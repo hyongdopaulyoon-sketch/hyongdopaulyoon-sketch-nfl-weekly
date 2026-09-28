@@ -2,7 +2,7 @@
 
   python picks.py suggest --week 4          model.csv 의 후보·참고를 status=suggested 로 적재(같은 주 재실행 시 갱신, placed 는 보존)
   python picks.py place --week 4 --id 2026_04_PIT_CLE:spread [--line -3 --odds -110]   실제 베팅 → status=placed(라인·배당 갱신 가능)
-  python picks.py place --week 4 --all-candidates                                       후보(grade 후보) 전부 placed
+  python picks.py place --week 4 --all-candidates                                       관찰 등급 전부 placed
   python picks.py grade --week 4            results.csv(nfl_pull --phase results) 로 W/L/P 채점
   python picks.py stats                     집행(placed) 성적 — 주별·시장별·등급별·엣지 구간별 · 손익분기 52.4%
 
@@ -50,7 +50,7 @@ def suggest(week):
         for market, side, line, val, edge, grade, p in (
                 ("spread", m["spread_side"], m["mkt_spread_home"], m["model_margin_home"], m["edge_spread"], m["spread_grade"], m["p_cover"]),
                 ("total", m["total_side"], m["mkt_total"], m["model_total"], m["edge_total"], m["total_grade"], m["p_total"])):
-            if not grade.startswith(("후보", "참고")):
+            if not grade.startswith(("관찰", "참고")):
                 continue
             pid = f'{m["game_id"]}:{market}'
             old = keep.get(pid)
@@ -72,7 +72,7 @@ def place(week, pid=None, all_candidates=False, line=None, odds=None, note=""):
     for r in rows:
         if int(r["week"]) != week:
             continue
-        if (pid and r["id"] == pid) or (all_candidates and r["grade"].startswith("후보")):
+        if (pid and r["id"] == pid) or (all_candidates and r["grade"].startswith("관찰")):
             r["status"] = "placed"; r["placed_at"] = datetime.now().strftime("%Y-%m-%d %H:%M")
             if line is not None: r["line"] = line
             if odds is not None: r["odds"] = odds

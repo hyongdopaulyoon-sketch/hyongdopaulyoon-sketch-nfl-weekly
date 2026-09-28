@@ -239,6 +239,16 @@ def ph_slate(week, force=False):
            "weather", "temp_f", "spread_home", "total", "ml_away", "ml_home", "odds_provider", "nv_spread_line", "nv_total_line",
            "away_rest", "home_rest", "away_qb", "home_qb", "div_game", "status", "away_score", "home_score"]
     wcsv(os.path.join(wd, "games.csv"), hdr, rows)
+    # 라인 이동 기록(정보 — 뉴스가 라인에 먼저 반영된다): 리프레시마다 한 줄씩 누적
+    lh = os.path.join(wd, "line_history.csv")
+    new = not os.path.exists(lh)
+    with open(lh, "a", newline="", encoding="utf-8-sig") as f:
+        w = csv.writer(f)
+        if new:
+            w.writerow(["pulled_at", "game", "spread_home", "total", "ml_away", "ml_home"])
+        ts = datetime.now().strftime("%m-%d %H:%M")
+        for r in rows:
+            w.writerow([ts, f"{r[5]}@{r[6]}", r[14], r[15], r[16], r[17]])
 
 
 def _qb1_by_team():
@@ -331,14 +341,16 @@ def ph_model(week, force=False):
         edge_sp = None if mk_sp is None else margin - (-mk_sp)
         edge_tot = None if mk_tot is None else total - mk_tot
         def band(e, th):
+            # 2026-09-28 백테스트(2024·2025 정규시즌 ~450경기): 모델 방향 ATS ≈ 45%, 괴리 3.5점+ 구간은 시장이 맞았다(2025 31%).
+            # 그래서 모델−시장 괴리는 **베팅 후보가 아니라 관찰(페이퍼) 대상**이다. 실베팅은 Paul 판단(QB·뉴스·라인 이동)으로 place.
             if e is None:
                 return "시장 결측"
-            return "후보" if abs(e) >= th[1] else "참고" if abs(e) >= th[0] else "시장 동조 — 비집행"
+            return "관찰(큰 괴리 — 페이퍼)" if abs(e) >= th[1] else "참고" if abs(e) >= th[0] else "시장 동조"
         sp_side = "" if edge_sp is None else (f"{h} {mk_sp:+g}" if edge_sp > 0 else f"{a} {-mk_sp:+g}")
         tot_side = "" if edge_tot is None else (f"Over {mk_tot:g}" if edge_tot > 0 else f"Under {mk_tot:g}")
         sp_grade, tot_grade = band(edge_sp, EDGE_SPREAD), band(edge_tot, EDGE_TOTAL)
         if thin:
-            sp_grade = sp_grade.replace("후보", "참고(※ 얇음)"); tot_grade = tot_grade.replace("후보", "참고(※ 얇음)")
+            sp_grade += " ※"; tot_grade += " ※"
         p_cover = "" if edge_sp is None else round(norm_cdf(abs(edge_sp) / SD_MARGIN) * 100, 1)
         p_tot = "" if edge_tot is None else round(norm_cdf(abs(edge_tot) / SD_TOTAL) * 100, 1)
         rows.append([g["game_id"] or g["espn_id"], a, h, round(margin, 1), round(p_home * 100, 1), round(total, 1),
@@ -353,13 +365,14 @@ def ph_model(week, force=False):
 
 
 RULES = [
-    "N1. **점수는 「모델 − 시장」 하나다.** 모델 = EPA/플레이 팀 레이팅(2026 주차 감쇠 0.9 · 2025 사전확률 600플레이·30% 회귀) × 62플레이 + 홈 1.5점 + QB 교체 −4.5점. 축·가중치 실측은 표본(주 16경기)이 안 돼 하지 않는다 — MLB 에서 배운 것.",
-    "N2. **시장 동조 비집행** — 스프레드 |엣지| <2.0점 · 총점 <3.0점이면 우리 의견 = 시장. 배당 수수료만 내는 자리라 집행하지 않는다(MLB C19-12 실측 −9.8u 의 교훈). 참고 = 2.0/3.0 이상, **후보 = 3.5/5.0 이상**.",
+    "N0. **모델은 베팅 신호가 아니다(2026-09-28 백테스트 확정).** 2024·2025 정규시즌 ~450경기에서 EPA 모델 방향 ATS ≈ 45%, 모델−시장 괴리 3.5점+ 구간은 시장이 맞았다(2025 15-33). 마감 라인 MAE 는 시장 10.1 < 모델 11.3. 단순 각도(홈독·디비전독·휴식·바이·목요일·실외 12월 등 19개, 2015~25 2,895경기)도 전부 50~54%·시즌 일관성 없음. → 모델·괴리는 **정보·리스크 서술과 페이퍼 추적**에만 쓴다.",
+    "N1. **점수는 「모델 − 시장」 하나다(페이퍼).** 모델 = EPA/플레이 팀 레이팅(2026 주차 감쇠 0.9 · 2025 사전확률 600플레이·30% 회귀) × 62플레이 + 홈 1.5점 + QB 교체 −4.5점. 축·가중치 실측은 표본(주 16경기)이 안 돼 하지 않는다 — MLB 에서 배운 것.",
+    "N2. **등급은 세 가지 — 시장 동조 / 참고 / 관찰(큰 괴리 — 페이퍼)**. 스프레드 2.0·3.5점, 총점 3.0·5.0점 문턱. 「후보」 등급은 없다 — 실베팅은 Paul 이 QB·부상 뉴스·라인 이동을 보고 정하고 picks.py place 로 기록한다. 관찰 등급은 suggested(페이퍼)로 자동 적립해 모델이 시장보다 나은지 계속 잰다.",
     "N3. **※ 값 얇음** — 어느 한 팀의 2026 플레이가 150 미만이면 후보 제외(참고까지). 대체값으로 4★ 를 세우지 않는다(MLB D13-8).",
     "N4. **QB 가 전부다** — 예상 선발 QB 가 시즌 주전과 다르거나 보고가 Out/Doubtful 이면 −4.5점을 모델에 넣고 리스크 첫 줄에 쓴다. 일요일 아침 최종 리프레시 전엔 「잠정」.",
     "N5. **리스크는 값만 적는다** — 휴식일·디비전·날씨(바람 15mph+·강수)·부상 수는 사실로만, 「그래서 이긴다/진다」로 단정하지 않는다(MLB B14·B10-1 교훈).",
-    "N6. **손익분기** — 스프레드·총점 −110 기준 52.4%. 후보 = 우리 커버 확률 ≥ 60% 구간(엣지 3.5점 ≈ 60.6%). 시즌 목표는 이기는 것보다 **기록·검증**(약 240경기).",
-    "N7. **기록** — picks.py suggest 가 후보·참고를 picks.csv 에 「suggested」로 적고, 실제 베팅한 것만 place 로 바꾼다. 채점은 월요일 grade. 성적은 집행(placed)만 센다.",
+    "N6. **손익분기** — 스프레드·총점 −110 기준 52.4%. 시즌 목표는 이기는 것보다 **기록·검증**(약 240경기): placed(실베팅) 와 suggested(페이퍼) 를 따로 세어 사람 판단과 모델 어느 쪽이 시장을 이기는지 본다.",
+    "N7. **기록** — picks.py suggest 가 관찰·참고를 picks.csv 에 「suggested」(페이퍼)로 적고, 실제 베팅한 것만 place 로 바꾼다(모델 제안이 아닌 경기도 place 가능). 채점은 월요일 grade. 성적은 placed 와 suggested 를 따로 센다.",
     "N8. **판정 개정은 주 1회(화요일)** 결과를 보고 pending_rules.md 한 줄로 남긴 뒤에만 바꾼다. 같은 주 안에서 문턱을 손대지 않는다.",
 ]
 
@@ -412,6 +425,9 @@ def ph_digest(week, force=False):
                      + f' · Out {x.get("n_out", 0)} / Doubtful {x.get("n_doubtful", 0)} / Questionable {x.get("n_questionable", 0)}'
                      + (f' — Out: {x["out"]}' if x.get("out") else "") + (f' — Doubtful: {x["doubtful"]}' if x.get("doubtful") else "")
                      + (f' (보고 {x.get("report_week")}주차)' if x.get("report_week") and str(x.get("report_week")) != str(week) else ""))
+        hist = [x for x in rd(os.path.join(wd, "line_history.csv")) if x["game"] == f"{a}@{h}"]
+        if len(hist) >= 2 and (hist[0]["spread_home"] != hist[-1]["spread_home"] or hist[0]["total"] != hist[-1]["total"]):
+            L.append(f'- 라인 이동: 스프레드(홈) {hist[0]["spread_home"]} → {hist[-1]["spread_home"]} · 총점 {hist[0]["total"]} → {hist[-1]["total"]} ({hist[0]["pulled_at"]} → {hist[-1]["pulled_at"]}) — 정보(뉴스 반영), 방향 근거 아님')
         wx = f'{g["weather"]} {g["temp_f"]}°F' if g["weather"] else "예보 없음"
         L.append(f'- 맥락(값만 — N5): 휴식 {a} {g["away_rest"] or "?"}일 / {h} {g["home_rest"] or "?"}일 · 날씨 {wx} · 지붕 {g["roof"] or "?"}'
                  + (" · ⚠️ 목요일 경기(짧은 휴식)" if any(str(x) == "4" for x in (g["away_rest"], g["home_rest"])) else ""))
