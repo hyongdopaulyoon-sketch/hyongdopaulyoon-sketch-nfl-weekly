@@ -67,6 +67,19 @@ def suggest(week):
     print(f"suggest week {week}: 신규 {n_new} · 갱신 {n_upd} · 전체 {len(keep)}행 → {os.path.relpath(PICKS, ROOT)}")
 
 
+def lean(week, pid, side, line, odds="-110", note=""):
+    """설명문 판단(관심) 기록 — 사람(수정 세션) 의견을 페이퍼로 남겨 모델·사람·실베팅을 따로 잰다. id = game_id:spread|total"""
+    rows = rd(PICKS); keep = {r["id"]: r for r in rows}
+    game_id, market = pid.rsplit(":", 1)
+    game = next((r["game"] for r in rows if r["id"].startswith(game_id + ":")), game_id.split("_", 2)[-1].replace("_", "@"))
+    old = keep.get(pid)
+    row = {"id": pid, "season": SEASON, "week": week, "game": game, "market": market, "side": side, "line": line, "odds": odds,
+           "model_value": old["model_value"] if old else "", "edge": old["edge"] if old else "", "grade": "관심(설명문)", "p_win": old["p_win"] if old else "",
+           "status": old["status"] if old and old["status"] == "placed" else "suggested", "placed_at": old["placed_at"] if old else "",
+           "result": "", "score": "", "units": "", "note": note}
+    keep[pid] = row; save(list(keep.values())); print(f"lean 기록: {pid} {side} ({row['status']})")
+
+
 def place(week, pid=None, all_candidates=False, line=None, odds=None, note=""):
     rows = rd(PICKS); n = 0
     for r in rows:
@@ -142,11 +155,14 @@ def main():
     s = sub.add_parser("suggest"); s.add_argument("--week", type=int, required=True)
     p = sub.add_parser("place"); p.add_argument("--week", type=int, required=True); p.add_argument("--id"); p.add_argument("--all-candidates", action="store_true")
     p.add_argument("--line"); p.add_argument("--odds"); p.add_argument("--note", default="")
+    l = sub.add_parser("lean"); l.add_argument("--week", type=int, required=True); l.add_argument("--id", required=True); l.add_argument("--side", required=True)
+    l.add_argument("--line", required=True); l.add_argument("--odds", default="-110"); l.add_argument("--note", default="")
     g = sub.add_parser("grade"); g.add_argument("--week", type=int, required=True)
     sub.add_parser("stats")
     a = ap.parse_args()
     if a.cmd == "suggest": suggest(a.week)
     elif a.cmd == "place": place(a.week, a.id, a.all_candidates, a.line, a.odds, a.note)
+    elif a.cmd == "lean": lean(a.week, a.id, a.side, a.line, a.odds, a.note)
     elif a.cmd == "grade": grade(a.week)
     else: stats()
 
