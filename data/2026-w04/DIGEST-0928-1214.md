@@ -1,0 +1,278 @@
+# NFL 2026 Week 4 — 주간 다이제스트 (생성 09-28 12:14 PT · ESPN DraftKings 라인 · nflverse EPA)
+
+## 운용 규칙(N)
+
+- N1. **점수는 「모델 − 시장」 하나다.** 모델 = EPA/플레이 팀 레이팅(2026 주차 감쇠 0.9 · 2025 사전확률 600플레이·30% 회귀) × 62플레이 + 홈 1.5점 + QB 교체 −4.5점. 축·가중치 실측은 표본(주 16경기)이 안 돼 하지 않는다 — MLB 에서 배운 것.
+- N2. **시장 동조 비집행** — 스프레드 |엣지| <2.0점 · 총점 <3.0점이면 우리 의견 = 시장. 배당 수수료만 내는 자리라 집행하지 않는다(MLB C19-12 실측 −9.8u 의 교훈). 참고 = 2.0/3.0 이상, **후보 = 3.5/5.0 이상**.
+- N3. **※ 값 얇음** — 어느 한 팀의 2026 플레이가 150 미만이면 후보 제외(참고까지). 대체값으로 4★ 를 세우지 않는다(MLB D13-8).
+- N4. **QB 가 전부다** — 예상 선발 QB 가 시즌 주전과 다르거나 보고가 Out/Doubtful 이면 −4.5점을 모델에 넣고 리스크 첫 줄에 쓴다. 일요일 아침 최종 리프레시 전엔 「잠정」.
+- N5. **리스크는 값만 적는다** — 휴식일·디비전·날씨(바람 15mph+·강수)·부상 수는 사실로만, 「그래서 이긴다/진다」로 단정하지 않는다(MLB B14·B10-1 교훈).
+- N6. **손익분기** — 스프레드·총점 −110 기준 52.4%. 후보 = 우리 커버 확률 ≥ 60% 구간(엣지 3.5점 ≈ 60.6%). 시즌 목표는 이기는 것보다 **기록·검증**(약 240경기).
+- N7. **기록** — picks.py suggest 가 후보·참고를 picks.csv 에 「suggested」로 적고, 실제 베팅한 것만 place 로 바꾼다. 채점은 월요일 grade. 성적은 집행(placed)만 센다.
+- N8. **판정 개정은 주 1회(화요일)** 결과를 보고 pending_rules.md 한 줄로 남긴 뒤에만 바꾼다. 같은 주 안에서 문턱을 손대지 않는다.
+
+## 🏁 서열표 — 스프레드 엣지 순(모델 − 시장, 홈 기준 점)
+
+| # | 경기 | 킥오프 ET(PT) | 시장 스프레드(홈) | 모델 마진(홈) | 엣지 | 스프레드 판정 | 시장 총점 | 모델 총점 | 엣지 | 총점 판정 | ※ |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | JAX@CIN | Sun 10-04 13:00 (10:00 PT) | -3.0 | -9.5 | -12.5 | JAX +3 · 후보 | 51.5 | 48.3 | -3.2 | Under 51.5 · 참고 |  |
+| 2 | IND@WAS | Sun 10-04 09:30 (06:30 PT) | 3.5 | -9.3 | -5.8 | IND -3.5 · 후보 | 47.5 | 51.9 | 4.4 | Over 47.5 · 참고 |  |
+| 3 | NYJ@CHI | Sun 10-04 13:00 (10:00 PT) | -3.0 | 8.6 | 5.6 | CHI -3 · 참고(※ 얇음) | 42.5 | 48.3 | 5.8 | Over 42.5 · 참고(※ 얇음) | ※ |
+| 4 | KC@LV | Sun 10-04 16:25 (13:25 PT) | 4.5 | -9.9 | -5.4 | KC -4.5 · 후보 | 47.5 | 39.2 | -8.3 | Under 47.5 · 후보 |  |
+| 5 | DAL@HOU | Sun 10-04 13:00 (10:00 PT) | -2.5 | 7.0 | 4.5 | HOU -2.5 · 후보 | 47.5 | 53.4 | 5.9 | Over 47.5 · 후보 |  |
+| 6 | NE@BUF | Sun 10-04 13:00 (10:00 PT) | -7.0 | 2.9 | -4.1 | NE +7 · 후보 | 48.5 | 55.4 | 6.9 | Over 48.5 · 후보 |  |
+| 7 | ARI@NYG | Sun 10-04 13:00 (10:00 PT) | 1.5 | 1.8 | 3.3 | NYG +1.5 · 참고 | 44.5 | 55.1 | 10.6 | Over 44.5 · 후보 |  |
+| 8 | GB@TB | Sun 10-04 13:00 (10:00 PT) | 3.5 | -0.8 | 2.7 | TB +3.5 · 참고 | 39.5 | 47.2 | 7.7 | Over 39.5 · 후보 |  |
+| 9 | TEN@BAL | Sun 10-04 13:00 (10:00 PT) | -11.5 | 13.9 | 2.4 | BAL -11.5 · 참고 | 43.5 | 48.4 | 4.9 | Over 43.5 · 참고 |  |
+| 10 | PIT@CLE | Thu 10-01 20:15 (17:15 PT) | 3.0 | -0.7 | 2.3 | CLE +3 · 참고 | 38.5 | 34.7 | -3.8 | Under 38.5 · 참고 |  |
+| 11 | LAC@SEA | Sun 10-04 16:25 (13:25 PT) | -6.5 | 5.2 | -1.3 | LAC +6.5 · 시장 동조 — 비집행 | 43.5 | 31.5 | -12.0 | Under 43.5 · 후보 |  |
+| 12 | MIA@MIN | Sun 10-04 16:05 (13:05 PT) | -10.0 | 9.1 | -0.9 | MIA +10 · 시장 동조 — 비집행 | 38.5 | 37.5 | -1.0 | Under 38.5 · 시장 동조 — 비집행 |  |
+| 13 | ATL@NO | Mon 10-05 20:15 (17:15 PT) | -2.5 | 1.6 | -0.9 | ATL +2.5 · 시장 동조 — 비집행 | 48.5 | 39.3 | -9.2 | Under 48.5 · 후보 |  |
+| 14 | LA@PHI | Sun 10-04 13:00 (10:00 PT) | 2.5 | -3.0 | -0.5 | LA -2.5 · 시장 동조 — 비집행 | 46.5 | 47.3 | 0.8 | Over 46.5 · 시장 동조 — 비집행 | ※ |
+| 15 | DET@CAR | Sun 10-04 20:20 (17:20 PT) | 3.5 | -3.7 | -0.2 | DET -3.5 · 시장 동조 — 비집행 | 50.5 | 53.9 | 3.4 | Over 50.5 · 참고 |  |
+| 16 | DEN@SF | Sun 10-04 16:25 (13:25 PT) | -3.0 | 3.0 | 0.0 | SF -3 · 시장 동조 — 비집행 | 46.5 | 54.9 | 8.4 | Over 46.5 · 후보 |  |
+
+## 📊 팀 레이팅(EPA/플레이 · 공격 높을수록 좋음 / 수비 낮을수록 좋음 · 순마진/경기)
+
+| 팀 | 공격 | 패스 | 러시 | 수비 | 패스 | 러시 | 순마진 | 2026 플레이 | PF/PA |
+|---|---|---|---|---|---|---|---|---|---|
+| JAX | +0.052 | +0.065 | +0.007 | -0.081 | -0.107 | -0.028 | +8.2 | 167 | 27.3/12.0 |
+| LA | +0.083 | +0.145 | +0.012 | -0.050 | -0.064 | -0.025 | +8.2 | 192 | 20.3/21.0 |
+| SEA | +0.028 | +0.102 | -0.054 | -0.097 | -0.070 | -0.117 | +7.7 | 178 | 25.0/16.7 |
+| BUF | +0.119 | +0.127 | +0.089 | +0.007 | -0.051 | +0.060 | +7.0 | 180 | 33.7/26.0 |
+| KC | +0.060 | +0.058 | +0.029 | -0.029 | -0.015 | -0.032 | +5.5 | 191 | 29.3/16.7 |
+| NE | +0.056 | +0.143 | +0.002 | -0.033 | -0.047 | -0.016 | +5.5 | 178 | 12.0/17.0 |
+| SF | +0.121 | +0.170 | +0.005 | +0.040 | +0.076 | -0.001 | +5.0 | 160 | 32.7/16.7 |
+| PHI | +0.023 | +0.041 | -0.002 | -0.038 | -0.076 | -0.010 | +3.8 | 123 | 24.0/21.0 |
+| DEN | +0.018 | +0.043 | -0.003 | -0.038 | -0.078 | -0.006 | +3.5 | 164 | 20.0/23.3 |
+| CHI | +0.068 | +0.063 | +0.061 | +0.019 | +0.033 | -0.004 | +3.0 | 139 | 31.0/23.0 |
+| HOU | -0.029 | +0.007 | -0.061 | -0.076 | -0.106 | -0.043 | +2.9 | 200 | 18.0/25.0 |
+| DET | +0.076 | +0.142 | -0.032 | +0.032 | +0.029 | -0.000 | +2.7 | 197 | 31.0/31.7 |
+| BAL | +0.057 | +0.012 | +0.070 | +0.021 | +0.053 | -0.033 | +2.3 | 173 | 30.7/26.0 |
+| MIN | -0.090 | -0.134 | -0.021 | -0.096 | -0.111 | -0.058 | +0.3 | 165 | 23.7/13.7 |
+| GB | +0.039 | +0.132 | -0.033 | +0.036 | +0.067 | -0.012 | +0.2 | 180 | 18.7/30.3 |
+| LAC | -0.051 | -0.050 | -0.015 | -0.043 | -0.045 | -0.052 | -0.5 | 177 | 14.7/25.3 |
+| IND | +0.027 | +0.014 | +0.065 | +0.037 | +0.048 | -0.016 | -0.7 | 187 | 24.0/30.3 |
+| PIT | -0.018 | -0.013 | +0.008 | +0.007 | +0.013 | +0.002 | -1.6 | 184 | 17.7/20.0 |
+| NO | -0.044 | -0.043 | -0.063 | -0.016 | -0.010 | -0.046 | -1.7 | 222 | 27.0/27.7 |
+| ATL | -0.040 | -0.046 | -0.013 | -0.011 | -0.013 | +0.005 | -1.8 | 189 | 17.0/22.7 |
+| TB | -0.046 | -0.058 | +0.006 | -0.011 | +0.034 | -0.060 | -2.2 | 177 | 20.7/26.3 |
+| CAR | -0.012 | -0.012 | -0.024 | +0.028 | +0.051 | +0.018 | -2.5 | 195 | 29.7/27.7 |
+| DAL | +0.090 | +0.141 | -0.001 | +0.132 | +0.182 | +0.058 | -2.6 | 178 | 29.3/27.3 |
+| CIN | +0.010 | +0.001 | +0.014 | +0.054 | +0.088 | +0.045 | -2.7 | 176 | 26.7/21.0 |
+| CLE | -0.118 | -0.172 | -0.048 | -0.056 | -0.082 | -0.034 | -3.8 | 164 | 18.0/23.7 |
+| NYG | -0.004 | -0.011 | +0.016 | +0.070 | +0.044 | +0.102 | -4.6 | 177 | 15.3/18.3 |
+| ARI | +0.000 | +0.017 | -0.042 | +0.079 | +0.142 | -0.011 | -4.9 | 196 | 21.0/27.0 |
+| WAS | +0.007 | +0.008 | +0.004 | +0.094 | +0.149 | +0.035 | -5.4 | 198 | 25.0/30.7 |
+| LV | -0.118 | -0.092 | -0.184 | -0.024 | +0.025 | -0.043 | -5.8 | 184 | 29.3/18.0 |
+| MIA | -0.035 | -0.017 | -0.035 | +0.082 | +0.130 | +0.012 | -7.3 | 173 | 12.0/28.7 |
+| NYJ | -0.059 | -0.075 | -0.061 | +0.079 | +0.159 | +0.013 | -8.6 | 194 | 21.3/20.3 |
+| TEN | -0.103 | -0.154 | -0.032 | +0.061 | +0.117 | +0.002 | -10.2 | 157 | 12.3/19.7 |
+
+## JAX@CIN  Sun 10-04 13:00 ET (10:00 PT) · Paycor Stadium · outdoors · JAX 2-1 / CIN 2-1
+
+- 시장(Draft Kings): 스프레드 홈 -3.0 · 총점 51.5 · ML JAX +130 / CIN -155 · nflverse 라인 2.5/51.5
+- 레이팅: JAX 공격 +0.052(패 +0.065/러 +0.007) · 수비 -0.081(패 -0.107/러 -0.028) · 순마진 +8.2 · PF/PA 27.3/12.0
+- 레이팅: CIN 공격 +0.010(패 +0.001/러 +0.014) · 수비 +0.054(패 +0.088/러 +0.045) · 순마진 -2.7 · PF/PA 26.7/21.0
+- 모델: 홈 마진 -9.5 · 홈 승률 23.3% · 총점 48.3
+- **스프레드**: 엣지 -12.5점 → JAX +3 · **후보** · 커버 확률 83.1%
+- **총점**: 엣지 -3.2점 → Under 51.5 · **참고** · 확률 61.9%
+- 부상·QB JAX: 예상 QB Trevor Lawrence(시즌 주전 T.Lawrence) · Out 0 / Doubtful 1 / Questionable 0 — Doubtful: Albert Regis(DT) (보고 3주차)
+- 부상·QB CIN: 예상 QB Joe Burrow(시즌 주전 J.Burrow) · Out 1 / Doubtful 1 / Questionable 0 — Out: Andrei Iosivas(WR) — Doubtful: B.J. Hill(DT) (보고 3주차)
+- 맥락(값만 — N5): 휴식 JAX 7일 / CIN 7일 · 날씨 Mostly cloudy 69°F · 지붕 outdoors
+- 리스크: 자동 항목 없음 · 〔직접 서술 — 값만, 단정 금지〕
+
+## IND@WAS  Sun 10-04 09:30 ET (06:30 PT) · Tottenham Hotspur Stadium · outdoors · IND 1-2 / WAS 1-2 · **중립 구장(홈 이점 0)**
+
+- 시장(Draft Kings): 스프레드 홈 3.5 · 총점 47.5 · ML IND -180 / WAS +150 · nflverse 라인 -3.5/47.5
+- 레이팅: IND 공격 +0.027(패 +0.014/러 +0.065) · 수비 +0.037(패 +0.048/러 -0.016) · 순마진 -0.7 · PF/PA 24.0/30.3
+- 레이팅: WAS 공격 +0.007(패 +0.008/러 +0.004) · 수비 +0.094(패 +0.149/러 +0.035) · 순마진 -5.4 · PF/PA 25.0/30.7
+- 모델: 홈 마진 -9.3 · 홈 승률 23.8% · 총점 51.9 · QB 조정 IND 0.0 / WAS -4.5
+- **스프레드**: 엣지 -5.8점 → IND -3.5 · **후보** · 커버 확률 67.2%
+- **총점**: 엣지 4.4점 → Over 47.5 · **참고** · 확률 66.2%
+- 부상·QB IND: 예상 QB Daniel Jones(시즌 주전 D.Jones) · Out 2 / Doubtful 0 / Questionable 1 — Out: Ashton Dulin(WR) · Alec Pierce(WR) (보고 3주차)
+- 부상·QB WAS: 예상 QB Jayden Daniels(시즌 주전 J.Daniels) ⚠️ QB 보고 Jayden Daniels Out(3주차 보고 — 잠정) · Out 5 / Doubtful 0 / Questionable 0 — Out: Frankie Luvu(LB) · Sam Cosmi(G) · Nick Cross(S) · Chig Okonkwo(TE) · Jayden Daniels(QB) (보고 3주차)
+- 맥락(값만 — N5): 휴식 IND 7일 / WAS 7일 · 날씨 예보 없음 · 지붕 outdoors
+- 리스크: WAS QB 보고 Jayden Daniels Out(3주차 보고 — 잠정) → 모델 −4.5점 · 중립 구장 — 홈 이점 0 · 〔직접 서술 — 값만, 단정 금지〕
+
+## NYJ@CHI  Sun 10-04 13:00 ET (10:00 PT) · Soldier Field · outdoors · NYJ 1-2 / CHI 1-1
+
+- 시장(Draft Kings): 스프레드 홈 -3.0 · 총점 42.5 · ML NYJ +124 / CHI -148 · nflverse 라인 3/42.5
+- 레이팅: NYJ 공격 -0.059(패 -0.075/러 -0.061) · 수비 +0.079(패 +0.159/러 +0.013) · 순마진 -8.6 · PF/PA 21.3/20.3
+- 레이팅: CHI 공격 +0.068(패 +0.063/러 +0.061) · 수비 +0.019(패 +0.033/러 -0.004) · 순마진 +3.0 · PF/PA 31.0/23.0
+- 모델: 홈 마진 8.6 · 홈 승률 74.6% · 총점 48.3 · QB 조정 NYJ 0.0 / CHI -4.5
+- **스프레드**: 엣지 5.6점 → CHI -3 · **참고(※ 얇음)** · 커버 확률 66.7%
+- **총점**: 엣지 5.8점 → Over 42.5 · **참고(※ 얇음)** · 확률 70.9%
+- 부상·QB NYJ: 예상 QB Geno Smith(시즌 주전 G.Smith) · Out 3 / Doubtful 1 / Questionable 2 — Out: Minkah Fitzpatrick(S) · Francisco Mauigoa(LB) · Mason Taylor(TE) — Doubtful: Kene Nwangwu(RB) (보고 3주차)
+- 부상·QB CHI: 예상 QB Tyson Bagent(시즌 주전 C.Williams) ⚠️ 백업 QB 선발 — 뎁스차트 QB1 Caleb Williams 대신 예상 선발 Tyson Bagent · Out 3 / Doubtful 0 / Questionable 1 — Out: Noah Sewell(LB) · Caleb Williams(QB) · Shemar Turner(DE) (보고 3주차)
+- 맥락(값만 — N5): 휴식 NYJ 7일 / CHI 6일 · 날씨 Mostly sunny 65°F · 지붕 outdoors
+- 리스크: CHI 백업 QB 선발 — 뎁스차트 QB1 Caleb Williams 대신 예상 선발 Tyson Bagent → 모델 −4.5점 · ※ 값 얇음 CHI — 후보 제외 · 〔직접 서술 — 값만, 단정 금지〕
+
+## KC@LV  Sun 10-04 16:25 ET (13:25 PT) · Allegiant Stadium · indoor · KC 3-0 / LV 3-0 · 디비전
+
+- 시장(Draft Kings): 스프레드 홈 4.5 · 총점 47.5 · ML KC -225 / LV +185 · nflverse 라인 -5.5/47.5
+- 레이팅: KC 공격 +0.060(패 +0.058/러 +0.029) · 수비 -0.029(패 -0.015/러 -0.032) · 순마진 +5.5 · PF/PA 29.3/16.7
+- 레이팅: LV 공격 -0.118(패 -0.092/러 -0.184) · 수비 -0.024(패 +0.025/러 -0.043) · 순마진 -5.8 · PF/PA 29.3/18.0
+- 모델: 홈 마진 -9.9 · 홈 승률 22.4% · 총점 39.2
+- **스프레드**: 엣지 -5.4점 → KC -4.5 · **후보** · 커버 확률 66.0%
+- **총점**: 엣지 -8.3점 → Under 47.5 · **후보** · 확률 78.6%
+- 부상·QB KC: 예상 QB Patrick Mahomes(시즌 주전 P.Mahomes) · Out 1 / Doubtful 1 / Questionable 0 — Out: Josh Simmons(T) — Doubtful: Chamarri Conner(S) (보고 3주차)
+- 부상·QB LV: 예상 QB Kirk Cousins(시즌 주전 K.Cousins) · Out 1 / Doubtful 0 / Questionable 3 — Out: Treydan Stukes(S) (보고 3주차)
+- 맥락(값만 — N5): 휴식 KC 7일 / LV 7일 · 날씨 Sunny 91°F · 지붕 indoor
+- 리스크: 자동 항목 없음 · 〔직접 서술 — 값만, 단정 금지〕
+
+## DAL@HOU  Sun 10-04 13:00 ET (10:00 PT) · Reliant Stadium · indoor · DAL 1-2 / HOU 0-3
+
+- 시장(Draft Kings): 스프레드 홈 -2.5 · 총점 47.5 · ML DAL +120 / HOU -142 · nflverse 라인 2.5/47.5
+- 레이팅: DAL 공격 +0.090(패 +0.141/러 -0.001) · 수비 +0.132(패 +0.182/러 +0.058) · 순마진 -2.6 · PF/PA 29.3/27.3
+- 레이팅: HOU 공격 -0.029(패 +0.007/러 -0.061) · 수비 -0.076(패 -0.106/러 -0.043) · 순마진 +2.9 · PF/PA 18.0/25.0
+- 모델: 홈 마진 7.0 · 홈 승률 70.4% · 총점 53.4
+- **스프레드**: 엣지 4.5점 → HOU -2.5 · **후보** · 커버 확률 63.5%
+- **총점**: 엣지 5.9점 → Over 47.5 · **후보** · 확률 71.2%
+- 부상·QB DAL: 예상 QB Dak Prescott(시즌 주전 D.Prescott) · Out 4 / Doubtful 0 / Questionable 0 — Out: Malik Hooker(S) · P.J. Locke(S) · Cobie Durant(CB) · DeMarvion Overshown(LB) (보고 3주차)
+- 부상·QB HOU: 예상 QB C.J. Stroud(시즌 주전 C.Stroud) · Out 5 / Doubtful 0 / Questionable 1 — Out: Jadeveon Clowney(DE) · M.J. Stewart(S) · Nico Collins(WR) · Jacob Hummel(LB) · Ed Ingram(G) (보고 3주차)
+- 맥락(값만 — N5): 휴식 DAL 7일 / HOU 7일 · 날씨 Intermittent clouds 78°F · 지붕 indoor
+- 리스크: 자동 항목 없음 · 〔직접 서술 — 값만, 단정 금지〕
+
+## NE@BUF  Sun 10-04 13:00 ET (10:00 PT) · Highmark Stadium · outdoors · NE 1-2 / BUF 3-0 · 디비전
+
+- 시장(Draft Kings): 스프레드 홈 -7.0 · 총점 48.5 · ML NE +250 / BUF -310 · nflverse 라인 7/48.5
+- 레이팅: NE 공격 +0.056(패 +0.143/러 +0.002) · 수비 -0.033(패 -0.047/러 -0.016) · 순마진 +5.5 · PF/PA 12.0/17.0
+- 레이팅: BUF 공격 +0.119(패 +0.127/러 +0.089) · 수비 +0.007(패 -0.051/러 +0.060) · 순마진 +7.0 · PF/PA 33.7/26.0
+- 모델: 홈 마진 2.9 · 홈 승률 58.9% · 총점 55.4
+- **스프레드**: 엣지 -4.1점 → NE +7 · **후보** · 커버 확률 62.3%
+- **총점**: 엣지 6.9점 → Over 48.5 · **후보** · 확률 74.5%
+- 부상·QB NE: 예상 QB Drake Maye(시즌 주전 D.Maye) · Out 3 / Doubtful 0 / Questionable 2 — Out: Dre'Mont Jones(LB) · Brenden Schooler(S) · Quintayvious Hutchins(LB) (보고 3주차)
+- 부상·QB BUF: 예상 QB Josh Allen(시즌 주전 J.Allen) · Out 2 / Doubtful 0 / Questionable 4 — Out: Jordan Hancock(CB) · T.J. Sanders(DE) (보고 3주차)
+- 맥락(값만 — N5): 휴식 NE 7일 / BUF 7일 · 날씨 예보 없음 · 지붕 outdoors
+- 리스크: 자동 항목 없음 · 〔직접 서술 — 값만, 단정 금지〕
+
+## ARI@NYG  Sun 10-04 13:00 ET (10:00 PT) · MetLife Stadium · outdoors · ARI 1-2 / NYG 2-1
+
+- 시장(Draft Kings): 스프레드 홈 1.5 · 총점 44.5 · ML ARI -115 / NYG -105 · nflverse 라인 -1.5/44.5
+- 레이팅: ARI 공격 +0.000(패 +0.017/러 -0.042) · 수비 +0.079(패 +0.142/러 -0.011) · 순마진 -4.9 · PF/PA 21.0/27.0
+- 레이팅: NYG 공격 -0.004(패 -0.011/러 +0.016) · 수비 +0.070(패 +0.044/러 +0.102) · 순마진 -4.6 · PF/PA 15.3/18.3
+- 모델: 홈 마진 1.8 · 홈 승률 55.5% · 총점 55.1
+- **스프레드**: 엣지 3.3점 → NYG +1.5 · **참고** · 커버 확률 60.0%
+- **총점**: 엣지 10.6점 → Over 44.5 · **후보** · 확률 84.4%
+- 부상·QB ARI: 예상 QB Jacoby Brissett(시즌 주전 J.Brissett) · Out 1 / Doubtful 0 / Questionable 2 — Out: Dadrion Taylor-Demerson(S) (보고 3주차)
+- 부상·QB NYG: 예상 QB Jameis Winston(시즌 주전 J.Winston) · Out 0 / Doubtful 0 / Questionable 3 (보고 3주차)
+- 맥락(값만 — N5): 휴식 ARI 7일 / NYG 7일 · 날씨 Cloudy 64°F · 지붕 outdoors
+- 리스크: 자동 항목 없음 · 〔직접 서술 — 값만, 단정 금지〕
+
+## GB@TB  Sun 10-04 13:00 ET (10:00 PT) · Raymond James Stadium · outdoors · GB 1-2 / TB 0-3
+
+- 시장(Draft Kings): 스프레드 홈 3.5 · 총점 39.5 · ML GB -198 / TB +164 · nflverse 라인 -3.5/39.5
+- 레이팅: GB 공격 +0.039(패 +0.132/러 -0.033) · 수비 +0.036(패 +0.067/러 -0.012) · 순마진 +0.2 · PF/PA 18.7/30.3
+- 레이팅: TB 공격 -0.046(패 -0.058/러 +0.006) · 수비 -0.011(패 +0.034/러 -0.060) · 순마진 -2.2 · PF/PA 20.7/26.3
+- 모델: 홈 마진 -0.8 · 홈 승률 47.5% · 총점 47.2
+- **스프레드**: 엣지 2.7점 → TB +3.5 · **참고** · 커버 확률 58.2%
+- **총점**: 엣지 7.7점 → Over 39.5 · **후보** · 확률 76.9%
+- 부상·QB GB: 예상 QB Jordan Love(시즌 주전 J.Love) · Out 4 / Doubtful 0 / Questionable 2 — Out: Aaron Banks(G) · Zach Bako-Bewele(T) · Jayden Reed(WR) · Warren Brinson(DT) (보고 3주차)
+- 부상·QB TB: 예상 QB Baker Mayfield(시즌 주전 B.Mayfield) · Out 2 / Doubtful 0 / Questionable 0 — Out: Rueben Bain Jr.(LB) · Josiah Trotter(LB) (보고 3주차)
+- 맥락(값만 — N5): 휴식 GB 10일 / TB 7일 · 날씨 Thunderstorms 84°F · 지붕 outdoors
+- 리스크: 실외 강수 예보(Thunderstorms) — 총점 쪽 참고 · 〔직접 서술 — 값만, 단정 금지〕
+
+## TEN@BAL  Sun 10-04 13:00 ET (10:00 PT) · M&T Bank Stadium · outdoors · TEN 0-3 / BAL 2-1
+
+- 시장(Draft Kings): 스프레드 홈 -11.5 · 총점 43.5 · ML TEN +500 / BAL -700 · nflverse 라인 11.5/43.5
+- 레이팅: TEN 공격 -0.103(패 -0.154/러 -0.032) · 수비 +0.061(패 +0.117/러 +0.002) · 순마진 -10.2 · PF/PA 12.3/19.7
+- 레이팅: BAL 공격 +0.057(패 +0.012/러 +0.070) · 수비 +0.021(패 +0.053/러 -0.033) · 순마진 +2.3 · PF/PA 30.7/26.0
+- 모델: 홈 마진 13.9 · 홈 승률 85.8% · 총점 48.4
+- **스프레드**: 엣지 2.4점 → BAL -11.5 · **참고** · 커버 확률 57.4%
+- **총점**: 엣지 4.9점 → Over 43.5 · **참고** · 확률 67.8%
+- 부상·QB TEN: 예상 QB Cam Ward(시즌 주전 C.Ward) · Out 0 / Doubtful 0 / Questionable 2 (보고 3주차)
+- 부상·QB BAL: 예상 QB Lamar Jackson(시즌 주전 L.Jackson) · Out 1 / Doubtful 0 / Questionable 1 — Out: Ronnie Stanley(T) (보고 3주차)
+- 맥락(값만 — N5): 휴식 TEN 7일 / BAL 7일 · 날씨 Cloudy 69°F · 지붕 outdoors
+- 리스크: 자동 항목 없음 · 〔직접 서술 — 값만, 단정 금지〕
+
+## PIT@CLE  Thu 10-01 20:15 ET (17:15 PT) · Huntington Bank Field · outdoors · PIT 2-1 / CLE 2-1 · 디비전
+
+- 시장(Draft Kings): 스프레드 홈 3.0 · 총점 38.5 · ML PIT -155 / CLE +130 · nflverse 라인 -3/38.5
+- 레이팅: PIT 공격 -0.018(패 -0.013/러 +0.008) · 수비 +0.007(패 +0.013/러 +0.002) · 순마진 -1.6 · PF/PA 17.7/20.0
+- 레이팅: CLE 공격 -0.118(패 -0.172/러 -0.048) · 수비 -0.056(패 -0.082/러 -0.034) · 순마진 -3.8 · PF/PA 18.0/23.7
+- 모델: 홈 마진 -0.7 · 홈 승률 47.7% · 총점 34.7
+- **스프레드**: 엣지 2.3점 → CLE +3 · **참고** · 커버 확률 56.9%
+- **총점**: 엣지 -3.8점 → Under 38.5 · **참고** · 확률 64.2%
+- 부상·QB PIT: 예상 QB Aaron Rodgers(시즌 주전 A.Rodgers) · Out 2 / Doubtful 0 / Questionable 4 — Out: Rico Dowdle(RB) · Gennings Dunker(G) (보고 3주차)
+- 부상·QB CLE: 예상 QB Deshaun Watson(시즌 주전 D.Watson) · Out 1 / Doubtful 0 / Questionable 2 — Out: Teven Jenkins(G) (보고 3주차)
+- 맥락(값만 — N5): 휴식 PIT 4일 / CLE 4일 · 날씨 Mostly cloudy 76°F · 지붕 outdoors · ⚠️ 목요일 경기(짧은 휴식)
+- 리스크: 자동 항목 없음 · 〔직접 서술 — 값만, 단정 금지〕
+
+## LAC@SEA  Sun 10-04 16:25 ET (13:25 PT) · Lumen Field · outdoors · LAC 0-3 / SEA 2-1
+
+- 시장(Draft Kings): 스프레드 홈 -6.5 · 총점 43.5 · ML LAC +250 / SEA -310 · nflverse 라인 6.5/43.5
+- 레이팅: LAC 공격 -0.051(패 -0.050/러 -0.015) · 수비 -0.043(패 -0.045/러 -0.052) · 순마진 -0.5 · PF/PA 14.7/25.3
+- 레이팅: SEA 공격 +0.028(패 +0.102/러 -0.054) · 수비 -0.097(패 -0.070/러 -0.117) · 순마진 +7.7 · PF/PA 25.0/16.7
+- 모델: 홈 마진 5.2 · 홈 승률 65.7% · 총점 31.5 · QB 조정 LAC 0.0 / SEA -4.5
+- **스프레드**: 엣지 -1.3점 → LAC +6.5 · **시장 동조 — 비집행** · 커버 확률 53.8%
+- **총점**: 엣지 -12.0점 → Under 43.5 · **후보** · 확률 87.3%
+- 부상·QB LAC: 예상 QB Justin Herbert(시즌 주전 J.Herbert) · Out 6 / Doubtful 0 / Questionable 2 — Out: Dalvin Tomlinson(DT) · Trey Pipkins(T) · Kayode Awosika(G) · Elijah Molden(S) · Charlie Kolar(TE) · Brenen Thompson(WR) (보고 3주차)
+- 부상·QB SEA: 예상 QB Drew Lock(시즌 주전 D.Lock) ⚠️ 백업 QB 선발 — 뎁스차트 QB1 Sam Darnold 대신 예상 선발 Drew Lock · Out 2 / Doubtful 0 / Questionable 1 — Out: Julian Love(S) · Ty Okada(S) (보고 3주차)
+- 맥락(값만 — N5): 휴식 LAC 7일 / SEA 7일 · 날씨 Mostly sunny 65°F · 지붕 outdoors
+- 리스크: SEA 백업 QB 선발 — 뎁스차트 QB1 Sam Darnold 대신 예상 선발 Drew Lock → 모델 −4.5점 · 〔직접 서술 — 값만, 단정 금지〕
+
+## MIA@MIN  Sun 10-04 16:05 ET (13:05 PT) · U.S. Bank Stadium · indoor · MIA 0-3 / MIN 3-0
+
+- 시장(Draft Kings): 스프레드 홈 -10.0 · 총점 38.5 · ML MIA +425 / MIN -575 · nflverse 라인 10/38.5
+- 레이팅: MIA 공격 -0.035(패 -0.017/러 -0.035) · 수비 +0.082(패 +0.130/러 +0.012) · 순마진 -7.3 · PF/PA 12.0/28.7
+- 레이팅: MIN 공격 -0.090(패 -0.134/러 -0.021) · 수비 -0.096(패 -0.111/러 -0.058) · 순마진 +0.3 · PF/PA 23.7/13.7
+- 모델: 홈 마진 9.1 · 홈 승률 75.9% · 총점 37.5
+- **스프레드**: 엣지 -0.9점 → MIA +10 · **시장 동조 — 비집행** · 커버 확률 52.6%
+- **총점**: 엣지 -1.0점 → Under 38.5 · **시장 동조 — 비집행** · 확률 53.6%
+- 부상·QB MIA: 예상 QB Malik Willis(시즌 주전 M.Willis) · Out 2 / Doubtful 1 / Questionable 2 — Out: Rob Beal Jr.(DE) · Caleb Douglas(WR) — Doubtful: Jaylen Wright(RB) (보고 3주차)
+- 부상·QB MIN: 예상 QB Kyler Murray(시즌 주전 C.Wentz) · ⓘ 주전 복귀 — 시즌 드롭백 최다 C.Wentz, 예상 선발 Kyler Murray(레이팅에 대체 QB 표본 섞임) · Out 2 / Doubtful 0 / Questionable 0 — Out: Nick Samac(C) · Brett Thorson(P) (보고 3주차)
+- 맥락(값만 — N5): 휴식 MIA 7일 / MIN 7일 · 날씨 Mostly sunny 64°F · 지붕 indoor
+- 리스크: MIN 주전 복귀 — 시즌 드롭백 최다 C.Wentz, 예상 선발 Kyler Murray(레이팅에 대체 QB 표본 섞임) · 〔직접 서술 — 값만, 단정 금지〕
+
+## ATL@NO  Mon 10-05 20:15 ET (17:15 PT) · Caesars Superdome · indoor · ATL 1-2 / NO 1-2 · 디비전
+
+- 시장(Draft Kings): 스프레드 홈 -2.5 · 총점 48.5 · ML ATL +130 / NO -155 · nflverse 라인 2.5/48.5
+- 레이팅: ATL 공격 -0.040(패 -0.046/러 -0.013) · 수비 -0.011(패 -0.013/러 +0.005) · 순마진 -1.8 · PF/PA 17.0/22.7
+- 레이팅: NO 공격 -0.044(패 -0.043/러 -0.063) · 수비 -0.016(패 -0.010/러 -0.046) · 순마진 -1.7 · PF/PA 27.0/27.7
+- 모델: 홈 마진 1.6 · 홈 승률 54.8% · 총점 39.3
+- **스프레드**: 엣지 -0.9점 → ATL +2.5 · **시장 동조 — 비집행** · 커버 확률 52.8%
+- **총점**: 엣지 -9.2점 → Under 48.5 · **후보** · 확률 81.0%
+- 부상·QB ATL: 예상 QB Michael Penix Jr.(시즌 주전 C.Rush) · ⓘ 주전 복귀 — 시즌 드롭백 최다 C.Rush, 예상 선발 Michael Penix Jr.(레이팅에 대체 QB 표본 섞임) · Out 1 / Doubtful 0 / Questionable 1 — Out: Samson Ebukam(DE) (보고 3주차)
+- 부상·QB NO: 예상 QB Tyler Shough(시즌 주전 T.Shough) · Out 2 / Doubtful 0 / Questionable 1 — Out: Barion Brown(WR) · Christen Miller(DT) (보고 3주차)
+- 맥락(값만 — N5): 휴식 ATL 11일 / NO 8일 · 날씨 Partly cloudy w/ t-storms 84°F · 지붕 indoor
+- 리스크: ATL 주전 복귀 — 시즌 드롭백 최다 C.Rush, 예상 선발 Michael Penix Jr.(레이팅에 대체 QB 표본 섞임) · 〔직접 서술 — 값만, 단정 금지〕
+
+## LA@PHI  Sun 10-04 13:00 ET (10:00 PT) · Lincoln Financial Field · outdoors · LA 1-2 / PHI 2-0
+
+- 시장(Draft Kings): 스프레드 홈 2.5 · 총점 46.5 · ML LA -130 / PHI +110 · nflverse 라인 -1.5/46.5
+- 레이팅: LA 공격 +0.083(패 +0.145/러 +0.012) · 수비 -0.050(패 -0.064/러 -0.025) · 순마진 +8.2 · PF/PA 20.3/21.0
+- 레이팅: PHI 공격 +0.023(패 +0.041/러 -0.002) · 수비 -0.038(패 -0.076/러 -0.010) · 순마진 +3.8 · PF/PA 24.0/21.0
+- 모델: 홈 마진 -3.0 · 홈 승률 40.9% · 총점 47.3
+- **스프레드**: 엣지 -0.5점 → LA -2.5 · **시장 동조 — 비집행** · 커버 확률 51.5%
+- **총점**: 엣지 0.8점 → Over 46.5 · **시장 동조 — 비집행** · 확률 53.1%
+- 부상·QB LA: 예상 QB Matthew Stafford(시즌 주전 M.Stafford) · Out 0 / Doubtful 2 / Questionable 1 — Doubtful: Puka Nacua(WR) · Kamren Kinchens(S) (보고 3주차)
+- 부상·QB PHI: 예상 QB Jalen Hurts(시즌 주전 J.Hurts) · Out 3 / Doubtful 0 / Questionable 1 — Out: Dallas Goedert(TE) · Fred Johnson(T) · Marquise Brown(WR) (보고 3주차)
+- 맥락(값만 — N5): 휴식 LA 7일 / PHI 6일 · 날씨 Cloudy 67°F · 지붕 outdoors
+- 리스크: ※ 값 얇음 PHI — 후보 제외 · 〔직접 서술 — 값만, 단정 금지〕
+
+## DET@CAR  Sun 10-04 20:20 ET (17:20 PT) · Bank of America Stadium · outdoors · DET 2-1 / CAR 1-2
+
+- 시장(Draft Kings): 스프레드 홈 3.5 · 총점 50.5 · ML DET -185 / CAR +154 · nflverse 라인 -3.5/50.5
+- 레이팅: DET 공격 +0.076(패 +0.142/러 -0.032) · 수비 +0.032(패 +0.029/러 -0.000) · 순마진 +2.7 · PF/PA 31.0/31.7
+- 레이팅: CAR 공격 -0.012(패 -0.012/러 -0.024) · 수비 +0.028(패 +0.051/러 +0.018) · 순마진 -2.5 · PF/PA 29.7/27.7
+- 모델: 홈 마진 -3.7 · 홈 승률 38.8% · 총점 53.9
+- **스프레드**: 엣지 -0.2점 → DET -3.5 · **시장 동조 — 비집행** · 커버 확률 50.6%
+- **총점**: 엣지 3.4점 → Over 50.5 · **참고** · 확률 62.6%
+- 부상·QB DET: 예상 QB Jared Goff(시즌 주전 J.Goff) · Out 2 / Doubtful 0 / Questionable 0 — Out: Ben Bartch(G) · Thomas Harper(S) (보고 3주차)
+- 부상·QB CAR: 예상 QB Bryce Young(시즌 주전 B.Young) · Out 3 / Doubtful 0 / Questionable 2 — Out: Nick Scott(S) · Devin Lloyd(LB) · Claudin Cherelus(LB) (보고 3주차)
+- 맥락(값만 — N5): 휴식 DET 7일 / CAR 7일 · 날씨 Thunderstorms 64°F · 지붕 outdoors
+- 리스크: 실외 강수 예보(Thunderstorms) — 총점 쪽 참고 · 〔직접 서술 — 값만, 단정 금지〕
+
+## DEN@SF  Sun 10-04 16:25 ET (13:25 PT) · Levi's Stadium · outdoors · DEN 2-1 / SF 3-0
+
+- 시장(Draft Kings): 스프레드 홈 -3.0 · 총점 46.5 · ML DEN +136 / SF -162 · nflverse 라인 3/46.5
+- 레이팅: DEN 공격 +0.018(패 +0.043/러 -0.003) · 수비 -0.038(패 -0.078/러 -0.006) · 순마진 +3.5 · PF/PA 20.0/23.3
+- 레이팅: SF 공격 +0.121(패 +0.170/러 +0.005) · 수비 +0.040(패 +0.076/러 -0.001) · 순마진 +5.0 · PF/PA 32.7/16.7
+- 모델: 홈 마진 3.0 · 홈 승률 59.1% · 총점 54.9
+- **스프레드**: 엣지 0.0점 → SF -3 · **시장 동조 — 비집행** · 커버 확률 50.0%
+- **총점**: 엣지 8.4점 → Over 46.5 · **후보** · 확률 78.8%
+- 부상·QB DEN: 예상 QB Bo Nix(시즌 주전 B.Nix) · Out 1 / Doubtful 0 / Questionable 1 — Out: Jonah Coleman(RB) (보고 3주차)
+- 부상·QB SF: 예상 QB Brock Purdy(시즌 주전 B.Purdy) · Out 4 / Doubtful 0 / Questionable 1 — Out: Demarcus Robinson(WR) · Nick Bosa(DE) · James Thompson Jr.(DT) · Romello Height(DE) (보고 3주차)
+- 맥락(값만 — N5): 휴식 DEN 7일 / SF 7일 · 날씨 Mostly sunny 81°F · 지붕 outdoors
+- 리스크: 자동 항목 없음 · 〔직접 서술 — 값만, 단정 금지〕
