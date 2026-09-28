@@ -80,8 +80,19 @@ def lean(week, pid, side, line, odds="-110", note=""):
     keep[pid] = row; save(list(keep.values())); print(f"lean 기록: {pid} {side} ({row['status']})")
 
 
-def place(week, pid=None, all_candidates=False, line=None, odds=None, note=""):
+def place(week, pid=None, all_candidates=False, line=None, odds=None, note="", side=None):
     rows = rd(PICKS); n = 0
+    if pid and side:
+        # 실베팅 쪽이 모델 페이퍼 행과 다르면(예: 모델 Over, Paul Under) 페이퍼 행은 두고 ":P" 행을 따로 만든다(2026-09-28 LA@DEN 사고)
+        base = next((r for r in rows if r["id"] == pid), None)
+        if base is None or base["side"].split()[0] != side.split()[0] or base["status"] == "placed" and base["side"] != side:
+            game = base["game"] if base else next((r["game"] for r in rows if r["id"].startswith(pid.rsplit(":", 1)[0] + ":")), pid.rsplit(":", 1)[0].split("_", 2)[-1].replace("_", "@"))
+            row = {k: "" for k in HDR}
+            row.update({"id": pid + ":P", "season": SEASON, "week": week, "game": game, "market": pid.rsplit(":", 1)[1], "side": side,
+                        "line": line or "", "odds": odds or "-110", "grade": "실베팅", "status": "placed",
+                        "placed_at": datetime.now().strftime("%Y-%m-%d %H:%M"), "note": note})
+            rows = [r for r in rows if r["id"] != row["id"]] + [row]
+            save(rows); print(f"placed(별도 행) {row['id']} {side}"); return
     for r in rows:
         if int(r["week"]) != week:
             continue
@@ -154,14 +165,14 @@ def main():
     ap = argparse.ArgumentParser(); sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("suggest"); s.add_argument("--week", type=int, required=True)
     p = sub.add_parser("place"); p.add_argument("--week", type=int, required=True); p.add_argument("--id"); p.add_argument("--all-candidates", action="store_true")
-    p.add_argument("--line"); p.add_argument("--odds"); p.add_argument("--note", default="")
+    p.add_argument("--line"); p.add_argument("--odds"); p.add_argument("--note", default=""); p.add_argument("--side", help="모델 행과 다른 쪽이면 별도 :P 행")
     l = sub.add_parser("lean"); l.add_argument("--week", type=int, required=True); l.add_argument("--id", required=True); l.add_argument("--side", required=True)
     l.add_argument("--line", required=True); l.add_argument("--odds", default="-110"); l.add_argument("--note", default="")
     g = sub.add_parser("grade"); g.add_argument("--week", type=int, required=True)
     sub.add_parser("stats")
     a = ap.parse_args()
     if a.cmd == "suggest": suggest(a.week)
-    elif a.cmd == "place": place(a.week, a.id, a.all_candidates, a.line, a.odds, a.note)
+    elif a.cmd == "place": place(a.week, a.id, a.all_candidates, a.line, a.odds, a.note, a.side)
     elif a.cmd == "lean": lean(a.week, a.id, a.side, a.line, a.odds, a.note)
     elif a.cmd == "grade": grade(a.week)
     else: stats()

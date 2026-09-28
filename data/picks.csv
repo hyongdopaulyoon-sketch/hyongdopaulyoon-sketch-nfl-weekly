@@ -42,5 +42,6 @@
 2026_03_LV_NO:spread,2026,3,LV@NO,spread,NO -3.5,-3.5,-110,5.6,2.1,참고,56.4,suggested,,L,LV 35-27 NO,-1,
 2026_03_LV_NO:total,2026,3,LV@NO,total,Under 43.5,43.5,-110,33.6,-9.9,관찰(큰 괴리 — 페이퍼),82.8,suggested,,L,LV 35-27 NO,-1,
 2026_03_LA_DEN:spread,2026,3,LA@DEN,spread,LA +1.5,-1.5,-110,-3.2,-4.7,관찰(큰 괴리 — 페이퍼),64.3,suggested,,L,LA 26-30 DEN,-1,
-2026_03_LA_DEN:total,2026,3,LA@DEN,total,Over 43.5,44.5,-110,47.0,3.5,참고,63.1,placed,2026-09-28 14:02,W,LA 26-30 DEN,0.909,Paul 실베팅 9/27(claude.ai 대화 — 언더) · 9/28 사후 기록 · 라인·배당 확인 전 기본값
+2026_03_LA_DEN:total,2026,3,LA@DEN,total,Over 43.5,43.5,-110,47.0,3.5,참고,63.1,suggested,,W,LA 26-30 DEN,0.909,
 2026_03_PHI_CHI:spread,2026,3,PHI@CHI,spread,PHI -3.5,-3.5,-110,,,관심(설명문),,placed,2026-09-28 13:15,,,,Paul 실베팅 9/28 — 설명문 판단(소액 관심) 동일
+2026_03_LA_DEN:total:P,2026,3,LA@DEN,total,Under 44.5,44.5,-110,,,실베팅,,placed,2026-09-27,L,LA 26-30 DEN,-1,Paul 실베팅 9/27(claude.ai 대화 — 언더 44.5) · 9/28 사후 기록 · 라이브 진입이면 라인·배당 정정 필요
