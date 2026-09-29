@@ -23,7 +23,7 @@
 2026_04_LAC_SEA:total,2026,4,LAC@SEA,total,Under 43.5,43.5,-110,31.5,-12.0,관찰(큰 괴리 — 페이퍼),87.3,suggested,,,,,
 2026_04_DET_CAR:total,2026,4,DET@CAR,total,Over 50.5,50.5,-110,53.9,3.4,참고,62.6,suggested,,,,,
 2026_04_ATL_NO:total,2026,4,ATL@NO,total,Under 48.5,48.5,-110,39.3,-9.2,관찰(큰 괴리 — 페이퍼),81.0,suggested,,,,,
-2026_03_PHI_CHI:total,2026,3,PHI@CHI,total,Over 41.5,41.5,-110,46.1,4.6,참고 ※,67.0,suggested,,,,,
+2026_03_PHI_CHI:total,2026,3,PHI@CHI,total,Over 41.5,41.5,-110,46.1,4.6,참고 ※,67.0,suggested,,L,PHI 7-27 CHI,-1,
 2026_03_ATL_GB:total,2026,3,ATL@GB,total,Over 43.5,43.5,-110,47.7,4.2,참고,65.5,suggested,,W,ATL 35-14 GB,0.909,
 2026_03_CAR_CLE:spread,2026,3,CAR@CLE,spread,CLE +2.5,2.5,-110,0.1,2.6,참고,58.0,suggested,,W,CAR 18-21 CLE,0.909,
 2026_03_CAR_CLE:total,2026,3,CAR@CLE,total,Under 41.5,41.5,-110,36.4,-5.1,관찰(큰 괴리 — 페이퍼),68.8,suggested,,W,CAR 18-21 CLE,0.909,
@@ -43,5 +43,5 @@
 2026_03_LV_NO:total,2026,3,LV@NO,total,Under 43.5,43.5,-110,33.6,-9.9,관찰(큰 괴리 — 페이퍼),82.8,suggested,,L,LV 35-27 NO,-1,
 2026_03_LA_DEN:spread,2026,3,LA@DEN,spread,LA +1.5,-1.5,-110,-3.2,-4.7,관찰(큰 괴리 — 페이퍼),64.3,suggested,,L,LA 26-30 DEN,-1,
 2026_03_LA_DEN:total,2026,3,LA@DEN,total,Over 43.5,43.5,-110,47.0,3.5,참고,63.1,suggested,,W,LA 26-30 DEN,0.909,
-2026_03_PHI_CHI:spread,2026,3,PHI@CHI,spread,PHI -3.5,-3.5,-110,,,관심(설명문),,placed,2026-09-28 13:15,,,,Paul 실베팅 9/28 — 설명문 판단(소액 관심) 동일
+2026_03_PHI_CHI:spread,2026,3,PHI@CHI,spread,PHI -3.5,-3.5,-110,,,관심(설명문),,placed,2026-09-28 13:15,L,PHI 7-27 CHI,-1,Paul 실베팅 9/28 — 설명문 판단(소액 관심) 동일
 2026_03_LA_DEN:total:P,2026,3,LA@DEN,total,Under 44.5,44.5,-110,,,실베팅,,placed,2026-09-27,L,LA 26-30 DEN,-1,Paul 실베팅 9/27(claude.ai 대화 — 언더 44.5) · 9/28 사후 기록 · 라이브 진입이면 라인·배당 정정 필요
