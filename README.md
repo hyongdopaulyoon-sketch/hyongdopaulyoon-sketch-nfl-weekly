@@ -23,7 +23,8 @@ MLB 데일리 파이프라인의 축소판. 무료 데이터(ESPN 공개 API · 
 ## 파일
 - `scripts/nfl_pull.py` — sources(캐시) → ratings(`data/ratings.csv`) → slate(`games.csv` + `line_history.csv`) → injuries(`injuries.csv`) → model(`model.csv`) → digest(`DIGEST.md` + 시각 스냅샷). `--phase results` 는 최종 점수.
 - `scripts/picks.py` — suggest / place / grade / stats. 픽로그 `data/picks.csv`(한 행 = 경기 × 시장).
-- `scripts/weekly.py` — 위 절차 묶음. `scripts/backtest.py`·`scripts/angles.py` — 캘리브레이션·각도 백테스트.
+- `scripts/tracker_xlsx.py` — 보기용 추적기 `data/NFL_픽_추적기.xlsx`(픽로그·적중률·주별). **정본은 picks.csv** — xlsx 는 채점 때마다 다시 만들어지니 손으로 고치지 말 것.
+- `scripts/weekly.py` — 위 절차 묶음(--grade 뒤 추적기 xlsx 자동 갱신). `scripts/backtest.py`·`scripts/angles.py` — 캘리브레이션·각도 백테스트.
 - `scripts/pending_rules.md` — 규칙 개정 기록(N8: 화요일에만).
 - `data/cache/` — nflverse 원본(수십 MB, git 제외). `data/2026-wNN/` — 주간 산출물(git 포함).
 

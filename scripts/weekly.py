@@ -28,6 +28,7 @@ def main():
         run("nfl_pull.py", ["--week", str(a.grade), "--phase", "results"])
         run("picks.py", ["grade", "--week", str(a.grade)])
         run("picks.py", ["stats"])
+        run("tracker_xlsx.py", [])          # 보기용 추적기 xlsx 재생성(정본은 picks.csv)
         return
     wk = ["--week", str(a.week)] if a.week else []
     run("nfl_pull.py", wk + (["--force"] if a.refresh else []))
