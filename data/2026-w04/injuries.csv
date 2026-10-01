@@ -1,33 +1,33 @@
 ﻿team,report_week,expected_qb,depth_qb1,season_main_qb,qb_report,qb_flag,qb_note,n_out,n_doubtful,n_questionable,out,doubtful,questionable
-ARI,3,Jacoby Brissett,Jacoby Brissett,J.Brissett,,,,1,0,2,Dadrion Taylor-Demerson(S),,Roy Lopez(DT) · Max Melton(CB)
-ATL,3,Michael Penix Jr.,Michael Penix Jr.,C.Rush,,,"주전 복귀 — 시즌 드롭백 최다 C.Rush, 예상 선발 Michael Penix Jr.(레이팅에 대체 QB 표본 섞임)",1,0,1,Samson Ebukam(DE),,Billy Bowman Jr.(CB)
-BAL,3,Lamar Jackson,Lamar Jackson,L.Jackson,,,,1,0,1,Ronnie Stanley(T),,Zay Flowers(WR)
-BUF,3,Josh Allen,Josh Allen,J.Allen,,,,2,0,4,Jordan Hancock(CB) · T.J. Sanders(DE),,DJ Moore(WR) · Ed Oliver(DT) · Keon Coleman(WR) · Ar'maj Reed-Adams(G)
-CAR,3,Bryce Young,Bryce Young,B.Young,,,,3,0,2,Nick Scott(S) · Devin Lloyd(LB) · Claudin Cherelus(LB),,Xavier Legette(WR) · Jalen Coker(WR)
-CHI,3,Tyson Bagent,Caleb Williams,C.Williams,Tyson Bagent Questionable,백업 QB 선발 — 뎁스차트 QB1 Caleb Williams 대신 예상 선발 Tyson Bagent,,3,0,1,Noah Sewell(LB) · Caleb Williams(QB) · Shemar Turner(DE),,Tyson Bagent(QB)
-CIN,3,Joe Burrow,Joe Burrow,J.Burrow,,,,1,1,0,Andrei Iosivas(WR),B.J. Hill(DT),
-CLE,3,Deshaun Watson,Deshaun Watson,D.Watson,,,,1,0,2,Teven Jenkins(G),,Grant Delpit(S) · Tyson Campbell(CB)
-DAL,3,Dak Prescott,Dak Prescott,D.Prescott,,,,4,0,0,Malik Hooker(S) · P.J. Locke(S) · Cobie Durant(CB) · DeMarvion Overshown(LB),,
-DEN,3,Bo Nix,Bo Nix,B.Nix,,,,1,0,1,Jonah Coleman(RB),,Marvin Mims Jr.(WR)
-DET,3,Jared Goff,Jared Goff,J.Goff,,,,2,0,0,Ben Bartch(G) · Thomas Harper(S),,
-GB,3,Jordan Love,Jordan Love,J.Love,,,,4,0,2,Aaron Banks(G) · Zach Bako-Bewele(T) · Jayden Reed(WR) · Warren Brinson(DT),,Javon Hargrave(DT) · Anthony Campbell(DT)
-HOU,3,C.J. Stroud,C.J. Stroud,C.Stroud,,,,5,0,1,Jadeveon Clowney(DE) · M.J. Stewart(S) · Nico Collins(WR) · Jacob Hummel(LB) · Ed Ingram(G),,Trent Brown(T)
-IND,3,Daniel Jones,Daniel Jones,D.Jones,,,,2,0,1,Ashton Dulin(WR) · Alec Pierce(WR),,Charvarius Ward(CB)
-JAX,3,Trevor Lawrence,Trevor Lawrence,T.Lawrence,,,,0,1,0,,Albert Regis(DT),
-KC,3,Patrick Mahomes,Patrick Mahomes,P.Mahomes,,,,1,1,0,Josh Simmons(T),Chamarri Conner(S),
-LA,3,Matthew Stafford,Matthew Stafford,M.Stafford,,,,0,2,1,,Puka Nacua(WR) · Kamren Kinchens(S),Colby Parkinson(TE)
-LAC,3,Justin Herbert,Justin Herbert,J.Herbert,Trey Lance Questionable,,,6,0,2,Dalvin Tomlinson(DT) · Trey Pipkins(T) · Kayode Awosika(G) · Elijah Molden(S) · Charlie Kolar(TE) · Brenen Thompson(WR),,Trey Lance(QB) · Rodney Shelley(CB)
-LV,3,Kirk Cousins,Kirk Cousins,K.Cousins,Aidan O'Connell Questionable,,,1,0,3,Treydan Stukes(S),,Kwity Paye(DE) · Aidan O'Connell(QB) · Brock Bowers(TE)
-MIA,3,Malik Willis,Malik Willis,M.Willis,,,,2,1,2,Rob Beal Jr.(DE) · Caleb Douglas(WR),Jaylen Wright(RB),Ryan Miller(WR) · Julius Brents(CB)
-MIN,3,Kyler Murray,Kyler Murray,C.Wentz,,,"주전 복귀 — 시즌 드롭백 최다 C.Wentz, 예상 선발 Kyler Murray(레이팅에 대체 QB 표본 섞임)",2,0,0,Nick Samac(C) · Brett Thorson(P),,
-NE,3,Drake Maye,Drake Maye,D.Maye,,,,3,0,2,Dre'Mont Jones(LB) · Brenden Schooler(S) · Quintayvious Hutchins(LB),,Craig Woodson(S) · Eli Raridon(TE)
-NO,3,Tyler Shough,Tyler Shough,T.Shough,,,,2,0,1,Barion Brown(WR) · Christen Miller(DT),,Martin Emerson(CB)
-NYG,3,Jameis Winston,Jameis Winston,J.Winston,,,,0,0,3,,,Brian Burns(LB) · Deonte Banks(CB) · Tyler Nubin(S)
-NYJ,3,Geno Smith,Geno Smith,G.Smith,,,,3,1,2,Minkah Fitzpatrick(S) · Francisco Mauigoa(LB) · Mason Taylor(TE),Kene Nwangwu(RB),Joseph Ossai(DE) · Adonai Mitchell(WR)
-PHI,3,Jalen Hurts,Jalen Hurts,J.Hurts,,,,3,0,1,Dallas Goedert(TE) · Fred Johnson(T) · Marquise Brown(WR),,Jonathan Greenard(LB)
-PIT,3,Aaron Rodgers,Aaron Rodgers,A.Rodgers,,,,2,0,4,Rico Dowdle(RB) · Gennings Dunker(G),,Jamel Dean(CB) · Michael Pittman(WR) · Jaylen Warren(RB) · Joey Porter Jr.(CB)
-SEA,3,Drew Lock,Sam Darnold,D.Lock,,백업 QB 선발 — 뎁스차트 QB1 Sam Darnold 대신 예상 선발 Drew Lock,,2,0,1,Julian Love(S) · Ty Okada(S),,Brandon Pili(DT)
-SF,3,Brock Purdy,Brock Purdy,B.Purdy,,,,4,0,1,Demarcus Robinson(WR) · Nick Bosa(DE) · James Thompson Jr.(DT) · Romello Height(DE),,Mike Evans(WR)
-TB,3,Baker Mayfield,Baker Mayfield,B.Mayfield,,,,2,0,0,Rueben Bain Jr.(LB) · Josiah Trotter(LB),,
-TEN,3,Cam Ward,Cam Ward,C.Ward,,,,0,0,2,,,Cordale Flott(CB) · Tyjae Spears(RB)
-WAS,3,Jayden Daniels,Jayden Daniels,J.Daniels,Jayden Daniels Out,QB 보고 Jayden Daniels Out(3주차 보고 — 잠정),,5,0,0,Frankie Luvu(LB) · Sam Cosmi(G) · Nick Cross(S) · Chig Okonkwo(TE) · Jayden Daniels(QB),,
+ARI,4,Jacoby Brissett,Jacoby Brissett,J.Brissett,,,,0,0,0,,,
+ATL,4,Michael Penix Jr.,Michael Penix Jr.,C.Rush,,,"주전 복귀 — 시즌 드롭백 최다 C.Rush, 예상 선발 Michael Penix Jr.(레이팅에 대체 QB 표본 섞임)",0,0,0,,,
+BAL,4,Lamar Jackson,Lamar Jackson,L.Jackson,,,,0,0,0,,,
+BUF,4,Josh Allen,Josh Allen,J.Allen,,,,0,0,0,,,
+CAR,4,Bryce Young,Bryce Young,B.Young,,,,0,0,0,,,
+CHI,4,Case Keenum,Caleb Williams,C.Williams,,백업 QB 선발 — 뎁스차트 QB1 Caleb Williams 대신 예상 선발 Case Keenum,,0,0,0,,,
+CIN,4,Joe Burrow,Joe Burrow,J.Burrow,,,,0,0,0,,,
+CLE,4,Deshaun Watson,Deshaun Watson,D.Watson,,,,0,0,0,,,
+DAL,4,Dak Prescott,Dak Prescott,D.Prescott,,,,0,0,0,,,
+DEN,4,Bo Nix,Bo Nix,B.Nix,,,,0,0,0,,,
+DET,4,Jared Goff,Jared Goff,J.Goff,,,,0,0,0,,,
+GB,4,Jordan Love,Jordan Love,J.Love,,,,0,0,0,,,
+HOU,4,C.J. Stroud,C.J. Stroud,C.Stroud,,,,0,0,0,,,
+IND,4,Daniel Jones,Daniel Jones,D.Jones,,,,0,0,0,,,
+JAX,4,Trevor Lawrence,Trevor Lawrence,T.Lawrence,,,,0,0,0,,,
+KC,4,Patrick Mahomes,Patrick Mahomes,P.Mahomes,,,,0,0,0,,,
+LA,4,Matthew Stafford,Matthew Stafford,M.Stafford,,,,0,0,0,,,
+LAC,4,Justin Herbert,Justin Herbert,J.Herbert,,,,0,0,0,,,
+LV,4,Kirk Cousins,Kirk Cousins,K.Cousins,,,,0,0,0,,,
+MIA,4,Malik Willis,Malik Willis,M.Willis,,,,0,0,0,,,
+MIN,4,Kyler Murray,Kyler Murray,C.Wentz,,,"주전 복귀 — 시즌 드롭백 최다 C.Wentz, 예상 선발 Kyler Murray(레이팅에 대체 QB 표본 섞임)",0,0,0,,,
+NE,4,Drake Maye,Drake Maye,D.Maye,,,,0,0,0,,,
+NO,4,Tyler Shough,Tyler Shough,T.Shough,,,,0,0,0,,,
+NYG,4,Jameis Winston,Jameis Winston,J.Winston,,,,0,0,0,,,
+NYJ,4,Geno Smith,Geno Smith,G.Smith,,,,0,0,0,,,
+PHI,4,Jalen Hurts,Jalen Hurts,J.Hurts,,,,0,0,0,,,
+PIT,4,Aaron Rodgers,Aaron Rodgers,A.Rodgers,,,,0,0,0,,,
+SEA,4,Drew Lock,Sam Darnold,D.Lock,,백업 QB 선발 — 뎁스차트 QB1 Sam Darnold 대신 예상 선발 Drew Lock,,0,0,0,,,
+SF,4,Brock Purdy,Brock Purdy,B.Purdy,,,,0,0,0,,,
+TB,4,Jalon Daniels,Baker Mayfield,B.Mayfield,,백업 QB 선발 — 뎁스차트 QB1 Baker Mayfield 대신 예상 선발 Jalon Daniels,,0,0,0,,,
+TEN,4,Cam Ward,Cam Ward,C.Ward,,,,0,0,0,,,
+WAS,4,Jayden Daniels,Jayden Daniels,J.Daniels,,,,2,0,0,Sam Cosmi(G) · Nick Cross(S),,
