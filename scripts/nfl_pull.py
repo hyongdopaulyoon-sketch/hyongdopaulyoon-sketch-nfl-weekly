@@ -135,7 +135,7 @@ def ph_sources(week, force=False):
     for sub, name, age in (("snap_counts", f"snap_counts_{SEASON}.csv", 12),
                            ("pfr_advstats", f"advstats_week_def_{SEASON}.csv", 12), ("pfr_advstats", f"advstats_week_pass_{SEASON}.csv", 12),
                            ("pfr_advstats", f"advstats_week_def_{SEASON - 1}.csv", 24 * 30), ("pfr_advstats", f"advstats_week_pass_{SEASON - 1}.csv", 24 * 30),
-                           ("nextgen_stats", "ngs_passing.csv.gz", 12)):
+                           ("nextgen_stats", "ngs_passing.csv.gz", 12), ("ftn_charting", f"ftn_charting_{SEASON}.csv", 12)):
         fetch(NFLVERSE + f"{sub}/{name}", os.path.join(CACHE, name), age, force)
 
 
@@ -336,7 +336,53 @@ def _ngs_qb(team, qb):
     return None
 
 
-def _pass_matchup_lines(off_t, def_t, qb, P26, P25):
+def _ftn_by_team():
+    """FTN 차팅 × pbp(game_id·play_id 조인) → 팀별 드롭백 성향(2026-10-01 서술 전용).
+    공격: pa 플레이액션 비율 · bl_epa 블리츠 받았을 때 EPA/드롭백 · intw 가로채기 위험 패스 비율 · n 드롭백
+    수비: d_bl 블리츠 비율 · d_n 상대 드롭백"""
+    ftn = {(r["nflverse_game_id"], r["nflverse_play_id"]): r for r in rd(os.path.join(CACHE, f"ftn_charting_{SEASON}.csv"))}
+    if not ftn:
+        return {}
+    o, d = defaultdict(lambda: defaultdict(float)), defaultdict(lambda: defaultdict(float))
+    for r in rd(os.path.join(CACHE, f"play_by_play_{SEASON}.csv.gz")):
+        if r.get("season_type", "REG") != "REG" or fnum(r.get("qb_dropback")) != 1:
+            continue
+        f = ftn.get((r["game_id"], str(int(fnum(r["play_id"]) or 0))))
+        if not f or not r.get("posteam"):
+            continue
+        bl = (fnum(f.get("n_blitzers")) or 0) > 0
+        x, y = o[r["posteam"]], d[r["defteam"]]
+        x["n"] += 1; x["pa"] += f["is_play_action"] == "TRUE"; x["intw"] += f["is_interception_worthy"] == "TRUE"
+        if bl:
+            x["bl_n"] += 1; x["bl_epa"] += fnum(r.get("epa")) or 0
+        y["d_n"] += 1; y["d_bl"] += bl
+    out = {}
+    for t in set(o) | set(d):
+        x, y = o.get(t, {}), d.get(t, {})
+        out[t] = {"pa": x["pa"] / x["n"] if x.get("n") else None, "intw": x["intw"] / x["n"] if x.get("n") else None,
+                  "bl_epa": x["bl_epa"] / x["bl_n"] if x.get("bl_n") else None, "bl_n": int(x.get("bl_n", 0)),
+                  "d_bl": y["d_bl"] / y["d_n"] if y.get("d_n") else None}
+    return out
+
+
+def _ftn_text(off_t, def_t, F):
+    if not F or off_t not in F or def_t not in F:
+        return ""
+    v = lambda k: {t: x[k] for t, x in F.items() if x[k] is not None}
+    o, d = F[off_t], F[def_t]
+    parts = []
+    if o["pa"] is not None:
+        parts.append(f"{off_t} 플레이액션 {o['pa'] * 100:.0f}%(많은 순 {_rank(v('pa'), off_t)}위)")
+    if o["bl_epa"] is not None:
+        parts.append(f"블리츠 받을 때 EPA/드롭백 {o['bl_epa']:+.2f}(좋은 순 {_rank(v('bl_epa'), off_t)}위 · {o['bl_n']}회)")
+    if o["intw"] is not None:
+        parts.append(f"가로채기 위험 패스 {o['intw'] * 100:.1f}%")
+    if d["d_bl"] is not None:
+        parts.append(f"vs {def_t} 블리츠 {d['d_bl'] * 100:.0f}%(많은 순 {_rank(v('d_bl'), def_t)}위)")
+    return " · FTN: " + " · ".join(parts) if parts else ""
+
+
+def _pass_matchup_lines(off_t, def_t, qb, P26, P25, F=None):
     """「off_t 패스 공격 vs def_t 수비 압박」 한 줄 — 서술 전용."""
     dv = {t: v[0] for t, v in P26.items()}; ov = {t: v[1] for t, v in P26.items()}
     q = _ngs_qb(off_t, qb)
@@ -353,7 +399,7 @@ def _pass_matchup_lines(off_t, def_t, qb, P26, P25):
         p25.append(f"{off_t} 피압박 {P25[off_t][1]:.1f}")
     thin = f" ※ 2026 {n}경기 — 얇음" if n and n < 6 else ""
     return (f"- 패스 매치업(서술 — 점수 아님) {off_t} 공격 → {def_t} 수비: {qtxt} · {otxt} vs {dtxt}{thin}"
-            + (f" (2025 경기당: {' · '.join(p25)})" if p25 else ""))
+            + (f" (2025 경기당: {' · '.join(p25)})" if p25 else "") + _ftn_text(off_t, def_t, F))
 
 
 def ph_injuries(week, force=False):
@@ -487,7 +533,7 @@ def ph_digest(week, force=False):
     model = {r["game_id"]: r for r in rd(os.path.join(wd, "model.csv"))}
     inj = {r["team"]: r for r in rd(os.path.join(wd, "injuries.csv"))}
     rt = {r["team"]: r for r in rd(os.path.join(DATA, "ratings.csv"))}
-    P26, P25 = _press_by_team(SEASON), _press_by_team(SEASON - 1)
+    P26, P25, FTN = _press_by_team(SEASON), _press_by_team(SEASON - 1), _ftn_by_team()
     now = datetime.now()
     L = [f"# NFL {SEASON} Week {week} — 주간 다이제스트 (생성 {now:%m-%d %H:%M} PT · ESPN DraftKings 라인 · nflverse EPA)", ""]
     L += ["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES] + [""]
@@ -537,7 +583,7 @@ def ph_digest(week, force=False):
                         if str(x.get("n_starters_missing") or "0") not in ("0", "") else "")
                      + (f' (보고 {x.get("report_week")}주차)' if x.get("report_week") and str(x.get("report_week")) != str(week) else ""))
         for o_, d_, x in ((a, h, ia), (h, a, ih)):
-            L.append(_pass_matchup_lines(o_, d_, x.get("expected_qb"), P26, P25))
+            L.append(_pass_matchup_lines(o_, d_, x.get("expected_qb"), P26, P25, FTN))
         hist = [x for x in rd(os.path.join(wd, "line_history.csv")) if x["game"] == f"{a}@{h}"]
         if len(hist) >= 2 and (hist[0]["spread_home"] != hist[-1]["spread_home"] or hist[0]["total"] != hist[-1]["total"]):
             L.append(f'- 라인 이동: 스프레드(홈) {hist[0]["spread_home"]} → {hist[-1]["spread_home"]} · 총점 {hist[0]["total"]} → {hist[-1]["total"]} ({hist[0]["pulled_at"]} → {hist[-1]["pulled_at"]}) — 정보(뉴스 반영), 방향 근거 아님')
