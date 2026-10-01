@@ -1,7 +1,8 @@
 """발행문 검사 + 판단 기록 (2026-09-29 발행 세션 도입).
   python check_nfl.py --week 4 --file 발행문.md [--record]
 검사: ① 경기 머리(🏈 AWAY@HOME) 커버리지 ② 시장 줄 스프레드·총점이 model.csv 와 같은가 ③ 판단 줄 형식·관심 ≤3·한 경기 한 시장
-④ 뉴스 확인 줄 존재 ⑤ 금지 낱말(캐시아웃·헤지 권유). --record 면 관심·소액 관심을 picks.csv 에 「관심(발행)」 페이퍼로 적는다."""
+④ 뉴스 확인 줄 존재 ⑤ 금지 낱말(캐시아웃·헤지 권유) ⑥ 방향 줄(2026-10-01 — 패스여도 스프레드·총점 쪽을 반드시 적는다) 형식·라인 = 시장·판단 쪽 = 방향 쪽.
+--record 면 관심·소액 관심은 「관심(발행)」(id …:J), 방향은 「방향(발행)」(id …:D) 페이퍼로 적는다 — 모델 페이퍼 행(id …:spread|total)은 그대로 둔다."""
 import argparse
 import csv
 import os
@@ -39,7 +40,7 @@ def main():
     games = rd(os.path.join(wd, "games.csv")); model = {f'{r["away"]}@{r["home"]}': r for r in rd(os.path.join(wd, "model.csv"))}
     txt = open(a.file, encoding="utf-8").read().replace("−", "-")
     secs = sections(txt)
-    문제, 판단들 = [], []
+    문제, 판단들, 방향들 = [], [], []
     keys = [f'{g["away"]}@{g["home"]}' for g in games]
     missing = [k for k in keys if k not in secs]
     if missing:
@@ -58,6 +59,22 @@ def main():
                 문제.append(f"{k}: 총점 {mk.group(2)} ≠ 다이제스트 {m['mkt_total']}")
         if not re.search(r"(?m)^- 뉴스 확인", body):
             문제.append(f"{k}: 「뉴스 확인(웹)」 줄 없음")
+        dm = re.search(r"(?m)^- 방향:\s*스프레드\s+([A-Z]{2,3}) ([+-]?[\d.]+)\s*·\s*총점\s+(Over|Under|오버|언더) ([\d.]+)", body)
+        dirs = {}
+        if not dm:
+            문제.append(f"{k}: 방향 줄(「- 방향: 스프레드 팀 ±x · 총점 Over|Under y」) 없음/형식 오류 — 패스여도 필수")
+        else:
+            a_, h_ = k.split("@")
+            team, sp, ou, tot = dm.group(1), fnum(dm.group(2)), dm.group(3).replace("오버", "Over").replace("언더", "Under"), fnum(dm.group(4))
+            hs = fnum(m["mkt_spread_home"])
+            if team not in (a_, h_):
+                문제.append(f"{k}: 방향 스프레드 팀 {team} 이 이 경기 팀이 아님")
+            elif hs is not None and sp != (hs if team == h_ else -hs):
+                문제.append(f"{k}: 방향 스프레드 {team} {dm.group(2)} ≠ 시장 라인({team} {(hs if team == h_ else -hs):+g})")
+            if tot != fnum(m["mkt_total"]):
+                문제.append(f"{k}: 방향 총점 {dm.group(4)} ≠ 시장 {m['mkt_total']}")
+            dirs = {"스프레드": f"{team} {sp:+g}", "총점": f"{ou} {tot:g}"}
+            방향들.append((k, dirs["스프레드"], dirs["총점"]))
         j = re.search(r"(?m)^- 판단:\s*(패스|소액 관심|관심)(?:\s*·\s*(스프레드|총점)\s*·\s*([^\n]+))?", body)
         if not j:
             문제.append(f"{k}: 판단 줄 없음/형식 오류"); continue
@@ -69,32 +86,35 @@ def main():
                 문제.append(f"{k}: 스프레드 쪽 형식 「팀 +3.5」 아님: {side}")
             if market == "총점" and not re.fullmatch(r"(Over|Under|오버|언더) [\d.]+", side):
                 문제.append(f"{k}: 총점 쪽 형식 「Over 41.5」 아님: {side}")
+            if dirs and market in dirs and side.replace("오버", "Over").replace("언더", "Under").split()[0] != dirs[market].split()[0]:
+                문제.append(f"{k}: 판단 쪽 {side} 이 방향 줄({dirs[market]})과 반대")
             판단들.append((k, verdict, market, side))
         if re.search(r"캐시아웃|헤지(?:를|를 하|하세요|권)|라이브로 들어가", body) and not re.search(r"전제가 깨|QB 부상", body):
             문제.append(f"{k}: 캐시아웃·헤지·라이브 권유 문구(금지)")
     n관심 = sum(1 for x in 판단들 if x[1] == "관심")
     if n관심 > 3:
         문제.append(f"「관심」 {n관심}경기 — 주당 최대 3")
-    print(f"■ NFL 발행문 검사 week {a.week}: 경기 {len(secs)}/{len(keys)} · 판단 {len(판단들)}(관심 {n관심}) · 문제 {len(문제)}")
+    print(f"■ NFL 발행문 검사 week {a.week}: 경기 {len(secs)}/{len(keys)} · 판단 {len(판단들)}(관심 {n관심}) · 방향 {len(방향들)} · 문제 {len(문제)}")
     for x in 문제:
         print("  ✗", x)
     for k, v, mk, sd in 판단들:
         print(f"  · {k} {v} · {mk} · {sd}")
-    if a.record and 판단들:
+    for k, s_, t_ in 방향들:
+        print(f"  → {k} 방향 {s_} / {t_}")
+    if a.record and (판단들 or 방향들):
         import picks as P
+        gid_of = {f'{r["away"]}@{r["home"]}': r["game_id"] for r in games}
         for k, v, mk, sd in 판단들:
-            gid = next((r["game_id"] for r in games if f'{r["away"]}@{r["home"]}' == k), None)
-            if not gid:
+            if k not in gid_of:
                 continue
             market = "spread" if mk == "스프레드" else "total"
             sd = sd.replace("오버", "Over").replace("언더", "Under")
-            line = sd.split()[-1]
-            P.lean(a.week, f"{gid}:{market}", sd, line, "-110", f"발행 판단 {v}")
-        rows = P.rd(P.PICKS)
-        for r in rows:
-            if r["grade"] == "관심(설명문)" and int(r["week"]) == a.week and r["note"].startswith("발행 판단"):
-                r["grade"] = "관심(발행)"
-        P.save(rows)
+            P.lean(a.week, f"{gid_of[k]}:{market}", sd, sd.split()[-1], "-110", f"발행 판단 {v}", suffix=":J", grade="관심(발행)")
+        for k, s_, t_ in 방향들:
+            if k not in gid_of:
+                continue
+            for market, sd in (("spread", s_), ("total", t_)):
+                P.lean(a.week, f"{gid_of[k]}:{market}", sd, sd.split()[-1], "-110", "발행 방향", suffix=":D", grade="방향(발행)")
     return 1 if 문제 else 0
 
 

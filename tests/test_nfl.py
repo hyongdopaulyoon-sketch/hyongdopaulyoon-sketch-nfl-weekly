@@ -37,3 +37,16 @@ def test_grade_spread_and_total():
     assert P._grade_one({"game": "NE@BUF", "market": "spread", "side": "BUF -4"}, res)[0] == "P"
     assert P._grade_one({"game": "NE@BUF", "market": "total", "side": "Over 43.5"}, res)[0] == "W"
     assert P._grade_one({"game": "NE@BUF", "market": "total", "side": "Under 43.5"}, res)[0] == "L"
+
+
+def test_lean_suffix_keeps_model_row(tmp_path, monkeypatch):
+    # 발행 판단(:J)·방향(:D) 기록이 모델 페이퍼 행(game_id:market)을 덮어쓰지 않는다(2026-10-01)
+    monkeypatch.setattr(P, "PICKS", str(tmp_path / "picks.csv")); monkeypatch.setattr(P, "DATA", str(tmp_path))
+    base = {k: "" for k in P.HDR}
+    base.update({"id": "2026_04_PIT_CLE:total", "season": "2026", "week": "4", "game": "PIT@CLE", "market": "total",
+                 "side": "Under 38.5", "line": "38.5", "grade": "참고", "status": "suggested"})
+    P.save([base])
+    P.lean(4, "2026_04_PIT_CLE:total", "Over 38.5", "38.5", suffix=":D", grade="방향(발행)")
+    rows = {r["id"]: r for r in P.rd(P.PICKS)}
+    assert rows["2026_04_PIT_CLE:total"]["side"] == "Under 38.5" and rows["2026_04_PIT_CLE:total"]["grade"] == "참고"
+    assert rows["2026_04_PIT_CLE:total:D"]["side"] == "Over 38.5" and rows["2026_04_PIT_CLE:total:D"]["grade"] == "방향(발행)"

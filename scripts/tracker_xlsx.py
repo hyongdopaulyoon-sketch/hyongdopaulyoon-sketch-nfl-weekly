@@ -54,9 +54,11 @@ def main():
     done = [r for r in rows if r["result"] in ("W", "L", "P")]
     placed = [r for r in done if r["status"] == "placed"]
     pub = [r for r in done if r["grade"].startswith("관심(발행)")]
+    lean_ = [r for r in done if r["grade"].startswith("방향(발행)")]
     model = [r for r in done if r["status"] != "placed" and r["grade"].startswith(("관찰", "참고"))]
     s2.append(["실베팅(placed)"] + rec(placed) + ["Paul 이 실제로 건 것 — 손익분기 52.4%"])
     s2.append(["발행 판단(페이퍼)"] + rec(pub) + ["발행 세션 관심·소액 관심(9/29~)"])
+    s2.append(["발행 방향(페이퍼)"] + rec(lean_) + ["발행 세션 방향 줄 — 패스 포함 전 경기·스프레드+총점(10/1~)"])
     s2.append(["모델 관찰·참고(페이퍼)"] + rec(model) + ["EPA 모델 방향 — 백테스트 45%, 검증용"])
     s2.append([])
     s2.append(["실베팅 · 시장별"]); [s2.append([f"  {k}"] + rec([r for r in placed if r["market"] == k]) + [""]) for k in ("spread", "total")]

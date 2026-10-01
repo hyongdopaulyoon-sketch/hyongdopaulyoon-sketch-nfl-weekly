@@ -67,17 +67,20 @@ def suggest(week):
     print(f"suggest week {week}: 신규 {n_new} · 갱신 {n_upd} · 전체 {len(keep)}행 → {os.path.relpath(PICKS, ROOT)}")
 
 
-def lean(week, pid, side, line, odds="-110", note=""):
-    """설명문 판단(관심) 기록 — 사람(수정 세션) 의견을 페이퍼로 남겨 모델·사람·실베팅을 따로 잰다. id = game_id:spread|total"""
+def lean(week, pid, side, line, odds="-110", note="", suffix="", grade="관심(설명문)"):
+    """사람 판단 페이퍼 기록 — 모델·사람·실베팅을 따로 잰다. id = game_id:spread|total[suffix]
+    suffix 를 주면(발행 판단 ':J' · 발행 방향 ':D') 모델 페이퍼 행(game_id:market)을 덮어쓰지 않는다(2026-10-01)."""
     rows = rd(PICKS); keep = {r["id"]: r for r in rows}
     game_id, market = pid.rsplit(":", 1)
     game = next((r["game"] for r in rows if r["id"].startswith(game_id + ":")), game_id.split("_", 2)[-1].replace("_", "@"))
+    rid = pid + suffix
     old = keep.get(pid)
-    row = {"id": pid, "season": SEASON, "week": week, "game": game, "market": market, "side": side, "line": line, "odds": odds,
-           "model_value": old["model_value"] if old else "", "edge": old["edge"] if old else "", "grade": "관심(설명문)", "p_win": old["p_win"] if old else "",
-           "status": old["status"] if old and old["status"] == "placed" else "suggested", "placed_at": old["placed_at"] if old else "",
+    row = {"id": rid, "season": SEASON, "week": week, "game": game, "market": market, "side": side, "line": line, "odds": odds,
+           "model_value": old["model_value"] if old else "", "edge": old["edge"] if old else "", "grade": grade, "p_win": old["p_win"] if old else "",
+           "status": "suggested" if suffix else (old["status"] if old and old["status"] == "placed" else "suggested"),
+           "placed_at": "" if suffix else (old["placed_at"] if old else ""),
            "result": "", "score": "", "units": "", "note": note}
-    keep[pid] = row; save(list(keep.values())); print(f"lean 기록: {pid} {side} ({row['status']})")
+    keep[rid] = row; save(list(keep.values())); print(f"lean 기록: {rid} {side} ({row['status']})")
 
 
 def place(week, pid=None, all_candidates=False, line=None, odds=None, note="", side=None):

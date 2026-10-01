@@ -283,10 +283,13 @@ def ph_injuries(week, force=False):
     inj = rd(os.path.join(CACHE, f"injuries_{SEASON}.csv"))
     weeks = sorted({int(r["week"]) for r in inj})
     use = week if week in weeks else (max(weeks) if weeks else None)
-    by = defaultdict(list)
+    by, prac = defaultdict(list), defaultdict(list)
     for r in inj:
-        if use is not None and int(r["week"]) == use and r.get("report_status"):
-            by[r["team"]].append(r)
+        if use is not None and int(r["week"]) == use:
+            if r.get("report_status"):
+                by[r["team"]].append(r)
+            elif r.get("practice_status"):
+                prac[r["team"]].append(r)
     qb1, main_qb = _qb1_by_team()
     games = rd(os.path.join(wd, "games.csv"))
     teams = sorted({g["away"] for g in games} | {g["home"] for g in games})
@@ -307,10 +310,19 @@ def ph_injuries(week, force=False):
             note = f"주전 복귀 — 시즌 드롭백 최다 {main_qb[t]}, 예상 선발 {exp}(레이팅에 대체 QB 표본 섞임)"
         if qb_rep and ("Out" in qb_rep or "Doubtful" in qb_rep):
             flag = (flag + " · " if flag else "") + f"QB 보고 {qb_rep}" + (f"({use}주차 보고 — 잠정)" if use and int(use) != int(week) else "")
+        # 최종 지정(Out/Q) 전엔 nflverse 가 연습 보고만 올린다 → 「Out 0」이 아니라 「미발표」(2026-10-01 PIT@CLE: 다이제스트 0, 실제 C·G·WR Out)
+        pending = "" if by[t] else ("미발표" if prac[t] else "")
+        dnp = [f'{r["full_name"]}({r["position"]})' for r in prac[t] if r["practice_status"].startswith("Did Not")]
+        lim = [f'{r["full_name"]}({r["position"]})' for r in prac[t] if r["practice_status"].startswith("Limited")]
+        qb_prac = next((f'{r["full_name"]} {"DNP" if r["practice_status"].startswith("Did Not") else "Limited"}' for r in prac[t]
+                        if r["position"] == "QB" and r["practice_status"].startswith(("Did Not", "Limited"))), "")
+        if pending and qb_prac:
+            note = (note + " · " if note else "") + f"QB 연습 {qb_prac}(최종 지정 미발표 — 잠정)"
         rows.append([t, use or "", exp, d1, main_qb.get(t, ""), qb_rep, flag, note, len(out), len(dbt), len(q),
-                     " · ".join(out), " · ".join(dbt), " · ".join(q)])
+                     " · ".join(out), " · ".join(dbt), " · ".join(q), pending, len(dnp), len(lim), " · ".join(dnp), " · ".join(lim)])
     wcsv(os.path.join(wd, "injuries.csv"), ["team", "report_week", "expected_qb", "depth_qb1", "season_main_qb", "qb_report", "qb_flag", "qb_note",
-                                             "n_out", "n_doubtful", "n_questionable", "out", "doubtful", "questionable"], rows)
+                                             "n_out", "n_doubtful", "n_questionable", "out", "doubtful", "questionable",
+                                             "final_pending", "n_dnp", "n_limited", "dnp", "limited"], rows)
 
 
 def ph_model(week, force=False):
@@ -375,7 +387,7 @@ RULES = [
     "N7. **기록** — picks.py suggest 가 관찰·참고를 picks.csv 에 「suggested」(페이퍼)로 적고, 실제 베팅한 것만 place 로 바꾼다(모델 제안이 아닌 경기도 place 가능). 채점은 월요일 grade. 성적은 placed 와 suggested 를 따로 센다.",
     "N8. **판정 개정은 주 1회(화요일)** 결과를 보고 pending_rules.md 한 줄로 남긴 뒤에만 바꾼다. 같은 주 안에서 문턱을 손대지 않는다.",
     "N9. **캐시아웃·헤지·라이브 진입은 하지 않는다** — 북의 캐시아웃 가격은 공정가보다 5~10% 나쁘고, 헤지는 수수료를 두 번 낸다. 예외는 베팅 전제가 깨졌을 때(QB 부상 등)뿐(2026-09-28 PHI@CHI 전반 7-0 질문).",
-    "N10. **발행은 claude.ai NFL 발행 세션이 한다(2026-09-29 Paul)** — 이 다이제스트를 붙여넣으면 경기별 발행문(시장·뉴스 확인(웹)·매치업·맥락·모델(참고)·반대 근거·판단·이유)을 쓰고 「판단: 패스/소액 관심/관심」을 낸다. 로컬은 check_nfl.py 로 숫자·형식을 대조하고 판단을 페이퍼(관심(발행))로 기록한다. 발행 세션의 몫은 **최신 뉴스(QB 확정·새 부상·라인 이동) 확인** — 다이제스트 부상 보고는 전 주차 것일 수 있다.",
+    "N10. **발행은 claude.ai NFL 발행 세션이 한다(2026-09-29 Paul)** — 이 다이제스트를 붙여넣으면 경기별 발행문(판단·방향·시장·뉴스 확인(웹)·매치업·맥락·모델(참고)·반대 근거·이유)을 쓰고 「판단: 패스/소액 관심/관심」(돈을 거느냐)과 **「방향: 스프레드 쪽 · 총점 쪽」(패스여도 필수 — 2026-10-01 Paul 「결정 없이 서술만」)** 을 낸다. 로컬은 check_nfl.py 로 숫자·형식을 대조하고 판단(관심(발행))·방향(방향(발행))을 따로 페이퍼로 기록한다. 발행 세션의 몫은 **최신 뉴스(QB 확정·새 부상·라인 이동) 확인** — 다이제스트 부상 보고는 전 주차 것일 수 있다.",
 ]
 
 
@@ -424,7 +436,10 @@ def ph_digest(week, force=False):
         for t, x in ((a, ia), (h, ih)):
             L.append(f'- 부상·QB {t}: 예상 QB {x.get("expected_qb") or "?"}(시즌 주전 {x.get("season_main_qb") or "?"})'
                      + (f' ⚠️ {x["qb_flag"]}' if x.get("qb_flag") else "") + (f' · ⓘ {x["qb_note"]}' if x.get("qb_note") else "")
-                     + f' · Out {x.get("n_out", 0)} / Doubtful {x.get("n_doubtful", 0)} / Questionable {x.get("n_questionable", 0)}'
+                     + (f' · ⚠️ 최종 지정 미발표 — 연습 보고 DNP {x.get("n_dnp", 0)}' + (f'({x["dnp"]})' if x.get("dnp") else "")
+                        + f' · Limited {x.get("n_limited", 0)}' + (f'({x["limited"]})' if x.get("limited") else "") + ' — 발행 세션 웹 확인 필수'
+                        if x.get("final_pending") else
+                        f' · Out {x.get("n_out", 0)} / Doubtful {x.get("n_doubtful", 0)} / Questionable {x.get("n_questionable", 0)}')
                      + (f' — Out: {x["out"]}' if x.get("out") else "") + (f' — Doubtful: {x["doubtful"]}' if x.get("doubtful") else "")
                      + (f' (보고 {x.get("report_week")}주차)' if x.get("report_week") and str(x.get("report_week")) != str(week) else ""))
         hist = [x for x in rd(os.path.join(wd, "line_history.csv")) if x["game"] == f"{a}@{h}"]
