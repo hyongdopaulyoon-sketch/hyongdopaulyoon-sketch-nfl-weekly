@@ -46,4 +46,4 @@
 2026_04_ATL_NO:spread:T,2026,4,ATL@NO,spread,ATL +8.5,+8.5,-120,,,티저 다리(관찰),,suggested,,,,,원 라인 +2.5 · 총점 47.5 · 가격 미기록(−120 티저 환산 손익분기 73.9%),,,
 2026_04_PIT_CLE:spread:D,2026,4,PIT@CLE,spread,PIT -2.5,-2.5,-110,-0.7,2.3,방향(발행),56.9,suggested,,,,,발행 방향,,,
 2026_04_PIT_CLE:total:D,2026,4,PIT@CLE,total,Over 38.5,38.5,-110,34.2,-4.3,방향(발행),65.8,suggested,,,,,발행 방향,,,
-2026_04_PIT_CLE:spread:P,2026,4,PIT@CLE,spread,PIT -2.5,-2.5,-120,,,실베팅,,placed,2026-10-01 11:36,,,,Paul 자체 판단 0.5u — 발행 판단은 패스(굳이 하나만 PIT -2.5). 배당 미확인 — 발행 시점 시장가 -120 으로 임시(Paul 확인 시 정정). Ramsey(PIT CB) Q 상태에서 베팅,,,0.5
+2026_04_PIT_CLE:spread:P,2026,4,PIT@CLE,spread,PIT -2.5,-2.5,-108,,,실베팅,,placed,2026-10-01 11:36,,,,"Paul 자체 판단 0.5u — 발행 판단은 패스(굳이 하나만 PIT -2.5). 체결 Polymarket 「PIT to win by over 2.5 → Yes」 52c(≈ -108, 손익분기 52.0%). Ramsey(PIT CB) Q 상태에서 베팅",,,0.5
