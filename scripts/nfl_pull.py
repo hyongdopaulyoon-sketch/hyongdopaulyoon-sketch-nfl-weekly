@@ -131,6 +131,12 @@ def ph_sources(week, force=False):
     fetch(NFLVERSE + f"pbp/play_by_play_{SEASON}.csv.gz", os.path.join(CACHE, f"play_by_play_{SEASON}.csv.gz"), 12, force)
     fetch(NFLVERSE + f"pbp/play_by_play_{SEASON - 1}.csv.gz", os.path.join(CACHE, f"play_by_play_{SEASON - 1}.csv.gz"), 24 * 30, force)
     fetch(f"{ESPN}?week={week}&seasontype=2&dates={SEASON}", os.path.join(week_dir(week), "espn_scoreboard.json"), 0.5, force)
+    # 고급 데이터(2026-10-01 — 다이제스트 서술 전용, 점수·등급엔 안 씀): 스냅 비율 · PFR 압박 · NGS QB
+    for sub, name, age in (("snap_counts", f"snap_counts_{SEASON}.csv", 12),
+                           ("pfr_advstats", f"advstats_week_def_{SEASON}.csv", 12), ("pfr_advstats", f"advstats_week_pass_{SEASON}.csv", 12),
+                           ("pfr_advstats", f"advstats_week_def_{SEASON - 1}.csv", 24 * 30), ("pfr_advstats", f"advstats_week_pass_{SEASON - 1}.csv", 24 * 30),
+                           ("nextgen_stats", "ngs_passing.csv.gz", 12)):
+        fetch(NFLVERSE + f"{sub}/{name}", os.path.join(CACHE, name), age, force)
 
 
 def _team_week_epa(pbp_path, season):
@@ -277,6 +283,79 @@ def _same_person(short, full):
     return full.split()[0][0].upper() == m.group(1) and full.split()[-1].lower() == m.group(2).split()[-1].lower()
 
 
+def _norm_name(n):
+    n = re.sub(r"[.'\-]", "", (n or "").lower())
+    return " ".join(w for w in n.split() if w not in ("jr", "sr", "ii", "iii", "iv", "v"))
+
+
+STARTER_SNAP = 0.60   # 최근 3경기 출전 경기 평균 스냅 비율 60%+ = 주전급
+
+
+def _snap_pct():
+    """{(team, 정규화 이름): 최근 팀 3경기 중 출전 경기의 평균 max(공격, 수비) 스냅 비율} — 결장자가 「얼마나 뛰던 선수」인지."""
+    rows = [r for r in rd(os.path.join(CACHE, f"snap_counts_{SEASON}.csv")) if r.get("game_type", "REG") == "REG"]
+    team_weeks = defaultdict(set)
+    for r in rows:
+        team_weeks[r["team"]].add(int(r["week"]))
+    acc = defaultdict(list)
+    for r in rows:
+        if int(r["week"]) in sorted(team_weeks[r["team"]])[-3:]:
+            v = max(fnum(r.get("offense_pct")) or 0, fnum(r.get("defense_pct")) or 0)
+            if v > 0:
+                acc[(r["team"], _norm_name(r["player"]))].append(v)
+    return {k: sum(v) / len(v) for k, v in acc.items()}
+
+
+def _press_by_team(season):
+    """PFR 주간 고급 기록 → {team: (수비 압박/경기, 공격 피압박/경기, 경기 수)}."""
+    d = rd(os.path.join(CACHE, f"advstats_week_def_{season}.csv")); o = rd(os.path.join(CACHE, f"advstats_week_pass_{season}.csv"))
+    dp, op, gm = defaultdict(float), defaultdict(float), defaultdict(set)
+    for r in d:
+        if r.get("game_type", "REG") == "REG":
+            dp[r["team"]] += fnum(r.get("def_pressures")) or 0; gm[r["team"]].add(r["game_id"])
+    for r in o:
+        if r.get("game_type", "REG") == "REG":
+            op[r["team"]] += fnum(r.get("times_pressured")) or 0
+    return {t: (dp[t] / len(g), op[t] / len(g), len(g)) for t, g in gm.items() if g}
+
+
+def _rank(vals, t, high_first=True):
+    order = sorted(vals, key=lambda k: vals[k], reverse=high_first)
+    return order.index(t) + 1 if t in order else None
+
+
+def _ngs_qb(team, qb):
+    """NGS 시즌 합계(week 0) — 예상 선발 QB 의 2026 값, 없으면 2025. (시즌, 투구 시간, CPOE, 공격성%, 시도)"""
+    rows = [r for r in rd(os.path.join(CACHE, "ngs_passing.csv.gz")) if r.get("week") == "0" and r.get("season_type") == "REG"]
+    last = (qb or "").split()[-1].lower() if qb else ""
+    for season in (str(SEASON), str(SEASON - 1)):
+        for r in rows:
+            if r["season"] == season and r["player_display_name"].split()[-1].lower() == last and (qb or "")[:1] == r["player_display_name"][:1] \
+                    and (season != str(SEASON) or ESPN2NV.get(r["team_abbr"], {"LAR": "LA"}.get(r["team_abbr"], r["team_abbr"])) == team):
+                return season, fnum(r["avg_time_to_throw"]), fnum(r["completion_percentage_above_expectation"]), fnum(r["aggressiveness"]), r["attempts"]
+    return None
+
+
+def _pass_matchup_lines(off_t, def_t, qb, P26, P25):
+    """「off_t 패스 공격 vs def_t 수비 압박」 한 줄 — 서술 전용."""
+    dv = {t: v[0] for t, v in P26.items()}; ov = {t: v[1] for t, v in P26.items()}
+    q = _ngs_qb(off_t, qb)
+    qtxt = (f"QB {qb} 투구 시간 {q[1]:.2f}초 · CPOE {q[2]:+.1f} · 공격적 패스 {q[3]:.0f}%(시도 {q[4]}{', 2025' if q[0] != str(SEASON) else ''})" if q and q[1] is not None
+            else f"QB {qb or '?'} NGS 기록 없음")
+    def_ = P26.get(def_t); off_ = P26.get(off_t)
+    dtxt = (f"{def_t} 수비 압박 경기당 {def_[0]:.1f}(리그 {_rank(dv, def_t)}위)" if def_ else f"{def_t} 수비 압박 기록 없음")
+    otxt = (f"{off_t} 공격 피압박 경기당 {off_[1]:.1f}(적은 순 {_rank(ov, off_t, high_first=False)}위)" if off_ else "")
+    n = min(def_[2] if def_ else 0, off_[2] if off_ else 0)
+    p25 = []
+    if def_t in P25:
+        p25.append(f"{def_t} 압박 {P25[def_t][0]:.1f}")
+    if off_t in P25:
+        p25.append(f"{off_t} 피압박 {P25[off_t][1]:.1f}")
+    thin = f" ※ 2026 {n}경기 — 얇음" if n and n < 6 else ""
+    return (f"- 패스 매치업(서술 — 점수 아님) {off_t} 공격 → {def_t} 수비: {qtxt} · {otxt} vs {dtxt}{thin}"
+            + (f" (2025 경기당: {' · '.join(p25)})" if p25 else ""))
+
+
 def ph_injuries(week, force=False):
     """nflverse 부상 보고(해당 주, 없으면 최신 주) + 뎁스차트 QB1 → data/2026-wNN/injuries.csv (팀별 한 줄)"""
     wd = week_dir(week)
@@ -293,11 +372,20 @@ def ph_injuries(week, force=False):
     qb1, main_qb = _qb1_by_team()
     games = rd(os.path.join(wd, "games.csv"))
     teams = sorted({g["away"] for g in games} | {g["home"] for g in games})
+    snap = _snap_pct()
+
+    def nm(r):
+        # 「이름(포지션 · 스냅 n%)」 — 최근 3경기 출전 경기 평균, 60%+ 는 ★주전급 (2026-10-01)
+        v = snap.get((r["team"], _norm_name(r["full_name"])))
+        return f'{r["full_name"]}({r["position"]}' + (f' · {"★" if v >= STARTER_SNAP else ""}스냅 {v * 100:.0f}%' if v else "") + ")"
+
+    def n_star(rs):
+        return sum(1 for r in rs if (snap.get((r["team"], _norm_name(r["full_name"]))) or 0) >= STARTER_SNAP)
     rows = []
     for t in teams:
-        out = [f'{r["full_name"]}({r["position"]})' for r in by[t] if r["report_status"] == "Out"]
-        dbt = [f'{r["full_name"]}({r["position"]})' for r in by[t] if r["report_status"] == "Doubtful"]
-        q = [f'{r["full_name"]}({r["position"]})' for r in by[t] if r["report_status"] == "Questionable"]
+        out = [nm(r) for r in by[t] if r["report_status"] == "Out"]
+        dbt = [nm(r) for r in by[t] if r["report_status"] == "Doubtful"]
+        q = [nm(r) for r in by[t] if r["report_status"] == "Questionable"]
         qb_rep = next((f'{r["full_name"]} {r["report_status"]}' for r in by[t] if r["position"] == "QB" and r["report_status"] in ("Out", "Doubtful", "Questionable")), "")
         exp = next((g["away_qb"] if g["away"] == t else g["home_qb"] for g in games if t in (g["away"], g["home"])), "")
         # 벌점(qb_flag): ⓐ 예상 선발이 뎁스차트 QB1 이 아니다(백업 선발) ⓑ 보고가 QB Out/Doubtful.
@@ -312,17 +400,19 @@ def ph_injuries(week, force=False):
             flag = (flag + " · " if flag else "") + f"QB 보고 {qb_rep}" + (f"({use}주차 보고 — 잠정)" if use and int(use) != int(week) else "")
         # 최종 지정(Out/Q) 전엔 nflverse 가 연습 보고만 올린다 → 「Out 0」이 아니라 「미발표」(2026-10-01 PIT@CLE: 다이제스트 0, 실제 C·G·WR Out)
         pending = "" if by[t] else ("미발표" if prac[t] else "")
-        dnp = [f'{r["full_name"]}({r["position"]})' for r in prac[t] if r["practice_status"].startswith("Did Not")]
-        lim = [f'{r["full_name"]}({r["position"]})' for r in prac[t] if r["practice_status"].startswith("Limited")]
+        dnp = [nm(r) for r in prac[t] if r["practice_status"].startswith("Did Not")]
+        lim = [nm(r) for r in prac[t] if r["practice_status"].startswith("Limited")]
+        starters = n_star([r for r in by[t] if r["report_status"] in ("Out", "Doubtful")]) if by[t] else n_star(
+            [r for r in prac[t] if r["practice_status"].startswith("Did Not")])
         qb_prac = next((f'{r["full_name"]} {"DNP" if r["practice_status"].startswith("Did Not") else "Limited"}' for r in prac[t]
                         if r["position"] == "QB" and r["practice_status"].startswith(("Did Not", "Limited"))), "")
         if pending and qb_prac:
             note = (note + " · " if note else "") + f"QB 연습 {qb_prac}(최종 지정 미발표 — 잠정)"
         rows.append([t, use or "", exp, d1, main_qb.get(t, ""), qb_rep, flag, note, len(out), len(dbt), len(q),
-                     " · ".join(out), " · ".join(dbt), " · ".join(q), pending, len(dnp), len(lim), " · ".join(dnp), " · ".join(lim)])
+                     " · ".join(out), " · ".join(dbt), " · ".join(q), pending, len(dnp), len(lim), " · ".join(dnp), " · ".join(lim), starters])
     wcsv(os.path.join(wd, "injuries.csv"), ["team", "report_week", "expected_qb", "depth_qb1", "season_main_qb", "qb_report", "qb_flag", "qb_note",
                                              "n_out", "n_doubtful", "n_questionable", "out", "doubtful", "questionable",
-                                             "final_pending", "n_dnp", "n_limited", "dnp", "limited"], rows)
+                                             "final_pending", "n_dnp", "n_limited", "dnp", "limited", "n_starters_missing"], rows)
 
 
 def ph_model(week, force=False):
@@ -397,6 +487,7 @@ def ph_digest(week, force=False):
     model = {r["game_id"]: r for r in rd(os.path.join(wd, "model.csv"))}
     inj = {r["team"]: r for r in rd(os.path.join(wd, "injuries.csv"))}
     rt = {r["team"]: r for r in rd(os.path.join(DATA, "ratings.csv"))}
+    P26, P25 = _press_by_team(SEASON), _press_by_team(SEASON - 1)
     now = datetime.now()
     L = [f"# NFL {SEASON} Week {week} — 주간 다이제스트 (생성 {now:%m-%d %H:%M} PT · ESPN DraftKings 라인 · nflverse EPA)", ""]
     L += ["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES] + [""]
@@ -441,7 +532,12 @@ def ph_digest(week, force=False):
                         if x.get("final_pending") else
                         f' · Out {x.get("n_out", 0)} / Doubtful {x.get("n_doubtful", 0)} / Questionable {x.get("n_questionable", 0)}')
                      + (f' — Out: {x["out"]}' if x.get("out") else "") + (f' — Doubtful: {x["doubtful"]}' if x.get("doubtful") else "")
+                     + (f' — Questionable: {x["questionable"]}' if x.get("questionable") else "")
+                     + (f' · ★주전급(스냅 60%+) {"Out/Doubtful" if not x.get("final_pending") else "연습 불참"} {x["n_starters_missing"]}명'
+                        if str(x.get("n_starters_missing") or "0") not in ("0", "") else "")
                      + (f' (보고 {x.get("report_week")}주차)' if x.get("report_week") and str(x.get("report_week")) != str(week) else ""))
+        for o_, d_, x in ((a, h, ia), (h, a, ih)):
+            L.append(_pass_matchup_lines(o_, d_, x.get("expected_qb"), P26, P25))
         hist = [x for x in rd(os.path.join(wd, "line_history.csv")) if x["game"] == f"{a}@{h}"]
         if len(hist) >= 2 and (hist[0]["spread_home"] != hist[-1]["spread_home"] or hist[0]["total"] != hist[-1]["total"]):
             L.append(f'- 라인 이동: 스프레드(홈) {hist[0]["spread_home"]} → {hist[-1]["spread_home"]} · 총점 {hist[0]["total"]} → {hist[-1]["total"]} ({hist[0]["pulled_at"]} → {hist[-1]["pulled_at"]}) — 정보(뉴스 반영), 방향 근거 아님')
