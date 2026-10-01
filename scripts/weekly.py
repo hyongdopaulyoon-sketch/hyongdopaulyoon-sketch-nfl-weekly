@@ -40,6 +40,7 @@ def main():
         w = str(j["week"]["number"])
     run("picks.py", ["suggest", "--week", w])
     run("picks.py", ["teaser", "--week", w])          # 웡 티저 다리 페이퍼(2026-10-01) — 실베팅 아님
+    run("picks.py", ["wind", "--week", w])            # 바람 15mph+ 언더 페이퍼(2026-10-01) — 경기 당일 판만
 
 
 if __name__ == "__main__":

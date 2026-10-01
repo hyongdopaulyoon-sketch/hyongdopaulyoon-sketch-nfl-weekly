@@ -65,9 +65,12 @@ def main():
     avg_c = (sum((-o / (100 - o) if o < 0 else 100 / (o + 100)) for o in pr) / len(pr) * 100) if pr else None
     s2.append(["티저 다리(관찰·페이퍼)"] + rec(tz) + [f"웡 티저 다리(10/1~) — 손익분기 73.9%(−120 2팀 환산) · 60다리 보고 · <72% 폐기"
                                                 + (f" · 평균 표시가 {avg_c:.1f}c(n {len(pr)})" if pr else "")])
+    wn = [r for r in done if r["grade"] == "바람 언더(관찰)"]
+    s2.append(["바람 언더(관찰·페이퍼)"] + rec(wn) + ["실외 · 킥오프 예보 지속 15mph+ 언더(10/1~) — 손익분기 52.4% · 40픽 또는 시즌 종료 때 보고 · <52.4% 폐기"])
     # CLV(2026-10-01): 픽 라인 vs 마감 라인(점, + = 우리가 더 좋은 숫자) — 승패보다 빨리 실력이 보인다. 모델 페이퍼는 리프레시마다 쪽이 갱신돼 ≈0 이 정상
     for lab, xs in (("평균 CLV · 실베팅", [r for r in rows if r["status"] == "placed"]), ("평균 CLV · 발행 판단", [r for r in rows if r["grade"].startswith("관심(발행)")]),
-                    ("평균 CLV · 발행 방향", [r for r in rows if r["grade"].startswith("방향(발행)")])):
+                    ("평균 CLV · 발행 방향", [r for r in rows if r["grade"].startswith("방향(발행)")]),
+                    ("평균 CLV · 바람 언더", [r for r in rows if r["grade"] == "바람 언더(관찰)"])):
         cv = [fnum(r.get("clv")) for r in xs if fnum(r.get("clv")) is not None]
         s2.append([lab, len(cv), sum(1 for v in cv if v > 0), sum(1 for v in cv if v < 0), sum(1 for v in cv if v == 0),
                    None, round(sum(cv) / len(cv), 2) if cv else None, "픽/우리 쪽 이동/반대/같음 · 「유닛」 칸 = 평균 CLV(점)"])
