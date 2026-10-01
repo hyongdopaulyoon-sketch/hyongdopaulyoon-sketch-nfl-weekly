@@ -18,7 +18,7 @@ from datetime import datetime
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE); DATA = os.path.join(ROOT, "data")
 PICKS = os.path.join(DATA, "picks.csv")
 HDR = ["id", "season", "week", "game", "market", "side", "line", "odds", "model_value", "edge", "grade", "p_win", "status",
-       "placed_at", "result", "score", "units", "note"]
+       "placed_at", "result", "score", "units", "note", "closing_line", "clv"]
 SEASON = 2026
 
 
@@ -124,6 +124,42 @@ def _grade_one(r, res):
     return ("P" if d == 0 else "W" if d > 0 else "L"), score
 
 
+def _closing(week):
+    """{game_id: (홈 스프레드(베팅 표기, 홈 +3 = 3), 총점)} — nflverse games.csv 마감(spread_line = 홈 기대 마진 → 부호 반전),
+    없으면 우리 line_history 마지막 행(DraftKings, 마감 직전이 아닐 수 있음)."""
+    out = {}
+    for r in rd(os.path.join(DATA, "cache", "games.csv")):
+        if r.get("season") == str(SEASON) and r.get("week") == str(week) and fnum(r.get("spread_line")) is not None:
+            out[r["game_id"]] = (-fnum(r["spread_line"]), fnum(r.get("total_line")))
+    wd = os.path.join(DATA, f"{SEASON}-w{week:02d}")
+    last = {}
+    for r in rd(os.path.join(wd, "line_history.csv")):          # 시간순 누적 — 마지막 행이 이긴다
+        last[f'{SEASON}_{week:02d}_{r["game"].replace("@", "_")}'] = (fnum(r["spread_home"]), fnum(r["total"]))
+    for gid, v in last.items():
+        out.setdefault(gid, v)
+    return out
+
+
+def clv_of(r, close):
+    """픽 시점 라인 대비 마감 라인 이득(점, + = 우리가 더 좋은 숫자를 잡음). 스프레드 'CLE +2.5' · 총점 'Under 38.5'."""
+    if not close:
+        return None, None
+    a, h = r["game"].split("@")
+    parts = r["side"].split()
+    if len(parts) < 2 or fnum(parts[1]) is None:
+        return None, None
+    mine = fnum(parts[1])
+    if r["market"] == "spread":
+        if close[0] is None:
+            return None, None
+        c = close[0] if parts[0] == h else -close[0]
+        return c, mine - c
+    if close[1] is None:
+        return None, None
+    c = close[1]
+    return c, (c - mine) if parts[0] == "Over" else (mine - c)
+
+
 def grade(week):
     wd = os.path.join(DATA, f"{SEASON}-w{week:02d}")
     res = {f'{r["away"]}@{r["home"]}': r for r in rd(os.path.join(wd, "results.csv")) if r["status"] == "STATUS_FINAL"}
@@ -141,7 +177,14 @@ def grade(week):
         r["result"], r["score"] = wl, score
         r["units"] = "0" if wl == "P" else ("-1" if wl == "L" else f"{(100 / abs(o) if o < 0 else o / 100):.3f}")
         n += 1
-    save(rows); print(f"grade week {week}: {n}행 채점")
+    # CLV(2026-10-01) — 승패보다 잡음이 훨씬 작아 수십 건이면 「우리 정보가 시장보다 빨랐나」가 보인다
+    close = _closing(week); nc = 0
+    for r in rows:
+        if int(r["week"]) == week and not r.get("clv"):
+            c, v = clv_of(r, close.get(r["id"].split(":")[0]))
+            if v is not None:
+                r["closing_line"], r["clv"] = f"{c:g}", f"{v:+g}"; nc += 1
+    save(rows); print(f"grade week {week}: {n}행 채점 · CLV {nc}행")
 
 
 def stats():
@@ -154,6 +197,11 @@ def stats():
     placed = [r for r in rows if r["status"] == "placed"]; sug = [r for r in rows if r["status"] != "placed"]
     print(f"📊 NFL {SEASON} 픽 성적 — 손익분기 52.4%(−110)")
     print(f"■ 집행(placed) {len(placed)}픽 {rec(placed)} · 모델 제안(미집행) {len(sug)}픽 {rec(sug)}")
+    for lab, xs in (("실베팅", placed), ("발행 판단", [r for r in rows if r["grade"].startswith("관심(발행)")]),
+                    ("발행 방향", [r for r in rows if r["grade"].startswith("방향(발행)")]), ("모델 페이퍼", [r for r in sug if r["grade"].startswith(("관찰", "참고"))])):
+        cv = [fnum(r.get("clv")) for r in xs if fnum(r.get("clv")) is not None]
+        if cv:
+            print(f"  평균 CLV {lab}: {sum(cv) / len(cv):+.2f}점(n {len(cv)} · 우리 쪽 이동 {sum(1 for v in cv if v > 0)} / 반대 {sum(1 for v in cv if v < 0)})")
     for lab, key in (("시장", "market"), ("등급", "grade"), ("주차", "week")):
         by = defaultdict(list)
         for r in placed: by[r[key]].append(r)

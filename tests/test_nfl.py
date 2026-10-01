@@ -50,3 +50,12 @@ def test_lean_suffix_keeps_model_row(tmp_path, monkeypatch):
     rows = {r["id"]: r for r in P.rd(P.PICKS)}
     assert rows["2026_04_PIT_CLE:total"]["side"] == "Under 38.5" and rows["2026_04_PIT_CLE:total"]["grade"] == "참고"
     assert rows["2026_04_PIT_CLE:total:D"]["side"] == "Over 38.5" and rows["2026_04_PIT_CLE:total:D"]["grade"] == "방향(발행)"
+
+
+def test_clv_spread_and_total():
+    # 픽 'CLE +2.5' · 마감 홈(CLE) +1.5 → 1점 이득 / 'PIT -2.5' · 마감 CLE +3.5(PIT -3.5) → +1 / Under 38.5 · 마감 37.5 → +1 / Over 38.5 → −1
+    close = (1.5, 37.5)
+    assert P.clv_of({"game": "PIT@CLE", "market": "spread", "side": "CLE +2.5"}, close) == (1.5, 1.0)
+    assert P.clv_of({"game": "PIT@CLE", "market": "spread", "side": "PIT -2.5"}, (3.5, 37.5)) == (-3.5, 1.0)
+    assert P.clv_of({"game": "PIT@CLE", "market": "total", "side": "Under 38.5"}, close) == (37.5, 1.0)
+    assert P.clv_of({"game": "PIT@CLE", "market": "total", "side": "Over 38.5"}, close) == (37.5, -1.0)

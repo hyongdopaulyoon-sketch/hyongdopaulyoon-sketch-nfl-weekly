@@ -60,6 +60,12 @@ def main():
     s2.append(["발행 판단(페이퍼)"] + rec(pub) + ["발행 세션 관심·소액 관심(9/29~)"])
     s2.append(["발행 방향(페이퍼)"] + rec(lean_) + ["발행 세션 방향 줄 — 패스 포함 전 경기·스프레드+총점(10/1~)"])
     s2.append(["모델 관찰·참고(페이퍼)"] + rec(model) + ["EPA 모델 방향 — 백테스트 45%, 검증용"])
+    # CLV(2026-10-01): 픽 라인 vs 마감 라인(점, + = 우리가 더 좋은 숫자) — 승패보다 빨리 실력이 보인다. 모델 페이퍼는 리프레시마다 쪽이 갱신돼 ≈0 이 정상
+    for lab, xs in (("평균 CLV · 실베팅", [r for r in rows if r["status"] == "placed"]), ("평균 CLV · 발행 판단", [r for r in rows if r["grade"].startswith("관심(발행)")]),
+                    ("평균 CLV · 발행 방향", [r for r in rows if r["grade"].startswith("방향(발행)")])):
+        cv = [fnum(r.get("clv")) for r in xs if fnum(r.get("clv")) is not None]
+        s2.append([lab, len(cv), sum(1 for v in cv if v > 0), sum(1 for v in cv if v < 0), sum(1 for v in cv if v == 0),
+                   None, round(sum(cv) / len(cv), 2) if cv else None, "픽/우리 쪽 이동/반대/같음 · 「유닛」 칸 = 평균 CLV(점)"])
     s2.append([])
     s2.append(["실베팅 · 시장별"]); [s2.append([f"  {k}"] + rec([r for r in placed if r["market"] == k]) + [""]) for k in ("spread", "total")]
     s2.append(["실베팅 · 등급별"]); [s2.append([f"  {k}"] + rec([r for r in placed if r["grade"] == k]) + [""]) for k in sorted({r["grade"] for r in placed})]

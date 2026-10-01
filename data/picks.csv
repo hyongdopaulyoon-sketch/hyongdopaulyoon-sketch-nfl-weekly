@@ -1,47 +1,47 @@
-﻿id,season,week,game,market,side,line,odds,model_value,edge,grade,p_win,status,placed_at,result,score,units,note
-2026_04_PIT_CLE:spread,2026,4,PIT@CLE,spread,CLE +3,3.0,-110,-0.7,2.3,참고,56.9,suggested,,,,,
-2026_04_PIT_CLE:total,2026,4,PIT@CLE,total,Under 38.5,38.5,-110,34.2,-4.3,참고,65.8,suggested,,,,,
-2026_04_IND_WAS:spread,2026,4,IND@WAS,spread,IND -3.5,3.5,-110,-9.3,-5.8,관찰(큰 괴리 — 페이퍼),67.2,suggested,,,,,
-2026_04_IND_WAS:total,2026,4,IND@WAS,total,Over 47.5,47.5,-110,56.0,8.5,관찰(큰 괴리 — 페이퍼),79.0,suggested,,,,,
-2026_04_NE_BUF:spread,2026,4,NE@BUF,spread,NE +6.5,-6.5,-110,2.9,-3.6,관찰(큰 괴리 — 페이퍼),60.8,suggested,,,,,
-2026_04_NE_BUF:total,2026,4,NE@BUF,total,Over 48.5,48.5,-110,55.0,6.5,관찰(큰 괴리 — 페이퍼),73.1,suggested,,,,,
-2026_04_NYJ_CHI:spread,2026,4,NYJ@CHI,spread,CHI -3.5,-3.5,-110,10.0,6.5,관찰(큰 괴리 — 페이퍼),69.1,suggested,,,,,
-2026_04_NYJ_CHI:total,2026,4,NYJ@CHI,total,Over 43.5,43.5,-110,46.7,3.2,참고,62.0,suggested,,,,,
-2026_04_JAX_CIN:spread,2026,4,JAX@CIN,spread,JAX +2.5,-2.5,-110,-9.5,-12.0,관찰(큰 괴리 — 페이퍼),82.1,suggested,,,,,
-2026_04_JAX_CIN:total,2026,4,JAX@CIN,total,Under 51.5,51.5,-110,47.9,-3.6,참고,63.5,suggested,,,,,
-2026_04_ARI_NYG:spread,2026,4,ARI@NYG,spread,NYG +2.5,2.5,-110,1.8,4.3,관찰(큰 괴리 — 페이퍼),62.9,suggested,,,,,
-2026_04_ARI_NYG:total,2026,4,ARI@NYG,total,Over 44.5,44.5,-110,54.7,10.2,관찰(큰 괴리 — 페이퍼),83.3,suggested,,,,,
-2026_04_GB_TB:spread,2026,4,GB@TB,spread,TB +3.5,3.5,-110,-0.8,2.7,참고,58.2,suggested,,,,,
-2026_04_GB_TB:total,2026,4,GB@TB,total,Over 38.5,38.5,-110,42.3,3.8,참고,64.1,suggested,,,,,
-2026_04_TEN_BAL:spread,2026,4,TEN@BAL,spread,BAL -11.5,-11.5,-110,13.9,2.4,참고,57.4,suggested,,,,,
-2026_04_TEN_BAL:total,2026,4,TEN@BAL,total,Over 42.5,42.5,-110,47.9,5.4,관찰(큰 괴리 — 페이퍼),69.7,suggested,,,,,
-2026_04_DAL_HOU:spread,2026,4,DAL@HOU,spread,HOU -3,-3.0,-110,7.0,4.0,관찰(큰 괴리 — 페이퍼),62.0,suggested,,,,,
-2026_04_DAL_HOU:total,2026,4,DAL@HOU,total,Over 48.5,48.5,-110,52.9,4.4,참고,66.3,suggested,,,,,
-2026_04_KC_LV:spread,2026,4,KC@LV,spread,KC -4.5,4.5,-110,-9.9,-5.4,관찰(큰 괴리 — 페이퍼),66.0,suggested,,,,,
-2026_04_KC_LV:total,2026,4,KC@LV,total,Under 47.5,47.5,-110,38.8,-8.7,관찰(큰 괴리 — 페이퍼),79.8,suggested,,,,,
-2026_04_DEN_SF:total,2026,4,DEN@SF,total,Over 47.5,47.5,-110,54.5,7.0,관찰(큰 괴리 — 페이퍼),74.7,suggested,,,,,
-2026_04_LAC_SEA:total,2026,4,LAC@SEA,total,Under 42.5,42.5,-110,31.1,-11.4,관찰(큰 괴리 — 페이퍼),86.1,suggested,,,,,
-2026_04_DET_CAR:total,2026,4,DET@CAR,total,Over 50.5,50.5,-110,53.9,3.4,참고,62.6,suggested,,,,,
-2026_04_ATL_NO:total,2026,4,ATL@NO,total,Under 47.5,47.5,-110,38.9,-8.6,관찰(큰 괴리 — 페이퍼),79.5,suggested,,,,,
-2026_03_PHI_CHI:total,2026,3,PHI@CHI,total,Over 41.5,41.5,-110,46.1,4.6,참고 ※,67.0,suggested,,L,PHI 7-27 CHI,-1,
-2026_03_ATL_GB:total,2026,3,ATL@GB,total,Over 43.5,43.5,-110,47.7,4.2,참고,65.5,suggested,,W,ATL 35-14 GB,0.909,
-2026_03_CAR_CLE:spread,2026,3,CAR@CLE,spread,CLE +2.5,2.5,-110,0.1,2.6,참고,58.0,suggested,,W,CAR 18-21 CLE,0.909,
-2026_03_CAR_CLE:total,2026,3,CAR@CLE,total,Under 41.5,41.5,-110,36.4,-5.1,관찰(큰 괴리 — 페이퍼),68.8,suggested,,W,CAR 18-21 CLE,0.909,
-2026_03_NYJ_DET:spread,2026,3,NYJ@DET,spread,DET -7,-7.0,-110,12.8,5.8,관찰(큰 괴리 — 페이퍼),67.2,suggested,,P,NYJ 24-31 DET,0,
-2026_03_NYJ_DET:total,2026,3,NYJ@DET,total,Over 49.5,49.5,-110,54.1,4.6,참고,67.0,suggested,,W,NYJ 24-31 DET,0.909,
-2026_03_KC_MIA:total,2026,3,KC@MIA,total,Over 45.5,45.5,-110,51.0,5.5,관찰(큰 괴리 — 페이퍼),69.9,suggested,,L,KC 24-10 MIA,-1,
-2026_03_TEN_NYG:spread,2026,3,TEN@NYG,spread,NYG -2.5,-2.5,-110,7.1,4.6,관찰(큰 괴리 — 페이퍼),63.8,suggested,,W,TEN 7-12 NYG,0.909,
-2026_03_TEN_NYG:total,2026,3,TEN@NYG,total,Over 37.5,37.5,-110,47.6,10.1,관찰(큰 괴리 — 페이퍼),83.1,suggested,,L,TEN 7-12 NYG,-1,
-2026_03_CIN_PIT:spread,2026,3,CIN@PIT,spread,PIT +3.5,3.5,-110,2.7,6.2,관찰(큰 괴리 — 페이퍼),68.2,suggested,,W,CIN 27-30 PIT,0.909,
-2026_03_CIN_PIT:total,2026,3,CIN@PIT,total,Over 42.5,42.5,-110,49.4,6.9,관찰(큰 괴리 — 페이퍼),74.3,suggested,,W,CIN 27-30 PIT,0.909,
-2026_03_SEA_WAS:spread,2026,3,SEA@WAS,spread,SEA -8.5,8.5,-110,-11.7,-3.2,참고,59.6,suggested,,L,SEA 31-33 WAS,-1,
-2026_03_ARI_SF:spread,2026,3,ARI@SF,spread,SF -7.5,-7.5,-110,11.4,3.9,관찰(큰 괴리 — 페이퍼),61.7,suggested,,L,ARI 30-36 SF,-1,
-2026_03_ARI_SF:total,2026,3,ARI@SF,total,Over 48.5,48.5,-110,61.0,12.5,관찰(큰 괴리 — 페이퍼),88.3,suggested,,W,ARI 30-36 SF,0.909,
-2026_03_MIN_TB:total,2026,3,MIN@TB,total,Under 42.5,42.5,-110,31.0,-11.5,관찰(큰 괴리 — 페이퍼),86.2,suggested,,W,MIN 23-16 TB,0.909,
-2026_03_BAL_DAL:total,2026,3,BAL@DAL,total,Over 53.5,53.5,-110,64.8,11.3,관찰(큰 괴리 — 페이퍼),85.9,suggested,,W,BAL 34-31 DAL,0.909,
-2026_03_LV_NO:spread,2026,3,LV@NO,spread,NO -3.5,-3.5,-110,5.6,2.1,참고,56.4,suggested,,L,LV 35-27 NO,-1,
-2026_03_LV_NO:total,2026,3,LV@NO,total,Under 43.5,43.5,-110,33.6,-9.9,관찰(큰 괴리 — 페이퍼),82.8,suggested,,L,LV 35-27 NO,-1,
-2026_03_LA_DEN:spread,2026,3,LA@DEN,spread,LA +1.5,-1.5,-110,-3.2,-4.7,관찰(큰 괴리 — 페이퍼),64.3,suggested,,L,LA 26-30 DEN,-1,
-2026_03_LA_DEN:total,2026,3,LA@DEN,total,Over 43.5,43.5,-110,47.0,3.5,참고,63.1,suggested,,W,LA 26-30 DEN,0.909,
-2026_03_PHI_CHI:spread,2026,3,PHI@CHI,spread,PHI -3.5,-3.5,-110,,,관심(설명문),,placed,2026-09-28 13:15,L,PHI 7-27 CHI,-1,Paul 실베팅 9/28 — 설명문 판단(소액 관심) 동일
-2026_03_LA_DEN:total:P,2026,3,LA@DEN,total,Under 44.5,44.5,-110,,,실베팅,,placed,2026-09-27,L,LA 26-30 DEN,-1,Paul 실베팅 9/27(claude.ai 대화 — 언더 44.5) · 9/28 사후 기록 · 라이브 진입이면 라인·배당 정정 필요
+﻿id,season,week,game,market,side,line,odds,model_value,edge,grade,p_win,status,placed_at,result,score,units,note,closing_line,clv
+2026_04_PIT_CLE:spread,2026,4,PIT@CLE,spread,CLE +3,3.0,-110,-0.7,2.3,참고,56.9,suggested,,,,,,,
+2026_04_PIT_CLE:total,2026,4,PIT@CLE,total,Under 38.5,38.5,-110,34.2,-4.3,참고,65.8,suggested,,,,,,,
+2026_04_IND_WAS:spread,2026,4,IND@WAS,spread,IND -3.5,3.5,-110,-9.3,-5.8,관찰(큰 괴리 — 페이퍼),67.2,suggested,,,,,,,
+2026_04_IND_WAS:total,2026,4,IND@WAS,total,Over 47.5,47.5,-110,56.0,8.5,관찰(큰 괴리 — 페이퍼),79.0,suggested,,,,,,,
+2026_04_NE_BUF:spread,2026,4,NE@BUF,spread,NE +6.5,-6.5,-110,2.9,-3.6,관찰(큰 괴리 — 페이퍼),60.8,suggested,,,,,,,
+2026_04_NE_BUF:total,2026,4,NE@BUF,total,Over 48.5,48.5,-110,55.0,6.5,관찰(큰 괴리 — 페이퍼),73.1,suggested,,,,,,,
+2026_04_NYJ_CHI:spread,2026,4,NYJ@CHI,spread,CHI -3.5,-3.5,-110,10.0,6.5,관찰(큰 괴리 — 페이퍼),69.1,suggested,,,,,,,
+2026_04_NYJ_CHI:total,2026,4,NYJ@CHI,total,Over 43.5,43.5,-110,46.7,3.2,참고,62.0,suggested,,,,,,,
+2026_04_JAX_CIN:spread,2026,4,JAX@CIN,spread,JAX +2.5,-2.5,-110,-9.5,-12.0,관찰(큰 괴리 — 페이퍼),82.1,suggested,,,,,,,
+2026_04_JAX_CIN:total,2026,4,JAX@CIN,total,Under 51.5,51.5,-110,47.9,-3.6,참고,63.5,suggested,,,,,,,
+2026_04_ARI_NYG:spread,2026,4,ARI@NYG,spread,NYG +2.5,2.5,-110,1.8,4.3,관찰(큰 괴리 — 페이퍼),62.9,suggested,,,,,,,
+2026_04_ARI_NYG:total,2026,4,ARI@NYG,total,Over 44.5,44.5,-110,54.7,10.2,관찰(큰 괴리 — 페이퍼),83.3,suggested,,,,,,,
+2026_04_GB_TB:spread,2026,4,GB@TB,spread,TB +3.5,3.5,-110,-0.8,2.7,참고,58.2,suggested,,,,,,,
+2026_04_GB_TB:total,2026,4,GB@TB,total,Over 38.5,38.5,-110,42.3,3.8,참고,64.1,suggested,,,,,,,
+2026_04_TEN_BAL:spread,2026,4,TEN@BAL,spread,BAL -11.5,-11.5,-110,13.9,2.4,참고,57.4,suggested,,,,,,,
+2026_04_TEN_BAL:total,2026,4,TEN@BAL,total,Over 42.5,42.5,-110,47.9,5.4,관찰(큰 괴리 — 페이퍼),69.7,suggested,,,,,,,
+2026_04_DAL_HOU:spread,2026,4,DAL@HOU,spread,HOU -3,-3.0,-110,7.0,4.0,관찰(큰 괴리 — 페이퍼),62.0,suggested,,,,,,,
+2026_04_DAL_HOU:total,2026,4,DAL@HOU,total,Over 48.5,48.5,-110,52.9,4.4,참고,66.3,suggested,,,,,,,
+2026_04_KC_LV:spread,2026,4,KC@LV,spread,KC -4.5,4.5,-110,-9.9,-5.4,관찰(큰 괴리 — 페이퍼),66.0,suggested,,,,,,,
+2026_04_KC_LV:total,2026,4,KC@LV,total,Under 47.5,47.5,-110,38.8,-8.7,관찰(큰 괴리 — 페이퍼),79.8,suggested,,,,,,,
+2026_04_DEN_SF:total,2026,4,DEN@SF,total,Over 47.5,47.5,-110,54.5,7.0,관찰(큰 괴리 — 페이퍼),74.7,suggested,,,,,,,
+2026_04_LAC_SEA:total,2026,4,LAC@SEA,total,Under 42.5,42.5,-110,31.1,-11.4,관찰(큰 괴리 — 페이퍼),86.1,suggested,,,,,,,
+2026_04_DET_CAR:total,2026,4,DET@CAR,total,Over 50.5,50.5,-110,53.9,3.4,참고,62.6,suggested,,,,,,,
+2026_04_ATL_NO:total,2026,4,ATL@NO,total,Under 47.5,47.5,-110,38.9,-8.6,관찰(큰 괴리 — 페이퍼),79.5,suggested,,,,,,,
+2026_03_PHI_CHI:total,2026,3,PHI@CHI,total,Over 41.5,41.5,-110,46.1,4.6,참고 ※,67.0,suggested,,L,PHI 7-27 CHI,-1,,42.5,+1
+2026_03_ATL_GB:total,2026,3,ATL@GB,total,Over 43.5,43.5,-110,47.7,4.2,참고,65.5,suggested,,W,ATL 35-14 GB,0.909,,43.5,+0
+2026_03_CAR_CLE:spread,2026,3,CAR@CLE,spread,CLE +2.5,2.5,-110,0.1,2.6,참고,58.0,suggested,,W,CAR 18-21 CLE,0.909,,2.5,+0
+2026_03_CAR_CLE:total,2026,3,CAR@CLE,total,Under 41.5,41.5,-110,36.4,-5.1,관찰(큰 괴리 — 페이퍼),68.8,suggested,,W,CAR 18-21 CLE,0.909,,41.5,+0
+2026_03_NYJ_DET:spread,2026,3,NYJ@DET,spread,DET -7,-7.0,-110,12.8,5.8,관찰(큰 괴리 — 페이퍼),67.2,suggested,,P,NYJ 24-31 DET,0,,-7,+0
+2026_03_NYJ_DET:total,2026,3,NYJ@DET,total,Over 49.5,49.5,-110,54.1,4.6,참고,67.0,suggested,,W,NYJ 24-31 DET,0.909,,49.5,+0
+2026_03_KC_MIA:total,2026,3,KC@MIA,total,Over 45.5,45.5,-110,51.0,5.5,관찰(큰 괴리 — 페이퍼),69.9,suggested,,L,KC 24-10 MIA,-1,,45.5,+0
+2026_03_TEN_NYG:spread,2026,3,TEN@NYG,spread,NYG -2.5,-2.5,-110,7.1,4.6,관찰(큰 괴리 — 페이퍼),63.8,suggested,,W,TEN 7-12 NYG,0.909,,-2.5,+0
+2026_03_TEN_NYG:total,2026,3,TEN@NYG,total,Over 37.5,37.5,-110,47.6,10.1,관찰(큰 괴리 — 페이퍼),83.1,suggested,,L,TEN 7-12 NYG,-1,,37.5,+0
+2026_03_CIN_PIT:spread,2026,3,CIN@PIT,spread,PIT +3.5,3.5,-110,2.7,6.2,관찰(큰 괴리 — 페이퍼),68.2,suggested,,W,CIN 27-30 PIT,0.909,,3.5,+0
+2026_03_CIN_PIT:total,2026,3,CIN@PIT,total,Over 42.5,42.5,-110,49.4,6.9,관찰(큰 괴리 — 페이퍼),74.3,suggested,,W,CIN 27-30 PIT,0.909,,42.5,+0
+2026_03_SEA_WAS:spread,2026,3,SEA@WAS,spread,SEA -8.5,8.5,-110,-11.7,-3.2,참고,59.6,suggested,,L,SEA 31-33 WAS,-1,,-8.5,+0
+2026_03_ARI_SF:spread,2026,3,ARI@SF,spread,SF -7.5,-7.5,-110,11.4,3.9,관찰(큰 괴리 — 페이퍼),61.7,suggested,,L,ARI 30-36 SF,-1,,-7.5,+0
+2026_03_ARI_SF:total,2026,3,ARI@SF,total,Over 48.5,48.5,-110,61.0,12.5,관찰(큰 괴리 — 페이퍼),88.3,suggested,,W,ARI 30-36 SF,0.909,,48.5,+0
+2026_03_MIN_TB:total,2026,3,MIN@TB,total,Under 42.5,42.5,-110,31.0,-11.5,관찰(큰 괴리 — 페이퍼),86.2,suggested,,W,MIN 23-16 TB,0.909,,42.5,+0
+2026_03_BAL_DAL:total,2026,3,BAL@DAL,total,Over 53.5,53.5,-110,64.8,11.3,관찰(큰 괴리 — 페이퍼),85.9,suggested,,W,BAL 34-31 DAL,0.909,,53.5,+0
+2026_03_LV_NO:spread,2026,3,LV@NO,spread,NO -3.5,-3.5,-110,5.6,2.1,참고,56.4,suggested,,L,LV 35-27 NO,-1,,-3.5,+0
+2026_03_LV_NO:total,2026,3,LV@NO,total,Under 43.5,43.5,-110,33.6,-9.9,관찰(큰 괴리 — 페이퍼),82.8,suggested,,L,LV 35-27 NO,-1,,43.5,+0
+2026_03_LA_DEN:spread,2026,3,LA@DEN,spread,LA +1.5,-1.5,-110,-3.2,-4.7,관찰(큰 괴리 — 페이퍼),64.3,suggested,,L,LA 26-30 DEN,-1,,1.5,+0
+2026_03_LA_DEN:total,2026,3,LA@DEN,total,Over 43.5,43.5,-110,47.0,3.5,참고,63.1,suggested,,W,LA 26-30 DEN,0.909,,43.5,+0
+2026_03_PHI_CHI:spread,2026,3,PHI@CHI,spread,PHI -3.5,-3.5,-110,,,관심(설명문),,placed,2026-09-28 13:15,L,PHI 7-27 CHI,-1,Paul 실베팅 9/28 — 설명문 판단(소액 관심) 동일,-3.5,+0
+2026_03_LA_DEN:total:P,2026,3,LA@DEN,total,Under 44.5,44.5,-110,,,실베팅,,placed,2026-09-27,L,LA 26-30 DEN,-1,Paul 실베팅 9/27(claude.ai 대화 — 언더 44.5) · 9/28 사후 기록 · 라이브 진입이면 라인·배당 정정 필요,43.5,+1
