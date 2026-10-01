@@ -50,10 +50,13 @@ def suggest(week):
         for market, side, line, val, edge, grade, p in (
                 ("spread", m["spread_side"], m["mkt_spread_home"], m["model_margin_home"], m["edge_spread"], m["spread_grade"], m["p_cover"]),
                 ("total", m["total_side"], m["mkt_total"], m["model_total"], m["edge_total"], m["total_grade"], m["p_total"])):
-            if not grade.startswith(("관찰", "참고")):
-                continue
             pid = f'{m["game_id"]}:{market}'
             old = keep.get(pid)
+            if not grade.startswith(("관찰", "참고")):
+                # 리프레시로 시장 동조가 되면 미집행·미채점 페이퍼 행을 지운다(10/1 PIT@CLE 9/28 「CLE +3 참고」 잔존)
+                if old and old["status"] != "placed" and not old["result"] and old["grade"].startswith(("관찰", "참고")):
+                    del keep[pid]
+                continue
             if old and old["status"] == "placed":
                 continue                                   # 실제 베팅한 행은 모델이 바뀌어도 건드리지 않는다
             row = {"id": pid, "season": SEASON, "week": week, "game": f'{m["away"]}@{m["home"]}', "market": market, "side": side,
