@@ -160,6 +160,50 @@ def clv_of(r, close):
     return c, (c - mine) if parts[0] == "Over" else (mine - c)
 
 
+TEASER_FAV, TEASER_DOG, TEASER_TOT = (-8.5, -7.5), (1.5, 2.5), 49.0   # 웡 티저 다리 — 2026-10-01 사전 등록, 조정 금지
+TEASER_GRADE = "티저 다리(관찰)"
+
+
+def teaser(week, game=None, cents=None, src=""):
+    """웡 티저 다리 페이퍼 적립(2026-10-01 Paul 「페이퍼로 기록만」) — 실베팅 아님.
+    조건: 시장 스프레드(팀 기준) −7.5~−8.5 또는 +1.5~+2.5 & 총점 ≤49 → 다리 = 그 팀 라인 +6. id = game_id:spread:T.
+    리프레시마다 다시 판정 — 가격이 붙었거나 채점된 행은 유지, 그 밖은 범위를 벗어나면 지운다.
+    --game AWAY@HOME --cents 73 --src 'Polymarket No' 로 표시 가격을 붙인다(odds 를 미국식으로 환산 → 유닛 손익이 그 가격 기준)."""
+    wd = os.path.join(DATA, f"{SEASON}-w{week:02d}")
+    rows = rd(PICKS); keep = {r["id"]: r for r in rows}
+    cand = {}
+    for m in rd(os.path.join(wd, "model.csv")):
+        hl, tot = fnum(m["mkt_spread_home"]), fnum(m["mkt_total"])
+        if hl is None or tot is None or tot > TEASER_TOT:
+            continue
+        for team, ln in ((m["home"], hl), (m["away"], -hl)):
+            if TEASER_FAV[0] <= ln <= TEASER_FAV[1] or TEASER_DOG[0] <= ln <= TEASER_DOG[1]:
+                cand[f'{m["game_id"]}:spread:T'] = (f'{m["away"]}@{m["home"]}', f"{team} {ln + 6:+g}", ln, tot)
+    n_new = n_del = 0
+    for rid, r in list(keep.items()):
+        if r["grade"] == TEASER_GRADE and int(r["week"]) == week and not r["result"] and "표시가" not in r["note"] and rid not in cand:
+            del keep[rid]; n_del += 1
+    for rid, (g, side, ln, tot) in cand.items():
+        old = keep.get(rid)
+        if old and (old["result"] or "표시가" in old["note"]):
+            continue
+        n_new += old is None
+        keep[rid] = {k: "" for k in HDR} | {"id": rid, "season": SEASON, "week": week, "game": g, "market": "spread", "side": side,
+                                           "line": side.split()[1], "odds": "-120", "grade": TEASER_GRADE, "status": "suggested",
+                                           "note": f"원 라인 {ln:+g} · 총점 {tot:g} · 가격 미기록(−120 티저 환산 손익분기 73.9%)"}
+    if game:
+        rid = next((k for k, v in keep.items() if v["grade"] == TEASER_GRADE and v["game"] == game and int(v["week"]) == week), None)
+        if not rid:
+            sys.exit(f"{game}: 이번 주 티저 다리 후보가 아님")
+        if cents is not None:
+            c = float(cents)
+            keep[rid]["odds"] = f"{-100 * c / (100 - c):.0f}" if c >= 50 else f"+{100 * (100 - c) / c:.0f}"
+            keep[rid]["note"] = keep[rid]["note"].split(" · 가격")[0] + f" · 가격 {src} {c:g}c(표시가 — 실베팅 아님)"
+    save(list(keep.values()))
+    legs = [v for v in keep.values() if v["grade"] == TEASER_GRADE and int(v["week"]) == week]
+    print(f"teaser week {week}: 다리 {len(legs)}(신규 {n_new} · 제외 {n_del}) — " + " · ".join(f'{v["game"]} {v["side"]}' for v in legs))
+
+
 def grade(week):
     wd = os.path.join(DATA, f"{SEASON}-w{week:02d}")
     res = {f'{r["away"]}@{r["home"]}': r for r in rd(os.path.join(wd, "results.csv")) if r["status"] == "STATUS_FINAL"}
@@ -180,7 +224,7 @@ def grade(week):
     # CLV(2026-10-01) — 승패보다 잡음이 훨씬 작아 수십 건이면 「우리 정보가 시장보다 빨랐나」가 보인다
     close = _closing(week); nc = 0
     for r in rows:
-        if int(r["week"]) == week and not r.get("clv"):
+        if int(r["week"]) == week and not r.get("clv") and r["grade"] != TEASER_GRADE:
             c, v = clv_of(r, close.get(r["id"].split(":")[0]))
             if v is not None:
                 r["closing_line"], r["clv"] = f"{c:g}", f"{v:+g}"; nc += 1
@@ -220,12 +264,14 @@ def main():
     l = sub.add_parser("lean"); l.add_argument("--week", type=int, required=True); l.add_argument("--id", required=True); l.add_argument("--side", required=True)
     l.add_argument("--line", required=True); l.add_argument("--odds", default="-110"); l.add_argument("--note", default="")
     g = sub.add_parser("grade"); g.add_argument("--week", type=int, required=True)
+    t = sub.add_parser("teaser"); t.add_argument("--week", type=int, required=True); t.add_argument("--game"); t.add_argument("--cents"); t.add_argument("--src", default="")
     sub.add_parser("stats")
     a = ap.parse_args()
     if a.cmd == "suggest": suggest(a.week)
     elif a.cmd == "place": place(a.week, a.id, a.all_candidates, a.line, a.odds, a.note, a.side)
     elif a.cmd == "lean": lean(a.week, a.id, a.side, a.line, a.odds, a.note)
     elif a.cmd == "grade": grade(a.week)
+    elif a.cmd == "teaser": teaser(a.week, a.game, a.cents, a.src)
     else: stats()
 
 

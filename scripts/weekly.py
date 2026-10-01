@@ -33,11 +33,13 @@ def main():
     wk = ["--week", str(a.week)] if a.week else []
     run("nfl_pull.py", wk + (["--force"] if a.refresh else []))
     if a.week:
-        run("picks.py", ["suggest", "--week", str(a.week)])
+        w = str(a.week)
     else:
         import json, urllib.request
         j = json.load(urllib.request.urlopen("https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard", timeout=20))
-        run("picks.py", ["suggest", "--week", str(j["week"]["number"])])
+        w = str(j["week"]["number"])
+    run("picks.py", ["suggest", "--week", w])
+    run("picks.py", ["teaser", "--week", w])          # 웡 티저 다리 페이퍼(2026-10-01) — 실베팅 아님
 
 
 if __name__ == "__main__":

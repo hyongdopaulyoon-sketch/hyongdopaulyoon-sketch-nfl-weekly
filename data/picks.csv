@@ -45,3 +45,6 @@
 2026_03_LA_DEN:total,2026,3,LA@DEN,total,Over 43.5,43.5,-110,47.0,3.5,참고,63.1,suggested,,W,LA 26-30 DEN,0.909,,43.5,+0
 2026_03_PHI_CHI:spread,2026,3,PHI@CHI,spread,PHI -3.5,-3.5,-110,,,관심(설명문),,placed,2026-09-28 13:15,L,PHI 7-27 CHI,-1,Paul 실베팅 9/28 — 설명문 판단(소액 관심) 동일,-3.5,+0
 2026_03_LA_DEN:total:P,2026,3,LA@DEN,total,Under 44.5,44.5,-110,,,실베팅,,placed,2026-09-27,L,LA 26-30 DEN,-1,Paul 실베팅 9/27(claude.ai 대화 — 언더 44.5) · 9/28 사후 기록 · 라이브 진입이면 라인·배당 정정 필요,43.5,+1
+2026_04_PIT_CLE:spread:T,2026,4,PIT@CLE,spread,CLE +8.5,+8.5,-270,,,티저 다리(관찰),,suggested,,,,,원 라인 +2.5 · 총점 38.5 · 가격 Polymarket No 73c(표시가 — 실베팅 아님),,
+2026_04_ARI_NYG:spread:T,2026,4,ARI@NYG,spread,NYG +8.5,+8.5,-120,,,티저 다리(관찰),,suggested,,,,,원 라인 +2.5 · 총점 44.5 · 가격 미기록(−120 티저 환산 손익분기 73.9%),,
+2026_04_ATL_NO:spread:T,2026,4,ATL@NO,spread,ATL +8.5,+8.5,-120,,,티저 다리(관찰),,suggested,,,,,원 라인 +2.5 · 총점 47.5 · 가격 미기록(−120 티저 환산 손익분기 73.9%),,

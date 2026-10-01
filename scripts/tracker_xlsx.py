@@ -60,6 +60,11 @@ def main():
     s2.append(["발행 판단(페이퍼)"] + rec(pub) + ["발행 세션 관심·소액 관심(9/29~)"])
     s2.append(["발행 방향(페이퍼)"] + rec(lean_) + ["발행 세션 방향 줄 — 패스 포함 전 경기·스프레드+총점(10/1~)"])
     s2.append(["모델 관찰·참고(페이퍼)"] + rec(model) + ["EPA 모델 방향 — 백테스트 45%, 검증용"])
+    tz = [r for r in done if r["grade"] == "티저 다리(관찰)"]
+    pr = [fnum(r["odds"]) for r in tz if "표시가" in r["note"] and fnum(r["odds"])]
+    avg_c = (sum((-o / (100 - o) if o < 0 else 100 / (o + 100)) for o in pr) / len(pr) * 100) if pr else None
+    s2.append(["티저 다리(관찰·페이퍼)"] + rec(tz) + [f"웡 티저 다리(10/1~) — 손익분기 73.9%(−120 2팀 환산) · 60다리 보고 · <72% 폐기"
+                                                + (f" · 평균 표시가 {avg_c:.1f}c(n {len(pr)})" if pr else "")])
     # CLV(2026-10-01): 픽 라인 vs 마감 라인(점, + = 우리가 더 좋은 숫자) — 승패보다 빨리 실력이 보인다. 모델 페이퍼는 리프레시마다 쪽이 갱신돼 ≈0 이 정상
     for lab, xs in (("평균 CLV · 실베팅", [r for r in rows if r["status"] == "placed"]), ("평균 CLV · 발행 판단", [r for r in rows if r["grade"].startswith("관심(발행)")]),
                     ("평균 CLV · 발행 방향", [r for r in rows if r["grade"].startswith("방향(발행)")])):
