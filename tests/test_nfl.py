@@ -59,3 +59,16 @@ def test_clv_spread_and_total():
     assert P.clv_of({"game": "PIT@CLE", "market": "spread", "side": "PIT -2.5"}, (3.5, 37.5)) == (-3.5, 1.0)
     assert P.clv_of({"game": "PIT@CLE", "market": "total", "side": "Under 38.5"}, close) == (37.5, 1.0)
     assert P.clv_of({"game": "PIT@CLE", "market": "total", "side": "Over 38.5"}, close) == (37.5, -1.0)
+
+
+def test_stake_scales_units(tmp_path, monkeypatch):
+    # 0.5유닛 실베팅은 손익도 0.5배(2026-10-01 PIT -2.5 0.5u)
+    monkeypatch.setattr(P, "PICKS", str(tmp_path / "picks.csv")); monkeypatch.setattr(P, "DATA", str(tmp_path))
+    os.makedirs(tmp_path / "2026-w04")
+    with open(tmp_path / "2026-w04" / "results.csv", "w", encoding="utf-8") as fh:
+        fh.write("away,home,status,away_score,home_score\nPIT,CLE,STATUS_FINAL,24,20\n")
+    P.save([])
+    P.place(4, "2026_04_PIT_CLE:spread", line="-2.5", odds="-120", side="PIT -2.5", stake="0.5")
+    P.grade(4)
+    r = P.rd(P.PICKS)[0]
+    assert r["result"] == "W" and abs(float(r["units"]) - 0.5 * 100 / 120) < 1e-3

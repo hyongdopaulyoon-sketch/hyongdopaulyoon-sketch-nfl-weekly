@@ -18,7 +18,7 @@ from datetime import datetime
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE); DATA = os.path.join(ROOT, "data")
 PICKS = os.path.join(DATA, "picks.csv")
 HDR = ["id", "season", "week", "game", "market", "side", "line", "odds", "model_value", "edge", "grade", "p_win", "status",
-       "placed_at", "result", "score", "units", "note", "closing_line", "clv"]
+       "placed_at", "result", "score", "units", "note", "closing_line", "clv", "stake"]   # stake = 베팅 크기(유닛, 빈칸 = 1) — 2026-10-01
 SEASON = 2026
 
 
@@ -86,7 +86,7 @@ def lean(week, pid, side, line, odds="-110", note="", suffix="", grade="관심(�
     keep[rid] = row; save(list(keep.values())); print(f"lean 기록: {rid} {side} ({row['status']})")
 
 
-def place(week, pid=None, all_candidates=False, line=None, odds=None, note="", side=None):
+def place(week, pid=None, all_candidates=False, line=None, odds=None, note="", side=None, stake=None):
     rows = rd(PICKS); n = 0
     if pid and side:
         # 실베팅 쪽이 모델 페이퍼 행과 다르면(예: 모델 Over, Paul Under) 페이퍼 행은 두고 ":P" 행을 따로 만든다(2026-09-28 LA@DEN 사고)
@@ -96,7 +96,7 @@ def place(week, pid=None, all_candidates=False, line=None, odds=None, note="", s
             row = {k: "" for k in HDR}
             row.update({"id": pid + ":P", "season": SEASON, "week": week, "game": game, "market": pid.rsplit(":", 1)[1], "side": side,
                         "line": line or "", "odds": odds or "-110", "grade": "실베팅", "status": "placed",
-                        "placed_at": datetime.now().strftime("%Y-%m-%d %H:%M"), "note": note})
+                        "placed_at": datetime.now().strftime("%Y-%m-%d %H:%M"), "note": note, "stake": stake or ""})
             rows = [r for r in rows if r["id"] != row["id"]] + [row]
             save(rows); print(f"placed(별도 행) {row['id']} {side}"); return
     for r in rows:
@@ -107,6 +107,7 @@ def place(week, pid=None, all_candidates=False, line=None, odds=None, note="", s
             if line is not None: r["line"] = line
             if odds is not None: r["odds"] = odds
             if note: r["note"] = note
+            if stake: r["stake"] = stake
             n += 1
     save(rows); print(f"placed {n}행")
 
@@ -285,7 +286,8 @@ def grade(week):
             continue
         o = fnum(r["odds"]) or -110
         r["result"], r["score"] = wl, score
-        r["units"] = "0" if wl == "P" else ("-1" if wl == "L" else f"{(100 / abs(o) if o < 0 else o / 100):.3f}")
+        st = fnum(r.get("stake")) or 1.0
+        r["units"] = "0" if wl == "P" else (f"{-st:g}" if wl == "L" else f"{st * (100 / abs(o) if o < 0 else o / 100):.3f}")
         n += 1
     # CLV(2026-10-01) — 승패보다 잡음이 훨씬 작아 수십 건이면 「우리 정보가 시장보다 빨랐나」가 보인다
     close = _closing(week); nc = 0
@@ -330,7 +332,7 @@ def main():
     ap = argparse.ArgumentParser(); sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("suggest"); s.add_argument("--week", type=int, required=True)
     p = sub.add_parser("place"); p.add_argument("--week", type=int, required=True); p.add_argument("--id"); p.add_argument("--all-candidates", action="store_true")
-    p.add_argument("--line"); p.add_argument("--odds"); p.add_argument("--note", default=""); p.add_argument("--side", help="모델 행과 다른 쪽이면 별도 :P 행")
+    p.add_argument("--line"); p.add_argument("--odds"); p.add_argument("--note", default=""); p.add_argument("--stake", help="베팅 크기(유닛) — 기본 1"); p.add_argument("--side", help="모델 행과 다른 쪽이면 별도 :P 행")
     l = sub.add_parser("lean"); l.add_argument("--week", type=int, required=True); l.add_argument("--id", required=True); l.add_argument("--side", required=True)
     l.add_argument("--line", required=True); l.add_argument("--odds", default="-110"); l.add_argument("--note", default="")
     g = sub.add_parser("grade"); g.add_argument("--week", type=int, required=True)
@@ -339,7 +341,7 @@ def main():
     sub.add_parser("stats")
     a = ap.parse_args()
     if a.cmd == "suggest": suggest(a.week)
-    elif a.cmd == "place": place(a.week, a.id, a.all_candidates, a.line, a.odds, a.note, a.side)
+    elif a.cmd == "place": place(a.week, a.id, a.all_candidates, a.line, a.odds, a.note, a.side, a.stake)
     elif a.cmd == "lean": lean(a.week, a.id, a.side, a.line, a.odds, a.note)
     elif a.cmd == "grade": grade(a.week)
     elif a.cmd == "teaser": teaser(a.week, a.game, a.cents, a.src)
