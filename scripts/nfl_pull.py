@@ -336,6 +336,108 @@ def _ngs_qb(team, qb):
     return None
 
 
+def _team_profile():
+    """2026 정규시즌 pbp → 팀별 공격·수비 단위 성적(2026-10-03 포지션 매치업 표 — 서술 전용).
+    공격/수비 각각: 드롭백 EPA·성공률 · 러시 EPA·성공률 · 색 비율 · 턴오버/경기 · 3rd down 전환율.
+    선수: 타깃 점유율·EPA/타깃(리시버) · 캐리 점유율·EPA/캐리(러셔) — 상위 2명·1명."""
+    o = defaultdict(lambda: defaultdict(float)); d = defaultdict(lambda: defaultdict(float))
+    games = defaultdict(set); rec = defaultdict(lambda: defaultdict(lambda: [0, 0.0])); rus = defaultdict(lambda: defaultdict(lambda: [0, 0.0]))
+    for r in rd(os.path.join(CACHE, f"play_by_play_{SEASON}.csv.gz")):
+        if r.get("season_type", "REG") != "REG" or not r.get("posteam") or r.get("play_type") not in ("pass", "run"):
+            continue
+        pt, dt = r["posteam"], r["defteam"]; epa = fnum(r.get("epa")) or 0.0; suc = fnum(r.get("success")) or 0.0
+        games[pt].add(r["game_id"]); games[dt].add(r["game_id"])
+        db = fnum(r.get("qb_dropback")) == 1
+        for side, x in (("o", o[pt]), ("d", d[dt])):
+            k = "p" if db else "r"
+            x[k + "n"] += 1; x[k + "epa"] += epa; x[k + "suc"] += suc
+            if db:
+                x["sack"] += fnum(r.get("sack")) == 1
+            x["to"] += (fnum(r.get("interception")) == 1) + (fnum(r.get("fumble_lost")) == 1)
+            if r.get("down") == "3":
+                x["3n"] += 1; x["3c"] += fnum(r.get("first_down")) == 1 or fnum(r.get("touchdown")) == 1
+        if db and r.get("receiver_player_name"):
+            v = rec[pt][r["receiver_player_name"]]; v[0] += 1; v[1] += epa; o[pt]["tgt"] += 1
+        if not db and r.get("rusher_player_name"):
+            v = rus[pt][r["rusher_player_name"]]; v[0] += 1; v[1] += epa; o[pt]["car"] += 1
+    out = {}
+    for t in set(o) | set(d):
+        x, y, g = o[t], d[t], max(len(games[t]), 1)
+        row = {"g": g}
+        for pre, z in (("o", x), ("d", y)):
+            row[pre + "_pepa"] = z["pepa"] / z["pn"] if z["pn"] else None
+            row[pre + "_psr"] = z["psuc"] / z["pn"] if z["pn"] else None
+            row[pre + "_repa"] = z["repa"] / z["rn"] if z["rn"] else None
+            row[pre + "_rsr"] = z["rsuc"] / z["rn"] if z["rn"] else None
+            row[pre + "_sack"] = z["sack"] / z["pn"] if z["pn"] else None
+            row[pre + "_to"] = z["to"] / g
+            row[pre + "_3rd"] = z["3c"] / z["3n"] if z["3n"] else None
+        row["rec"] = sorted(((n, c, e / c, c / x["tgt"]) for n, (c, e) in rec[t].items() if x["tgt"]), key=lambda v: -v[1])[:2]
+        row["rus"] = sorted(((n, c, e / c, c / x["car"]) for n, (c, e) in rus[t].items() if x["car"]), key=lambda v: -v[1])[:1]
+        out[t] = row
+    return out
+
+
+def _status_of(short, inj_row):
+    """pbp 짧은 이름(「J.Jefferson」) → 그 팀 부상 줄의 상태 꼬리표(Out/Doubtful/Questionable/연습 DNP·Limited) 또는 ""."""
+    for key, lab in (("out", "Out"), ("doubtful", "Doubtful"), ("questionable", "Q"), ("dnp", "연습 DNP"), ("limited", "연습 Limited")):
+        for full in [x.split("(")[0].strip() for x in str(inj_row.get(key) or "").split(" · ") if x.strip()]:
+            if full and _same_person(short, full):
+                return lab
+    return ""
+
+
+def _matchup_table(a, h, PRO, P26, inj):
+    """📊 포지션 매치업 — 두 방향(원정 공격 vs 홈 수비 · 홈 공격 vs 원정 수비), 영역마다 값·리그 순위. 서술 전용(N0 —
+    점수·등급에 안 넣는다: 2026-10-01 특징 백테스트에서 결장·압박·CPOE 모두 마감 라인 대비 잔차 0과 미구분)."""
+    if a not in PRO or h not in PRO:
+        return []
+    T = list(PRO)
+
+    def rk(key, t, high=True):
+        vals = {u: PRO[u][key] for u in T if PRO[u].get(key) is not None}
+        return _rank(vals, t, high) if t in vals else None
+
+    def cell(off, de, okey, dkey, fmt, o_high, d_high, unit=""):
+        ov, dv = PRO[off].get(okey), PRO[de].get(dkey)
+        if ov is None or dv is None:
+            return "—"
+        ro, rd_ = rk(okey, off, o_high), rk(dkey, de, d_high)
+        edge = (f" → **{off} 우위**" if ro + 8 <= rd_ else f" → **{de} 우위**" if rd_ + 8 <= ro else " → 비슷")
+        return f"{off} {fmt.format(ov)}{unit}({ro}위) vs {de} {fmt.format(dv)}{unit}({rd_}위){edge}"
+
+    def press(off, de):
+        if off not in P26 or de not in P26:
+            return "—"
+        ov, dv = P26[off][1], P26[de][0]
+        ro = _rank({t: v[1] for t, v in P26.items()}, off, False); rd_ = _rank({t: v[0] for t, v in P26.items()}, de)
+        edge = (f" → **{off} 우위**" if ro + 8 <= rd_ else f" → **{de} 우위**" if rd_ + 8 <= ro else " → 비슷")
+        return f"{off} 피압박 {ov:.1f}/경기({ro}위) vs {de} 압박 {dv:.1f}/경기({rd_}위){edge}"
+
+    def players(t):
+        x, ir = PRO[t], inj.get(t, {})
+        parts = [f'{n} 타깃 {sh * 100:.0f}%·EPA/타깃 {e:+.2f}' + (f' ⚠️{_status_of(n, ir)}' if _status_of(n, ir) else "") for n, c, e, sh in x["rec"]]
+        parts += [f'{n} 캐리 {sh * 100:.0f}%·EPA/캐리 {e:+.2f}' + (f' ⚠️{_status_of(n, ir)}' if _status_of(n, ir) else "") for n, c, e, sh in x["rus"]]
+        return " · ".join(parts) or "—"
+
+    g = min(PRO[a]["g"], PRO[h]["g"])
+    L = [f"- 📊 포지션 매치업(서술 — 점수 아님 · 2026 {g}경기{' ※ 얇음' if g < 6 else ''} · 순위는 32팀 중, 「우위」는 순위 8칸 이상 차이):", "",
+         f"| 영역 | {a} 공격 → {h} 수비 | {h} 공격 → {a} 수비 |", "|---|---|---|"]
+    rows = [("패스(드롭백 EPA)", "o_pepa", "d_pepa", "{:+.3f}", True, False, ""),
+            ("패스 성공률", "o_psr", "d_psr", "{:.0%}", True, False, ""),
+            ("러시(EPA)", "o_repa", "d_repa", "{:+.3f}", True, False, ""),
+            ("러시 성공률", "o_rsr", "d_rsr", "{:.0%}", True, False, ""),
+            ("색 비율(드롭백당)", "o_sack", "d_sack", "{:.1%}", False, True, ""),
+            ("턴오버/경기(공격 잃음 · 수비 뺏음)", "o_to", "d_to", "{:.1f}", False, True, ""),
+            ("3rd down 전환", "o_3rd", "d_3rd", "{:.0%}", True, False, "")]
+    for lab, ok, dk, fmt, oh, dh, u in rows:
+        L.append(f"| {lab} | {cell(a, h, ok, dk, fmt, oh, dh, u)} | {cell(h, a, ok, dk, fmt, oh, dh, u)} |")
+    L.append(f"| 패스 보호 vs 압박(PFR) | {press(a, h)} | {press(h, a)} |")
+    L.append(f"| 핵심 선수(2026 점유율) | {players(a)} | {players(h)} |")
+    L.append("")
+    return L
+
+
 def _ftn_by_team():
     """FTN 차팅 × pbp(game_id·play_id 조인) → 팀별 드롭백 성향(2026-10-01 서술 전용).
     공격: pa 플레이액션 비율 · bl_epa 블리츠 받았을 때 EPA/드롭백 · intw 가로채기 위험 패스 비율 · n 드롭백
@@ -534,6 +636,7 @@ def ph_digest(week, force=False):
     inj = {r["team"]: r for r in rd(os.path.join(wd, "injuries.csv"))}
     rt = {r["team"]: r for r in rd(os.path.join(DATA, "ratings.csv"))}
     P26, P25, FTN = _press_by_team(SEASON), _press_by_team(SEASON - 1), _ftn_by_team()
+    PRO = _team_profile()
     now = datetime.now()
     L = [f"# NFL {SEASON} Week {week} — 주간 다이제스트 (생성 {now:%m-%d %H:%M} PT · ESPN DraftKings 라인 · nflverse EPA)", ""]
     L += ["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES] + [""]
@@ -582,6 +685,7 @@ def ph_digest(week, force=False):
                      + (f' · ★주전급(스냅 60%+) {"Out/Doubtful" if not x.get("final_pending") else "연습 불참"} {x["n_starters_missing"]}명'
                         if str(x.get("n_starters_missing") or "0") not in ("0", "") else "")
                      + (f' (보고 {x.get("report_week")}주차)' if x.get("report_week") and str(x.get("report_week")) != str(week) else ""))
+        L += _matchup_table(a, h, PRO, P26, inj)
         for o_, d_, x in ((a, h, ia), (h, a, ih)):
             L.append(_pass_matchup_lines(o_, d_, x.get("expected_qb"), P26, P25, FTN))
         hist = [x for x in rd(os.path.join(wd, "line_history.csv")) if x["game"] == f"{a}@{h}"]
