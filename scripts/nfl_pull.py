@@ -336,6 +336,130 @@ def _ngs_qb(team, qb):
     return None
 
 
+# 2026-10-04 실제 수치 표 — 안정성 r(홀/짝 경기 상관, 2017~2025 직접 측정 · scripts/stat_research.py)를 각 수치 옆에 적는다.
+# r ≥ .45 실력(반복된다) · .30~.45 중간 · < .25 운(다음 경기를 거의 예측 못 함). 지어낸 기준 없이 이 측정값만 쓴다.
+STAB = {"ppd_o": .61, "td_o": .61, "sc_o": .54, "ppd_d": .36, "qb_cmp": .40, "qb_cpoe": .41, "qb_ypa": .48, "qb_epa": .47, "qb_td": .39,
+        "qb_int": .03, "qb_sack": .46, "wr_catch": .50, "wr_ypt": .34, "wr_td": .18, "rb_ypc": .27, "rb_sr": .33}
+
+
+def _stab(key):
+    r = STAB[key]
+    return f"r {r:.2f}·" + ("실력" if r >= .45 else "중간" if r >= .25 else "운")
+
+
+def _real_stats():
+    """2026 플레이별 기록 → (팀-경기 합계, 선수-경기 합계, 이름) — stat_research.load 재사용(진행 중 시즌은 캐시 안 함)."""
+    import stat_research as SR
+    try:
+        return SR.load(SEASON, cache=False)
+    except Exception as e:
+        log(f"  실제 수치 계산 실패: {type(e).__name__}")
+        return None
+
+
+def _real_stats_block(a, h, RS, inj, games_row, model_row):
+    """📈 실제 수치 — 드라이브 득점 확률(공격·상대 수비) · 드라이브 기반 예상 득점 vs 시장 내재 득점 · QB·리시버·러셔 실제 성적.
+    서술 전용 — 드라이브 모델은 2018~2025 1,618경기에서 시장보다 덜 정확(점수 차 오차 10.38 vs 9.92)."""
+    if not RS:
+        return []
+    import stat_research as SR
+    T, P, NM = RS
+    off, de = defaultdict(list), defaultdict(list)
+    for (g, wk, pt, dt), x in T.items():
+        off[pt].append(x); de[dt].append(x)
+    allx = list(T.values())
+    lg = sum(x.get("dr_pts", 0) for x in allx) / max(sum(x.get("dr", 0) for x in allx), 1)
+
+    def rate(rows, num, den, mult=1):
+        b = sum(r.get(den, 0) for r in rows)
+        if num == "score":
+            a_ = sum(r.get("dr_td", 0) + r.get("dr_fg", 0) for r in rows)
+        else:
+            a_ = sum(r.get(num, 0) for r in rows)
+        return (mult * a_ / b) if b else None
+
+    def drives(rows):
+        return int(sum(r.get("dr", 0) for r in rows))
+    L = []
+    ppd = {}
+    for t, opp in ((a, h), (h, a)):
+        ppd[t] = (SR.shrunk_ppd(off[t], lg, SR.K_OFF), SR.shrunk_ppd(de[opp], lg, SR.K_DEF))
+    exp_a = SR.DRIVES_PG * (ppd[a][0] + ppd[a][1] - lg) - HFA / 2
+    exp_h = SR.DRIVES_PG * (ppd[h][0] + ppd[h][1] - lg) + HFA / 2
+    hl, tot = fnum(model_row.get("mkt_spread_home")), fnum(model_row.get("mkt_total"))
+    mk_h = (tot - hl) / 2 if hl is not None and tot is not None else None
+    mk_a = (tot + hl) / 2 if hl is not None and tot is not None else None
+
+    def novig(ml_a, ml_h):
+        def imp(o):
+            o = fnum(o)
+            if o is None:
+                return None
+            return (-o / (-o + 100)) if o < 0 else (100 / (o + 100))
+        pa_, ph_ = imp(ml_a), imp(ml_h)
+        return (pa_ / (pa_ + ph_), ph_ / (pa_ + ph_)) if pa_ and ph_ else (None, None)
+    wa, wh = novig(games_row.get("ml_away"), games_row.get("ml_home"))
+    pct = lambda v: f"{v:.0f}%" if v is not None else "—"
+    num = lambda v, fm: (fm.format(v) if v is not None else "—")
+    L += ["- 📈 **실제 수치(서술 — 점수 아님 · 2026 플레이별 기록 · 각 수치 옆 r = 2017~2025 실측 안정성: 실력 ≥.45 / 중간 / 운 <.25)**:", "",
+          f"| 수치 | {a} | {h} |", "|---|---|---|"]
+    L.append(f"| 공격 드라이브당 득점({_stab('ppd_o')}) — 원값(드라이브 수) → 보정 | {num(rate(off[a], 'dr_pts', 'dr'), '{:.2f}')}({drives(off[a])}) → {ppd[a][0]:.2f} | {num(rate(off[h], 'dr_pts', 'dr'), '{:.2f}')}({drives(off[h])}) → {ppd[h][0]:.2f} |")
+    L.append(f"| 공격 드라이브 TD 확률({_stab('td_o')}) | {pct(rate(off[a], 'dr_td', 'dr', 100))} | {pct(rate(off[h], 'dr_td', 'dr', 100))} |")
+    L.append(f"| 공격 드라이브 득점(TD+FG) 확률({_stab('sc_o')}) | {pct(rate(off[a], 'score', 'dr', 100))} | {pct(rate(off[h], 'score', 'dr', 100))} |")
+    L.append(f"| 상대 수비가 내준 드라이브당 득점({_stab('ppd_d')}) — 원값 → 보정 | {h} 수비 {num(rate(de[h], 'dr_pts', 'dr'), '{:.2f}')} → {ppd[a][1]:.2f} | {a} 수비 {num(rate(de[a], 'dr_pts', 'dr'), '{:.2f}')} → {ppd[h][1]:.2f} |")
+    L.append(f"| 예상 득점 — 드라이브 모델(리그 {lg:.2f}/드라이브 · 경기당 {SR.DRIVES_PG:.0f}드라이브) / 시장 내재 | {exp_a:.1f} / {num(mk_a, '{:.1f}')} | {exp_h:.1f} / {num(mk_h, '{:.1f}')} |")
+    L.append(f"| 승리 확률 — 시장(ML 무비그) | {pct(wa * 100 if wa else None)} | {pct(wh * 100 if wh else None)} |")
+
+    def team_players(t, kind):
+        agg = defaultdict(lambda: defaultdict(float))
+        for (k, pid, g), x in P.items():
+            if k == kind and NM.get(pid, ("", ""))[1] == t:
+                for kk, vv in x.items():
+                    agg[pid][kk] += vv
+        return agg
+
+    def qb_cell(t):
+        agg = team_players(t, "qb")
+        if not agg:
+            return "—"
+        exp = (inj.get(t) or {}).get("expected_qb") or ""
+        pid = next((pp for pp in agg if exp and _same_person(NM[pp][0], exp)), None) or max(agg, key=lambda pp: agg[pp].get("db", 0))
+        x = agg[pid]
+        att = x.get("att", 0) or 1
+        cp = (x["cpoe"] / x["cpoe_n"]) if x.get("cpoe_n") else None
+        return (f"{NM[pid][0]}: 완성 {100 * x.get('cmp', 0) / att:.0f}%({_stab('qb_cmp')}) · CPOE {num(cp, '{:+.1f}')}({_stab('qb_cpoe')}) · "
+                f"야드/시도 {x.get('yds', 0) / att:.1f}({_stab('qb_ypa')}) · EPA/드롭백 {x.get('epa', 0) / max(x.get('db', 1), 1):+.2f}({_stab('qb_epa')}) · "
+                f"TD {100 * x.get('td', 0) / att:.1f}%({_stab('qb_td')}) · 색 {100 * x.get('sack', 0) / max(x.get('db', 1), 1):.1f}%({_stab('qb_sack')}) · "
+                f"INT {100 * x.get('int', 0) / att:.1f}%({_stab('qb_int')}) · 시도 {int(att)}")
+
+    def rec_cell(t):
+        agg = team_players(t, "rec")
+        tops = sorted(agg, key=lambda pp: -agg[pp].get("tgt", 0))[:2]
+        out = []
+        for pp in tops:
+            x = agg[pp]; tg = x.get("tgt", 0) or 1
+            st = _status_of(NM[pp][0], inj.get(t, {}))
+            out.append(f"{NM[pp][0]}{' ⚠️' + st if st else ''}: 타깃 {int(tg)} · 캐치율 {100 * x.get('cmp', 0) / tg:.0f}%({_stab('wr_catch')}) · "
+                       f"야드/타깃 {x.get('yds', 0) / tg:.1f}({_stab('wr_ypt')}) · TD {int(x.get('td', 0))}({_stab('wr_td')})")
+        return " / ".join(out) or "—"
+
+    def rush_cell(t):
+        agg = team_players(t, "rush")
+        if not agg:
+            return "—"
+        pp = max(agg, key=lambda q: agg[q].get("car", 0)); x = agg[pp]; c = x.get("car", 0) or 1
+        st = _status_of(NM[pp][0], inj.get(t, {}))
+        return (f"{NM[pp][0]}{' ⚠️' + st if st else ''}: 캐리 {int(c)} · 야드/캐리 {x.get('yds', 0) / c:.1f}({_stab('rb_ypc')}) · "
+                f"성공률 {100 * x.get('suc', 0) / c:.0f}%({_stab('rb_sr')})")
+    L.append(f"| QB(예상 선발 — 2026 실제 성적) | {qb_cell(a)} | {qb_cell(h)} |")
+    L.append(f"| 리시버 상위 2(타깃순) | {rec_cell(a)} | {rec_cell(h)} |")
+    L.append(f"| 러셔 1위(캐리순) | {rush_cell(a)} | {rush_cell(h)} |")
+    L += ["", "  ↳ 읽는 법: r(안정성)이 높은 수치(드라이브당 득점·EPA·야드/시도·캐치율)는 실력이라 다음 경기에도 이어질 가능성이 크고, "
+          "INT%·레드존 TD%·리시버 TD 수처럼 r 이 낮은 수치는 운이라 몇 경기 값으로 판단하지 않는다. 예상 득점은 드라이브 모델보다 **시장 내재 값이 더 정확**하다"
+          "(2018~2025 1,618경기 점수 차 오차 시장 9.92 vs 드라이브 모델 10.38 · 총점 10.38 vs 10.83).", ""]
+    return L
+
+
 def _team_profile():
     """2026 정규시즌 pbp → 팀별 공격·수비 단위 성적(2026-10-03 포지션 매치업 표 — 서술 전용).
     공격/수비 각각: 드롭백 EPA·성공률 · 러시 EPA·성공률 · 색 비율 · 턴오버/경기 · 3rd down 전환율.
@@ -637,6 +761,7 @@ def ph_digest(week, force=False):
     rt = {r["team"]: r for r in rd(os.path.join(DATA, "ratings.csv"))}
     P26, P25, FTN = _press_by_team(SEASON), _press_by_team(SEASON - 1), _ftn_by_team()
     PRO = _team_profile()
+    RS = _real_stats()
     now = datetime.now()
     L = [f"# NFL {SEASON} Week {week} — 주간 다이제스트 (생성 {now:%m-%d %H:%M} PT · ESPN DraftKings 라인 · nflverse EPA)", ""]
     L += ["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES] + [""]
@@ -685,6 +810,7 @@ def ph_digest(week, force=False):
                      + (f' · ★주전급(스냅 60%+) {"Out/Doubtful" if not x.get("final_pending") else "연습 불참"} {x["n_starters_missing"]}명'
                         if str(x.get("n_starters_missing") or "0") not in ("0", "") else "")
                      + (f' (보고 {x.get("report_week")}주차)' if x.get("report_week") and str(x.get("report_week")) != str(week) else ""))
+        L += _real_stats_block(a, h, RS, inj, g, m)
         L += _matchup_table(a, h, PRO, P26, inj)
         for o_, d_, x in ((a, h, ia), (h, a, ih)):
             L.append(_pass_matchup_lines(o_, d_, x.get("expected_qb"), P26, P25, FTN))
