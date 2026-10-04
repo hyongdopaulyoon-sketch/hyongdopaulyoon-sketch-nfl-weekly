@@ -67,6 +67,11 @@ def main():
     for r in picks:
         by[r["game"]].append(r)
     pubs = pub_lines(wd)
+    import predictions as PR
+    preds = defaultdict(dict)
+    for r in N.rd(PR.path(a.week)):
+        preds[r["game"]][r["src"]] = r
+    psum = PR.summary(PR.all_rows())
     games.sort(key=lambda g: g["kickoff_utc"])
 
     def result_of(r, gk):
@@ -135,8 +140,29 @@ def main():
             line_items.append(f'<li><span class="tag bet">실베팅</span> <b>{esc(r["side"])}</b> {esc(r.get("odds", ""))} · {stake:g}u {chip(result_of(r, gk))}'
                               + (f' <span class="muted">{float(u):+.2f}u</span>' if u else "")
                               + (f' <span class="muted">CLV {esc(r["clv_prob"])}%p</span>' if r.get("clv_prob") else "") + "</li>")
+        pr = preds.get(gk, {})
+        fin = lv.get("state") == "STATUS_FINAL"
+        win = (H if float(lv.get("sh") or 0) > float(lv.get("sa") or 0) else A if float(lv.get("sa") or 0) > float(lv.get("sh") or 0) else "") if fin else ""
+
+        def pchip(r):
+            if not fin or not win:
+                return ""
+            return chip("W" if r.get("pick") == win else "L")
+        pred_html = ""
+        m_, d_, b_ = pr.get("시장"), pr.get("모델"), pr.get("발행")
+        if m_:
+            pp = P.fnum(m_.get("p_pick"))
+            pred_html = (f'<div class="pred"><span class="lab">예측</span><span>이길 팀 <b>{esc(m_["pick"])} {pct(pp)}</b>{pchip(m_)}'
+                         f' · 예상 {esc(A)} {esc(m_["score_away"])} – {esc(H)} {esc(m_["score_home"])} <span class="muted">(시장)</span></span>')
+            if b_:
+                pred_html += (f'<span>발행 <b>{esc(b_["pick"])} {pct(P.fnum(b_.get("p_pick")))}</b>{pchip(b_)} · {esc(A)} {esc(b_["score_away"])} – {esc(H)} {esc(b_["score_home"])}</span>')
+            if d_:
+                pred_html += (f'<span class="muted">모델 {esc(A)} {esc(d_["score_away"])} – {esc(H)} {esc(d_["score_home"])} → {esc(d_["pick"])}'
+                              + (" ⚠️ 엇갈림" if d_["pick"] != m_["pick"] else "") + "</span>")
+            pred_html += "</div>"
         cards.append(f'''<article class="card{' hasbet' if bets else ''}">
   <header class="match">{team(A, lv.get("na"))}<span class="at">@</span>{team(H, lv.get("nh"))}</header>
+  {pred_html}
   <div class="meta">{status}{' <span class="chip">디비전</span>' if g.get("div_game") == "1" else ""}{' <span class="chip">중립</span>' if g.get("neutral") == "1" else ""}</div>
   <div class="mkts">{"".join(price) or '<div class="muted">가격 없음(경기 시작 뒤엔 사라짐)</div>'}</div>
   {f'<ul class="lines">{"".join(line_items)}</ul>' if line_items else ""}
@@ -189,6 +215,8 @@ th{{font-size:.72rem;letter-spacing:.06em;color:var(--muted);font-weight:500}}
 .mk .lab{{color:var(--muted);font-size:.75rem;grid-row:span 2;align-self:start;padding-top:2px}}
 .mk em{{font-style:normal;font-family:var(--mono);font-size:.8rem}}
 .mk .prob{{color:var(--muted);font-size:.78rem}}
+.pred{{display:grid;gap:3px;font-size:.88rem;background:var(--bg);padding:8px 10px;border-left:3px solid var(--ink)}}
+.pred .lab{{font-size:.7rem;letter-spacing:.06em;color:var(--muted)}}
 .lines{{list-style:none;margin:0;padding:0;display:grid;gap:6px;border-top:1px dashed var(--line);padding-top:8px;font-size:.85rem}}
 .lines .sub{{color:var(--muted);font-size:.76rem}}
 .tag{{font-size:.68rem;letter-spacing:.04em;padding:1px 6px;margin-right:4px;border:1px solid var(--line)}}
@@ -209,6 +237,8 @@ th{{font-size:.72rem;letter-spacing:.06em;color:var(--muted);font-weight:500}}
     <div class="stat"><div class="k">유닛 손익</div><div class="v">{su:+.2f}u</div></div>
     <div class="stat"><div class="k">평균 가격 CLV</div><div class="v">{(sum(cvs) / len(cvs)) if cvs else 0:+.1f}%p</div></div>
     <div class="stat"><div class="k">이번 주 실베팅</div><div class="v">{len(wk_bets)}건</div></div>
+    <div class="stat"><div class="k">승자 예측 · 시장</div><div class="v">{psum.get("시장", {}).get("w", 0)}-{psum.get("시장", {}).get("l", 0)}</div></div>
+    <div class="stat"><div class="k">승자 예측 · 발행</div><div class="v">{psum.get("발행", {}).get("w", 0)}-{psum.get("발행", {}).get("l", 0)}</div></div>
   </section>
   {f'<div class="tbl"><table><thead><tr><th>경기</th><th>베팅</th><th>배당</th><th>크기</th><th>결과</th></tr></thead><tbody>{bet_rows}</tbody></table></div>' if wk_bets else ""}
   <section class="grid">{"".join(cards)}</section>

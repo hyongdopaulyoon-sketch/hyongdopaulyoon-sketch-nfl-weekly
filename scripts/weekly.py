@@ -29,6 +29,8 @@ def main():
         run("picks.py", ["grade", "--week", str(a.grade)])
         run("picks.py", ["stats"])
         run("tracker_xlsx.py", [])          # 보기용 추적기 xlsx 재생성(정본은 picks.csv)
+        run("predictions.py", ["grade", "--week", str(a.grade)])
+        run("predictions.py", ["report"])
         run("nfl_board.py", ["--week", str(a.grade)])   # 채점 결과 반영한 보드(2026-10-04)
         return
     wk = ["--week", str(a.week)] if a.week else []
@@ -43,6 +45,7 @@ def main():
     run("picks.py", ["teaser", "--week", w])          # 웡 티저 다리 페이퍼(2026-10-01) — 실베팅 아님
     run("picks.py", ["wind", "--week", w])            # 바람 15mph+ 언더 페이퍼(2026-10-01) — 경기 당일 판만
     run("picks.py", ["angles", "--week", w])          # 최근 3시즌 약한 꼴 2개 페이퍼(2026-10-04)
+    run("predictions.py", ["record", "--week", w])     # 결과 예측 기록(2026-10-04 — 킥오프 지난 경기 동결)
     run("nfl_board.py", ["--week", w])                 # 보드 HTML(board/board-wNN.html) — Artifact 게시는 세션이 한다
 
 

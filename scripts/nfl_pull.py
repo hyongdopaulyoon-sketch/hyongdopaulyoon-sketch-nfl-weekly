@@ -369,6 +369,24 @@ TEAM_KR = {"ARI": "애리조나 카디널스", "ATL": "애틀랜타 팰컨스", 
            "TEN": "테네시 타이탄스", "WAS": "워싱턴 커맨더스"}     # 2026-10-04 팀명 표시(다이제스트 경기 제목 · 보드)
 
 
+def _predict_line(a, h, res):
+    """🔮 예측(2026-10-04 Paul 「결과 예측을 하라」) — 경기 절 맨 위. 시장(가장 정확) + 우리 드라이브 모델(두 번째 의견)."""
+    if not res:
+        return []
+    m, d = res.get("시장"), res.get("모델")
+    L = []
+    if m:
+        mg = m["sh"] - m["sa"]
+        fav = h if mg > 0 else a
+        L.append(f'- 🔮 **예측**: 이길 팀 **{m["pick"]} {100 * m["p"]:.0f}%** · 예상 점수 **{a} {m["sa"]:.1f} – {h} {m["sh"]:.1f}** '
+                 f'(시장 배당 기준 — 가장 정확) · 점수 차 {fav} {abs(mg):.1f} · 총점 {m["sa"] + m["sh"]:.1f}')
+    if d:
+        warn = " · ⚠️ 시장과 이길 팀이 엇갈림" if m and d["pick"] != m["pick"] else ""
+        L.append(f'    ↳ 우리 드라이브 모델(두 번째 의견 · 시장보다 덜 정확): {a} {d["sa"]:.1f} – {h} {d["sh"]:.1f} → {d["pick"]}'
+                 + (f' {100 * d["p"]:.0f}%' if d.get("p") is not None else "") + warn)
+    return L
+
+
 def _espn_names(wd):
     """{약칭: ESPN 영문 팀명} — 주간 스코어보드에서."""
     try:
@@ -937,6 +955,12 @@ def ph_digest(week, force=False):
     PRO = _team_profile()
     RS = _real_stats()
     NAMES = _espn_names(wd)
+    try:
+        import predictions as PR
+        PRED = {k: v[1] for k, v in PR.compute(week).items()}
+    except Exception as e:
+        log(f"  예측 계산 실패: {type(e).__name__}")
+        PRED = {}
     now = datetime.now()
     L = [f"# NFL {SEASON} Week {week} — 주간 다이제스트 (생성 {now:%m-%d %H:%M} PT · ESPN DraftKings 라인 · nflverse EPA)", ""]
     L += ["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES] + [""]
@@ -963,7 +987,8 @@ def ph_digest(week, force=False):
         m = model.get(g["game_id"] or g["espn_id"], {})
         L += [f'## {a}@{h}  {g["kickoff_et"]} ET ({g["kickoff_pt"]} PT) · {g["venue"]} · {g["roof"] or "?"} · {a} {g["away_rec"]} / {h} {g["home_rec"]}'
               + (" · 디비전" if g.get("div_game") == "1" else "") + (" · **중립 구장(홈 이점 0)**" if g.get("neutral") == "1" else ""), "",
-              f'- 팀: **{NAMES.get(a, a)}**({TEAM_KR.get(a, a)}) @ **{NAMES.get(h, h)}**({TEAM_KR.get(h, h)}) · 로고는 보드(Artifact)에서', ""]
+              f'- 팀: **{NAMES.get(a, a)}**({TEAM_KR.get(a, a)}) @ **{NAMES.get(h, h)}**({TEAM_KR.get(h, h)}) · 로고는 보드(Artifact)에서']
+        L += _predict_line(a, h, PRED.get(f"{a}@{h}")) + [""]
         L.append(f'- 시장({g["odds_provider"] or "DK"}): 스프레드 홈 {m.get("mkt_spread_home", "?")} · 총점 {m.get("mkt_total", "?")} · ML {a} {g["ml_away"] or "?"} / {h} {g["ml_home"] or "?"}'
                  + (f' · nflverse 라인 {g["nv_spread_line"]}/{g["nv_total_line"]}' if g["nv_spread_line"] else ""))
         L += _price_block(a, h, g, [x for x in rd(os.path.join(wd, "line_history.csv")) if x["game"] == f"{a}@{h}"])

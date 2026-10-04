@@ -40,7 +40,7 @@ def main():
     games = rd(os.path.join(wd, "games.csv")); model = {f'{r["away"]}@{r["home"]}': r for r in rd(os.path.join(wd, "model.csv"))}
     txt = open(a.file, encoding="utf-8").read().replace("−", "-")
     secs = sections(txt)
-    문제, 판단들, 방향들 = [], [], []
+    문제, 판단들, 방향들, 예측들 = [], [], [], []
     keys = [f'{g["away"]}@{g["home"]}' for g in games]
     missing = [k for k in keys if k not in secs]
     if missing:
@@ -75,6 +75,15 @@ def main():
                 문제.append(f"{k}: 방향 총점 {dm.group(4)} ≠ 시장 {m['mkt_total']}")
             dirs = {"스프레드": f"{team} {sp:+g}", "총점": f"{ou} {tot:g}"}
             방향들.append((k, dirs["스프레드"], dirs["총점"]))
+        pm = re.search(r"(?m)^- 예측:\s*승자\s+([A-Z]{2,3})\s+(\d+(?:\.\d+)?)%\s*·\s*점수\s+([A-Z]{2,3})\s+(\d+(?:\.\d)?)\s*[–-]\s*([A-Z]{2,3})\s+(\d+(?:\.\d)?)", body)
+        if not pm:
+            문제.append(f"{k}: 예측 줄(「- 예측: 승자 팀 NN% · 점수 원정 x – 홈 y」) 없음/형식 오류 — 2026-10-04 결과 예측 의무")
+        else:
+            a_, h_ = k.split("@")
+            if pm.group(1) not in (a_, h_) or pm.group(3) != a_ or pm.group(5) != h_:
+                문제.append(f"{k}: 예측 줄 팀 순서/약칭 오류(점수는 원정 먼저)")
+            else:
+                예측들.append((k, pm.group(1), float(pm.group(2)) / 100, float(pm.group(4)), float(pm.group(6))))
         j = re.search(r"(?m)^- 판단:\s*(패스|소액 관심|관심)(?:\s*·\s*(스프레드|총점)\s*·\s*([^\n]+))?", body)
         if not j:
             문제.append(f"{k}: 판단 줄 없음/형식 오류"); continue
@@ -101,6 +110,12 @@ def main():
         print(f"  · {k} {v} · {mk} · {sd}")
     for k, s_, t_ in 방향들:
         print(f"  → {k} 방향 {s_} / {t_}")
+    for k, pk, pp, sa, sh in 예측들:
+        print(f"  🔮 {k} 예측 {pk} {100 * pp:.0f}% · {sa:g}-{sh:g}")
+    if a.record and 예측들:
+        import predictions as PR
+        for k, pk, pp, sa, sh in 예측들:
+            PR.add_pub(a.week, k, pk, pp, sa, sh)
     if a.record and (판단들 or 방향들):
         import picks as P
         gid_of = {f'{r["away"]}@{r["home"]}': r["game_id"] for r in games}
