@@ -2,3 +2,6 @@ data/cache/
 __pycache__/
 *.tmp
 *.bak*
+data/*/poly_*.json
+data/*/summary_*.json
+graphify-out/
