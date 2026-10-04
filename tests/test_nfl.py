@@ -72,3 +72,10 @@ def test_stake_scales_units(tmp_path, monkeypatch):
     P.grade(4)
     r = P.rd(P.PICKS)[0]
     assert r["result"] == "W" and abs(float(r["units"]) - 0.5 * 100 / 120) < 1e-3
+
+
+def test_grade_moneyline():
+    res = {"away_score": "20", "home_score": "24"}
+    assert P._grade_one({"game": "JAX@CIN", "market": "ml", "side": "CIN ML"}, res)[0] == "W"
+    assert P._grade_one({"game": "JAX@CIN", "market": "ml", "side": "JAX ML"}, res)[0] == "L"
+    assert P.clv_of({"game": "JAX@CIN", "market": "ml", "side": "CIN ML"}, (2.5, 51.5)) == (None, None)

@@ -123,6 +123,10 @@ def _grade_one(r, res):
         team, pts = r["side"].split()[0], fnum(r["side"].split()[1])
         mine, theirs = (sa, sh) if team == a else (sh, sa)
         d = mine + pts - theirs
+    elif r["market"] == "ml":                       # 머니라인(2026-10-04): side 'CIN ML' — 이기면 W, 비기면 P
+        team = r["side"].split()[0]
+        mine, theirs = (sa, sh) if team == a else (sh, sa)
+        d = mine - theirs
     else:
         d = (sa + sh) - fnum(r["side"].split()[1]); d = d if r["side"].startswith("Over") else -d
     return ("P" if d == 0 else "W" if d > 0 else "L"), score
