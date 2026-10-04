@@ -360,6 +360,28 @@ def _price_block(a, h, g, hist):
     return L
 
 
+TEAM_KR = {"ARI": "애리조나 카디널스", "ATL": "애틀랜타 팰컨스", "BAL": "볼티모어 레이븐스", "BUF": "버펄로 빌스", "CAR": "캐롤라이나 팬서스",
+           "CHI": "시카고 베어스", "CIN": "신시내티 벵골스", "CLE": "클리블랜드 브라운스", "DAL": "댈러스 카우보이스", "DEN": "덴버 브롱코스",
+           "DET": "디트로이트 라이언스", "GB": "그린베이 패커스", "HOU": "휴스턴 텍선스", "IND": "인디애나폴리스 콜츠", "JAX": "잭슨빌 재규어스",
+           "KC": "캔자스시티 치프스", "LV": "라스베이거스 레이더스", "LAC": "LA 차저스", "LA": "LA 램스", "MIA": "마이애미 돌핀스",
+           "MIN": "미네소타 바이킹스", "NE": "뉴잉글랜드 패트리어츠", "NO": "뉴올리언스 세인츠", "NYG": "뉴욕 자이언츠", "NYJ": "뉴욕 제츠",
+           "PHI": "필라델피아 이글스", "PIT": "피츠버그 스틸러스", "SF": "샌프란시스코 49ers", "SEA": "시애틀 시호크스", "TB": "탬파베이 버커니어스",
+           "TEN": "테네시 타이탄스", "WAS": "워싱턴 커맨더스"}     # 2026-10-04 팀명 표시(다이제스트 경기 제목 · 보드)
+
+
+def _espn_names(wd):
+    """{약칭: ESPN 영문 팀명} — 주간 스코어보드에서."""
+    try:
+        j = json.load(open(os.path.join(wd, "espn_scoreboard.json"), encoding="utf-8"))
+    except Exception:
+        return {}
+    out = {}
+    for ev in j.get("events", []):
+        for t in ev["competitions"][0]["competitors"]:
+            out[ESPN2NV.get(t["team"]["abbreviation"], t["team"]["abbreviation"])] = t["team"].get("displayName", "")
+    return out
+
+
 def ph_slate(week, force=False):
     """ESPN 주간 스코어보드 + nflverse 일정 → data/2026-wNN/games.csv"""
     wd = week_dir(week)
@@ -914,6 +936,7 @@ def ph_digest(week, force=False):
     P26, P25, FTN = _press_by_team(SEASON), _press_by_team(SEASON - 1), _ftn_by_team()
     PRO = _team_profile()
     RS = _real_stats()
+    NAMES = _espn_names(wd)
     now = datetime.now()
     L = [f"# NFL {SEASON} Week {week} — 주간 다이제스트 (생성 {now:%m-%d %H:%M} PT · ESPN DraftKings 라인 · nflverse EPA)", ""]
     L += ["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES] + [""]
@@ -939,7 +962,8 @@ def ph_digest(week, force=False):
         a, h = g["away"], g["home"]
         m = model.get(g["game_id"] or g["espn_id"], {})
         L += [f'## {a}@{h}  {g["kickoff_et"]} ET ({g["kickoff_pt"]} PT) · {g["venue"]} · {g["roof"] or "?"} · {a} {g["away_rec"]} / {h} {g["home_rec"]}'
-              + (" · 디비전" if g.get("div_game") == "1" else "") + (" · **중립 구장(홈 이점 0)**" if g.get("neutral") == "1" else ""), ""]
+              + (" · 디비전" if g.get("div_game") == "1" else "") + (" · **중립 구장(홈 이점 0)**" if g.get("neutral") == "1" else ""), "",
+              f'- 팀: **{NAMES.get(a, a)}**({TEAM_KR.get(a, a)}) @ **{NAMES.get(h, h)}**({TEAM_KR.get(h, h)}) · 로고는 보드(Artifact)에서', ""]
         L.append(f'- 시장({g["odds_provider"] or "DK"}): 스프레드 홈 {m.get("mkt_spread_home", "?")} · 총점 {m.get("mkt_total", "?")} · ML {a} {g["ml_away"] or "?"} / {h} {g["ml_home"] or "?"}'
                  + (f' · nflverse 라인 {g["nv_spread_line"]}/{g["nv_total_line"]}' if g["nv_spread_line"] else ""))
         L += _price_block(a, h, g, [x for x in rd(os.path.join(wd, "line_history.csv")) if x["game"] == f"{a}@{h}"])
