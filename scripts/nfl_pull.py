@@ -208,6 +208,158 @@ def _parse_spread(details, home_abbr):
     return pts if fav == home_abbr else -pts
 
 
+PRICE_COLS = ["sp_home_odds", "sp_away_odds", "over_odds", "under_odds", "open_spread_home", "open_sp_home_odds", "open_sp_away_odds",
+              "open_total", "open_over_odds", "open_under_odds", "open_ml_away", "open_ml_home"]
+
+
+def _espn_prices(odds):
+    """ESPN odds 블록(스코어보드 odds[0] 또는 summary pickcenter[0]) → 양쪽 배당·개장 값(2026-10-04 가격 블록).
+    스프레드 라인은 홈 기준(홈 +2.5 = 홈 언더독). 값이 없으면 빈칸."""
+    def g(*path):
+        x = odds or {}
+        for k in path:
+            x = (x or {}).get(k) if isinstance(x, dict) else None
+        return x if x not in (None, "") else ""
+    num = lambda v: str(v).lstrip("ou") if v != "" else ""
+    return {"sp_home_line": g("pointSpread", "home", "close", "line"), "sp_home_odds": g("pointSpread", "home", "close", "odds"),
+            "sp_away_odds": g("pointSpread", "away", "close", "odds"),
+            "total_line": num(g("total", "over", "close", "line")), "over_odds": g("total", "over", "close", "odds"), "under_odds": g("total", "under", "close", "odds"),
+            "ml_away": g("moneyline", "away", "close", "odds"), "ml_home": g("moneyline", "home", "close", "odds"),
+            "open_spread_home": g("pointSpread", "home", "open", "line"), "open_sp_home_odds": g("pointSpread", "home", "open", "odds"),
+            "open_sp_away_odds": g("pointSpread", "away", "open", "odds"), "open_total": num(g("total", "over", "open", "line")),
+            "open_over_odds": g("total", "over", "open", "odds"), "open_under_odds": g("total", "under", "open", "odds"),
+            "open_ml_away": g("moneyline", "away", "open", "odds"), "open_ml_home": g("moneyline", "home", "open", "odds")}
+
+
+def _implied(o):
+    o = fnum(o)
+    if o is None or o == 0:
+        return None
+    return (-o / (-o + 100)) if o < 0 else (100 / (o + 100))
+
+
+def _novig(o1, o2):
+    p1, p2 = _implied(o1), _implied(o2)
+    return (p1 / (p1 + p2), p2 / (p1 + p2)) if p1 and p2 else (None, None)
+
+
+def _cents_to_us(c):
+    """예측시장 가격(0~1) → 미국식 배당 문자열."""
+    if c is None or not 0 < c < 1:
+        return "?"
+    return f"{-100 * c / (1 - c):.0f}" if c >= 0.5 else f"+{100 * (1 - c) / c:.0f}"
+
+
+def _poly(g):
+    """Polymarket 경기 시장(gamma 공개 API · slug nfl-{원정}-{홈}-{UTC 날짜}) → 사는 가격(ask, 0~1).
+    {"ml": {팀: c}, "spread": {(팀, 라인): c}, "total": {(Over|Under, 라인): c}} — 없거나 실패하면 None. 수수료 미반영."""
+    try:
+        day = g["kickoff_utc"][:10]
+        slug = f"nfl-{g['away'].lower()}-{g['home'].lower()}-{day}"
+        path = os.path.join(week_dir_from_game(g), f"poly_{slug}.json")
+        # Polymarket 은 urllib 기본 UA 에 403(ESPN 과 반대) — 이 요청에만 브라우저 UA(2026-10-04 실측)
+        if not (os.path.exists(path) and time.time() - os.path.getmtime(path) < 1800):
+            req = urllib.request.Request(f"https://gamma-api.polymarket.com/events?slug={slug}", headers={"User-Agent": "Mozilla/5.0"})
+            data = urllib.request.urlopen(req, timeout=30).read()
+            open(path + ".tmp", "wb").write(data); os.replace(path + ".tmp", path)
+        ev = (json.load(open(path, encoding="utf-8")) or [None])[0]
+        if not ev:
+            return None
+    except Exception:
+        return None
+    out = {"ml": {}, "spread": {}, "total": {}}
+    nick = {}
+    for m in ev.get("markets", []) or []:
+        if m.get("sportsMarketType") == "moneyline":
+            oc = json.loads(m.get("outcomes") or "[]")
+            if len(oc) == 2:
+                nick = {oc[0]: g["away"], oc[1]: g["home"]}
+    for m in ev.get("markets", []) or []:
+        if m.get("closed"):
+            continue
+        try:
+            oc = json.loads(m.get("outcomes") or "[]"); ask0 = float(m.get("bestAsk")); bid0 = float(m.get("bestBid"))
+        except (TypeError, ValueError):
+            continue
+        ask1 = 1 - bid0                              # 두 번째 쪽을 사는 가격
+        t = m.get("sportsMarketType")
+        if t == "moneyline" and len(oc) == 2:
+            out["ml"][nick.get(oc[0], oc[0])] = ask0; out["ml"][nick.get(oc[1], oc[1])] = ask1
+        elif t == "spreads" and len(oc) == 2 and m.get("line") is not None:
+            ln = float(m["line"])
+            out["spread"][(nick.get(oc[0], oc[0]), ln)] = ask0; out["spread"][(nick.get(oc[1], oc[1]), -ln)] = ask1
+        elif t == "totals" and len(oc) == 2 and m.get("line") is not None:
+            ln = float(m["line"])
+            out["total"][(oc[0], ln)] = ask0; out["total"][(oc[1], ln)] = ask1
+    return out
+
+
+def _poly_lines(a, h, g):
+    """💵 블록 아래 「가격 비교」 — DK 와 같은 라인의 Polymarket 사는 가격, 쪽별로 더 싼 곳."""
+    pm = _poly(g)
+    if not pm:
+        return []
+    hl, tl = fnum(g.get("spread_home")), fnum(g.get("total"))
+    imp = lambda o: _implied(o)
+    rows, best = [], []
+
+    def cmp(label, dk_odds, c):
+        if c is None:
+            return
+        us = _cents_to_us(c)
+        rows.append(f"{label} {c * 100:.0f}c({us})")
+        d, q = imp(dk_odds), c
+        if d is not None:
+            best.append(f"{label}: " + (f"Polymarket {us}" if q < d - 1e-9 else f"DK {dk_odds}" if d < q - 1e-9 else f"같음 {dk_odds}"))
+    cmp(f"{a} ML", g.get("ml_away"), pm["ml"].get(a)); cmp(f"{h} ML", g.get("ml_home"), pm["ml"].get(h))
+    if hl is not None:
+        cmp(f"{h} {hl:+g}", g.get("sp_home_odds"), pm["spread"].get((h, hl))); cmp(f"{a} {-hl:+g}", g.get("sp_away_odds"), pm["spread"].get((a, -hl)))
+    if tl is not None:
+        cmp(f"Over {tl:g}", g.get("over_odds"), pm["total"].get(("Over", tl))); cmp(f"Under {tl:g}", g.get("under_odds"), pm["total"].get(("Under", tl)))
+    if not rows:
+        return ["    ↳ Polymarket: 같은 라인 시장 없음(다른 라인만 있음)"]
+    return [f"    ↳ Polymarket(사는 가격 · 조회 {datetime.now():%H:%M} PT · 수수료 미반영): " + " · ".join(rows),
+            "    ↳ 쪽별 더 좋은 가격(같은 라인): " + " · ".join(best)]
+
+
+def week_dir_from_game(g):
+    """경기 행 → 그 주 폴더(game_id 2026_04_… 에서 주차)."""
+    try:
+        return week_dir(int(str(g.get("game_id", "")).split("_")[1]))
+    except Exception:
+        return CACHE
+
+
+def _price_block(a, h, g, hist):
+    """💵 가격 — DK 양쪽 배당 · 무비그 확률 · 손익분기 · 개장 → 지금 · 라인 이력(시각별). 서술·기록용(판단 근거는 발행 규칙대로)."""
+    if not g.get("sp_home_odds") and not g.get("ml_home"):
+        return []
+    hl = fnum(g.get("spread_home"))
+    pct = lambda v: f"{100 * v:.1f}%" if v is not None else "—"
+    sh, sa = _novig(g.get("sp_home_odds"), g.get("sp_away_odds"))
+    po, pu = _novig(g.get("over_odds"), g.get("under_odds"))
+    ma, mh = _novig(g.get("ml_away"), g.get("ml_home"))
+    L = []
+    if hl is not None:
+        L.append(f"- 💵 가격(DK · 조회 {datetime.now():%m-%d %H:%M} PT): 스프레드 {h} {hl:+g} {g.get('sp_home_odds') or '?'} / {a} {-hl:+g} {g.get('sp_away_odds') or '?'}"
+                 f" · 총점 {g.get('total')} O {g.get('over_odds') or '?'} / U {g.get('under_odds') or '?'} · ML {a} {g.get('ml_away') or '?'} / {h} {g.get('ml_home') or '?'}")
+        L.append(f"    ↳ 무비그 확률(수수료 뺀 시장 확률): {h} 커버 {pct(sh)} / {a} 커버 {pct(sa)} · Over {pct(po)} / Under {pct(pu)} · 승리 {a} {pct(ma)} / {h} {pct(mh)}")
+        be = lambda o: pct(_implied(o))
+        L.append(f"    ↳ 손익분기(지금 배당으로 이만큼 맞혀야 본전): {h} {hl:+g} {be(g.get('sp_home_odds'))} · {a} {-hl:+g} {be(g.get('sp_away_odds'))} · "
+                 f"Over {be(g.get('over_odds'))} · Under {be(g.get('under_odds'))} · {a} ML {be(g.get('ml_away'))} · {h} ML {be(g.get('ml_home'))}")
+        if g.get("open_spread_home") or g.get("open_total"):
+            L.append(f"    ↳ 개장 → 지금: 스프레드 {h} {g.get('open_spread_home') or '?'}({g.get('open_sp_home_odds') or '?'}) → {hl:+g}({g.get('sp_home_odds') or '?'})"
+                     f" · 총점 {g.get('open_total') or '?'}(O {g.get('open_over_odds') or '?'}) → {g.get('total')}(O {g.get('over_odds') or '?'})"
+                     f" · ML {h} {g.get('open_ml_home') or '?'} → {g.get('ml_home') or '?'}")
+    L += _poly_lines(a, h, g)
+    pts = [x for x in hist if x.get("sp_home_odds")]
+    if pts:
+        pick = [pts[0]] + pts[1:-1][-3:] + ([pts[-1]] if len(pts) > 1 else [])
+        L.append("    ↳ 라인 이력(우리 조회 시각): " + " | ".join(
+            f"{x['pulled_at']} {h} {x['spread_home']}({x.get('sp_home_odds') or '?'}) · 총점 {x['total']}(O {x.get('over_odds') or '?'})" for x in pick))
+    return L
+
+
 def ph_slate(week, force=False):
     """ESPN 주간 스코어보드 + nflverse 일정 → data/2026-wNN/games.csv"""
     wd = week_dir(week)
@@ -227,6 +379,7 @@ def ph_slate(week, force=False):
                 away, as_, arec = ab, t.get("score", ""), rec
         odds = (c.get("odds") or [{}])[0]
         spread_home = _parse_spread(odds.get("details"), home)
+        _px = _espn_prices(odds)
         _ml = odds.get("moneyline") or {}
         ml_a = (((_ml.get("away") or {}).get("close") or {}).get("odds") or "")
         ml_h = (((_ml.get("home") or {}).get("close") or {}).get("odds") or "")
@@ -240,21 +393,20 @@ def ph_slate(week, force=False):
                      "" if spread_home is None else spread_home, odds.get("overUnder", ""), ml_a or "", ml_h or "", (odds.get("provider") or {}).get("name", ""),
                      g.get("spread_line", ""), g.get("total_line", ""), g.get("away_rest", ""), g.get("home_rest", ""),
                      g.get("away_qb_name", ""), g.get("home_qb_name", ""), g.get("div_game", ""),
-                     ev["status"]["type"]["name"], as_, hs])
+                     ev["status"]["type"]["name"], as_, hs] + [_px[k] for k in PRICE_COLS])
     hdr = ["espn_id", "game_id", "kickoff_utc", "kickoff_et", "kickoff_pt", "away", "home", "away_rec", "home_rec", "venue", "roof", "neutral",
            "weather", "temp_f", "spread_home", "total", "ml_away", "ml_home", "odds_provider", "nv_spread_line", "nv_total_line",
-           "away_rest", "home_rest", "away_qb", "home_qb", "div_game", "status", "away_score", "home_score"]
+           "away_rest", "home_rest", "away_qb", "home_qb", "div_game", "status", "away_score", "home_score"] + PRICE_COLS
     wcsv(os.path.join(wd, "games.csv"), hdr, rows)
     # 라인 이동 기록(정보 — 뉴스가 라인에 먼저 반영된다): 리프레시마다 한 줄씩 누적
+    # 2026-10-04: 배당 열 추가(sp_home_odds·sp_away_odds·over_odds·under_odds) — 옛 4열 파일은 새 머리로 다시 쓴다(옛 행 배당 칸은 빈칸)
     lh = os.path.join(wd, "line_history.csv")
-    new = not os.path.exists(lh)
-    with open(lh, "a", newline="", encoding="utf-8-sig") as f:
-        w = csv.writer(f)
-        if new:
-            w.writerow(["pulled_at", "game", "spread_home", "total", "ml_away", "ml_home"])
-        ts = datetime.now().strftime("%m-%d %H:%M")
-        for r in rows:
-            w.writerow([ts, f"{r[5]}@{r[6]}", r[14], r[15], r[16], r[17]])
+    LH = ["pulled_at", "game", "spread_home", "total", "ml_away", "ml_home", "sp_home_odds", "sp_away_odds", "over_odds", "under_odds"]
+    old = rd(lh)
+    ts = datetime.now().strftime("%m-%d %H:%M")
+    ix = {k: hdr.index(k) for k in ("spread_home", "total", "ml_away", "ml_home", "sp_home_odds", "sp_away_odds", "over_odds", "under_odds")}
+    new_rows = [[r.get(k, "") for k in LH] for r in old] + [[ts, f"{r[5]}@{r[6]}"] + [r[ix[k]] for k in LH[2:]] for r in rows]
+    wcsv(lh, LH, new_rows)
 
 
 def _qb1_by_team():
@@ -790,6 +942,7 @@ def ph_digest(week, force=False):
               + (" · 디비전" if g.get("div_game") == "1" else "") + (" · **중립 구장(홈 이점 0)**" if g.get("neutral") == "1" else ""), ""]
         L.append(f'- 시장({g["odds_provider"] or "DK"}): 스프레드 홈 {m.get("mkt_spread_home", "?")} · 총점 {m.get("mkt_total", "?")} · ML {a} {g["ml_away"] or "?"} / {h} {g["ml_home"] or "?"}'
                  + (f' · nflverse 라인 {g["nv_spread_line"]}/{g["nv_total_line"]}' if g["nv_spread_line"] else ""))
+        L += _price_block(a, h, g, [x for x in rd(os.path.join(wd, "line_history.csv")) if x["game"] == f"{a}@{h}"])
         ra, rh = rt.get(a, {}), rt.get(h, {})
         L.append(f'- 레이팅: {a} 공격 {fnum(ra.get("off", 0)):+.3f}(패 {fnum(ra.get("off_pass", 0)):+.3f}/러 {fnum(ra.get("off_rush", 0)):+.3f}) · 수비 {fnum(ra.get("def", 0)):+.3f}(패 {fnum(ra.get("def_pass", 0)):+.3f}/러 {fnum(ra.get("def_rush", 0)):+.3f}) · 순마진 {fnum(ra.get("net_pts_per_game", 0)):+.1f} · PF/PA {ra.get("pf_pg")}/{ra.get("pa_pg")}')
         L.append(f'- 레이팅: {h} 공격 {fnum(rh.get("off", 0)):+.3f}(패 {fnum(rh.get("off_pass", 0)):+.3f}/러 {fnum(rh.get("off_rush", 0)):+.3f}) · 수비 {fnum(rh.get("def", 0)):+.3f}(패 {fnum(rh.get("def_pass", 0)):+.3f}/러 {fnum(rh.get("def_rush", 0)):+.3f}) · 순마진 {fnum(rh.get("net_pts_per_game", 0)):+.1f} · PF/PA {rh.get("pf_pg")}/{rh.get("pa_pg")}')
@@ -849,6 +1002,23 @@ def ph_results(week, force=False):
         d = {t["homeAway"]: (ESPN2NV.get(t["team"]["abbreviation"], t["team"]["abbreviation"]), t.get("score")) for t in c["competitors"]}
         rows.append([ev["id"], d["away"][0], d["home"][0], ev["status"]["type"]["name"], d["away"][1], d["home"][1]])
     wcsv(os.path.join(wd, "results.csv"), ["espn_id", "away", "home", "status", "away_score", "home_score"], rows)
+    # 마감 라인·배당(2026-10-04 — CLV 용): 끝난 경기만, 경기당 1콜(캐시 — 끝난 경기의 마감은 바뀌지 않는다)
+    crow = []
+    for r in rows:
+        if r[3] != "STATUS_FINAL":
+            continue
+        sp = os.path.join(wd, f"summary_{r[0]}.json")
+        if not os.path.exists(sp):
+            fetch(f"https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event={r[0]}", sp, 24 * 365)
+        try:
+            pc = (json.load(open(sp, encoding="utf-8")).get("pickcenter") or [{}])[0]
+        except Exception:
+            continue
+        px = _espn_prices(pc)
+        crow.append([r[0], f"{r[1]}@{r[2]}", px["sp_home_line"], px["sp_home_odds"], px["sp_away_odds"], px["total_line"], px["over_odds"], px["under_odds"],
+                     px["ml_away"], px["ml_home"]])
+    wcsv(os.path.join(wd, "closing.csv"), ["espn_id", "game", "spread_home", "sp_home_odds", "sp_away_odds", "total", "over_odds", "under_odds",
+                                           "ml_away", "ml_home"], crow)
 
 
 PHASES = [("sources", ph_sources), ("ratings", ph_ratings), ("slate", ph_slate), ("injuries", ph_injuries), ("model", ph_model), ("digest", ph_digest)]

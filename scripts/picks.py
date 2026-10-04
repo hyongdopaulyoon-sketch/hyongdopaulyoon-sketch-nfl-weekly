@@ -18,7 +18,7 @@ from datetime import datetime
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE); DATA = os.path.join(ROOT, "data")
 PICKS = os.path.join(DATA, "picks.csv")
 HDR = ["id", "season", "week", "game", "market", "side", "line", "odds", "model_value", "edge", "grade", "p_win", "status",
-       "placed_at", "result", "score", "units", "note", "closing_line", "clv", "stake"]   # stake = 베팅 크기(유닛, 빈칸 = 1) — 2026-10-01
+       "placed_at", "result", "score", "units", "note", "closing_line", "clv", "stake", "closing_odds", "clv_prob"]   # clv_prob = 마감 무비그 확률 − 잡은 배당 내재 확률(%p)   # stake = 베팅 크기(유닛, 빈칸 = 1) — 2026-10-01
 SEASON = 2026
 
 
@@ -130,6 +130,52 @@ def _grade_one(r, res):
     else:
         d = (sa + sh) - fnum(r["side"].split()[1]); d = d if r["side"].startswith("Over") else -d
     return ("P" if d == 0 else "W" if d > 0 else "L"), score
+
+
+def _closing_dk(week):
+    """{game_id: dict} — results 단계가 저장한 DK 마감(closing.csv). 없으면 빈 dict."""
+    wd = os.path.join(DATA, f"{SEASON}-w{week:02d}")
+    out = {}
+    for r in rd(os.path.join(wd, "closing.csv")):
+        out[f'{SEASON}_{week:02d}_{r["game"].replace("@", "_")}'] = r
+    return out
+
+
+def _imp(o):
+    o = fnum(o)
+    if o is None or o == 0:
+        return None
+    return (-o / (-o + 100)) if o < 0 else (100 / (o + 100))
+
+
+def clv_price(r, c):
+    """가격 CLV(%p) — 같은 라인일 때만: 마감 무비그 확률(우리 쪽) − 우리가 잡은 배당의 내재 확률. + = 우리가 싸게 샀다. (마감 배당, CLV%p)"""
+    if not c:
+        return None, None
+    a, h = r["game"].split("@")
+    parts = r["side"].split()
+    mine_p = _imp(r.get("odds"))
+    if mine_p is None or not parts:
+        return None, None
+    def nv(x, y):
+        px, py = _imp(x), _imp(y)
+        return px / (px + py) if px and py else None
+    if r["market"] == "ml":
+        o_close, o_other = (c.get("ml_home"), c.get("ml_away")) if parts[0] == h else (c.get("ml_away"), c.get("ml_home"))
+    elif r["market"] == "spread":
+        hl = fnum(c.get("spread_home"))
+        if hl is None or len(parts) < 2:
+            return None, None
+        team_line = hl if parts[0] == h else -hl
+        if fnum(parts[1]) != team_line:
+            return None, None                        # 라인이 다르면 점 CLV 만(가격 비교 불가)
+        o_close, o_other = (c.get("sp_home_odds"), c.get("sp_away_odds")) if parts[0] == h else (c.get("sp_away_odds"), c.get("sp_home_odds"))
+    else:
+        if len(parts) < 2 or fnum(parts[1]) != fnum(c.get("total")):
+            return None, None
+        o_close, o_other = (c.get("over_odds"), c.get("under_odds")) if parts[0] == "Over" else (c.get("under_odds"), c.get("over_odds"))
+    p = nv(o_close, o_other)
+    return (o_close, None) if p is None else (o_close, 100 * (p - mine_p))
 
 
 def _closing(week):
@@ -361,6 +407,16 @@ def grade(week):
         n += 1
     # CLV(2026-10-01) — 승패보다 잡음이 훨씬 작아 수십 건이면 「우리 정보가 시장보다 빨랐나」가 보인다
     close = _closing(week); nc = 0
+    cdk = _closing_dk(week)
+    for gid, c in cdk.items():                     # DK 마감이 있으면 그걸 마감 라인으로(nflverse 보다 우리 북과 같은 기준)
+        hl, tl = fnum(c.get("spread_home")), fnum(c.get("total"))
+        if hl is not None or tl is not None:
+            close[gid] = (hl if hl is not None else (close.get(gid) or (None, None))[0], tl if tl is not None else (close.get(gid) or (None, None))[1])
+    for r in rows:
+        if int(r["week"]) == week and not r.get("clv_prob") and r["grade"] not in (TEASER_GRADE,):
+            co, cp = clv_price(r, cdk.get(r["id"].split(":")[0]))
+            if cp is not None:
+                r["closing_odds"], r["clv_prob"] = co, f"{cp:+.1f}"
     act = {r["game_id"]: r.get("wind", "") for r in rd(os.path.join(DATA, "cache", "games.csv")) if r.get("season") == str(SEASON)}
     for r in rows:
         if r["grade"] == WIND_GRADE and int(r["week"]) == week and r["result"] and "실측" not in r["note"]:

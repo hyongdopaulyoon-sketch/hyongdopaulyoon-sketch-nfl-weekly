@@ -79,3 +79,13 @@ def test_grade_moneyline():
     assert P._grade_one({"game": "JAX@CIN", "market": "ml", "side": "CIN ML"}, res)[0] == "W"
     assert P._grade_one({"game": "JAX@CIN", "market": "ml", "side": "JAX ML"}, res)[0] == "L"
     assert P.clv_of({"game": "JAX@CIN", "market": "ml", "side": "CIN ML"}, (2.5, 51.5)) == (None, None)
+
+
+def test_price_helpers():
+    assert N._cents_to_us(0.52) == "-108" and N._cents_to_us(0.25) == "+300"
+    a, b = N._novig("-120", "+100")
+    assert abs(a - 0.5217) < 1e-3 and abs(a + b - 1) < 1e-9
+    # 가격 CLV: PIT -2.5 를 -108 에 잡았고 마감 PIT -2.5 -120 / CLE +100 → 마감 무비그 52.2% − 내재 51.9% = +0.3%p
+    co, cp = P.clv_price({"game": "PIT@CLE", "market": "spread", "side": "PIT -2.5", "odds": "-108"},
+                         {"spread_home": "+2.5", "sp_home_odds": "+100", "sp_away_odds": "-120", "total": "38.5", "over_odds": "-105", "under_odds": "-115"})
+    assert co == "-120" and abs(cp - 0.3) < 0.1
