@@ -80,3 +80,5 @@
 2026_04_DET_CAR:total:D,2026,4,DET@CAR,total,Over 51.5,51.5,-110,,,방향(발행),,suggested,,,,,발행 방향,,,
 2026_04_JAX_CIN:spread:A2,2026,4,JAX@CIN,spread,CIN -2.5,-2.5,-110,,,각도 관찰 A2(드라이브 우위 언더독 반대),,suggested,,,,,언더독 JAX 드라이브 득점 차 우위 +0.98 → 반대 CIN · 10-04 09:01 PT 판,,,
 2026_04_DAL_HOU:spread:A2,2026,4,DAL@HOU,spread,HOU -3,-3,-110,,,각도 관찰 A2(드라이브 우위 언더독 반대),,suggested,,,,,언더독 DAL 드라이브 득점 차 우위 +0.91 → 반대 HOU · 10-04 09:01 PT 판,,,
+2026_04_JAX_CIN:ml:P,2026,4,JAX@CIN,ml,CIN ML,,-148,,,실베팅,,placed,2026-10-04 09:27,,,,Paul 실베팅 — A2 패턴(드라이브 우위 언더독 JAX의 반대) ML. 배당은 수집값(DK −148) 그대로(Paul). 금액 미확인 — 권장 0.5u 로 임시,,,0.5
+2026_04_DAL_HOU:ml:P,2026,4,DAL@HOU,ml,HOU ML,,-148,,,실베팅,,placed,2026-10-04 09:27,,,,Paul 실베팅 — A2 패턴(드라이브 우위 언더독 DAL의 반대) ML. 배당은 수집값(DK −148) 그대로(Paul). 금액 미확인 — 권장 0.5u 로 임시,,,0.5
