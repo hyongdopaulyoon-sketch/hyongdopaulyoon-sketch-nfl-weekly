@@ -47,6 +47,7 @@ def main():
     run("picks.py", ["angles", "--week", w])          # 최근 3시즌 약한 꼴 2개 페이퍼(2026-10-04)
     run("predictions.py", ["record", "--week", w])     # 결과 예측 기록(2026-10-04 — 킥오프 지난 경기 동결)
     run("nfl_board.py", ["--week", w])                 # 보드 HTML(board/board-wNN.html) — Artifact 게시는 세션이 한다
+    run("transmittal.py", ["--week", w])               # 남은 경기 전달문 + Google Drive 사본(2026-10-04 — 다운로드 없이 발행 세션이 Drive 로 읽음)
 
 
 if __name__ == "__main__":
