@@ -548,6 +548,91 @@ STAB = {"ppd_o": .61, "td_o": .61, "sc_o": .54, "ppd_d": .36, "qb_cmp": .40, "qb
         "qb_int": .03, "qb_sack": .46, "wr_catch": .50, "wr_ypt": .34, "wr_td": .18, "rb_ypc": .27, "rb_sr": .33}
 
 
+# 2026-10-05 개선안 3(Paul 승인 · MLB 「소표본 문턱 숫자 고정 + 자동 라벨 + 원값/보정 병기」): 얇은 표본 문턱
+THIN_QB_DB, THIN_WR_TGT, THIN_RB_CAR = 150, 30, 40
+K_QB = 150          # QB EPA/드롭백 수축 — 선수 모델 사전 등록(7e975b8)과 같은 k, 사전값 = 2026 리그 평균
+
+
+def _qb_shrunk(x, P):
+    """QB 한 명 합계 x → 리그 평균 쪽으로 수축한 EPA/드롭백."""
+    tot_e = sum(v.get("epa", 0) for (k, _p, _g), v in P.items() if k == "qb")
+    tot_d = sum(v.get("db", 0) for (k, _p, _g), v in P.items() if k == "qb") or 1
+    lg = tot_e / tot_d
+    return (x.get("epa", 0) + K_QB * lg) / (x.get("db", 0) + K_QB)
+
+
+def _qb_of(t, RS, inj):
+    """(이름, 드롭백, 원 EPA/드롭백, 보정 EPA) — 예상 선발 QB(없으면 드롭백 최다)."""
+    if not RS:
+        return None
+    _T, P, NM = RS
+    agg = defaultdict(lambda: defaultdict(float))
+    for (k, pid, g), x in P.items():
+        if k == "qb" and NM.get(pid, ("", ""))[1] == t:
+            for kk, vv in x.items():
+                agg[pid][kk] += vv
+    if not agg:
+        return None
+    exp = (inj.get(t) or {}).get("expected_qb") or ""
+    pid = next((pp for pp in agg if exp and _same_person(NM[pp][0], exp)), None) or max(agg, key=lambda pp: agg[pp].get("db", 0))
+    x = agg[pid]; db = x.get("db", 0)
+    return NM[pid][0], int(db), (x.get("epa", 0) / db if db else None), _qb_shrunk(x, P)
+
+
+# ⚖️ 저울질 표(2026-10-05 개선안 1 · MLB 보드 세션 상의) — 값만. 점수 칸 = 백테스트 근거(점수 0 = 시장이 이미 반영).
+# MLB 교훈: 점수 0 항목에 「유리/불리·우위·중대」 낱말을 찍으면 발행 세션이 근거로 써 버린다 → 방향 낱말 없이 값과 근거만.
+BAL_EVID = {
+    "qb": "0 — 2018~22 선수 모델 QB 조정 방향 45%(n370 · 시장이 더 정확, 7e975b8)",
+    "press": "0 — 2018~22 압박 미스매치 −0.19점 p .64(F3 · n632)",
+    "pass": "0 — 팀 EPA 모델 점수 차 오차 10.48 > 시장 9.92(1,151경기)",
+    "rest": "0 — 2023~25 라인·일정 15항목 전부 잡음(BH) · 목요일 원정 48.9%",
+    "wx": "0 — 바람 15mph+ 언더는 따로 관찰 중(2006~25 55%, 최근 3년 53% — 약한 신호)",
+    "inj": "0 — 주전 결장 수 차 −0.15점/명 p .44(F1 · n2,110) · 라인 뒤 발표분만 「새 정보」 관찰",
+    "line": "정보 — 움직였다 = 시장이 이미 소화",
+}
+
+
+def _balance_table(a, h, g, RS, inj, P26, PRO):
+    """⚖️ 저울질 표 — 경기마다 같은 7행. 표시 전용(재계산 없음 — 값은 다이제스트 다른 표와 같은 원천)."""
+    L = ["- ⚖️ **저울질 표(값만 — 점수 칸은 백테스트 근거 · 점수 0 = 시장이 이미 반영 · 「유리/불리」로 읽지 않는다)**:", "",
+         f"| 항목 | {a} | {h} | 점수 · 근거 |", "|---|---|---|---|"]
+    q = {t: _qb_of(t, RS, inj) for t in (a, h)}
+
+    def qcell(t):
+        x = q[t]
+        if not x or x[2] is None:
+            return "—"
+        nm, db, raw, sh = x
+        return f"{nm} 원 {raw:+.2f} → 보정 {sh:+.2f}(드롭백 {db}{' ※ 얇음' if db < THIN_QB_DB else ''})"
+    L.append(f"| QB 수준(EPA/드롭백 · k={K_QB}) | {qcell(a)} | {qcell(h)} | {BAL_EVID['qb']} |")
+
+    def pcell(o, d):
+        if o not in P26 or d not in P26:
+            return "—"
+        return f"피압박 {P26[o][1]:.1f}/경기 vs {d} 압박 {P26[d][0]:.1f}/경기"
+    L.append(f"| 패스 보호 vs 상대 압박 | {pcell(a, h)} | {pcell(h, a)} | {BAL_EVID['press']} |")
+
+    def ecell(o, d):
+        if o not in PRO or d not in PRO or PRO[o].get("o_pepa") is None or PRO[d].get("d_pepa") is None:
+            return "—"
+        return f"공격 {PRO[o]['o_pepa']:+.3f} vs {d} 수비 {PRO[d]['d_pepa']:+.3f}"
+    L.append(f"| 패스 공격 vs 상대 패스 수비(드롭백 EPA) | {ecell(a, h)} | {ecell(h, a)} | {BAL_EVID['pass']} |")
+    L.append(f"| 휴식 | {g.get('away_rest') or '?'}일 | {g.get('home_rest') or '?'}일{' · 디비전' if g.get('div_game') == '1' else ''} | {BAL_EVID['rest']} |")
+    wx = f"{g.get('roof') or '?'} · {g.get('weather') or '예보 없음'}" + (f" {g.get('temp_f')}°F" if g.get("temp_f") else "")
+    L.append(f"| 날씨 | {wx} | (같은 구장) | {BAL_EVID['wx']} |")
+
+    def icell(t):
+        x = inj.get(t) or {}
+        n = str(x.get("n_starters_missing") or "0")
+        return f"★주전 {'연습 불참' if x.get('final_pending') else 'Out/Doubtful'} {n}명"
+    L.append(f"| 주전 결장(스냅 60%+) | {icell(a)} | {icell(h)} | {BAL_EVID['inj']} |")
+    os_, ns_, ot_, nt_ = (fnum(g.get("open_spread_home")), fnum(g.get("spread_home")), fnum(g.get("open_total")), fnum(g.get("total")))
+    mv = (f"스프레드(홈) {os_:+g} → {ns_:+g}" if os_ is not None and ns_ is not None else "스프레드 개장값 없음") +          (f" · 총점 {ot_:g} → {nt_:g}" if ot_ is not None and nt_ is not None else "")
+    L.append(f"| 라인 개장 → 지금 | {mv} | | {BAL_EVID['line']} |")
+    L += ["", "  ↳ 점수 합계 0 — 이 표는 🔮 시장 예측을 바꾸지 않는다. 점수를 받을 수 있는 후보는 발행 세션이 채우는 「라인 뒤 새 정보」뿐(관찰 중 · 30픽 판정).", ""]
+    return L
+
+
 def _stab(key):
     r = STAB[key]
     return f"r {r:.2f}·" + ("실력" if r >= .45 else "중간" if r >= .25 else "운")
@@ -607,7 +692,8 @@ def _real_stats_block(a, h, RS, inj, games_row, model_row):
     wa, wh = novig(games_row.get("ml_away"), games_row.get("ml_home"))
     pct = lambda v: f"{v:.0f}%" if v is not None else "—"
     num = lambda v, fm: (fm.format(v) if v is not None else "—")
-    L += ["- 📈 **실제 수치(서술 — 점수 아님 · 2026 플레이별 기록 · 각 수치 옆 r = 2017~2025 실측 안정성: 실력 ≥.45 / 중간 / 운 <.25)**:", "",
+    L += ["- 📈 **실제 수치(서술 — 점수 아님 · 창: 2026 정규시즌 전체(프리시즌·플레이오프 제외) · 각 수치 옆 r = 2017~2025 실측 안정성: 실력 ≥.45 / 중간 / 운 <.25 · "
+          f"※ 얇음 = QB 드롭백 <{THIN_QB_DB} · 리시버 타깃 <{THIN_WR_TGT} · 러셔 캐리 <{THIN_RB_CAR} → 근거 금지)**:", "",
           f"| 수치 | {a} | {h} |", "|---|---|---|"]
     L.append(f"| 공격 드라이브당 득점({_stab('ppd_o')}) — 원값(드라이브 수) → 보정 | {num(rate(off[a], 'dr_pts', 'dr'), '{:.2f}')}({drives(off[a])}) → {ppd[a][0]:.2f} | {num(rate(off[h], 'dr_pts', 'dr'), '{:.2f}')}({drives(off[h])}) → {ppd[h][0]:.2f} |")
     L.append(f"| 공격 드라이브 TD 확률({_stab('td_o')}) | {pct(rate(off[a], 'dr_td', 'dr', 100))} | {pct(rate(off[h], 'dr_td', 'dr', 100))} |")
@@ -633,10 +719,12 @@ def _real_stats_block(a, h, RS, inj, games_row, model_row):
         x = agg[pid]
         att = x.get("att", 0) or 1
         cp = (x["cpoe"] / x["cpoe_n"]) if x.get("cpoe_n") else None
+        db = x.get("db", 0)
+        thin = (f" · ※ 얇음(드롭백 {int(db)} < {THIN_QB_DB} — 근거 금지 · 보정 EPA {_qb_shrunk(x, P):+.2f})" if db < THIN_QB_DB else "")
         return (f"{NM[pid][0]}: 완성 {100 * x.get('cmp', 0) / att:.0f}%({_stab('qb_cmp')}) · CPOE {num(cp, '{:+.1f}')}({_stab('qb_cpoe')}) · "
                 f"야드/시도 {x.get('yds', 0) / att:.1f}({_stab('qb_ypa')}) · EPA/드롭백 {x.get('epa', 0) / max(x.get('db', 1), 1):+.2f}({_stab('qb_epa')}) · "
                 f"TD {100 * x.get('td', 0) / att:.1f}%({_stab('qb_td')}) · 색 {100 * x.get('sack', 0) / max(x.get('db', 1), 1):.1f}%({_stab('qb_sack')}) · "
-                f"INT {100 * x.get('int', 0) / att:.1f}%({_stab('qb_int')}) · 시도 {int(att)}")
+                f"INT {100 * x.get('int', 0) / att:.1f}%({_stab('qb_int')}) · 시도 {int(att)} · 드롭백 {int(db)}{thin}")
 
     def rec_cell(t):
         agg = team_players(t, "rec")
@@ -645,7 +733,7 @@ def _real_stats_block(a, h, RS, inj, games_row, model_row):
         for pp in tops:
             x = agg[pp]; tg = x.get("tgt", 0) or 1
             st = _status_of(NM[pp][0], inj.get(t, {}))
-            out.append(f"{NM[pp][0]}{' ⚠️' + st if st else ''}: 타깃 {int(tg)} · 캐치율 {100 * x.get('cmp', 0) / tg:.0f}%({_stab('wr_catch')}) · "
+            out.append(f"{NM[pp][0]}{' ⚠️' + st if st else ''}: 타깃 {int(tg)}{f' ※ 얇음(<{THIN_WR_TGT} — 근거 금지)' if tg < THIN_WR_TGT else ''} · 캐치율 {100 * x.get('cmp', 0) / tg:.0f}%({_stab('wr_catch')}) · "
                        f"야드/타깃 {x.get('yds', 0) / tg:.1f}({_stab('wr_ypt')}) · TD {int(x.get('td', 0))}({_stab('wr_td')})")
         return " / ".join(out) or "—"
 
@@ -655,7 +743,7 @@ def _real_stats_block(a, h, RS, inj, games_row, model_row):
             return "—"
         pp = max(agg, key=lambda q: agg[q].get("car", 0)); x = agg[pp]; c = x.get("car", 0) or 1
         st = _status_of(NM[pp][0], inj.get(t, {}))
-        return (f"{NM[pp][0]}{' ⚠️' + st if st else ''}: 캐리 {int(c)} · 야드/캐리 {x.get('yds', 0) / c:.1f}({_stab('rb_ypc')}) · "
+        return (f"{NM[pp][0]}{' ⚠️' + st if st else ''}: 캐리 {int(c)}{f' ※ 얇음(<{THIN_RB_CAR} — 근거 금지)' if c < THIN_RB_CAR else ''} · 야드/캐리 {x.get('yds', 0) / c:.1f}({_stab('rb_ypc')}) · "
                 f"성공률 {100 * x.get('suc', 0) / c:.0f}%({_stab('rb_sr')})")
     L.append(f"| QB(예상 선발 — 2026 실제 성적) | {qb_cell(a)} | {qb_cell(h)} |")
     L.append(f"| 리시버 상위 2(타깃순) | {rec_cell(a)} | {rec_cell(h)} |")
@@ -733,16 +821,14 @@ def _matchup_table(a, h, PRO, P26, inj):
         if ov is None or dv is None:
             return "—"
         ro, rd_ = rk(okey, off, o_high), rk(dkey, de, d_high)
-        edge = (f" → **{off} 우위**" if ro + 8 <= rd_ else f" → **{de} 우위**" if rd_ + 8 <= ro else " → 비슷")
-        return f"{off} {fmt.format(ov)}{unit}({ro}위) vs {de} {fmt.format(dv)}{unit}({rd_}위){edge}"
+        return f"{off} {fmt.format(ov)}{unit}({ro}위) vs {de} {fmt.format(dv)}{unit}({rd_}위)"
 
     def press(off, de):
         if off not in P26 or de not in P26:
             return "—"
         ov, dv = P26[off][1], P26[de][0]
         ro = _rank({t: v[1] for t, v in P26.items()}, off, False); rd_ = _rank({t: v[0] for t, v in P26.items()}, de)
-        edge = (f" → **{off} 우위**" if ro + 8 <= rd_ else f" → **{de} 우위**" if rd_ + 8 <= ro else " → 비슷")
-        return f"{off} 피압박 {ov:.1f}/경기({ro}위) vs {de} 압박 {dv:.1f}/경기({rd_}위){edge}"
+        return f"{off} 피압박 {ov:.1f}/경기({ro}위) vs {de} 압박 {dv:.1f}/경기({rd_}위)"
 
     def players(t):
         x, ir = PRO[t], inj.get(t, {})
@@ -751,7 +837,7 @@ def _matchup_table(a, h, PRO, P26, inj):
         return " · ".join(parts) or "—"
 
     g = min(PRO[a]["g"], PRO[h]["g"])
-    L = [f"- 📊 포지션 매치업(서술 — 점수 아님 · 2026 {g}경기{' ※ 얇음' if g < 6 else ''} · 순위는 32팀 중, 「우위」는 순위 8칸 이상 차이):", "",
+    L = [f"- 📊 포지션 매치업(서술 — 점수 아님 · 2026 {g}경기{' ※ 얇음' if g < 6 else ''} · 순위는 32팀 중 · 값과 순위만(10/5 「우위」 낱말 삭제 — 점수 0 항목)):", "",
          f"| 영역 | {a} 공격 → {h} 수비 | {h} 공격 → {a} 수비 |", "|---|---|---|"]
     rows = [("패스(드롭백 EPA)", "o_pepa", "d_pepa", "{:+.3f}", True, False, ""),
             ("패스 성공률", "o_psr", "d_psr", "{:.0%}", True, False, ""),
@@ -1026,6 +1112,7 @@ def ph_digest(week, force=False):
                      + (f' · ★주전급(스냅 60%+) {"Out/Doubtful" if not x.get("final_pending") else "연습 불참"} {x["n_starters_missing"]}명'
                         if str(x.get("n_starters_missing") or "0") not in ("0", "") else "")
                      + (f' (보고 {x.get("report_week")}주차)' if x.get("report_week") and str(x.get("report_week")) != str(week) else ""))
+        L += _balance_table(a, h, g, RS, inj, P26, PRO)
         L += _real_stats_block(a, h, RS, inj, g, m)
         L += _matchup_table(a, h, PRO, P26, inj)
         for o_, d_, x in ((a, h, ia), (h, a, ih)):

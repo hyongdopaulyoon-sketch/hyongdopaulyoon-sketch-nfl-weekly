@@ -153,7 +153,7 @@ def main():
         rows = by.get(gk, [])
         bets = [r for r in rows if r.get("status") == "placed"]
         dirs = [r for r in rows if r["grade"] == "방향(발행)"]
-        obs = [r for r in rows if r["grade"] in ("바람 언더(관찰)", "티저 다리(관찰)") or r["grade"].startswith("각도 관찰")]
+        obs = [r for r in rows if r["grade"] in ("바람 언더(관찰)", "티저 다리(관찰)", "새 정보(관찰)") or r["grade"].startswith("각도 관찰")]
         pub = pubs.get(gk, {})
         pr = preds.get(gk, {})
         m_, d_, b_ = pr.get("시장"), pr.get("모델"), pr.get("발행")
@@ -195,6 +195,8 @@ def main():
                     teaser_open.append(r)
             elif r["grade"].startswith("바람"):
                 lab = "바람 언더"
+            elif r["grade"].startswith("새 정보"):
+                lab = "라인 뒤 새 정보"
             else:
                 lab = r["grade"].split("(")[0].replace("각도 관찰 ", "각도 ")
             items.append(f'<li><span class="tag obs">{term("관찰", "관찰만")}</span> {lab} <b title="{esc(r.get("note", ""))}">{esc(r["side"])}</b> {hit(result_of(r, gk))}</li>')

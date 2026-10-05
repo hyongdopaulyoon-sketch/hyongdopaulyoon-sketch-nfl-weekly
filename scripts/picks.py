@@ -454,7 +454,7 @@ def stats():
         by = defaultdict(list)
         for r in placed: by[r[key]].append(r)
         print(f"  {lab}: " + " · ".join(f"{k} {rec(v)}" for k, v in sorted(by.items(), key=lambda kv: str(kv[0]))))
-    for g in (TEASER_GRADE, WIND_GRADE, "각도 관찰 A1(원정 큰 페이버릿 반대)", "각도 관찰 A2(드라이브 우위 언더독 반대)"):
+    for g in ("새 정보(관찰)", TEASER_GRADE, WIND_GRADE, "각도 관찰 A1(원정 큰 페이버릿 반대)", "각도 관찰 A2(드라이브 우위 언더독 반대)"):
         xs = [r for r in rows if r["grade"] == g]
         if xs:
             print(f"  페이퍼 {g}: {rec(xs)}")

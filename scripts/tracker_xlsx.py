@@ -68,13 +68,16 @@ def main():
                                                 + (f" · 평균 표시가 {avg_c:.1f}c(n {len(pr)})" if pr else "")])
     wn = [r for r in done if r["grade"] == "바람 언더(관찰)"]
     s2.append(["바람 언더(관찰·페이퍼)"] + rec(wn) + ["실외 · 킥오프 예보 지속 15mph+ 언더(10/1~) — 손익분기 52.4% · 40픽 또는 시즌 종료 때 보고 · <52.4% 폐기"])
+    _nx = [r for r in done if r["grade"] == "새 정보(관찰)"]
+    s2.append(["라인 뒤 새 정보(관찰·페이퍼)"] + rec(_nx) + ["발행 「- 새 정보:」 줄(10/5~ 사전 등록 55b93ea) — 30픽: 평균 CLV>0 & ≥52.4% 상정 · <50% 또는 CLV≤−0.5 폐기"])
     for _g in ("각도 관찰 A1(원정 큰 페이버릿 반대)", "각도 관찰 A2(드라이브 우위 언더독 반대)"):
         _xs = [r for r in done if r["grade"] == _g]
         s2.append([_g + "·페이퍼"] + rec(_xs) + ["2023~25 탐색 약한 꼴(10/4~) — 30픽/시즌 끝 보고 · <50% 폐기 · ≥55% & CLV ≥0 이면 상정"])
     # CLV(2026-10-01): 픽 라인 vs 마감 라인(점, + = 우리가 더 좋은 숫자) — 승패보다 빨리 실력이 보인다. 모델 페이퍼는 리프레시마다 쪽이 갱신돼 ≈0 이 정상
     for lab, xs in (("평균 CLV · 실베팅", [r for r in rows if r["status"] == "placed"]), ("평균 CLV · 발행 판단", [r for r in rows if r["grade"].startswith("관심(발행)")]),
                     ("평균 CLV · 발행 방향", [r for r in rows if r["grade"].startswith("방향(발행)")]),
-                    ("평균 CLV · 바람 언더", [r for r in rows if r["grade"] == "바람 언더(관찰)"])):
+                    ("평균 CLV · 바람 언더", [r for r in rows if r["grade"] == "바람 언더(관찰)"]),
+                    ("평균 CLV · 라인 뒤 새 정보", [r for r in rows if r["grade"] == "새 정보(관찰)"])):
         cv = [fnum(r.get("clv")) for r in xs if fnum(r.get("clv")) is not None]
         s2.append([lab, len(cv), sum(1 for v in cv if v > 0), sum(1 for v in cv if v < 0), sum(1 for v in cv if v == 0),
                    None, round(sum(cv) / len(cv), 2) if cv else None, "픽/우리 쪽 이동/반대/같음 · 「유닛」 칸 = 평균 CLV(점)"])
