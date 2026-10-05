@@ -152,7 +152,7 @@ def main():
         m_, d_, b_ = pr.get("시장"), pr.get("모델"), pr.get("발행")
         if m_:
             pp = P.fnum(m_.get("p_pick"))
-            pred_html = (f'<div class="pred"><span class="lab">예측</span><span>이길 팀 <b>{esc(m_["pick"])} {pct(pp)}</b>{pchip(m_)}'
+            pred_html = (f'<div class="pred"><span class="lab">예측</span><span>이길 팀 <b>{esc(m_["pick"])} {pct(pp)}</b> <span class="star" title="2018~25 이 별 승자 적중 {PR.STAR_HIT.get(PR.stars(pp), "")}">{PR.star_str(pp)}</span>{pchip(m_)}'
                          f' · 예상 {esc(A)} {esc(m_["score_away"])} – {esc(H)} {esc(m_["score_home"])} <span class="muted">(시장)</span></span>')
             if b_:
                 pred_html += (f'<span>발행 <b>{esc(b_["pick"])} {pct(P.fnum(b_.get("p_pick")))}</b>{pchip(b_)} · {esc(A)} {esc(b_["score_away"])} – {esc(H)} {esc(b_["score_home"])}</span>')
@@ -217,6 +217,7 @@ th{{font-size:.72rem;letter-spacing:.06em;color:var(--muted);font-weight:500}}
 .mk .prob{{color:var(--muted);font-size:.78rem}}
 .pred{{display:grid;gap:3px;font-size:.88rem;background:var(--bg);padding:8px 10px;border-left:3px solid var(--ink)}}
 .pred .lab{{font-size:.7rem;letter-spacing:.06em;color:var(--muted)}}
+.star{{color:var(--acc);letter-spacing:.05em}}
 .lines{{list-style:none;margin:0;padding:0;display:grid;gap:6px;border-top:1px dashed var(--line);padding-top:8px;font-size:.85rem}}
 .lines .sub{{color:var(--muted);font-size:.76rem}}
 .tag{{font-size:.68rem;letter-spacing:.04em;padding:1px 6px;margin-right:4px;border:1px solid var(--line)}}

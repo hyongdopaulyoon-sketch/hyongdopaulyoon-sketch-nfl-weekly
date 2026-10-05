@@ -378,7 +378,8 @@ def _predict_line(a, h, res):
     if m:
         mg = m["sh"] - m["sa"]
         fav = h if mg > 0 else a
-        L.append(f'- 🔮 **예측**: 이길 팀 **{m["pick"]} {100 * m["p"]:.0f}%** · 예상 점수 **{a} {m["sa"]:.1f} – {h} {m["sh"]:.1f}** '
+        import predictions as _PR
+        L.append(f'- 🔮 **예측**: 이길 팀 **{m["pick"]} {100 * m["p"]:.0f}% {_PR.star_str(m["p"])}**(2018~25 이 별 적중 {_PR.STAR_HIT[_PR.stars(m["p"])]}) · 예상 점수 **{a} {m["sa"]:.1f} – {h} {m["sh"]:.1f}** '
                  f'(시장 배당 기준 — 가장 정확) · 점수 차 {fav} {abs(mg):.1f} · 총점 {m["sa"] + m["sh"]:.1f}')
     if d:
         warn = " · ⚠️ 시장과 이길 팀이 엇갈림" if m and d["pick"] != m["pick"] else ""

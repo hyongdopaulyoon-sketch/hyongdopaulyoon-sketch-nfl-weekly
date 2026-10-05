@@ -27,10 +27,10 @@ def main():
     if a.grade:
         run("nfl_pull.py", ["--week", str(a.grade), "--phase", "results"])
         run("picks.py", ["grade", "--week", str(a.grade)])
+        run("predictions.py", ["grade", "--week", str(a.grade)])
+        run("predictions.py", ["report", "--week", str(a.grade)])   # 보고 순서(2026-10-05): ① 예측 적중(별점별) ② 실베팅 ③ 페이퍼
         run("picks.py", ["stats"])
         run("tracker_xlsx.py", [])          # 보기용 추적기 xlsx 재생성(정본은 picks.csv)
-        run("predictions.py", ["grade", "--week", str(a.grade)])
-        run("predictions.py", ["report"])
         run("nfl_board.py", ["--week", str(a.grade)])   # 채점 결과 반영한 보드(2026-10-04)
         return
     wk = ["--week", str(a.week)] if a.week else []

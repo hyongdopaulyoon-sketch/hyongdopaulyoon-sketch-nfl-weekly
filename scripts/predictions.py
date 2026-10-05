@@ -19,6 +19,25 @@ HDR = ["game_id", "week", "game", "kickoff_utc", "made_at", "src", "pick", "p_pi
        "line_home", "total_line", "result", "margin_err", "total_err", "spread_hit", "total_hit", "final"]
 
 
+# ★ 승자 자신감(2026-10-05 Paul 승인) — 이길 팀 확률 구간. 2018~2025 정규시즌 시장 무비그 확률로 잰 실제 승자 적중:
+#   ★★★★ 75%+ 82.4%(n467) · ★★★ 65~75% 71.0%(n587) · ★★ 57~65% 60.8%(n656) · ★ <57% 50.1%(n409) — 8시즌 서열 유지.
+#   「누가 이기나」 자신감일 뿐 돈의 가치가 아니다: 같은 기간 페이버릿 스프레드 커버는 모든 별에서 47~49%.
+STAR_CUTS = ((0.75, 4), (0.65, 3), (0.57, 2), (0.0, 1))
+STAR_HIT = {4: "82%", 3: "71%", 2: "61%", 1: "50%"}
+
+
+def stars(p):
+    """이길 팀 확률(0.5~1) → 별 수(1~4). None 이면 0."""
+    if p is None:
+        return 0
+    return next(n for c, n in STAR_CUTS if p >= c)
+
+
+def star_str(p):
+    n = stars(p)
+    return "★" * n if n else ""
+
+
 def path(week):
     return os.path.join(N.week_dir(week), "predictions.csv")
 
@@ -98,16 +117,56 @@ def add_pub(week, game, pick, p, sa, sh, made_at=""):
     N.wcsv(path(week), HDR, [[r.get(k, "") for k in HDR] for r in keep.values()])
 
 
+def _cache_games(week):
+    """nflverse games.csv(캐시) 그 주 정규시즌 경기 — 마감 ML·스프레드·총점·점수."""
+    return [g for g in N.rd(os.path.join(N.DATA, "cache", "games.csv")) if g.get("season") == str(SEASON) and g.get("week") == str(week)]
+
+
+def _finals(week):
+    """{A@H: (원정 점수, 홈 점수)} — 우리 results.csv(끝난 경기) 우선, 없으면 nflverse 캐시."""
+    out = {}
+    for g in _cache_games(week):
+        fa, fh = N.fnum(g.get("away_score")), N.fnum(g.get("home_score"))
+        if fa is not None and fh is not None:
+            out[f'{g["away_team"]}@{g["home_team"]}'] = (fa, fh)
+    for r in N.rd(os.path.join(N.week_dir(week), "results.csv")):
+        if r["status"] == "STATUS_FINAL":
+            out[f'{r["away"]}@{r["home"]}'] = (N.fnum(r["away_score"]), N.fnum(r["home_score"]))
+    return out
+
+
+def backfill(week):
+    """시장 예측 소급(2026-10-05 Paul 승인) — 킥오프 전 기록이 없는 경기만, nflverse 마감 ML·스프레드·총점으로.
+    made_at 「소급(마감)」 — 마감 값은 킥오프 직전 시장이라 그 시점 예측과 같은 성격이지만, 실시간 기록과 구분해 둔다. 발행·모델 행은 만들지 않는다."""
+    rows = N.rd(path(week)); keep = {(r["game"], r["src"]): r for r in rows}; n = 0
+    for g in _cache_games(week):
+        gk = f'{g["away_team"]}@{g["home_team"]}'
+        if (gk, "시장") in keep or g.get("game_type", "REG") != "REG":
+            continue
+        sl, tot = N.fnum(g.get("spread_line")), N.fnum(g.get("total_line"))
+        wa, wh = N._novig(g.get("away_moneyline"), g.get("home_moneyline"))
+        if sl is None or tot is None or wa is None:
+            continue
+        hl = -sl                                          # nflverse spread_line = 홈 기대 마진 → 베팅 표기
+        keep[(gk, "시장")] = {k: "" for k in HDR} | dict(
+            game_id=g["game_id"], week=week, game=gk, kickoff_utc="", made_at="소급(마감)", src="시장",
+            pick=g["home_team"] if wh >= wa else g["away_team"], p_pick=f"{max(wa, wh):.3f}",
+            score_away=f"{(tot + hl) / 2:.1f}", score_home=f"{(tot - hl) / 2:.1f}", line_home=f"{hl:g}", total_line=f"{tot:g}")
+        n += 1
+    os.makedirs(N.week_dir(week), exist_ok=True)
+    N.wcsv(path(week), HDR, [[r.get(k, "") for k in HDR] for r in keep.values()])
+    print(f"predictions backfill week {week}: 소급 {n}경기")
+
+
 def grade(week):
     rows = N.rd(path(week))
-    res = {f'{r["away"]}@{r["home"]}': r for r in N.rd(os.path.join(N.week_dir(week), "results.csv")) if r["status"] == "STATUS_FINAL"}
+    fin = _finals(week)
     n = 0
     for r in rows:
-        x = res.get(r["game"])
-        if not x:
+        if r["game"] not in fin:
             continue
         a, h = r["game"].split("@")
-        fa, fh = N.fnum(x["away_score"]), N.fnum(x["home_score"])
+        fa, fh = fin[r["game"]]
         r["final"] = f"{a} {fa:g}-{fh:g} {h}"
         win = h if fh > fa else a if fa > fh else ""
         r["result"] = "" if not win else ("W" if r["pick"] == win else "L")
@@ -115,10 +174,12 @@ def grade(week):
         lh, tl = N.fnum(r["line_home"]), N.fnum(r["total_line"])
         if sa is not None and sh is not None:
             r["margin_err"] = f"{abs((sh - sa) - (fh - fa)):.1f}"; r["total_err"] = f"{abs((sh + sa) - (fh + fa)):.1f}"
-            if lh is not None:
+            if r["src"] == "시장":
+                r["spread_hit"] = r["total_hit"] = ""        # 시장 예측 = 라인 자체(내재 점수 반올림 잔차로 쪽이 생기는 착시 방지)
+            elif lh is not None:
                 pred = (sh - sa) + lh; act = (fh - fa) + lh       # 홈 커버 여유(+ = 홈 커버)
                 r["spread_hit"] = "" if act == 0 or pred == 0 else ("W" if (pred > 0) == (act > 0) else "L")
-            if tl is not None:
+            if tl is not None and r["src"] != "시장":
                 pt_, at_ = (sh + sa) - tl, (fh + fa) - tl
                 r["total_hit"] = "" if at_ == 0 or pt_ == 0 else ("W" if (pt_ > 0) == (at_ > 0) else "L")
         n += 1
@@ -138,7 +199,12 @@ def summary(rows):
         te = [N.fnum(r["total_err"]) for r in xs if N.fnum(r["total_err"]) is not None]
         sw = sum(1 for r in xs if r["spread_hit"] == "W"); sl = sum(1 for r in xs if r["spread_hit"] == "L")
         tw = sum(1 for r in xs if r["total_hit"] == "W"); tl = sum(1 for r in xs if r["total_hit"] == "L")
-        out[src] = dict(n=len(xs), w=w, l=l, me=sum(me) / len(me) if me else None, te=sum(te) / len(te) if te else None, sw=sw, sl=sl, tw=tw, tl=tl)
+        st = {}
+        for k in (4, 3, 2, 1):
+            ys = [r for r in xs if stars(N.fnum(r["p_pick"])) == k and r["result"] in ("W", "L")]
+            st[k] = (sum(1 for r in ys if r["result"] == "W"), sum(1 for r in ys if r["result"] == "L"))
+        out[src] = dict(n=len(xs), w=w, l=l, me=sum(me) / len(me) if me else None, te=sum(te) / len(te) if te else None, sw=sw, sl=sl, tw=tw, tl=tl,
+                        stars=st, back=sum(1 for r in xs if r["made_at"].startswith("소급")))
     return out
 
 
@@ -151,23 +217,34 @@ def all_rows():
     return rows
 
 
-def report():
-    s = summary(all_rows())
+def report(week=None):
+    rows = all_rows()
     print(f"📊 NFL {SEASON} 결과 예측 — 시즌 누적")
-    for src, x in s.items():
-        print(f"■ {src}: {x['n']}경기 · 승자 {x['w']}-{x['l']}" + (f" {100 * x['w'] / (x['w'] + x['l']):.0f}%" if x['w'] + x['l'] else "")
-              + (f" · 점수 차 오차 {x['me']:.1f} · 총점 오차 {x['te']:.1f}" if x["me"] is not None else "")
-              + (f" · 스프레드 쪽 {x['sw']}-{x['sl']}" if src != "시장" else "") + f" · 총점 쪽 {x['tw']}-{x['tl']}")
-    print("  (시장은 스프레드 쪽을 고르지 않는다 — 라인 자체가 시장 예측 점수 차)")
+    for lab, rs in ((f"{week}주차", [r for r in rows if r["week"] == str(week)]), ("시즌", rows)) if week else (("시즌", rows),):
+        s = summary(rs)
+        for src, x in s.items():
+            print(f"■ {lab} {src}: {x['n']}경기" + (f"(소급 {x['back']})" if x["back"] else "") + f" · 승자 {x['w']}-{x['l']}"
+                  + (f" {100 * x['w'] / (x['w'] + x['l']):.0f}%" if x['w'] + x['l'] else "")
+                  + (f" · 점수 차 오차 {x['me']:.1f} · 총점 오차 {x['te']:.1f}" if x["me"] is not None else "")
+                  + (f" · 스프레드 쪽 {x['sw']}-{x['sl']} · 총점 쪽 {x['tw']}-{x['tl']}" if src != "시장" else ""))
+            print("    별점별 승자: " + " · ".join(f"{'★' * k} {w}-{l}" + (f" {100 * w / (w + l):.0f}%" if w + l else "") + f"(기대 {STAR_HIT[k]})"
+                                          for k, (w, l) in x["stars"].items()))
+    print("  (시장은 스프레드 쪽을 고르지 않는다 — 라인 자체가 시장 예측 점수 차 · 별점은 승자 자신감이지 돈의 가치가 아니다)")
 
 
 def main():
     ap = argparse.ArgumentParser(); sub = ap.add_subparsers(dest="cmd", required=True)
     for c in ("record", "grade"):
         sub.add_parser(c).add_argument("--week", type=int, required=True)
-    sub.add_parser("report")
+    sub.add_parser("report").add_argument("--week", type=int, help="그 주차 줄을 시즌 위에 먼저")
+    sub.add_parser("backfill").add_argument("--weeks", required=True, help="예: 1-4")
     a = ap.parse_args()
-    {"record": lambda: record(a.week), "grade": lambda: grade(a.week), "report": report}[a.cmd]()
+    if a.cmd == "backfill":
+        lo, _, hi = a.weeks.partition("-")
+        for wk in range(int(lo), int(hi or lo) + 1):
+            backfill(wk); grade(wk)
+        return
+    {"record": lambda: record(a.week), "grade": lambda: grade(a.week), "report": lambda: report(a.week)}[a.cmd]()
 
 
 if __name__ == "__main__":

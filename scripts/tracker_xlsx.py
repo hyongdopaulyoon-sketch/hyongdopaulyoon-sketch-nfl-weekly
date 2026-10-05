@@ -58,7 +58,8 @@ def main():
     model = [r for r in done if r["status"] != "placed" and r["grade"].startswith(("관찰", "참고"))]
     s2.append(["실베팅(placed)"] + rec(placed) + ["Paul 이 실제로 건 것 — 손익분기 52.4%"])
     s2.append(["발행 판단(페이퍼)"] + rec(pub) + ["발행 세션 관심·소액 관심(9/29~)"])
-    s2.append(["발행 방향(페이퍼)"] + rec(lean_) + ["발행 세션 방향 줄 — 패스 포함 전 경기·스프레드+총점(10/1~)"])
+    _ld = rec(lean_); _ld[4] = None                        # 2026-10-05: 방향은 동전(돈 아님) — 유닛 칸 비움, 적중률만
+    s2.append(["발행 방향(예측 쪽)"] + _ld + ["발행 세션 방향 줄 — 예측 점수에서 나온 쪽(10/1~). 2018~25 어떤 별점에서도 스프레드 ≈49% = 동전 · 유닛 미표시"])
     s2.append(["모델 관찰·참고(페이퍼)"] + rec(model) + ["EPA 모델 방향 — 백테스트 45%, 검증용"])
     tz = [r for r in done if r["grade"] == "티저 다리(관찰)"]
     pr = [fnum(r["odds"]) for r in tz if "표시가" in r["note"] and fnum(r["odds"])]

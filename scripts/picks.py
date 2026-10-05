@@ -431,27 +431,33 @@ def grade(week):
 
 def stats():
     rows = [r for r in rd(PICKS) if r["result"] in ("W", "L", "P")]
-    def rec(xs):
+    def rec(xs, units=True):
         w = sum(1 for x in xs if x["result"] == "W"); l = sum(1 for x in xs if x["result"] == "L"); p = len(xs) - w - l
         u = sum(fnum(x["units"]) or 0 for x in xs)
         pct = f"{100 * w / (w + l):.1f}%" if w + l else "—"
-        return f"{w}-{l}" + (f"-{p}" if p else "") + f" {pct} {u:+.2f}u"
+        return f"{w}-{l}" + (f"-{p}" if p else "") + f" {pct}" + (f" {u:+.2f}u" if units else "")
     placed = [r for r in rows if r["status"] == "placed"]; sug = [r for r in rows if r["status"] != "placed"]
     print(f"📊 NFL {SEASON} 픽 성적 — 손익분기 52.4%(−110)")
-    print(f"■ 집행(placed) {len(placed)}픽 {rec(placed)} · 모델 제안(미집행) {len(sug)}픽 {rec(sug)}")
-    for lab, xs in (("실베팅", placed), ("발행 판단", [r for r in rows if r["grade"].startswith("관심(발행)")]),
-                    ("발행 방향", [r for r in rows if r["grade"].startswith("방향(발행)")]), ("모델 페이퍼", [r for r in sug if r["grade"].startswith(("관찰", "참고"))])):
+    # 2026-10-05 Paul 승인: 모델 페이퍼(관찰·참고)는 보고에서 뺀다(기록·추적기는 유지) · 발행 방향은 동전 — 적중률만(유닛 없음)
+    print(f"■ 실베팅 {len(placed)}픽 {rec(placed)}")
+    dirs = [r for r in rows if r["grade"].startswith("방향(발행)")]
+    if dirs:
+        print(f"■ 발행 방향(예측 쪽 · 돈 아님) {rec(dirs, units=False)}")
+    for lab, xs in (("실베팅", placed), ("발행 판단", [r for r in rows if r["grade"].startswith("관심(발행)")]), ("발행 방향", dirs)):
         cv = [fnum(r.get("clv")) for r in xs if fnum(r.get("clv")) is not None]
+        cp = [fnum(r.get("clv_prob")) for r in xs if fnum(r.get("clv_prob")) is not None]
         if cv:
             print(f"  평균 CLV {lab}: {sum(cv) / len(cv):+.2f}점(n {len(cv)} · 우리 쪽 이동 {sum(1 for v in cv if v > 0)} / 반대 {sum(1 for v in cv if v < 0)})")
+        if cp and lab == "실베팅":
+            print(f"  평균 가격 CLV {lab}: {sum(cp) / len(cp):+.1f}%p(n {len(cp)} — 마감 무비그 확률 − 잡은 배당 확률, ML 포함)")
     for lab, key in (("시장", "market"), ("등급", "grade"), ("주차", "week")):
         by = defaultdict(list)
         for r in placed: by[r[key]].append(r)
         print(f"  {lab}: " + " · ".join(f"{k} {rec(v)}" for k, v in sorted(by.items(), key=lambda kv: str(kv[0]))))
-    by = defaultdict(list)
-    for r in rows:
-        e = abs(fnum(r["edge"]) or 0); by["≥5" if e >= 5 else "3.5~5" if e >= 3.5 else "2~3.5" if e >= 2 else "<2"].append(r)
-    print("  엣지 구간(제안+집행 전부 — 모델 검증용): " + " · ".join(f"{k} {rec(v)}" for k, v in sorted(by.items())))
+    for g in (TEASER_GRADE, WIND_GRADE, "각도 관찰 A1(원정 큰 페이버릿 반대)", "각도 관찰 A2(드라이브 우위 언더독 반대)"):
+        xs = [r for r in rows if r["grade"] == g]
+        if xs:
+            print(f"  페이퍼 {g}: {rec(xs)}")
 
 
 def main():
