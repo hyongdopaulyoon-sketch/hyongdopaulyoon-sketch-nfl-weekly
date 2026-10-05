@@ -595,6 +595,24 @@ BAL_EVID = {
 }
 
 
+_PRIOR = None
+
+
+def _prior_and_h2h():
+    """nflverse 캐시 → ({(시즌, 팀): [승, 패]}, 정규시즌 끝난 경기 목록) — 저울질 표 「작년 성적 · 최근 맞대결」(10/5 Paul 「응」)."""
+    global _PRIOR
+    if _PRIOR is None:
+        rec = defaultdict(lambda: [0, 0]); done = []
+        for x in rd(os.path.join(CACHE, "games.csv")):
+            if x.get("game_type") != "REG" or x.get("result") in ("", None):
+                continue
+            r = int(float(x["result"])); s_ = int(x["season"]); done.append(x)
+            if r:
+                rec[(s_, x["home_team"])][0 if r > 0 else 1] += 1; rec[(s_, x["away_team"])][1 if r > 0 else 0] += 1
+        _PRIOR = (rec, done)
+    return _PRIOR
+
+
 def _balance_table(a, h, g, RS, inj, P26, PRO):
     """⚖️ 저울질 표 — 경기마다 같은 7행. 표시 전용(재계산 없음 — 값은 다이제스트 다른 표와 같은 원천)."""
     L = ["- ⚖️ **저울질 표(값만 — 점수 칸은 백테스트 근거 · 점수 0 = 시장이 이미 반영 · 「유리/불리」로 읽지 않는다)**:", "",
@@ -631,6 +649,20 @@ def _balance_table(a, h, g, RS, inj, P26, PRO):
         n = str(x.get("n_starters_missing") or "0")
         return f"★주전 {'연습 불참' if x.get('final_pending') else 'Out/Doubtful'} {n}명"
     L.append(f"| 주전 결장(스냅 60%+) | {icell(a)} | {icell(h)} | {BAL_EVID['inj']} |")
+    rec, done = _prior_and_h2h()
+    py = SEASON - 1
+
+    def prior(t):
+        w, l = rec.get((py, t), [0, 0])
+        return f"{py} {w}-{l}" + (f"({w / (w + l):.3f})" if w + l else "")
+    mt = sorted([x for x in done if {x["away_team"], x["home_team"]} == {a, h} and int(x["season"]) >= SEASON - 3],
+                key=lambda x: (x["season"], int(x["week"])))[-4:]
+    ha = sum(1 for x in mt if (int(float(x["result"])) > 0) == (x["home_team"] == a) and int(float(x["result"])) != 0)
+    hh = sum(1 for x in mt if (int(float(x["result"])) > 0) == (x["home_team"] == h) and int(float(x["result"])) != 0)
+    last2 = " · ".join(f'{x["season"]} {x["away_team"]} {x["away_score"]}–{x["home_score"]} {x["home_team"]}' for x in mt[-2:])
+    L.append(f"| 작년 성적 | {prior(a)} | {prior(h)} | 0 — 2007~25 작년 승률 .25+ 높은 팀 커버 50.3%(n1,934) · 시장 확률과 실제 승률 일치(37.5% vs 38.3%) |")
+    L.append(f"| 최근 맞대결({SEASON - 3}~ · 최근 {len(mt)}경기) | {a} {ha}승 | {h} {hh}승{' · ' + last2 if last2 else ''} | "
+             f"0 — 2006~25 직전 맞대결 진 팀 리턴매치 커버 51.5%(n2,594 · 손익분기 52.4% 미만, 우연 범위) · MLB H2H 도 기각(9/1·9/5) |")
     os_, ns_, ot_, nt_ = (fnum(g.get("open_spread_home")), fnum(g.get("spread_home")), fnum(g.get("open_total")), fnum(g.get("total")))
     mv = (f"스프레드(홈) {os_:+g} → {ns_:+g}" if os_ is not None and ns_ is not None else "스프레드 개장값 없음") +          (f" · 총점 {ot_:g} → {nt_:g}" if ot_ is not None and nt_ is not None else "")
     L.append(f"| 라인 개장 → 지금 | {mv} | | {BAL_EVID['line']} |")

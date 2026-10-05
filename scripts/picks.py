@@ -216,6 +216,9 @@ def clv_of(r, close):
 
 TEASER_FAV, TEASER_DOG, TEASER_TOT = (-8.5, -7.5), (1.5, 2.5), 49.0   # 웡 티저 다리 — 2026-10-01 사전 등록, 조정 금지
 TEASER_GRADE = "티저 다리(관찰)"
+# 다리 하나의 환산 배당(2026-10-05 정정): 2팀 티저 −120(소수 1.833)의 다리 몫 = √1.833 = 1.354 → −283(손익분기 73.9%).
+# 전엔 다리마다 −120 으로 유닛을 셌다 — 손익분기 54.5% 기준이라 유닛이 부풀었다(적중률 판정은 영향 없음).
+TEASER_LEG_ODDS = "-283"
 
 
 def teaser(week, game=None, cents=None, src=""):
@@ -243,8 +246,8 @@ def teaser(week, game=None, cents=None, src=""):
             continue
         n_new += old is None
         keep[rid] = {k: "" for k in HDR} | {"id": rid, "season": SEASON, "week": week, "game": g, "market": "spread", "side": side,
-                                           "line": side.split()[1], "odds": "-120", "grade": TEASER_GRADE, "status": "suggested",
-                                           "note": f"원 라인 {ln:+g} · 총점 {tot:g} · 가격 미기록(−120 티저 환산 손익분기 73.9%)"}
+                                           "line": side.split()[1], "odds": TEASER_LEG_ODDS, "grade": TEASER_GRADE, "status": "suggested",
+                                           "note": f"원 라인 {ln:+g} · 총점 {tot:g} · 가격 미기록(2팀 −120 티저의 다리 환산 −283 · 손익분기 73.9%)"}
     if game:
         rid = next((k for k, v in keep.items() if v["grade"] == TEASER_GRADE and v["game"] == game and int(v["week"]) == week), None)
         if not rid:
@@ -458,6 +461,9 @@ def stats():
         xs = [r for r in rows if r["grade"] == g]
         if xs:
             print(f"  페이퍼 {g}: {rec(xs)}")
+    bk = sorted({r["grade"] for r in rows if r["grade"].endswith("(소급)")})
+    if bk:   # 2026-10-05 1~3주차 소급(backfill_weeks.py) — 전향 판정 표본과 따로
+        print("  소급 백테스트(기록용 · 전향 판정에 안 섞음): " + " · ".join(f'{g} {rec([r for r in rows if r["grade"] == g])}' for g in bk))
 
 
 def main():

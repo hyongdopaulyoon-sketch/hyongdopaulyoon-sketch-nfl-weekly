@@ -1,0 +1,11 @@
+﻿game,kickoff_utc,roof,forecast_wind_mph,source
+DET@BUF,2026-09-18T00:15Z,outdoors,3.3,open-meteo historical-forecast (킥오프 정시 시간값)
+MIN@CHI,2026-09-20T17:00Z,outdoors,10.4,open-meteo historical-forecast (킥오프 정시 시간값)
+PHI@TEN,2026-09-20T17:00Z,outdoors,4.0,open-meteo historical-forecast (킥오프 정시 시간값)
+PIT@NE,2026-09-20T17:00Z,outdoors,4.3,open-meteo historical-forecast (킥오프 정시 시간값)
+GB@NYJ,2026-09-20T17:00Z,outdoors,4.5,open-meteo historical-forecast (킥오프 정시 시간값)
+CLE@TB,2026-09-20T17:00Z,outdoors,1.4,open-meteo historical-forecast (킥오프 정시 시간값)
+NO@BAL,2026-09-20T17:00Z,outdoors,5.9,open-meteo historical-forecast (킥오프 정시 시간값)
+JAX@DEN,2026-09-20T20:05Z,outdoors,6.8,open-meteo historical-forecast (킥오프 정시 시간값)
+MIA@SF,2026-09-20T20:25Z,outdoors,8.2,open-meteo historical-forecast (킥오프 정시 시간값)
+IND@KC,2026-09-21T00:20Z,outdoors,7.9,open-meteo historical-forecast (킥오프 정시 시간값)

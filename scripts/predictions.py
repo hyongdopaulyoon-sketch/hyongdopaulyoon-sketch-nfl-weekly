@@ -138,18 +138,25 @@ def _finals(week):
 def backfill(week):
     """시장 예측 소급(2026-10-05 Paul 승인) — 킥오프 전 기록이 없는 경기만, nflverse 마감 ML·스프레드·총점으로.
     made_at 「소급(마감)」 — 마감 값은 킥오프 직전 시장이라 그 시점 예측과 같은 성격이지만, 실시간 기록과 구분해 둔다. 발행·모델 행은 만들지 않는다."""
-    rows = N.rd(path(week)); keep = {(r["game"], r["src"]): r for r in rows}; n = 0
+    rows = [r for r in N.rd(path(week)) if not (r["src"] == "시장" and r["made_at"].startswith("소급"))]   # 소급 시장 행은 다시 만든다
+    keep = {(r["game"], r["src"]): r for r in rows}; n = 0
+    dk = {r["game"]: r for r in N.rd(os.path.join(N.week_dir(week), "closing.csv"))}   # DK 마감(ESPN pickcenter) 우선 — 4주차 실시간 기록과 같은 북
     for g in _cache_games(week):
         gk = f'{g["away_team"]}@{g["home_team"]}'
         if (gk, "시장") in keep or g.get("game_type", "REG") != "REG":
             continue
-        sl, tot = N.fnum(g.get("spread_line")), N.fnum(g.get("total_line"))
-        wa, wh = N._novig(g.get("away_moneyline"), g.get("home_moneyline"))
-        if sl is None or tot is None or wa is None:
+        c = dk.get(gk)
+        if c and N.fnum(c.get("spread_home")) is not None and N.fnum(c.get("total")) is not None and c.get("ml_home"):
+            hl, tot = N.fnum(c["spread_home"]), N.fnum(c["total"]); wa, wh = N._novig(c.get("ml_away"), c.get("ml_home")); tag = "소급(DK 마감)"
+        else:
+            sl, tot = N.fnum(g.get("spread_line")), N.fnum(g.get("total_line"))
+            wa, wh = N._novig(g.get("away_moneyline"), g.get("home_moneyline"))
+            hl = -sl if sl is not None else None          # nflverse spread_line = 홈 기대 마진 → 베팅 표기
+            tag = "소급(nflverse 마감)"
+        if hl is None or tot is None or wa is None:
             continue
-        hl = -sl                                          # nflverse spread_line = 홈 기대 마진 → 베팅 표기
         keep[(gk, "시장")] = {k: "" for k in HDR} | dict(
-            game_id=g["game_id"], week=week, game=gk, kickoff_utc="", made_at="소급(마감)", src="시장",
+            game_id=g["game_id"], week=week, game=gk, kickoff_utc="", made_at=tag, src="시장",
             pick=g["home_team"] if wh >= wa else g["away_team"], p_pick=f"{max(wa, wh):.3f}",
             score_away=f"{(tot + hl) / 2:.1f}", score_home=f"{(tot - hl) / 2:.1f}", line_home=f"{hl:g}", total_line=f"{tot:g}")
         n += 1
