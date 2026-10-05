@@ -388,6 +388,19 @@ def _predict_line(a, h, res):
     return L
 
 
+def _teaser_line(week, gk):
+    """🧩 티저 다리(2026-10-05 Paul 「a」 — 숨김 해제). 웡 티저: 백테스트 통과한 유일한 전략(검증 2023~25 74.3%)."""
+    rows = rd(os.path.join(DATA, "picks.csv"))
+    tz = [r for r in rows if r["grade"] == "티저 다리(관찰)"]
+    mine = [r for r in tz if r["week"] == str(week) and r["game"] == gk]
+    if not mine:
+        return []
+    w = sum(1 for r in tz if r["result"] == "W"); l = sum(1 for r in tz if r["result"] == "L")
+    r = mine[0]
+    return [f'- 🧩 **티저 다리**: {r["side"]}({r["note"].split(" · ")[0]}에서 6점 받기) · 검증 2023~25 74% · 올 시즌 {w}-{l} '
+            f'· ⚠️ 다리 2개를 한 장으로 묶어야 하고 둘 다 이겨야 돈을 받는다 · 2팀 티저 가격 −120 이하일 때만 손익분기(73.9%) 위']
+
+
 def _espn_names(wd):
     """{약칭: ESPN 영문 팀명} — 주간 스코어보드에서."""
     try:
@@ -989,7 +1002,7 @@ def ph_digest(week, force=False):
         L += [f'## {a}@{h}  {g["kickoff_et"]} ET ({g["kickoff_pt"]} PT) · {g["venue"]} · {g["roof"] or "?"} · {a} {g["away_rec"]} / {h} {g["home_rec"]}'
               + (" · 디비전" if g.get("div_game") == "1" else "") + (" · **중립 구장(홈 이점 0)**" if g.get("neutral") == "1" else ""), "",
               f'- 팀: **{NAMES.get(a, a)}**({TEAM_KR.get(a, a)}) @ **{NAMES.get(h, h)}**({TEAM_KR.get(h, h)}) · 로고는 보드(Artifact)에서']
-        L += _predict_line(a, h, PRED.get(f"{a}@{h}")) + [""]
+        L += _predict_line(a, h, PRED.get(f"{a}@{h}")) + _teaser_line(week, f"{a}@{h}") + [""]
         L.append(f'- 시장({g["odds_provider"] or "DK"}): 스프레드 홈 {m.get("mkt_spread_home", "?")} · 총점 {m.get("mkt_total", "?")} · ML {a} {g["ml_away"] or "?"} / {h} {g["ml_home"] or "?"}'
                  + (f' · nflverse 라인 {g["nv_spread_line"]}/{g["nv_total_line"]}' if g["nv_spread_line"] else ""))
         L += _price_block(a, h, g, [x for x in rd(os.path.join(wd, "line_history.csv")) if x["game"] == f"{a}@{h}"])

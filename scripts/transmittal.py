@@ -28,12 +28,14 @@ def build(week):
     names = [k[1] for k in keep]
     wind = [r for r in picks if r["grade"] == "바람 언더(관찰)" and r["week"] == str(week) and r["game"] in names]
     bets = [r for r in picks if r.get("status") == "placed" and r["week"] == str(week) and r["game"] in names]
+    tz = [r for r in picks if r["grade"] == "티저 다리(관찰)" and r["week"] == str(week) and r["game"] in names]
     sched = " · ".join(f'{g} {games[g]["kickoff_pt"]} PT({games[g]["kickoff_et"].split(" ")[0]})' for g in names)
     out = [f"NFL 발행 — {week}주차 아직 시작 안 한 {len(keep)}경기 · 다이제스트 {stamp} PT판 · 전달문 생성 {datetime.now():%m-%d %H:%M} PT", "",
            "※ nfl-weekly-publish 스킬대로: 경기마다 둘째 줄 「- 예측: 승자 팀 NN% · 점수 원정 x – 홈 y · 근거」(출발점 = 다이제스트 🔮 시장 예측, 새 사실 있으면 조정), 방향, 근거, 맨 아래 판단·굳이 하나만, 📘 ①~⑥.",
            f"※ 킥오프 순서: {sched} — 이미 시작한 경기는 건너뛴다.",
            "※ 웹 확인: 최종 비활성 명단(킥오프 90분 전) · 라인 이동 · 날씨.",
            "※ 바람 언더 관찰 경기: " + (" · ".join(f'{r["game"]} {r["side"]}({r["note"].split(" · ")[0]})' for r in wind) or "없음") + ".",
+           "※ 티저 다리(검증 전략 — 다리 2개를 묶어야 함): " + (" · ".join(f'{r["game"]} {r["side"]}' for r in tz) or "없음") + ".",
            "※ 이 경기들에 걸린 Paul 실베팅: " + (" · ".join(f'{r["game"]} {r["side"]} {r["odds"]} {r.get("stake") or 1}u' for r in bets) or "없음") + ".", ""]
     for _k, g, h, b in keep:
         out += [f"## {g}  {h}", b.rstrip() + "\n"]

@@ -110,7 +110,7 @@ def main():
         rows = by.get(gk, [])
         bets = [r for r in rows if r.get("status") == "placed"]
         dirs = [r for r in rows if r["grade"] == "방향(발행)"]
-        obs = [r for r in rows if r["grade"] in ("바람 언더(관찰)",) or r["grade"].startswith("각도 관찰")]
+        obs = [r for r in rows if r["grade"] in ("바람 언더(관찰)", "티저 다리(관찰)") or r["grade"].startswith("각도 관찰")]
         pub = pubs.get(gk, {})
 
         def team(t, name):
@@ -132,7 +132,7 @@ def main():
             line_items.append(f'<li><span class="tag pub">발행</span> 판단 <b>{esc(pub.get("판단", "—"))}</b>' + (f' · 방향 {dir_txt}' if dir_txt else "")
                               + (f'<div class="sub">굳이 하나만: {esc(pub["굳이"])}</div>' if pub.get("굳이") else "") + "</li>")
         for r in obs:
-            lab = "바람" if r["grade"].startswith("바람") else r["grade"].split("(")[0].replace("각도 관찰 ", "")
+            lab = "바람" if r["grade"].startswith("바람") else "티저" if r["grade"].startswith("티저") else r["grade"].split("(")[0].replace("각도 관찰 ", "")
             line_items.append(f'<li><span class="tag obs">관찰 {esc(lab)}</span> {esc(r["side"])} {chip(result_of(r, gk))}<div class="sub">{esc(r.get("note", ""))}</div></li>')
         for r in bets:
             stake = P.fnum(r.get("stake")) or 1
