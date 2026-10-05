@@ -37,7 +37,7 @@ def sections(txt):
 
 
 CAP = 0.05          # 발행 예측 조정 상한(시장 승률 대비)
-LABEL_BAND = 0.02   # |발행 − 시장| < 2%p = 「비슷」
+LABEL_BAND = 0.03   # |발행 − 시장| < 3%p = 「비슷」(10/5 보강 — 북 사이 무비그 차이만 1~2%p)
 POS = r"(?:QB|RB|FB|WR|TE|OL|OT|OG|G|C|T|DL|DE|DT|NT|EDGE|LB|ILB|OLB|CB|DB|S|FS|SS|K|P|LS)"
 
 
@@ -104,6 +104,39 @@ def attribution(k, body, dsec):
     return bad, warn
 
 
+NUM_LINES = ("- 매치업", "- 맥락", "- 결론", "- 시장")      # 다이제스트 값을 옮기는 줄 — 뉴스·새 정보·📘 는 제외
+
+
+def polarity(k, body, m, g, dsec):
+    """부호·방향 반대 읽기(MLB 귀속 4패턴 중 「분해 부호 반대」 — 10/4 「편성 이득 −인데 득을 본다」) + 판 밖 숫자(H1 계열).
+    ① 「TEAM 페이버릿/언더독」 ↔ 시장 스프레드 부호 ② 「TEAM 쪽으로 이동」 ↔ 개장→지금 홈 라인 변화 ③ 값 옮기는 줄의 소수·% 숫자가 기준판 경기 절에 있나(경고)."""
+    bad, warn = [], []
+    a_, h_ = k.split("@")
+    hs = fnum(m.get("mkt_spread_home"))
+    if hs:
+        fav = h_ if hs < 0 else a_
+        for mm in re.finditer(r"\b([A-Z]{2,3})(?:가|이|는|은|\s)*\s*(페이버릿|언더독)", body):
+            t, w = mm.group(1), mm.group(2)
+            if t in (a_, h_) and ((w == "페이버릿") != (t == fav)):
+                bad.append(f"{k}: 「{t} {w}」 — 시장 스프레드 홈 {hs:+g} 이면 페이버릿은 {fav}(부호 반대 읽기)")
+    o, n = fnum(g.get("open_spread_home")), fnum(g.get("spread_home"))
+    if o is not None and n is not None and o != n:
+        toward = h_ if n < o else a_
+        for mm in re.finditer(r"\b([A-Z]{2,3}) 쪽(?:으로)?\s*(?:[\d.]+\s*점?\s*)?(?:이동|움직)", body):
+            if mm.group(1) in (a_, h_) and mm.group(1) != toward:
+                bad.append(f"{k}: 「{mm.group(1)} 쪽 이동」 — 개장 {o:+g} → 지금 {n:+g}(홈 기준)은 {toward} 쪽 이동")
+    sec = dsec.replace("−", "-")
+    for ln in body.splitlines():
+        if not ln.startswith(NUM_LINES) or "보도" in ln:
+            continue
+        for x in re.findall(r"[+-]?\d+\.\d+%?|\d+%", ln):
+            core = x.lstrip("+")
+            if core not in sec and x not in sec:
+                warn.append(f"{k}: 숫자 {x} 가 기준판 경기 절에 없음 — 「{ln[:40]}…」(재계산·외부 숫자면 「보도」 라벨)")
+                break
+    return bad, warn
+
+
 def line_move(wd, game, hhmm, side, market):
     """발표 시각 직전 스냅샷 → 마지막 스냅샷 라인 이동(우리 쪽 + 점). 판단 못 하면 None."""
     hist = rd(os.path.join(wd, "line_history.csv"))
@@ -138,6 +171,7 @@ def main():
     secs = sections(txt)
     문제, 판단들, 방향들, 예측들, 경고, 새정보 = [], [], [], [], [], []
     snap = pick_snapshot(wd, txt, a.digest)
+    games_by = {f'{r["away"]}@{r["home"]}': r for r in games}
     dsecs = digest_sections(snap)
     mkt_pred = {r["game"]: r for r in rd(os.path.join(wd, "predictions.csv")) if r.get("src") == "시장"}
     keys = [f'{g["away"]}@{g["home"]}' for g in games]
@@ -182,13 +216,15 @@ def main():
             if pm.group(1) not in (a_, h_) or pm.group(3) != a_ or pm.group(5) != h_:
                 문제.append(f"{k}: 예측 줄 팀 순서/약칭 오류(점수는 원정 먼저)")
             else:
-                예측들.append((k, pm.group(1), float(pm.group(2)) / 100, float(pm.group(4)), float(pm.group(6))))
+                예측들.append([k, pm.group(1), float(pm.group(2)) / 100, float(pm.group(4)), float(pm.group(6)), ""])
                 pline = body[pm.start():body.find("\n", pm.start()) if body.find("\n", pm.start()) > 0 else len(body)]
                 mp = mkt_pred.get(k)
                 if mp and fnum(mp.get("p_pick")) is not None:
                     pm_ = fnum(mp["p_pick"]); pub = float(pm.group(2)) / 100
                     mine = pm_ if pm.group(1) == mp["pick"] else 1 - pm_      # 시장 확률을 발행 승자 기준으로
                     d = pub - mine
+                    if abs(d) > CAP + 1e-9 and re.search(r"QB|새 정보|확정", pline):
+                        예측들[-1][5] = "상한 예외"
                     if abs(d) > CAP + 1e-9 and not re.search(r"QB|새 정보|확정", pline):
                         문제.append(f"{k}: 예측 {pm.group(1)} {pub:.0%} — 시장 {mine:.0%}에서 {d * 100:+.0f}%p(상한 ±5%p, 예외 = QB 교체·라인 뒤 확정 결장 — 근거에 적을 것)")
                     want = "높게 봄" if d >= LABEL_BAND else "낮게 봄" if d <= -LABEL_BAND else "비슷"
@@ -217,13 +253,19 @@ def main():
                     if t_ not in (a_, h_) or (hs is not None and fnum(ln) != (hs if t_ == h_ else -hs)):
                         문제.append(f"{k}: 새 정보 쪽 {side} ≠ 시장 라인")
                 mv = line_move(wd, k, hhmm, side, mkt_)
-                새정보.append((k, mkt_, side, fact, hhmm, mv))
+                sm_ = re.search(r"DIGEST-(\d{4})-(\d{4})\.md$", snap)
+                early = bool(sm_ and sm_.group(1) == datetime.now().strftime("%m%d") and f"{int(hhmm.split(':')[0]):02d}{hhmm.split(':')[1]}" <= sm_.group(2))
+                if early:
+                    경고.append(f"{k}: 새 정보 발표 {hhmm} 가 기준판({sm_.group(2)[:2]}:{sm_.group(2)[2:]}) 이전 — 다이제스트에 이미 있었을 사실 → 판정 표본 아님(대조군으로 적립)")
+                새정보.append((k, mkt_, side, fact, hhmm, mv, early))
         cm = re.search(r"(?m)^- 결론:([^\n]*)", body)
         if not cm or not all(c in cm.group(1) for c in "①②③"):
             문제.append(f"{k}: 「- 결론: ① 가장 큰 근거 ② 가장 큰 반대 근거 ③ 위험 요소」 줄 없음/세 문장 아님(2026-10-05)")
         if re.search(r"유리\s*\d+\s*[·,/]\s*불리\s*\d+|불리\s*\d+\s*[·,/]\s*유리\s*\d+", body):
             문제.append(f"{k}: 개수 요약(「유리 n · 불리 n」) 금지 — 개수는 크기를 숨긴다")
         b_, w_ = attribution(k, body, dsecs.get(k, ""))
+        문제 += b_; 경고 += w_
+        b_, w_ = polarity(k, body, m, games_by.get(k, {}), dsecs.get(k, ""))
         문제 += b_; 경고 += w_
         j = re.search(r"(?m)^- 판단:\s*(패스|소액 관심|관심)(?:\s*·\s*(스프레드|총점)\s*·\s*([^\n]+))?", body)
         if not j:
@@ -250,25 +292,26 @@ def main():
     for x in 경고:
         print("  △", x)
     print(f"  (귀속 대조 기준판: {os.path.basename(snap)})")
-    for k, mk_, sd, fact, hhmm, mv in 새정보:
-        print(f"  🆕 {k} 새 정보 {sd} · 발표 {hhmm} · 발표 뒤 라인 이동 {'?' if mv is None else f'{mv:+g}점(우리 쪽 +)'} · {fact}")
+    for k, mk_, sd, fact, hhmm, mv, early in 새정보:
+        print(f"  🆕 {k} 새 정보{'(대조군 — 판 이전 발표)' if early else ''} {sd} · 발표 {hhmm} · 발표 뒤 라인 이동 {'?' if mv is None else f'{mv:+g}점(우리 쪽 +)'} · {fact}")
     for k, v, mk, sd in 판단들:
         print(f"  · {k} {v} · {mk} · {sd}")
     for k, s_, t_ in 방향들:
         print(f"  → {k} 방향 {s_} / {t_}")
-    for k, pk, pp, sa, sh in 예측들:
-        print(f"  🔮 {k} 예측 {pk} {100 * pp:.0f}% · {sa:g}-{sh:g}")
+    for k, pk, pp, sa, sh, fl in 예측들:
+        print(f"  🔮 {k} 예측 {pk} {100 * pp:.0f}% · {sa:g}-{sh:g}" + (f" · {fl}" if fl else ""))
     if a.record and 예측들:
         import predictions as PR
-        for k, pk, pp, sa, sh in 예측들:
-            PR.add_pub(a.week, k, pk, pp, sa, sh)
+        for k, pk, pp, sa, sh, fl in 예측들:
+            PR.add_pub(a.week, k, pk, pp, sa, sh, flag=fl)
     if a.record and 새정보:
         import picks as P
         gid_of = {f'{r["away"]}@{r["home"]}': r["game_id"] for r in games}
-        for k, mk_, sd, fact, hhmm, mv in 새정보:
+        for k, mk_, sd, fact, hhmm, mv, early in 새정보:
             if k in gid_of:
                 P.lean(a.week, f"{gid_of[k]}:{mk_}", sd, sd.split()[-1], "-110",
-                       f"새 정보: {fact} · 발표 {hhmm} PT · 발표 뒤 라인 이동 {'?' if mv is None else f'{mv:+g}'}점", suffix=":N", grade="새 정보(관찰)")
+                       f"새 정보: {fact} · 발표 {hhmm} PT · 발표 뒤 라인 이동 {'?' if mv is None else f'{mv:+g}'}점",
+                       suffix=":NC" if early else ":N", grade="새 정보(판 이전·대조)" if early else "새 정보(관찰)")
     if a.record and (판단들 or 방향들):
         import picks as P
         gid_of = {f'{r["away"]}@{r["home"]}': r["game_id"] for r in games}

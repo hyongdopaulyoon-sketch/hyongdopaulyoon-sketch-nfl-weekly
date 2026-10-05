@@ -16,7 +16,7 @@ import nfl_pull as N   # noqa: E402
 
 SEASON = N.SEASON
 HDR = ["game_id", "week", "game", "kickoff_utc", "made_at", "src", "pick", "p_pick", "score_away", "score_home",
-       "line_home", "total_line", "result", "margin_err", "total_err", "spread_hit", "total_hit", "final"]
+       "line_home", "total_line", "result", "margin_err", "total_err", "spread_hit", "total_hit", "final", "flag"]
 
 
 # ★ 승자 자신감(2026-10-05 Paul 승인) — 이길 팀 확률 구간. 2018~2025 정규시즌 시장 무비그 확률로 잰 실제 승자 적중:
@@ -104,7 +104,7 @@ def record(week):
     print(f"predictions record week {week}: {len(keep)}행")
 
 
-def add_pub(week, game, pick, p, sa, sh, made_at=""):
+def add_pub(week, game, pick, p, sa, sh, made_at="", flag=""):
     """발행 세션 예측 한 줄(check_nfl --record 가 부른다)."""
     rows = N.rd(path(week)); keep = {(r["game"], r["src"]): r for r in rows}
     games = {f'{g["away"]}@{g["home"]}': g for g in N.rd(os.path.join(N.week_dir(week), "games.csv"))}
@@ -113,7 +113,7 @@ def add_pub(week, game, pick, p, sa, sh, made_at=""):
                                                     made_at=made_at or datetime.now().strftime("%m-%d %H:%M"), src="발행", pick=pick,
                                                     p_pick=f"{p:.3f}" if p is not None else "", score_away=f"{sa:.1f}" if sa is not None else "",
                                                     score_home=f"{sh:.1f}" if sh is not None else "", line_home=g.get("spread_home", ""),
-                                                    total_line=g.get("total", ""))
+                                                    total_line=g.get("total", ""), flag=flag)
     N.wcsv(path(week), HDR, [[r.get(k, "") for k in HDR] for r in keep.values()])
 
 
@@ -229,6 +229,9 @@ def report(week=None):
                   + (f" · 스프레드 쪽 {x['sw']}-{x['sl']} · 총점 쪽 {x['tw']}-{x['tl']}" if src != "시장" else ""))
             print("    별점별 승자: " + " · ".join(f"{'★' * k} {w}-{l}" + (f" {100 * w / (w + l):.0f}%" if w + l else "") + f"(기대 {STAR_HIT[k]})"
                                           for k, (w, l) in x["stars"].items()))
+    ex = [r for r in rows if r["src"] == "발행" and r.get("flag") == "상한 예외" and r.get("result") in ("W", "L")]
+    if ex:
+        print(f"■ 발행 상한 예외(시장 ±5%p 초과 — QB·새 정보·확정): 승자 {sum(1 for r in ex if r['result'] == 'W')}-{sum(1 for r in ex if r['result'] == 'L')}")
     print("  (시장은 스프레드 쪽을 고르지 않는다 — 라인 자체가 시장 예측 점수 차 · 별점은 승자 자신감이지 돈의 가치가 아니다)")
 
 
