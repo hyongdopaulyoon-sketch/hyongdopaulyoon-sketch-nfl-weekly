@@ -85,3 +85,5 @@
 2026_04_LA_PHI:spread,2026,4,LA@PHI,spread,LA -3.5,3.5,-110,-7.5,-4.0,관찰(큰 괴리 — 페이퍼),62.1,suggested,,,,,,,,,,
 2026_04_DET_CAR:spread,2026,4,DET@CAR,spread,CAR +4.5,4.5,-110,-2.3,2.2,참고,56.7,suggested,,,,,,,,,,
 2026_04_DET_CAR:total,2026,4,DET@CAR,total,Over 52.5,52.5,-110,57.5,5.0,참고,68.2,suggested,,,,,,,,,,
+2026_04_ATL_NO:spread:D,2026,4,ATL@NO,spread,NO -1.5,-1.5,-110,,,방향(발행),,suggested,,,,,발행 방향,,,,,
+2026_04_ATL_NO:total:D,2026,4,ATL@NO,total,Over 47.5,47.5,-110,38.9,-8.6,방향(발행),79.3,suggested,,,,,발행 방향,,,,,

@@ -574,7 +574,10 @@ def _qb_of(t, RS, inj):
     if not agg:
         return None
     exp = (inj.get(t) or {}).get("expected_qb") or ""
-    pid = next((pp for pp in agg if exp and _same_person(NM[pp][0], exp)), None) or max(agg, key=lambda pp: agg[pp].get("db", 0))
+    pid = next((pp for pp in agg if exp and _same_person(NM[pp][0], exp)), None)
+    if pid is None and exp:
+        return exp, 0, None, None                     # 예상 선발이 2026 드롭백 0 — 다른 QB 값으로 채우지 않는다(10/5 ATL Penix ← C.Rush 오표시)
+    pid = pid or max(agg, key=lambda pp: agg[pp].get("db", 0))
     x = agg[pid]; db = x.get("db", 0)
     return NM[pid][0], int(db), (x.get("epa", 0) / db if db else None), _qb_shrunk(x, P)
 
@@ -600,7 +603,9 @@ def _balance_table(a, h, g, RS, inj, P26, PRO):
 
     def qcell(t):
         x = q[t]
-        if not x or x[2] is None:
+        if x and x[2] is None:
+            return f"{x[0]} — 2026 드롭백 0(기록 없음 ※ 얇음)"
+        if not x:
             return "—"
         nm, db, raw, sh = x
         return f"{nm} 원 {raw:+.2f} → 보정 {sh:+.2f}(드롭백 {db}{' ※ 얇음' if db < THIN_QB_DB else ''})"
@@ -715,7 +720,10 @@ def _real_stats_block(a, h, RS, inj, games_row, model_row):
         if not agg:
             return "—"
         exp = (inj.get(t) or {}).get("expected_qb") or ""
-        pid = next((pp for pp in agg if exp and _same_person(NM[pp][0], exp)), None) or max(agg, key=lambda pp: agg[pp].get("db", 0))
+        pid = next((pp for pp in agg if exp and _same_person(NM[pp][0], exp)), None)
+        if pid is None and exp:
+            return f"{exp}: 2026 기록 없음(드롭백 0 ※ 얇음 — 근거 금지)"
+        pid = pid or max(agg, key=lambda pp: agg[pp].get("db", 0))
         x = agg[pid]
         att = x.get("att", 0) or 1
         cp = (x["cpoe"] / x["cpoe_n"]) if x.get("cpoe_n") else None
