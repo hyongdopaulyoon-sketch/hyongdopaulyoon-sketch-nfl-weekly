@@ -258,6 +258,11 @@ def main():
                 if early:
                     경고.append(f"{k}: 새 정보 발표 {hhmm} 가 기준판({sm_.group(2)[:2]}:{sm_.group(2)[2:]}) 이전 — 다이제스트에 이미 있었을 사실 → 판정 표본 아님(대조군으로 적립)")
                 새정보.append((k, mkt_, side, fact, hhmm, mv, early))
+        gm = re.search(r"(?m)^- 굳이 하나만:\s*(스프레드|총점)\s+([A-Z]{2,3} [+-][\d.]+|(?:Over|Under|오버|언더) [\d.]+)", body)
+        if gm and dirs:   # 2026-10-08 Paul 「같은 쪽으로」 — 굳이 하나만은 방향 줄과 같은 쪽(가격이 싸다는 이유로 반대쪽 금지)
+            gside = gm.group(2).replace("오버", "Over").replace("언더", "Under")
+            if gside.split()[0] != dirs[gm.group(1)].split()[0]:
+                문제.append(f"{k}: 굳이 하나만 {gside} 이 방향 줄({dirs[gm.group(1)]})과 반대 — 같은 쪽만(10/8)")
         cm = re.search(r"(?m)^- 결론:([^\n]*)", body)
         if not cm or not all(c in cm.group(1) for c in "①②③"):
             문제.append(f"{k}: 「- 결론: ① 가장 큰 근거 ② 가장 큰 반대 근거 ③ 위험 요소」 줄 없음/세 문장 아님(2026-10-05)")
