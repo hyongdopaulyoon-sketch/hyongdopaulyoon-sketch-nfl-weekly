@@ -42,4 +42,5 @@ def test_changes_line_reports_only_diffs():
 
 def test_check_nfl_ml_side_pattern():
     assert re.fullmatch(CK.ML_SIDE, "DAL ML -520") and re.fullmatch(CK.ML_SIDE, "IND ML") and not re.fullmatch(CK.ML_SIDE, "DAL -8.5")
-    assert "- 키커:" in CK.MUST_LINES and "- 맞대결:" in CK.MUST_LINES
+    assert "- 스탯 비교" in CK.MUST_LINES and "- 맞대결:" in CK.MUST_LINES
+    assert CK.COVER_TALK.search("③ 위험 요소는 키 넘버 7입니다") and CK.COVER_TALK.search("8점 차 이상이면 틀린다") and not CK.COVER_TALK.search("득점 26.0점(12위·중간)")

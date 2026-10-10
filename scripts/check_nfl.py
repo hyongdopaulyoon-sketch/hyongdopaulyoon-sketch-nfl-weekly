@@ -107,7 +107,9 @@ def attribution(k, body, dsec):
 
 
 NUM_LINES = ("- 매치업", "- 맥락", "- 결론", "- 시장", "- 맞대결", "- 팀 비교", "- QB 비교", "- 선수 비교", "- 키커", "- 심판")      # 다이제스트 값을 옮기는 줄 — 뉴스·새 정보·📘 는 제외
-MUST_LINES = ("- 맞대결:", "- 팀 비교:", "- QB 비교:", "- 선수 비교:", "- 키커:", "- 심판:")   # 2026-10-10 Paul 필수(값은 다이제스트 표 그대로)
+MUST_LINES = ("- 맞대결:", "- 스탯 비교", "- 팀 비교:", "- 심판:")   # 2026-10-10 Paul 필수(값은 다이제스트 표 그대로) · 저녁 개정: QB·선수·키커는 「스탯 비교」 블록 안으로
+COVER_TALK = re.compile(r"키 ?넘버|커버|점 ?차(?:로|까지|이면|면| 이상| 이내)[^\n]{0,14}(?:지면|이기면|맞|틀)")   # 스프레드 점수 차 설명 — 2026-10-10 Paul 「쓸데없는 정보」
+STAT_ROWS = ("득점", "실점", "공격 효율", "득점 드라이브", "수비 효율", "패스 공격", "러시 공격", "패스 수비", "러시 수비", "3rd down", "턴오버", "색 허용", "QB", "주요 선수", "키커")
 ML_SIDE = r"[A-Z]{2,3} ML(?:\s*[+-]\d{3,4})?"
 
 
@@ -201,6 +203,17 @@ def main():
             문제.append(f"{k}: 필수 줄 없음(2026-10-10 Paul): {' '.join(miss)}")
         if re.search(r"티저|teaser", body, re.I):
             문제.append(f"{k}: 「티저」 언급 — 2026-10-10 폐지(쓰지 않는다)")
+        sm = re.search(r"(?ms)^- 스탯 비교[^\n]*\n((?:[ \t]+[·•][^\n]*\n?)+)", body)
+        if sm:
+            miss_rows = [x for x in STAT_ROWS if x not in sm.group(1)]
+            if miss_rows:
+                문제.append(f"{k}: 스탯 비교에 빠진 행 {len(miss_rows)}: {', '.join(miss_rows)} — 다이제스트 📊 표 전 행을 옮긴다")
+        elif "- 스탯 비교" in body:
+            문제.append(f"{k}: 스탯 비교 줄 아래 「  · 항목 …」 들여쓴 행이 없음")
+        for ln in body.splitlines():
+            if ln.startswith(("- 결론", "- 굳이 하나만", "📘")) or (ln.strip() and not ln.startswith("-") and "📘" in body[:body.find(ln) + 1]):
+                if COVER_TALK.search(ln):
+                    문제.append(f"{k}: 스프레드 점수 차·커버 설명(「{COVER_TALK.search(ln).group(0)}」) — 2026-10-10 Paul 「쓸데없는 정보」, 방향 줄 한 줄만 허용"); break
         dm = re.search(r"(?m)^- 방향:\s*스프레드\s+([A-Z]{2,3}) ([+-]?[\d.]+)\s*·\s*총점\s+(Over|Under|오버|언더) ([\d.]+)", body)
         dirs = {}
         if not dm:
