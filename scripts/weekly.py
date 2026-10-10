@@ -42,7 +42,6 @@ def main():
         j = json.load(urllib.request.urlopen("https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard", timeout=20))
         w = str(j["week"]["number"])
     run("picks.py", ["suggest", "--week", w])
-    run("picks.py", ["teaser", "--week", w])          # 웡 티저 다리 페이퍼(2026-10-01) — 실베팅 아님
     run("picks.py", ["wind", "--week", w])            # 바람 15mph+ 언더 페이퍼(2026-10-01) — 경기 당일 판만
     run("picks.py", ["angles", "--week", w])          # 최근 3시즌 약한 꼴 2개 페이퍼(2026-10-04)
     run("predictions.py", ["record", "--week", w])     # 결과 예측 기록(2026-10-04 — 킥오프 지난 경기 동결)

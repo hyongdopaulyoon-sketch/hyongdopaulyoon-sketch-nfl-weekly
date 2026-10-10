@@ -64,7 +64,7 @@ def main():
     tz = [r for r in done if r["grade"] == "티저 다리(관찰)"]
     pr = [fnum(r["odds"]) for r in tz if "표시가" in r["note"] and fnum(r["odds"])]
     avg_c = (sum((-o / (100 - o) if o < 0 else 100 / (o + 100)) for o in pr) / len(pr) * 100) if pr else None
-    s2.append(["티저 다리(관찰·페이퍼)"] + rec(tz) + [f"웡 티저 다리(10/1~) — 손익분기 73.9%(−120 2팀 환산) · 60다리 보고 · <72% 폐기"
+    s2.append(["티저 다리(관찰·페이퍼 — 10/10 폐지, 기록만)"] + rec(tz) + [f"웡 티저 다리(10/1~10/10 · Paul 「티저는 별로」로 적립 중단) — 손익분기 73.9%(−120 2팀 환산)"
                                                 + (f" · 평균 표시가 {avg_c:.1f}c(n {len(pr)})" if pr else "")])
     wn = [r for r in done if r["grade"] == "바람 언더(관찰)"]
     s2.append(["바람 언더(관찰·페이퍼)"] + rec(wn) + ["실외 · 킥오프 예보 지속 15mph+ 언더(10/1~) — 손익분기 52.4% · 40픽 또는 시즌 종료 때 보고 · <52.4% 폐기"])

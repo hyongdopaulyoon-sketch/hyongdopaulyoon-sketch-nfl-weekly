@@ -21,7 +21,6 @@ TERM = {
     "스프레드": "점수 차 핸디. NO −1.5 면 NO 가 2점 이상 이겨야 맞음, ATL +1.5 면 ATL 이 이기거나 1점 차 이내로 지면 맞음",
     "총점": "두 팀 점수를 더한 값. Over 47.5 = 48점 이상, Under 47.5 = 47점 이하",
     "ML": "머니라인 — 점수 차 상관없이 그냥 이길 팀",
-    "티저": "핸디를 6점 유리하게 옮기는 대신 다리 2개를 한 장으로 묶어 둘 다 맞혀야 돈을 받는 베팅",
     "방향": "예측 점수에서 나온 스프레드·총점 쪽. 실력으로는 동전(≈50%)이라 돈 근거가 아니고 적중률만 잰다",
     "관찰": "돈을 걸지 않고 맞는지만 기록하는 페이퍼 실험",
     "CLV": "내가 산 가격이 경기 직전 마감 가격보다 좋았는지(+ = 싸게 샀다). 승패보다 빨리 실력이 보이는 숫자",
@@ -144,7 +143,6 @@ def main():
         return f'<img class="mini" src="{logo_uri(t)}" alt="" width="22" height="22">'
 
     pre_cards, done_rows = [], []
-    teaser_open = []
     for g in games:
         A, H = g["away"], g["home"]; gk = f"{A}@{H}"
         lv = live.get(gk, {})
@@ -153,7 +151,7 @@ def main():
         rows = by.get(gk, [])
         bets = [r for r in rows if r.get("status") == "placed"]
         dirs = [r for r in rows if r["grade"] == "방향(발행)"]
-        obs = [r for r in rows if r["grade"] in ("바람 언더(관찰)", "티저 다리(관찰)", "새 정보(관찰)") or r["grade"].startswith("각도 관찰")]
+        obs = [r for r in rows if r["grade"] in ("바람 언더(관찰)", "새 정보(관찰)") or r["grade"].startswith("각도 관찰")]   # 티저는 2026-10-10 폐지
         pub = pubs.get(gk, {})
         pr = preds.get(gk, {})
         m_, d_, b_ = pr.get("시장"), pr.get("모델"), pr.get("발행")
@@ -189,11 +187,7 @@ def main():
                          + (f'<b title="{esc(pub.get("굳이", ""))}">{esc(vw)}</b>' + (" · " if dir_txt else "") if vw else "")
                          + (f'{term("방향")} {dir_txt}' if dir_txt else "") + "</li>")
         for r in obs:
-            if r["grade"].startswith("티저"):
-                lab = term("티저", "티저 다리")
-                if not fin:
-                    teaser_open.append(r)
-            elif r["grade"].startswith("바람"):
+            if r["grade"].startswith("바람"):
                 lab = "바람 언더"
             elif r["grade"].startswith("새 정보"):
                 lab = "라인 뒤 새 정보"
@@ -248,12 +242,10 @@ def main():
     wk_done_bets = [r for r in wk_bets if result_of(r, r["game"])]
     wb_w = sum(1 for r in wk_done_bets if result_of(r, r["game"]) == "W"); wb_l = sum(1 for r in wk_done_bets if result_of(r, r["game"]) == "L")
     wm = wsum.get("시장", {})
-    tz_txt = ("없음" if not teaser_open else f"{len(teaser_open)}개(" + " · ".join(esc(r["side"]) for r in teaser_open) + ")"
-              + (" — 묶을 짝 있음" if len(teaser_open) >= 2 else " — 짝이 없어 걸 수 없음"))
     verdicts = [verdict_word(pubs.get(f'{g["away"]}@{g["home"]}', {}).get("판단", "")) for g in games
                 if live.get(f'{g["away"]}@{g["home"]}', {}).get("state") != "STATUS_FINAL"]
     cand = sum(1 for v in verdicts if v in ("관심", "소액 관심"))
-    headline = (f'남은 경기 <b>{len(pre_cards)}</b> · 발행 후보 <b>{cand}</b> · {term("티저", "티저 다리")} {tz_txt} · '
+    headline = (f'남은 경기 <b>{len(pre_cards)}</b> · 발행 후보 <b>{cand}</b> · '
                 f'이번 주 실베팅 <b>{wb_w}-{wb_l}</b>' + (f'(대기 {len(wk_open_bets)})' if wk_open_bets else "")
                 )
     ms = psum.get("시장", {})
@@ -341,7 +333,7 @@ details.more summary{{cursor:pointer;font-weight:500}}
   <section class="legend">
     <div><b>읽는 법</b> — 보라색 낱말에 손가락·마우스를 대면 뜻이 나와요.</div>
     <div><span class="star">★</span> = <b>이길 확률이 높은 정도</b>(2018~25 실제 적중 ★ 50% · ★★ 61% · ★★★ 71% · ★★★★ 82%). <b>돈 버는 신호가 아니에요</b> — 별 4개 팀도 {term("스프레드")}는 절반만 맞았어요.</div>
-    <div>{term("스프레드")} = 점수 차 핸디 · {term("총점")} = 두 팀 점수 합이 기준보다 많을지(Over)·적을지(Under) · {term("ML")} = 그냥 이길 팀 · {term("티저")} = 핸디를 6점 유리하게 받는 대신 2경기를 묶어 둘 다 맞혀야 함</div>
+    <div>{term("스프레드")} = 점수 차 핸디 · {term("총점")} = 두 팀 점수 합이 기준보다 많을지(Over)·적을지(Under) · {term("ML")} = 그냥 이길 팀(10/10부터 주인공)</div>
     <div>{term("방향")} = 예측에서 나온 쪽(동전 — 적중률만 봄) · {term("관찰", "관찰만")} = 돈 안 건 기록 · <span class="tag bet">실베팅</span> = Paul 이 실제로 건 것(주황 테두리 카드) · 맞힘/틀림 = 예측·관찰 결과, <span class="bp w">승</span><span class="bp l">패</span> = 실베팅 결과</div>
   </section>
   <h2>아직 안 한 경기</h2>

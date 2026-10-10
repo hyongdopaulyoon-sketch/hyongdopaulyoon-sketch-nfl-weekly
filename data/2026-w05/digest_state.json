@@ -1,0 +1,213 @@
+{
+"LV@NE": {
+"spread_home": "-3.5",
+"total": "45.5",
+"ml": "+164/-198",
+"qb": {
+"LV": "Kirk Cousins",
+"NE": "Drake Maye"
+},
+"out": {
+"LV": [],
+"NE": []
+}
+},
+"CLE@NYJ": {
+"spread_home": "-2.5",
+"total": "39.5",
+"ml": "+114/-135",
+"qb": {
+"CLE": "Deshaun Watson",
+"NYJ": "Geno Smith"
+},
+"out": {
+"CLE": [],
+"NYJ": []
+}
+},
+"HOU@TEN": {
+"spread_home": "7.5",
+"total": "37.5",
+"ml": "-425/+330",
+"qb": {
+"HOU": "C.J. Stroud",
+"TEN": "Cam Ward"
+},
+"out": {
+"HOU": [],
+"TEN": []
+}
+},
+"CHI@GB": {
+"spread_home": "2.5",
+"total": "45.5",
+"ml": "-130/+110",
+"qb": {
+"CHI": "Tyson Bagent",
+"GB": "Jordan Love"
+},
+"out": {
+"CHI": [],
+"GB": []
+}
+},
+"NYG@WAS": {
+"spread_home": "-3.5",
+"total": "41.5",
+"ml": "+160/-192",
+"qb": {
+"NYG": "Jameis Winston",
+"WAS": "Jayden Daniels"
+},
+"out": {
+"NYG": [],
+"WAS": []
+}
+},
+"CIN@MIA": {
+"spread_home": "6.5",
+"total": "42.5",
+"ml": "-325/+260",
+"qb": {
+"CIN": "Joe Burrow",
+"MIA": "Malik Willis"
+},
+"out": {
+"CIN": [],
+"MIA": []
+}
+},
+"BAL@ATL": {
+"spread_home": "-3.0",
+"total": "43.5",
+"ml": "+142/-170",
+"qb": {
+"BAL": "Lamar Jackson",
+"ATL": "Michael Penix Jr."
+},
+"out": {
+"BAL": [],
+"ATL": []
+}
+},
+"SF@SEA": {
+"spread_home": "-3.0",
+"total": "45.5",
+"ml": "+136/-162",
+"qb": {
+"SF": "Brock Purdy",
+"SEA": "Drew Lock"
+},
+"out": {
+"SF": [],
+"SEA": []
+}
+},
+"TB@DAL": {
+"spread_home": "-8.5",
+"total": "48.5",
+"ml": "+390/-520",
+"qb": {
+"TB": "Jalon Daniels",
+"DAL": "Dak Prescott"
+},
+"out": {
+"TB": [
+"Antoine Winfield Jr.",
+"Baker Mayfield",
+"Benjamin Morrison",
+"SirVocea Dennis",
+"★스냅 97%)",
+"★스냅 97%)",
+"스냅 24%)",
+"스냅 51%)"
+],
+"DAL": [
+"Cobie Durant",
+"DeMarvion Overshown",
+"Drew Shelton",
+"스냅 2%)",
+"스냅 52%)"
+]
+}
+},
+"IND@PIT": {
+"spread_home": "-2.5",
+"total": "44.5",
+"ml": "+124/-148",
+"qb": {
+"IND": "Daniel Jones",
+"PIT": "Aaron Rodgers"
+},
+"out": {
+"IND": [],
+"PIT": []
+}
+},
+"BUF@LA": {
+"spread_home": "-3.0",
+"total": "54.5",
+"ml": "+145/-175",
+"qb": {
+"BUF": "Josh Allen",
+"LA": "Matthew Stafford"
+},
+"out": {
+"BUF": [],
+"LA": []
+}
+},
+"DEN@LAC": {
+"spread_home": "3.5",
+"total": "41.5",
+"ml": "-185/+154",
+"qb": {
+"DEN": "Bo Nix",
+"LAC": "Justin Herbert"
+},
+"out": {
+"DEN": [],
+"LAC": []
+}
+},
+"MIN@NO": {
+"spread_home": "2.5",
+"total": "41.5",
+"ml": "-142/+120",
+"qb": {
+"MIN": "Kyler Murray",
+"NO": "Tyler Shough"
+},
+"out": {
+"MIN": [],
+"NO": []
+}
+},
+"DET@ARI": {
+"spread_home": "5.5",
+"total": "54.5",
+"ml": "-258/+210",
+"qb": {
+"DET": "Jared Goff",
+"ARI": "Jacoby Brissett"
+},
+"out": {
+"DET": [],
+"ARI": []
+}
+},
+"PHI@JAX": {
+"spread_home": "-7.5",
+"total": "41.5",
+"ml": "+310/-395",
+"qb": {
+"PHI": "Jalen Hurts",
+"JAX": "Trevor Lawrence"
+},
+"out": {
+"PHI": [],
+"JAX": []
+}
+},
+"_stamp": "10-10 04:10"
+}

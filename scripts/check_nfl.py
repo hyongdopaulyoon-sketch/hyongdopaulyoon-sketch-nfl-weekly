@@ -5,7 +5,9 @@
 --record 면 관심·소액 관심은 「관심(발행)」(id …:J), 방향은 「방향(발행)」(id …:D) 페이퍼로 적는다 — 모델 페이퍼 행(id …:spread|total)은 그대로 둔다.
 2026-10-05(개선안 2·4·5 · MLB 보드 세션 상의): ⑦ 「- 새 정보:」 줄(라인 뒤 새 정보 관찰 — 사전 등록 55b93ea, --record 면 id …:N 「새 정보(관찰)」)
 ⑧ 예측 조정 상한 — 시장 승률 ±5%p 초과는 근거에 QB·새 정보·확정이 있을 때만 · 쉬운 라벨(시장보다 높게 봄/비슷/낮게 봄) ⑨ 「- 결론: ①②③」 세 문장
-⑩ 개수 요약(「유리 3 · 불리 1」) 금지 ⑪ 귀속 대조 — 매치업 줄 팀 수치 = ratings.csv · 「팀 포지션 선수」 = 다이제스트 그 팀 부상 줄 · (★NN%) = 다이제스트 스냅."""
+⑩ 개수 요약(「유리 3 · 불리 1」) 금지 ⑪ 귀속 대조 — 매치업 줄 팀 수치 = ratings.csv · 「팀 포지션 선수」 = 다이제스트 그 팀 부상 줄 · (★NN%) = 다이제스트 스냅.
+2026-10-10(Paul 「맞대결·키커·QB·선수·팀 비교 무조건」 + 「티저 버리고 ML 집중」): ⑫ 필수 줄 「- 맞대결:」「- 팀 비교:」「- QB 비교:」「- 선수 비교:」「- 키커:」「- 심판:」(값은 다이제스트 🤝🏟️🦵🧑‍⚖️ 표 그대로 — 판 밖 숫자 경고 대상)
+⑬ 판단·굳이 하나만에 ML 허용(「- 판단: 관심 · ML · DAL ML -520」 — 팀은 예측 승자와 같아야 함; --record 면 market ml · side 「DAL ML」 · odds 는 적힌 배당, 없으면 games.csv DK ML) ⑭ 티저 낱말이 발행문에 있으면 문제."""
 from datetime import datetime
 import argparse
 import csv
@@ -104,7 +106,9 @@ def attribution(k, body, dsec):
     return bad, warn
 
 
-NUM_LINES = ("- 매치업", "- 맥락", "- 결론", "- 시장")      # 다이제스트 값을 옮기는 줄 — 뉴스·새 정보·📘 는 제외
+NUM_LINES = ("- 매치업", "- 맥락", "- 결론", "- 시장", "- 맞대결", "- 팀 비교", "- QB 비교", "- 선수 비교", "- 키커", "- 심판")      # 다이제스트 값을 옮기는 줄 — 뉴스·새 정보·📘 는 제외
+MUST_LINES = ("- 맞대결:", "- 팀 비교:", "- QB 비교:", "- 선수 비교:", "- 키커:", "- 심판:")   # 2026-10-10 Paul 필수(값은 다이제스트 표 그대로)
+ML_SIDE = r"[A-Z]{2,3} ML(?:\s*[+-]\d{3,4})?"
 
 
 def polarity(k, body, m, g, dsec):
@@ -192,6 +196,11 @@ def main():
                 문제.append(f"{k}: 총점 {mk.group(2)} ≠ 다이제스트 {m['mkt_total']}")
         if not re.search(r"(?m)^- 뉴스 확인", body):
             문제.append(f"{k}: 「뉴스 확인(웹)」 줄 없음")
+        miss = [x for x in MUST_LINES if not re.search(r"(?m)^" + re.escape(x), body)]
+        if miss:
+            문제.append(f"{k}: 필수 줄 없음(2026-10-10 Paul): {' '.join(miss)}")
+        if re.search(r"티저|teaser", body, re.I):
+            문제.append(f"{k}: 「티저」 언급 — 2026-10-10 폐지(쓰지 않는다)")
         dm = re.search(r"(?m)^- 방향:\s*스프레드\s+([A-Z]{2,3}) ([+-]?[\d.]+)\s*·\s*총점\s+(Over|Under|오버|언더) ([\d.]+)", body)
         dirs = {}
         if not dm:
@@ -258,8 +267,11 @@ def main():
                 if early:
                     경고.append(f"{k}: 새 정보 발표 {hhmm} 가 기준판({sm_.group(2)[:2]}:{sm_.group(2)[2:]}) 이전 — 다이제스트에 이미 있었을 사실 → 판정 표본 아님(대조군으로 적립)")
                 새정보.append((k, mkt_, side, fact, hhmm, mv, early))
-        gm = re.search(r"(?m)^- 굳이 하나만:\s*(스프레드|총점)\s+([A-Z]{2,3} [+-][\d.]+|(?:Over|Under|오버|언더) [\d.]+)", body)
-        if gm and dirs:   # 2026-10-08 Paul 「같은 쪽으로」 — 굳이 하나만은 방향 줄과 같은 쪽(가격이 싸다는 이유로 반대쪽 금지)
+        gm = re.search(r"(?m)^- 굳이 하나만:\s*(스프레드|총점|ML)\s+([A-Z]{2,3} [+-][\d.]+|(?:Over|Under|오버|언더) [\d.]+|" + ML_SIDE + ")", body)
+        if gm and gm.group(1) == "ML":   # 2026-10-10 ML 허용 — 팀은 예측 승자와 같아야 한다
+            if 예측들 and 예측들[-1][0] == k and gm.group(2).split()[0] != 예측들[-1][1]:
+                문제.append(f"{k}: 굳이 하나만 ML {gm.group(2)} 이 예측 승자({예측들[-1][1]})와 다름")
+        elif gm and dirs:   # 2026-10-08 Paul 「같은 쪽으로」 — 굳이 하나만은 방향 줄과 같은 쪽(가격이 싸다는 이유로 반대쪽 금지)
             gside = gm.group(2).replace("오버", "Over").replace("언더", "Under")
             if gside.split()[0] != dirs[gm.group(1)].split()[0]:
                 문제.append(f"{k}: 굳이 하나만 {gside} 이 방향 줄({dirs[gm.group(1)]})과 반대 — 같은 쪽만(10/8)")
@@ -272,7 +284,7 @@ def main():
         문제 += b_; 경고 += w_
         b_, w_ = polarity(k, body, m, games_by.get(k, {}), dsecs.get(k, ""))
         문제 += b_; 경고 += w_
-        j = re.search(r"(?m)^- 판단:\s*(패스|소액 관심|관심)(?:\s*·\s*(스프레드|총점)\s*·\s*([^\n]+))?", body)
+        j = re.search(r"(?m)^- 판단:\s*(패스|소액 관심|관심)(?:\s*·\s*(스프레드|총점|ML)\s*·\s*([^\n]+))?", body)
         if not j:
             문제.append(f"{k}: 판단 줄 없음/형식 오류"); continue
         verdict, market, side = j.group(1), j.group(2), (j.group(3) or "").strip()
@@ -283,6 +295,11 @@ def main():
                 문제.append(f"{k}: 스프레드 쪽 형식 「팀 +3.5」 아님: {side}")
             if market == "총점" and not re.fullmatch(r"(Over|Under|오버|언더) [\d.]+", side):
                 문제.append(f"{k}: 총점 쪽 형식 「Over 41.5」 아님: {side}")
+            if market == "ML":   # 2026-10-10 Paul 「ML 에 집중」
+                if not re.fullmatch(ML_SIDE, side):
+                    문제.append(f"{k}: ML 쪽 형식 「DAL ML -520」 아님: {side}")
+                elif 예측들 and 예측들[-1][0] == k and side.split()[0] != 예측들[-1][1]:
+                    문제.append(f"{k}: 판단 ML {side} 이 예측 승자({예측들[-1][1]})와 다름")
             if dirs and market in dirs and side.replace("오버", "Over").replace("언더", "Under").split()[0] != dirs[market].split()[0]:
                 문제.append(f"{k}: 판단 쪽 {side} 이 방향 줄({dirs[market]})과 반대")
             판단들.append((k, verdict, market, side))
@@ -322,6 +339,12 @@ def main():
         gid_of = {f'{r["away"]}@{r["home"]}': r["game_id"] for r in games}
         for k, v, mk, sd in 판단들:
             if k not in gid_of:
+                continue
+            if mk == "ML":   # 2026-10-10: side 「DAL ML」 · odds = 적힌 배당 또는 games.csv DK ML
+                t_ = sd.split()[0]; g_ = games_by.get(k, {})
+                mo = re.search(r"[+-]\d{3,4}", sd)
+                odds = mo.group(0) if mo else (g_.get("ml_home") if t_ == k.split("@")[1] else g_.get("ml_away")) or "-110"
+                P.lean(a.week, f"{gid_of[k]}:ml", f"{t_} ML", "", odds, f"발행 판단 {v}", suffix=":J", grade="관심(발행)")
                 continue
             market = "spread" if mk == "스프레드" else "total"
             sd = sd.replace("오버", "Over").replace("언더", "Under")

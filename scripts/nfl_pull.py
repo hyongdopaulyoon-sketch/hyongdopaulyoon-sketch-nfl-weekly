@@ -388,19 +388,6 @@ def _predict_line(a, h, res):
     return L
 
 
-def _teaser_line(week, gk):
-    """🧩 티저 다리(2026-10-05 Paul 「a」 — 숨김 해제). 웡 티저: 백테스트 통과한 유일한 전략(검증 2023~25 74.3%)."""
-    rows = rd(os.path.join(DATA, "picks.csv"))
-    tz = [r for r in rows if r["grade"] == "티저 다리(관찰)"]
-    mine = [r for r in tz if r["week"] == str(week) and r["game"] == gk]
-    if not mine:
-        return []
-    w = sum(1 for r in tz if r["result"] == "W"); l = sum(1 for r in tz if r["result"] == "L")
-    r = mine[0]
-    return [f'- 🧩 **티저 다리**: {r["side"]}({r["note"].split(" · ")[0]}에서 6점 받기) · 검증 2023~25 74% · 올 시즌 {w}-{l} '
-            f'· ⚠️ 다리 2개를 한 장으로 묶어야 하고 둘 다 이겨야 돈을 받는다 · 2팀 티저 가격 −120 이하일 때만 손익분기(73.9%) 위']
-
-
 def _espn_names(wd):
     """{약칭: ESPN 영문 팀명} — 주간 스코어보드에서."""
     try:
@@ -1081,7 +1068,9 @@ RULES = [
     "N7. **기록** — picks.py suggest 가 관찰·참고를 picks.csv 에 「suggested」(페이퍼)로 적고, 실제 베팅한 것만 place 로 바꾼다(모델 제안이 아닌 경기도 place 가능). 채점은 월요일 grade. 성적은 placed 와 suggested 를 따로 센다.",
     "N8. **판정 개정은 주 1회(화요일)** 결과를 보고 pending_rules.md 한 줄로 남긴 뒤에만 바꾼다. 같은 주 안에서 문턱을 손대지 않는다.",
     "N9. **캐시아웃·헤지·라이브 진입은 하지 않는다** — 북의 캐시아웃 가격은 공정가보다 5~10% 나쁘고, 헤지는 수수료를 두 번 낸다. 예외는 베팅 전제가 깨졌을 때(QB 부상 등)뿐(2026-09-28 PHI@CHI 전반 7-0 질문).",
-    "N10. **발행은 claude.ai NFL 발행 세션이 한다(2026-09-29 Paul)** — 이 다이제스트를 붙여넣으면 경기별 발행문(판단·방향·시장·뉴스 확인(웹)·매치업·맥락·모델(참고)·반대 근거·이유)을 쓰고 「판단: 패스/소액 관심/관심」(돈을 거느냐)과 **「방향: 스프레드 쪽 · 총점 쪽」(패스여도 필수 — 2026-10-01 Paul 「결정 없이 서술만」)** 을 낸다. 로컬은 check_nfl.py 로 숫자·형식을 대조하고 판단(관심(발행))·방향(방향(발행))을 따로 페이퍼로 기록한다. 발행 세션의 몫은 **최신 뉴스(QB 확정·새 부상·라인 이동) 확인** — 다이제스트 부상 보고는 전 주차 것일 수 있다.",
+    "N10. **발행은 claude.ai NFL 발행 세션이 한다(2026-09-29 Paul)** — 이 다이제스트를 붙여넣으면 경기별 발행문(예측·방향·시장·뉴스 확인(웹)·**맞대결·팀 비교·QB 비교·선수 비교·키커(2026-10-10 Paul 필수)**·매치업·맥락·결론·판단)을 쓰고 「판단: 패스/소액 관심/관심」(돈을 거느냐)과 **「방향: 스프레드 쪽 · 총점 쪽」(패스여도 필수 — 2026-10-01 Paul 「결정 없이 서술만」)** 을 낸다. 로컬은 check_nfl.py 로 숫자·형식을 대조하고 판단(관심(발행))·방향(방향(발행))을 따로 페이퍼로 기록한다. 발행 세션의 몫은 **최신 뉴스(QB 확정·새 부상·라인 이동) 확인** — 다이제스트 부상 보고는 전 주차 것일 수 있다.",
+    "N11. **ML(이길 팀)이 주인공이다(2026-10-10 Paul 「티저는 버리고 ML에 집중」)** — 🔮 예측(시장 ML 무비그 확률·★)이 모든 경기의 첫 줄이고, 판단·실베팅은 ML 도 기록한다(「판단: 관심 · ML · 팀 배당」). 2018~25 실측: 시장 페이버릿 ML 을 배당대로 걸면 ★★★★ −1.6% · ★★★ −1.9% · ★★ −3.1% · ★ −9.6%(언더독은 ★ 구간만 +4.3%) — 별이 많을수록 잘 맞지만 수수료 때문에 자동 베팅은 손해. 그래서 ML 집중 = 예측 정확도·새 정보·가격(DK vs Polymarket 더 싼 쪽) 쪽이지 페이버릿 자동 매수가 아니다.",
+    "N12. **🧩 티저 다리는 폐지(2026-10-10 Paul 「티저는 별로」)** — 다이제스트·전달문·보드·발행문에 티저를 쓰지 않는다. 과거 페이퍼 기록(4주 3-0 · 소급 10-7)은 picks.csv 에 남지만 적립을 멈췄다. 맞대결·팀 비교·키커·심판·순위·흐름 블록(🤝🏟️🦵🧑‍⚖️)은 **값만** — 백테스트에서 시장을 이긴 적이 없다(리턴매치 51.5% · 작년 성적 50.3% · 일정 15항목 잡음).",
 ]
 
 
@@ -1104,6 +1093,9 @@ def ph_digest(week, force=False):
     now = datetime.now()
     L = [f"# NFL {SEASON} Week {week} — 주간 다이제스트 (생성 {now:%m-%d %H:%M} PT · ESPN DraftKings 라인 · nflverse EPA)", ""]
     L += ["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES] + [""]
+    import context_blocks as CB
+    L += CB.collection_check(week, games, inj, rt, wd)
+    prev_state = CB.load_state(week); prev_stamp = prev_state.pop("_stamp", "?"); new_state = {}
     # 서열표 — |엣지| 큰 순
     L += ["## 🏁 서열표 — 스프레드 엣지 순(모델 − 시장, 홈 기준 점)", "",
           "| # | 경기 | 킥오프 ET(PT) | 시장 스프레드(홈) | 모델 마진(홈) | 엣지 | 스프레드 판정 | 시장 총점 | 모델 총점 | 엣지 | 총점 판정 | ※ |",
@@ -1128,7 +1120,11 @@ def ph_digest(week, force=False):
         L += [f'## {a}@{h}  {g["kickoff_et"]} ET ({g["kickoff_pt"]} PT) · {g["venue"]} · {g["roof"] or "?"} · {a} {g["away_rec"]} / {h} {g["home_rec"]}'
               + (" · 디비전" if g.get("div_game") == "1" else "") + (" · **중립 구장(홈 이점 0)**" if g.get("neutral") == "1" else ""), "",
               f'- 팀: **{NAMES.get(a, a)}**({TEAM_KR.get(a, a)}) @ **{NAMES.get(h, h)}**({TEAM_KR.get(h, h)}) · 로고는 보드(Artifact)에서']
-        L += _predict_line(a, h, PRED.get(f"{a}@{h}")) + _teaser_line(week, f"{a}@{h}") + [""]
+        L += _predict_line(a, h, PRED.get(f"{a}@{h}"))
+        cur = CB.snapshot(g, m, inj); ch = CB.changes_line(prev_state.get(f"{a}@{h}"), cur, prev_stamp)
+        if ch: L.append(ch)
+        new_state[f"{a}@{h}"] = cur
+        if L[-1] != "": L.append("")
         L.append(f'- 시장({g["odds_provider"] or "DK"}): 스프레드 홈 {m.get("mkt_spread_home", "?")} · 총점 {m.get("mkt_total", "?")} · ML {a} {g["ml_away"] or "?"} / {h} {g["ml_home"] or "?"}'
                  + (f' · nflverse 라인 {g["nv_spread_line"]}/{g["nv_total_line"]}' if g["nv_spread_line"] else ""))
         L += _price_block(a, h, g, [x for x in rd(os.path.join(wd, "line_history.csv")) if x["game"] == f"{a}@{h}"])
@@ -1152,6 +1148,7 @@ def ph_digest(week, force=False):
                      + (f' · ★주전급(스냅 60%+) {"Out/Doubtful" if not x.get("final_pending") else "연습 불참"} {x["n_starters_missing"]}명'
                         if str(x.get("n_starters_missing") or "0") not in ("0", "") else "")
                      + (f' (보고 {x.get("report_week")}주차)' if x.get("report_week") and str(x.get("report_week")) != str(week) else ""))
+        L += CB.h2h_block(a, h) + CB.team_compare_block(a, h, rt) + CB.kicker_block(a, h, g) + CB.referee_block(g)
         L += _balance_table(a, h, g, RS, inj, P26, PRO)
         L += _real_stats_block(a, h, RS, inj, g, m)
         L += _matchup_table(a, h, PRO, P26, inj)
@@ -1178,6 +1175,7 @@ def ph_digest(week, force=False):
     open(out + ".tmp", "w", encoding="utf-8").write(txt); os.replace(out + ".tmp", out)
     snap = os.path.join(wd, f"DIGEST-{now:%m%d-%H%M}.md")
     open(snap, "w", encoding="utf-8").write(txt)
+    new_state["_stamp"] = f"{now:%m-%d %H:%M}"; CB.save_state(week, new_state)   # 🆕 직전 판 변동용(2026-10-10)
     log(f"  wrote {os.path.relpath(out, ROOT)} ({len(L)} lines) + 스냅샷 {os.path.basename(snap)}")
 
 
