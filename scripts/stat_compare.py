@@ -6,6 +6,7 @@ from collections import defaultdict
 
 import nfl_pull as N
 import context_blocks as CB
+import adv_players as AP
 
 QB_MIN_DB = 60      # QB 순위 대상 최소 드롭백(이 밑이면 순위 대신 「표본 적음」)
 WR_MIN_TGT = 15
@@ -134,14 +135,21 @@ def build(a, h, RS, PRO, rt, inj, g):
                 x = rec[p]; tg = x.get("tgt", 0) or 1; st = CB.N._status_of(NM[p][0], inj.get(t, {}))
                 ypt = x.get("yds", 0) / tg
                 rk = f"{_rank(rpool, p)}/{len(rpool)}위·{tier(_rank(rpool, p), len(rpool))}" if p in rpool else "표본 적음"
-                out.append(f"{NM[p][0]}{'⚠️' + st if st else ''} 타깃 {int(tg)} · 야드/타깃 {ypt:.1f}({rk}) · 캐치율 {100 * x.get('cmp', 0) / tg:.0f}%")
+                ex = AP.receiver_extra(NM[p][0])
+                out.append(f"{NM[p][0]}{'⚠️' + st if st else ''} 타깃 {int(tg)} · 야드/타깃 {ypt:.1f}({rk}) · 캐치율 {100 * x.get('cmp', 0) / tg:.0f}%" + (f" · {ex}" if ex else ""))
             top = max((p for p in rus if NM.get(p, ("", ""))[1] == t), key=lambda p: rus[p].get("car", 0), default=None)
             if top:
                 x = rus[top]; c = x.get("car", 0) or 1; st = CB.N._status_of(NM[top][0], inj.get(t, {}))
                 rk = f"{_rank(upool, top)}/{len(upool)}위·{tier(_rank(upool, top), len(upool))}" if top in upool else "표본 적음"
-                out.append(f"{NM[top][0]}{'⚠️' + st if st else ''} 캐리 {int(c)} · 야드/캐리 {x.get('yds', 0) / c:.1f}({rk}) · 성공률 {100 * x.get('suc', 0) / c:.0f}%")
+                ex = AP.rusher_extra(NM[top][0])
+                out.append(f"{NM[top][0]}{'⚠️' + st if st else ''} 캐리 {int(c)} · 야드/캐리 {x.get('yds', 0) / c:.1f}({rk}) · 성공률 {100 * x.get('suc', 0) / c:.0f}%" + (f" · {ex}" if ex else ""))
             return " / ".join(out) or "—"
-        L.append(f"| 주요 선수(리시버 2·러셔 1 · 순위는 타깃 {WR_MIN_TGT}+/캐리 {RB_MIN_CAR}+ 선수 중) | {players(a)} | {players(h)} | ⚠️ = 부상 보고 상태 · 캐치율은 실력(r .50), TD 는 운 |")
+        L.append(f"| 주요 선수(리시버 2·러셔 1 · 순위는 타깃 {WR_MIN_TGT}+/캐리 {RB_MIN_CAR}+ 선수 중) | {players(a)} | {players(h)} | ⚠️ = 부상 보고 상태 · 캐치율은 실력(r .50), TD 는 운 · [ ] 안 r = 2024~25 홀/짝 주 안정성(실력 ≥.45 / 중간 / 운 <.25 — 운 지표(드롭·태클 깨기·기대 대비 러시 야드)는 근거 금지) |")
+        try:
+            wk_ = int(str(g.get("game_id", "")).split("_")[1])
+        except (IndexError, ValueError):
+            wk_ = 0
+        L.append(f"| OL 연속성(최근 3경기 공격 스냅 상위 5명) | {AP.ol_continuity(a, inj.get(a), wk_)} | {AP.ol_continuity(h, inj.get(h), wk_)} | 오펜스 라인 주전이 몇 명 빠지나 — 2006~25 OL 2명+ 결장 ATS 45.2%(우연 범위, 시장 반영) |")
     # 키커
     DK = CB._depth_kicker(); KS = CB.kicker_stats()
     kpct = {}

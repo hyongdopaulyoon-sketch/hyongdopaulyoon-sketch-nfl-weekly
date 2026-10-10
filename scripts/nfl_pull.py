@@ -137,6 +137,8 @@ def ph_sources(week, force=False):
                            ("pfr_advstats", f"advstats_week_def_{SEASON - 1}.csv", 24 * 30), ("pfr_advstats", f"advstats_week_pass_{SEASON - 1}.csv", 24 * 30),
                            ("nextgen_stats", "ngs_passing.csv.gz", 12), ("ftn_charting", f"ftn_charting_{SEASON}.csv", 12)):
         fetch(NFLVERSE + f"{sub}/{name}", os.path.join(CACHE, name), age, force)
+    import adv_players as AP   # 2026-10-10 Paul 「넣어」 — PFR rec/rush · NGS receiving/rushing 미러(서술 전용)
+    AP.fetch_all(force)
 
 
 def _team_week_epa(pbp_path, season):
