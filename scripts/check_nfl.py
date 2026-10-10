@@ -133,7 +133,7 @@ def polarity(k, body, m, g, dsec):
         if t not in (a_, h_):
             continue
         sent = body[max(body.rfind("\n", 0, mm.start()), body.rfind("。", 0, mm.start()), body.rfind(". ", 0, mm.start()), body.rfind("다.", 0, mm.start())) + 1:mm.end()]
-        if re.search(r"\bML\b|머니라인", sent):
+        if re.search(r"ML|머니라인", sent):   # 「ML도」처럼 조사가 붙으면 \b 가 안 걸린다(10/10 DEN@LAC 오탐)
             continue                                           # ML 이동 문장 — 스프레드 부호 검사 대상 아님(10/10)
         pair = re.search(r"([A-Z]{2,3})?\s*([+-]?\d+(?:\.\d+)?)\s*에서\s*(?:[A-Z]{2,3}\s*)?([+-]?\d+(?:\.\d+)?)\s*(?:로|으로)", sent)
         if pair and pair.group(1) in (a_, h_, None):
