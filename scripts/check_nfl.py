@@ -109,7 +109,9 @@ def attribution(k, body, dsec):
 NUM_LINES = ("- 매치업", "- 맥락", "- 결론", "- 시장", "- 맞대결", "- 팀 비교", "- QB 비교", "- 선수 비교", "- 키커", "- 심판")      # 다이제스트 값을 옮기는 줄 — 뉴스·새 정보·📘 는 제외
 MUST_LINES = ("- 맞대결:", "- 스탯 비교", "- 팀 비교:", "- 심판:")   # 2026-10-10 Paul 필수(값은 다이제스트 표 그대로) · 저녁 개정: QB·선수·키커는 「스탯 비교」 블록 안으로
 COVER_TALK = re.compile(r"키 ?넘버|커버|점 ?차(?:로|까지|이면|면| 이상| 이내)[^\n]{0,14}(?:지면|이기면|맞|틀)")   # 스프레드 점수 차 설명 — 2026-10-10 Paul 「쓸데없는 정보」
-STAT_ROWS = ("득점", "실점", "공격 효율", "득점 드라이브", "수비 효율", "패스 공격", "러시 공격", "패스 수비", "러시 수비", "3rd down", "턴오버", "색 허용", "QB", "주요 선수", "키커")
+# 행마다 허용 표기(발행 세션이 다이제스트 행 이름을 줄여 쓰는 경우 — 10/10 3차 발행 실측) · QB·주요 선수·키커는 별도 줄(「- QB 비교:」「- 선수 비교:」「- 키커:」)로도 인정
+STAT_ROWS = (("득점",), ("실점",), ("공격 효율", "드라이브당 득점"), ("득점 드라이브",), ("수비 효율", "내준 드라이브당"), ("패스 공격",), ("러시 공격",), ("패스 수비",), ("러시 수비",),
+             ("3rd down",), ("턴오버",), ("색 허용",), ("QB", "- QB 비교:"), ("주요 선수", "- 선수 비교:"), ("키커", "- 키커:"))
 ML_SIDE = r"[A-Z]{2,3} ML(?:\s*[+-]\d{3,4})?"
 
 
@@ -126,11 +128,26 @@ def polarity(k, body, m, g, dsec):
             if t in (a_, h_) and ((w == "페이버릿") != (t == fav)):
                 bad.append(f"{k}: 「{t} {w}」 — 시장 스프레드 홈 {hs:+g} 이면 페이버릿은 {fav}(부호 반대 읽기)")
     o, n = fnum(g.get("open_spread_home")), fnum(g.get("spread_home"))
-    if o is not None and n is not None and o != n:
-        toward = h_ if n < o else a_
-        for mm in re.finditer(r"\b([A-Z]{2,3}) 쪽(?:으로)?\s*(?:[\d.]+\s*점?\s*)?(?:이동|움직)", body):
-            if mm.group(1) in (a_, h_) and mm.group(1) != toward:
-                bad.append(f"{k}: 「{mm.group(1)} 쪽 이동」 — 개장 {o:+g} → 지금 {n:+g}(홈 기준)은 {toward} 쪽 이동")
+    for mm in re.finditer(r"\b([A-Z]{2,3}) 쪽(?:으로)?\s*(?:[\d.]+\s*점?\s*)?(?:이동|움직)", body):
+        t = mm.group(1)
+        if t not in (a_, h_):
+            continue
+        sent = body[max(body.rfind("\n", 0, mm.start()), body.rfind("。", 0, mm.start()), body.rfind(". ", 0, mm.start()), body.rfind("다.", 0, mm.start())) + 1:mm.end()]
+        if re.search(r"\bML\b|머니라인", sent):
+            continue                                           # ML 이동 문장 — 스프레드 부호 검사 대상 아님(10/10)
+        pair = re.search(r"([A-Z]{2,3})?\s*([+-]?\d+(?:\.\d+)?)\s*에서\s*(?:[A-Z]{2,3}\s*)?([+-]?\d+(?:\.\d+)?)\s*(?:로|으로)", sent)
+        if pair and pair.group(1) in (a_, h_, None):
+            team = pair.group(1) or h_                         # 팀 표기 없으면 홈 기준 라인
+            x, y = fnum(pair.group(2)), fnum(pair.group(3))
+            if x is None or y is None or x == y:
+                continue
+            toward = team if y < x else (a_ if team == h_ else h_)   # 그 팀 라인이 나빠지면(숫자 감소) 그 팀 쪽 이동
+            if t != toward:
+                bad.append(f"{k}: 「{t} 쪽 이동」 — 문장의 {team} {x:+g} → {y:+g} 는 {toward} 쪽 이동(라인이 나빠진 팀 쪽)")
+        elif o is not None and n is not None and o != n:
+            toward = h_ if n < o else a_
+            if t != toward:
+                bad.append(f"{k}: 「{t} 쪽 이동」 — 개장 {o:+g} → 지금 {n:+g}(홈 기준)은 {toward} 쪽 이동")
     sec = dsec.replace("−", "-")
     for ln in body.splitlines():
         if not ln.startswith(NUM_LINES) or "보도" in ln:
@@ -203,9 +220,9 @@ def main():
             문제.append(f"{k}: 필수 줄 없음(2026-10-10 Paul): {' '.join(miss)}")
         if re.search(r"티저|teaser", body, re.I):
             문제.append(f"{k}: 「티저」 언급 — 2026-10-10 폐지(쓰지 않는다)")
-        sm = re.search(r"(?ms)^- 스탯 비교[^\n]*\n((?:[ \t]+[·•][^\n]*\n?)+)", body)
+        sm = re.search(r"(?ms)^- 스탯 비교[^\n]*\n((?:[ \t]+[·•\-][^\n]*\n?)+)", body)
         if sm:
-            miss_rows = [x for x in STAT_ROWS if x not in sm.group(1)]
+            miss_rows = [alts[0] for alts in STAT_ROWS if not any((a in sm.group(1)) or (a.startswith("- ") and re.search("(?m)^" + re.escape(a), body)) for a in alts)]
             if miss_rows:
                 문제.append(f"{k}: 스탯 비교에 빠진 행 {len(miss_rows)}: {', '.join(miss_rows)} — 다이제스트 📊 표 전 행을 옮긴다")
         elif "- 스탯 비교" in body:

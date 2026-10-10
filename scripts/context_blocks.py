@@ -158,8 +158,13 @@ def team_compare_block(a, h, rt):
     sa, na = row(a); sh, nh = row(h)
     def flow(s):
         return " · ".join(f"{wk}주 {opp} {sc} {res}{'(ATS ' + ats + ')' if ats else ''}" for wk, opp, sc, res, ats, ou in s["g"][-5:]) or "—"
+    rec, _done = N._prior_and_h2h(); py = N.SEASON - 1
+    def prior(t):
+        w, l = rec.get((py, t), [0, 0])
+        return f"{py} 시즌 {w}-{l}" + (f"({w / (w + l):.3f})" if w + l else "")
     L = [f"- 🏟️ **팀 비교(값만 — 2026 정규시즌 · 순위는 32팀 중 · 동률은 승률순, NFL 타이브레이크 미적용)**:", "",
          f"| 항목 | {a} | {h} |", "|---|---|---|",
+         f"| 작년 성적(2025) | {prior(a)} | {prior(h)} |",   # 10/10 발행 세션 제안 — 요약표 「2025 시즌」 열 원본(값만: 작년 승률 .25+ 차 커버 50.3%)
          f"| 전적(홈 / 원정) | {_rec_str(sa['w'], sa['l'], sa['t'])} (홈 {sa['hw']}-{sa['hl']} / 원정 {sa['aw']}-{sa['al']}) | {_rec_str(sh['w'], sh['l'], sh['t'])} (홈 {sh['hw']}-{sh['hl']} / 원정 {sh['aw']}-{sh['al']}) |",
          f"| 순위 맥락 | {DIV.get(a, '?')} {sa.get('div_rank', '?')}/{sa.get('div_n', 4)}위 · 컨퍼런스 {sa.get('conf_rank', '?')}/{sa.get('conf_n', 16)}위 · 디비전 {sa['dw']}-{sa['dl']} · 컨퍼런스 {sa['cw']}-{sa['cl']} | "
          f"{DIV.get(h, '?')} {sh.get('div_rank', '?')}/{sh.get('div_n', 4)}위 · 컨퍼런스 {sh.get('conf_rank', '?')}/{sh.get('conf_n', 16)}위 · 디비전 {sh['dw']}-{sh['dl']} · 컨퍼런스 {sh['cw']}-{sh['cl']} |",
