@@ -49,6 +49,8 @@ def build(week):
             open(os.path.join(DRIVE, "NFL_전달문_최신.md"), "w", encoding="utf-8").write(body)
             shutil.copyfile(os.path.join(D, "DIGEST.md"), os.path.join(DRIVE, f"DIGEST_{N.SEASON}-w{week:02d}.md"))
             print(f"  → Drive 동기화: {DRIVE}\\NFL_전달문_최신.md · DIGEST_{N.SEASON}-w{week:02d}.md")
+            print("  ⛔ 이 전달문 파일을 Paul 에게 첨부·전송·다운로드 안내하지 말 것(2026-10-10 Paul) — 발행 세션이 Drive 에서 직접 읽는다. "
+                  "알림은 「Drive 갱신됨 · MM-DD HH:MM판 · N경기 → 발행 세션에 'NFL 발행'」 한 줄만.")
         except Exception as e:
             print(f"  (Drive 사본 실패: {type(e).__name__} — 로컬 전달문은 정상)")
     return p
