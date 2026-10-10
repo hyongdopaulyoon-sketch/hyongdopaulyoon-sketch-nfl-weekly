@@ -324,19 +324,24 @@ def wind(week):
     print(f"wind week {week}: 오늘 경기 예보 " + (" · ".join(seen) or "대상 없음") + f" → 기록 {sum(1 for v in keep.values() if v['grade'] == WIND_GRADE and int(v['week']) == week)}")
 
 
-ANGLE_GRADES = {"A1": "각도 관찰 A1(원정 큰 페이버릿 반대)", "A2": "각도 관찰 A2(드라이브 우위 언더독 반대)"}
+ANGLE_GRADES = {"A1": "각도 관찰 A1(원정 큰 페이버릿 반대)", "A2": "각도 관찰 A2(드라이브 우위 언더독 반대)",
+                "A3": "각도 관찰 A3(결장 팀 반대 3점+ 이동 → 결장 팀)"}   # 2026-10-10 Paul 「A3는 등록해」(발행 세션 가설 — 역사 백테스트 불가, 전향만)
+A3_MOVE = 3.0   # 개장→현재 스프레드 이동(점) 문턱 — 사전 등록, 조정 금지
 
 
 def angles(week):
     """2026-10-04 Paul 「페이퍼 관찰로」 — 최근 3시즌 탐색(explore_recent.py)의 약한 꼴 두 개를 2026 전향으로 잰다(실베팅 아님).
     A1 원정 팀이 −7 이상 페이버릿 → 홈 언더독 쪽(홈 +라인) · A2 시즌 드라이브 득점 차(공격 − 수비 드라이브당 득점)가 상대보다 0.5+ 큰 팀이
     언더독 → 그 반대(페이버릿) 쪽. 판정: 킥오프 전 리프레시마다 다시(범위 밖이면 미채점 행 삭제), 킥오프 지난 경기는 동결.
+    A3(2026-10-10) 개장→현재 스프레드가 **결장 확정 팀**(★주전 Out/Doubtful 최종 지정 또는 백업 QB 선발 — 연습 보고만이면 제외) 반대쪽으로 3점+ 이동
+    → 결장 팀 쪽(현재 라인). 가설(발행 세션): 시장이 결장을 과하게 감점한다. 역사 개장 라인이 없어 백테스트 불가 — 전향만, 기존 증거는 반대(백업 QB ATS 49.9%).
     사전 등록: 각 30픽 또는 정규시즌 끝 보고 · <50% 폐기 · ≥55% & 평균 CLV ≥0 이면 Paul 상정."""
     from datetime import timezone
     import stat_research as SR
     wd = os.path.join(DATA, f"{SEASON}-w{week:02d}")
     rows = rd(PICKS); keep = {r["id"]: r for r in rows}
     games = {g["game_id"]: g for g in rd(os.path.join(wd, "games.csv"))}
+    inj = {r["team"]: r for r in rd(os.path.join(wd, "injuries.csv"))}
     now = datetime.now(timezone.utc)
     try:
         T, _P, _N = SR.load(SEASON, cache=False)
@@ -362,6 +367,16 @@ def angles(week):
             continue
         if hl >= 7:                                 # 원정 −7 이상 페이버릿
             cand[f'{m["game_id"]}:spread:A1'] = (f"{a}@{h}", f"{h} {hl:+g}", "A1", f"원정 {a} {-hl:+g} 페이버릿")
+        os_ = fnum(g.get("open_spread_home"))
+        if os_ is not None:                         # A3 — 결장 확정 팀 반대쪽으로 3점+ 이동
+            def absent(t):
+                x = inj.get(t) or {}
+                return bool(x.get("qb_flag")) or ((fnum(x.get("n_starters_missing")) or 0) > 0 and not x.get("final_pending"))
+            mv = hl - os_                           # + = 홈 라인이 나빠짐(원정 쪽으로 이동)
+            if mv >= A3_MOVE and absent(h):
+                cand[f'{m["game_id"]}:spread:A3'] = (f"{a}@{h}", f"{h} {hl:+g}", "A3", f"홈 {h} 결장 확정 · 개장 {os_:+g} → 지금 {hl:+g}(홈 기준, {mv:+g}점 반대 이동)")
+            elif -mv >= A3_MOVE and absent(a):
+                cand[f'{m["game_id"]}:spread:A3'] = (f"{a}@{h}", f"{a} {-hl:+g}", "A3", f"원정 {a} 결장 확정 · 개장 {os_:+g} → 지금 {hl:+g}(홈 기준, {-mv:+g}점 반대 이동)")
         if gp(a) >= 3 and gp(h) >= 3:
             na = (ppd(off[a]) or 0) - (ppd(de[a]) or 0); nh = (ppd(off[h]) or 0) - (ppd(de[h]) or 0)
             for dog, fav, dline, diff in ((h, a, hl, nh - na), (a, h, -hl, na - nh)):
@@ -457,7 +472,7 @@ def stats():
         by = defaultdict(list)
         for r in placed: by[r[key]].append(r)
         print(f"  {lab}: " + " · ".join(f"{k} {rec(v)}" for k, v in sorted(by.items(), key=lambda kv: str(kv[0]))))
-    for g in ("새 정보(관찰)", "새 정보(판 이전·대조)", TEASER_GRADE, WIND_GRADE, "각도 관찰 A1(원정 큰 페이버릿 반대)", "각도 관찰 A2(드라이브 우위 언더독 반대)"):
+    for g in ("새 정보(관찰)", "새 정보(판 이전·대조)", TEASER_GRADE, WIND_GRADE, *ANGLE_GRADES.values()):
         xs = [r for r in rows if r["grade"] == g]
         if xs:
             print(f"  페이퍼 {g}: {rec(xs)}")
