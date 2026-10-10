@@ -8,86 +8,204 @@
 "NE": "Drake Maye"
 },
 "out": {
-"LV": [],
-"NE": []
-}
-},
-"CLE@NYJ": {
-"spread_home": "-2.5",
-"total": "39.5",
-"ml": "+114/-135",
-"qb": {
-"CLE": "Deshaun Watson",
-"NYJ": "Geno Smith"
-},
-"out": {
-"CLE": [],
-"NYJ": []
-}
-},
-"HOU@TEN": {
-"spread_home": "7.5",
-"total": "37.5",
-"ml": "-425/+330",
-"qb": {
-"HOU": "C.J. Stroud",
-"TEN": "Cam Ward"
-},
-"out": {
-"HOU": [],
-"TEN": []
-}
-},
-"CHI@GB": {
-"spread_home": "2.5",
-"total": "45.5",
-"ml": "-130/+110",
-"qb": {
-"CHI": "Tyson Bagent",
-"GB": "Jordan Love"
-},
-"out": {
-"CHI": [],
-"GB": []
+"LV": [
+"Dont'e Thornton Jr.",
+"Jalen Nailor",
+"Trey Zuhn III",
+"스냅 47%)",
+"스냅 5%)"
+],
+"NE": [
+"Carlton Davis III",
+"Channing Canada",
+"Christian Gonzalez",
+"Karon Prunty",
+"Mack Hollins",
+"Reggie Gilliam",
+"★스냅 63%)",
+"★스냅 92%)",
+"★스냅 94%)",
+"스냅 24%)",
+"스냅 4%)",
+"스냅 5%)"
+]
 }
 },
 "NYG@WAS": {
 "spread_home": "-3.5",
 "total": "41.5",
-"ml": "+160/-192",
+"ml": "+142/-170",
 "qb": {
 "NYG": "Jameis Winston",
 "WAS": "Jayden Daniels"
 },
 "out": {
-"NYG": [],
-"WAS": []
+"NYG": [
+"Chauncey Golston",
+"Jason Pinnock",
+"스냅 50%)",
+"스냅 53%)"
+],
+"WAS": [
+"Charles Omenihu",
+"Marcus Mariota",
+"Nick Cross",
+"Percy Butler",
+"Stefon Diggs",
+"Tyler Owens",
+"★스냅 100%)",
+"스냅 24%)",
+"스냅 44%)",
+"스냅 54%)",
+"스냅 59%)"
+]
+}
+},
+"TB@DAL": {
+"spread_home": "-9.5",
+"total": "49.5",
+"ml": "?/?",
+"qb": {
+"TB": "Jalon Daniels",
+"DAL": "Dak Prescott"
+},
+"out": {
+"TB": [
+"Antoine Winfield Jr.",
+"Baker Mayfield",
+"Benjamin Morrison",
+"SirVocea Dennis",
+"★스냅 94%)",
+"★스냅 96%)",
+"스냅 2%)",
+"스냅 28%)"
+],
+"DAL": [
+"Cobie Durant",
+"DeMarvion Overshown",
+"Drew Shelton",
+"스냅 1%)"
+]
+}
+},
+"HOU@TEN": {
+"spread_home": "7.0",
+"total": "38.5",
+"ml": "-375/+295",
+"qb": {
+"HOU": "C.J. Stroud",
+"TEN": "Cam Ward"
+},
+"out": {
+"HOU": [
+"Tank Dell"
+],
+"TEN": [
+"Amani Hooker",
+"★스냅 99%)"
+]
 }
 },
 "CIN@MIA": {
-"spread_home": "6.5",
-"total": "42.5",
-"ml": "-325/+260",
+"spread_home": "7.0",
+"total": "43.5",
+"ml": "-355/+280",
 "qb": {
 "CIN": "Joe Burrow",
 "MIA": "Malik Willis"
 },
 "out": {
-"CIN": [],
-"MIA": []
+"CIN": [
+"Kyle Dugger",
+"★스냅 66%)"
+],
+"MIA": [
+"Caleb Douglas",
+"Justin Joly",
+"Reese Taylor",
+"Rob Beal Jr.",
+"★스냅 86%)"
+]
 }
 },
-"BAL@ATL": {
-"spread_home": "-3.0",
-"total": "43.5",
-"ml": "+142/-170",
+"CHI@GB": {
+"spread_home": "1.5",
+"total": "45.5",
+"ml": "-125/+105",
 "qb": {
-"BAL": "Lamar Jackson",
-"ATL": "Michael Penix Jr."
+"CHI": "Tyson Bagent",
+"GB": "Jordan Love"
 },
 "out": {
-"BAL": [],
-"ATL": []
+"CHI": [
+"Keyshaun Elliott",
+"Kyle Monangai",
+"스냅 40%)"
+],
+"GB": [
+"Chris Brooks",
+"Savion Williams",
+"스냅 35%)"
+]
+}
+},
+"IND@PIT": {
+"spread_home": "-3.0",
+"total": "43.5",
+"ml": "+124/-148",
+"qb": {
+"IND": "Daniel Jones",
+"PIT": "Aaron Rodgers"
+},
+"out": {
+"IND": [
+"Arden Key",
+"Ashton Dulin",
+"Jaylon Carlies",
+"Will Mallory",
+"★스냅 63%)",
+"스냅 35%)",
+"스냅 59%)"
+],
+"PIT": [
+"DeShon Elliott",
+"Jamel Dean",
+"Michael Pittman",
+"★스냅 64%)",
+"★스냅 72%)"
+]
+}
+},
+"DEN@LAC": {
+"spread_home": "3.5",
+"total": "41.5",
+"ml": "-192/+160",
+"qb": {
+"DEN": "Bo Nix",
+"LAC": "Justin Herbert"
+},
+"out": {
+"DEN": [
+"Pat Surtain II",
+"Riley Moss",
+"★스냅 83%)"
+],
+"LAC": [
+"Brenen Thompson",
+"Derwin James",
+"Donte Jackson",
+"Joe Alt",
+"Kayode Awosika",
+"Quentin Johnston",
+"Trevor Penning",
+"★스냅 68%)",
+"★스냅 74%)",
+"★스냅 79%)",
+"★스냅 81%)",
+"★스냅 92%)",
+"스냅 18%)",
+"스냅 33%)"
+]
 }
 },
 "SF@SEA": {
@@ -99,49 +217,55 @@
 "SEA": "Drew Lock"
 },
 "out": {
-"SF": [],
-"SEA": []
-}
-},
-"TB@DAL": {
-"spread_home": "-8.5",
-"total": "48.5",
-"ml": "+390/-520",
-"qb": {
-"TB": "Jalon Daniels",
-"DAL": "Dak Prescott"
-},
-"out": {
-"TB": [
-"Antoine Winfield Jr.",
-"Baker Mayfield",
-"Benjamin Morrison",
-"SirVocea Dennis",
-"★스냅 97%)",
-"★스냅 97%)",
-"스냅 24%)",
-"스냅 51%)"
+"SF": [
+"James Thompson Jr.",
+"Kyle Juszczyk",
+"Marques Sigle",
+"Nick Bosa",
+"★스냅 68%)",
+"★스냅 84%)",
+"스냅 36%)",
+"스냅 47%)"
 ],
-"DAL": [
-"Cobie Durant",
-"DeMarvion Overshown",
-"Drew Shelton",
-"스냅 2%)",
-"스냅 52%)"
+"SEA": [
+"Chazz Surratt",
+"Julian Neal",
+"Zach Charbonnet",
+"스냅 4%)",
+"스냅 4%)"
 ]
 }
 },
-"IND@PIT": {
+"CLE@NYJ": {
 "spread_home": "-2.5",
-"total": "44.5",
-"ml": "+124/-148",
+"total": "39.5",
+"ml": "+114/-135",
 "qb": {
-"IND": "Daniel Jones",
-"PIT": "Aaron Rodgers"
+"CLE": "Deshaun Watson",
+"NYJ": "Geno Smith"
 },
 "out": {
-"IND": [],
-"PIT": []
+"CLE": [
+"Carsen Ryan",
+"Dillon Gabriel",
+"Kalia Davis",
+"Mason Graham",
+"Mike Hall Jr.",
+"Teven Jenkins",
+"Tylan Wallace",
+"스냅 2%)",
+"스냅 22%)",
+"스냅 49%)"
+],
+"NYJ": [
+"Adonai Mitchell",
+"Breece Hall",
+"Dylan Parham",
+"Francisco Mauigoa",
+"★스냅 79%)",
+"★스냅 82%)",
+"스냅 56%)"
+]
 }
 },
 "BUF@LA": {
@@ -157,17 +281,55 @@
 "LA": []
 }
 },
-"DEN@LAC": {
-"spread_home": "3.5",
-"total": "41.5",
-"ml": "-185/+154",
+"DET@ARI": {
+"spread_home": "5.5",
+"total": "54.5",
+"ml": "-250/+205",
 "qb": {
-"DEN": "Bo Nix",
-"LAC": "Justin Herbert"
+"DET": "Jared Goff",
+"ARI": "Jacoby Brissett"
 },
 "out": {
-"DEN": [],
-"LAC": []
+"DET": [
+"Ben Bartch",
+"Brian Branch",
+"Cade Mays",
+"Rock Ya-Sin",
+"★스냅 100%)",
+"스냅 57%)"
+],
+"ARI": [
+"Andrew Wingard",
+"Isaiah Adams",
+"★스냅 68%)",
+"★스냅 81%)"
+]
+}
+},
+"PHI@JAX": {
+"spread_home": "-7.5",
+"total": "41.5",
+"ml": "+320/-410",
+"qb": {
+"PHI": "Jalen Hurts",
+"JAX": "Trevor Lawrence"
+},
+"out": {
+"PHI": [
+"DeVonta Smith",
+"Drew Kendall",
+"Marcus Epps",
+"Marquise Brown",
+"Saquon Barkley",
+"★스냅 100%)",
+"★스냅 94%)",
+"스냅 22%)",
+"스냅 32%)",
+"스냅 56%)"
+],
+"JAX": [
+"Jaylon Jones"
+]
 }
 },
 "MIN@NO": {
@@ -179,35 +341,42 @@
 "NO": "Tyler Shough"
 },
 "out": {
-"MIN": [],
-"NO": []
+"MIN": [
+"Charles Demmings",
+"Christian Darrisaw",
+"★스냅 85%)",
+"스냅 3%)"
+],
+"NO": [
+"Anfernee Jennings",
+"Jeremiah Wright",
+"Kaden Elliss",
+"★스냅 100%)",
+"스냅 28%)"
+]
 }
 },
-"DET@ARI": {
-"spread_home": "5.5",
-"total": "54.5",
-"ml": "-258/+210",
+"BAL@ATL": {
+"spread_home": "-3.5",
+"total": "43.5",
+"ml": "+150/-180",
 "qb": {
-"DET": "Jared Goff",
-"ARI": "Jacoby Brissett"
+"BAL": "Tyler Huntley",
+"ATL": "Michael Penix Jr."
 },
 "out": {
-"DET": [],
-"ARI": []
+"BAL": [
+"Cam Jurgens",
+"Lamar Jackson",
+"Trey Hendrickson",
+"★스냅 84%)",
+"스냅 57%)"
+],
+"ATL": [
+"Yasir Abdullah",
+"스냅 39%)"
+]
 }
 },
-"PHI@JAX": {
-"spread_home": "-7.5",
-"total": "41.5",
-"ml": "+310/-395",
-"qb": {
-"PHI": "Jalen Hurts",
-"JAX": "Trevor Lawrence"
-},
-"out": {
-"PHI": [],
-"JAX": []
-}
-},
-"_stamp": "10-10 04:10"
+"_stamp": "10-10 04:22"
 }
