@@ -468,14 +468,31 @@ def _qb1_by_team():
     return {t: v["name"] for t, v in dc.items()}, main_qb
 
 
+def _last_starter_by_team():
+    """pbp 2026 팀별 **가장 최근 주차**에 드롭백이 가장 많은 QB {team: (week, 짧은 이름)} — 일정표 예상 QB(nflverse home/away_qb_name)가 묵을 때의 정본
+    (10/11 SEA: 일정표 3~5주 Drew Lock, 실제 3·4주 Darnold 선발 → 모델 −4.5 오적용)."""
+    db = defaultdict(lambda: defaultdict(int))
+    for r in rd(os.path.join(CACHE, f"play_by_play_{SEASON}.csv.gz")):
+        if r.get("season_type", "REG") == "REG" and r.get("qb_dropback") == "1" and r.get("passer_player_name") and r.get("posteam"):
+            db[(r["posteam"], int(r["week"]))][r["passer_player_name"]] += 1
+    out = {}
+    for (t, wk), v in db.items():
+        if t not in out or wk > out[t][0]:
+            out[t] = (wk, max(v, key=v.get))
+    return out
+
+
 def _same_person(short, full):
     """pbp 'J.Love' 와 뎁스차트 'Jordan Love' 대조 — 성 일치 + 이니셜."""
     if not short or not full:
         return False
+    sfx = {"jr", "jr.", "sr", "sr.", "ii", "iii", "iv", "v"}
+    ft = [w for w in full.replace(",", " ").split() if w.lower() not in sfx] or full.split()   # 「Michael Penix Jr.」 → 성 Penix(10/11 ATL 드롭백 0 오표시)
     m = re.match(r"([A-Z])\.\s*(.+)", short)
     if not m:
-        return short.split()[-1].lower() == full.split()[-1].lower()
-    return full.split()[0][0].upper() == m.group(1) and full.split()[-1].lower() == m.group(2).split()[-1].lower()
+        st = [w for w in short.split() if w.lower() not in sfx] or short.split()
+        return st[-1].lower() == ft[-1].lower()
+    return ft[0][0].upper() == m.group(1) and ft[-1].lower() == m.group(2).split()[-1].lower()
 
 
 def _norm_name(n):
@@ -963,6 +980,7 @@ def ph_injuries(week, force=False):
             elif r.get("practice_status"):
                 prac[r["team"]].append(r)
     qb1, main_qb = _qb1_by_team()
+    last_st = _last_starter_by_team()
     games = rd(os.path.join(wd, "games.csv"))
     teams = sorted({g["away"] for g in games} | {g["home"] for g in games})
     snap = _snap_pct()
@@ -980,7 +998,20 @@ def ph_injuries(week, force=False):
         dbt = [nm(r) for r in by[t] if r["report_status"] == "Doubtful"]
         q = [nm(r) for r in by[t] if r["report_status"] == "Questionable"]
         qb_rep = next((f'{r["full_name"]} {r["report_status"]}' for r in by[t] if r["position"] == "QB" and r["report_status"] in ("Out", "Doubtful", "Questionable")), "")
-        exp = next((g["away_qb"] if g["away"] == t else g["home_qb"] for g in games if t in (g["away"], g["home"])), "")
+        exp_sched = next((g["away_qb"] if g["away"] == t else g["home_qb"] for g in games if t in (g["away"], g["home"])), "")
+        # 예상 선발 정본(10/11): 최근 경기 선발(pbp) == 뎁스차트 QB1 이고 그 QB 가 Out/Doubtful 보고에 없으면 그 선수. 일정표(nflverse)는 그 밖에만 — 일정표가 묵어 백업을 선발로 적는 일(SEA Lock) 방지
+        exp = exp_sched
+        ls = last_st.get(t)
+        d1_ = qb1.get(t, "")
+        qb_bad = {r["full_name"] for r in by[t] if r["position"] == "QB" and r["report_status"] in ("Out", "Doubtful")}
+        if ls and d1_ and _same_person(ls[1], d1_) and d1_ not in qb_bad:
+            if exp_sched and not _same_person(ls[1], exp_sched):
+                exp = d1_
+                sched_note = f"일정표 예상 {exp_sched} 는 묵은 값 — 최근 {ls[0]}주 선발·뎁스차트 QB1 {d1_} 로 정정"
+            else:
+                exp = exp_sched or d1_; sched_note = ""
+        else:
+            sched_note = ""
         # 벌점(qb_flag): ⓐ 예상 선발이 뎁스차트 QB1 이 아니다(백업 선발) ⓑ 보고가 QB Out/Doubtful.
         # 정보(qb_note): 예상 선발 = QB1 인데 시즌 드롭백 최다 QB 와 다르다 → 주전 복귀(레이팅은 대체 QB 표본이 섞여 있음) — 벌점 아님.
         flag, note = "", ""
@@ -1001,6 +1032,8 @@ def ph_injuries(week, force=False):
                         if r["position"] == "QB" and r["practice_status"].startswith(("Did Not", "Limited"))), "")
         if pending and qb_prac:
             note = (note + " · " if note else "") + f"QB 연습 {qb_prac}(최종 지정 미발표 — 잠정)"
+        if sched_note:
+            note = (note + " · " if note else "") + sched_note
         rows.append([t, use or "", exp, d1, main_qb.get(t, ""), qb_rep, flag, note, len(out), len(dbt), len(q),
                      " · ".join(out), " · ".join(dbt), " · ".join(q), pending, len(dnp), len(lim), " · ".join(dnp), " · ".join(lim), starters])
     wcsv(os.path.join(wd, "injuries.csv"), ["team", "report_week", "expected_qb", "depth_qb1", "season_main_qb", "qb_report", "qb_flag", "qb_note",

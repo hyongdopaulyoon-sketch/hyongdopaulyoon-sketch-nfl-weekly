@@ -208,34 +208,6 @@
 ]
 }
 },
-"SF@SEA": {
-"spread_home": "-3.0",
-"total": "46.5",
-"ml": "+140/-166",
-"qb": {
-"SF": "Brock Purdy",
-"SEA": "Drew Lock"
-},
-"out": {
-"SF": [
-"James Thompson Jr.",
-"Kyle Juszczyk",
-"Marques Sigle",
-"Nick Bosa",
-"★스냅 68%)",
-"★스냅 84%)",
-"스냅 36%)",
-"스냅 47%)"
-],
-"SEA": [
-"Chazz Surratt",
-"Julian Neal",
-"Zach Charbonnet",
-"스냅 4%)",
-"스냅 4%)"
-]
-}
-},
 "CLE@NYJ": {
 "spread_home": "-2.5",
 "total": "38.5",
@@ -284,6 +256,34 @@
 "스냅 43%)"
 ],
 "LA": []
+}
+},
+"SF@SEA": {
+"spread_home": "-3.0",
+"total": "46.5",
+"ml": "+140/-166",
+"qb": {
+"SF": "Brock Purdy",
+"SEA": "Sam Darnold"
+},
+"out": {
+"SF": [
+"James Thompson Jr.",
+"Kyle Juszczyk",
+"Marques Sigle",
+"Nick Bosa",
+"★스냅 68%)",
+"★스냅 84%)",
+"스냅 36%)",
+"스냅 47%)"
+],
+"SEA": [
+"Chazz Surratt",
+"Julian Neal",
+"Zach Charbonnet",
+"스냅 4%)",
+"스냅 4%)"
+]
 }
 },
 "DET@ARI": {
@@ -383,5 +383,5 @@
 ]
 }
 },
-"_stamp": "10-11 08:33"
+"_stamp": "10-11 10:14"
 }
