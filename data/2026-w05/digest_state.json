@@ -2,7 +2,7 @@
 "LV@NE": {
 "spread_home": "-3.5",
 "total": "45.5",
-"ml": "+160/-192",
+"ml": "+154/-185",
 "qb": {
 "LV": "Kirk Cousins",
 "NE": "Drake Maye"
@@ -64,7 +64,7 @@
 "HOU@TEN": {
 "spread_home": "6.5",
 "total": "37.5",
-"ml": "-345/+275",
+"ml": "-340/+270",
 "qb": {
 "HOU": "C.J. Stroud",
 "TEN": "Cam Ward"
@@ -383,5 +383,5 @@
 ]
 }
 },
-"_stamp": "10-11 08:20"
+"_stamp": "10-11 08:33"
 }
