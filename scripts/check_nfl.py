@@ -33,7 +33,7 @@ def fnum(x):
 
 def sections(txt):
     out = {}
-    for m in re.finditer(r"(?ms)^🏈\s*([A-Z]{2,3})@([A-Z]{2,3})\b[^\n]*\n(.*?)(?=^🏈|^🏁|\Z)", txt):
+    for m in re.finditer(r"(?ms)^(?:#+\s*)?🏈\s*([A-Z]{2,3})@([A-Z]{2,3})\b[^\n]*\n(.*?)(?=^(?:#+\s*)?🏈|^(?:#+\s*|\*\*)?🏁|\Z)", txt):   # 「## 🏈」 머리도 허용(10/11)
         out[f"{m.group(1)}@{m.group(2)}"] = m.group(3)
     return out
 
@@ -49,7 +49,7 @@ def pick_snapshot(wd, txt, override=None):
     if override:
         return override
     snaps = sorted(f for f in os.listdir(wd) if re.fullmatch(r"DIGEST-\d{4}-\d{4}\.md", f)) if os.path.isdir(wd) else []
-    m = re.search(r"다이제스트\s*(\d{2})[-/](\d{2})\s+(\d{1,2}):(\d{2})", txt)
+    m = re.search(r"다이제스트\s*(?:기준은\s*)?(\d{2})[-/](\d{2})\s+(\d{1,2}):(\d{2})", txt)
     if m:
         key = f"DIGEST-{m.group(1)}{m.group(2)}-{int(m.group(3)):02d}{m.group(4)}.md"
         if key in snaps:
@@ -107,7 +107,9 @@ def attribution(k, body, dsec):
 
 
 NUM_LINES = ("- 매치업", "- 맥락", "- 결론", "- 시장", "- 맞대결", "- 팀 비교", "- QB 비교", "- 선수 비교", "- 키커", "- 심판")      # 다이제스트 값을 옮기는 줄 — 뉴스·새 정보·📘 는 제외
-MUST_LINES = ("- 맞대결:", "- 스탯 비교", "- 팀 비교:", "- 심판:")   # 2026-10-10 Paul 필수(값은 다이제스트 표 그대로) · 저녁 개정: QB·선수·키커는 「스탯 비교」 블록 안으로
+# 6판(10/11) 필수 줄 — 「- 명단:」「**📋 명단**:」 같은 변형도 인정(머리 기호·볼드·이모지 무시)
+MUST_LINES = (("명단", r"명단"), ("맞대결", r"맞대결"), ("팀 비교", r"팀 비교"), ("선수 비교", r"선수 비교"), ("변수", r"변수"), ("정리", r"정리"))
+LINE_HEAD = r"(?m)^[-*\s]*(?:\*\*)?(?:[📋🤝📊⚠️]\s*)?"
 COVER_TALK = re.compile(r"키 ?넘버|커버|점 ?차(?:로|까지|이면|면| 이상| 이내)[^\n]{0,14}(?:지면|이기면|맞|틀)"
                         r"|달러를? ?걸|이면 승자 예측|(?:Over|Under)(?:도|예요|다|가|예)\b|꼭 걸 필요|근소 승 예측")   # 스프레드 점수 차 설명(10/10) + 📘 상투구(10/11 Paul 「쓸데없으니까 빼라고 했잖아」)
 # 행마다 허용 표기(발행 세션이 다이제스트 행 이름을 줄여 쓰는 경우 — 10/10 3차 발행 실측) · QB·주요 선수·키커는 별도 줄(「- QB 비교:」「- 선수 비교:」「- 키커:」)로도 인정
@@ -214,11 +216,19 @@ def main():
                 문제.append(f"{k}: 스프레드 홈 {mk.group(1)} ≠ 다이제스트 {m['mkt_spread_home']}")
             if fnum(mk.group(2)) != fnum(m["mkt_total"]):
                 문제.append(f"{k}: 총점 {mk.group(2)} ≠ 다이제스트 {m['mkt_total']}")
-        if not re.search(r"(?m)^- 뉴스 확인", body):
-            문제.append(f"{k}: 「뉴스 확인(웹)」 줄 없음")
-        miss = [x for x in MUST_LINES if not re.search(r"(?m)^" + re.escape(x), body)]
+        if not re.search(LINE_HEAD + r"(?:명단|뉴스 확인)", body):
+            문제.append(f"{k}: 「- 명단:」 줄 없음(웹 확인 — 비활성·출전 확정·출처·시각)")
+        miss = [lab for lab, pat in MUST_LINES if not re.search(LINE_HEAD + pat, body)]
         if miss:
-            문제.append(f"{k}: 필수 줄 없음(2026-10-10 Paul): {' '.join(miss)}")
+            문제.append(f"{k}: 필수 줄 없음(6판 10/11): {' '.join(miss)}")
+        # 팀 비교·선수 비교 줄의 순위(「n위」)가 기준판 경기 절에 있나 — 환각 순위 검출(경고)
+        dsec_ = dsecs.get(k, "")
+        for ln in body.splitlines():
+            if not re.match(LINE_HEAD + r"(?:팀 비교|선수 비교|공격|수비|패스|러시|달리기|3rd|턴오버|QB|리시버|러닝백|키커|압박|QB 보호)", ln):
+                continue
+            for n_ in re.findall(r"(\d{1,3})위", ln):
+                if dsec_ and not re.search(rf"(?<![\d.]){n_}(?:/\d+)?위", dsec_):
+                    경고.append(f"{k}: 「{n_}위」 가 기준판 경기 절에 없음 — 「{ln.strip()[:50]}…」(재계산·외부면 「보도」 라벨)"); break
         if re.search(r"티저|teaser", body, re.I):
             문제.append(f"{k}: 「티저」 언급 — 2026-10-10 폐지(쓰지 않는다)")
         sm = re.search(r"(?ms)^- 스탯 비교[^\n]*\n((?:[ \t]+[·•\-][^\n]*\n?)+)", body)
@@ -229,13 +239,15 @@ def main():
         elif "- 스탯 비교" in body:
             문제.append(f"{k}: 스탯 비교 줄 아래 「  · 항목 …」 들여쓴 행이 없음")
         for ln in body.splitlines():
-            if ln.startswith(("- 결론", "- 굳이 하나만", "📘")) or (ln.strip() and not ln.startswith("-") and "📘" in body[:body.find(ln) + 1]):
+            if re.match(LINE_HEAD + r"(?:결론|굳이 하나만|정리|변수|📘)", ln) or ln.startswith("📘") or (ln.strip() and not ln.startswith("-") and "📘" in body[:body.find(ln) + 1]):
                 if COVER_TALK.search(ln):
                     문제.append(f"{k}: 📘·결론 상투구(「{COVER_TALK.search(ln).group(0)}」) — 배당 환산·점수 예시·커버·키 넘버·「꼭 걸 필요 없다」 금지(10/10·10/11 Paul)"); break
-        if re.search(r"(?m)^- 판단:\s*패스", body):   # 패스 경기의 📘 에 ML 가격·손익분기·Polymarket 비교 줄 금지(10/11)
-            tail = body[body.find("📘"):] if "📘" in body else ""
+        if re.search(r"(?m)^- 판단:\s*패스", body):   # 패스 경기의 📘·정리 에 ML 가격·손익분기·Polymarket 비교 금지(10/11)
+            tail = "\n".join(ln for ln in body.splitlines() if re.match(LINE_HEAD + r"(?:정리|📘)", ln) or ln.startswith("📘"))
+            if "📘" in body:
+                tail += body[body.find("📘"):]
             if re.search(r"손익분기|Polymarket|ML로 걸면", tail):
-                문제.append(f"{k}: 판단이 패스인데 📘 에 ML 가격·손익분기·Polymarket 줄 — 패스면 돈 문장을 쓰지 않는다(10/11 Paul)")
+                문제.append(f"{k}: 판단이 패스인데 정리·📘 에 ML 가격·손익분기·Polymarket 줄 — 패스면 돈 문장을 쓰지 않는다(10/11 Paul)")
         dm = re.search(r"(?m)^- 방향:\s*스프레드\s+([A-Z]{2,3}) ([+-]?[\d.]+)\s*·\s*총점\s+(Over|Under|오버|언더) ([\d.]+)", body)
         dirs = {}
         if not dm:
@@ -310,9 +322,9 @@ def main():
             gside = gm.group(2).replace("오버", "Over").replace("언더", "Under")
             if gside.split()[0] != dirs[gm.group(1)].split()[0]:
                 문제.append(f"{k}: 굳이 하나만 {gside} 이 방향 줄({dirs[gm.group(1)]})과 반대 — 같은 쪽만(10/8)")
-        cm = re.search(r"(?m)^- 결론:([^\n]*)", body)
-        if not cm or not all(c in cm.group(1) for c in "①②③"):
-            문제.append(f"{k}: 「- 결론: ① 가장 큰 근거 ② 가장 큰 반대 근거 ③ 위험 요소」 줄 없음/세 문장 아님(2026-10-05)")
+        cm = re.search(r"(?m)^- 결론:([^\n]*)", body)   # 6판(10/11): 결론 줄은 선택 — 있으면 ①②③ 형식만 검사
+        if cm and not all(c in cm.group(1) for c in "①②③"):
+            문제.append(f"{k}: 「- 결론:」 줄이 있는데 ①②③ 세 문장이 아님")
         if re.search(r"유리\s*\d+\s*[·,/]\s*불리\s*\d+|불리\s*\d+\s*[·,/]\s*유리\s*\d+", body):
             문제.append(f"{k}: 개수 요약(「유리 n · 불리 n」) 금지 — 개수는 크기를 숨긴다")
         b_, w_ = attribution(k, body, dsecs.get(k, ""))
