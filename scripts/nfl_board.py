@@ -521,7 +521,10 @@ def main():
                 l0, h0, b0 = mains[-1]
                 body += f'<div class="pubv"><div class="pubh">{esc(l0)} 발행</div>{mk(h0)}{mk(b0)}</div>'
             for l1, h1, b1 in d["supp"]:
-                body += f'<div class="pubv supp"><div class="pubh">{esc(l1)}{"" if "보완" in l1 else " · 보완"}</div>{mk(b1)}</div>'
+                # 보완 머리 「**DEN@LAC** — LAC 오펜스 라인이 더 비어요」 의 뒷말도 보인다(10/11 11:35 보완 — 경기 코드만 떼고)
+                h1r = re.sub(r"^(?:#{1,4}\s*)?(?:🏈\s*)?(?:\*\*)?[A-Z]{2,3}@[A-Z]{2,3}(?:\*\*)?\s*(?:[—-]\s*)?", "", h1).strip()
+                body += (f'<div class="pubv supp"><div class="pubh">{esc(l1)}{"" if "보완" in l1 else " · 보완"}</div>'
+                         + (f'<div style="font-weight:600">{mk(h1r)}</div>' if h1r else "") + f'{mk(b1)}</div>')
             if len(mains) > 1:
                 body += ('<details class="prevv"><summary>이전 판 보기 — ' + esc(" · ".join(x[0] for x in mains[:-1])) + "</summary>"
                          + "".join(f'<div class="pubv"><div class="pubh">{esc(l2)} 발행</div>{mk(h2)}{mk(b2)}</div>' for l2, h2, b2 in reversed(mains[:-1]))
