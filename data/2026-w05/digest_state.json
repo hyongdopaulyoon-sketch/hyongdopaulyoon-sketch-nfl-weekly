@@ -2,7 +2,7 @@
 "LV@NE": {
 "spread_home": "-3.5",
 "total": "45.5",
-"ml": "+164/-198",
+"ml": "+160/-192",
 "qb": {
 "LV": "Kirk Cousins",
 "NE": "Drake Maye"
@@ -34,7 +34,7 @@
 "NYG@WAS": {
 "spread_home": "-3.5",
 "total": "41.5",
-"ml": "+142/-170",
+"ml": "+160/-192",
 "qb": {
 "NYG": "Jameis Winston",
 "WAS": "Jayden Daniels"
@@ -58,6 +58,24 @@
 "스냅 44%)",
 "스냅 54%)",
 "스냅 59%)"
+]
+}
+},
+"HOU@TEN": {
+"spread_home": "6.5",
+"total": "37.5",
+"ml": "-345/+275",
+"qb": {
+"HOU": "C.J. Stroud",
+"TEN": "Cam Ward"
+},
+"out": {
+"HOU": [
+"Tank Dell"
+],
+"TEN": [
+"Amani Hooker",
+"★스냅 99%)"
 ]
 }
 },
@@ -88,28 +106,10 @@
 ]
 }
 },
-"HOU@TEN": {
-"spread_home": "7.0",
-"total": "38.5",
-"ml": "-375/+295",
-"qb": {
-"HOU": "C.J. Stroud",
-"TEN": "Cam Ward"
-},
-"out": {
-"HOU": [
-"Tank Dell"
-],
-"TEN": [
-"Amani Hooker",
-"★스냅 99%)"
-]
-}
-},
 "CIN@MIA": {
 "spread_home": "7.0",
-"total": "43.5",
-"ml": "-355/+280",
+"total": "44.5",
+"ml": "-345/+275",
 "qb": {
 "CIN": "Joe Burrow",
 "MIA": "Malik Willis"
@@ -130,7 +130,7 @@
 },
 "CHI@GB": {
 "spread_home": "1.5",
-"total": "45.5",
+"total": "47.5",
 "ml": "-125/+105",
 "qb": {
 "CHI": "Tyson Bagent",
@@ -151,8 +151,8 @@
 },
 "IND@PIT": {
 "spread_home": "-3.0",
-"total": "43.5",
-"ml": "+124/-148",
+"total": "41.5",
+"ml": "+130/-155",
 "qb": {
 "IND": "Daniel Jones",
 "PIT": "Aaron Rodgers"
@@ -179,7 +179,7 @@
 "DEN@LAC": {
 "spread_home": "3.5",
 "total": "41.5",
-"ml": "-192/+160",
+"ml": "-185/+154",
 "qb": {
 "DEN": "Bo Nix",
 "LAC": "Justin Herbert"
@@ -210,8 +210,8 @@
 },
 "SF@SEA": {
 "spread_home": "-3.0",
-"total": "45.5",
-"ml": "+136/-162",
+"total": "46.5",
+"ml": "+140/-166",
 "qb": {
 "SF": "Brock Purdy",
 "SEA": "Drew Lock"
@@ -238,7 +238,7 @@
 },
 "CLE@NYJ": {
 "spread_home": "-2.5",
-"total": "39.5",
+"total": "38.5",
 "ml": "+114/-135",
 "qb": {
 "CLE": "Deshaun Watson",
@@ -277,7 +277,12 @@
 "LA": "Matthew Stafford"
 },
 "out": {
-"BUF": [],
+"BUF": [
+"Ed Oliver",
+"Josh Palmer",
+"스냅 36%)",
+"스냅 43%)"
+],
 "LA": []
 }
 },
@@ -309,7 +314,7 @@
 "PHI@JAX": {
 "spread_home": "-7.5",
 "total": "41.5",
-"ml": "+320/-410",
+"ml": "?/?",
 "qb": {
 "PHI": "Jalen Hurts",
 "JAX": "Trevor Lawrence"
@@ -332,10 +337,32 @@
 ]
 }
 },
+"BAL@ATL": {
+"spread_home": "-3.0",
+"total": "43.5",
+"ml": "+145/-175",
+"qb": {
+"BAL": "Tyler Huntley",
+"ATL": "Michael Penix Jr."
+},
+"out": {
+"BAL": [
+"Cam Jurgens",
+"Lamar Jackson",
+"Trey Hendrickson",
+"★스냅 84%)",
+"스냅 57%)"
+],
+"ATL": [
+"Yasir Abdullah",
+"스냅 39%)"
+]
+}
+},
 "MIN@NO": {
 "spread_home": "2.5",
 "total": "41.5",
-"ml": "-142/+120",
+"ml": "-135/+114",
 "qb": {
 "MIN": "Kyler Murray",
 "NO": "Tyler Shough"
@@ -356,27 +383,5 @@
 ]
 }
 },
-"BAL@ATL": {
-"spread_home": "-3.5",
-"total": "43.5",
-"ml": "+150/-180",
-"qb": {
-"BAL": "Tyler Huntley",
-"ATL": "Michael Penix Jr."
-},
-"out": {
-"BAL": [
-"Cam Jurgens",
-"Lamar Jackson",
-"Trey Hendrickson",
-"★스냅 84%)",
-"스냅 57%)"
-],
-"ATL": [
-"Yasir Abdullah",
-"스냅 39%)"
-]
-}
-},
-"_stamp": "10-10 05:27"
+"_stamp": "10-11 08:20"
 }
