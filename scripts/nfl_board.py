@@ -369,7 +369,7 @@ def main():
         mini_used.add(t)
         return f'<span class="mini lg-{esc(t)}" role="img" aria-label="{esc(t)}"></span>'
 
-    pre_cards, done_rows, trows, pick_of = [], [], [], {}
+    pre_cards, done_rows, trows, pick_of, star_of = [], [], [], {}, {}
     for g in games:
         A, H = g["away"], g["home"]; gk = f"{A}@{H}"
         lv = live.get(gk, {})
@@ -384,6 +384,7 @@ def main():
         m_, d_, b_ = pr.get("시장"), pr.get("모델"), pr.get("발행")
         pp = P.fnum(m_.get("p_pick")) if m_ else None
         pick_t = (b_ or m_ or {}).get("pick", ""); pick_of[gk] = pick_t
+        star_of[gk] = P.fnum(b_.get("p_pick")) if b_ and b_.get("p_pick") else pp   # 펼침 머리 별점 — 발행 예측 확률(없으면 시장)
 
         def nm(t):   # 표·끝난 경기 줄의 팀 이름 — 우리 픽은 색
             return f'<span class="{"pk" if t == pick_t else "tn"}">{esc(name_kr(t))}</span>'
@@ -528,7 +529,7 @@ def main():
             cnt = f"발행 {len(mains)}판" + (f" · 보완 {len(d['supp'])}" if d["supp"] else "")
         else:
             body, cnt = '<p class="muted">아직 이 경기 발행문이 없어요.</p>', "발행문 없음"
-        pub_secs.append(f'<details class="pubd" data-p="{esc(gk)}"><summary>{mini(A)} <b class="{"pk" if A == pk_ else ""}">{esc(name_kr(A))}</b> @ <b class="{"pk" if H == pk_ else ""}">{esc(name_kr(H))}</b> {mini(H)} '
+        pub_secs.append(f'<details class="pubd" data-p="{esc(gk)}"><summary>{mini(A)} <b class="{"pk" if A == pk_ else ""}">{esc(name_kr(A))}</b> <small class="muted">{esc(g.get("away_rec", ""))}</small> @ <b class="{"pk" if H == pk_ else ""}">{esc(name_kr(H))}</b> <small class="muted">{esc(g.get("home_rec", ""))}</small> {mini(H)} {(f'<span class="star">{PR.star_str(star_of[gk])}</span> <span class="pk">{esc(pk_)} {pct(star_of[gk])}</span> ') if pk_ and star_of.get(gk) is not None else ""}'
                         f'<span class="muted">{esc(g["kickoff_et"].split(" ", 1)[0])} {esc(g["kickoff_pt"])} PT · {cnt}</span></summary><div class="md">{body}</div></details>')
     logo_css = (".mini{display:inline-block;width:22px;height:22px;background-size:contain;background-repeat:no-repeat;vertical-align:middle}"
                 + ".tlogo{display:inline-block;width:36px;height:36px;flex:none;background-size:contain;background-repeat:no-repeat}"
