@@ -995,6 +995,13 @@ def ph_injuries(week, force=False):
     rows = []
     for t in teams:
         out = [nm(r) for r in by[t] if r["report_status"] == "Out"]
+        # IR·PUP 등 로스터 상태 결장(그 주 부상 보고서엔 안 나옴 — 10/11 LAC Slater): 올해 스냅이 있는 선수만, 보고서 Out 과 중복 제외
+        import adv_players as AP
+        _outn = {x.split("(")[0].strip().lower() for x in out}
+        for _n, (_pos, _st) in AP.reserve_players(t).items():
+            _v = snap.get((t, _norm_name(_n)))
+            if _v and _n.lower() not in _outn:
+                out.append(f'{_n}({_pos} · {"★" if _v >= STARTER_SNAP else ""}스냅 {_v * 100:.0f}% · {"IR" if _st == "RES" else _st})')
         dbt = [nm(r) for r in by[t] if r["report_status"] == "Doubtful"]
         q = [nm(r) for r in by[t] if r["report_status"] == "Questionable"]
         qb_rep = next((f'{r["full_name"]} {r["report_status"]}' for r in by[t] if r["position"] == "QB" and r["report_status"] in ("Out", "Doubtful", "Questionable")), "")
@@ -1028,6 +1035,7 @@ def ph_injuries(week, force=False):
         lim = [nm(r) for r in prac[t] if r["practice_status"].startswith("Limited")]
         starters = n_star([r for r in by[t] if r["report_status"] in ("Out", "Doubtful")]) if by[t] else n_star(
             [r for r in prac[t] if r["practice_status"].startswith("Did Not")])
+        starters += sum(1 for x in out if x.endswith("· IR)") and "★" in x)   # IR 간 ★주전도 결장 수에(10/11)
         qb_prac = next((f'{r["full_name"]} {"DNP" if r["practice_status"].startswith("Did Not") else "Limited"}' for r in prac[t]
                         if r["position"] == "QB" and r["practice_status"].startswith(("Did Not", "Limited"))), "")
         if pending and qb_prac:

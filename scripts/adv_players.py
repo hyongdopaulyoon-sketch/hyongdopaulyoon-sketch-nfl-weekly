@@ -31,7 +31,8 @@ def fetch_all(force=False):
     for sub, name, age in (("pfr_advstats", f"advstats_week_rec_{N.SEASON}.csv", 12), ("pfr_advstats", f"advstats_week_rush_{N.SEASON}.csv", 12),
                            ("pfr_advstats", f"advstats_week_rec_{N.SEASON - 1}.csv", 24 * 30), ("pfr_advstats", f"advstats_week_rush_{N.SEASON - 1}.csv", 24 * 30),
                            ("pfr_advstats", f"advstats_week_rec_{N.SEASON - 2}.csv", 24 * 30), ("pfr_advstats", f"advstats_week_rush_{N.SEASON - 2}.csv", 24 * 30),
-                           ("nextgen_stats", "ngs_receiving.csv.gz", 12), ("nextgen_stats", "ngs_rushing.csv.gz", 12)):
+                           ("nextgen_stats", "ngs_receiving.csv.gz", 12), ("nextgen_stats", "ngs_rushing.csv.gz", 12),
+                           ("weekly_rosters", f"roster_weekly_{N.SEASON}.csv", 12)):   # IR(RES) 판정용(10/11 LAC Slater)
         try:
             N.fetch(N.NFLVERSE + f"{sub}/{name}", os.path.join(N.CACHE, name), age, force)
         except Exception as e:
@@ -192,6 +193,24 @@ def rusher_extra(short):
     return " · ".join(parts)
 
 
+# ───────────── 로스터 상태(IR 등) ─────────────
+RESERVE = {"RES", "PUP", "NFI", "SUS", "EXE"}   # nflverse weekly_rosters status — 그 주 부상 보고서에 안 나오는 결장(IR 이동 등)
+_RES = None
+
+
+def reserve_players(team):
+    """{full_name: (position, status)} — 최신 주 로스터에서 ACT 가 아닌 결장 상태(IR/PUP/NFI/SUS). 10/11 DEN@LAC: Slater IR 이 OL 결장에서 빠졌던 구멍."""
+    global _RES
+    if _RES is None:
+        rows = N.rd(os.path.join(N.CACHE, f"roster_weekly_{N.SEASON}.csv"))
+        wk = max((int(r["week"]) for r in rows if r.get("week")), default=0)
+        _RES = defaultdict(dict)
+        for r in rows:
+            if int(r.get("week") or 0) == wk and r.get("status") in RESERVE:
+                _RES[r["team"]][r["full_name"]] = (r.get("position", ""), r.get("status", ""))
+    return _RES.get(team, {})
+
+
 # ───────────── OL 연속성 ─────────────
 def ol_continuity(team, inj_row, week):
     """최근 3경기(이번 주 전) 공격 스냅 상위 OL 5명 중 오늘 Out/Doubtful 수 → 문자열."""
@@ -206,7 +225,13 @@ def ol_continuity(team, inj_row, week):
             tot[r["player"]] += N.fnum(r.get("offense_snaps")) or 0
     starters = [n for n, _ in sorted(tot.items(), key=lambda kv: -kv[1])[:5]]
     absent = [n.split("(")[0].strip() for key in ("out", "doubtful") for n in str((inj_row or {}).get(key) or "").split(" · ") if n.strip()]
-    miss = [s for s in starters if any(N._same_person(s, a) or N._same_person(a, s) or s.lower() == a.lower() for a in absent)]
+    res = reserve_players(team)
+    miss = []
+    for s_ in starters:
+        if any(N._same_person(s_, a) or N._same_person(a, s_) or s_.lower() == a.lower() for a in absent):
+            miss.append(s_)
+        elif any(s_.lower() == n.lower() or N._same_person(s_, n) for n in res):
+            miss.append(s_ + "(IR)")
     pend = bool((inj_row or {}).get("final_pending"))
     return (f"주전 5명 중 결장 {len(miss)}명" + (f"({', '.join(miss)})" if miss else "") + f" · 최근 {len(weeks)}경기 기준"
             + (" · ⚠️ 최종 지정 미발표(연습 보고만)" if pend else ""))

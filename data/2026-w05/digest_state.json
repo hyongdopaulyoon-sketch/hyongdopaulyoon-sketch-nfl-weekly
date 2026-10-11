@@ -10,8 +10,11 @@
 "out": {
 "LV": [
 "Dont'e Thornton Jr.",
+"IR)",
+"Jack Bech",
 "Jalen Nailor",
 "Trey Zuhn III",
+"스냅 35%",
 "스냅 47%)",
 "스냅 5%)"
 ],
@@ -19,15 +22,21 @@
 "Carlton Davis III",
 "Channing Canada",
 "Christian Gonzalez",
+"Greg Van Roten",
+"IR)",
+"IR)",
 "Karon Prunty",
 "Mack Hollins",
+"Quintayvious Hutchins",
 "Reggie Gilliam",
 "★스냅 63%)",
 "★스냅 92%)",
 "★스냅 94%)",
+"스냅 23%",
 "스냅 24%)",
 "스냅 4%)",
-"스냅 5%)"
+"스냅 5%)",
+"스냅 54%"
 ]
 }
 },
@@ -41,13 +50,26 @@
 },
 "out": {
 "NYG": [
+"Braxton Berrios",
+"Brian Burns",
 "Chauncey Golston",
+"IR)",
+"IR)",
+"IR)",
 "Jason Pinnock",
+"Jaxson Dart",
+"스냅 12%",
 "스냅 50%)",
-"스냅 53%)"
+"스냅 53%)",
+"스냅 55%",
+"스냅 7%"
 ],
 "WAS": [
 "Charles Omenihu",
+"IR)",
+"IR)",
+"Jaylin Lane",
+"Leo Chenal",
 "Marcus Mariota",
 "Nick Cross",
 "Percy Butler",
@@ -56,8 +78,10 @@
 "★스냅 100%)",
 "스냅 24%)",
 "스냅 44%)",
+"스냅 53%",
 "스냅 54%)",
-"스냅 59%)"
+"스냅 59%)",
+"스냅 8%"
 ]
 }
 },
@@ -71,11 +95,23 @@
 },
 "out": {
 "HOU": [
-"Tank Dell"
+"IR)",
+"IR)",
+"Jaylin Smith",
+"Mario Edwards",
+"Tank Dell",
+"스냅 12%",
+"스냅 29%"
 ],
 "TEN": [
 "Amani Hooker",
-"★스냅 99%)"
+"Fernando Carmona",
+"IR)",
+"IR)",
+"Jackson Slater",
+"★스냅 98%",
+"★스냅 99%)",
+"스냅 51%"
 ]
 }
 },
@@ -92,17 +128,26 @@
 "Antoine Winfield Jr.",
 "Baker Mayfield",
 "Benjamin Morrison",
+"IR)",
+"Jalen McMillan",
 "SirVocea Dennis",
 "★스냅 94%)",
 "★스냅 96%)",
 "스냅 2%)",
-"스냅 28%)"
+"스냅 28%)",
+"스냅 3%"
 ],
 "DAL": [
 "Cobie Durant",
 "DeMarvion Overshown",
 "Drew Shelton",
-"스냅 1%)"
+"IR)",
+"IR)",
+"Jalen Thompson",
+"Jonathan Bullard",
+"스냅 1%)",
+"스냅 36%",
+"스냅 42%"
 ]
 }
 },
@@ -116,15 +161,24 @@
 },
 "out": {
 "CIN": [
+"Andrei Iosivas",
+"IR)",
+"IR)",
+"Jalen Davis",
 "Kyle Dugger",
-"★스냅 66%)"
+"★스냅 66%)",
+"스냅 52%",
+"스냅 53%"
 ],
 "MIA": [
 "Caleb Douglas",
+"De'Von Achane",
+"IR)",
 "Justin Joly",
 "Reese Taylor",
 "Rob Beal Jr.",
-"★스냅 86%)"
+"★스냅 86%)",
+"스냅 40%"
 ]
 }
 },
@@ -138,14 +192,26 @@
 },
 "out": {
 "CHI": [
+"Braxton Jones",
+"IR)",
 "Keyshaun Elliott",
 "Kyle Monangai",
+"★스냅 60%",
 "스냅 40%)"
 ],
 "GB": [
 "Chris Brooks",
+"Edgerrin Cooper",
+"IR)",
+"IR)",
+"IR)",
+"Jayden Reed",
 "Savion Williams",
-"스냅 35%)"
+"Zach Bako-Bewele",
+"★스냅 77%",
+"스냅 3%",
+"스냅 35%)",
+"스냅 5%"
 ]
 }
 },
@@ -159,20 +225,29 @@
 },
 "out": {
 "IND": [
+"Alec Pierce",
 "Arden Key",
 "Ashton Dulin",
+"IR)",
+"IR)",
 "Jaylon Carlies",
+"Micheal Clemons",
 "Will Mallory",
 "★스냅 63%)",
+"스냅 26%",
+"스냅 30%",
 "스냅 35%)",
 "스냅 59%)"
 ],
 "PIT": [
 "DeShon Elliott",
+"Derrick Harmon",
+"IR)",
 "Jamel Dean",
 "Michael Pittman",
 "★스냅 64%)",
-"★스냅 72%)"
+"★스냅 72%)",
+"스냅 36%"
 ]
 }
 },
@@ -186,23 +261,35 @@
 },
 "out": {
 "DEN": [
+"IR)",
+"IR)",
+"Jonah Coleman",
+"Pat Bryant",
 "Pat Surtain II",
 "Riley Moss",
-"★스냅 83%)"
+"★스냅 83%)",
+"스냅 40%",
+"스냅 57%"
 ],
 "LAC": [
 "Brenen Thompson",
+"David Njoku",
 "Derwin James",
 "Donte Jackson",
+"IR)",
+"IR)",
 "Joe Alt",
 "Kayode Awosika",
 "Quentin Johnston",
+"Rashawn Slater",
 "Trevor Penning",
 "★스냅 68%)",
 "★스냅 74%)",
 "★스냅 79%)",
 "★스냅 81%)",
 "★스냅 92%)",
+"★스냅 95%",
+"스냅 16%",
 "스냅 18%)",
 "스냅 33%)"
 ]
@@ -231,11 +318,20 @@
 ],
 "NYJ": [
 "Adonai Mitchell",
+"Arian Smith",
+"Braiden McGregor",
 "Breece Hall",
+"David Onyemata",
 "Dylan Parham",
 "Francisco Mauigoa",
+"IR)",
+"IR)",
+"IR)",
 "★스냅 79%)",
 "★스냅 82%)",
+"스냅 1%",
+"스냅 16%",
+"스냅 22%",
 "스냅 56%)"
 ]
 }
@@ -251,11 +347,18 @@
 "out": {
 "BUF": [
 "Ed Oliver",
+"IR)",
+"Jordan Hancock",
 "Josh Palmer",
+"스냅 20%",
 "스냅 36%)",
 "스냅 43%)"
 ],
-"LA": []
+"LA": [
+"IR)",
+"Terrance Ferguson",
+"스냅 42%"
+]
 }
 },
 "SF@SEA": {
@@ -268,19 +371,28 @@
 },
 "out": {
 "SF": [
+"C.J. West",
+"Demarcus Robinson",
+"IR)",
+"IR)",
 "James Thompson Jr.",
 "Kyle Juszczyk",
 "Marques Sigle",
 "Nick Bosa",
 "★스냅 68%)",
 "★스냅 84%)",
+"스냅 31%",
 "스냅 36%)",
+"스냅 44%",
 "스냅 47%)"
 ],
 "SEA": [
 "Chazz Surratt",
+"IR)",
+"Jadarian Price",
 "Julian Neal",
 "Zach Charbonnet",
+"스냅 31%",
 "스냅 4%)",
 "스냅 4%)"
 ]
@@ -296,18 +408,33 @@
 },
 "out": {
 "DET": [
+"Avonte Maddox",
 "Ben Bartch",
 "Brian Branch",
 "Cade Mays",
+"IR)",
+"IR)",
 "Rock Ya-Sin",
+"Thomas Harper",
 "★스냅 100%)",
+"스냅 36%",
+"스냅 45%",
 "스냅 57%)"
 ],
 "ARI": [
 "Andrew Wingard",
+"Hunter Long",
+"IR)",
+"IR)",
+"IR)",
 "Isaiah Adams",
+"Paris Johnson Jr.",
+"Will Johnson",
 "★스냅 68%)",
-"★스냅 81%)"
+"★스냅 81%)",
+"★스냅 83%",
+"★스냅 99%",
+"스냅 31%"
 ]
 }
 },
@@ -323,17 +450,23 @@
 "PHI": [
 "DeVonta Smith",
 "Drew Kendall",
+"IR)",
 "Marcus Epps",
 "Marquise Brown",
 "Saquon Barkley",
+"Tank Bigsby",
 "★스냅 100%)",
 "★스냅 94%)",
 "스냅 22%)",
+"스냅 29%",
 "스냅 32%)",
 "스냅 56%)"
 ],
 "JAX": [
-"Jaylon Jones"
+"Caleb Ransaw",
+"IR)",
+"Jaylon Jones",
+"스냅 20%"
 ]
 }
 },
@@ -348,14 +481,26 @@
 "out": {
 "BAL": [
 "Cam Jurgens",
+"Durham Smythe",
+"Ethan Pocic",
+"IR)",
+"IR)",
+"IR)",
+"Jovaughn Gwyn",
 "Lamar Jackson",
 "Trey Hendrickson",
 "★스냅 84%)",
+"★스냅 86%",
+"스냅 16%",
+"스냅 45%",
 "스냅 57%)"
 ],
 "ATL": [
+"A.J. Terrell",
+"IR)",
 "Yasir Abdullah",
-"스냅 39%)"
+"스냅 39%)",
+"스냅 9%"
 ]
 }
 },
@@ -371,17 +516,29 @@
 "MIN": [
 "Charles Demmings",
 "Christian Darrisaw",
+"Donovan Jackson",
+"IR)",
+"IR)",
+"Josh Oliver",
+"★스냅 70%",
 "★스냅 85%)",
-"스냅 3%)"
+"스냅 3%)",
+"스냅 50%"
 ],
 "NO": [
 "Anfernee Jennings",
+"IR)",
+"IR)",
 "Jeremiah Wright",
 "Kaden Elliss",
+"Kelvin Banks Jr.",
+"Travis Etienne",
 "★스냅 100%)",
-"스냅 28%)"
+"스냅 28%)",
+"스냅 46%",
+"스냅 59%"
 ]
 }
 },
-"_stamp": "10-11 11:59"
+"_stamp": "10-11 14:06"
 }
