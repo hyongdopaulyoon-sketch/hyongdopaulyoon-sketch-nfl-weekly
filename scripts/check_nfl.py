@@ -259,8 +259,9 @@ def main():
                 mg = (sh0 - sa0) + hs0; tt = (sa0 + sh0) - tl0
                 sp_side = (f"{h_} {hs0:+g}" if mg > 0 else f"{a_} {-hs0:+g}") if mg != 0 else None
                 tot_side = (f"Over {tl0:g}" if tt > 0 else f"Under {tl0:g}") if tt != 0 else None
-                if sp_side and tot_side:
-                    dirs = {"스프레드": sp_side, "총점": tot_side}; 방향들.append((k, sp_side, tot_side))
+                # 2026-10-12(보드 세션 BUF@LA): 스프레드·총점을 따로 기록 — 동률(None)인 시장은 옛 :D 행을 지운다(킥오프 전 마지막 발행 = 정본)
+                dirs = {kk: vv for kk, vv in (("스프레드", sp_side), ("총점", tot_side)) if vv}
+                방향들.append((k, sp_side, tot_side))
         else:
             a_, h_ = k.split("@")
             team, sp, ou, tot = dm.group(1), fnum(dm.group(2)), dm.group(3).replace("오버", "Over").replace("언더", "Under"), fnum(dm.group(4))
@@ -409,6 +410,11 @@ def main():
             if k not in gid_of:
                 continue
             for market, sd in (("spread", s_), ("total", t_)):
+                if sd is None:   # 동률 — 방향 없음: 옛 발행의 :D 행이 남지 않게 지운다(채점된 행은 둔다)
+                    rid = f"{gid_of[k]}:{market}:D"; rows_ = P.rd(P.PICKS)
+                    if any(r["id"] == rid and not r.get("result") for r in rows_):
+                        P.save([r for r in rows_ if r["id"] != rid]); print(f"방향 없음(동률): {rid} 옛 행 삭제")
+                    continue
                 P.lean(a.week, f"{gid_of[k]}:{market}", sd, sd.split()[-1], "-110", "발행 방향", suffix=":D", grade="방향(발행)")
     return 1 if 문제 else 0
 
