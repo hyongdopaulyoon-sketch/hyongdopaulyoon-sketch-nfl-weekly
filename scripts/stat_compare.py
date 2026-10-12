@@ -32,6 +32,55 @@ def cell(vals, t, fmt, high=True, unit="", n=None):
     return f"{fmt.format(v)}{unit} · {r}위({tier(r, n)})"
 
 
+def player_tables(a, h, RS, inj, g):
+    """🧑‍🤝‍🧑 팀별 선수 표(2026-10-12 Paul) — QB(예상 선발) · 러셔 2(캐리 순) · 리시버 4(타깃 순) · 키커. 값 + 리그 자격자 중 순위 + 부상 상태. 발행문이 두 표를 그대로 옮긴다."""
+    L = [f"- 🧑‍🤝‍🧑 **선수 표(2026 정규시즌 전체 · 순위는 리그 자격자(QB 드롭백 {QB_MIN_DB}+ · 리시버 타깃 {WR_MIN_TGT}+ · 러셔 캐리 {RB_MIN_CAR}+) 중 · 상태 = 이번 주 부상 보고 · 발행문 「- 선수 표:」 아래 두 표 그대로 · 값만, 점수 0)**:", ""]
+    if not RS:
+        return L + ["(pbp 없음 — 선수 표 생략)", ""]
+    T, P, NM = RS
+    qb = defaultdict(lambda: defaultdict(float)); rec = defaultdict(lambda: defaultdict(float)); rus = defaultdict(lambda: defaultdict(float)); gcount = defaultdict(set)
+    for (k, pid, gid), x in P.items():
+        tgt = {"qb": qb, "rec": rec, "rush": rus}[k]
+        for kk, vv in x.items():
+            tgt[pid][kk] += vv
+        gcount[pid].add(gid)
+    qpool = {p: (x["epa"] / x["db"]) for p, x in qb.items() if x.get("db", 0) >= QB_MIN_DB}
+    rpool = {p: x["yds"] / x["tgt"] for p, x in rec.items() if x.get("tgt", 0) >= WR_MIN_TGT}
+    upool = {p: x["yds"] / x["car"] for p, x in rus.items() if x.get("car", 0) >= RB_MIN_CAR}
+
+    def rk(pool, p):
+        return f"{_rank(pool, p)}/{len(pool)}위·{tier(_rank(pool, p), len(pool))}" if p in pool else "표본 적음"
+    DK = CB._depth_kicker(); KS = CB.kicker_stats()
+    for t in (a, h):
+        inj_t = inj.get(t) or {}
+        L += [f"| {t} 선수 | 역할 | 경기 | 표본 | 야드 | TD | 효율 | EPA/플레이 | 리그 순위 | 상태 |", "|---|---|---|---|---|---|---|---|---|---|"]
+        exp = inj_t.get("expected_qb") or ""
+        qbs = sorted((p for p in qb if NM.get(p, ("", ""))[1] == t and qb[p].get("db", 0) >= 10), key=lambda p: -qb[p]["db"])[:2]
+        for p in qbs:
+            x = qb[p]; att = x.get("att", 0) or 1; db = x.get("db", 0) or 1
+            tag = " (예상 선발)" if exp and N._same_person(NM[p][0], exp) else ""
+            st = CB.N._status_of(NM[p][0], inj_t)
+            L.append(f"| {NM[p][0]}{tag} | QB | {len(gcount[p])} | 드롭백 {int(db)} · 시도 {int(att)} | {int(x.get('yds', 0))} | 패스 {int(x.get('td', 0))} · INT {int(x.get('int', 0))}[운] | 완성 {100 * x.get('cmp', 0) / att:.0f}% · 야드/시도 {x.get('yds', 0) / att:.1f} · 색 {100 * x.get('sack', 0) / db:.1f}% | {x.get('epa', 0) / db:+.2f} | EPA {rk(qpool, p)} | {st or '—'} |")
+        if exp and not any(N._same_person(NM[p][0], exp) for p in qbs):
+            L.append(f"| {exp} (예상 선발) | QB | 0 | 2026 기록 없음 | — | — | — | — | 표본 적음 | {CB.N._status_of(exp, inj_t) or '—'} |")
+        for p in sorted((p for p in rus if NM.get(p, ("", ""))[1] == t), key=lambda p: -rus[p].get("car", 0))[:2]:
+            x = rus[p]; c = x.get("car", 0) or 1; st = CB.N._status_of(NM[p][0], inj_t)
+            L.append(f"| {NM[p][0]} | 러셔 | {len(gcount[p])} | 캐리 {int(c)} | {int(x.get('yds', 0))} | {int(x.get('td', 0))}[운] | 야드/캐리 {x.get('yds', 0) / c:.1f} · 성공률 {100 * x.get('suc', 0) / c:.0f}% | {x.get('epa', 0) / c:+.2f} | 야드/캐리 {rk(upool, p)} | {st or '—'} |")
+        for p in sorted((p for p in rec if NM.get(p, ("", ""))[1] == t), key=lambda p: -rec[p].get("tgt", 0))[:4]:
+            x = rec[p]; tg = x.get("tgt", 0) or 1; st = CB.N._status_of(NM[p][0], inj_t)
+            L.append(f"| {NM[p][0]} | 리시버 | {len(gcount[p])} | 타깃 {int(tg)} · 캐치 {int(x.get('cmp', 0))} | {int(x.get('yds', 0))} | {int(x.get('td', 0))}[운] | 캐치율 {100 * x.get('cmp', 0) / tg:.0f}% · 야드/타깃 {x.get('yds', 0) / tg:.1f} | {x.get('epa', 0) / tg:+.2f} | 야드/타깃 {rk(rpool, p)} | {st or '—'} |")
+        nm = DK.get(t, "")
+        mine = [r for r in KS if nm and N._same_person(r["kicker"], nm)]
+        if mine:
+            fa = sum(int(r[f"fg{i}_att"]) for r in mine for i in range(3)); fm = sum(int(r[f"fg{i}_made"]) for r in mine for i in range(3))
+            la, lm = sum(int(r["fg2_att"]) for r in mine), sum(int(r["fg2_made"]) for r in mine)
+            L.append(f"| {nm} | 키커 | — | FG {fm}/{fa}(2024~26) | — | — | FG {100 * fm / fa:.0f}% · 50+ {lm}/{la} | — | — | {CB.N._status_of(nm, inj_t) or '—'} |")
+        L.append("")
+    L.append("  ↳ [운] = TD·INT 는 해마다 안 이어지는 운 지표(근거 금지). 효율·EPA 는 실력 쪽. 표본이 「표본 적음」이면 순위 대신 값만 참고. 결장(Out/Doubtful)인 선수는 이미 라인에 반영 — 판 시각 뒤 확정만 새 정보.")
+    L.append("")
+    return L
+
+
 def build(a, h, RS, PRO, rt, inj, g):
     """→ 다이제스트 줄 목록. RS = stat_research.load() 결과, PRO = _team_profile(), rt = ratings dict."""
     L = ["- 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영)**:", "",

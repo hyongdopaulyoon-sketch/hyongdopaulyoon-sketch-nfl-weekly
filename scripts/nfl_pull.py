@@ -1212,6 +1212,7 @@ def ph_digest(week, force=False):
                         if str(x.get("n_starters_missing") or "0") not in ("0", "") else "")
                      + (f' (보고 {x.get("report_week")}주차)' if x.get("report_week") and str(x.get("report_week")) != str(week) else ""))
         L += SC.build(a, h, RS, PRO, rt, inj, g)   # 📊 스탯 비교(말로) — 2026-10-10 Paul 「숫자만 있어 이해 어려움」
+        L += SC.player_tables(a, h, RS, inj, g)    # 🧑‍🤝‍🧑 팀별 선수 표 — 2026-10-12 Paul 「선수별 스탯 표로」
         L += CB.h2h_block(a, h) + CB.team_compare_block(a, h, rt) + CB.kicker_block(a, h, g) + CB.referee_block(g)
         L += _balance_table(a, h, g, RS, inj, P26, PRO)
         L += _real_stats_block(a, h, RS, inj, g, m)
