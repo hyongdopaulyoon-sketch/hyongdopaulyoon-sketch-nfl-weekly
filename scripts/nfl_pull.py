@@ -1139,6 +1139,11 @@ def ph_digest(week, force=False):
     import context_blocks as CB
     import stat_compare as SC
     L += CB.collection_check(week, games, inj, rt, wd)
+    try:
+        import predictions as _PR
+        L += _PR.season_block(week)   # 📊 시즌 성적(2026-10-11 Paul)
+    except Exception as e:
+        log(f"  시즌 성적 블록 실패: {type(e).__name__}")
     prev_state = CB.load_state(week); prev_stamp = prev_state.pop("_stamp", "?"); new_state = {}
     # 서열표 — |엣지| 큰 순
     L += ["## 🏁 서열표 — 스프레드 엣지 순(모델 − 시장, 홈 기준 점)", "",

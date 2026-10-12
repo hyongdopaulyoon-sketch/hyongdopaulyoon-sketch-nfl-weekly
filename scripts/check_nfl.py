@@ -251,7 +251,16 @@ def main():
         dm = re.search(r"(?m)^- 방향:\s*스프레드\s+([A-Z]{2,3}) ([+-]?[\d.]+)\s*·\s*총점\s+(Over|Under|오버|언더) ([\d.]+)", body)
         dirs = {}
         if not dm:
-            문제.append(f"{k}: 방향 줄(「- 방향: 스프레드 팀 ±x · 총점 Over|Under y」) 없음/형식 오류 — 패스여도 필수")
+            # 7판(10/11 Paul 「방향·시장과 다름 헷갈림」): 방향 줄은 발행문에 없다 — 예측 점수와 시장 라인에서 자동 유도(동률이면 기록 안 함)
+            pm0 = re.search(r"(?m)^- 예측:.*?점수\s+([A-Z]{2,3})\s+(\d+(?:\.\d)?)\s*[–-]\s*([A-Z]{2,3})\s+(\d+(?:\.\d)?)", body)
+            hs0, tl0 = fnum(m["mkt_spread_home"]), fnum(m["mkt_total"])
+            if pm0 and hs0 is not None and tl0 is not None:
+                a_, h_ = k.split("@"); sa0, sh0 = float(pm0.group(2)), float(pm0.group(4))
+                mg = (sh0 - sa0) + hs0; tt = (sa0 + sh0) - tl0
+                sp_side = (f"{h_} {hs0:+g}" if mg > 0 else f"{a_} {-hs0:+g}") if mg != 0 else None
+                tot_side = (f"Over {tl0:g}" if tt > 0 else f"Under {tl0:g}") if tt != 0 else None
+                if sp_side and tot_side:
+                    dirs = {"스프레드": sp_side, "총점": tot_side}; 방향들.append((k, sp_side, tot_side))
         else:
             a_, h_ = k.split("@")
             team, sp, ou, tot = dm.group(1), fnum(dm.group(2)), dm.group(3).replace("오버", "Over").replace("언더", "Under"), fnum(dm.group(4))

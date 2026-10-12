@@ -242,6 +242,34 @@ def report(week=None):
     print("  (시장은 스프레드 쪽을 고르지 않는다 — 라인 자체가 시장 예측 점수 차 · 별점은 승자 자신감이지 돈의 가치가 아니다)")
 
 
+def season_block(week=None):
+    """📊 시즌 성적 — 다이제스트 머리·전달문·발행문 맨 위(2026-10-11 Paul 「여태까지 모든 게임 결과는 어떤지 따로 보고 싶다」).
+    주차별 시장(=우리 예측) 승자 적중 · 별점별 · 발행 승자 · 발행 방향(동전) · Paul 실베팅. 값만."""
+    import picks as P
+    rows = all_rows()
+    L = ["## 📊 시즌 성적(예측 = 시장 ML 승자 · 채점은 화요일, 끝난 경기만 · 방향·실베팅은 picks.csv)", "",
+         "| 주차 | 시장 예측 승자 | ★★★★ | ★★★ | ★★ | ★ | 발행 예측 승자 | 발행 방향(동전) | Paul 실베팅 |", "|---|---|---|---|---|---|---|---|---|"]
+    pk = [r for r in P.rd(P.PICKS) if r["result"] in ("W", "L", "P")]
+    def rec(xs, w="W", l="L"):
+        a = sum(1 for x in xs if x["result"] == w); b = sum(1 for x in xs if x["result"] == l)
+        return f"{a}-{b}" + (f" {100 * a / (a + b):.0f}%" if a + b else "")
+    weeks = sorted({int(r["week"]) for r in rows if r.get("final")})
+    for wk in weeks + ["시즌"]:
+        rs = rows if wk == "시즌" else [r for r in rows if int(r["week"]) == wk]
+        s = summary(rs); m = s.get("시장", {}); b = s.get("발행", {})
+        pks = pk if wk == "시즌" else [x for x in pk if int(x["week"]) == wk]
+        dirs = [x for x in pks if x["grade"].startswith("방향(발행)")]; bets = [x for x in pks if x["status"] == "placed"]
+        u = sum(P.fnum(x["units"]) or 0 for x in bets)
+        stars = m.get("stars", {})
+        L.append(f"| {wk if wk == '시즌' else str(wk) + '주'} | {rec(rs and [dict(result=r['result']) for r in rs if r['src'] == '시장' and r.get('final')])}"
+                 + "".join(f" | {stars[k][0]}-{stars[k][1]}" if k in stars else " | —" for k in (4, 3, 2, 1))
+                 + f" | {rec([dict(result=r['result']) for r in rs if r['src'] == '발행' and r.get('final')]) if b else '—'}"
+                 + f" | {rec(dirs)} | {rec(bets)}{f' {u:+.2f}u' if bets else ''} |")
+    L += ["", "  ↳ 읽는 법: 「시장 예측 승자」= 다이제스트 🔮(DK 배당 기준) 이길 팀이 실제로 이긴 비율 — 2018~25 기대치 ★★★★ 82% · ★★★ 71% · ★★ 61% · ★ 50%. "
+          "「발행 예측」은 발행 세션이 조정한 승자. 「방향」은 예측 점수에서 자동으로 나오는 스프레드·총점 쪽(실력 동전, 돈 아님). 소급(1~3주)은 마감 라인으로 채운 값.", ""]
+    return L
+
+
 def main():
     ap = argparse.ArgumentParser(); sub = ap.add_subparsers(dest="cmd", required=True)
     for c in ("record", "grade"):
