@@ -109,7 +109,7 @@ def h2h_block(a, h):
 # ───────────────────────── 🏟️ 팀 비교 ─────────────────────────
 def standings():
     """2026 정규시즌 결과 → {team: dict(w,l,t,div_w,div_l,conf_w,conf_l,home,away,pf,pa,last5,streak,div_rank,conf_rank)} — 동률은 승률순(NFL 타이브레이크 미적용)."""
-    rows = [x for x in games() if x["season"] == str(N.SEASON) and x["game_type"] == "REG" and x.get("result") not in ("", None)]
+    rows = [x for x in games() if x["season"] == str(N.SEASON) and x["game_type"] == "REG" and x.get("result") not in ("", None) and N._asof_ok(x.get("week"))]
     rows.sort(key=lambda x: (int(x["week"]), x["gameday"]))
     S = defaultdict(lambda: dict(w=0, l=0, t=0, dw=0, dl=0, cw=0, cl=0, hw=0, hl=0, aw=0, al=0, pf=0, pa=0, g=[], ats=[], ou=[]))
     for x in rows:
@@ -373,7 +373,7 @@ def collection_check(week, games_rows, inj, rt, wd):
         return f"| {item} | {val} | {'✅' if ok else '⚠️'} | {note} |"
     L = ["## 📋 수집 점검(스크립트 자동 — ⚠️ 는 발행 전에 리프레시 또는 웹 확인)", "", "| 항목 | 값 | 상태 | 비고 |", "|---|---|---|---|",
          row("경기 수(ESPN vs nflverse 일정)", f"{len(games_rows)} / {len(nv)}", len(games_rows) == len(nv) and len(nv) > 0, "다르면 바이·연기 확인"),
-         row("DK 스프레드·총점·ML", f"{sum(1 for g in games_rows if g.get('spread_home') and g.get('total') and g.get('ml_home'))}/{len(games_rows)}", all(g.get("spread_home") and g.get("total") and g.get("ml_home") for g in games_rows), "빈 경기는 💵 블록 결측"),
+         row("DK 스프레드·총점·ML(안 시작한 경기)", f"{sum(1 for g in games_rows if g.get('status') not in ('STATUS_FINAL', 'STATUS_IN_PROGRESS') and g.get('spread_home') and g.get('total') and g.get('ml_home'))}/{sum(1 for g in games_rows if g.get('status') not in ('STATUS_FINAL', 'STATUS_IN_PROGRESS'))}", all(g.get("spread_home") and g.get("total") and g.get("ml_home") for g in games_rows if g.get("status") not in ("STATUS_FINAL", "STATUS_IN_PROGRESS")), "끝난 경기는 가격이 빠지는 게 정상 · 빈 경기는 💵 블록 결측"),
          row("Polymarket 가격 파일", f"{poly}/{len(games_rows)}", poly >= len(games_rows), "없으면 「더 좋은 가격」 비교 불가"),
          row("부상 보고(최종 지정 / 연습 보고만)", f"{inj_final} / {inj_pend} 팀(이번 주 {len(teams)}팀)", inj_final + inj_pend >= len(teams), "연습 보고만이면 Out/Q 웹 확인 필수"),
          row("pbp 최신 주차", f"{max((int(k) for k in pbp_w if k.isdigit()), default=0)}주(이번 {week}주)", max((int(k) for k in pbp_w if k.isdigit()), default=0) >= week - 1, "한 주 뒤면 레이팅·📈 가 지난주 값"),

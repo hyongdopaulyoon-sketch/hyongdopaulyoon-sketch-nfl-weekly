@@ -47,6 +47,15 @@ QB_ADJ = 4.5          # 예상 선발 QB 가 시즌 주전과 다르면 −4.5�
 EDGE_SPREAD = (2.0, 3.5)   # (참고, 후보) 문턱 — 그 밑은 「시장 동조 — 비집행」
 EDGE_TOTAL = (3.0, 5.0)
 THIN_PLAYS = 150      # 2026 플레이 수가 이 밑이면 ※(값 얇음 — 후보 제외)
+AS_OF_WEEK = None     # 2026-10-11 누수 차단: 주 N 작업 중엔 주 N 이상의 플레이·결과를 쓰지 않는다(main 이 --week 로 설정). None 이면 전부 사용
+
+
+def _asof_ok(week_value):
+    """pbp/games 행의 week 가 AS_OF_WEEK 보다 앞이면 True(AS_OF_WEEK 미설정이면 항상 True)."""
+    try:
+        return AS_OF_WEEK is None or int(week_value) < AS_OF_WEEK
+    except (TypeError, ValueError):
+        return True
 
 
 # ───────────────────────── 공용 ─────────────────────────
@@ -151,6 +160,8 @@ def _team_week_epa(pbp_path, season):
         if e is None or not r.get("posteam") or not r.get("defteam"):
             continue
         wk = int(r["week"]); kind = "pass" if r["play_type"] == "pass" else "rush"
+        if season == SEASON and not _asof_ok(wk):
+            continue
         o = acc[(r["posteam"], wk)]; d = acc[(r["defteam"], wk)]
         o["off_epa"] += e; o["off_n"] += 1; o[f"off_{kind}_epa"] += e; o[f"off_{kind}_n"] += 1
         d["def_epa"] += e; d["def_n"] += 1; d[f"def_{kind}_epa"] += e; d[f"def_{kind}_n"] += 1
@@ -164,7 +175,7 @@ def ph_ratings(week, force=False):
     prev = _team_week_epa(os.path.join(CACHE, f"play_by_play_{SEASON - 1}.csv.gz"), SEASON - 1)
     teams = sorted({t for t, _ in cur} | {t for t, _ in prev})
     last_wk = max((w for _, w in cur), default=0)
-    games = [g for g in rd(os.path.join(CACHE, "games.csv")) if g["season"] == str(SEASON) and g["game_type"] == "REG" and g.get("home_score")]
+    games = [g for g in rd(os.path.join(CACHE, "games.csv")) if g["season"] == str(SEASON) and g["game_type"] == "REG" and g.get("home_score") and _asof_ok(g.get("week"))]
     pts = defaultdict(lambda: [0.0, 0.0, 0])   # for, against, games
     for g in games:
         hs, as_ = fnum(g["home_score"]), fnum(g["away_score"])
@@ -462,7 +473,7 @@ def _qb1_by_team():
                 dc[r["team"]] = {"dt": r["dt"], "name": r["player_name"]}
     db = defaultdict(lambda: defaultdict(int))
     for r in rd(os.path.join(CACHE, f"play_by_play_{SEASON}.csv.gz")):
-        if r.get("play_type") == "pass" and r.get("passer_player_name") and r.get("posteam"):
+        if r.get("play_type") == "pass" and r.get("passer_player_name") and r.get("posteam") and _asof_ok(r.get("week")):
             db[r["posteam"]][r["passer_player_name"]] += 1
     main_qb = {t: max(v, key=v.get) for t, v in db.items()}
     return {t: v["name"] for t, v in dc.items()}, main_qb
@@ -473,7 +484,7 @@ def _last_starter_by_team():
     (10/11 SEA: 일정표 3~5주 Drew Lock, 실제 3·4주 Darnold 선발 → 모델 −4.5 오적용)."""
     db = defaultdict(lambda: defaultdict(int))
     for r in rd(os.path.join(CACHE, f"play_by_play_{SEASON}.csv.gz")):
-        if r.get("season_type", "REG") == "REG" and r.get("qb_dropback") == "1" and r.get("passer_player_name") and r.get("posteam"):
+        if r.get("season_type", "REG") == "REG" and r.get("qb_dropback") == "1" and r.get("passer_player_name") and r.get("posteam") and _asof_ok(r.get("week")):
             db[(r["posteam"], int(r["week"]))][r["passer_player_name"]] += 1
     out = {}
     for (t, wk), v in db.items():
@@ -685,7 +696,7 @@ def _real_stats():
     """2026 플레이별 기록 → (팀-경기 합계, 선수-경기 합계, 이름) — stat_research.load 재사용(진행 중 시즌은 캐시 안 함)."""
     import stat_research as SR
     try:
-        return SR.load(SEASON, cache=False)
+        return SR.load(SEASON, cache=False, max_week=AS_OF_WEEK)
     except Exception as e:
         log(f"  실제 수치 계산 실패: {type(e).__name__}")
         return None
@@ -807,7 +818,7 @@ def _team_profile():
     o = defaultdict(lambda: defaultdict(float)); d = defaultdict(lambda: defaultdict(float))
     games = defaultdict(set); rec = defaultdict(lambda: defaultdict(lambda: [0, 0.0])); rus = defaultdict(lambda: defaultdict(lambda: [0, 0.0]))
     for r in rd(os.path.join(CACHE, f"play_by_play_{SEASON}.csv.gz")):
-        if r.get("season_type", "REG") != "REG" or not r.get("posteam") or r.get("play_type") not in ("pass", "run"):
+        if r.get("season_type", "REG") != "REG" or not r.get("posteam") or r.get("play_type") not in ("pass", "run") or not _asof_ok(r.get("week")):
             continue
         pt, dt = r["posteam"], r["defteam"]; epa = fnum(r.get("epa")) or 0.0; suc = fnum(r.get("success")) or 0.0
         games[pt].add(r["game_id"]); games[dt].add(r["game_id"])
@@ -1135,6 +1146,9 @@ def ph_digest(week, force=False):
         PRED = {}
     now = datetime.now()
     L = [f"# NFL {SEASON} Week {week} — 주간 다이제스트 (생성 {now:%m-%d %H:%M} PT · ESPN DraftKings 라인 · nflverse EPA)", ""]
+    _fin = sum(1 for g in games if g.get("status") in ("STATUS_FINAL", "STATUS_IN_PROGRESS"))
+    if _fin:
+        L += [f"> ⚠️ 이 판은 이번 주 {_fin}경기가 시작·종료된 뒤 생성됐다. 레이팅·모델·📈·📊·순위는 **{week}주차 결과를 뺀 값**(AS-OF {week}주, 2026-10-11 누수 차단)이고, 끝난 경기의 DK 가격 칸은 비어 있다. 채점·관찰 기록은 킥오프 전 판 값으로만.", ""]
     L += ["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES] + [""]
     import context_blocks as CB
     import stat_compare as SC
@@ -1282,6 +1296,8 @@ def main():
     log(f"NFL {SEASON} week {week}")
     if a.phase == "results":
         ph_results(week, a.force); return
+    global AS_OF_WEEK
+    AS_OF_WEEK = week
     for name, fn in PHASES:
         if a.phase and a.phase != name:
             continue

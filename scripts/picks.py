@@ -46,7 +46,13 @@ def suggest(week):
     rows = rd(PICKS)
     keep = {r["id"]: r for r in rows}
     n_new = n_upd = 0
+    from datetime import timezone as _tz
+    _now = datetime.now(_tz.utc)
+    _kick = {g["game_id"]: g.get("kickoff_utc") for g in rd(os.path.join(wd, "games.csv"))}
     for m in model:
+        _k = _kick.get(m["game_id"])
+        if _k and datetime.strptime(_k, "%Y-%m-%dT%H:%MZ").replace(tzinfo=_tz.utc) <= _now:
+            continue   # 킥오프 지난 경기는 동결(2026-10-11 누수: 15:44 리프레시가 끝난 경기 관찰 행을 결과 포함 모델로 덮어씀)
         for market, side, line, val, edge, grade, p in (
                 ("spread", m["spread_side"], m["mkt_spread_home"], m["model_margin_home"], m["edge_spread"], m["spread_grade"], m["p_cover"]),
                 ("total", m["total_side"], m["mkt_total"], m["model_total"], m["edge_total"], m["total_grade"], m["p_total"])):

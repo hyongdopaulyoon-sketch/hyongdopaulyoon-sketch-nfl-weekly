@@ -26,7 +26,7 @@ def tm(t):
     return TEAM.get(t, t)
 
 
-def load(season, cache=True):
+def load(season, cache=True, max_week=None):
     """팀-경기 단위 공격 합계 + 선수-경기 단위 합계 + 선수 이름(pickle 캐시 — 진행 중 시즌은 cache=False)."""
     pk = os.path.join(HIST, f"research_{season}.pkl")
     if cache and os.path.exists(pk):
@@ -42,6 +42,8 @@ def load(season, cache=True):
         for r in csv.DictReader(fh):
             if r.get("season_type", "REG") != "REG" or not r.get("posteam") or not r.get("defteam"):
                 continue
+            if max_week is not None and int(r["week"]) >= max_week:
+                continue   # AS-OF 컷(2026-10-11): 주 N 다이제스트는 주 N 플레이를 모른다
             k = (r["game_id"], int(r["week"]), tm(r["posteam"]), tm(r["defteam"]))
             dk = (r["game_id"], k[2], r.get("fixed_drive"))
             if r.get("fixed_drive"):

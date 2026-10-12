@@ -40,69 +40,6 @@
 ]
 }
 },
-"CHI@GB": {
-"spread_home": "1.5",
-"total": "46.5",
-"ml": "?/?",
-"qb": {
-"CHI": "Tyson Bagent",
-"GB": "Jordan Love"
-},
-"out": {
-"CHI": [
-"Braxton Jones",
-"IR)",
-"Keyshaun Elliott",
-"Kyle Monangai",
-"★스냅 60%",
-"스냅 40%)"
-],
-"GB": [
-"Chris Brooks",
-"Edgerrin Cooper",
-"IR)",
-"IR)",
-"IR)",
-"Jayden Reed",
-"Savion Williams",
-"Zach Bako-Bewele",
-"★스냅 77%",
-"스냅 3%",
-"스냅 35%)",
-"스냅 5%"
-]
-}
-},
-"HOU@TEN": {
-"spread_home": "6.5",
-"total": "37.5",
-"ml": "?/?",
-"qb": {
-"HOU": "C.J. Stroud",
-"TEN": "Cam Ward"
-},
-"out": {
-"HOU": [
-"IR)",
-"IR)",
-"Jaylin Smith",
-"Mario Edwards",
-"Tank Dell",
-"스냅 12%",
-"스냅 29%"
-],
-"TEN": [
-"Amani Hooker",
-"Fernando Carmona",
-"IR)",
-"IR)",
-"Jackson Slater",
-"★스냅 98%",
-"★스냅 99%)",
-"스냅 51%"
-]
-}
-},
 "NYG@WAS": {
 "spread_home": "-3.5",
 "total": "41.5",
@@ -148,6 +85,67 @@
 ]
 }
 },
+"HOU@TEN": {
+"spread_home": "6.5",
+"total": "37.5",
+"ml": "?/?",
+"qb": {
+"HOU": "C.J. Stroud",
+"TEN": "Cam Ward"
+},
+"out": {
+"HOU": [
+"IR)",
+"IR)",
+"Jaylin Smith",
+"Mario Edwards",
+"Tank Dell",
+"스냅 12%",
+"스냅 29%"
+],
+"TEN": [
+"Amani Hooker",
+"Fernando Carmona",
+"IR)",
+"IR)",
+"Jackson Slater",
+"★스냅 98%",
+"★스냅 99%)",
+"스냅 51%"
+]
+}
+},
+"CIN@MIA": {
+"spread_home": "7.0",
+"total": "44.5",
+"ml": "?/?",
+"qb": {
+"CIN": "Joe Burrow",
+"MIA": "Malik Willis"
+},
+"out": {
+"CIN": [
+"Andrei Iosivas",
+"IR)",
+"IR)",
+"Jalen Davis",
+"Kyle Dugger",
+"★스냅 66%)",
+"스냅 52%",
+"스냅 53%"
+],
+"MIA": [
+"Caleb Douglas",
+"De'Von Achane",
+"IR)",
+"Justin Joly",
+"Reese Taylor",
+"Rob Beal Jr.",
+"★스냅 86%)",
+"스냅 40%"
+]
+}
+},
 "TB@DAL": {
 "spread_home": "-9.5",
 "total": "49.5",
@@ -184,34 +182,72 @@
 ]
 }
 },
-"CIN@MIA": {
-"spread_home": "7.0",
-"total": "44.5",
+"CHI@GB": {
+"spread_home": "1.5",
+"total": "46.5",
 "ml": "?/?",
 "qb": {
-"CIN": "Joe Burrow",
-"MIA": "Malik Willis"
+"CHI": "Tyson Bagent",
+"GB": "Jordan Love"
 },
 "out": {
-"CIN": [
-"Andrei Iosivas",
+"CHI": [
+"Braxton Jones",
 "IR)",
-"IR)",
-"Jalen Davis",
-"Kyle Dugger",
-"★스냅 66%)",
-"스냅 52%",
-"스냅 53%"
+"Keyshaun Elliott",
+"Kyle Monangai",
+"★스냅 60%",
+"스냅 40%)"
 ],
-"MIA": [
-"Caleb Douglas",
-"De'Von Achane",
+"GB": [
+"Chris Brooks",
+"Edgerrin Cooper",
 "IR)",
-"Justin Joly",
-"Reese Taylor",
-"Rob Beal Jr.",
-"★스냅 86%)",
-"스냅 40%"
+"IR)",
+"IR)",
+"Jayden Reed",
+"Savion Williams",
+"Zach Bako-Bewele",
+"★스냅 77%",
+"스냅 3%",
+"스냅 35%)",
+"스냅 5%"
+]
+}
+},
+"IND@PIT": {
+"spread_home": "-3.0",
+"total": "41.5",
+"ml": "?/?",
+"qb": {
+"IND": "Daniel Jones",
+"PIT": "Aaron Rodgers"
+},
+"out": {
+"IND": [
+"Alec Pierce",
+"Arden Key",
+"Ashton Dulin",
+"IR)",
+"IR)",
+"Jaylon Carlies",
+"Micheal Clemons",
+"Will Mallory",
+"★스냅 63%)",
+"스냅 26%",
+"스냅 30%",
+"스냅 35%)",
+"스냅 59%)"
+],
+"PIT": [
+"DeShon Elliott",
+"Derrick Harmon",
+"IR)",
+"Jamel Dean",
+"Michael Pittman",
+"★스냅 64%)",
+"★스냅 72%)",
+"스냅 36%"
 ]
 }
 },
@@ -259,35 +295,69 @@
 ]
 }
 },
-"PHI@JAX": {
-"spread_home": "-7.5",
-"total": "41.5",
+"CLE@NYJ": {
+"spread_home": "-2.5",
+"total": "38.5",
 "ml": "?/?",
 "qb": {
-"PHI": "Jalen Hurts",
-"JAX": "Trevor Lawrence"
+"CLE": "Deshaun Watson",
+"NYJ": "Geno Smith"
 },
 "out": {
-"PHI": [
-"DeVonta Smith",
-"Drew Kendall",
-"IR)",
-"Marcus Epps",
-"Marquise Brown",
-"Saquon Barkley",
-"Tank Bigsby",
-"★스냅 100%)",
-"★스냅 94%)",
+"CLE": [
+"Carsen Ryan",
+"Dillon Gabriel",
+"Kalia Davis",
+"Mason Graham",
+"Mike Hall Jr.",
+"Teven Jenkins",
+"Tylan Wallace",
+"스냅 2%)",
 "스냅 22%)",
-"스냅 29%",
-"스냅 32%)",
-"스냅 56%)"
+"스냅 49%)"
 ],
-"JAX": [
-"Caleb Ransaw",
+"NYJ": [
+"Adonai Mitchell",
+"Arian Smith",
+"Braiden McGregor",
+"Breece Hall",
+"David Onyemata",
+"Dylan Parham",
+"Francisco Mauigoa",
 "IR)",
-"Jaylon Jones",
-"스냅 20%"
+"IR)",
+"IR)",
+"★스냅 79%)",
+"★스냅 82%)",
+"스냅 1%",
+"스냅 16%",
+"스냅 22%",
+"스냅 56%)"
+]
+}
+},
+"BUF@LA": {
+"spread_home": "-3.5",
+"total": "54.5",
+"ml": "+150/-180",
+"qb": {
+"BUF": "Josh Allen",
+"LA": "Matthew Stafford"
+},
+"out": {
+"BUF": [
+"Ed Oliver",
+"IR)",
+"Jordan Hancock",
+"Josh Palmer",
+"스냅 20%",
+"스냅 36%)",
+"스냅 43%)"
+],
+"LA": [
+"IR)",
+"Terrance Ferguson",
+"스냅 42%"
 ]
 }
 },
@@ -328,42 +398,6 @@
 ]
 }
 },
-"IND@PIT": {
-"spread_home": "-3.0",
-"total": "41.5",
-"ml": "?/?",
-"qb": {
-"IND": "Daniel Jones",
-"PIT": "Aaron Rodgers"
-},
-"out": {
-"IND": [
-"Alec Pierce",
-"Arden Key",
-"Ashton Dulin",
-"IR)",
-"IR)",
-"Jaylon Carlies",
-"Micheal Clemons",
-"Will Mallory",
-"★스냅 63%)",
-"스냅 26%",
-"스냅 30%",
-"스냅 35%)",
-"스냅 59%)"
-],
-"PIT": [
-"DeShon Elliott",
-"Derrick Harmon",
-"IR)",
-"Jamel Dean",
-"Michael Pittman",
-"★스냅 64%)",
-"★스냅 72%)",
-"스냅 36%"
-]
-}
-},
 "MIN@NO": {
 "spread_home": "2.5",
 "total": "41.5",
@@ -397,72 +431,6 @@
 "스냅 28%)",
 "스냅 46%",
 "스냅 59%"
-]
-}
-},
-"BUF@LA": {
-"spread_home": "-3.5",
-"total": "54.5",
-"ml": "+150/-180",
-"qb": {
-"BUF": "Josh Allen",
-"LA": "Matthew Stafford"
-},
-"out": {
-"BUF": [
-"Ed Oliver",
-"IR)",
-"Jordan Hancock",
-"Josh Palmer",
-"스냅 20%",
-"스냅 36%)",
-"스냅 43%)"
-],
-"LA": [
-"IR)",
-"Terrance Ferguson",
-"스냅 42%"
-]
-}
-},
-"CLE@NYJ": {
-"spread_home": "-2.5",
-"total": "38.5",
-"ml": "?/?",
-"qb": {
-"CLE": "Deshaun Watson",
-"NYJ": "Geno Smith"
-},
-"out": {
-"CLE": [
-"Carsen Ryan",
-"Dillon Gabriel",
-"Kalia Davis",
-"Mason Graham",
-"Mike Hall Jr.",
-"Teven Jenkins",
-"Tylan Wallace",
-"스냅 2%)",
-"스냅 22%)",
-"스냅 49%)"
-],
-"NYJ": [
-"Adonai Mitchell",
-"Arian Smith",
-"Braiden McGregor",
-"Breece Hall",
-"David Onyemata",
-"Dylan Parham",
-"Francisco Mauigoa",
-"IR)",
-"IR)",
-"IR)",
-"★스냅 79%)",
-"★스냅 82%)",
-"스냅 1%",
-"스냅 16%",
-"스냅 22%",
-"스냅 56%)"
 ]
 }
 },
@@ -540,5 +508,37 @@
 ]
 }
 },
-"_stamp": "10-11 20:56"
+"PHI@JAX": {
+"spread_home": "-7.5",
+"total": "41.5",
+"ml": "?/?",
+"qb": {
+"PHI": "Jalen Hurts",
+"JAX": "Trevor Lawrence"
+},
+"out": {
+"PHI": [
+"DeVonta Smith",
+"Drew Kendall",
+"IR)",
+"Marcus Epps",
+"Marquise Brown",
+"Saquon Barkley",
+"Tank Bigsby",
+"★스냅 100%)",
+"★스냅 94%)",
+"스냅 22%)",
+"스냅 29%",
+"스냅 32%)",
+"스냅 56%)"
+],
+"JAX": [
+"Caleb Ransaw",
+"IR)",
+"Jaylon Jones",
+"스냅 20%"
+]
+}
+},
+"_stamp": "10-11 21:15"
 }
