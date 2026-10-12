@@ -47,7 +47,7 @@ def pick_snapshot(wd, txt, override=None):
     """귀속 대조 기준판 — 발행문이 본 판(MLB 9/21 「라운드별 기준판 대조」 교훈: 현재판과 대조하면 경기 뒤 갱신된 값으로 오탐).
     우선순위: --digest 지정 > 발행문의 「다이제스트 MM-DD HH:MM」 > 「판 HH:MM」 이하 최신 스냅샷(오늘) > DIGEST.md."""
     if override:
-        return override
+        return override if os.path.exists(override) else os.path.join(wd, override)   # 10/12: 파일 이름만 줘도 wd 안에서 찾는다
     snaps = sorted(f for f in os.listdir(wd) if re.fullmatch(r"DIGEST-\d{4}-\d{4}\.md", f)) if os.path.isdir(wd) else []
     m = re.search(r"다이제스트\s*(?:기준은\s*)?(\d{2})[-/](\d{2})\s+(\d{1,2}):(\d{2})", txt)
     if m:
@@ -65,7 +65,19 @@ def pick_snapshot(wd, txt, override=None):
 
 def digest_sections(p):
     txt = open(p, encoding="utf-8").read() if os.path.exists(p) else ""
-    return {m.group(1): m.group(2) for m in re.finditer(r"(?ms)^## ([A-Z]{2,3}@[A-Z]{2,3})  [^\n]*\n(.*?)(?=^## |\Z)", txt)}
+    return {m.group(1): m.group(2) for m in re.finditer(r"(?ms)^## (?:🏈\s*)?([A-Z]{2,3}@[A-Z]{2,3})\s*(?:—|  )[^\n]*\n(.*?)(?=^## |\Z)", txt)}   # 10/12: 「## 🏈 A@H —」 머리도
+
+
+def snapshot_market(p):
+    """기준판 서열표 → {A@H: (시장 스프레드(홈), 시장 총점)} — 리프레시 뒤 판과 대조하지 않게(2026-10-12 BUF@LA 54.5 vs 현재 55.5)."""
+    out = {}
+    if not os.path.exists(p):
+        return out
+    for ln in open(p, encoding="utf-8"):
+        m = re.match(r"\| \d+ \| ([A-Z]{2,3}@[A-Z]{2,3}) \| [^|]* \| ([+-]?[\d.]+) \| [^|]* \| [^|]* \| [^|]* \| ([\d.]+) \|", ln)
+        if m:
+            out[m.group(1)] = (m.group(2), m.group(3))
+    return out
 
 
 def attribution(k, body, dsec):
@@ -199,6 +211,7 @@ def main():
     snap = pick_snapshot(wd, txt, a.digest)
     games_by = {f'{r["away"]}@{r["home"]}': r for r in games}
     dsecs = digest_sections(snap)
+    snap_mkt = snapshot_market(snap)
     mkt_pred = {r["game"]: r for r in rd(os.path.join(wd, "predictions.csv")) if r.get("src") == "시장"}
     keys = [f'{g["away"]}@{g["home"]}' for g in games]
     missing = [k for k in keys if k not in secs]
@@ -208,6 +221,8 @@ def main():
         if k not in model:
             문제.append(f"{k}: 이번 주 경기가 아님(경기 키 오타?)"); continue
         m = model[k]
+        if k in snap_mkt:   # 기준판의 시장 값으로 대조(리프레시 뒤 판 오탐 방지)
+            m = {**m, "mkt_spread_home": snap_mkt[k][0], "mkt_total": snap_mkt[k][1]}
         mk = re.search(r"스프레드 홈 ([+-]?[\d.]+)\s*·\s*총점 ([\d.]+)", body)
         if not mk:
             문제.append(f"{k}: 시장 줄 형식(「스프레드 홈 x · 총점 y」) 없음")
