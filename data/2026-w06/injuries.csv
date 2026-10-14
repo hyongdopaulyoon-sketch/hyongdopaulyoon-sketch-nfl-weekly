@@ -1,0 +1,29 @@
+﻿team,report_week,expected_qb,depth_qb1,season_main_qb,qb_report,qb_flag,qb_note,n_out,n_doubtful,n_questionable,out,doubtful,questionable,final_pending,n_dnp,n_limited,dnp,limited,n_starters_missing
+ARI,6,Jacoby Brissett,Jacoby Brissett,J.Brissett,,,,3,0,0,Hunter Long(TE · 스냅 32% · IR) · Paris Johnson Jr.(OL · ★스냅 99% · IR) · Isaiah Adams(OL · ★스냅 71% · IR),,,,0,0,,,2
+ATL,6,Michael Penix Jr.,Michael Penix Jr.,M.Penix,,,,1,0,0,Yasir Abdullah(LB · 스냅 36% · IR),,,,0,0,,,0
+BAL,6,Lamar Jackson,Lamar Jackson,L.Jackson,,,,3,0,0,Ethan Pocic(OL · 스냅 16% · IR) · Durham Smythe(TE · 스냅 40% · IR) · Jovaughn Gwyn(OL · ★스냅 72% · IR),,,,0,0,,,1
+BUF,6,Josh Allen,Josh Allen,J.Allen,,,,0,0,0,,,,,0,0,,,0
+CAR,6,Bryce Young,Bryce Young,B.Young,,,,4,0,0,Jaycee Horn(DB · ★스냅 81% · IR) · Xavier Legette(WR · 스냅 50% · IR) · Jonathon Brooks(RB · 스냅 30% · IR) · Cam Jackson(DL · 스냅 54% · IR),,,,0,0,,,1
+CHI,6,Tyson Bagent,Caleb Williams,T.Bagent,,백업 QB 선발 — 뎁스차트 QB1 Caleb Williams 대신 예상 선발 Tyson Bagent,,2,0,0,Montez Sweat(DL · ★스냅 72% · IR) · Braxton Jones(OL · 스냅 46% · IR),,,,0,0,,,1
+CLE,6,Deshaun Watson,Deshaun Watson,D.Watson,,,,1,0,0,Raheim Sanders(RB · 스냅 35% · IR),,,,0,0,,,0
+DAL,6,Dak Prescott,Dak Prescott,D.Prescott,,,,2,0,0,Jonathan Bullard(DL · 스냅 36% · IR) · Jalen Thompson(DB · 스냅 42% · IR),,,,0,0,,,0
+DEN,6,Bo Nix,Bo Nix,B.Nix,,,,1,0,0,Pat Bryant(WR · 스냅 53% · IR),,,미발표,2,1,Talanoa Hufanga(S · ★스냅 88%) · Pat Surtain II(CB),Riley Moss(CB · ★스냅 76%),1
+GB,6,Jordan Love,Jordan Love,J.Love,,,,2,0,0,Chris Brooks(RB · 스냅 29% · IR) · Edgerrin Cooper(LB · ★스냅 65% · IR),,,,0,0,,,1
+HOU,6,C.J. Stroud,C.J. Stroud,C.Stroud,,,,1,0,0,Mario Edwards(DL · 스냅 30% · IR),,,,0,0,,,0
+IND,6,Daniel Jones,Daniel Jones,D.Jones,,,,1,0,0,Arden Key(DL · ★스냅 61% · IR),,,,0,0,,,1
+JAX,6,Trevor Lawrence,Trevor Lawrence,T.Lawrence,,,,2,0,0,Anton Harrison(OL · ★스냅 86% · IR) · Caleb Ransaw(DB · 스냅 30% · IR),,,,0,0,,,1
+KC,6,Patrick Mahomes,Patrick Mahomes,P.Mahomes,,,,1,0,0,Tyquan Thornton(WR · 스냅 56% · IR),,,,0,0,,,0
+LA,6,Matthew Stafford,Matthew Stafford,M.Stafford,,,,1,0,0,Terrance Ferguson(TE · 스냅 26% · IR),,,,0,0,,,0
+LAC,6,Justin Herbert,Justin Herbert,J.Herbert,,,,2,0,0,Rashawn Slater(OL · ★스냅 92% · IR) · Trevor Penning(OL · ★스냅 80% · IR),,,,0,0,,,2
+LV,6,Kirk Cousins,Kirk Cousins,K.Cousins,,,,1,0,0,Jack Bech(WR · 스냅 16% · IR),,,,0,0,,,0
+NE,6,Drake Maye,Drake Maye,D.Maye,,,,3,0,0,Greg Van Roten(OL · 스냅 35% · IR) · Mack Hollins(WR · 스냅 58% · IR) · Reggie Gilliam(RB · 스냅 18% · IR),,,,0,0,,,0
+NO,6,Tyler Shough,Tyler Shough,T.Shough,,,,1,0,0,Travis Etienne(RB · 스냅 38% · IR),,,,0,0,,,0
+NYG,6,Jameis Winston,Jameis Winston,J.Winston,,,,3,0,0,Braxton Berrios(WR · 스냅 6% · IR) · Brian Burns(LB · 스냅 42% · IR) · Chauncey Golston(DL · 스냅 48% · IR),,,,0,0,,,0
+NYJ,6,Geno Smith,Geno Smith,G.Smith,,,,1,0,0,Braiden McGregor(LB · 스냅 8% · IR),,,,0,0,,,0
+PHI,6,Jalen Hurts,Jalen Hurts,J.Hurts,,,,1,0,0,Tank Bigsby(RB · 스냅 26% · IR),,,,0,0,,,0
+PIT,6,Aaron Rodgers,Aaron Rodgers,A.Rodgers,,,,2,0,0,Michael Pittman(WR · ★스냅 72% · IR) · Derrick Harmon(DL · 스냅 25% · IR),,,,0,0,,,1
+SEA,6,Sam Darnold,Sam Darnold,S.Darnold,,,QB 연습 Drew Lock Limited(최종 지정 미발표 — 잠정) · 일정표 예상 Drew Lock 는 묵은 값 — 최근 5주 선발·뎁스차트 QB1 Sam Darnold 로 정정,1,0,0,Jadarian Price(RB · 스냅 28% · IR),,,미발표,2,4,Chazz Surratt(LB) · Drake Thomas(LB · ★스냅 80%),Leonard Williams(DT · ★스냅 71%) · Drew Lock(QB) · Jaxon Smith-Njigba(WR · ★스냅 86%) · Zach Charbonnet(RB),1
+SF,6,Brock Purdy,Brock Purdy,B.Purdy,,,,1,0,0,Dre Greenlaw(LB · ★스냅 66% · IR),,,,0,0,,,1
+TB,6,Jalon Daniels,Baker Mayfield,B.Mayfield,,백업 QB 선발 — 뎁스차트 QB1 Baker Mayfield 대신 예상 선발 Jalon Daniels,,1,0,0,Jalen McMillan(WR · 스냅 3% · IR),,,,0,0,,,0
+TEN,6,Cam Ward,Cam Ward,C.Ward,,,,2,0,0,Jackson Slater(OL · ★스냅 98% · IR) · Fernando Carmona(OL · 스냅 2% · IR),,,,0,0,,,1
+WAS,6,Jayden Daniels,Jayden Daniels,J.Daniels,,,,2,0,0,Leo Chenal(LB · 스냅 24% · IR) · Jaylin Lane(WR · 스냅 5% · IR),,,,0,0,,,0
