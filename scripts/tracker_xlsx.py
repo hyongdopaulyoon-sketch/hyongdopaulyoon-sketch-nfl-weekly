@@ -1,5 +1,10 @@
 """NFL 픽 추적기(xlsx) — 정본은 data/picks.csv, 이 파일은 보기용으로 매번 다시 만든다(손으로 고치지 말 것).
   python tracker_xlsx.py  → data/NFL_픽_추적기.xlsx (시트: 픽로그 · 적중률 · 주별)"""
+import sys
+try:
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+except Exception:
+    pass
 import csv
 import os
 from collections import defaultdict
