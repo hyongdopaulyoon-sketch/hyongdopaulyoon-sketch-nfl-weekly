@@ -55,7 +55,7 @@
 },
 "TEN@IND": {
 "spread_home": "-7.0",
-"total": "43.5",
+"total": "44.5",
 "ml": "+270/-340",
 "qb": {
 "TEN": "Cam Ward",
@@ -80,7 +80,7 @@
 "BUF@LV": {
 "spread_home": "5.5",
 "total": "53.5",
-"ml": "-250/+205",
+"ml": "-258/+210",
 "qb": {
 "BUF": "Josh Allen",
 "LV": "Kirk Cousins"
@@ -96,8 +96,8 @@
 },
 "CHI@ATL": {
 "spread_home": "1.5",
-"total": "51.5",
-"ml": "-118/-102",
+"total": "50.5",
+"ml": "-115/-105",
 "qb": {
 "CHI": "Tyson Bagent",
 "ATL": "Michael Penix Jr."
@@ -175,7 +175,7 @@
 "NO@NYG": {
 "spread_home": "1.5",
 "total": "45.5",
-"ml": "-115/-105",
+"ml": "-112/-108",
 "qb": {
 "NO": "Tyler Shough",
 "NYG": "Jameis Winston"
@@ -202,7 +202,7 @@
 "ARI@LA": {
 "spread_home": "-12.5",
 "total": "51.5",
-"ml": "+575/-850",
+"ml": "+600/-900",
 "qb": {
 "ARI": "Jacoby Brissett",
 "LA": "Matthew Stafford"
@@ -346,5 +346,5 @@
 ]
 }
 },
-"_stamp": "10-14 16:38"
+"_stamp": "10-14 21:32"
 }
