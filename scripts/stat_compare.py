@@ -134,8 +134,9 @@ def conclusion_line(a, h, sec, inj, m, g):
     cand = []
     for t, x in ((a, ia), (h, ih)):
         for key in ("questionable", "doubtful"):
-            for nm in [y.strip() for y in str(x.get(key) or "").split(" · ") if "★" in y]:
-                cand.append(f"{t} {nm.split('(')[0]}({key[0].upper()})")
+            # 항목 = 「이름(포지션 · ★스냅 nn%)」 — 괄호 안에도 「 · 」가 있어 「) · 」 경계로 나눈다(2026-10-15 「DEN ★스냅 76%)(Q)」 오기 수정)
+            for nm in [y.strip() for y in re.split(r"\)\s*·\s*", str(x.get(key) or "")) if "★" in y]:
+                cand.append(f"{t} {nm.split('(')[0].strip()}({key[0].upper()})")
     out.append("새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): " + (", ".join(cand[:6]) if cand else "없음"))
     lm = next((ln for ln in sec if ln.startswith("- 라인 이동:")), "")
     if lm:
