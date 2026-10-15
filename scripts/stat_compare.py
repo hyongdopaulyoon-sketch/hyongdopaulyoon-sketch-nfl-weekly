@@ -127,8 +127,10 @@ def conclusion_line(a, h, sec, inj, m, g):
                    + f" · 캐리 1위 {a} {pl[a]['rush'] or '—'} vs {h} {pl[h]['rush'] or '—'}")
     # ★주전 결장·새 정보 후보
     ia, ih = inj.get(a) or {}, inj.get(h) or {}
+    _ina = re.search(r"- 🏥 결장 명단\(ESPN 공식 비활성 · 발표 (\S+) PT\): .*?★주전 결장 ([A-Z]{2,3}) (\d+) / ([A-Z]{2,3}) (\d+)", txt)
     out.append(f"★주전 Out/Doubtful {a} {ia.get('n_starters_missing') or 0}명 / {h} {ih.get('n_starters_missing') or 0}명"
-               + (" · ⚠️ 최종 지정 미발표(연습 보고) — 웹 확인 필수" if ia.get("final_pending") or ih.get("final_pending") else ""))
+               + (f" · 공식 비활성(ESPN {_ina.group(1)} PT 발표): ★주전 {_ina.group(2)} {_ina.group(3)} / {_ina.group(4)} {_ina.group(5)} — 🏥 줄 그대로" if _ina else
+                  (" · ⚠️ 최종 지정 미발표(연습 보고) — 웹 확인 필수" if ia.get("final_pending") or ih.get("final_pending") else " · 공식 비활성 미발표(🏥 줄)")))
     cand = []
     for t, x in ((a, ia), (h, ih)):
         for key in ("questionable", "doubtful"):

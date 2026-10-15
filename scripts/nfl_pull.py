@@ -1058,6 +1058,78 @@ def ph_injuries(week, force=False):
     wcsv(os.path.join(wd, "injuries.csv"), ["team", "report_week", "expected_qb", "depth_qb1", "season_main_qb", "qb_report", "qb_flag", "qb_note",
                                              "n_out", "n_doubtful", "n_questionable", "out", "doubtful", "questionable",
                                              "final_pending", "n_dnp", "n_limited", "dnp", "limited", "n_starters_missing"], rows)
+    ph_inactives(week, games, snap)
+
+
+ESPN_SUMMARY = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event="
+
+
+def ph_inactives(week, games, snap):
+    """ESPN summary 의 injuries → data/2026-wNN/inactives.csv (2026-10-15 Paul 「발행세션 말고 여기서 수집」).
+    킥오프 90분 전 공식 비활성 명단이 type 「Coach's Decision」·발표 시각과 함께 온다(그 전엔 주간 보고 Out 만). 매 실행 새로 받는다."""
+    wd = week_dir(week)
+    rows = []
+    for g in games:
+        if not g.get("espn_id") or g.get("status") in ("F", "final", "Final"):
+            continue
+        p = os.path.join(wd, f"espn_summary_{g['espn_id']}.json")
+        try:
+            fetch(ESPN_SUMMARY + g["espn_id"], p, 0, True)
+            j = json.load(open(p, encoding="utf-8"))
+        except Exception as e:
+            print(f"  inactives {g['away']}@{g['home']}: summary 실패({type(e).__name__})"); continue
+        try:
+            ko = datetime.strptime(g["kickoff_utc"], "%Y-%m-%dT%H:%MZ")
+        except Exception:
+            ko = None
+        for tb in j.get("injuries", []) or []:
+            ab = (tb.get("team") or {}).get("abbreviation", "")
+            t = ESPN2NV.get(ab, ab)
+            items = tb.get("injuries", []) or []
+            # 공식 비활성 판정: 「Coach's Decision」(건강한 제외)이 하나라도 있거나, 발표 시각이 킥오프 2시간 안
+            def _dt(x):
+                try:
+                    return datetime.strptime((x.get("date") or "")[:16], "%Y-%m-%dT%H:%M")
+                except Exception:
+                    return None
+            official = any(str((x.get("details") or {}).get("type") or "").startswith("Coach") for x in items) or \
+                       any(ko and _dt(x) and 0 <= (ko - _dt(x)).total_seconds() <= 2 * 3600 for x in items)
+            for x in items:
+                a_ = x.get("athlete") or {}
+                nm = a_.get("displayName", ""); pos = (a_.get("position") or {}).get("abbreviation", "")
+                d = x.get("details") or {}
+                v = snap.get((t, _norm_name(nm)))
+                rows.append([f'{g["away"]}@{g["home"]}', t, nm, pos, x.get("status", ""), d.get("type", ""), d.get("detail", ""),
+                             (x.get("date") or "")[:16], int(official), 1 if (v or 0) >= STARTER_SNAP else 0,
+                             f"{v * 100:.0f}" if v else ""])
+    wcsv(os.path.join(wd, "inactives.csv"), ["game", "team", "player", "pos", "status", "reason", "detail", "announced_utc", "official", "star", "snap_pct"], rows)
+
+
+def _inactives_line(wd, g, a, h):
+    """경기 절 「- 🏥 결장 명단(ESPN …)」 — 공식 비활성이면 발표 PT 시각·팀별 Out 명단(★ 스냅 60%+)·★주전 결장 수, 아니면 미발표."""
+    rows = [r for r in rd(os.path.join(wd, "inactives.csv")) if r["game"] == f"{a}@{h}"]
+    if not rows:
+        return "- 🏥 결장 명단(ESPN): 자료 없음(summary 미수집) — 발행 세션 웹 확인"
+    off = all(r["official"] == "1" for r in rows if r["team"] in (a, h)) and any(r["team"] == a for r in rows) and any(r["team"] == h for r in rows)
+    try:
+        ko = datetime.strptime(g["kickoff_utc"], "%Y-%m-%dT%H:%MZ")
+        kp = datetime.strptime(g["kickoff_pt"], "%H:%M")
+        ann = max(datetime.strptime(r["announced_utc"], "%Y-%m-%dT%H:%M") for r in rows if r["announced_utc"])
+        ann_pt = (kp - (ko - ann)).strftime("%H:%M")
+    except Exception:
+        ann_pt = "?"
+    parts, stars = [], {}
+    for t in (a, h):
+        outs = [r for r in rows if r["team"] == t and r["status"] == "Out"]
+        stars[t] = sum(1 for r in outs if r["star"] == "1")
+        names = " · ".join(("★" if r["star"] == "1" else "") + f'{r["player"]}({r["pos"]}' + (f' · 스냅 {r["snap_pct"]}%' if r["snap_pct"] else "")
+                           + (" · 건강 제외" if str(r["reason"]).startswith("Coach") else (f' · {r["reason"]}' if r["reason"] else "")) + ")" for r in outs)
+        parts.append(f'{t} Out {len(outs)}' + (f' — {names}' if names else ""))
+    if off:
+        return (f'- 🏥 결장 명단(ESPN 공식 비활성 · 발표 {ann_pt} PT): ' + " / ".join(parts)
+                + f' · ★주전 결장 {a} {stars[a]} / {h} {stars[h]} — 값만(새 정보 여부는 판 시각 뒤 확정인지로)')
+    return ('- 🏥 결장 명단(ESPN): 공식 비활성 미발표(킥오프 90분 전 발표 — 그때 리프레시하면 이 줄이 채워진다) · 주간 보고 기준 '
+            + " / ".join(parts))
 
 
 def ph_model(week, force=False):
@@ -1211,6 +1283,7 @@ def ph_digest(week, force=False):
                      + (f' · ★주전급(스냅 60%+) {"Out/Doubtful" if not x.get("final_pending") else "연습 불참"} {x["n_starters_missing"]}명'
                         if str(x.get("n_starters_missing") or "0") not in ("0", "") else "")
                      + (f' (보고 {x.get("report_week")}주차)' if x.get("report_week") and str(x.get("report_week")) != str(week) else ""))
+        L.append(_inactives_line(wd, g, a, h))    # 🏥 ESPN 공식 비활성 명단 — 2026-10-15 Paul 「여기서 수집」
         L += SC.build(a, h, RS, PRO, rt, inj, g)   # 📊 스탯 비교(말로) — 2026-10-10 Paul 「숫자만 있어 이해 어려움」
         L += SC.player_tables(a, h, RS, inj, g)    # 🧑‍🤝‍🧑 팀별 선수 표 — 2026-10-12 Paul 「선수별 스탯 표로」
         _sec_start = max((i for i, _l in enumerate(L) if _l.startswith("## ")), default=0)
