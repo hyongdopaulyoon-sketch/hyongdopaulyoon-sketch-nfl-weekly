@@ -81,6 +81,69 @@ def player_tables(a, h, RS, inj, g):
     return L
 
 
+def conclusion_line(a, h, sec, inj, m, g):
+    """📌 결론 재료(자동 — 2026-10-14 Paul 「MLB 처럼」 · MLB A9 방식). sec = 이 경기 절에 이미 쌓인 줄들(🔮·📊·🧑‍🤝‍🧑·라인 이동).
+    발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다 — 재계산·지어내기 방지."""
+    import re
+    txt = "\n".join(sec)
+    out = []
+    mp = re.search(r"이길 팀 \*\*([A-Z]{2,3}) (\d+)% (★+)\*\*.*?예상 점수 \*\*([A-Z]{2,3}) ([\d.]+) – ([A-Z]{2,3}) ([\d.]+)\*\*", txt)
+    if mp:
+        out.append(f"이길 팀 {mp.group(1)} {mp.group(2)}% {mp.group(3)} · 시장 예상 점수 {mp.group(4)} {mp.group(5)} – {mp.group(6)} {mp.group(7)}"
+                   f"(※ 발행 점수는 스프레드·총점 각각 라인과 0.5점+ 다르게 — 9판, 동률이면 방향이 기록되지 않는다)")
+    # 스탯 격차 상위 3 — 📊 표 행에서 32팀 순위 차
+    gaps = []
+    for ln in sec:
+        mm = re.match(r"\| ([^|]+?) \| ([^|]*?(\d+)위[^|]*) \| ([^|]*?(\d+)위[^|]*) \|", ln)
+        if mm and not mm.group(1).startswith(("QB", "주요 선수", "OL", "키커", "항목")):
+            lab = mm.group(1).strip(); ra, rh = int(mm.group(3)), int(mm.group(5))
+            ca, ch = mm.group(2).strip(), mm.group(4).strip()
+            gaps.append((abs(ra - rh), f"{lab}: {a} {ca} vs {h} {ch}"))
+    gaps.sort(key=lambda x: -x[0])
+    if gaps:
+        out.append("스탯 격차 상위 3(32팀 순위 차 순): " + " / ".join(x[1] for x in gaps[:3]))
+    # 선수 핵심 — 🧑‍🤝‍🧑 표
+    pl = {}
+    cur = None
+    for ln in sec:
+        hm = re.match(r"\| ([A-Z]{2,3}) 선수 \|", ln)
+        if hm:
+            cur = hm.group(1); pl[cur] = {"qb": None, "rec": None, "rush": None}; continue
+        if cur and ln.startswith("|") and not ln.startswith("|---"):
+            c = [x.strip() for x in ln.strip().strip("|").split("|")]
+            if len(c) < 10:
+                continue
+            nm, role, st = c[0], c[1], c[9]
+            tag = f"{nm}" + (f"({st})" if st and st != "—" else "")
+            if role == "QB" and pl[cur]["qb"] is None:
+                pl[cur]["qb"] = f"{tag} {c[8]}"
+            elif role == "리시버" and pl[cur]["rec"] is None:
+                pl[cur]["rec"] = f"{tag} {c[3].split('·')[0].strip()} · {c[8]}"
+            elif role == "러셔" and pl[cur]["rush"] is None:
+                pl[cur]["rush"] = f"{tag} {c[3]} · {c[8]}"
+    if pl.get(a) and pl.get(h):
+        out.append("선수 핵심: QB " + f"{a} {pl[a]['qb'] or '—'} vs {h} {pl[h]['qb'] or '—'}"
+                   + f" · 타깃 1위 {a} {pl[a]['rec'] or '—'} vs {h} {pl[h]['rec'] or '—'}"
+                   + f" · 캐리 1위 {a} {pl[a]['rush'] or '—'} vs {h} {pl[h]['rush'] or '—'}")
+    # ★주전 결장·새 정보 후보
+    ia, ih = inj.get(a) or {}, inj.get(h) or {}
+    out.append(f"★주전 Out/Doubtful {a} {ia.get('n_starters_missing') or 0}명 / {h} {ih.get('n_starters_missing') or 0}명"
+               + (" · ⚠️ 최종 지정 미발표(연습 보고) — 웹 확인 필수" if ia.get("final_pending") or ih.get("final_pending") else ""))
+    cand = []
+    for t, x in ((a, ia), (h, ih)):
+        for key in ("questionable", "doubtful"):
+            for nm in [y.strip() for y in str(x.get(key) or "").split(" · ") if "★" in y]:
+                cand.append(f"{t} {nm.split('(')[0]}({key[0].upper()})")
+    out.append("새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): " + (", ".join(cand[:6]) if cand else "없음"))
+    lm = next((ln for ln in sec if ln.startswith("- 라인 이동:")), "")
+    if lm:
+        out.append(lm[2:].split(" (")[0])
+    obs = [x for x in (m.get("spread_grade", ""), m.get("total_grade", "")) if "관찰" in str(x)]
+    if obs:
+        out.append("로컬 페이퍼 관찰 있음(돈 아님): " + " · ".join(obs))
+    return ["- 📌 **결론 재료(자동 — 9판 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: " + " · ".join(out), ""]
+
+
 def build(a, h, RS, PRO, rt, inj, g):
     """→ 다이제스트 줄 목록. RS = stat_research.load() 결과, PRO = _team_profile(), rt = ratings dict."""
     L = ["- 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영)**:", "",
