@@ -263,43 +263,21 @@ def main():
                 tail += body[body.find("📘"):]
             if re.search(r"손익분기|Polymarket|ML로 걸면", tail):
                 문제.append(f"{k}: 판단이 패스인데 정리·📘 에 ML 가격·손익분기·Polymarket 줄 — 패스면 돈 문장을 쓰지 않는다(10/11 Paul)")
-        dm = re.search(r"(?m)^- 방향:\s*스프레드\s+([A-Z]{2,3}) ([+-]?[\d.]+)\s*·\s*총점\s+(Over|Under|오버|언더) ([\d.]+)", body)
-        dirs = {}
-        if not dm:
-            # 7판(10/11 Paul 「방향·시장과 다름 헷갈림」): 방향 줄은 발행문에 없다 — 예측 점수와 시장 라인에서 자동 유도(동률이면 기록 안 함)
-            pm0 = re.search(r"(?m)^- 예측:.*?점수\s+([A-Z]{2,3})\s+(\d+(?:\.\d)?)\s*[–-]\s*([A-Z]{2,3})\s+(\d+(?:\.\d)?)", body)
-            hs0, tl0 = fnum(m["mkt_spread_home"]), fnum(m["mkt_total"])
-            if pm0 and hs0 is not None and tl0 is not None:
-                a_, h_ = k.split("@"); sa0, sh0 = float(pm0.group(2)), float(pm0.group(4))
-                mg = (sh0 - sa0) + hs0; tt = (sa0 + sh0) - tl0
-                sp_side = (f"{h_} {hs0:+g}" if mg > 0 else f"{a_} {-hs0:+g}") if mg != 0 else None
-                tot_side = (f"Over {tl0:g}" if tt > 0 else f"Under {tl0:g}") if tt != 0 else None
-                if sp_side is None or tot_side is None:   # 9판(2026-10-14 Paul): 라인과 동률이면 방향이 안 남는다 — 0.5점+ 다르게
-                    문제.append(f"{k}: 예측 점수가 시장 라인과 동률({'스프레드' if sp_side is None else ''}{'·' if sp_side is None and tot_side is None else ''}{'총점' if tot_side is None else ''}) — 9판: 점수 차·총점 각각 라인과 0.5점 이상 다르게(동률이면 방향 기록 불가)")
-                # 2026-10-12(보드 세션 BUF@LA): 스프레드·총점을 따로 기록 — 동률(None)인 시장은 옛 :D 행을 지운다(킥오프 전 마지막 발행 = 정본)
-                dirs = {kk: vv for kk, vv in (("스프레드", sp_side), ("총점", tot_side)) if vv}
-                방향들.append((k, sp_side, tot_side))
-        else:
-            a_, h_ = k.split("@")
-            team, sp, ou, tot = dm.group(1), fnum(dm.group(2)), dm.group(3).replace("오버", "Over").replace("언더", "Under"), fnum(dm.group(4))
-            hs = fnum(m["mkt_spread_home"])
-            if team not in (a_, h_):
-                문제.append(f"{k}: 방향 스프레드 팀 {team} 이 이 경기 팀이 아님")
-            elif hs is not None and sp != (hs if team == h_ else -hs):
-                문제.append(f"{k}: 방향 스프레드 {team} {dm.group(2)} ≠ 시장 라인({team} {(hs if team == h_ else -hs):+g})")
-            if tot != fnum(m["mkt_total"]):
-                문제.append(f"{k}: 방향 총점 {dm.group(4)} ≠ 시장 {m['mkt_total']}")
-            dirs = {"스프레드": f"{team} {sp:+g}", "총점": f"{ou} {tot:g}"}
-            방향들.append((k, dirs["스프레드"], dirs["총점"]))
-        pm = re.search(r"(?m)^- 예측:\s*승자\s+([A-Z]{2,3})\s+(\d+(?:\.\d+)?)%\s*(?:★{1,4}\s*)?·\s*점수\s+([A-Z]{2,3})\s+(\d+(?:\.\d)?)\s*[–-]\s*([A-Z]{2,3})\s+(\d+(?:\.\d)?)", body)
+        dirs = {}   # 10판(2026-10-16 Paul 「ML 전용」): 방향(스프레드·총점 쪽) 기록 폐지 — 발행 방향 23-32(42%) · ML 픽 쪽 ATS 2026 37%/2018~25 48%
+        if re.search(r"(?m)^- 방향:", body):
+            문제.append(f"{k}: 「- 방향:」 줄 — 10판부터 쓰지 않는다(ML 전용)")
+        # 10판: 점수는 선택(있으면 경고) — 「- 예측: 승자 팀 NN% ★ · 근거 …」
+        pm = re.search(r"(?m)^- 예측:\s*승자\s+([A-Z]{2,3})\s+(\d+(?:\.\d+)?)%\s*(?:★{1,4}\s*)?(?:·\s*점수\s+([A-Z]{2,3})\s+(\d+(?:\.\d)?)\s*[–-]\s*([A-Z]{2,3})\s+(\d+(?:\.\d)?))?", body)
         if not pm:
-            문제.append(f"{k}: 예측 줄(「- 예측: 승자 팀 NN% · 점수 원정 x – 홈 y」) 없음/형식 오류 — 2026-10-04 결과 예측 의무")
+            문제.append(f"{k}: 예측 줄(「- 예측: 승자 팀 NN% ★ · 근거 …」) 없음/형식 오류 — 2026-10-04 결과 예측 의무")
         else:
             a_, h_ = k.split("@")
-            if pm.group(1) not in (a_, h_) or pm.group(3) != a_ or pm.group(5) != h_:
-                문제.append(f"{k}: 예측 줄 팀 순서/약칭 오류(점수는 원정 먼저)")
+            if pm.group(3):
+                경고.append(f"{k}: 예측 줄에 점수가 있음 — 10판(10/16)부터 점수는 쓰지 않는다(ML 전용)")
+            if pm.group(1) not in (a_, h_) or (pm.group(3) and (pm.group(3) != a_ or pm.group(5) != h_)):
+                문제.append(f"{k}: 예측 줄 팀 약칭/순서 오류")
             else:
-                예측들.append([k, pm.group(1), float(pm.group(2)) / 100, float(pm.group(4)), float(pm.group(6)), ""])
+                예측들.append([k, pm.group(1), float(pm.group(2)) / 100, float(pm.group(4)) if pm.group(4) else None, float(pm.group(6)) if pm.group(6) else None, ""])
                 pline = body[pm.start():body.find("\n", pm.start()) if body.find("\n", pm.start()) > 0 else len(body)]
                 mp = mkt_pred.get(k)
                 if mp and fnum(mp.get("p_pick")) is not None:
@@ -395,7 +373,7 @@ def main():
     for k, s_, t_ in 방향들:
         print(f"  → {k} 방향 {s_} / {t_}")
     for k, pk, pp, sa, sh, fl in 예측들:
-        print(f"  🔮 {k} 예측 {pk} {100 * pp:.0f}% · {sa:g}-{sh:g}" + (f" · {fl}" if fl else ""))
+        print(f"  🔮 {k} 예측 {pk} {100 * pp:.0f}%" + (f" · {sa:g}-{sh:g}" if sa is not None else "") + (f" · {fl}" if fl else ""))
     if a.record and 예측들:
         import predictions as PR
         for k, pk, pp, sa, sh, fl in 예측들:

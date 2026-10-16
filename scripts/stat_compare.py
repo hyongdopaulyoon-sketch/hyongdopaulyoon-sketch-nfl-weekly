@@ -89,8 +89,7 @@ def conclusion_line(a, h, sec, inj, m, g):
     out = []
     mp = re.search(r"이길 팀 \*\*([A-Z]{2,3}) (\d+)% (★+)\*\*.*?예상 점수 \*\*([A-Z]{2,3}) ([\d.]+) – ([A-Z]{2,3}) ([\d.]+)\*\*", txt)
     if mp:
-        out.append(f"이길 팀 {mp.group(1)} {mp.group(2)}% {mp.group(3)} · 시장 예상 점수 {mp.group(4)} {mp.group(5)} – {mp.group(6)} {mp.group(7)}"
-                   f"(※ 발행 점수는 스프레드·총점 각각 라인과 0.5점+ 다르게 — 9판, 동률이면 방향이 기록되지 않는다)")
+        out.append(f"이길 팀 {mp.group(1)} {mp.group(2)}% {mp.group(3)}(10판: 예상 점수·방향·스프레드/총점 판단은 쓰지 않는다 — ML 전용)")
     # 스탯 격차 상위 3 — 📊 표 행에서 32팀 순위 차
     gaps = []
     for ln in sec:
@@ -144,7 +143,7 @@ def conclusion_line(a, h, sec, inj, m, g):
     obs = [x for x in (m.get("spread_grade", ""), m.get("total_grade", "")) if "관찰" in str(x)]
     if obs:
         out.append("로컬 페이퍼 관찰 있음(돈 아님): " + " · ".join(obs))
-    return ["- 📌 **결론 재료(자동 — 9판 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: " + " · ".join(out), ""]
+    return ["- 📌 **결론 재료(자동 — 10판 ML 전용 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: " + " · ".join(out), ""]
 
 
 def build(a, h, RS, PRO, rt, inj, g):

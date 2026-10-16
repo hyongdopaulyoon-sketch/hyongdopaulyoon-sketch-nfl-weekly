@@ -42,6 +42,11 @@ def fnum(x):
 
 def suggest(week):
     wd = os.path.join(DATA, f"{SEASON}-w{week:02d}")
+    # 10판(2026-10-16 Paul 「ML 전용」): 모델 스프레드·총점 페이퍼(관찰·참고) 적립 중단 — 2024~26 재검 큰 괴리 ATS 43%·총점 47%.
+    # 이 주차 미채점 관찰·참고 행은 지운다(채점된 행·placed 는 둔다).
+    rows0 = rd(PICKS)
+    keep0 = [r for r in rows0 if not (int(r["week"]) == week and r["status"] != "placed" and not r["result"] and r["grade"].startswith(("관찰", "참고")))]
+    save(keep0); print(f"suggest week {week}: 10판 — 모델 관찰·참고 페이퍼 중단(미채점 {len(rows0) - len(keep0)}행 정리)"); return
     model = rd(os.path.join(wd, "model.csv"))
     rows = rd(PICKS)
     keep = {r["id"]: r for r in rows}
@@ -302,6 +307,7 @@ def wind(week):
     조건: 실외(roof outdoors/open) · 중립 아님 · NWS 시간별 예보 킥오프 시각 지속 풍속 ≥15mph → 그 시점 시장 총점 Under.
     판정 시점: 경기 당일(PT) 리프레시만 — 같은 날 여러 번이면 킥오프 전 마지막 판이 이긴다(미채점·킥오프 전 행은 덮어쓰기/삭제).
     킥오프가 지난 경기는 동결(소급 추가·삭제 금지). id = game_id:total:wind. 채점 때 실측 wind 를 note 에 붙인다."""
+    print(f"wind week {week}: 10판(2026-10-16) — 바람 언더 페이퍼 중단"); return
     from datetime import timezone
     wd = os.path.join(DATA, f"{SEASON}-w{week:02d}")
     rows = rd(PICKS); keep = {r["id"]: r for r in rows}
@@ -331,8 +337,25 @@ def wind(week):
 
 
 ANGLE_GRADES = {"A1": "각도 관찰 A1(원정 큰 페이버릿 반대)", "A2": "각도 관찰 A2(드라이브 우위 언더독 반대)",
-                "A3": "각도 관찰 A3(결장 팀 반대 3점+ 이동 → 결장 팀)"}   # 2026-10-10 Paul 「A3는 등록해」(발행 세션 가설 — 역사 백테스트 불가, 전향만)
+                "A3": "각도 관찰 A3(결장 팀 반대 3점+ 이동 → 결장 팀)",   # 2026-10-10 Paul 「A3는 등록해」(발행 세션 가설 — 역사 백테스트 불가, 전향만)
+                "A4": "각도 관찰 A4(작년 플옵팀 언더독 1~8주 → 그 팀 ML)"}   # 2026-10-16 Paul 「작년 경기를 재료로」 — 아래 A4 주석
 A3_MOVE = 3.0   # 개장→현재 스프레드 이동(점) 문턱 — 사전 등록, 조정 금지
+# A4(2026-10-16 사전 등록 · 조정 금지): 작년 플레이오프 팀이 비플옵 팀 상대로 ML 언더독(무비그 <50%)인 1~8주 경기 → 그 팀 ML(현재 DK 배당).
+# 근거 2018~25 정규시즌(16개 각도 탐색 중 선택 — 사후 선택 위험): 1~4주 24-14 실제 63% vs 시장 40% 수익 +50%(z +3.0) · 5~8주 19-23 +6% · 9주~ 소멸(−6%)
+# · 시즌별 1~8주 6/8 플러스 · 2026 1~4주 3-2 +52%. 판정: 20픽에서 ≥50% & 수익 플러스면 유지, 아니면 폐기. 10판부터 A1·A2 는 생성 중단(기록만 남김).
+A4_MAX_WEEK = 8
+_PO = None
+
+
+def _last_playoff():
+    """작년(SEASON−1) 플레이오프에 나간 팀 집합 — data/cache/games.csv 의 비정규시즌 경기."""
+    global _PO
+    if _PO is None:
+        _PO = set()
+        for g in rd(os.path.join(DATA, "cache", "games.csv")):
+            if g.get("season") == str(SEASON - 1) and g.get("game_type") != "REG" and g.get("result"):
+                _PO.add(g["home_team"]); _PO.add(g["away_team"])
+    return _PO
 
 
 def angles(week):
@@ -371,8 +394,6 @@ def angles(week):
         hl = fnum(m["mkt_spread_home"])            # 홈 베팅 라인(+ = 홈 언더독)
         if hl is None:
             continue
-        if hl >= 7:                                 # 원정 −7 이상 페이버릿
-            cand[f'{m["game_id"]}:spread:A1'] = (f"{a}@{h}", f"{h} {hl:+g}", "A1", f"원정 {a} {-hl:+g} 페이버릿")
         os_ = fnum(g.get("open_spread_home"))
         if os_ is not None:                         # A3 — 결장 확정 팀 반대쪽으로 3점+ 이동
             def absent(t):
@@ -380,15 +401,18 @@ def angles(week):
                 return bool(x.get("qb_flag")) or ((fnum(x.get("n_starters_missing")) or 0) > 0 and not x.get("final_pending"))
             mv = hl - os_                           # + = 홈 라인이 나빠짐(원정 쪽으로 이동)
             if mv >= A3_MOVE and absent(h):
-                cand[f'{m["game_id"]}:spread:A3'] = (f"{a}@{h}", f"{h} {hl:+g}", "A3", f"홈 {h} 결장 확정 · 개장 {os_:+g} → 지금 {hl:+g}(홈 기준, {mv:+g}점 반대 이동)")
+                cand[f'{m["game_id"]}:spread:A3'] = (f"{a}@{h}", f"{h} {hl:+g}", "A3", f"홈 {h} 결장 확정 · 개장 {os_:+g} → 지금 {hl:+g}(홈 기준, {mv:+g}점 반대 이동)", "spread", f"{hl:+g}", "-110")
             elif -mv >= A3_MOVE and absent(a):
-                cand[f'{m["game_id"]}:spread:A3'] = (f"{a}@{h}", f"{a} {-hl:+g}", "A3", f"원정 {a} 결장 확정 · 개장 {os_:+g} → 지금 {hl:+g}(홈 기준, {-mv:+g}점 반대 이동)")
-        if gp(a) >= 3 and gp(h) >= 3:
-            na = (ppd(off[a]) or 0) - (ppd(de[a]) or 0); nh = (ppd(off[h]) or 0) - (ppd(de[h]) or 0)
-            for dog, fav, dline, diff in ((h, a, hl, nh - na), (a, h, -hl, na - nh)):
-                if dline > 0 and diff >= 0.5:
-                    cand[f'{m["game_id"]}:spread:A2'] = (f"{a}@{h}", f"{fav} {-dline:+g}", "A2",
-                                                         f"언더독 {dog} 드라이브 득점 차 우위 {diff:+.2f} → 반대 {fav}")
+                cand[f'{m["game_id"]}:spread:A3'] = (f"{a}@{h}", f"{a} {-hl:+g}", "A3", f"원정 {a} 결장 확정 · 개장 {os_:+g} → 지금 {hl:+g}(홈 기준, {-mv:+g}점 반대 이동)", "spread", f"{-hl:+g}", "-110")
+        if week <= A4_MAX_WEEK:                     # A4 — 작년 플옵팀이 비플옵 팀 상대 ML 언더독
+            ia_, ih_ = _imp(g.get("ml_away")), _imp(g.get("ml_home"))
+            if ia_ and ih_:
+                pa_, ph_ = ia_ / (ia_ + ih_), ih_ / (ia_ + ih_)
+                po = _last_playoff()
+                for t, p_, o_ in ((a, pa_, g.get("ml_away")), (h, ph_, g.get("ml_home"))):
+                    other = h if t == a else a
+                    if t in po and other not in po and p_ < 0.5:
+                        cand[f'{m["game_id"]}:ml:A4'] = (f"{a}@{h}", f"{t} ML", "A4", f"작년 플옵팀 {t} 언더독(무비그 {100 * p_:.0f}% · 상대 {other} 비플옵) · {week}주차", "ml", "", o_ or "+100")
     n_new = n_del = 0
     for rid, r in list(keep.items()):
         if r["grade"] in ANGLE_GRADES.values() and int(r["week"]) == week and not r["result"] and rid not in cand:
@@ -396,15 +420,15 @@ def angles(week):
             if g.get("kickoff_utc") and datetime.strptime(g["kickoff_utc"], "%Y-%m-%dT%H:%MZ").replace(tzinfo=timezone.utc) <= now:
                 continue                            # 킥오프 지남 — 동결
             del keep[rid]; n_del += 1
-    for rid, (game, side, key, why) in cand.items():
+    for rid, (game, side, key, why, market, line, odds) in cand.items():
         g = games.get(rid.split(":")[0]) or {}
         if g.get("kickoff_utc") and datetime.strptime(g["kickoff_utc"], "%Y-%m-%dT%H:%MZ").replace(tzinfo=timezone.utc) <= now and rid in keep:
             continue
         if g.get("kickoff_utc") and datetime.strptime(g["kickoff_utc"], "%Y-%m-%dT%H:%MZ").replace(tzinfo=timezone.utc) <= now:
             continue                                # 이미 시작한 경기는 새로 넣지 않는다
         n_new += rid not in keep
-        keep[rid] = {k: "" for k in HDR} | {"id": rid, "season": SEASON, "week": week, "game": game, "market": "spread", "side": side,
-                                           "line": side.split()[1], "odds": "-110", "grade": ANGLE_GRADES[key], "status": "suggested",
+        keep[rid] = {k: "" for k in HDR} | {"id": rid, "season": SEASON, "week": week, "game": game, "market": market, "side": side,
+                                           "line": line, "odds": odds, "grade": ANGLE_GRADES[key], "status": "suggested",
                                            "note": f"{why} · {datetime.now():%m-%d %H:%M} PT 판"}
     save(list(keep.values()))
     legs = [v for v in keep.values() if v["grade"] in ANGLE_GRADES.values() and int(v["week"]) == week]
