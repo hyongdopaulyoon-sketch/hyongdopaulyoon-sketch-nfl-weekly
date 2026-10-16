@@ -24,6 +24,23 @@ def _rank(vals, t, high=True):
     return (xs.index(vals[t]) + 1) if t in vals and vals[t] is not None else None
 
 
+GAP_CUTS = ((4, "차이 없음"), (9, "근접"), (15, "경미"), (10 ** 9, "중대"))   # 2026-10-16 Paul 「서술 전용 등급 열」 — 32팀 순위 차 기준, 확률·별점 영향 0
+
+
+def gap_label(ra, rh, a, h, n=32):
+    """순위 차 → 「경미 · SEA 쪽」. n 이 32 가 아니면(QB 풀 등) 구간을 n/32 로 비례."""
+    if ra is None or rh is None:
+        return "—"
+    d = abs(ra - rh) * 32 / max(n, 1)
+    lab = next(name for cut, name in GAP_CUTS if d <= cut)
+    return lab if lab == "차이 없음" else f"{lab} · {a if ra < rh else h} 쪽"
+
+
+def gap(vals, a, h, high=True):
+    n = len([x for x in vals.values() if x is not None])
+    return gap_label(_rank(vals, a, high), _rank(vals, h, high), a, h, n)
+
+
 def cell(vals, t, fmt, high=True, unit="", n=None):
     v = vals.get(t)
     if v is None:
@@ -97,7 +114,7 @@ def conclusion_line(a, h, sec, inj, m, g):
         if mm and not mm.group(1).startswith(("QB", "주요 선수", "OL", "키커", "항목")):
             lab = mm.group(1).strip(); ra, rh = int(mm.group(3)), int(mm.group(5))
             ca, ch = mm.group(2).strip(), mm.group(4).strip()
-            gaps.append((abs(ra - rh), f"{lab}: {a} {ca} vs {h} {ch}"))
+            gaps.append((abs(ra - rh), f"{lab}: {a} {ca} vs {h} {ch} — {gap_label(ra, rh, a, h)}"))
     gaps.sort(key=lambda x: -x[0])
     if gaps:
         out.append("스탯 격차 상위 3(32팀 순위 차 순): " + " / ".join(x[1] for x in gaps[:3]))
@@ -148,13 +165,13 @@ def conclusion_line(a, h, sec, inj, m, g):
 
 def build(a, h, RS, PRO, rt, inj, g):
     """→ 다이제스트 줄 목록. RS = stat_research.load() 결과, PRO = _team_profile(), rt = ratings dict."""
-    L = ["- 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영)**:", "",
-         f"| 항목 | {a} | {h} | 뜻 |", "|---|---|---|---|"]
+    L = ["- 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 — 서술 전용, 확률·별점 영향 0)**:", "",
+         f"| 항목 | {a} | {h} | 뜻 | 격차(서술 전용) |", "|---|---|---|---|---|"]
     S = CB.standings()
     pf = {t: (S[t]["pf"] / (S[t]["w"] + S[t]["l"] + S[t]["t"])) if (S[t]["w"] + S[t]["l"] + S[t]["t"]) else None for t in CB.DIV}
     pa = {t: (S[t]["pa"] / (S[t]["w"] + S[t]["l"] + S[t]["t"])) if (S[t]["w"] + S[t]["l"] + S[t]["t"]) else None for t in CB.DIV}
-    L.append(f"| 득점(경기당) | {cell(pf, a, '{:.1f}', True, '점')} | {cell(pf, h, '{:.1f}', True, '점')} | 한 경기에 넣는 점수 |")
-    L.append(f"| 실점(경기당) | {cell(pa, a, '{:.1f}', False, '점')} | {cell(pa, h, '{:.1f}', False, '점')} | 한 경기에 내주는 점수(적을수록 좋음) |")
+    L.append(f"| 득점(경기당) | {cell(pf, a, '{:.1f}', True, '점')} | {cell(pf, h, '{:.1f}', True, '점')} | 한 경기에 넣는 점수 | {gap(pf, a, h, True)} |")
+    L.append(f"| 실점(경기당) | {cell(pa, a, '{:.1f}', False, '점')} | {cell(pa, h, '{:.1f}', False, '점')} | 한 경기에 내주는 점수(적을수록 좋음) | {gap(pa, a, h, False)} |")
     summ = []
     if RS:
         T, P, NM = RS
@@ -171,10 +188,10 @@ def build(a, h, RS, PRO, rt, inj, g):
             return 100 * sum(r.get("dr_td", 0) + r.get("dr_fg", 0) for r in rows) / d if d else None
         oppd = {t: ppd(off[t]) for t in CB.DIV}; dppd = {t: ppd(de[t]) for t in CB.DIV}
         osc = {t: scp(off[t]) for t in CB.DIV}; dsc = {t: scp(de[t]) for t in CB.DIV}
-        L.append(f"| 공격 효율(드라이브당 득점) | {cell(oppd, a, '{:.2f}')} | {cell(oppd, h, '{:.2f}')} | 공을 잡고 한 번 공격할 때 평균 몇 점 — 실력 지표(r .61) |")
-        L.append(f"| 득점 드라이브 비율 | {cell(osc, a, '{:.0f}', True, '%')} | {cell(osc, h, '{:.0f}', True, '%')} | 공격 10번 중 몇 번 점수(TD+FG)를 내나 |")
-        L.append(f"| 수비 효율(내준 드라이브당 득점) | {cell(dppd, a, '{:.2f}', False)} | {cell(dppd, h, '{:.2f}', False)} | 상대 공격 한 번에 평균 몇 점을 내주나 |")
-        L.append(f"| 상대 득점 드라이브 허용 | {cell(dsc, a, '{:.0f}', False, '%')} | {cell(dsc, h, '{:.0f}', False, '%')} | 상대 공격 10번 중 몇 번 점수를 허용하나 |")
+        L.append(f"| 공격 효율(드라이브당 득점) | {cell(oppd, a, '{:.2f}')} | {cell(oppd, h, '{:.2f}')} | 공을 잡고 한 번 공격할 때 평균 몇 점 — 실력 지표(r .61) | {gap(oppd, a, h, True)} |")
+        L.append(f"| 득점 드라이브 비율 | {cell(osc, a, '{:.0f}', True, '%')} | {cell(osc, h, '{:.0f}', True, '%')} | 공격 10번 중 몇 번 점수(TD+FG)를 내나 | {gap(osc, a, h, True)} |")
+        L.append(f"| 수비 효율(내준 드라이브당 득점) | {cell(dppd, a, '{:.2f}', False)} | {cell(dppd, h, '{:.2f}', False)} | 상대 공격 한 번에 평균 몇 점을 내주나 | {gap(dppd, a, h, False)} |")
+        L.append(f"| 상대 득점 드라이브 허용 | {cell(dsc, a, '{:.0f}', False, '%')} | {cell(dsc, h, '{:.0f}', False, '%')} | 상대 공격 10번 중 몇 번 점수를 허용하나 | {gap(dsc, a, h, False)} |")
         for t, lab in ((a, a), (h, h)):
             ro, rd_ = _rank(oppd, t), _rank(dppd, t, False)
             if ro and rd_:
@@ -192,7 +209,7 @@ def build(a, h, RS, PRO, rt, inj, g):
                 ("색 허용률(공격)", "o_sack", False, "{:.1%}", "QB 가 던지기 전에 잡히는 비율(낮을수록 보호가 좋음)"))
         for lab, key, high, fmt, mean in rows:
             vals = pv(key)
-            L.append(f"| {lab} | {cell(vals, a, fmt, high)} | {cell(vals, h, fmt, high)} | {mean} |")
+            L.append(f"| {lab} | {cell(vals, a, fmt, high)} | {cell(vals, h, fmt, high)} | {mean} | {gap(vals, a, h, high)} |")
     # QB — 예상 선발, 드롭백 60+ QB 중 순위
     if RS:
         T, P, NM = RS
@@ -208,7 +225,7 @@ def build(a, h, RS, PRO, rt, inj, g):
             return {"ypa": x.get("yds", 0) / att, "cpoe": (x["cpoe"] / x["cpoe_n"]) if x.get("cpoe_n") else None,
                     "epa": x.get("epa", 0) / db, "sack": 100 * x.get("sack", 0) / db, "cmp": 100 * x.get("cmp", 0) / att,
                     "td": 100 * x.get("td", 0) / att, "int": 100 * x.get("int", 0) / att}[key]
-        qcells = {}
+        qcells = {}; qrank = {}
         for t in (a, h):
             exp = (inj.get(t) or {}).get("expected_qb") or ""
             pid = next((p for p in qb if exp and N._same_person(NM[p][0], exp) and NM[p][1] == t), None)
@@ -229,9 +246,9 @@ def build(a, h, RS, PRO, rt, inj, g):
             db = int(qb[pid].get("db", 0))
             qcells[t] = f"{NM[pid][0]} · 드롭백 {db}" + (" ※ 얇음" if db < N.THIN_QB_DB else "") + " · " + " · ".join(parts)
             if pid in pool:
-                r = _rank({p: qstat(p, "epa") for p in pool}, pid, True)
+                r = _rank({p: qstat(p, "epa") for p in pool}, pid, True); qrank[t] = r
                 summ.append(f"{t} QB {NM[pid][0]} EPA {tier(r, len(pool))}({r}/{len(pool)}위)")
-        L.append(f"| QB(예상 선발 · 순위는 드롭백 {QB_MIN_DB}+ QB 중) | {qcells[a]} | {qcells[h]} | 야드/시도·EPA 는 실력(r .47~.48), 정확도 CPOE 는 중간, INT 는 운 |")
+        L.append(f"| QB(예상 선발 · 순위는 드롭백 {QB_MIN_DB}+ QB 중) | {qcells[a]} | {qcells[h]} | 야드/시도·EPA 는 실력(r .47~.48), 정확도 CPOE 는 중간, INT 는 운 | {gap_label(qrank.get(a), qrank.get(h), a, h, len(pool)) + (' (EPA 순위)' if a in qrank and h in qrank else '')} |")
         # 주요 선수 — 리시버 2·러셔 1, 리그 전체 자격자 중 순위
         rec = defaultdict(lambda: defaultdict(float)); rus = defaultdict(lambda: defaultdict(float))
         for (k, pid, gid), x in P.items():
@@ -258,12 +275,12 @@ def build(a, h, RS, PRO, rt, inj, g):
                 ex = AP.rusher_extra(NM[top][0])
                 out.append(f"{NM[top][0]}{'⚠️' + st if st else ''} 캐리 {int(c)} · 야드/캐리 {x.get('yds', 0) / c:.1f}({rk}) · 성공률 {100 * x.get('suc', 0) / c:.0f}%" + (f" · {ex}" if ex else ""))
             return " / ".join(out) or "—"
-        L.append(f"| 주요 선수(리시버 2·러셔 1 · 순위는 타깃 {WR_MIN_TGT}+/캐리 {RB_MIN_CAR}+ 선수 중) | {players(a)} | {players(h)} | ⚠️ = 부상 보고 상태 · 캐치율은 실력(r .50), TD 는 운 · [ ] 안 r = 2024~25 홀/짝 주 안정성(실력 ≥.45 / 중간 / 운 <.25 — 운 지표(드롭·태클 깨기·기대 대비 러시 야드)는 근거 금지) |")
+        L.append(f"| 주요 선수(리시버 2·러셔 1 · 순위는 타깃 {WR_MIN_TGT}+/캐리 {RB_MIN_CAR}+ 선수 중) | {players(a)} | {players(h)} | ⚠️ = 부상 보고 상태 · 캐치율은 실력(r .50), TD 는 운 · [ ] 안 r = 2024~25 홀/짝 주 안정성(실력 ≥.45 / 중간 / 운 <.25 — 운 지표(드롭·태클 깨기·기대 대비 러시 야드)는 근거 금지) | — |")
         try:
             wk_ = int(str(g.get("game_id", "")).split("_")[1])
         except (IndexError, ValueError):
             wk_ = 0
-        L.append(f"| OL 연속성(최근 3경기 공격 스냅 상위 5명) | {AP.ol_continuity(a, inj.get(a), wk_)} | {AP.ol_continuity(h, inj.get(h), wk_)} | 오펜스 라인 주전이 몇 명 빠지나 — 2006~25 OL 2명+ 결장 ATS 45.2%(우연 범위, 시장 반영) |")
+        L.append(f"| OL 연속성(최근 3경기 공격 스냅 상위 5명) | {AP.ol_continuity(a, inj.get(a), wk_)} | {AP.ol_continuity(h, inj.get(h), wk_)} | 오펜스 라인 주전이 몇 명 빠지나 — 2006~25 OL 2명+ 결장 ATS 45.2%(우연 범위, 시장 반영) | — |")
     # 키커
     DK = CB._depth_kicker(); KS = CB.kicker_stats()
     kpct = {}
@@ -281,6 +298,6 @@ def build(a, h, RS, PRO, rt, inj, g):
         l50a = sum(int(r["fg2_att"]) for r in mine); l50m = sum(int(r["fg2_made"]) for r in mine)
         rk = f"{_rank(kpool, key)}/{len(kpool)}위·{tier(_rank(kpool, key), len(kpool))}" if key in kpool else "표본 적음"
         return f"{nm} FG {100 * md / att:.0f}%({md}/{att} · {rk}) · 50야드+ {100 * l50m / l50a if l50a else 0:.0f}%({l50m}/{l50a})"
-    L.append(f"| 키커(2024~26 FG 성공률 · 순위는 20킥+ 키커 중) | {kick(a)} | {kick(h)} | FG 하나가 3점 — 실외 강풍·추위면 40야드 밖 성공률이 떨어진다 |")
+    L.append(f"| 키커(2024~26 FG 성공률 · 순위는 20킥+ 키커 중) | {kick(a)} | {kick(h)} | FG 하나가 3점 — 실외 강풍·추위면 40야드 밖 성공률이 떨어진다 | — |")
     L += ["", "  ↳ 한 줄: " + (" · ".join(summ) if summ else "—") + " — 순위는 2026 전체(얇은 표본 주의). 이 표는 시장 라인에 이미 들어간 정보라 예측 확률을 바꾸지 않는다(초등학생 설명 재료).", ""]
     return L
