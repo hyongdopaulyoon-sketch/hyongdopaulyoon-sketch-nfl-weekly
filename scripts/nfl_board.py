@@ -2,11 +2,11 @@
   python nfl_board.py --week 4 [--out ../board/board-w04.html]
 표시 전용 — 정본은 DIGEST.md·발행문·picks.csv·predictions.csv. 값을 옮겨 한 화면에 얹는다(가격 확률만 배당에서 계산).
 로고는 Artifact CSP 가 외부 이미지를 막아 data: URI 로 넣는다(ESPN 64px PNG, data/cache/logos 캐시).
-화면 순서(10/5): 머리(메타 한 줄 + 숫자 칩) → 이번 주 한 줄 결론 → 읽는 법 → 아직 안 한 경기 카드(실베팅 → 별 많은 순 → 킥오프)
+화면 순서(10/5): 머리(메타 한 줄 + 숫자 칩) → 이번 주 한 줄 결론 → 읽는 법 → 아직 안 한 경기 카드(별 많은 순 → 킥오프)
 → 끝난 경기(한 줄로 접힘) → 별점별 적중 표 → 숫자 자세히(접힘) → 바닥글."""
 import argparse, base64, glob, html, json, os, re, sys, urllib.request
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import nfl_pull as N   # noqa: E402
@@ -252,6 +252,9 @@ def md_html(txt):
             return
         rows = [[c.strip() for c in r.strip().strip("|").split("|")] for r in tbl]
         rows = [r for r in rows if not all(re.fullmatch(r":?-{2,}:?", c) for c in r if c)]
+        if rows and any("실베팅" in c for c in rows[0]):   # 옛 📊 시즌 표의 「Paul 실베팅」 열은 보드에 안 보인다(10/15 Paul)
+            keep = [i for i, c in enumerate(rows[0]) if "실베팅" not in c]
+            rows = [[r[i] for i in keep if i < len(r)] for r in rows]
         if rows:
             out.append('<div class="mdt"><table><thead><tr>' + "".join(f"<th>{inline(c)}</th>" for c in rows[0]) + "</tr></thead><tbody>"
                        + "".join("<tr>" + "".join(f"<td>{inline(c)}</td>" for c in r) + "</tr>" for r in rows[1:]) + "</tbody></table></div>")
@@ -286,11 +289,165 @@ def verdict_word(v):
     return "소액 관심" if v.startswith("소액") else "관심" if v.startswith("관심") else v
 
 
+BOARD_DIR = os.path.join(os.path.dirname(HERE), "board")
+HUB_URL_FILE = os.path.join(BOARD_DIR, "hub_url.txt")
+
+
+def records_before(week, split=False):
+    """{팀: 「W-L(-T)」} — 그 주 경기 전까지의 전적(nflverse 캐시 일정·점수). 지난 주 보드의 games.csv 전적은 채점 때
+    다시 받아 「그 경기 뒤」 값이라(3주 ATL 1-2 @ GB 1-2) 보드 전적은 이 값으로 통일한다(2026-10-12 주차별 보드).
+    split=True 면 {팀: (홈 전적, 원정 전적)} — ESPN 「3-2, 1-1 Away」처럼(2026-10-15 Paul 「홈게임 어웨이게임 성적」) · 중립 구장 경기도 지정 홈/원정으로 센다(ESPN 과 같음)."""
+    wlt = defaultdict(lambda: [0, 0, 0])
+    for g in N.rd(os.path.join(N.CACHE, "games.csv")):
+        if g.get("season") != str(N.SEASON) or g.get("game_type") != "REG" or int(g["week"]) >= week:
+            continue
+        fa, fh = N.fnum(g.get("away_score")), N.fnum(g.get("home_score"))
+        if fa is None or fh is None:
+            continue
+        A, H = g["away_team"], g["home_team"]
+        if split:   # 중립 구장(런던 등)도 지정 홈/원정으로 센다 — ESPN 표기와 같게(JAX 홈 3-0)
+            A, H = (A, "road"), (H, "home")
+        if fa == fh:
+            wlt[A][2] += 1; wlt[H][2] += 1
+        else:
+            wlt[A if fa > fh else H][0] += 1; wlt[H if fa > fh else A][1] += 1
+    fmt = lambda v: f"{v[0]}-{v[1]}" + (f"-{v[2]}" if v[2] else "")
+    if split:
+        teams = {t for t, _ in wlt}
+        return {t: (fmt(wlt[(t, "home")]), fmt(wlt[(t, "road")])) for t in teams}
+    return {t: fmt(v) for t, v in wlt.items()} if week > 1 or wlt else {}
+
+
+def games_fallback(week):
+    """games.csv 가 없는 주(1·2주 — 다이제스트 수집 전, 예측만 소급)는 nflverse 캐시 일정 + closing.csv(DK 마감)로
+    보드 행을 만든다(2026-10-12 Paul 「MLB 날짜별처럼 주차별로」). 전적은 그 주에 들어올 때까지의 기록.
+    시각은 9월(EDT, UTC−4 · PT = ET−3) 고정 — 이 경로는 1·2주(9월)만 쓴다."""
+    cg = [g for g in N.rd(os.path.join(N.CACHE, "games.csv")) if g.get("season") == str(N.SEASON) and g.get("game_type") == "REG"]
+    close = {r["game"]: r for r in N.rd(os.path.join(N.week_dir(week), "closing.csv"))}
+    pre = records_before(week)
+    rec = lambda t: pre.get(t, "0-0")
+    out = []
+    for g in sorted((g for g in cg if g["week"] == str(week)), key=lambda g: (g["gameday"], g["gametime"])):
+        A, H = g["away_team"], g["home_team"]; c = close.get(f"{A}@{H}", {})
+        et = datetime.strptime(f'{g["gameday"]} {g["gametime"]}', "%Y-%m-%d %H:%M")
+        u = et + timedelta(hours=4); pt = et - timedelta(hours=3)
+        fin = N.fnum(g.get("away_score")) is not None and N.fnum(g.get("home_score")) is not None
+        out.append(dict(espn_id=c.get("espn_id", ""), game_id=g["game_id"], kickoff_utc=u.strftime("%Y-%m-%dT%H:%MZ"),
+                        kickoff_et=et.strftime("%a %m-%d %H:%M"), kickoff_pt=pt.strftime("%H:%M"), away=A, home=H,
+                        away_rec=rec(A), home_rec=rec(H), neutral="1" if g.get("location") == "Neutral" else "", div_game=g.get("div_game", ""),
+                        status="STATUS_FINAL" if fin else "STATUS_SCHEDULED", away_score=g.get("away_score", ""), home_score=g.get("home_score", ""),
+                        spread_home=c.get("spread_home", ""), total=c.get("total", ""), ml_away=c.get("ml_away", ""), ml_home=c.get("ml_home", ""),
+                        sp_home_odds=c.get("sp_home_odds", ""), sp_away_odds=c.get("sp_away_odds", ""),
+                        over_odds=c.get("over_odds", ""), under_odds=c.get("under_odds", "")))
+    return out
+
+
+def week_links():
+    """[(주, URL)] — board/links.csv 레지스트리(주차별 보드 아티팩트, 새 주를 발행하면 한 줄 추가)."""
+    try:
+        return sorted((int(r["week"]), r["url"]) for r in N.rd(os.path.join(BOARD_DIR, "links.csv")) if r.get("week") and r.get("url"))
+    except (OSError, ValueError):
+        return []
+
+
+def hub_url():
+    try:
+        return open(HUB_URL_FILE, encoding="utf-8").read().strip()
+    except OSError:
+        return ""
+
+
+def week_nav(cur):
+    """보드 머리의 주차 체인(MLB 보드 날짜 체인과 같은 방식) — 현재 주는 굵게, 나머지는 그 주 보드로, 끝에 허브."""
+    links = dict(week_links()); links.setdefault(cur, "")
+    parts = [f'<b class="cur">{w}주</b>' if w == cur else f'<a href="{esc(u)}">{w}주</a>' for w, u in sorted(links.items()) if w == cur or u]
+    hu = hub_url()
+    return ('<nav class="weeks"><span class="muted">주차</span> ' + " · ".join(parts)
+            + (f' <a class="hub" href="{esc(hu)}">전체 주차 →</a>' if hu else "") + "</nav>")
+
+
+def hub_html():
+    """주차 허브 — 모든 주 보드의 「전체 주차 →」가 이 고정 URL 을 가리킨다. 새 주 보드가 생길 때 이 페이지만 다시 발행."""
+    links = week_links()
+    if not links:
+        return "<meta charset=\"utf-8\"><title>NFL 주간 보드</title><p>등록된 보드 없음</p>"
+    cg = [g for g in N.rd(os.path.join(N.CACHE, "games.csv")) if g.get("season") == str(N.SEASON) and g.get("game_type") == "REG"]
+    days = defaultdict(set)
+    for g in cg:
+        days[int(g["week"])].add(g["gameday"])
+
+    def span(w):   # 「9/10~9/14」 — 그 주 첫 경기일~마지막 경기일
+        ds = sorted(days.get(w, ()))
+        f = lambda d: f"{int(d[5:7])}/{int(d[8:10])}"
+        return f"{f(ds[0])}~{f(ds[-1])}" if ds else ""
+    rows = PR.all_rows()
+
+    def wl(w):
+        s = PR.summary([r for r in rows if r["week"] == str(w)])
+        m, b = s.get("시장", {}), s.get("발행", {})
+        if not m.get("w", 0) + m.get("l", 0):
+            return '<span class="r none">결과 전</span>'
+        t = f'<span class="r">{m["w"]}-{m["l"]}</span>'
+        if b.get("w", 0) + b.get("l", 0):
+            t += f'<span class="r2">발행 {b["w"]}-{b["l"]}</span>'
+        return t
+    w0, u0 = links[-1]
+    items = "".join(f'<li><a href="{esc(u)}"><span class="d">{w}주차</span><span class="sp">{esc(span(w))}</span>{wl(w)}'
+                    f'<span class="go">열기 →</span></a></li>' for w, u in reversed(links))
+    return f"""<meta charset="utf-8"><title>NFL 주간 보드</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@600;800&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root {{ --bg:#eef2ec; --sur:#ffffff; --ink:#14231b; --ink2:#5d6b62; --line:#d4ddd3; --acc:#e8590c; --accT:#fbe9df; }}
+@media (prefers-color-scheme: dark) {{ :root:not([data-theme="light"]) {{
+  --bg:#0f1712; --sur:#16211a; --ink:#e6efe7; --ink2:#97a69b; --line:#26352b; --acc:#ff7a2e; --accT:#2a1d14; color-scheme:dark; }} }}
+:root[data-theme="dark"] {{ --bg:#0f1712; --sur:#16211a; --ink:#e6efe7; --ink2:#97a69b; --line:#26352b; --acc:#ff7a2e; --accT:#2a1d14; color-scheme:dark; }}
+* {{ box-sizing:border-box; }}
+body {{ background:var(--bg); color:var(--ink); margin:0; font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif; line-height:1.55; }}
+.wrap {{ max-width:640px; margin:0 auto; padding:28px 16px 60px; font-variant-numeric:tabular-nums; }}
+h1 {{ font-family:"Saira Extra Condensed","Arial Narrow",sans-serif; font-weight:800; font-size:2.2rem; margin:0; letter-spacing:.02em; line-height:1; }}
+.meta {{ color:var(--ink2); font-size:.86rem; margin:8px 0 18px; }}
+a.latest {{ display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; text-decoration:none; color:var(--ink);
+  background:var(--sur); border:1px solid var(--line); border-left:5px solid var(--acc); padding:16px 18px; }}
+a.latest small {{ color:var(--acc); font-weight:700; letter-spacing:.08em; font-size:.74rem; }}
+a.latest b {{ font-family:"Saira Extra Condensed","Arial Narrow",sans-serif; font-size:1.6rem; }}
+a.latest .go {{ margin-left:auto; color:var(--acc); font-weight:700; }}
+a.latest:hover, a.latest:focus-visible {{ border-color:var(--acc); outline:none; }}
+h2 {{ font-size:.8rem; margin:30px 0 10px; color:var(--acc); letter-spacing:.12em; }}
+h2 small {{ color:var(--ink2); font-weight:400; letter-spacing:0; margin-left:6px; }}
+ol.list {{ list-style:none; margin:0; padding:0; border:1px solid var(--line); background:var(--sur); }}
+ol.list li + li {{ border-top:1px solid var(--line); }}
+ol.list a {{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding:10px 14px; color:var(--ink); text-decoration:none; }}
+ol.list a:hover, ol.list a:focus-visible {{ background:var(--accT); outline:none; }}
+.d {{ font-weight:700; min-width:58px; }}
+.sp {{ color:var(--ink2); font-size:.84rem; min-width:84px; font-family:"IBM Plex Mono",monospace; }}
+.r {{ font-family:"IBM Plex Mono",monospace; font-weight:600; }}
+.r2 {{ color:var(--ink2); font-size:.82rem; }}
+.r.none {{ color:var(--ink2); font-weight:400; font-family:inherit; font-size:.84rem; }}
+ol.list .go {{ margin-left:auto; color:var(--acc); font-size:.84rem; }}
+</style>
+<div class="wrap">
+<h1>🏈 NFL 주간 보드</h1>
+<p class="meta">주차별 보드는 그 주 결과가 찍힌 채로 남아요. 새 주차 보드가 생기면 맨 위 링크가 바뀝니다. 숫자 = 승자 예측(시장 ML 승자) 맞힘-틀림.</p>
+<a class="latest" href="{esc(u0)}"><small>최신 주차</small><b>{w0}주차</b><span class="go">열기 →</span></a>
+<h2>전체 주차<small>주차 · 날짜 · 승자 예측 맞힘-틀림</small></h2>
+<ol class="list">{items}</ol>
+</div>"""
+
+
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--week", type=int, required=True); ap.add_argument("--out")
+    ap.add_argument("--hub-out", default=os.path.join(BOARD_DIR, "hub.html"))
     a = ap.parse_args()
     wd = N.week_dir(a.week)
-    games = N.rd(os.path.join(wd, "games.csv"))
+    games = N.rd(os.path.join(wd, "games.csv")) if os.path.exists(os.path.join(wd, "games.csv")) else games_fallback(a.week)
+    pre = records_before(a.week)   # 보드 전적 = 그 주 경기 전(1주는 0-0)
+    hr = records_before(a.week, split=True)   # 원정팀은 원정 성적, 홈팀은 홈 성적을 덧붙인다(ESPN 「3-2, 1-1 Away」)
+    for g in games:
+        g["away_rec"] = pre.get(g["away"], "0-0" if a.week == 1 else g.get("away_rec", ""))
+        g["home_rec"] = pre.get(g["home"], "0-0" if a.week == 1 else g.get("home_rec", ""))
+        if a.week > 1:
+            g["away_rec"] += f' · 원정 {hr.get(g["away"], ("0-0", "0-0"))[1]}'
+            g["home_rec"] += f' · 홈 {hr.get(g["home"], ("0-0", "0-0"))[0]}'
     # 실시간 상태·점수(배당 들어 있는 espn_scoreboard.json 은 건드리지 않는다 — 끝난 경기는 배당이 사라지므로 따로 받는다)
     live = {}
     try:
@@ -336,25 +493,8 @@ def main():
         return ""
 
     def hit(res):
-        """예측·방향·관찰 결과 — 테두리만(실베팅 색 pill 과 구분)."""
+        """예측·방향·관찰 결과 — 테두리만. 실베팅은 보드에 표시하지 않는다(2026-10-15 Paul 「의미 없음 · 추천만」)."""
         return {"W": '<span class="hit w">맞힘</span>', "L": '<span class="hit l">틀림</span>', "P": '<span class="hit p">무승부</span>'}.get(res, "")
-
-    def betpill(r, gk):
-        res = result_of(r, gk); u = P.fnum(r.get("units"))
-        if res == "W":
-            return f'<span class="bp w">승 {u:+.2f}u</span>' if u is not None else '<span class="bp w">승</span>'
-        if res == "L":
-            return f'<span class="bp l">패 {u:+.2f}u</span>' if u is not None else '<span class="bp l">패</span>'
-        if res == "P":
-            return '<span class="bp p">환불</span>'
-        return '<span class="bp wait">대기</span>'
-
-    allp = [r for r in P.rd(P.PICKS) if r.get("status") == "placed"]
-    done = [r for r in allp if r.get("result") in ("W", "L", "P")]
-    su = sum(P.fnum(r.get("units")) or 0 for r in done)
-    sw = sum(1 for r in done if r["result"] == "W"); sl = sum(1 for r in done if r["result"] == "L")
-    cvs = [P.fnum(r.get("clv_prob")) for r in done if P.fnum(r.get("clv_prob")) is not None]
-    wk_bets = [r for r in picks if r.get("status") == "placed"]
 
     mini_used = set()
 
@@ -376,8 +516,7 @@ def main():
         st = lv.get("state", g.get("status", ""))
         fin = st == "STATUS_FINAL"
         rows = by.get(gk, [])
-        bets = [r for r in rows if r.get("status") == "placed"]
-        dirs = [r for r in rows if r["grade"] == "방향(발행)"]
+        dirs =[r for r in rows if r["grade"] == "방향(발행)"]
         obs = [r for r in rows if r["grade"] in ("바람 언더(관찰)", "새 정보(관찰)") or r["grade"].startswith("각도 관찰")]   # 티저는 2026-10-10 폐지
         pub = pubs.get(gk, {})
         pr = preds.get(gk, {})
@@ -409,10 +548,7 @@ def main():
             pred_html += "</div>"
         # ── 결론 줄(낱말만, 근거는 title)
         items = []
-        for r in bets:
-            stake = P.fnum(r.get("stake")) or 1
-            items.append(f'<li><span class="tag bet">실베팅</span> <b>{esc(r["side"])}</b> <span class="num">{esc(r.get("odds", ""))}</span> · {stake:g}u {betpill(r, gk)}</li>')
-        vw = verdict_word(pub.get("판단", ""))
+        vw =verdict_word(pub.get("판단", ""))
         if vw or dirs:
             dir_txt = " · ".join(esc(r["side"]) + " " + hit(result_of(r, gk)) for r in dirs)
             items.append(f'<li><span class="tag pub" title="claude.ai 발행 세션 판단">발행</span> '
@@ -462,10 +598,9 @@ def main():
                       f'<td data-s="{ml_s}">{esc(ml_txt)}</td>'
                       f'<td>{dir_cell}</td><td>{esc(vw0) or "—"}</td><td data-s="{res_s}">{res_txt}</td></tr>'))
         if fin:
-            bet_s = " ".join(betpill(r, gk) for r in bets)
-            done_rows.append(f'''<details class="done{' hasbet' if bets else ''}"><summary>
+            done_rows.append(f'''<details class="done"><summary>
   <span class="dm">{mini(A)}<b>{nm(A)}</b><small class="muted">{esc(g.get("away_rec", ""))}</small> <span class="num">{esc(str(lv.get("sa")))} – {esc(str(lv.get("sh")))}</span> <b>{nm(H)}</b><small class="muted">{esc(g.get("home_rec", ""))}</small>{mini(H)}</span>
-  <span class="dr">{f'예측 {esc(m_["pick"])} <span class="star">{PR.star_str(pp)}</span> {phit(m_)}' if m_ else ''} {bet_s}</span></summary>
+  <span class="dr">{f'예측 {esc(m_["pick"])} <span class="star">{PR.star_str(pp)}</span> {phit(m_)}' if m_ else ''}</span></summary>
   <div class="dbody">{pred_html}{lines}<a class="goto" data-g="{esc(gk)}">발행문·보완 전문 보기 ↓</a></div></details>''')
             continue
         # ── 아직 안 한 경기 / 진행 중
@@ -493,8 +628,8 @@ def main():
                          f'<td class="muted">승리 {esc(A)} {pct(ma)} / {esc(H)} {pct(mh)}</td></tr>')
         mk = (f'<div class="quick">{" · ".join(quick)}</div><details class="px"><summary>배당 자세히(DK · 수수료 뺀 확률)</summary>'
               f'<table>{"".join(price)}</table></details>') if quick else ""
-        key = (0 if bets else 1, -PR.stars(pp), g["kickoff_utc"])
-        pre_cards.append((key, f'''<article class="card{' hasbet' if bets else ''}" data-g="{esc(gk)}">
+        key = (-PR.stars(pp), g["kickoff_utc"])   # 별 많은 순 → 킥오프(10/15 실베팅 우선 정렬 삭제)
+        pre_cards.append((key, f'''<article class="card" data-g="{esc(gk)}">
   <header class="match">{team(A, lv.get("na"), rec=g.get("away_rec", ""), pk=A == pick_t)}<span class="at">@</span>{team(H, lv.get("nh"), right=True, rec=g.get("home_rec", ""), pk=H == pick_t)}</header>
   <div class="meta">{status}{div}{neu}</div>
   {pred_html}{mk}{lines}
@@ -539,16 +674,11 @@ def main():
                 + "".join(f'.lg-{t}{{background-image:url("{logo_uri(t)}")}}' for t in sorted(mini_used)))
     now = datetime.now().strftime("%m/%d %H:%M")
     # ── 이번 주 한 줄 결론
-    wk_open_bets = [r for r in wk_bets if not result_of(r, r["game"])]
-    wk_done_bets = [r for r in wk_bets if result_of(r, r["game"])]
-    wb_w = sum(1 for r in wk_done_bets if result_of(r, r["game"]) == "W"); wb_l = sum(1 for r in wk_done_bets if result_of(r, r["game"]) == "L")
     wm = wsum.get("시장", {})
     verdicts = [verdict_word(pubs.get(f'{g["away"]}@{g["home"]}', {}).get("판단", "")) for g in games
                 if live.get(f'{g["away"]}@{g["home"]}', {}).get("state") != "STATUS_FINAL"]
     cand = sum(1 for v in verdicts if v in ("관심", "소액 관심"))
-    headline = (f'남은 경기 <b>{len(pre_cards)}</b> · 발행 후보 <b>{cand}</b> · '
-                f'이번 주 실베팅 <b>{wb_w}-{wb_l}</b>' + (f'(대기 {len(wk_open_bets)})' if wk_open_bets else "")
-                )
+    headline = f'남은 경기 <b>{len(pre_cards)}</b> · 발행 후보 <b>{cand}</b>'
     ms = psum.get("시장", {})
     star_rows = "".join(
         f'<tr><td class="star">{"★" * k}</td><td class="num">{w}-{l}</td><td class="num">{(f"{100 * w / (w + l):.0f}%") if w + l else "—"}</td><td class="num muted">{PR.STAR_HIT[k]}</td></tr>'
@@ -579,7 +709,6 @@ h2{{font-family:var(--display);font-weight:600;font-size:1.35rem;letter-spacing:
 .term{{color:var(--term);text-decoration:none;border-bottom:1px dotted var(--term);cursor:help}}
 .grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}}
 .card{{background:var(--panel);border:1px solid var(--line);padding:14px;display:grid;gap:10px;min-width:0;align-content:start}}
-.card.hasbet,.done.hasbet{{border-color:var(--acc);box-shadow:inset 3px 0 0 var(--acc)}}
 .match{{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}}
 .team{{display:flex;align-items:center;gap:8px;min-width:0}}
 .team.r{{flex-direction:row-reverse;text-align:right}}
@@ -600,12 +729,9 @@ details.px table{{border-collapse:collapse;width:100%;font-size:.8rem;margin-top
 details.px td{{padding:3px 6px 3px 0;border-bottom:1px dashed var(--line);vertical-align:top}}
 .lines{{list-style:none;margin:0;padding:0;display:grid;gap:5px;border-top:1px dashed var(--line);padding-top:8px;font-size:.86rem}}
 .tag{{font-size:.68rem;padding:1px 6px;margin-right:4px;border:1px solid var(--line)}}
-.tag.bet{{background:var(--acc);border-color:var(--acc);color:var(--panel)}}
 .tag.obs{{border-style:dashed}}
 .hit{{font-size:.7rem;padding:0 5px;margin-left:2px;border:1px solid}}
 .hit.w{{color:var(--ok)}}.hit.l{{color:var(--bad)}}.hit.p{{color:var(--push)}}
-.bp{{font-size:.72rem;padding:1px 7px;margin-left:4px;font-weight:700;color:var(--panel)}}
-.bp.w{{background:var(--ok)}}.bp.l{{background:var(--bad)}}.bp.p{{background:var(--push)}}.bp.wait{{background:var(--muted)}}
 .donelist{{display:grid;gap:6px}}
 details.done{{background:var(--panel);border:1px solid var(--line)}}
 details.done summary{{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:space-between;padding:8px 12px;cursor:pointer;list-style:none}}
@@ -620,16 +746,17 @@ table.tiers th{{font-size:.74rem;color:var(--muted);font-weight:500}}
 details.more{{background:var(--panel);border:1px solid var(--line);padding:10px 14px}}
 details.more summary{{cursor:pointer;font-weight:500}}
 .note{{font-size:.78rem;color:var(--muted);max-width:75ch}}
+nav.weeks{{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline;font-size:.92rem}}
+nav.weeks a{{color:var(--ink)}}nav.weeks b.cur{{color:var(--acc)}}nav.weeks a.hub{{margin-left:8px;color:var(--acc);font-weight:700;text-decoration:none}}
 @media (max-width:420px){{h1{{font-size:2rem}}.grid{{grid-template-columns:1fr}}}}
 {EXTRA_CSS}
 {logo_css}
 </style>
 <div class="wrap">
   <div class="top"><h1>NFL {a.week}주차 보드</h1><div class="muted">갱신 {now} PT · 표시 전용(정본: 다이제스트·발행문) · 시간은 PT(캘리포니아)</div></div>
+  {week_nav(a.week)}
   <div class="chips">
     <div class="stat"><span class="k">승자 예측 시즌</span><span class="v">{ms.get("w", 0)}-{ms.get("l", 0)}</span></div>
-    <div class="stat"><span class="k">실베팅 시즌</span><span class="v">{sw}-{sl}</span></div>
-    <div class="stat"><span class="k">손익</span><span class="v">{su:+.2f}u</span></div>
     <div class="stat"><span class="k">승자 예측 이번 주</span><span class="v">{wm.get("w", 0)}-{wm.get("l", 0)}</span></div>
   </div>
   <div class="headline">{headline}</div>
@@ -637,7 +764,7 @@ details.more summary{{cursor:pointer;font-weight:500}}
     <div><b>읽는 법</b> — 보라색 낱말에 손가락·마우스를 대면 뜻이 나와요.</div>
     <div><span class="star">★</span> = <b>이길 확률이 높은 정도</b>(2018~25 실제 적중 ★ 50% · ★★ 61% · ★★★ 71% · ★★★★ 82%). <b>돈 버는 신호가 아니에요</b> — 별 4개 팀도 {term("스프레드")}는 절반만 맞았어요.</div>
     <div>{term("스프레드")} = 점수 차 핸디 · {term("총점")} = 두 팀 점수 합이 기준보다 많을지(Over)·적을지(Under) · {term("ML")} = 그냥 이길 팀(10/10부터 주인공)</div>
-    <div>{term("방향")} = 예측에서 나온 쪽(동전 — 적중률만 봄) · {term("관찰", "관찰만")} = 돈 안 건 기록 · <span class="tag bet">실베팅</span> = Paul 이 실제로 건 것(주황 테두리 카드) · 맞힘/틀림 = 예측·관찰 결과, <span class="bp w">승</span><span class="bp l">패</span> = 실베팅 결과</div>
+    <div>{term("방향")} = 예측에서 나온 쪽(동전 — 적중률만 봄) · {term("관찰", "관찰만")} = 돈 안 건 기록 · 맞힘/틀림 = 예측·방향·관찰 결과</div>
     <div><span class="pk">파란 글씨</span> = <b>우리 픽</b>(이길 팀 예측 — 발행 예측, 없으면 시장 예측) · 발행문 속 팀 약칭(HOU 등)에 마우스·손가락을 대면 지역+팀 이름이 나와요.</div>
     <div><b>카드나 표 줄을 누르면</b> 그 경기의 발행문·보완 전문이 아래에서 펼쳐져요. 표 머리(예측 승자·★·스프레드 …)를 누르면 그 기준으로 정렬돼요.</div>
   </section>
@@ -652,7 +779,6 @@ details.more summary{{cursor:pointer;font-weight:500}}
   <div><table class="tiers"><thead><tr><th>별</th><th>W-L</th><th>올해</th><th>2018~25 기대</th></tr></thead><tbody>{star_rows}</tbody></table>
   <p class="note">1~4주차 일부는 마감 배당으로 소급한 기록이에요. 표본이 작아 몇 주는 기대와 어긋나는 게 정상이에요.</p></div>
   <details class="more"><summary>숫자 자세히</summary>
-    <p>실베팅 시즌 {sw}-{sl} · {su:+.2f}u · 평균 {term("CLV")} {(sum(cvs) / len(cvs)) if cvs else 0:+.1f}%p(n {len(cvs)}) — 마감보다 비싸게 샀으면 −, 싸게 샀으면 +. 수십 건이 쌓여야 의미가 있어요.</p>
     <p>승자 예측 시즌 · 시장 {ms.get("w", 0)}-{ms.get("l", 0)} · 발행 {psum.get("발행", {}).get("w", 0)}-{psum.get("발행", {}).get("l", 0)} · 우리 모델 {psum.get("모델", {}).get("w", 0)}-{psum.get("모델", {}).get("l", 0)}</p>
   </details>
   <p class="note">표시 전용 — 재계산 없음 · 정본은 다이제스트(DIGEST.md)·발행문·picks.csv · 배당은 DraftKings(ESPN), 경기가 시작되면 ESPN 에서 사라져 끝난 경기엔 표시하지 않아요.</p>
@@ -661,6 +787,9 @@ details.more summary{{cursor:pointer;font-weight:500}}
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, "w", encoding="utf-8").write(page)
     print("wrote", out, f"{len(page):,} bytes")
+    if a.hub_out:
+        open(a.hub_out, "w", encoding="utf-8").write(hub_html())
+        print("wrote", a.hub_out)
 
 
 if __name__ == "__main__":
