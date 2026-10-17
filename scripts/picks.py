@@ -340,7 +340,10 @@ ANGLE_GRADES = {"A1": "각도 관찰 A1(원정 큰 페이버릿 반대)", "A2": 
                 "A3": "각도 관찰 A3(결장 팀 반대 3점+ 이동 → 결장 팀)",   # 2026-10-10 Paul 「A3는 등록해」(발행 세션 가설 — 역사 백테스트 불가, 전향만)
                 "A4": "각도 관찰 A4(작년 플옵팀 언더독 1~8주 → 그 팀 ML)",   # 2026-10-16 Paul 「작년 경기를 재료로」 — 아래 A4 주석
                 "A5": "각도 관찰 A5(3rd down 운 회귀 5~9주 → 상대 ML)",        # 2026-10-17 Paul 「둘 다 등록해」 — 아래 A5 주석
-                "A6": "각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS)"}       # 2026-10-17 — 아래 A6 주석
+                "A6": "각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS)",       # 2026-10-17 — 아래 A6 주석
+                "A7": "각도 관찰 A7(홈 언더독 +7 이상 → 홈 ATS)",                # 2026-10-17 「남는 종류 더」 — 아래 A7 주석
+                "A8": "각도 관찰 A8(접전 .750+ 팀 → 그 팀 ML)",                  # 아래 A8 주석
+                "A9": "각도 관찰 A9(12월~ 실외 → Over)"}                           # 아래 A9 주석
 A3_MOVE = 3.0   # 개장→현재 스프레드 이동(점) 문턱 — 사전 등록, 조정 금지
 # A4(2026-10-16 사전 등록 · 조정 금지): 작년 플레이오프 팀이 비플옵 팀 상대로 ML 언더독(무비그 <50%)인 1~8주 경기 → 그 팀 ML(현재 DK 배당).
 # 근거 2018~25 정규시즌(16개 각도 탐색 중 선택 — 사후 선택 위험): 1~4주 24-14 실제 63% vs 시장 40% 수익 +50%(z +3.0) · 5~8주 19-23 +6% · 9주~ 소멸(−6%)
@@ -354,7 +357,30 @@ A5_WEEKS = (5, 9); A5_GAP = 10
 # 근거 ESPN 개장·마감 2024~25 123경기: 반대쪽 ATS 73-50(59%) · 2024 63%·2025 56% · 언더독 쪽 이동일 때 65% / 페이버릿 쪽 56%. 7개 가격·타이밍 가설 중 선택.
 # 개장 라인은 games.csv open_spread_home(수집 세션 첫 수집 시점 ESPN 개장값). 판정 20픽 ≥52.4%.
 A6_KEYS = (3.0, 7.0)
+# A7·A8·A9(2026-10-17 사전 등록 · 조정 금지 · 예측시장 이후 24~25 시대에 남은 꼴 — 전 시대엔 없거나 약했음, 「시대가 바뀌었나」 전향 검증):
+#  A7 홈 언더독 +7 이상 → 홈 ATS(현재 라인): 전 18~23 77-67 53.5% · 후 24~25 29-15 65.9%(z2.1). 판정 20픽 ≥52.4%.
+#  A8 그 주 전 한 포제션(8점 이내) 경기 4+ & 승률 .750+ 팀 → 그 팀 ML: 전 잔차 −0.6%p · 후 92-43 실제 68% vs 시장 57%(+11.1%p z2.8). 5주차~. 판정 20픽 ≥50% & 수익 플러스.
+#  A9 12월·1월 실외 경기 → Over(현재 총점): 전 174-178 49.4% · 후 66-44 60.0%(z2.1). 판정 20픽 ≥52.4%.
+A7_LINE = 7.0; A8_MIN_GAMES = 4; A8_PCT = .75
 _PO = None
+_ONE = None
+
+
+def _one_score():
+    """{team: (승률, 경기 수)} — 올 시즌 끝난 경기 중 8점 이내(동점 제외), data/cache/games.csv."""
+    global _ONE
+    if _ONE is None:
+        acc = {}
+        for g in rd(os.path.join(DATA, "cache", "games.csv")):
+            if g.get("season") != str(SEASON) or g.get("game_type") != "REG" or not g.get("result"):
+                continue
+            d = fnum(g["result"]) or 0
+            if d == 0 or abs(d) > 8:
+                continue
+            for t, won in ((g["home_team"], d > 0), (g["away_team"], d < 0)):
+                a_ = acc.setdefault(t, [0, 0]); a_[0] += won; a_[1] += 1
+        _ONE = {t: (w / n, n) for t, (w, n) in acc.items() if n}
+    return _ONE
 
 
 def _last_playoff():
@@ -439,6 +465,17 @@ def angles(week):
                 r3, re_ = _rk(d3r, t), _rk(epar, t)
                 if r3 and re_ and re_ - r3 >= A5_GAP:
                     cand[f'{m["game_id"]}:ml:A5'] = (f"{a}@{h}", f"{opp} ML", "A5", f"{t} 3rd down {r3}위 vs 공격 EPA {re_}위(+{re_ - r3}) → 상대 {opp} · {week}주차", "ml", "", o_ or "+100")
+        if hl >= A7_LINE:                                       # A7 — 홈 언더독 +7 이상(홈 ATS)
+            cand[f'{m["game_id"]}:spread:A7'] = (f"{a}@{h}", f"{h} {hl:+g}", "A7", f"홈 {h} 언더독 {hl:+g}", "spread", f"{hl:+g}", "-110")
+        if week >= 5:                                           # A8 — 접전 .750+ 팀 ML
+            for t, o_ in ((a, g.get("ml_away")), (h, g.get("ml_home"))):
+                pct_, n1 = _one_score().get(t, (0, 0))
+                if n1 >= A8_MIN_GAMES and pct_ >= A8_PCT:
+                    cand[f'{m["game_id"]}:ml:A8'] = (f"{a}@{h}", f"{t} ML", "A8", f"{t} 한 포제션 경기 {round(pct_ * n1)}-{n1 - round(pct_ * n1)}({100 * pct_:.0f}%)", "ml", "", o_ or "+100")
+        _kick = g.get("kickoff_utc") or ""
+        _tl = fnum(m.get("mkt_total"))
+        if _tl is not None and _kick[5:7] in ("12", "01") and (g.get("roof") or "").lower() in ("outdoors", "open"):   # A9 — 12월~ 실외 오버
+            cand[f'{m["game_id"]}:total:A9'] = (f"{a}@{h}", f"Over {_tl:g}", "A9", f"{_kick[:10]} 실외({g.get('roof')}) · 총점 {_tl:g}", "total", f"{_tl:g}", "-110")
         if os_ is not None and hl != os_:                      # A6 — 키 넘버 역행(이동 반대쪽, 현재 라인)
             crossed = any((abs(os_) < k <= abs(hl)) or (abs(hl) < k <= abs(os_)) for k in A6_KEYS)
             if crossed:

@@ -1105,6 +1105,30 @@ def ph_inactives(week, games, snap):
     wcsv(os.path.join(wd, "inactives.csv"), ["game", "team", "player", "pos", "status", "reason", "detail", "announced_utc", "official", "star", "snap_pct"], rows)
 
 
+ANGLE_NOTE = {   # 2026-10-17 — 각도별 실측 한 줄(예측시장 이후 24~25 기준 · 서술용). 정의·판정 기준은 picks.py 주석
+    "A3": "결장 팀 반대 3점+ 이동 → 결장 팀 ATS(역사 없음 · 전향 5-2)",
+    "A4": "작년 플옵팀 언더독 1~8주 ML(18~25 24-14 +50% · 24~25 +4.6%p)",
+    "A5": "3rd down 운 회귀 → 상대 ML(24~25 54-27 실제 67% vs 시장 56%)",
+    "A6": "개장→마감 키 넘버 3·7 넘김 → 반대쪽 ATS(24~25 73-50 59%)",
+    "A7": "홈 언더독 +7 이상 → 홈 ATS(24~25 29-15 66% · 18~23 54%)",
+    "A8": "접전 .750+ 팀 ML(24~25 실제 68% vs 시장 57% · 18~23 0)",
+    "A9": "12월~ 실외 Over(24~25 60% · 18~23 49%)",
+}
+
+
+def _angles_line(week, g):
+    """경기 절 「- 🔎 관찰 각도」 — 이 경기의 각도 페이퍼(picks.csv, 미채점)와 실측 한 줄. 돈 아님 · 발행 세션은 ML 각도가 예측 승자와 같으면 소액 관심 근거로, 그 밖은 변수 한 줄."""
+    rows = [r for r in rd(os.path.join(DATA, "picks.csv")) if r.get("id", "").startswith(str(g.get("game_id", "")) + ":") and r.get("grade", "").startswith("각도 관찰") and not r.get("result")]
+    if not rows:
+        return "- 🔎 관찰 각도(페이퍼 · 돈 아님): 해당 없음"
+    parts = []
+    for r in sorted(rows, key=lambda r: r["id"]):
+        key = r["id"].split(":")[-1]
+        parts.append(f'{key} {r["side"]}' + (f'({r["odds"]})' if r.get("market") == "ml" and r.get("odds") else "") + f' — {ANGLE_NOTE.get(key, r["grade"])} · {r.get("note", "").split(" · ")[0]}')
+    return ("- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전 · 예측시장 이후 실측 기준): " + " / ".join(parts)
+            + " ← ML 각도가 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄")
+
+
 def _inactives_line(wd, g, a, h):
     """경기 절 「- 🏥 결장 명단」 — ESPN 당일 명단(건강 제외 등) ∪ 주간 보고 Out(injuries.csv out 열). ESPN 당일 명단은 주중에 이미 Out 인
     선수를 생략한다(10/15 SEA@DEN ESPN 5/5 vs 공식 7/7 — Thomas★·Surratt·Surtain 누락, 발행 세션 제보). 발표 시각 = 당일 행 중 가장 이른 것."""
@@ -1298,6 +1322,7 @@ def ph_digest(week, force=False):
                         if str(x.get("n_starters_missing") or "0") not in ("0", "") else "")
                      + (f' (보고 {x.get("report_week")}주차)' if x.get("report_week") and str(x.get("report_week")) != str(week) else ""))
         L.append(_inactives_line(wd, g, a, h))    # 🏥 ESPN 공식 비활성 명단 — 2026-10-15 Paul 「여기서 수집」
+        L.append(_angles_line(week, g))             # 🔎 관찰 각도(페이퍼) — 2026-10-17 Paul 「발행 시 반영되도록」
         L += SC.build(a, h, RS, PRO, rt, inj, g)   # 📊 스탯 비교(말로) — 2026-10-10 Paul 「숫자만 있어 이해 어려움」
         L += SC.player_tables(a, h, RS, inj, g)    # 🧑‍🤝‍🧑 팀별 선수 표 — 2026-10-12 Paul 「선수별 스탯 표로」
         _sec_start = max((i for i, _l in enumerate(L) if _l.startswith("## ")), default=0)

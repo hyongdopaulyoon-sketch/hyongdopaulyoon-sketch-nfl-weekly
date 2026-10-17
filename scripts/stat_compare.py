@@ -174,6 +174,10 @@ def conclusion_line(a, h, sec, inj, m, g):
             for nm in [y.strip() for y in re.split(r"\)\s*·\s*", str(x.get(key) or "")) if "★" in y]:
                 cand.append(f"{t} {nm.split('(')[0].strip()}({key[0].upper()})")
     out.append("새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): " + (", ".join(cand[:6]) if cand else "없음"))
+    _ag = next((ln for ln in sec if ln.startswith("- 🔎 관찰 각도")), "")
+    if _ag:
+        _body = _ag.split("): ", 1)[1].split(" ← ")[0] if "): " in _ag else ""
+        out.append("관찰 각도(페이퍼): " + (" / ".join(x.split(" — ")[0] for x in _body.split(" / ")) if _body and "해당 없음" not in _ag else "없음"))
     lm = next((ln for ln in sec if ln.startswith("- 라인 이동:")), "")
     if lm:
         out.append(lm[2:].split(" (")[0])
