@@ -36,9 +36,29 @@ def gap_label(ra, rh, a, h, n=32):
     return lab if lab == "차이 없음" else f"{lab} · {a if ra < rh else h} 쪽"
 
 
-def gap(vals, a, h, high=True):
+_GR = None
+
+
+def _gap_rates():
+    """data/gap_rates.json — scripts/gap_rates.py 가 만든 등급별 실측(2024~25 as-of · 순위 높은 팀 ML 승률 vs 시장 기대). 없으면 {}."""
+    global _GR
+    if _GR is None:
+        try:
+            import json
+            _GR = json.load(open(os.path.join(N.DATA, "gap_rates.json"), encoding="utf-8"))
+        except Exception:
+            _GR = {}
+    return _GR
+
+
+def gap(vals, a, h, high=True, item=None):
     n = len([x for x in vals.values() if x is not None])
-    return gap_label(_rank(vals, a, high), _rank(vals, h, high), a, h, n)
+    lab = gap_label(_rank(vals, a, high), _rank(vals, h, high), a, h, n)
+    if item and lab not in ("—", "차이 없음"):
+        r = _gap_rates().get(item, {}).get(lab.split(" · ")[0])
+        if r:   # 2026-10-17 Paul 「서술 옆에 퍼센트」 — 그 등급일 때 순위 높은 팀이 실제 이긴 비율 · 시장이 준 확률(서술 전용)
+            lab += f"({r['win']}% · 시장 {r['mkt']}%)"
+    return lab
 
 
 def cell(vals, t, fmt, high=True, unit="", n=None):
@@ -165,13 +185,13 @@ def conclusion_line(a, h, sec, inj, m, g):
 
 def build(a, h, RS, PRO, rt, inj, g):
     """→ 다이제스트 줄 목록. RS = stat_research.load() 결과, PRO = _team_profile(), rt = ratings dict."""
-    L = ["- 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 — 서술 전용, 확률·별점 영향 0)**:", "",
-         f"| 항목 | {a} | {h} | 뜻 | 격차(서술 전용) |", "|---|---|---|---|---|"]
+    L = ["- 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 · 괄호 = 2024~25 그 등급일 때 순위 높은 팀이 실제 이긴 비율와 시장이 준 확률(둘이 비슷 = 시장이 이미 반영) — 서술 전용, 확률·별점 영향 0)**:", "",
+         f"| 항목 | {a} | {h} | 뜻 | 격차(서술 전용 · 실측 승률/시장) |", "|---|---|---|---|---|"]
     S = CB.standings()
     pf = {t: (S[t]["pf"] / (S[t]["w"] + S[t]["l"] + S[t]["t"])) if (S[t]["w"] + S[t]["l"] + S[t]["t"]) else None for t in CB.DIV}
     pa = {t: (S[t]["pa"] / (S[t]["w"] + S[t]["l"] + S[t]["t"])) if (S[t]["w"] + S[t]["l"] + S[t]["t"]) else None for t in CB.DIV}
-    L.append(f"| 득점(경기당) | {cell(pf, a, '{:.1f}', True, '점')} | {cell(pf, h, '{:.1f}', True, '점')} | 한 경기에 넣는 점수 | {gap(pf, a, h, True)} |")
-    L.append(f"| 실점(경기당) | {cell(pa, a, '{:.1f}', False, '점')} | {cell(pa, h, '{:.1f}', False, '점')} | 한 경기에 내주는 점수(적을수록 좋음) | {gap(pa, a, h, False)} |")
+    L.append(f"| 득점(경기당) | {cell(pf, a, '{:.1f}', True, '점')} | {cell(pf, h, '{:.1f}', True, '점')} | 한 경기에 넣는 점수 | {gap(pf, a, h, True, '득점(경기당)')} |")
+    L.append(f"| 실점(경기당) | {cell(pa, a, '{:.1f}', False, '점')} | {cell(pa, h, '{:.1f}', False, '점')} | 한 경기에 내주는 점수(적을수록 좋음) | {gap(pa, a, h, False, '실점(경기당)')} |")
     summ = []
     if RS:
         T, P, NM = RS
@@ -188,10 +208,10 @@ def build(a, h, RS, PRO, rt, inj, g):
             return 100 * sum(r.get("dr_td", 0) + r.get("dr_fg", 0) for r in rows) / d if d else None
         oppd = {t: ppd(off[t]) for t in CB.DIV}; dppd = {t: ppd(de[t]) for t in CB.DIV}
         osc = {t: scp(off[t]) for t in CB.DIV}; dsc = {t: scp(de[t]) for t in CB.DIV}
-        L.append(f"| 공격 효율(드라이브당 득점) | {cell(oppd, a, '{:.2f}')} | {cell(oppd, h, '{:.2f}')} | 공을 잡고 한 번 공격할 때 평균 몇 점 — 실력 지표(r .61) | {gap(oppd, a, h, True)} |")
-        L.append(f"| 득점 드라이브 비율 | {cell(osc, a, '{:.0f}', True, '%')} | {cell(osc, h, '{:.0f}', True, '%')} | 공격 10번 중 몇 번 점수(TD+FG)를 내나 | {gap(osc, a, h, True)} |")
-        L.append(f"| 수비 효율(내준 드라이브당 득점) | {cell(dppd, a, '{:.2f}', False)} | {cell(dppd, h, '{:.2f}', False)} | 상대 공격 한 번에 평균 몇 점을 내주나 | {gap(dppd, a, h, False)} |")
-        L.append(f"| 상대 득점 드라이브 허용 | {cell(dsc, a, '{:.0f}', False, '%')} | {cell(dsc, h, '{:.0f}', False, '%')} | 상대 공격 10번 중 몇 번 점수를 허용하나 | {gap(dsc, a, h, False)} |")
+        L.append(f"| 공격 효율(드라이브당 득점) | {cell(oppd, a, '{:.2f}')} | {cell(oppd, h, '{:.2f}')} | 공을 잡고 한 번 공격할 때 평균 몇 점 — 실력 지표(r .61) | {gap(oppd, a, h, True, '공격 효율(드라이브당 득점)')} |")
+        L.append(f"| 득점 드라이브 비율 | {cell(osc, a, '{:.0f}', True, '%')} | {cell(osc, h, '{:.0f}', True, '%')} | 공격 10번 중 몇 번 점수(TD+FG)를 내나 | {gap(osc, a, h, True, '득점 드라이브 비율')} |")
+        L.append(f"| 수비 효율(내준 드라이브당 득점) | {cell(dppd, a, '{:.2f}', False)} | {cell(dppd, h, '{:.2f}', False)} | 상대 공격 한 번에 평균 몇 점을 내주나 | {gap(dppd, a, h, False, '수비 효율(내준 드라이브당 득점)')} |")
+        L.append(f"| 상대 득점 드라이브 허용 | {cell(dsc, a, '{:.0f}', False, '%')} | {cell(dsc, h, '{:.0f}', False, '%')} | 상대 공격 10번 중 몇 번 점수를 허용하나 | {gap(dsc, a, h, False, '상대 득점 드라이브 허용')} |")
         for t, lab in ((a, a), (h, h)):
             ro, rd_ = _rank(oppd, t), _rank(dppd, t, False)
             if ro and rd_:
@@ -209,7 +229,7 @@ def build(a, h, RS, PRO, rt, inj, g):
                 ("색 허용률(공격)", "o_sack", False, "{:.1%}", "QB 가 던지기 전에 잡히는 비율(낮을수록 보호가 좋음)"))
         for lab, key, high, fmt, mean in rows:
             vals = pv(key)
-            L.append(f"| {lab} | {cell(vals, a, fmt, high)} | {cell(vals, h, fmt, high)} | {mean} | {gap(vals, a, h, high)} |")
+            L.append(f"| {lab} | {cell(vals, a, fmt, high)} | {cell(vals, h, fmt, high)} | {mean} | {gap(vals, a, h, high, lab)} |")
     # QB — 예상 선발, 드롭백 60+ QB 중 순위
     if RS:
         T, P, NM = RS
