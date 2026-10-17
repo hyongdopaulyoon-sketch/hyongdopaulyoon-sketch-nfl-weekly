@@ -338,12 +338,22 @@ def wind(week):
 
 ANGLE_GRADES = {"A1": "각도 관찰 A1(원정 큰 페이버릿 반대)", "A2": "각도 관찰 A2(드라이브 우위 언더독 반대)",
                 "A3": "각도 관찰 A3(결장 팀 반대 3점+ 이동 → 결장 팀)",   # 2026-10-10 Paul 「A3는 등록해」(발행 세션 가설 — 역사 백테스트 불가, 전향만)
-                "A4": "각도 관찰 A4(작년 플옵팀 언더독 1~8주 → 그 팀 ML)"}   # 2026-10-16 Paul 「작년 경기를 재료로」 — 아래 A4 주석
+                "A4": "각도 관찰 A4(작년 플옵팀 언더독 1~8주 → 그 팀 ML)",   # 2026-10-16 Paul 「작년 경기를 재료로」 — 아래 A4 주석
+                "A5": "각도 관찰 A5(3rd down 운 회귀 5~9주 → 상대 ML)",        # 2026-10-17 Paul 「둘 다 등록해」 — 아래 A5 주석
+                "A6": "각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS)"}       # 2026-10-17 — 아래 A6 주석
 A3_MOVE = 3.0   # 개장→현재 스프레드 이동(점) 문턱 — 사전 등록, 조정 금지
 # A4(2026-10-16 사전 등록 · 조정 금지): 작년 플레이오프 팀이 비플옵 팀 상대로 ML 언더독(무비그 <50%)인 1~8주 경기 → 그 팀 ML(현재 DK 배당).
 # 근거 2018~25 정규시즌(16개 각도 탐색 중 선택 — 사후 선택 위험): 1~4주 24-14 실제 63% vs 시장 40% 수익 +50%(z +3.0) · 5~8주 19-23 +6% · 9주~ 소멸(−6%)
 # · 시즌별 1~8주 6/8 플러스 · 2026 1~4주 3-2 +52%. 판정: 20픽에서 ≥50% & 수익 플러스면 유지, 아니면 폐기. 10판부터 A1·A2 는 생성 중단(기록만 남김).
 A4_MAX_WEEK = 8
+# A5(2026-10-17 사전 등록 · 조정 금지): 그 주 전까지 시즌 3rd down 전환율 32팀 순위가 공격 EPA/플레이 순위보다 10계단+ 좋은 팀(= 3rd down 이 실력보다 잘 풀림)의
+# **상대 ML**(현재 DK 배당). 5~9주만(10주~ 는 시장이 따라잡음). 근거 2018~25 as-of: 5~18주 186-116 잔차 +5.4%p z2.05 수익 +3.4% · 5~9주 87-46 +9.6%p 수익 +13.4%
+# · 10~18주 +2.1%p 수익 −4.6% · 시즌 5/8 · 2026 4-1. 같은 계열 턴오버 마진 +1/경기 상대 +3.4%p(6/8). 14개 가설 탐색 중 선택(사후 선택 위험). 판정 20픽 ≥50% & 수익 플러스.
+A5_WEEKS = (5, 9); A5_GAP = 10
+# A6(2026-10-17 사전 등록 · 조정 금지): 개장 스프레드 → 현재(킥오프 직전 = 마감) 스프레드가 |3| 또는 |7| 을 넘어 이동한 경기 → **이동 반대쪽**(현재 라인, −110).
+# 근거 ESPN 개장·마감 2024~25 123경기: 반대쪽 ATS 73-50(59%) · 2024 63%·2025 56% · 언더독 쪽 이동일 때 65% / 페이버릿 쪽 56%. 7개 가격·타이밍 가설 중 선택.
+# 개장 라인은 games.csv open_spread_home(수집 세션 첫 수집 시점 ESPN 개장값). 판정 20픽 ≥52.4%.
+A6_KEYS = (3.0, 7.0)
 _PO = None
 
 
@@ -413,6 +423,28 @@ def angles(week):
                     other = h if t == a else a
                     if t in po and other not in po and p_ < 0.5:
                         cand[f'{m["game_id"]}:ml:A4'] = (f"{a}@{h}", f"{t} ML", "A4", f"작년 플옵팀 {t} 언더독(무비그 {100 * p_:.0f}% · 상대 {other} 비플옵) · {week}주차", "ml", "", o_ or "+100")
+        if A5_WEEKS[0] <= week <= A5_WEEKS[1] and T:          # A5 — 3rd down 운 회귀(상대 ML)
+            d3r, epar = {}, {}
+            for t_ in set(off):
+                o_rows = off[t_]
+                if len(o_rows) < 3:
+                    continue
+                d3 = sum(x.get("d3", 0) for x in o_rows); n_ = sum(x.get("n", 0) for x in o_rows) or 1
+                d3r[t_] = (sum(x.get("d3c", 0) for x in o_rows) / d3) if d3 else None; epar[t_] = sum(x.get("epa", 0) for x in o_rows) / n_
+
+            def _rk(vals, t_):
+                xs = sorted((v for v in vals.values() if v is not None), reverse=True); v = vals.get(t_)
+                return None if v is None else xs.index(v) + 1
+            for t, opp, o_ in ((a, h, g.get("ml_home")), (h, a, g.get("ml_away"))):
+                r3, re_ = _rk(d3r, t), _rk(epar, t)
+                if r3 and re_ and re_ - r3 >= A5_GAP:
+                    cand[f'{m["game_id"]}:ml:A5'] = (f"{a}@{h}", f"{opp} ML", "A5", f"{t} 3rd down {r3}위 vs 공격 EPA {re_}위(+{re_ - r3}) → 상대 {opp} · {week}주차", "ml", "", o_ or "+100")
+        if os_ is not None and hl != os_:                      # A6 — 키 넘버 역행(이동 반대쪽, 현재 라인)
+            crossed = any((abs(os_) < k <= abs(hl)) or (abs(hl) < k <= abs(os_)) for k in A6_KEYS)
+            if crossed:
+                moved_home = hl < os_                           # 홈 라인이 작아짐 = 홈 쪽으로 이동 → 반대 = 원정
+                side_ = f"{a} {-hl:+g}" if moved_home else f"{h} {hl:+g}"
+                cand[f'{m["game_id"]}:spread:A6'] = (f"{a}@{h}", side_, "A6", f"개장 {os_:+g} → 지금 {hl:+g}(홈 기준) 키 넘버 넘김 · 이동 반대쪽", "spread", side_.split()[1], "-110")
     n_new = n_del = 0
     for rid, r in list(keep.items()):
         if r["grade"] in ANGLE_GRADES.values() and int(r["week"]) == week and not r["result"] and rid not in cand:
