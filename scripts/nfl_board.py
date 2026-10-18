@@ -34,7 +34,7 @@ def term(word, label=None):
 # 주차 비교표·발행문 펼침(2026-10-11 Paul 「MLB 보드처럼 카드 누르면 설명 · 전 경기 표 · 발행 설명문·보완 다 넣어」)
 EXTRA_CSS = """
 .tblwrap{overflow-x:auto;background:var(--panel);border:1px solid var(--line)}
-table.cmp{border-collapse:collapse;width:100%;font-size:.84rem;min-width:900px}
+table.cmp{border-collapse:collapse;width:100%;font-size:.84rem;min-width:720px}
 table.cmp th{font-size:.72rem;color:var(--muted);font-weight:500;text-align:left;padding:6px 8px;border-bottom:2px solid var(--line);white-space:nowrap}
 table.cmp td{padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:middle}
 table.cmp tbody tr:hover{background:var(--soft)}
@@ -290,6 +290,8 @@ def verdict_word(v):
 
 
 BOARD_DIR = os.path.join(os.path.dirname(HERE), "board")
+# ESPN 경기 중 상태 — 하프타임·쿼터 사이·연장·지연도 「진행 중」(10/18 HOU@JAX 하프타임이 「예정」으로 보이던 것)
+IN_GAME = {"STATUS_IN_PROGRESS", "STATUS_HALFTIME", "STATUS_END_PERIOD", "STATUS_END_OF_REGULATION", "STATUS_OVERTIME", "STATUS_DELAYED", "STATUS_RAIN_DELAY"}
 HUB_URL_FILE = os.path.join(BOARD_DIR, "hub_url.txt")
 
 
@@ -516,8 +518,8 @@ def main():
         st = lv.get("state", g.get("status", ""))
         fin = st == "STATUS_FINAL"
         rows = by.get(gk, [])
-        dirs =[r for r in rows if r["grade"] == "방향(발행)"]
-        obs = [r for r in rows if r["grade"] in ("바람 언더(관찰)", "새 정보(관찰)") or r["grade"].startswith("각도 관찰")]   # 티저는 2026-10-10 폐지
+        # 10판 ML 전용(2026-10-16 Paul): 방향(스프레드/총점)·바람·A1·A2 페이퍼는 표시 안 함 — 새 정보·각도 A3·A4 관찰만
+        obs = [r for r in rows if r["grade"] == "새 정보(관찰)" or r["grade"].startswith(("각도 관찰 A3", "각도 관찰 A4"))]
         pub = pubs.get(gk, {})
         pr = preds.get(gk, {})
         m_, d_, b_ = pr.get("시장"), pr.get("모델"), pr.get("발행")
@@ -540,7 +542,7 @@ def main():
             stars = PR.star_str(pp)
             pred_html = (f'<div class="pred"><div>이길 팀 <b>{esc(name_kr(m_["pick"]))}({esc(m_["pick"])}) {pct(pp)}</b> '
                          f'<span class="star" title="2018~25 이 별 승자 적중 {PR.STAR_HIT.get(PR.stars(pp), "")}">{stars}</span> {phit(m_)}</div>'
-                         f'<div class="sub">예상 점수 {esc(A)} {int(float(m_["score_away"]) + 0.5)} – {esc(H)} {int(float(m_["score_home"]) + 0.5)} · 시장 배당 기준</div>')
+                         f'<div class="sub">시장(DK ML) 배당 기준</div>')
             if b_:
                 pred_html += f'<div class="sub">발행 예측 {esc(b_["pick"])} {pct(P.fnum(b_.get("p_pick")))} {phit(b_)}</div>'
             if d_ and d_["pick"] != m_["pick"]:
@@ -549,15 +551,11 @@ def main():
         # ── 결론 줄(낱말만, 근거는 title)
         items = []
         vw =verdict_word(pub.get("판단", ""))
-        if vw or dirs:
-            dir_txt = " · ".join(esc(r["side"]) + " " + hit(result_of(r, gk)) for r in dirs)
+        if vw:
             items.append(f'<li><span class="tag pub" title="claude.ai 발행 세션 판단">발행</span> '
-                         + (f'<b title="{esc(pub.get("굳이", ""))}">{esc(vw)}</b>' + (" · " if dir_txt else "") if vw else "")
-                         + (f'{term("방향")} {dir_txt}' if dir_txt else "") + "</li>")
+                         f'<b title="{esc(pub.get("굳이", ""))}">{esc(vw)}</b></li>')
         for r in obs:
-            if r["grade"].startswith("바람"):
-                lab = "바람 언더"
-            elif r["grade"].startswith("새 정보"):
+            if r["grade"].startswith("새 정보"):
                 lab = "라인 뒤 새 정보"
             else:
                 lab = r["grade"].split("(")[0].replace("각도 관찰 ", "각도 ")
@@ -565,13 +563,7 @@ def main():
         lines = f'<ul class="lines">{"".join(items)}</ul>' if items else ""
         div = '<span class="chip">디비전</span>' if g.get("div_game") == "1" else ""
         neu = '<span class="chip">중립 구장</span>' if g.get("neutral") == "1" else ""
-        # ── 주차 전체 비교표 한 줄(MLB 서열표처럼 — 머리 누르면 정렬, 줄 누르면 발행문 펼침 · 10/11 Paul)
-        hl0 = P.fnum(g.get("spread_home")); tl0 = P.fnum(g.get("total"))
-        if hl0 is None and m_:   # 시작·끝난 경기는 ESPN 배당이 사라져 games.csv 가 빈다 → 예측 기록(킥오프 동결)의 라인
-            hl0 = P.fnum(m_.get("line_home"))
-        if tl0 is None and m_:
-            tl0 = P.fnum(m_.get("total_line"))
-        sp_txt = ((f"{H} {hl0:+g}" if hl0 < 0 else f"{A} {-hl0:+g}" if hl0 > 0 else "PK") if hl0 is not None else "—")
+        # ── 주차 전체 비교표 한 줄(MLB 서열표처럼 — 머리 누르면 정렬, 줄 누르면 발행문 펼침 · 10/11 Paul · 10/16 ML 전용)
         ml_txt, ml_s = "—", ""
         mh0, ma0 = P.fnum(g.get("ml_home")), P.fnum(g.get("ml_away"))
         if mh0 is not None and ma0 is not None:
@@ -579,24 +571,22 @@ def main():
             ml_txt, ml_s = f"{fav0[0]} {fav0[1]}", f"{-fav0[2]:g}"
         if fin:
             res_txt, res_s = f'<span class="num">{esc(str(lv.get("sa")))} – {esc(str(lv.get("sh")))}</span> {phit(m_) if m_ else ""}', 2
-        elif st == "STATUS_IN_PROGRESS":
+        elif st in IN_GAME:
             res_txt, res_s = f'<span class="state live">진행 중</span> <span class="num">{esc(str(lv.get("sa")))} – {esc(str(lv.get("sh")))}</span>', 1
         else:
             res_txt, res_s = '<span class="muted">예정</span>', 0
         kts = re.sub(r"\D", "", g.get("kickoff_utc", ""))[:12] or ""
-        sc_txt = f'{int(float(m_["score_away"]) + 0.5)} – {int(float(m_["score_home"]) + 0.5)}' if m_ else "—"
-        dir_cell = " · ".join(esc(r["side"]) + " " + hit(result_of(r, gk)) for r in dirs) or '<span class="muted">—</span>'
+        bp_ = P.fnum(b_.get("p_pick")) if b_ else None
+        pub_cell = (f'{esc(name_kr(b_["pick"]))} {pct(bp_)} {phit(b_)}' if b_ else '<span class="muted">—</span>')
         vw0 = verdict_word(pub.get("판단", ""))
         trows.append((g.get("kickoff_utc", ""), f'<tr data-g="{esc(gk)}">'
                       f'<td data-s="{kts}">{mini(A)} {nm(A)} <small class="muted">{esc(A)} · {esc(g.get("away_rec", ""))}</small> @ {mini(H)} {nm(H)} <small class="muted">{esc(H)} · {esc(g.get("home_rec", ""))}</small></td>'
                       f'<td data-s="{kts}">{esc(g["kickoff_et"].split(" ", 1)[0])} {esc(g["kickoff_pt"])}</td>'
                       f'<td data-s="{pp if pp is not None else ""}">{(esc(name_kr(m_["pick"])) + " " + pct(pp)) if m_ else "—"}</td>'
                       f'<td class="star" data-s="{PR.stars(pp) if m_ else ""}">{PR.star_str(pp) if m_ else ""}</td>'
-                      f'<td class="num">{esc(A)} {sc_txt} {esc(H)}</td>'
-                      f'<td data-s="{abs(hl0) if hl0 is not None else ""}">{esc(sp_txt)}</td>'
-                      f'<td class="num" data-s="{tl0 if tl0 is not None else ""}">{f"{tl0:g}" if tl0 is not None else "—"}</td>'
+                      f'<td data-s="{bp_ if bp_ is not None else ""}">{pub_cell}</td>'
                       f'<td data-s="{ml_s}">{esc(ml_txt)}</td>'
-                      f'<td>{dir_cell}</td><td>{esc(vw0) or "—"}</td><td data-s="{res_s}">{res_txt}</td></tr>'))
+                      f'<td>{esc(vw0) or "—"}</td><td data-s="{res_s}">{res_txt}</td></tr>'))
         if fin:
             done_rows.append(f'''<details class="done"><summary>
   <span class="dm">{mini(A)}<b>{nm(A)}</b><small class="muted">{esc(g.get("away_rec", ""))}</small> <span class="num">{esc(str(lv.get("sa")))} – {esc(str(lv.get("sh")))}</span> <b>{nm(H)}</b><small class="muted">{esc(g.get("home_rec", ""))}</small>{mini(H)}</span>
@@ -604,24 +594,12 @@ def main():
   <div class="dbody">{pred_html}{lines}<a class="goto" data-g="{esc(gk)}">발행문·보완 전문 보기 ↓</a></div></details>''')
             continue
         # ── 아직 안 한 경기 / 진행 중
-        if st == "STATUS_IN_PROGRESS":
+        if st in IN_GAME:
             status = f'<span class="state live">진행 중</span> <b class="num">{esc(A)} {esc(str(lv.get("sa")))} – {esc(str(lv.get("sh")))} {esc(H)}</b> <span class="muted">{esc(lv.get("detail", ""))}</span>'
         else:
             status = f'<span class="state pre">예정</span> <span class="muted">{esc(g["kickoff_et"].split(" ", 1)[0])} {esc(g["kickoff_pt"])} PT</span>'
-        hl = P.fnum(g.get("spread_home")); tl = P.fnum(g.get("total"))
-        sh_, sa_ = N._novig(g.get("sp_home_odds"), g.get("sp_away_odds"))
-        po, pu = N._novig(g.get("over_odds"), g.get("under_odds"))
         ma, mh = N._novig(g.get("ml_away"), g.get("ml_home"))
-        quick, price = [], []
-        if hl is not None:
-            fav, fl = (H, hl) if hl < 0 else (A, -hl)
-            quick.append(f'{term("스프레드")} {esc(fav)} {fl:+g}')
-            price.append(f'<tr><td>{term("스프레드")}</td><td>{esc(H)} {hl:+g} <span class="num">{esc(g.get("sp_home_odds") or "")}</span> · {esc(A)} {-hl:+g} <span class="num">{esc(g.get("sp_away_odds") or "")}</span></td>'
-                         f'<td class="muted">{esc(H)} {pct(sh_)} / {esc(A)} {pct(sa_)}</td></tr>')
-        if tl is not None:
-            quick.append(f'{term("총점")} {tl:g}')
-            price.append(f'<tr><td>{term("총점")}</td><td>{tl:g} · O <span class="num">{esc(g.get("over_odds") or "")}</span> · U <span class="num">{esc(g.get("under_odds") or "")}</span></td>'
-                         f'<td class="muted">Over {pct(po)} / Under {pct(pu)}</td></tr>')
+        quick, price = [], []   # 10/16 ML 전용 — 스프레드·총점 줄 삭제
         if g.get("ml_home"):
             quick.append(f'{term("ML")} {esc(A)} <span class="num">{esc(g.get("ml_away"))}</span> / {esc(H)} <span class="num">{esc(g.get("ml_home"))}</span>')
             price.append(f'<tr><td>{term("ML")}</td><td>{esc(A)} <span class="num">{esc(g.get("ml_away"))}</span> · {esc(H)} <span class="num">{esc(g.get("ml_home"))}</span></td>'
@@ -636,8 +614,8 @@ def main():
 </article>'''))
     pre_cards.sort(key=lambda x: x[0])
     trows.sort(key=lambda x: x[0])
-    cmp_tbl = ('<div class="tblwrap"><table class="cmp"><thead><tr><th>경기</th><th>시간(PT)</th><th>예측 승자</th><th>★</th><th>예상 점수</th>'
-               f'<th>{term("스프레드")}</th><th>{term("총점")}</th><th>{term("ML")} 페이버릿</th><th>발행 {term("방향")}</th><th>판단</th><th>결과</th></tr></thead>'
+    cmp_tbl = ('<div class="tblwrap"><table class="cmp"><thead><tr><th>경기</th><th>시간(PT)</th><th>예측 승자(시장)</th><th>★</th><th>발행 예측</th>'
+               f'<th>{term("ML")} 페이버릿</th><th>판단</th><th>결과</th></tr></thead>'
                f'<tbody>{"".join(r for _, r in trows)}</tbody></table></div>')
     # ── 경기별 발행문·보완 전문(최신 발행 + 보완 · 이전 판은 접어 둠)
     pub_secs = []
@@ -762,11 +740,11 @@ nav.weeks a{{color:var(--ink)}}nav.weeks b.cur{{color:var(--acc)}}nav.weeks a.hu
   <div class="headline">{headline}</div>
   <section class="legend">
     <div><b>읽는 법</b> — 보라색 낱말에 손가락·마우스를 대면 뜻이 나와요.</div>
-    <div><span class="star">★</span> = <b>이길 확률이 높은 정도</b>(2018~25 실제 적중 ★ 50% · ★★ 61% · ★★★ 71% · ★★★★ 82%). <b>돈 버는 신호가 아니에요</b> — 별 4개 팀도 {term("스프레드")}는 절반만 맞았어요.</div>
-    <div>{term("스프레드")} = 점수 차 핸디 · {term("총점")} = 두 팀 점수 합이 기준보다 많을지(Over)·적을지(Under) · {term("ML")} = 그냥 이길 팀(10/10부터 주인공)</div>
-    <div>{term("방향")} = 예측에서 나온 쪽(동전 — 적중률만 봄) · {term("관찰", "관찰만")} = 돈 안 건 기록 · 맞힘/틀림 = 예측·방향·관찰 결과</div>
+    <div><span class="star">★</span> = <b>이길 확률이 높은 정도</b>(2018~25 실제 적중 ★ 50% · ★★ 61% · ★★★ 71% · ★★★★ 82%). <b>돈 버는 신호가 아니에요</b> — 별이 많은 팀일수록 ML 배당이 비싸서, 맞혀도 남는 돈이 적어요.</div>
+    <div>{term("ML")} = 그냥 이길 팀 — 10/16부터 보드는 <b>이길 팀 예측(ML)만</b> 보여 줘요(점수 차·총점·방향은 뺐어요).</div>
+    <div>{term("관찰", "관찰만")} = 돈 안 건 기록(라인 뒤 새 정보 · 각도 A3·A4) · 맞힘/틀림 = 예측·관찰 결과</div>
     <div><span class="pk">파란 글씨</span> = <b>우리 픽</b>(이길 팀 예측 — 발행 예측, 없으면 시장 예측) · 발행문 속 팀 약칭(HOU 등)에 마우스·손가락을 대면 지역+팀 이름이 나와요.</div>
-    <div><b>카드나 표 줄을 누르면</b> 그 경기의 발행문·보완 전문이 아래에서 펼쳐져요. 표 머리(예측 승자·★·스프레드 …)를 누르면 그 기준으로 정렬돼요.</div>
+    <div><b>카드나 표 줄을 누르면</b> 그 경기의 발행문·보완 전문이 아래에서 펼쳐져요. 표 머리(예측 승자·★·발행 예측 …)를 누르면 그 기준으로 정렬돼요.</div>
   </section>
   <h2>{a.week}주차 전체 경기 <span class="muted" style="font-size:.9rem">— 머리 누르면 정렬 · 줄 누르면 발행문</span></h2>
   {cmp_tbl}
