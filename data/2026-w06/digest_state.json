@@ -2,7 +2,7 @@
 "NYJ@NE": {
 "spread_home": "-7.5",
 "total": "43.5",
-"ml": "+275/-345",
+"ml": "?/?",
 "qb": {
 "NYJ": "Geno Smith",
 "NE": "Drake Maye"
@@ -78,7 +78,7 @@
 "TEN@IND": {
 "spread_home": "-6.5",
 "total": "43.5",
-"ml": "+235/-290",
+"ml": "?/?",
 "qb": {
 "TEN": "Cam Ward",
 "IND": "Daniel Jones"
@@ -110,7 +110,7 @@
 "DAL@GB": {
 "spread_home": "-1.5",
 "total": "53.5",
-"ml": "-105/-115",
+"ml": "-108/-112",
 "qb": {
 "DAL": "Dak Prescott",
 "GB": "Jordan Love"
@@ -147,7 +147,7 @@
 "BUF@LV": {
 "spread_home": "5.5",
 "total": "53.5",
-"ml": "-245/+200",
+"ml": "-238/+195",
 "qb": {
 "BUF": "Josh Allen",
 "LV": "Kirk Cousins"
@@ -168,7 +168,7 @@
 "NO@NYG": {
 "spread_home": "1.5",
 "total": "46.5",
-"ml": "-108/-112",
+"ml": "?/?",
 "qb": {
 "NO": "Tyler Shough",
 "NYG": "Jameis Winston"
@@ -205,7 +205,7 @@
 "ARI@LA": {
 "spread_home": "-12.5",
 "total": "51.5",
-"ml": "+550/-800",
+"ml": "+525/-750",
 "qb": {
 "ARI": "Jacoby Brissett",
 "LA": "Matthew Stafford"
@@ -266,9 +266,9 @@
 "BAL@CLE": {
 "spread_home": "3.0",
 "total": "39.5",
-"ml": "-170/+142",
+"ml": "?/?",
 "qb": {
-"BAL": "Lamar Jackson",
+"BAL": "Tyler Huntley",
 "CLE": "Deshaun Watson"
 },
 "out": {
@@ -302,44 +302,10 @@
 ]
 }
 },
-"PIT@TB": {
-"spread_home": "1.5",
-"total": "38.5",
-"ml": "-130/+110",
-"qb": {
-"PIT": "Aaron Rodgers",
-"TB": "Jalon Daniels"
-},
-"out": {
-"PIT": [
-"Ben Skowronek",
-"DeShon Elliott",
-"Derrick Harmon",
-"IR)",
-"IR)",
-"Michael Pittman",
-"Roman Wilson",
-"★스냅 72%",
-"스냅 12%)",
-"스냅 25%",
-"스냅 34%)"
-],
-"TB": [
-"Antoine Winfield Jr.",
-"Baker Mayfield",
-"David Sills",
-"IR)",
-"Jalen McMillan",
-"★스냅 94%)",
-"★스냅 96%)",
-"스냅 3%"
-]
-}
-},
 "CHI@ATL": {
 "spread_home": "1.5",
 "total": "51.5",
-"ml": "-118/-102",
+"ml": "?/?",
 "qb": {
 "CHI": "Caleb Williams",
 "ATL": "Michael Penix Jr."
@@ -372,7 +338,7 @@
 "CAR@PHI": {
 "spread_home": "3.0",
 "total": "39.5",
-"ml": "-162/+136",
+"ml": "?/?",
 "qb": {
 "CAR": "Bryce Young",
 "PHI": "Tanner McKee"
@@ -412,6 +378,40 @@
 "스냅 32%)",
 "스냅 40%)",
 "스냅 51%)"
+]
+}
+},
+"PIT@TB": {
+"spread_home": "2.5",
+"total": "38.5",
+"ml": "?/?",
+"qb": {
+"PIT": "Aaron Rodgers",
+"TB": "Jalon Daniels"
+},
+"out": {
+"PIT": [
+"Ben Skowronek",
+"DeShon Elliott",
+"Derrick Harmon",
+"IR)",
+"IR)",
+"Michael Pittman",
+"Roman Wilson",
+"★스냅 72%",
+"스냅 12%)",
+"스냅 25%",
+"스냅 34%)"
+],
+"TB": [
+"Antoine Winfield Jr.",
+"Baker Mayfield",
+"David Sills",
+"IR)",
+"Jalen McMillan",
+"★스냅 94%)",
+"★스냅 96%)",
+"스냅 3%"
 ]
 }
 },
@@ -486,5 +486,5 @@
 ]
 }
 },
-"_stamp": "10-18 08:59"
+"_stamp": "10-18 12:02"
 }
