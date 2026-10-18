@@ -198,7 +198,7 @@ def summary(rows):
     """{src: dict(승자 W-L, 점수 차 오차, 총점 오차, 스프레드 W-L, 총점 W-L)}"""
     out = {}
     for src in ("시장", "모델", "발행"):
-        xs = [r for r in rows if r["src"] == src and r.get("final")]
+        xs = [r for r in rows if r["src"] == src and r.get("final") and not str(r.get("flag", "")).startswith("킥오프 뒤")]   # 기록용(킥오프 뒤) 발행은 집계 제외(2026-10-18)
         if not xs:
             continue
         w = sum(1 for r in xs if r["result"] == "W"); l = sum(1 for r in xs if r["result"] == "L")
@@ -259,7 +259,7 @@ def season_block(week=None):
         stars = m.get("stars", {})
         L.append(f"| {wk if wk == '시즌' else str(wk) + '주'} | {rec(rs and [dict(result=r['result']) for r in rs if r['src'] == '시장' and r.get('final')])}"
                  + "".join(f" | {stars[k][0]}-{stars[k][1]}" if k in stars else " | —" for k in (4, 3, 2, 1))
-                 + f" | {rec([dict(result=r['result']) for r in rs if r['src'] == '발행' and r.get('final')]) if b else '—'}"
+                 + f" | {rec([dict(result=r['result']) for r in rs if r['src'] == '발행' and r.get('final') and not str(r.get('flag', '')).startswith('킥오프 뒤')]) if b else '—'}"
                  + " |")
     L += ["", "  ↳ 읽는 법: 「시장 예측 승자」= 다이제스트 🔮(DK 배당 기준) 이길 팀이 실제로 이긴 비율 — 2018~25 기대치 ★★★★ 82% · ★★★ 71% · ★★ 61% · ★ 50%. "
           "「발행 예측」은 발행 세션이 조정한 승자. 소급(1~3주)은 마감 라인으로 채운 값.", ""]

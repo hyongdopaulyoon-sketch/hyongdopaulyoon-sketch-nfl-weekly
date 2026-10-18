@@ -383,14 +383,17 @@ def main():
                 _started.add(_k)
         except ValueError:
             pass
-    if a.record:
-        for _k in sorted(set(x[0] for x in 예측들) & _started):
-            print(f"  ⏭ {_k}: 킥오프 지남 — 예측·판단·새 정보 기록 제외")
     if a.record and 예측들:
         import predictions as PR
+        _have = {r["game"] for r in N.rd(PR.path(a.week)) if r.get("src") == "발행" and not str(r.get("flag", "")).startswith("킥오프 뒤")}
         for k, pk, pp, sa, sh, fl in 예측들:
             if k in _started:
-                continue
+                # 2026-10-18 Paul 「기록용으로 발행 요청한 건데」: 킥오프 뒤 발행도 **기록은 남긴다** — flag 「킥오프 뒤·기록용」, 발행 성적 집계에서 제외.
+                # 킥오프 전에 이미 기록된 발행 행이 있으면 그것이 정본 — 덮지 않는다. 판단·새 정보는 킥오프 뒤면 기록 안 함.
+                if k in _have:
+                    print(f"  ⏭ {k}: 킥오프 지남 — 킥오프 전 기록이 있어 유지(덮지 않음)"); continue
+                PR.add_pub(a.week, k, pk, pp, sa, sh, flag="킥오프 뒤·기록용(집계 제외)" + (f" · {fl}" if fl else ""))
+                print(f"  📝 {k}: 킥오프 지남 — 예측만 기록용(집계 제외)으로 적음, 판단·새 정보 제외"); continue
             PR.add_pub(a.week, k, pk, pp, sa, sh, flag=fl)
     if a.record and 새정보:
         import picks as P
