@@ -540,7 +540,7 @@ def main():
         fin = st == "STATUS_FINAL"
         rows = by.get(gk, [])
         # 10판 ML 전용(2026-10-16 Paul): 방향(스프레드/총점)·바람·A1·A2 페이퍼는 표시 안 함 — 새 정보·각도 A3·A4 관찰만
-        obs = [r for r in rows if r["grade"] == "새 정보(관찰)" or r["grade"].startswith(("각도 관찰 A3", "각도 관찰 A4"))]
+        obs = [r for r in rows if r["grade"].startswith(("새 정보", "각도 관찰 A3", "각도 관찰 A4"))]   # 새 정보 = 관찰(:N)·대조군(:NC)
         pub = pubs.get(gk, {})
         pr = preds.get(gk, {})
         m_, d_, b_ = pr.get("시장"), pr.get("모델"), pr.get("발행")
@@ -580,7 +580,7 @@ def main():
                          f'<b title="{esc(pub.get("굳이", ""))}">{esc(vw)}</b></li>')
         for r in obs:
             if r["grade"].startswith("새 정보"):
-                lab = "라인 뒤 새 정보"
+                lab = "새 정보(대조 — 판 이전 발표)" if "대조" in r["grade"] else "라인 뒤 새 정보"
             else:
                 lab = r["grade"].split("(")[0].replace("각도 관찰 ", "각도 ")
             items.append(f'<li><span class="tag obs">{term("관찰", "관찰만")}</span> {lab} <b title="{esc(r.get("note", ""))}">{esc(r["side"])}</b> {hit(result_of(r, gk))}</li>')
