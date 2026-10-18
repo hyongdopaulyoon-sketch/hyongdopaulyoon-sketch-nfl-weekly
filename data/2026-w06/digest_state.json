@@ -1,4 +1,41 @@
 {
+"DAL@GB": {
+"spread_home": "1.5",
+"total": "53.5",
+"ml": "-112/-108",
+"qb": {
+"DAL": "Dak Prescott",
+"GB": "Jordan Love"
+},
+"out": {
+"DAL": [
+"Cobie Durant",
+"Drew Shelton",
+"IR)",
+"IR)",
+"Jalen Thompson",
+"Jonathan Bullard",
+"스냅 1%)",
+"스냅 36%",
+"스냅 42%"
+],
+"GB": [
+"Benjamin St-Juste",
+"Chris Brooks",
+"Edgerrin Cooper",
+"IR)",
+"IR)",
+"Javon Hargrave",
+"Jonathan Ford",
+"Skyy Moore",
+"★스냅 65%",
+"스냅 28%)",
+"스냅 29%",
+"스냅 36%)",
+"스냅 46%)"
+]
+}
+},
 "NYJ@NE": {
 "spread_home": "-7.5",
 "total": "43.5",
@@ -107,47 +144,10 @@
 ]
 }
 },
-"DAL@GB": {
-"spread_home": "-1.5",
-"total": "53.5",
-"ml": "-108/-112",
-"qb": {
-"DAL": "Dak Prescott",
-"GB": "Jordan Love"
-},
-"out": {
-"DAL": [
-"Cobie Durant",
-"Drew Shelton",
-"IR)",
-"IR)",
-"Jalen Thompson",
-"Jonathan Bullard",
-"스냅 1%)",
-"스냅 36%",
-"스냅 42%"
-],
-"GB": [
-"Benjamin St-Juste",
-"Chris Brooks",
-"Edgerrin Cooper",
-"IR)",
-"IR)",
-"Javon Hargrave",
-"Jonathan Ford",
-"Skyy Moore",
-"★스냅 65%",
-"스냅 28%)",
-"스냅 29%",
-"스냅 36%)",
-"스냅 46%)"
-]
-}
-},
 "BUF@LV": {
 "spread_home": "5.5",
 "total": "53.5",
-"ml": "-238/+195",
+"ml": "?/?",
 "qb": {
 "BUF": "Josh Allen",
 "LV": "Kirk Cousins"
@@ -162,6 +162,42 @@
 "Tonka Hemingway",
 "스냅 16%",
 "스냅 44%)"
+]
+}
+},
+"ARI@LA": {
+"spread_home": "-12.5",
+"total": "51.5",
+"ml": "?/?",
+"qb": {
+"ARI": "Jacoby Brissett",
+"LA": "Matthew Stafford"
+},
+"out": {
+"ARI": [
+"Andrew Wingard",
+"Hunter Long",
+"IR)",
+"IR)",
+"IR)",
+"Isaiah Adams",
+"Jeremiyah Love",
+"Paris Johnson Jr.",
+"Wydett Williams Jr.",
+"★스냅 71%",
+"★스냅 99%",
+"스냅 32%",
+"스냅 50%)",
+"스냅 52%)",
+"스냅 53%)"
+],
+"LA": [
+"Alaric Jackson",
+"IR)",
+"IR)",
+"Terrance Ferguson",
+"★스냅 100%",
+"스냅 26%"
 ]
 }
 },
@@ -199,42 +235,6 @@
 "스냅 42%",
 "스냅 48%",
 "스냅 6%"
-]
-}
-},
-"ARI@LA": {
-"spread_home": "-12.5",
-"total": "51.5",
-"ml": "+525/-750",
-"qb": {
-"ARI": "Jacoby Brissett",
-"LA": "Matthew Stafford"
-},
-"out": {
-"ARI": [
-"Andrew Wingard",
-"Hunter Long",
-"IR)",
-"IR)",
-"IR)",
-"Isaiah Adams",
-"Jeremiyah Love",
-"Paris Johnson Jr.",
-"Wydett Williams Jr.",
-"★스냅 71%",
-"★스냅 99%",
-"스냅 32%",
-"스냅 50%)",
-"스냅 52%)",
-"스냅 53%)"
-],
-"LA": [
-"Alaric Jackson",
-"IR)",
-"IR)",
-"Terrance Ferguson",
-"★스냅 100%",
-"스냅 26%"
 ]
 }
 },
@@ -450,7 +450,7 @@
 "LAC@KC": {
 "spread_home": "-7.5",
 "total": "41.5",
-"ml": "+330/-425",
+"ml": "?/?",
 "qb": {
 "LAC": "Justin Herbert",
 "KC": "Patrick Mahomes"
@@ -486,5 +486,5 @@
 ]
 }
 },
-"_stamp": "10-18 12:17"
+"_stamp": "10-18 16:02"
 }
