@@ -153,9 +153,22 @@ def logo_uri(team):
     return "data:image/png;base64," + base64.b64encode(open(p, "rb").read()).decode()
 
 
+TEAM_EN = {
+    "ARI": "Arizona Cardinals", "ATL": "Atlanta Falcons", "BAL": "Baltimore Ravens", "BUF": "Buffalo Bills",
+    "CAR": "Carolina Panthers", "CHI": "Chicago Bears", "CIN": "Cincinnati Bengals", "CLE": "Cleveland Browns",
+    "DAL": "Dallas Cowboys", "DEN": "Denver Broncos", "DET": "Detroit Lions", "GB": "Green Bay Packers",
+    "HOU": "Houston Texans", "IND": "Indianapolis Colts", "JAX": "Jacksonville Jaguars", "KC": "Kansas City Chiefs",
+    "LA": "Los Angeles Rams", "LAC": "Los Angeles Chargers", "LV": "Las Vegas Raiders", "MIA": "Miami Dolphins",
+    "MIN": "Minnesota Vikings", "NE": "New England Patriots", "NO": "New Orleans Saints", "NYG": "New York Giants",
+    "NYJ": "New York Jets", "PHI": "Philadelphia Eagles", "PIT": "Pittsburgh Steelers", "SEA": "Seattle Seahawks",
+    "SF": "San Francisco 49ers", "TB": "Tampa Bay Buccaneers", "TEN": "Tennessee Titans", "WAS": "Washington Commanders",
+}
+
+
 def name_kr(t):
-    """한글 팀 이름 — 지역 + 팀(「휴스턴 텍선스」 · 2026-10-11 Paul 「지역 팀이름 둘다」, 종전 별칭만 「텍선스」)."""
-    return KR.get(t) or t
+    """보드 팀 이름 — 10/18 Paul 「팀명 영어로 하자 그냥」부터 영어 지역+팀(「Houston Texans」). 함수 이름은 호출부 호환으로 둠
+    (10/11 「지역 팀이름 둘다」 한글판 → 영어판). 없는 약칭은 그대로."""
+    return TEAM_EN.get(t) or KR.get(t) or t
 
 
 def mark_teams(h, teams, pick):
@@ -368,7 +381,7 @@ def week_nav(cur):
             + (f' <a class="hub" href="{esc(hu)}">전체 주차 →</a>' if hu else "") + "</nav>")
 
 
-def hub_html():
+def hub_html(live=None):
     """주차 허브 — 모든 주 보드의 「전체 주차 →」가 이 고정 URL 을 가리킨다. 새 주 보드가 생길 때 이 페이지만 다시 발행."""
     links = week_links()
     if not links:
@@ -387,6 +400,8 @@ def hub_html():
     def wl(w):
         s = PR.summary([r for r in rows if r["week"] == str(w)])
         m, b = s.get("시장", {}), s.get("발행", {})
+        if live and w in live and sum(live[w]) > m.get("w", 0) + m.get("l", 0):   # 채점 전 이번 주 = 실시간 승패(10/18)
+            m = dict(m, w=live[w][0], l=live[w][1])
         if not m.get("w", 0) + m.get("l", 0):
             return '<span class="r none">결과 전</span>'
         t = f'<span class="r">{m["w"]}-{m["l"]}</span>'
@@ -447,9 +462,9 @@ def main():
     for g in games:
         g["away_rec"] = pre.get(g["away"], "0-0" if a.week == 1 else g.get("away_rec", ""))
         g["home_rec"] = pre.get(g["home"], "0-0" if a.week == 1 else g.get("home_rec", ""))
-        if a.week > 1:
-            g["away_rec"] += f' · 원정 {hr.get(g["away"], ("0-0", "0-0"))[1]}'
-            g["home_rec"] += f' · 홈 {hr.get(g["home"], ("0-0", "0-0"))[0]}'
+        for sd in ("away", "home"):   # 카드용 — 두 팀 모두 홈·원정 성적 둘 다(10/18 Paul), 표엔 전체 성적만
+            h_, r_ = hr.get(g[sd], ("0-0", "0-0"))
+            g[f"{sd}_rec_full"] = g[f"{sd}_rec"] + (f" · 홈 {h_} · 원정 {r_}" if a.week > 1 else "")
     # 실시간 상태·점수(배당 들어 있는 espn_scoreboard.json 은 건드리지 않는다 — 끝난 경기는 배당이 사라지므로 따로 받는다)
     live = {}
     try:
@@ -500,11 +515,15 @@ def main():
 
     mini_used = set()
 
-    def team(t, name, right=False, rec="", pk=False):
-        """카드 팀 칸 — 한글 별칭 밑에 약칭 · 이번 시즌 전적(games.csv away_rec/home_rec · 10/11 Paul 「팀명 밑에 이번 시즌 기록」)."""
+    def team(t, name, rec="", pk=False, home=False):
+        """카드 팀 한 줄 — 원정/홈 표지 · 로고 · 이름 · 전적(전체 · 홈 · 원정). 10/18 Paul 「카드 너무 정신없다」 → 두 팀을 위아래 두 줄로."""
         mini_used.add(t)
-        return (f'<div class="team{" r" if right else ""}" title="{esc(name or t)}"><span class="tlogo lg-{esc(t)}" role="img" aria-label="{esc(t)}"></span>'
-                f'<div><div class="tname{" pk" if pk else ""}">{esc(name_kr(t))}</div><div class="tkr">{esc(t)}{(" · " + esc(rec)) if rec else ""}</div></div></div>')
+        return (f'<div class="trow" title="{esc(name or t)} ({esc(t)})">{ha(home)}<span class="tlogo lg-{esc(t)}" role="img" aria-label="{esc(t)}"></span>'
+                f'<span class="tinfo"><span class="tname">{esc(name_kr(t))}</span><span class="trec">{esc(rec)}</span></span></div>')
+
+    def ha(home):
+        """「원정」/「홈」 표지 — 이 경기에서 누가 홈인지(10/18 Paul 「확실히 나타나게」)."""
+        return '<span class="ha h">홈</span>' if home else '<span class="ha">원정</span>'
 
     def mini(t):
         """작은 로고 — 표·펼침 머리에 경기마다 반복돼서(10/11 514KB) 팀별 CSS 배경으로 한 번만 싣는다."""
@@ -512,6 +531,8 @@ def main():
         return f'<span class="mini lg-{esc(t)}" role="img" aria-label="{esc(t)}"></span>'
 
     pre_cards, done_rows, trows, pick_of, star_of = [], [], [], {}, {}
+    live_wl = [0, 0]   # 이번 주 끝난 경기 시장 예측 승패(실시간 — 화요일 채점 전에도 반영, 10/18 Paul)
+    remaining = 0
     for g in games:
         A, H = g["away"], g["home"]; gk = f"{A}@{H}"
         lv = live.get(gk, {})
@@ -526,13 +547,17 @@ def main():
         pp = P.fnum(m_.get("p_pick")) if m_ else None
         pick_t = (b_ or m_ or {}).get("pick", ""); pick_of[gk] = pick_t
         star_of[gk] = P.fnum(b_.get("p_pick")) if b_ and b_.get("p_pick") else pp   # 펼침 머리 별점 — 발행 예측 확률(없으면 시장)
+        # 킥오프 뒤 발행(기록용 · 집계 제외 — 10/18 Paul 「기록용으로 발행 요청한 건데」)은 꼬리표로 구분
+        late_tag = ' <small class="muted" title="킥오프 뒤 발행 — 예측만 기록, 시즌 발행 예측 집계에서 빠짐">기록용(킥오프 뒤)</small>' if b_ and "기록용" in (b_.get("flag") or "") else ""
 
         def nm(t):   # 표·끝난 경기 줄의 팀 이름 — 우리 픽은 색
-            return f'<span class="{"pk" if t == pick_t else "tn"}">{esc(name_kr(t))}</span>'
+            return f'<span class="tn">{esc(name_kr(t))}</span>'   # 파란 글씨(우리 픽)는 발행문 칸에만(10/18 Paul 「너무 정신없으니」)
         win = ""
         if fin:
             fa, fh = float(lv.get("sa") or 0), float(lv.get("sh") or 0)
             win = H if fh > fa else A if fa > fh else ""
+            if win and m_:
+                live_wl[0 if m_.get("pick") == win else 1] += 1
 
         def phit(r):
             return hit("W" if r.get("pick") == win else "L") if fin and win and r else ""
@@ -541,17 +566,16 @@ def main():
         if m_:
             stars = PR.star_str(pp)
             pred_html = (f'<div class="pred"><div>이길 팀 <b>{esc(name_kr(m_["pick"]))}({esc(m_["pick"])}) {pct(pp)}</b> '
-                         f'<span class="star" title="2018~25 이 별 승자 적중 {PR.STAR_HIT.get(PR.stars(pp), "")}">{stars}</span> {phit(m_)}</div>'
-                         f'<div class="sub">시장(DK ML) 배당 기준</div>')
-            if b_:
-                pred_html += f'<div class="sub">발행 예측 {esc(b_["pick"])} {pct(P.fnum(b_.get("p_pick")))} {phit(b_)}</div>'
+                         f'<span class="star" title="2018~25 이 별 승자 적중 {PR.STAR_HIT.get(PR.stars(pp), "")}">{stars}</span> {phit(m_)}</div>')
+            if b_ and (b_["pick"] != m_["pick"] or abs((P.fnum(b_.get("p_pick")) or 0) - (pp or 0)) >= 0.005 or late_tag):
+                pred_html += f'<div class="sub">발행 예측 {esc(b_["pick"])} {pct(P.fnum(b_.get("p_pick")))} {phit(b_)}{late_tag}</div>'
             if d_ and d_["pick"] != m_["pick"]:
                 pred_html += f'<div class="sub">우리 모델은 {esc(d_["pick"])} 쪽 — 시장과 반대(덜 정확한 두 번째 의견)</div>'
             pred_html += "</div>"
         # ── 결론 줄(낱말만, 근거는 title)
         items = []
         vw =verdict_word(pub.get("판단", ""))
-        if vw:
+        if vw in ("관심", "소액 관심"):
             items.append(f'<li><span class="tag pub" title="claude.ai 발행 세션 판단">발행</span> '
                          f'<b title="{esc(pub.get("굳이", ""))}">{esc(vw)}</b></li>')
         for r in obs:
@@ -577,10 +601,10 @@ def main():
             res_txt, res_s = '<span class="muted">예정</span>', 0
         kts = re.sub(r"\D", "", g.get("kickoff_utc", ""))[:12] or ""
         bp_ = P.fnum(b_.get("p_pick")) if b_ else None
-        pub_cell = (f'{esc(name_kr(b_["pick"]))} {pct(bp_)} {phit(b_)}' if b_ else '<span class="muted">—</span>')
+        pub_cell = (f'{esc(name_kr(b_["pick"]))} {pct(bp_)} {phit(b_)}{late_tag}' if b_ else '<span class="muted">—</span>')
         vw0 = verdict_word(pub.get("판단", ""))
         trows.append((g.get("kickoff_utc", ""), f'<tr data-g="{esc(gk)}">'
-                      f'<td data-s="{kts}">{mini(A)} {nm(A)} <small class="muted">{esc(A)} · {esc(g.get("away_rec", ""))}</small> @ {mini(H)} {nm(H)} <small class="muted">{esc(H)} · {esc(g.get("home_rec", ""))}</small></td>'
+                      f'<td data-s="{kts}"><div>{ha(False)}{mini(A)} {nm(A)} <small class="muted">{esc(g.get("away_rec", ""))}</small></div><div>{ha(True)}{mini(H)} {nm(H)} <small class="muted">{esc(g.get("home_rec", ""))}</small></div></td>'
                       f'<td data-s="{kts}">{esc(g["kickoff_et"].split(" ", 1)[0])} {esc(g["kickoff_pt"])}</td>'
                       f'<td data-s="{pp if pp is not None else ""}">{(esc(name_kr(m_["pick"])) + " " + pct(pp)) if m_ else "—"}</td>'
                       f'<td class="star" data-s="{PR.stars(pp) if m_ else ""}">{PR.star_str(pp) if m_ else ""}</td>'
@@ -604,11 +628,13 @@ def main():
             quick.append(f'{term("ML")} {esc(A)} <span class="num">{esc(g.get("ml_away"))}</span> / {esc(H)} <span class="num">{esc(g.get("ml_home"))}</span>')
             price.append(f'<tr><td>{term("ML")}</td><td>{esc(A)} <span class="num">{esc(g.get("ml_away"))}</span> · {esc(H)} <span class="num">{esc(g.get("ml_home"))}</span></td>'
                          f'<td class="muted">승리 {esc(A)} {pct(ma)} / {esc(H)} {pct(mh)}</td></tr>')
-        mk = (f'<div class="quick">{" · ".join(quick)}</div><details class="px"><summary>배당 자세히(DK · 수수료 뺀 확률)</summary>'
-              f'<table>{"".join(price)}</table></details>') if quick else ""
+        mk = f'<div class="quick">{" · ".join(quick)}</div>' if quick else ""
+        remaining += 1
+        if not (b_ or (ptext.get(gk) or {}).get("main")):   # 발행문 없는 경기는 카드 안 만듦 — 표에만(10/18 Paul 「심플하게」)
+            continue
         key = (-PR.stars(pp), g["kickoff_utc"])   # 별 많은 순 → 킥오프(10/15 실베팅 우선 정렬 삭제)
         pre_cards.append((key, f'''<article class="card" data-g="{esc(gk)}">
-  <header class="match">{team(A, lv.get("na"), rec=g.get("away_rec", ""), pk=A == pick_t)}<span class="at">@</span>{team(H, lv.get("nh"), right=True, rec=g.get("home_rec", ""), pk=H == pick_t)}</header>
+  <header class="match2">{team(A, lv.get("na"), rec=g.get("away_rec_full", ""), pk=A == pick_t)}{team(H, lv.get("nh"), rec=g.get("home_rec_full", ""), pk=H == pick_t, home=True)}</header>
   <div class="meta">{status}{div}{neu}</div>
   {pred_html}{mk}{lines}
 </article>'''))
@@ -656,7 +682,7 @@ def main():
     verdicts = [verdict_word(pubs.get(f'{g["away"]}@{g["home"]}', {}).get("판단", "")) for g in games
                 if live.get(f'{g["away"]}@{g["home"]}', {}).get("state") != "STATUS_FINAL"]
     cand = sum(1 for v in verdicts if v in ("관심", "소액 관심"))
-    headline = f'남은 경기 <b>{len(pre_cards)}</b> · 발행 후보 <b>{cand}</b>'
+    headline = f'남은 경기 <b>{remaining}</b>(발행 {len(pre_cards)} · 발행 전 {remaining - len(pre_cards)}) · 발행 후보 <b>{cand}</b>'
     ms = psum.get("시장", {})
     star_rows = "".join(
         f'<tr><td class="star">{"★" * k}</td><td class="num">{w}-{l}</td><td class="num">{(f"{100 * w / (w + l):.0f}%") if w + l else "—"}</td><td class="num muted">{PR.STAR_HIT[k]}</td></tr>'
@@ -688,6 +714,14 @@ h2{{font-family:var(--display);font-weight:600;font-size:1.35rem;letter-spacing:
 .grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}}
 .card{{background:var(--panel);border:1px solid var(--line);padding:14px;display:grid;gap:10px;min-width:0;align-content:start}}
 .match{{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}}
+.match2{{display:grid;gap:6px}}
+.ha{{display:inline-block;min-width:2.6em;margin-right:6px;padding:0 4px;font-size:.66rem;line-height:1.5;text-align:center;border:1px solid var(--line);color:var(--muted);vertical-align:middle}}
+.ha.h{{border-color:var(--acc);color:var(--acc);font-weight:700}}
+.trow{{display:flex;align-items:center;gap:8px;min-width:0}}
+.trow .tlogo{{width:28px;height:28px}}
+.trow .tname{{font-weight:700;font-size:1rem;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+.trow .tinfo{{display:flex;flex-direction:column;min-width:0;line-height:1.25}}
+.trow .trec{{font-size:.74rem;color:var(--muted);white-space:nowrap}}
 .team{{display:flex;align-items:center;gap:8px;min-width:0}}
 .team.r{{flex-direction:row-reverse;text-align:right}}
 .team img{{width:36px;height:36px;flex:none}}
@@ -734,8 +768,8 @@ nav.weeks a{{color:var(--ink)}}nav.weeks b.cur{{color:var(--acc)}}nav.weeks a.hu
   <div class="top"><h1>NFL {a.week}주차 보드</h1><div class="muted">갱신 {now} PT · 표시 전용(정본: 다이제스트·발행문) · 시간은 PT(캘리포니아)</div></div>
   {week_nav(a.week)}
   <div class="chips">
-    <div class="stat"><span class="k">승자 예측 시즌</span><span class="v">{ms.get("w", 0)}-{ms.get("l", 0)}</span></div>
-    <div class="stat"><span class="k">승자 예측 이번 주</span><span class="v">{wm.get("w", 0)}-{wm.get("l", 0)}</span></div>
+    <div class="stat"><span class="k">승자 예측 시즌</span><span class="v">{ms.get("w", 0) - wm.get("w", 0) + live_wl[0]}-{ms.get("l", 0) - wm.get("l", 0) + live_wl[1]}</span></div>
+    <div class="stat"><span class="k">승자 예측 이번 주</span><span class="v">{live_wl[0]}-{live_wl[1]}</span></div>
   </div>
   <div class="headline">{headline}</div>
   <section class="legend">
@@ -743,14 +777,14 @@ nav.weeks a{{color:var(--ink)}}nav.weeks b.cur{{color:var(--acc)}}nav.weeks a.hu
     <div><span class="star">★</span> = <b>이길 확률이 높은 정도</b>(2018~25 실제 적중 ★ 50% · ★★ 61% · ★★★ 71% · ★★★★ 82%). <b>돈 버는 신호가 아니에요</b> — 별이 많은 팀일수록 ML 배당이 비싸서, 맞혀도 남는 돈이 적어요.</div>
     <div>{term("ML")} = 그냥 이길 팀 — 10/16부터 보드는 <b>이길 팀 예측(ML)만</b> 보여 줘요(점수 차·총점·방향은 뺐어요).</div>
     <div>{term("관찰", "관찰만")} = 돈 안 건 기록(라인 뒤 새 정보 · 각도 A3·A4) · 맞힘/틀림 = 예측·관찰 결과</div>
-    <div><span class="pk">파란 글씨</span> = <b>우리 픽</b>(이길 팀 예측 — 발행 예측, 없으면 시장 예측) · 발행문 속 팀 약칭(HOU 등)에 마우스·손가락을 대면 지역+팀 이름이 나와요.</div>
+    <div><span class="pk">파란 글씨</span> = <b>우리 픽</b>(발행문 칸에서만 표시) · 발행문 속 팀 약칭(HOU 등)에 마우스·손가락을 대면 팀 이름이 나와요.</div>
     <div><b>카드나 표 줄을 누르면</b> 그 경기의 발행문·보완 전문이 아래에서 펼쳐져요. 표 머리(예측 승자·★·발행 예측 …)를 누르면 그 기준으로 정렬돼요.</div>
   </section>
+  {f'<h2>끝난 경기 <span class="muted" style="font-size:.9rem">— 눌러서 펼치기</span></h2><section class="donelist">{"".join(done_rows)}</section>' if done_rows else ""}
   <h2>{a.week}주차 전체 경기 <span class="muted" style="font-size:.9rem">— 머리 누르면 정렬 · 줄 누르면 발행문</span></h2>
   {cmp_tbl}
-  <h2>아직 안 한 경기</h2>
-  {f'<section class="grid">{"".join(c for _, c in pre_cards)}</section>' if pre_cards else '<p class="muted">이번 주 경기가 모두 끝났어요.</p>'}
-  {f'<h2>끝난 경기 <span class="muted" style="font-size:.9rem">— 눌러서 펼치기</span></h2><section class="donelist">{"".join(done_rows)}</section>' if done_rows else ""}
+  <h2>아직 안 한 경기 — 발행된 경기 <span class="muted" style="font-size:.9rem">(발행 전 경기는 위 표에만)</span></h2>
+  {f'<section class="grid">{"".join(c for _, c in pre_cards)}</section>' if pre_cards else ('<p class="muted">이번 주 경기가 모두 끝났어요.</p>' if not remaining else '<p class="muted">아직 발행문이 나온 경기가 없어요.</p>')}
   <h2>발행문·보완 전문 — 경기별 <span class="muted" style="font-size:.9rem">(카드·표 줄을 누르면 여기서 펼쳐져요)</span></h2>
   <section class="publist">{"".join(pub_secs)}</section>
   <h2>별점별 승자 적중 — 시즌(시장 예측)</h2>
@@ -766,7 +800,7 @@ nav.weeks a{{color:var(--ink)}}nav.weeks b.cur{{color:var(--acc)}}nav.weeks a.hu
     open(out, "w", encoding="utf-8").write(page)
     print("wrote", out, f"{len(page):,} bytes")
     if a.hub_out:
-        open(a.hub_out, "w", encoding="utf-8").write(hub_html())
+        open(a.hub_out, "w", encoding="utf-8").write(hub_html(live={a.week: live_wl}))
         print("wrote", a.hub_out)
 
 
