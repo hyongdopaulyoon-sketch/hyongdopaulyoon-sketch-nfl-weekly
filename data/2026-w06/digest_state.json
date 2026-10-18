@@ -78,7 +78,7 @@
 "TEN@IND": {
 "spread_home": "-6.5",
 "total": "43.5",
-"ml": "+240/-298",
+"ml": "+235/-290",
 "qb": {
 "TEN": "Cam Ward",
 "IND": "Daniel Jones"
@@ -339,7 +339,7 @@
 "CHI@ATL": {
 "spread_home": "1.5",
 "total": "51.5",
-"ml": "-120/+100",
+"ml": "-118/-102",
 "qb": {
 "CHI": "Caleb Williams",
 "ATL": "Michael Penix Jr."
@@ -372,7 +372,7 @@
 "CAR@PHI": {
 "spread_home": "3.0",
 "total": "39.5",
-"ml": "-166/+140",
+"ml": "-162/+136",
 "qb": {
 "CAR": "Bryce Young",
 "PHI": "Tanner McKee"
@@ -448,9 +448,9 @@
 }
 },
 "LAC@KC": {
-"spread_home": "-7.0",
+"spread_home": "-7.5",
 "total": "41.5",
-"ml": "+310/-395",
+"ml": "+330/-425",
 "qb": {
 "LAC": "Justin Herbert",
 "KC": "Patrick Mahomes"
@@ -486,5 +486,5 @@
 ]
 }
 },
-"_stamp": "10-18 08:42"
+"_stamp": "10-18 08:59"
 }
