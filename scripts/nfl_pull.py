@@ -1113,6 +1113,7 @@ ANGLE_NOTE = {   # 2026-10-17 — 각도별 실측 한 줄(예측시장 이후 2
     "A7": "홈 언더독 +7 이상 → 홈 ATS(24~25 29-15 66% · 18~23 54%)",
     "A8": "접전 .750+ 팀 ML(24~25 실제 68% vs 시장 57% · 18~23 0)",
     "A9": "12월~ 실외 Over(24~25 60% · 18~23 49%)",
+    "A10": "색률 상위 8 수비의 상대 ML(색 팀은 시장보다 못 이김: 18~23 −4.7%p · 24~25 −3.4%p)",
 }
 
 
@@ -1329,6 +1330,7 @@ def ph_digest(week, force=False):
                      '**발행은 전날(토요일)** — 킥오프(런던 06:30 PT) 뒤 발행은 기록용(집계 제외)')
         L += SC.build(a, h, RS, PRO, rt, inj, g)   # 📊 스탯 비교(말로) — 2026-10-10 Paul 「숫자만 있어 이해 어려움」
         L += SC.player_tables(a, h, RS, inj, g)    # 🧑‍🤝‍🧑 팀별 선수 표 — 2026-10-12 Paul 「선수별 스탯 표로」
+        L += SC.defense_tables(a, h, RS, inj, g, week)   # 🛡️ 수비 선수 표 — 2026-10-18 Paul 「수비 비교는 안 해도 되나」
         _sec_start = max((i for i, _l in enumerate(L) if _l.startswith("## ")), default=0)
         L += SC.conclusion_line(a, h, L[_sec_start:], inj, m, g)   # 📌 결론 재료(자동) — 2026-10-14 Paul 「MLB 처럼」
         L += CB.h2h_block(a, h) + CB.team_compare_block(a, h, rt) + CB.kicker_block(a, h, g) + CB.referee_block(g)

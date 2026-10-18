@@ -234,6 +234,8 @@ def main():
         if not re.search(LINE_HEAD + r"(?:명단|뉴스 확인)", body):
             문제.append(f"{k}: 「- 명단:」 줄 없음(웹 확인 — 비활성·출전 확정·출처·시각)")
         miss = [lab for lab, pat in MUST_LINES if not re.search(LINE_HEAD + pat, body)]
+        if a.week >= 7 and not re.search(LINE_HEAD + r"수비 표", body):   # 2026-10-18 Paul — 🛡️ 수비 선수 표(7주차부터 필수)
+            miss.append("수비 표")
         if miss:
             문제.append(f"{k}: 필수 줄 없음(6판 10/11): {' '.join(miss)}")
         # 팀 비교·선수 비교 줄의 순위(「n위」)가 기준판 경기 절에 있나 — 환각 순위 검출(경고)

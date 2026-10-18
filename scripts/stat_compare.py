@@ -69,6 +69,66 @@ def cell(vals, t, fmt, high=True, unit="", n=None):
     return f"{fmt.format(v)}{unit} · {r}위({tier(r, n)})"
 
 
+def _def_rows(week):
+    """advstats_week_def_<SEASON>.csv → {team: {pid: 누적 dict}} (week 미만 · 정규시즌) + 팀 합계."""
+    import csv
+    p = os.path.join(N.CACHE, f"advstats_week_def_{N.SEASON}.csv")
+    out = defaultdict(lambda: defaultdict(lambda: defaultdict(float))); team = defaultdict(lambda: defaultdict(float)); games = defaultdict(set)
+    if not os.path.exists(p):
+        return out, team, games
+    for r in csv.DictReader(open(p, encoding="utf-8-sig")):
+        if r.get("game_type") != "REG" or int(r.get("week") or 0) >= week:
+            continue
+        t = N.ESPN2NV.get(r["team"], r["team"]); x = out[t][r["pfr_player_name"]]
+        x["g"] += 1; games[t].add(r["game_id"])
+        for c in ("def_pressures", "def_sacks", "def_times_hitqb", "def_targets", "def_completions_allowed", "def_yards_allowed", "def_tackles_combined", "def_missed_tackles", "def_ints"):
+            v = N.fnum(r.get(c)) or 0; x[c] += v; team[t][c] += v
+    return out, team, games
+
+
+def defense_tables(a, h, RS, inj, g, week):
+    """🛡️ 수비 선수 표(2026-10-18 Paul 「수비 비교는 안 해도 되나 선수들 스탯」) — PFR 주간 수비 기록 시즌 누적(그 주 전까지). 서술 전용·점수 0.
+    팀별 패스러시 2(압박 순) · 커버리지 2(타깃 순) + 팀 줄(압박률·놓친 태클% 32팀 순위). 2018~25 재검: 압박률·색률·커버리지·놓친 태클 전부 시장이 반영(색률 상위 팀은 오히려 과대평가 → A10)."""
+    rows, team, games = _def_rows(week)
+    L = [f"- 🛡️ **수비 선수 표(PFR 주간 기록 시즌 누적 · {week}주차 전까지 · 패스러시 2 = 압박 순, 커버리지 2 = 타깃 순 · 팀 줄은 32팀 순위 · 발행문 「- 수비 표:」 아래 두 표 그대로 · 값만, 점수 0 — 압박·색·커버리지는 시장이 이미 반영)**:", ""]
+    if not rows:
+        return L + ["(advstats 수비 기록 없음 — 수비 표 생략)", ""]
+    # 팀 압박률 = 압박 / 상대 드롭백(연구 T 의 defteam db), 놓친 태클% = 놓침/(태클+놓침)
+    db_def = defaultdict(float)
+    if RS:
+        T, _P, _NM = RS
+        for (gid, wk, pt, dt), x in T.items():
+            if wk < week:
+                db_def[dt] += x.get("db", 0)
+    prr = {t: (team[t]["def_pressures"] / db_def[t]) if db_def.get(t) else None for t in team}
+    mtr = {t: (team[t]["def_missed_tackles"] / (team[t]["def_tackles_combined"] + team[t]["def_missed_tackles"])) if (team[t]["def_tackles_combined"] + team[t]["def_missed_tackles"]) else None for t in team}
+    skr = {t: (team[t]["def_sacks"] / db_def[t]) if db_def.get(t) else None for t in team}
+    for t in (a, h):
+        L.append(f"| {t} 수비 | 역할 | 경기 | 압박 | 색 | QB 히트 | 타깃→허용 | 야드/타깃 | 놓친 태클 | 상태 |")
+        L.append("|---|---|---|---|---|---|---|---|---|---|")
+        pl = rows.get(t, {})
+        rush = sorted(pl.items(), key=lambda kv: -kv[1]["def_pressures"])[:2]
+        cov = sorted(pl.items(), key=lambda kv: -kv[1]["def_targets"])[:2]
+        seen = set()
+        for role, items in (("패스러시", rush), ("커버리지", cov)):
+            for nm, x in items:
+                if nm in seen:
+                    continue
+                seen.add(nm); st = CB.N._status_of(nm, inj.get(t, {}))
+                tg = int(x["def_targets"]); cmp_ = int(x["def_completions_allowed"]); ypt = (x["def_yards_allowed"] / tg) if tg else None
+                tk = x["def_tackles_combined"] + x["def_missed_tackles"]
+                L.append(f"| {nm} | {role} | {int(x['g'])} | {int(x['def_pressures'])} | {x['def_sacks']:g} | {int(x['def_times_hitqb'])} | {tg}→{cmp_} | {f'{ypt:.1f}' if ypt is not None else '—'} | {int(x['def_missed_tackles'])}/{int(tk)} | {st or '—'} |")
+        if not pl:
+            L.append("| (기록 없음) | | | | | | | | | |")
+        rp, rm, rs = _rank(prr, t), _rank(mtr, t, False), _rank(skr, t)
+        nn = len([v for v in prr.values() if v is not None])
+        L.append(f"| {t} 팀 | 합계 | {len(games.get(t, ()))} | 압박률 {100 * prr[t]:.1f}%({rp}위·{tier(rp, nn)}) | 색률 {100 * skr[t]:.1f}%({rs}위) | — | — | — | 놓친 태클 {100 * mtr[t]:.1f}%({rm}위·{tier(rm, nn)} — 적을수록 좋음) | — |" if prr.get(t) is not None and mtr.get(t) is not None else f"| {t} 팀 | 합계 | — | — | — | — | — | — | — | — |")
+        L.append("")
+    L.append("  ↳ 읽는 법: 압박·색은 상대 OL·QB 색 허용률(선수 표)과 맞춰 보고, 커버리지 「타깃→허용」은 많이 노려진 CB 를 뜻한다(허용 수가 많다고 나쁜 것은 아님 — 야드/타깃이 기준). 놓친 태클은 상대 RB 야드/캐리와 함께. 전부 서술 재료 — 2018~25 백테스트에서 시장을 못 이겼고, 색률 상위 8 수비는 오히려 시장이 과대평가(A10 관찰).")
+    L.append("")
+    return L
+
+
 def player_tables(a, h, RS, inj, g):
     """🧑‍🤝‍🧑 팀별 선수 표(2026-10-12 Paul) — QB(예상 선발) · 러셔 2(캐리 순) · 리시버 4(타깃 순) · 키커. 값 + 리그 자격자 중 순위 + 부상 상태. 발행문이 두 표를 그대로 옮긴다."""
     L = [f"- 🧑‍🤝‍🧑 **선수 표(2026 정규시즌 전체 · 순위는 리그 자격자(QB 드롭백 {QB_MIN_DB}+ · 리시버 타깃 {WR_MIN_TGT}+ · 러셔 캐리 {RB_MIN_CAR}+) 중 · 상태 = 이번 주 부상 보고 · 발행문 「- 선수 표:」 아래 두 표 그대로 · 값만, 점수 0)**:", ""]

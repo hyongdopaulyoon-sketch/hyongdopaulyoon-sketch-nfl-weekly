@@ -343,7 +343,8 @@ ANGLE_GRADES = {"A1": "각도 관찰 A1(원정 큰 페이버릿 반대)", "A2": 
                 "A6": "각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS)",       # 2026-10-17 — 아래 A6 주석
                 "A7": "각도 관찰 A7(홈 언더독 +7 이상 → 홈 ATS)",                # 2026-10-17 「남는 종류 더」 — 아래 A7 주석
                 "A8": "각도 관찰 A8(접전 .750+ 팀 → 그 팀 ML)",                  # 아래 A8 주석
-                "A9": "각도 관찰 A9(12월~ 실외 → Over)"}                           # 아래 A9 주석
+                "A9": "각도 관찰 A9(12월~ 실외 → Over)",                           # 아래 A9 주석
+                "A10": "각도 관찰 A10(색률 상위 8 수비 팀의 상대 → 상대 ML)"}       # 2026-10-18 수비 데이터 탐색 — 아래 A10 주석
 A3_MOVE = 3.0   # 개장→현재 스프레드 이동(점) 문턱 — 사전 등록, 조정 금지
 # A4(2026-10-16 사전 등록 · 조정 금지): 작년 플레이오프 팀이 비플옵 팀 상대로 ML 언더독(무비그 <50%)인 1~8주 경기 → 그 팀 ML(현재 DK 배당).
 # 근거 2018~25 정규시즌(16개 각도 탐색 중 선택 — 사후 선택 위험): 1~4주 24-14 실제 63% vs 시장 40% 수익 +50%(z +3.0) · 5~8주 19-23 +6% · 9주~ 소멸(−6%)
@@ -362,6 +363,29 @@ A6_KEYS = (3.0, 7.0)
 #  A8 그 주 전 한 포제션(8점 이내) 경기 4+ & 승률 .750+ 팀 → 그 팀 ML: 전 잔차 −0.6%p · 후 92-43 실제 68% vs 시장 57%(+11.1%p z2.8). 5주차~. 판정 20픽 ≥50% & 수익 플러스.
 #  A9 12월·1월 실외 경기 → Over(현재 총점): 전 174-178 49.4% · 후 66-44 60.0%(z2.1). 판정 20픽 ≥52.4%.
 A7_LINE = 7.0; A8_MIN_GAMES = 4; A8_PCT = .75
+# A10(2026-10-18 사전 등록 · 조정 금지): 그 주 전까지 색률(색/상대 드롭백, PFR advstats def) 32팀 상위 8 수비 팀의 **상대 ML**. 5주차~.
+# 근거 2018~25 as-of(수비 6가설 중 유일한 일관 신호 — 색 팀 쪽이 시장보다 못 이김): 색 팀 ML 잔차 전 18~23 −4.7%p(0/6 시즌 플러스) · 후 24~25 −3.4%p(1/2) · 색 팀 ATS 46%/45%.
+# 해석: 색은 잡음이 큰 지표인데 시장(대중)이 「색 많은 수비 = 강함」으로 과대평가. 판정 20픽 ≥50% & 수익 플러스.
+A10_TOP = 8
+_SK = None
+
+
+def _sack_rate(week, T):
+    """{team: 색/상대 드롭백} — advstats_week_def_<SEASON>.csv(week 미만) + 연구 T 의 defteam 드롭백. 3경기 미만 팀 제외."""
+    import csv as _csv2
+    p = os.path.join(DATA, "cache", f"advstats_week_def_{SEASON}.csv")
+    if not os.path.exists(p) or not T:
+        return {}
+    sacks = defaultdict(float); gms = defaultdict(set)
+    for r in _csv2.DictReader(open(p, encoding="utf-8-sig")):
+        if r.get("game_type") != "REG" or int(r.get("week") or 0) >= week:
+            continue
+        t = {"WSH": "WAS", "LAR": "LA"}.get(r["team"], r["team"]); sacks[t] += fnum(r.get("def_sacks")) or 0; gms[t].add(r["game_id"])
+    db = defaultdict(float)
+    for (gid, wk, pt, dt), x in T.items():
+        if wk < week:
+            db[dt] += x.get("db", 0)
+    return {t: sacks[t] / db[t] for t in sacks if db.get(t) and len(gms[t]) >= 3}
 _PO = None
 _ONE = None
 
@@ -465,6 +489,15 @@ def angles(week):
                 r3, re_ = _rk(d3r, t), _rk(epar, t)
                 if r3 and re_ and re_ - r3 >= A5_GAP:
                     cand[f'{m["game_id"]}:ml:A5'] = (f"{a}@{h}", f"{opp} ML", "A5", f"{t} 3rd down {r3}위 vs 공격 EPA {re_}위(+{re_ - r3}) → 상대 {opp} · {week}주차", "ml", "", o_ or "+100")
+        if week >= 5:                                           # A10 — 색률 상위 8 수비 팀의 상대 ML
+            global _SK
+            if _SK is None:
+                _SK = _sack_rate(week, T)
+            if _SK:
+                order = sorted(_SK, key=lambda t_: -_SK[t_])
+                for t, opp, o_ in ((a, h, g.get("ml_home")), (h, a, g.get("ml_away"))):
+                    if t in order[:A10_TOP]:
+                        cand[f'{m["game_id"]}:ml:A10'] = (f"{a}@{h}", f"{opp} ML", "A10", f"{t} 색률 {100 * _SK[t]:.1f}%({order.index(t) + 1}위) → 상대 {opp}", "ml", "", o_ or "+100")
         if hl >= A7_LINE:                                       # A7 — 홈 언더독 +7 이상(홈 ATS)
             cand[f'{m["game_id"]}:spread:A7'] = (f"{a}@{h}", f"{h} {hl:+g}", "A7", f"홈 {h} 언더독 {hl:+g}", "spread", f"{hl:+g}", "-110")
         if week >= 5:                                           # A8 — 접전 .750+ 팀 ML
