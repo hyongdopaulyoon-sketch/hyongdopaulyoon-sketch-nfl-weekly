@@ -385,7 +385,7 @@ def main():
             pass
     if a.record and 예측들:
         import predictions as PR
-        _have = {r["game"] for r in N.rd(PR.path(a.week)) if r.get("src") == "발행" and not str(r.get("flag", "")).startswith("킥오프 뒤")}
+        _have = {r["game"] for r in PR.N.rd(PR.path(a.week)) if r.get("src") == "발행" and not str(r.get("flag", "")).startswith("킥오프 뒤")}
         for k, pk, pp, sa, sh, fl in 예측들:
             if k in _started:
                 # 2026-10-18 Paul 「기록용으로 발행 요청한 건데」: 킥오프 뒤 발행도 **기록은 남긴다** — flag 「킥오프 뒤·기록용」, 발행 성적 집계에서 제외.

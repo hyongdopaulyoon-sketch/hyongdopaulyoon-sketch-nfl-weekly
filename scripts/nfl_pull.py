@@ -1323,6 +1323,10 @@ def ph_digest(week, force=False):
                      + (f' (보고 {x.get("report_week")}주차)' if x.get("report_week") and str(x.get("report_week")) != str(week) else ""))
         L.append(_inactives_line(wd, g, a, h))    # 🏥 ESPN 공식 비활성 명단 — 2026-10-15 Paul 「여기서 수집」
         L.append(_angles_line(week, g))             # 🔎 관찰 각도(페이퍼) — 2026-10-17 Paul 「발행 시 반영되도록」
+        if g.get("neutral") == "1":                 # 🌍 국제·중립 경기 — 2026-10-18 Paul 「런던 게임 확실히 반영」
+            L.append(f'- 🌍 **국제·중립 경기**: {g.get("venue", "?")} · 킥오프 {g.get("kickoff_pt", "?")} PT({g.get("kickoff_et", "?")} ET) · 홈 이점 0(모델 반영) · 양 팀 모두 원정·시차 — '
+                     '2018~25 중립 경기 37: 페이버릿 ML 24-13(실제 65% vs 시장 63%) · ATS 19-18 · 언더 21-16 = 시장대로(축 아님) · '
+                     '**발행은 전날(토요일)** — 킥오프(런던 06:30 PT) 뒤 발행은 기록용(집계 제외)')
         L += SC.build(a, h, RS, PRO, rt, inj, g)   # 📊 스탯 비교(말로) — 2026-10-10 Paul 「숫자만 있어 이해 어려움」
         L += SC.player_tables(a, h, RS, inj, g)    # 🧑‍🤝‍🧑 팀별 선수 표 — 2026-10-12 Paul 「선수별 스탯 표로」
         _sec_start = max((i for i, _l in enumerate(L) if _l.startswith("## ")), default=0)
