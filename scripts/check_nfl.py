@@ -374,15 +374,29 @@ def main():
         print(f"  → {k} 방향 {s_} / {t_}")
     for k, pk, pp, sa, sh, fl in 예측들:
         print(f"  🔮 {k} 예측 {pk} {100 * pp:.0f}%" + (f" · {sa:g}-{sh:g}" if sa is not None else "") + (f" · {fl}" if fl else ""))
+    # 2026-10-18(보드 세션 질문 ⓒ): 킥오프 지난 경기는 기록하지 않는다 — 발행문에 절이 있어도 건너뛰고 알린다(사본에서 절을 빼던 수작업 불필요)
+    from datetime import timezone as _tz
+    _now = datetime.now(_tz.utc); _started = set()
+    for _k, _g in games_by.items():
+        try:
+            if datetime.strptime(_g.get("kickoff_utc", ""), "%Y-%m-%dT%H:%MZ").replace(tzinfo=_tz.utc) <= _now:
+                _started.add(_k)
+        except ValueError:
+            pass
+    if a.record:
+        for _k in sorted(set(x[0] for x in 예측들) & _started):
+            print(f"  ⏭ {_k}: 킥오프 지남 — 예측·판단·새 정보 기록 제외")
     if a.record and 예측들:
         import predictions as PR
         for k, pk, pp, sa, sh, fl in 예측들:
+            if k in _started:
+                continue
             PR.add_pub(a.week, k, pk, pp, sa, sh, flag=fl)
     if a.record and 새정보:
         import picks as P
         gid_of = {f'{r["away"]}@{r["home"]}': r["game_id"] for r in games}
         for k, mk_, sd, fact, hhmm, mv, early in 새정보:
-            if k in gid_of:
+            if k in gid_of and k not in _started:
                 P.lean(a.week, f"{gid_of[k]}:{mk_}", sd, sd.split()[-1], "-110",
                        f"새 정보: {fact} · 발표 {hhmm} PT · 발표 뒤 라인 이동 {'?' if mv is None else f'{mv:+g}'}점",
                        suffix=":NC" if early else ":N", grade="새 정보(판 이전·대조)" if early else "새 정보(관찰)")
@@ -390,7 +404,7 @@ def main():
         import picks as P
         gid_of = {f'{r["away"]}@{r["home"]}': r["game_id"] for r in games}
         for k, v, mk, sd in 판단들:
-            if k not in gid_of:
+            if k not in gid_of or k in _started:
                 continue
             if mk == "ML":   # 2026-10-10: side 「DAL ML」 · odds = 적힌 배당 또는 games.csv DK ML
                 t_ = sd.split()[0]; g_ = games_by.get(k, {})
