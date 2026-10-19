@@ -69,6 +69,99 @@ def cell(vals, t, fmt, high=True, unit="", n=None):
     return f"{fmt.format(v)}{unit} · {r}위({tier(r, n)})"
 
 
+_LY = {}
+
+
+def last_year():
+    """작년(SEASON−1) 팀 지표·선수 지표 — research_<SEASON-1>.pkl + games.csv. {team: {key: 값}}, {pid: {...}}, NM. 캐시."""
+    if _LY:
+        return _LY["team"], _LY["players"], _LY["nm"]
+    import csv, stat_research as SR
+    y = N.SEASON - 1
+    try:
+        T, P, NM = SR.load(y)
+    except Exception:
+        _LY.update(team={}, players={}, nm={}); return {}, {}, {}
+    off, de = defaultdict(list), defaultdict(list)
+    for (gid, wk, pt, dt), x in T.items():
+        off[pt].append(x); de[dt].append(x)
+    def sm(rows, k): return sum(r.get(k, 0) for r in rows)
+    team = {}
+    pf, pa, gcnt = defaultdict(float), defaultdict(float), defaultdict(int)
+    for g in N.rd(os.path.join(N.CACHE, "games.csv")):
+        if g.get("season") == str(y) and g.get("game_type") == "REG" and g.get("home_score"):
+            hs, as_ = N.fnum(g["home_score"]) or 0, N.fnum(g["away_score"]) or 0
+            pf[g["home_team"]] += hs; pa[g["home_team"]] += as_; pf[g["away_team"]] += as_; pa[g["away_team"]] += hs; gcnt[g["home_team"]] += 1; gcnt[g["away_team"]] += 1
+    for t in set(off) | set(de):
+        o, d = off[t], de[t]; n_ = sm(o, "n") or 1; nd = sm(d, "n") or 1; dr = sm(o, "dr") or 1; ddr = sm(d, "dr") or 1
+        team[t] = {"득점(경기당)": pf[t] / gcnt[t] if gcnt[t] else None, "실점(경기당)": pa[t] / gcnt[t] if gcnt[t] else None,
+                   "공격 효율(드라이브당 득점)": sm(o, "dr_pts") / dr, "득점 드라이브 비율": 100 * (sm(o, "dr_td") + sm(o, "dr_fg")) / dr,
+                   "수비 효율(내준 드라이브당 득점)": sm(d, "dr_pts") / ddr, "상대 득점 드라이브 허용": 100 * (sm(d, "dr_td") + sm(d, "dr_fg")) / ddr,
+                   "패스 공격(드롭백당 EPA)": sm(o, "pepa") / (sm(o, "db") or 1), "러시 공격(러시당 EPA)": sm(o, "repa") / (sm(o, "rn") or 1),
+                   "패스 수비(허용 EPA)": sm(d, "pepa") / (sm(d, "db") or 1), "러시 수비(허용 EPA)": sm(d, "repa") / (sm(d, "rn") or 1),
+                   "3rd down 전환(공격)": sm(o, "d3c") / (sm(o, "d3") or 1), "3rd down 허용(수비)": sm(d, "d3c") / (sm(d, "d3") or 1),
+                   "턴오버(경기당 잃음)": sm(o, "to") / max(len(o), 1), "색 허용률(공격)": sm(o, "sack") / (sm(o, "db") or 1)}
+    players = defaultdict(lambda: defaultdict(float)); kinds = {}
+    for (k, pid, gid), x in P.items():
+        kinds[pid] = k
+        for kk, vv in x.items():
+            players[(k, pid)][kk] += vv
+    _LY.update(team=team, players=dict(players), nm=NM)
+    return team, dict(players), NM
+
+
+LY_HIGH = {"실점(경기당)": False, "수비 효율(내준 드라이브당 득점)": False, "상대 득점 드라이브 허용": False, "패스 수비(허용 EPA)": False, "러시 수비(허용 EPA)": False,
+           "3rd down 허용(수비)": False, "턴오버(경기당 잃음)": False, "색 허용률(공격)": False}
+LY_FMT = {"득점(경기당)": "{:.1f}점", "실점(경기당)": "{:.1f}점", "공격 효율(드라이브당 득점)": "{:.2f}", "득점 드라이브 비율": "{:.0f}%", "수비 효율(내준 드라이브당 득점)": "{:.2f}",
+          "상대 득점 드라이브 허용": "{:.0f}%", "패스 공격(드롭백당 EPA)": "{:+.3f}", "러시 공격(러시당 EPA)": "{:+.3f}", "패스 수비(허용 EPA)": "{:+.3f}", "러시 수비(허용 EPA)": "{:+.3f}",
+          "3rd down 전환(공격)": "{:.0%}", "3rd down 허용(수비)": "{:.0%}", "턴오버(경기당 잃음)": "{:.1f}", "색 허용률(공격)": "{:.1%}"}
+
+
+def ly_cell(item, a, h):
+    """「a 값(순위) / h 값(순위)」 — 작년 32팀 순위. 없으면 —."""
+    team, _p, _n = last_year()
+    if not team or item not in LY_FMT:
+        return "—"
+    vals = {t: v.get(item) for t, v in team.items()}
+    high = LY_HIGH.get(item, True)
+    def one(t):
+        v = vals.get(t)
+        if v is None:
+            return f"{t} —"
+        r = _rank(vals, t, high); return f"{t} {LY_FMT[item].format(v)}({r}위)"
+    return f"{one(a)} / {one(h)}"
+
+
+def ly_player(kind, name, team, pid=None):
+    """선수 작년 값 — QB EPA/드롭백(순위) · 리시버 야드/타깃(순위) · 러셔 야드/캐리(순위). 선수 id(gsis) 우선, 없으면 이름 대조(짧은 이름 그대로 또는 풀네임 — 팀 무관, 이적 포함). 없으면 「작년 기록 없음」."""
+    _t, P, NM = last_year()
+    if not P:
+        return "—"
+    if pid is not None and (kind, pid) in P:
+        cands = [(kind, pid)]
+    else:
+        cands = [(k, q) for (k, q) in P if k == kind and (NM.get(q, ("", ""))[0] == name or N._same_person(NM.get(q, ("", ""))[0], name))]
+    if not cands:
+        return "— 작년 기록 없음"
+    k, pid = cands[0]; x = P[(k, pid)]
+    if kind == "qb":
+        pool = {p: v["epa"] / v["db"] for (kk, p), v in P.items() if kk == "qb" and v.get("db", 0) >= 200}
+        if x.get("db", 0) < 200:
+            return f"드롭백 {int(x.get('db', 0))}(표본 적음)"
+        val = x["epa"] / x["db"]; return f"EPA/드롭백 {val:+.2f}({_rank(pool, pid)}/{len(pool)}위) · 야드/시도 {x.get('yds', 0) / (x.get('att', 0) or 1):.1f}"
+    if kind == "rec":
+        pool = {p: v["yds"] / v["tgt"] for (kk, p), v in P.items() if kk == "rec" and v.get("tgt", 0) >= 50}
+        if x.get("tgt", 0) < 50:
+            return f"타깃 {int(x.get('tgt', 0))}(표본 적음)"
+        return f"타깃 {int(x['tgt'])} · 야드/타깃 {x['yds'] / x['tgt']:.1f}({_rank(pool, pid)}/{len(pool)}위)"
+    if kind == "rush":
+        pool = {p: v["yds"] / v["car"] for (kk, p), v in P.items() if kk == "rush" and v.get("car", 0) >= 100}
+        if x.get("car", 0) < 100:
+            return f"캐리 {int(x.get('car', 0))}(표본 적음)"
+        return f"캐리 {int(x['car'])} · 야드/캐리 {x['yds'] / x['car']:.1f}({_rank(pool, pid)}/{len(pool)}위)"
+    return "—"
+
+
 def _def_rows(week):
     """advstats_week_def_<SEASON>.csv → {team: {pid: 누적 dict}} (week 미만 · 정규시즌) + 팀 합계."""
     import csv
@@ -150,30 +243,30 @@ def player_tables(a, h, RS, inj, g):
     DK = CB._depth_kicker(); KS = CB.kicker_stats()
     for t in (a, h):
         inj_t = inj.get(t) or {}
-        L += [f"| {t} 선수 | 역할 | 경기 | 표본 | 야드 | TD | 효율 | EPA/플레이 | 리그 순위 | 상태 |", "|---|---|---|---|---|---|---|---|---|---|"]
+        L += [f"| {t} 선수 | 역할 | 경기 | 표본 | 야드 | TD | 효율 | EPA/플레이 | 리그 순위 | 상태 | {N.SEASON - 1}(작년·참고) |", "|---|---|---|---|---|---|---|---|---|---|---|"]
         exp = inj_t.get("expected_qb") or ""
         qbs = sorted((p for p in qb if NM.get(p, ("", ""))[1] == t and qb[p].get("db", 0) >= 10), key=lambda p: -qb[p]["db"])[:2]
         for p in qbs:
             x = qb[p]; att = x.get("att", 0) or 1; db = x.get("db", 0) or 1
             tag = " (예상 선발)" if exp and N._same_person(NM[p][0], exp) else ""
             st = CB.N._status_of(NM[p][0], inj_t)
-            L.append(f"| {NM[p][0]}{tag} | QB | {len(gcount[p])} | 드롭백 {int(db)} · 시도 {int(att)} | {int(x.get('yds', 0))} | 패스 {int(x.get('td', 0))} · INT {int(x.get('int', 0))}[운] | 완성 {100 * x.get('cmp', 0) / att:.0f}% · 야드/시도 {x.get('yds', 0) / att:.1f} · 색 {100 * x.get('sack', 0) / db:.1f}% | {x.get('epa', 0) / db:+.2f} | EPA {rk(qpool, p)} | {st or '—'} |")
+            L.append(f"| {NM[p][0]}{tag} | QB | {len(gcount[p])} | 드롭백 {int(db)} · 시도 {int(att)} | {int(x.get('yds', 0))} | 패스 {int(x.get('td', 0))} · INT {int(x.get('int', 0))}[운] | 완성 {100 * x.get('cmp', 0) / att:.0f}% · 야드/시도 {x.get('yds', 0) / att:.1f} · 색 {100 * x.get('sack', 0) / db:.1f}% | {x.get('epa', 0) / db:+.2f} | EPA {rk(qpool, p)} | {st or '—'} | {ly_player('qb', NM[p][0], t, p)} |")
         if exp and not any(N._same_person(NM[p][0], exp) for p in qbs):
-            L.append(f"| {exp} (예상 선발) | QB | 0 | 2026 기록 없음 | — | — | — | — | 표본 적음 | {CB.N._status_of(exp, inj_t) or '—'} |")
+            L.append(f"| {exp} (예상 선발) | QB | 0 | 2026 기록 없음 | — | — | — | — | 표본 적음 | {CB.N._status_of(exp, inj_t) or '—'} | {ly_player('qb', exp, t)} |")
         for p in sorted((p for p in rus if NM.get(p, ("", ""))[1] == t), key=lambda p: -rus[p].get("car", 0))[:2]:
             x = rus[p]; c = x.get("car", 0) or 1; st = CB.N._status_of(NM[p][0], inj_t)
-            L.append(f"| {NM[p][0]} | 러셔 | {len(gcount[p])} | 캐리 {int(c)} | {int(x.get('yds', 0))} | {int(x.get('td', 0))}[운] | 야드/캐리 {x.get('yds', 0) / c:.1f} · 성공률 {100 * x.get('suc', 0) / c:.0f}% | {x.get('epa', 0) / c:+.2f} | 야드/캐리 {rk(upool, p)} | {st or '—'} |")
+            L.append(f"| {NM[p][0]} | 러셔 | {len(gcount[p])} | 캐리 {int(c)} | {int(x.get('yds', 0))} | {int(x.get('td', 0))}[운] | 야드/캐리 {x.get('yds', 0) / c:.1f} · 성공률 {100 * x.get('suc', 0) / c:.0f}% | {x.get('epa', 0) / c:+.2f} | 야드/캐리 {rk(upool, p)} | {st or '—'} | {ly_player('rush', NM[p][0], t, p)} |")
         for p in sorted((p for p in rec if NM.get(p, ("", ""))[1] == t), key=lambda p: -rec[p].get("tgt", 0))[:4]:
             x = rec[p]; tg = x.get("tgt", 0) or 1; st = CB.N._status_of(NM[p][0], inj_t)
-            L.append(f"| {NM[p][0]} | 리시버 | {len(gcount[p])} | 타깃 {int(tg)} · 캐치 {int(x.get('cmp', 0))} | {int(x.get('yds', 0))} | {int(x.get('td', 0))}[운] | 캐치율 {100 * x.get('cmp', 0) / tg:.0f}% · 야드/타깃 {x.get('yds', 0) / tg:.1f} | {x.get('epa', 0) / tg:+.2f} | 야드/타깃 {rk(rpool, p)} | {st or '—'} |")
+            L.append(f"| {NM[p][0]} | 리시버 | {len(gcount[p])} | 타깃 {int(tg)} · 캐치 {int(x.get('cmp', 0))} | {int(x.get('yds', 0))} | {int(x.get('td', 0))}[운] | 캐치율 {100 * x.get('cmp', 0) / tg:.0f}% · 야드/타깃 {x.get('yds', 0) / tg:.1f} | {x.get('epa', 0) / tg:+.2f} | 야드/타깃 {rk(rpool, p)} | {st or '—'} | {ly_player('rec', NM[p][0], t, p)} |")
         nm = DK.get(t, "")
         mine = [r for r in KS if nm and N._same_person(r["kicker"], nm)]
         if mine:
             fa = sum(int(r[f"fg{i}_att"]) for r in mine for i in range(3)); fm = sum(int(r[f"fg{i}_made"]) for r in mine for i in range(3))
             la, lm = sum(int(r["fg2_att"]) for r in mine), sum(int(r["fg2_made"]) for r in mine)
-            L.append(f"| {nm} | 키커 | — | FG {fm}/{fa}(2024~26) | — | — | FG {100 * fm / fa:.0f}% · 50+ {lm}/{la} | — | — | {CB.N._status_of(nm, inj_t) or '—'} |")
+            L.append(f"| {nm} | 키커 | — | FG {fm}/{fa}(2024~26) | — | — | FG {100 * fm / fa:.0f}% · 50+ {lm}/{la} | — | — | {CB.N._status_of(nm, inj_t) or '—'} | — |")
         L.append("")
-    L.append("  ↳ [운] = TD·INT 는 해마다 안 이어지는 운 지표(근거 금지). 효율·EPA 는 실력 쪽. 표본이 「표본 적음」이면 순위 대신 값만 참고. 결장(Out/Doubtful)인 선수는 이미 라인에 반영 — 판 시각 뒤 확정만 새 정보.")
+    L.append("  ↳ 마지막 열 = 작년 풀시즌 값(이름 대조 — 이적 포함, 「표본 적음」은 작년 표본 부족·「작년 기록 없음」은 신인/미출전). [운] = TD·INT 는 해마다 안 이어지는 운 지표(근거 금지). 효율·EPA 는 실력 쪽. 표본이 「표본 적음」이면 순위 대신 값만 참고. 결장(Out/Doubtful)인 선수는 이미 라인에 반영 — 판 시각 뒤 확정만 새 정보.")
     L.append("")
     return L
 
@@ -383,5 +476,20 @@ def build(a, h, RS, PRO, rt, inj, g):
         rk = f"{_rank(kpool, key)}/{len(kpool)}위·{tier(_rank(kpool, key), len(kpool))}" if key in kpool else "표본 적음"
         return f"{nm} FG {100 * md / att:.0f}%({md}/{att} · {rk}) · 50야드+ {100 * l50m / l50a if l50a else 0:.0f}%({l50m}/{l50a})"
     L.append(f"| 키커(2024~26 FG 성공률 · 순위는 20킥+ 키커 중) | {kick(a)} | {kick(h)} | FG 하나가 3점 — 실외 강풍·추위면 40야드 밖 성공률이 떨어진다 | — |")
-    L += ["", "  ↳ 한 줄: " + (" · ".join(summ) if summ else "—") + " — 순위는 2026 전체(얇은 표본 주의). 이 표는 시장 라인에 이미 들어간 정보라 예측 확률을 바꾸지 않는다(초등학생 설명 재료).", ""]
+    # 2026-10-18 Paul 「작년 것도 비교」 — 6번째 열 「2025 시즌(작년·참고)」: 팀 행은 작년 풀시즌 값(32팀 순위), QB 행은 예상 선발의 작년 EPA, 나머지 —
+    exp_qb = {t: (inj.get(t) or {}).get("expected_qb") or "" for t in (a, h)}
+    for i, ln in enumerate(L):
+        if ln.startswith("| 항목 |"):
+            L[i] = ln + f" {N.SEASON - 1} 시즌(작년·참고) |"
+        elif ln.startswith("|---|---|---|---|---|"):
+            L[i] = ln + "---|"
+        elif ln.startswith("| ") and ln.endswith(" |"):
+            item = ln[2:ln.find(" |", 2)].strip()
+            if item in LY_FMT:
+                L[i] = ln + f" {ly_cell(item, a, h)} |"
+            elif item.startswith("QB("):
+                L[i] = ln + f" {a} {ly_player('qb', exp_qb[a], a) if exp_qb[a] else '—'} / {h} {ly_player('qb', exp_qb[h], h) if exp_qb[h] else '—'} |"
+            else:
+                L[i] = ln + " — |"
+    L += ["", "  ↳ 한 줄: " + (" · ".join(summ) if summ else "—") + f" — 순위는 2026 전체(얇은 표본 주의) · 마지막 열은 {N.SEASON - 1} 풀시즌 값(작년 순위, 참고 — 올해 표본이 얇을 때 「원래 어떤 팀인가」). 이 표는 시장 라인에 이미 들어간 정보라 예측 확률을 바꾸지 않는다(초등학생 설명 재료).", ""]
     return L
