@@ -65,7 +65,7 @@
 "WAS@SF": {
 "spread_home": "-7.5",
 "total": "51.5",
-"ml": "+300/-380",
+"ml": "?/?",
 "qb": {
 "WAS": "Jayden Daniels",
 "SF": "Brock Purdy"
@@ -424,5 +424,5 @@
 ]
 }
 },
-"_stamp": "10-19 13:21"
+"_stamp": "10-19 17:19"
 }
