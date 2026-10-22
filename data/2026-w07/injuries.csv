@@ -1,0 +1,29 @@
+﻿team,report_week,expected_qb,depth_qb1,season_main_qb,qb_report,qb_flag,qb_note,n_out,n_doubtful,n_questionable,out,doubtful,questionable,final_pending,n_dnp,n_limited,dnp,limited,n_starters_missing
+ARI,7,Jacoby Brissett,Jacoby Brissett,J.Brissett,,,,3,0,0,Hunter Long(TE · 스냅 30% · IR) · Paris Johnson Jr.(OL · ★스냅 98% · IR) · Isaiah Adams(OL · 스냅 42% · IR),,,,0,0,,,1
+ATL,7,Michael Penix Jr.,Michael Penix Jr.,M.Penix,,,,1,0,0,Yasir Abdullah(LB · 스냅 50% · IR),,,,0,0,,,0
+BAL,7,Tyler Huntley,Lamar Jackson,L.Jackson,,백업 QB 선발 — 뎁스차트 QB1 Lamar Jackson 대신 예상 선발 Tyler Huntley,,1,0,0,Durham Smythe(TE · 스냅 28% · IR),,,,0,0,,,0
+CAR,7,Bryce Young,Bryce Young,B.Young,,,,1,0,0,Jaycee Horn(DB · ★스냅 91% · IR),,,,0,0,,,1
+CHI,7,Caleb Williams,Caleb Williams,C.Williams,,,,2,0,0,Montez Sweat(DL · ★스냅 70% · IR) · Dayo Odeyingbo(DL · 스냅 48% · IR),,,미발표,3,1,T.J. Edwards(LB · ★스냅 69%) · Jack Sanborn(LB · 스냅 16%) · Kyle Monangai(RB · 스냅 54%),Jonah Jackson(G · ★스냅 88%),2
+CIN,7,Joe Burrow,Joe Burrow,J.Burrow,,,,3,0,0,Jalen Davis(DB · 스냅 31% · IR) · Tanner Hudson(TE · 스냅 31% · IR) · Swayze Bozeman(LB · 스냅 2% · IR),,,,0,0,,,0
+CLE,7,Deshaun Watson,Deshaun Watson,D.Watson,,,,1,0,0,Raheim Sanders(RB · 스냅 32% · IR),,,,0,0,,,0
+DAL,7,Dak Prescott,Dak Prescott,D.Prescott,,,,0,0,0,,,,,0,0,,,0
+DEN,7,Bo Nix,Bo Nix,B.Nix,,,,1,0,0,Pat Bryant(WR · 스냅 36% · IR),,,,0,0,,,0
+DET,7,Jared Goff,Jared Goff,J.Goff,,,,2,0,0,Tom Kennedy(WR · 스냅 1% · IR) · Devin White(LB · 스냅 22% · IR),,,,0,0,,,0
+GB,7,Jordan Love,Jordan Love,J.Love,,,,5,0,0,Javon Hargrave(DL · 스냅 46% · IR) · Jonathan Ford(DL · 스냅 23% · IR) · Skyy Moore(WR · 스냅 28% · IR) · Chris Brooks(RB · 스냅 17% · IR) · Edgerrin Cooper(LB · 스냅 54% · IR),,,,0,0,,,0
+HOU,7,C.J. Stroud,C.J. Stroud,C.Stroud,,,,0,0,0,,,,,0,0,,,0
+IND,7,Daniel Jones,Daniel Jones,D.Jones,,,,1,0,0,Arden Key(DL · 스냅 41% · IR),,,,0,0,,,0
+KC,7,Patrick Mahomes,Patrick Mahomes,P.Mahomes,,,,1,0,0,Tyquan Thornton(WR · 스냅 55% · IR),,,,0,0,,,0
+LA,7,Matthew Stafford,Matthew Stafford,M.Stafford,,,,2,0,0,Davante Adams(WR · ★스냅 81% · IR) · Poona Ford(DL · 스냅 41% · IR),,,,0,0,,,1
+LV,7,Kirk Cousins,Kirk Cousins,K.Cousins,,,,0,0,0,,,,,0,0,,,0
+MIA,7,Malik Willis,Malik Willis,M.Willis,,,,1,0,0,De'Von Achane(RB · 스냅 5% · IR),,,,0,0,,,0
+MIN,7,Kyler Murray,Kyler Murray,K.Murray,,,,2,0,0,Josh Oliver(TE · 스냅 41% · IR) · Donovan Jackson(OL · 스냅 55% · IR),,,,0,0,,,0
+NE,7,Drake Maye,Drake Maye,D.Maye,,,,3,0,0,Mack Hollins(WR · 스냅 41% · IR) · Reggie Gilliam(RB · 스냅 22% · IR) · Romeo Doubs(WR · 스냅 50% · IR),,,미발표,3,5,Alijah Vera-Tucker(G · ★스냅 77%) · Ben Brown(C · ★스냅 93%) · Joshua Farmer(DT · 스냅 25%),Morgan Moses(T · ★스냅 71%) · Carlton Davis III(CB · ★스냅 100%) · A.J. Brown(WR · ★스냅 76%) · Karon Prunty(CB) · Channing Canada(CB),2
+NO,7,Tyler Shough,Tyler Shough,T.Shough,,,,0,0,0,,,,,0,0,,,0
+NYG,7,Jameis Winston,Jameis Winston,J.Winston,,,일정표 예상 J.J. McCarthy 는 묵은 값 — 최근 6주 선발·뎁스차트 QB1 Jameis Winston 로 정정,2,0,0,Braxton Berrios(WR · 스냅 3% · IR) · Chauncey Golston(DL · 스냅 38% · IR),,,,0,0,,,0
+NYJ,7,Geno Smith,Geno Smith,G.Smith,,,,1,0,0,Braiden McGregor(LB · 스냅 8% · IR),,,,0,0,,,0
+PHI,7,Tanner McKee,Tanner McKee,J.Hurts,,,"주전 복귀 — 시즌 드롭백 최다 J.Hurts, 예상 선발 Tanner McKee(레이팅에 대체 QB 표본 섞임) · 일정표 예상 Jalen Hurts 는 묵은 값 — 최근 6주 선발·뎁스차트 QB1 Tanner McKee 로 정정",3,0,0,Jalen Hurts(QB · ★스냅 100% · IR) · Tank Bigsby(RB · 스냅 48% · IR) · Will Shipley(RB · 스냅 34% · IR),,,,0,0,,,1
+PIT,7,Aaron Rodgers,Aaron Rodgers,A.Rodgers,,,,3,0,0,Michael Pittman(WR · ★스냅 72% · IR) · Roman Wilson(WR · 스냅 32% · IR) · Derrick Harmon(DL · 스냅 8% · IR),,,,0,0,,,1
+SEA,7,Sam Darnold,Sam Darnold,S.Darnold,,,일정표 예상 Drew Lock 는 묵은 값 — 최근 6주 선발·뎁스차트 QB1 Sam Darnold 로 정정,0,0,0,,,,,0,0,,,0
+SF,7,Brock Purdy,Brock Purdy,B.Purdy,,,,1,0,0,Dre Greenlaw(LB · ★스냅 63% · EXE),,,,0,0,,,0
+TB,7,Jalon Daniels,Baker Mayfield,B.Mayfield,,백업 QB 선발 — 뎁스차트 QB1 Baker Mayfield 대신 예상 선발 Jalon Daniels,,0,0,0,,,,,0,0,,,0
+TEN,7,Cam Ward,Cam Ward,C.Ward,,,,0,0,0,,,,,0,0,,,0
