@@ -224,6 +224,23 @@ def all_rows():
     return rows
 
 
+def _brier(xs):
+    """홈 승 확률로 잰 Brier(낮을수록 정확) — 무승부·결과 없음 제외. (값, n)"""
+    t = n = 0
+    for r in xs:
+        p, fin = N.fnum(r.get("p_pick")), r.get("final") or ""
+        try:
+            a, sc, h = fin.split(" ")
+            sa, sh = (int(v) for v in sc.split("-"))
+        except ValueError:
+            continue
+        if p is None or sa == sh:
+            continue
+        ph = p if r["pick"] == h else 1 - p
+        t += (ph - (1 if sh > sa else 0)) ** 2; n += 1
+    return (t / n, n) if n else (None, 0)
+
+
 def report(week=None):
     rows = all_rows()
     print(f"📊 NFL {SEASON} 결과 예측 — 시즌 누적")
@@ -232,14 +249,24 @@ def report(week=None):
         for src, x in s.items():
             print(f"■ {lab} {src}: {x['n']}경기" + (f"(소급 {x['back']})" if x["back"] else "") + f" · 승자 {x['w']}-{x['l']}"
                   + (f" {100 * x['w'] / (x['w'] + x['l']):.0f}%" if x['w'] + x['l'] else "")
-                  + (f" · 점수 차 오차 {x['me']:.1f} · 총점 오차 {x['te']:.1f}" if x["me"] is not None else "")
-                  + (f" · 스프레드 쪽 {x['sw']}-{x['sl']} · 총점 쪽 {x['tw']}-{x['tl']}" if src != "시장" else ""))
+                  + (lambda b: f" · Brier {b[0]:.4f}(n {b[1]})" if b[0] is not None else "")(_brier([r for r in rs if r["src"] == src])))
             print("    별점별 승자: " + " · ".join(f"{'★' * k} {w}-{l}" + (f" {100 * w / (w + l):.0f}%" if w + l else "") + f"(기대 {STAR_HIT[k]})"
                                           for k, (w, l) in x["stars"].items()))
     ex = [r for r in rows if r["src"] == "발행" and r.get("flag") == "상한 예외" and r.get("result") in ("W", "L")]
     if ex:
         print(f"■ 발행 상한 예외(시장 ±5%p 초과 — QB·새 정보·확정): 승자 {sum(1 for r in ex if r['result'] == 'W')}-{sum(1 for r in ex if r['result'] == 'L')}")
-    print("  (시장은 스프레드 쪽을 고르지 않는다 — 라인 자체가 시장 예측 점수 차 · 별점은 승자 자신감이지 돈의 가치가 아니다)")
+    # 같은 경기 발행 vs 시장(2026-10-21 — 발행 예측이 시장 위에 정보를 더했나)
+    pair = {}
+    for r in rows:
+        if r["src"] in ("시장", "발행") and r.get("final"):
+            pair.setdefault((r["week"], r["game"]), {})[r["src"]] = r
+    both = [d for d in pair.values() if len(d) == 2]
+    if both:
+        bm, bp = _brier([d["시장"] for d in both]), _brier([d["발행"] for d in both])
+        moved = [d for d in both if d["시장"]["pick"] != d["발행"]["pick"]
+                 or abs((N.fnum(d["발행"]["p_pick"]) or 0) - (N.fnum(d["시장"]["p_pick"]) or 0)) >= 0.03]
+        print(f"■ 같은 경기 발행 vs 시장: {len(both)}경기 · Brier 시장 {bm[0]:.4f} / 발행 {bp[0]:.4f} · 발행이 3%p+ 조정하거나 승자를 바꾼 경기 {len(moved)}")
+    print("  (10판 ML 전용 — Brier 는 확률 정확도, 낮을수록 좋음 · 2018~25 시장 마감 무비그 Brier 0.2106(n 2,119) · 동전 0.25 · 별점은 승자 자신감이지 돈의 가치가 아니다)")
 
 
 def season_block(week=None):

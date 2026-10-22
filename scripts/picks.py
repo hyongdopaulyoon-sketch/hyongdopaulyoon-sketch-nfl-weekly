@@ -346,6 +346,7 @@ ANGLE_GRADES = {"A1": "각도 관찰 A1(원정 큰 페이버릿 반대)", "A2": 
                 "A9": "각도 관찰 A9(12월~ 실외 → Over)",                           # 아래 A9 주석
                 "A10": "각도 관찰 A10(색률 상위 8 수비 팀의 상대 → 상대 ML)"}       # 2026-10-18 수비 데이터 탐색 — 아래 A10 주석
 A3_MOVE = 3.0   # 개장→현재 스프레드 이동(점) 문턱 — 사전 등록, 조정 금지
+ANGLE_TARGET = {"A3": 30, "A4": 20, "A5": 20, "A6": 20, "A7": 20, "A8": 20, "A9": 20, "A10": 20}   # 사전 등록 판정 픽 수(pending_rules)
 # A4(2026-10-16 사전 등록 · 조정 금지): 작년 플레이오프 팀이 비플옵 팀 상대로 ML 언더독(무비그 <50%)인 1~8주 경기 → 그 팀 ML(현재 DK 배당).
 # 근거 2018~25 정규시즌(16개 각도 탐색 중 선택 — 사후 선택 위험): 1~4주 24-14 실제 63% vs 시장 40% 수익 +50%(z +3.0) · 5~8주 19-23 +6% · 9주~ 소멸(−6%)
 # · 시즌별 1~8주 6/8 플러스 · 2026 1~4주 3-2 +52%. 판정: 20픽에서 ≥50% & 수익 플러스면 유지, 아니면 폐기. 10판부터 A1·A2 는 생성 중단(기록만 남김).
@@ -587,7 +588,12 @@ def stats():
         pct = f"{100 * w / (w + l):.1f}%" if w + l else "—"
         return f"{w}-{l}" + (f"-{p}" if p else "") + f" {pct}" + (f" {u:+.2f}u" if units else "")
     placed = [r for r in rows if r["status"] == "placed"]; sug = [r for r in rows if r["status"] != "placed"]
-    print(f"📊 NFL {SEASON} 픽 성적 — 손익분기 52.4%(−110)")
+    # 2026-10-21 10판 정리: 각도 페이퍼를 판정 진행도와 함께 맨 위에(사전 등록 목표 — A3 30픽 · A4~A10 20픽, 조정 금지)
+    print(f"📊 NFL {SEASON} 페이퍼 성적(10판 ML · 각도 판정은 사전 등록 픽 수에서 · 유닛은 그 배당 기준)")
+    for k in ("A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10"):
+        xs = [r for r in rows if r["grade"] == ANGLE_GRADES[k]]
+        print(f"  {ANGLE_GRADES[k]}: {rec(xs) if xs else '0픽'} · 판정까지 {len(xs)}/{ANGLE_TARGET[k]}픽")
+    print("— 아래는 10판 전 기록(참고 · 손익분기 52.4%(−110) 기준) —")
     # 2026-10-05 Paul 승인: 모델 페이퍼(관찰·참고)는 보고에서 뺀다(기록·추적기는 유지) · 발행 방향은 동전 — 적중률만(유닛 없음)
     print(f"■ 실베팅 {len(placed)}픽 {rec(placed)}")
     dirs = [r for r in rows if r["grade"].startswith("방향(발행)")]
@@ -604,7 +610,7 @@ def stats():
         by = defaultdict(list)
         for r in placed: by[r[key]].append(r)
         print(f"  {lab}: " + " · ".join(f"{k} {rec(v)}" for k, v in sorted(by.items(), key=lambda kv: str(kv[0]))))
-    for g in ("새 정보(관찰)", "새 정보(판 이전·대조)", TEASER_GRADE, WIND_GRADE, *ANGLE_GRADES.values()):
+    for g in ("새 정보(관찰)", "새 정보(판 이전·대조)", TEASER_GRADE, WIND_GRADE, ANGLE_GRADES["A1"], ANGLE_GRADES["A2"]):
         xs = [r for r in rows if r["grade"] == g]
         if xs:
             print(f"  페이퍼 {g}: {rec(xs)}")
