@@ -1,7 +1,7 @@
 ﻿espn_id,game_id,kickoff_utc,kickoff_et,kickoff_pt,away,home,away_rec,home_rec,venue,roof,neutral,weather,temp_f,spread_home,total,ml_away,ml_home,odds_provider,nv_spread_line,nv_total_line,away_rest,home_rest,away_qb,home_qb,div_game,status,away_score,home_score,sp_home_odds,sp_away_odds,over_odds,under_odds,open_spread_home,open_sp_home_odds,open_sp_away_odds,open_total,open_over_odds,open_under_odds,open_ml_away,open_ml_home
-401873019,2026_07_DEN_ARI,2026-10-25T20:05Z,Sun 10-25 16:05,13:05,DEN,ARI,4-2,2-4,State Farm Stadium,indoor,,1,81,,,,,,-4.5,44.5,10,7,Bo Nix,Jacoby Brissett,0,STATUS_IN_PROGRESS,30,13,,,,,,,,,,,,
-401873020,2026_07_GB_DET,2026-10-25T20:25Z,Sun 10-25 16:25,13:25,GB,DET,4-2,3-2,Ford Field,indoor,,38,61,,,,,,3.5,55.5,7,14,Jordan Love,Jared Goff,1,STATUS_IN_PROGRESS,14,17,,,,,,,,,,,,
-401873021,2026_07_LA_LV,2026-10-25T20:25Z,Sun 10-25 16:25,13:25,LA,LV,2-4,3-3,Allegiant Stadium,indoor,,1,72,,,,,,-3.5,49.5,7,7,Matthew Stafford,Kirk Cousins,0,STATUS_IN_PROGRESS,28,12,,,,,,,,,,,,
+401873019,2026_07_DEN_ARI,2026-10-25T20:05Z,Sun 10-25 16:05,13:05,DEN,ARI,4-2,2-4,State Farm Stadium,indoor,,1,81,,,,,,-4.5,44.5,10,7,Bo Nix,Jacoby Brissett,0,STATUS_IN_PROGRESS,30,16,,,,,,,,,,,,
+401873020,2026_07_GB_DET,2026-10-25T20:25Z,Sun 10-25 16:25,13:25,GB,DET,4-2,3-2,Ford Field,indoor,,7,60,,,,,,3.5,55.5,7,14,Jordan Love,Jared Goff,1,STATUS_IN_PROGRESS,17,17,,,,,,,,,,,,
+401873021,2026_07_LA_LV,2026-10-25T20:25Z,Sun 10-25 16:25,13:25,LA,LV,2-4,3-3,Allegiant Stadium,indoor,,1,73,,,,,,-3.5,49.5,7,7,Matthew Stafford,Kirk Cousins,0,STATUS_IN_PROGRESS,35,18,,,,,,,,,,,,
 401873011,2026_07_PIT_NO,2026-10-25T13:30Z,Sun 10-25 09:30,06:30,PIT,NO,5-2,2-5,Stade de France,dome,1,,,,,,,,-3,43.5,7,7,Aaron Rodgers,Tyler Shough,0,STATUS_FINAL,16,10,,,,,,,,,,,,
 401873017,2026_07_SF_ATL,2026-10-25T17:00Z,Sun 10-25 13:00,10:00,SF,ATL,6-1,3-4,Mercedes-Benz Stadium,indoor,,,,,,,,,-2.5,49.5,6,7,Brock Purdy,Michael Penix Jr.,0,STATUS_FINAL,20,29,,,,,,,,,,,,
 401873013,2026_07_CLE_TEN,2026-10-25T17:00Z,Sun 10-25 13:00,10:00,CLE,TEN,5-2,1-6,Nissan Stadium,outdoors,,,,,,,,,-1.5,36.5,7,7,Deshaun Watson,Cam Ward,0,STATUS_FINAL,27,24,,,,,,,,,,,,
@@ -10,6 +10,6 @@
 401873018,2026_07_TB_CAR,2026-10-25T17:00Z,Sun 10-25 13:00,10:00,TB,CAR,2-5,3-3,Bank of America Stadium,outdoors,,,,,,,,,3,44.5,7,7,Baker Mayfield,Bryce Young,1,STATUS_FINAL,43,13,,,,,,,,,,,,
 401873012,2026_07_CIN_BAL,2026-10-25T17:00Z,Sun 10-25 13:00,10:00,CIN,BAL,4-2,4-3,M&T Bank Stadium,outdoors,,,,,,,,,-3,46.5,14,7,Joe Burrow,Tyler Huntley,1,STATUS_FINAL,35,13,,,,,,,,,,,,
 401873016,2026_07_NYG_HOU,2026-10-25T17:00Z,Sun 10-25 13:00,10:00,NYG,HOU,4-2-1,2-5,Reliant Stadium,indoor,,,,,,,,,10,42.5,7,7,J.J. McCarthy,C.J. Stroud,0,STATUS_FINAL,27,21,,,,,,,,,,,,
-401873022,2026_07_KC_SEA,2026-10-26T00:20Z,Sun 10-25 20:20,17:20,KC,SEA,5-0,3-3,Lumen Field,outdoors,,Cloudy,56,-3.0,43.5,+130,-155,Draft Kings,3,43.5,7,10,Patrick Mahomes,Sam Darnold,0,STATUS_SCHEDULED,0,0,-102,-118,-102,-118,-3,-105,-115,45.5,-110,-110,+130,-155
+401873022,2026_07_KC_SEA,2026-10-26T00:20Z,Sun 10-25 20:20,17:20,KC,SEA,5-0,3-3,Lumen Field,outdoors,,Showers,56,-3.0,43.5,+130,-155,Draft Kings,3,43.5,7,10,Patrick Mahomes,Sam Darnold,0,STATUS_SCHEDULED,0,0,-102,-118,-102,-118,-3,-105,-115,45.5,-110,-110,+130,-155
 401873010,2026_07_NE_CHI,2026-10-23T00:15Z,Thu 10-22 20:15,17:15,NE,CHI,4-3,5-2,Soldier Field,outdoors,,,,,,,,,3,50.5,4,4,Drake Maye,Caleb Williams,0,STATUS_FINAL,24,30,,,,,,,,,,,,
 401873009,2026_07_DAL_PHI,2026-10-27T00:15Z,Mon 10-26 20:15,17:15,DAL,PHI,2-4,2-4,Lincoln Financial Field,outdoors,,Mostly clear,59,4.5,43.5,-218,+180,Draft Kings,-4.5,43.5,8,8,Dak Prescott,Jalen Hurts,1,STATUS_SCHEDULED,0,0,-112,-108,-118,-102,-3,-110,-110,48.5,-110,-110,+136,-162
