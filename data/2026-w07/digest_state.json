@@ -2,7 +2,7 @@
 "LA@LV": {
 "spread_home": "3.5",
 "total": "48.5",
-"ml": "-185/+154",
+"ml": "-180/+150",
 "qb": {
 "LA": "Matthew Stafford",
 "LV": "Kirk Cousins"
@@ -29,7 +29,7 @@
 "DAL@PHI": {
 "spread_home": "4.5",
 "total": "43.5",
-"ml": "-205/+170",
+"ml": "-218/+180",
 "qb": {
 "DAL": "Dak Prescott",
 "PHI": "Tanner McKee"
@@ -107,7 +107,7 @@
 "CIN@BAL": {
 "spread_home": "3.0",
 "total": "46.5",
-"ml": "-148/+124",
+"ml": "?/?",
 "qb": {
 "CIN": "Joe Burrow",
 "BAL": "Tyler Huntley"
@@ -137,41 +137,10 @@
 ]
 }
 },
-"TB@CAR": {
-"spread_home": "-3.0",
-"total": "44.5",
-"ml": "+140/-166",
-"qb": {
-"TB": "Jalon Daniels",
-"CAR": "Bryce Young"
-},
-"out": {
-"TB": [
-"Antoine Winfield Jr.",
-"Christian Rozeboom",
-"Emeka Egbuka",
-"IR)",
-"Luke Goedeke",
-"★스냅 100%)",
-"★스냅 90%)",
-"★스냅 92%)",
-"스냅 17%"
-],
-"CAR": [
-"IR)",
-"Jaelan Phillips",
-"Jaycee Horn",
-"Thomas Incoom",
-"★스냅 63%)",
-"★스냅 91%",
-"스냅 7%)"
-]
-}
-},
 "IND@MIN": {
 "spread_home": "-6.5",
 "total": "41.5",
-"ml": "+260/-325",
+"ml": "?/?",
 "qb": {
 "IND": "Daniel Jones",
 "MIN": "Kyler Murray"
@@ -203,7 +172,7 @@
 "MIA@NYJ": {
 "spread_home": "-3.5",
 "total": "39.5",
-"ml": "+180/-218",
+"ml": "?/?",
 "qb": {
 "MIA": "Malik Willis",
 "NYJ": "Geno Smith"
@@ -228,8 +197,8 @@
 },
 "DEN@ARI": {
 "spread_home": "4.5",
-"total": "42.5",
-"ml": "-230/+190",
+"total": "43.5",
+"ml": "-238/+195",
 "qb": {
 "DEN": "Bo Nix",
 "ARI": "Jacoby Brissett"
@@ -270,7 +239,7 @@
 "GB@DET": {
 "spread_home": "-3.5",
 "total": "55.5",
-"ml": "+150/-180",
+"ml": "+160/-192",
 "qb": {
 "GB": "Jordan Love",
 "DET": "Jared Goff"
@@ -339,7 +308,7 @@
 "SF@ATL": {
 "spread_home": "2.5",
 "total": "49.5",
-"ml": "-142/+120",
+"ml": "?/?",
 "qb": {
 "SF": "Brock Purdy",
 "ATL": "Michael Penix Jr."
@@ -375,10 +344,41 @@
 ]
 }
 },
+"TB@CAR": {
+"spread_home": "-3.0",
+"total": "44.5",
+"ml": "?/?",
+"qb": {
+"TB": "Baker Mayfield",
+"CAR": "Bryce Young"
+},
+"out": {
+"TB": [
+"Antoine Winfield Jr.",
+"Christian Rozeboom",
+"Emeka Egbuka",
+"IR)",
+"Luke Goedeke",
+"★스냅 100%)",
+"★스냅 90%)",
+"★스냅 92%)",
+"스냅 17%"
+],
+"CAR": [
+"IR)",
+"Jaelan Phillips",
+"Jaycee Horn",
+"Thomas Incoom",
+"★스냅 63%)",
+"★스냅 91%",
+"스냅 7%)"
+]
+}
+},
 "NYG@HOU": {
-"spread_home": "-10.5",
+"spread_home": "-10.0",
 "total": "42.5",
-"ml": "+390/-520",
+"ml": "?/?",
 "qb": {
 "NYG": "J.J. McCarthy",
 "HOU": "C.J. Stroud"
@@ -408,27 +408,6 @@
 "스냅 25%)",
 "스냅 35%)"
 ]
-}
-},
-"CLE@TEN": {
-"spread_home": "2.5",
-"total": "36.5",
-"ml": "-135/+114",
-"qb": {
-"CLE": "Deshaun Watson",
-"TEN": "Cam Ward"
-},
-"out": {
-"CLE": [
-"Dillon Gabriel",
-"IR)",
-"Kalia Davis",
-"Mike Hall Jr.",
-"Raheim Sanders",
-"Teven Jenkins",
-"스냅 32%"
-],
-"TEN": []
 }
 },
 "PIT@NO": {
@@ -461,5 +440,26 @@
 "NO": []
 }
 },
-"_stamp": "10-25 08:48"
+"CLE@TEN": {
+"spread_home": "1.5",
+"total": "36.5",
+"ml": "?/?",
+"qb": {
+"CLE": "Deshaun Watson",
+"TEN": "Cam Ward"
+},
+"out": {
+"CLE": [
+"Dillon Gabriel",
+"IR)",
+"Kalia Davis",
+"Mike Hall Jr.",
+"Raheim Sanders",
+"Teven Jenkins",
+"스냅 32%"
+],
+"TEN": []
+}
+},
+"_stamp": "10-25 12:03"
 }
