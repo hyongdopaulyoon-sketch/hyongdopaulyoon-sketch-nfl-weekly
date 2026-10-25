@@ -137,38 +137,6 @@
 ]
 }
 },
-"IND@MIN": {
-"spread_home": "-7.0",
-"total": "41.5",
-"ml": "+270/-340",
-"qb": {
-"IND": "Daniel Jones",
-"MIN": "Kyler Murray"
-},
-"out": {
-"IND": [
-"Anthony Gould",
-"Arden Key",
-"CJ Allen",
-"IR)",
-"Sauce Gardner",
-"Tyler Warren",
-"★스냅 82%)",
-"★스냅 90%)",
-"스냅 1%)",
-"스냅 34%)",
-"스냅 41%"
-],
-"MIN": [
-"Donovan Jackson",
-"IR)",
-"IR)",
-"Josh Oliver",
-"스냅 41%",
-"스냅 55%"
-]
-}
-},
 "TB@CAR": {
 "spread_home": "-3.0",
 "total": "44.5",
@@ -197,6 +165,38 @@
 "★스냅 63%)",
 "★스냅 91%",
 "스냅 7%)"
+]
+}
+},
+"IND@MIN": {
+"spread_home": "-6.5",
+"total": "41.5",
+"ml": "+260/-325",
+"qb": {
+"IND": "Daniel Jones",
+"MIN": "Kyler Murray"
+},
+"out": {
+"IND": [
+"Anthony Gould",
+"Arden Key",
+"CJ Allen",
+"IR)",
+"Sauce Gardner",
+"Tyler Warren",
+"★스냅 82%)",
+"★스냅 90%)",
+"스냅 1%)",
+"스냅 34%)",
+"스냅 41%"
+],
+"MIN": [
+"Donovan Jackson",
+"IR)",
+"IR)",
+"Josh Oliver",
+"스냅 41%",
+"스냅 55%"
 ]
 }
 },
@@ -378,7 +378,7 @@
 "NYG@HOU": {
 "spread_home": "-10.5",
 "total": "42.5",
-"ml": "+400/-535",
+"ml": "+390/-520",
 "qb": {
 "NYG": "J.J. McCarthy",
 "HOU": "C.J. Stroud"
@@ -413,7 +413,7 @@
 "CLE@TEN": {
 "spread_home": "2.5",
 "total": "36.5",
-"ml": "-130/+110",
+"ml": "-135/+114",
 "qb": {
 "CLE": "Deshaun Watson",
 "TEN": "Cam Ward"
@@ -461,5 +461,5 @@
 "NO": []
 }
 },
-"_stamp": "10-25 08:04"
+"_stamp": "10-25 08:48"
 }
