@@ -16,9 +16,9 @@
 "Kobie Turner",
 "Nate Landman",
 "Poona Ford",
-"★스냅 81%",
-"스냅 41%",
-"스냅 59%"
+"★스냅 74%",
+"스냅 40%",
+"스냅 50%"
 ],
 "LV": [
 "Carter Runyon",
@@ -29,7 +29,7 @@
 "DAL@PHI": {
 "spread_home": "4.5",
 "total": "43.5",
-"ml": "-218/+180",
+"ml": "-225/+185",
 "qb": {
 "DAL": "Dak Prescott",
 "PHI": "Tanner McKee"
@@ -116,24 +116,17 @@
 "CIN": [
 "IR)",
 "IR)",
-"IR)",
-"Jalen Davis",
 "Swayze Bozeman",
 "Tanner Hudson",
 "스냅 2%",
-"스냅 31%",
-"스냅 31%"
+"스냅 35%"
 ],
 "BAL": [
-"Durham Smythe",
-"IR)",
 "Jaylinn Hawkins",
 "Lamar Jackson",
 "Tavius Robinson",
-"★스냅 65%)",
-"★스냅 72%)",
-"스냅 28%",
-"스냅 52%)"
+"★스냅 62%)",
+"★스냅 73%)"
 ]
 }
 },
@@ -148,24 +141,18 @@
 "out": {
 "IND": [
 "Anthony Gould",
-"Arden Key",
 "CJ Allen",
-"IR)",
 "Sauce Gardner",
 "Tyler Warren",
-"★스냅 82%)",
-"★스냅 90%)",
+"★스냅 73%)",
+"★스냅 94%)",
 "스냅 1%)",
-"스냅 34%)",
-"스냅 41%"
+"스냅 34%)"
 ],
 "MIN": [
 "Donovan Jackson",
 "IR)",
-"IR)",
-"Josh Oliver",
-"스냅 41%",
-"스냅 55%"
+"스냅 9%"
 ]
 }
 },
@@ -179,19 +166,13 @@
 },
 "out": {
 "MIA": [
-"De'Von Achane",
-"IR)",
-"Reese Taylor",
-"스냅 5%"
+"Reese Taylor"
 ],
 "NYJ": [
-"Braiden McGregor",
 "Francisco Mauigoa",
-"IR)",
 "Joseph Ossai",
 "Max Mitchell",
-"스냅 46%)",
-"스냅 8%"
+"스냅 32%)"
 ]
 }
 },
@@ -205,34 +186,21 @@
 },
 "out": {
 "DEN": [
-"IR)",
 "Jonah Elliss",
-"Pat Bryant",
 "Talanoa Hufanga",
 "Tyler Badie",
-"★스냅 83%)",
-"스냅 12%)",
-"스냅 36%",
-"스냅 54%)"
+"★스냅 66%)",
+"스냅 50%)",
+"스냅 9%)"
 ],
 "ARI": [
 "Andrew Wingard",
-"Hunter Long",
-"IR)",
-"IR)",
-"IR)",
-"Isaiah Adams",
 "Jeremiyah Love",
 "Jon Gaines II",
-"Paris Johnson Jr.",
 "Walter Nolen",
+"★스냅 100%)",
 "★스냅 62%)",
-"★스냅 86%)",
-"★스냅 98%",
-"스냅 30%",
-"스냅 4%)",
-"스냅 42%",
-"스냅 47%)"
+"스냅 49%)"
 ]
 }
 },
@@ -246,10 +214,6 @@
 },
 "out": {
 "GB": [
-"Chris Brooks",
-"Edgerrin Cooper",
-"IR)",
-"IR)",
 "IR)",
 "IR)",
 "IR)",
@@ -257,12 +221,10 @@
 "Jonathan Ford",
 "Skyy Moore",
 "Zaire Franklin",
-"★스냅 98%)",
-"스냅 17%",
-"스냅 23%",
-"스냅 28%",
-"스냅 46%",
-"스냅 54%"
+"★스냅 97%)",
+"스냅 18%",
+"스냅 25%",
+"스냅 45%"
 ],
 "DET": [
 "Devin White",
@@ -277,7 +239,7 @@
 "KC@SEA": {
 "spread_home": "-3.0",
 "total": "43.5",
-"ml": "+130/-155",
+"ml": "?/?",
 "qb": {
 "KC": "Patrick Mahomes",
 "SEA": "Sam Darnold"
@@ -289,10 +251,10 @@
 "Jaylon Moore",
 "Rashee Rice",
 "Tyquan Thornton",
-"★스냅 83%)",
-"스냅 44%)",
-"스냅 55%",
-"스냅 6%)"
+"★스냅 63%",
+"★스냅 76%)",
+"스냅 10%)",
+"스냅 3%)"
 ],
 "SEA": [
 "Chazz Surratt",
@@ -300,8 +262,8 @@
 "Elijah Arroyo",
 "IR)",
 "Zach Charbonnet",
-"★스냅 78%)",
-"스냅 23%"
+"★스냅 77%)",
+"스냅 19%"
 ]
 }
 },
@@ -321,11 +283,9 @@
 "Marques Sigle",
 "Mike Evans",
 "Nick Bosa",
-"★스냅 68%)",
-"스냅 14%)",
 "스냅 18%)",
-"스냅 54%)",
-"스냅 55%)"
+"스냅 43%)",
+"스냅 52%)"
 ],
 "ATL": [
 "Beaux Collins",
@@ -333,14 +293,11 @@
 "Brian Robinson",
 "Cameron Williams",
 "Divine Deablo",
-"IR)",
 "Michael Jerrell",
-"Yasir Abdullah",
-"★스냅 71%)",
-"스냅 27%)",
-"스냅 41%)",
-"스냅 43%)",
-"스냅 50%"
+"★스냅 66%)",
+"스냅 20%)",
+"스냅 26%)",
+"스냅 5%)"
 ]
 }
 },
@@ -360,18 +317,14 @@
 "IR)",
 "Luke Goedeke",
 "★스냅 100%)",
-"★스냅 90%)",
-"★스냅 92%)",
-"스냅 17%"
+"★스냅 88%)",
+"스냅 20%"
 ],
 "CAR": [
-"IR)",
 "Jaelan Phillips",
-"Jaycee Horn",
 "Thomas Incoom",
-"★스냅 63%)",
-"★스냅 91%",
-"스냅 7%)"
+"스냅 10%)",
+"스냅 52%)"
 ]
 }
 },
@@ -385,28 +338,22 @@
 },
 "out": {
 "NYG": [
-"Braxton Berrios",
-"Chauncey Golston",
 "Greg Newsome II",
-"IR)",
-"IR)",
 "Jevon Holland",
 "Tremaine Edmunds",
 "★스냅 100%)",
 "★스냅 100%)",
-"★스냅 86%)",
-"스냅 3%",
-"스냅 38%"
+"★스냅 78%)"
 ],
 "HOU": [
 "Blake Fisher",
 "David Montgomery",
 "Jalen Pitre",
 "Reed Blankenship",
-"★스냅 80%)",
-"★스냅 80%)",
-"스냅 25%)",
-"스냅 35%)"
+"★스냅 63%)",
+"★스냅 72%)",
+"스냅 14%)",
+"스냅 30%)"
 ]
 }
 },
@@ -422,20 +369,14 @@
 "PIT": [
 "Ben Skowronek",
 "Brandin Echols",
-"Derrick Harmon",
 "IR)",
 "IR)",
-"IR)",
-"IR)",
-"Michael Pittman",
 "Roman Wilson",
 "Sebastian Joseph-Day",
-"★스냅 72%",
-"스냅 10%)",
-"스냅 3%)",
-"스냅 32%",
+"스냅 33%",
 "스냅 35%",
-"스냅 8%"
+"스냅 4%)",
+"스냅 8%)"
 ],
 "NO": []
 }
@@ -456,10 +397,10 @@
 "Mike Hall Jr.",
 "Raheim Sanders",
 "Teven Jenkins",
-"스냅 32%"
+"스냅 29%"
 ],
 "TEN": []
 }
 },
-"_stamp": "10-25 16:15"
+"_stamp": "10-26 17:04"
 }
