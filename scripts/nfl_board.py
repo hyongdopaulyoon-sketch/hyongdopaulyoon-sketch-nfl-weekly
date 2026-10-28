@@ -1483,7 +1483,7 @@ def main():
         opp_ = H if pk_ == A else A if pk_ == H else ""
         texts_ = [b_ for _, _, b_ in ((d["main"][-1:] + d["supp"]) if d else [])]
         full_, short_ = pos_maps(game_player_rows(texts_, A, H), [r for r in inact if r.get("game") == gk], A, H)
-        hl_ = deco_regex(list(full_) + list(short_), team_alias(pk_) if pk_ else [], team_alias(opp_) if opp_ else team_alias(A) + team_alias(H))
+        hl_ = deco_regex(list(full_) + list(short_), team_alias(pk_) if pk_ else [], team_alias(opp_) if opp_ else [])   # 10/27 NBA 1a987e3 「양 팀 같은 색 안 됨」 — 픽(발행 → 시장 예측 승자)이 없으면 둘 다 강조 없음
         ref_html = ref_table(wd, gk)
 
         def mk(x):
