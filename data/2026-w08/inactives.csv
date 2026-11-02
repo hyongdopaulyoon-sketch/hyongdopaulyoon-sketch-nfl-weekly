@@ -1,141 +1,141 @@
 ﻿game,team,player,pos,status,reason,detail,announced_utc,official,star,snap_pct
-CAR@GB,GB,Jonnu Smith,TE,Out,Coach's Decision,Not Specified,2026-10-29T23:03,1,0,24
-CAR@GB,GB,Sean Rhyan,G,Out,Ankle,Sprain,2026-10-29T22:54,1,1,69
-CAR@GB,GB,Travis Glover,OT,Out,Knee,Not Specified,2026-10-29T22:54,1,1,100
-CAR@GB,GB,Donovan Jennings,G,Out,Coach's Decision,Not Specified,2026-10-29T22:54,1,0,
-CAR@GB,GB,Kaleb Johnson,RB,Out,Coach's Decision,Not Specified,2026-10-29T22:54,1,0,10
-CAR@GB,CAR,Ja'Tavion Sanders,TE,Out,Coach's Decision,Not Specified,2026-10-29T23:13,1,0,
-CAR@GB,CAR,AJ Dillon,RB,Out,Coach's Decision,Not Specified,2026-10-29T23:09,1,0,15
-CAR@GB,CAR,Haynes King,QB,Out,Coach's Decision,Not Specified,2026-10-29T22:58,1,0,
-CAR@GB,CAR,Bobby Brown III,DT,Out,Hand,Not Specified,2026-10-29T22:58,1,0,37
-CAR@GB,CAR,Torricelli Simpkins III,G,Out,Ankle,Not Specified,2026-10-29T01:32,1,0,20
-BAL@BUF,BUF,C.J. Gardner-Johnson,S,Suspension,Suspension,Not Specified,2026-10-29T23:08,0,1,79
-BAL@BUF,BUF,Dalton Kincaid,TE,Questionable,Chest,Not Specified,2026-10-29T21:00,0,1,67
-BAL@BUF,BUF,DJ Moore,WR,Questionable,Shoulder - AC Joint,Sprain,2026-10-29T20:56,0,0,39
-BAL@BUF,BUF,Joe Andreessen,LB,Questionable,Knee,Not Specified,2026-10-29T20:37,0,0,
-BAL@BUF,BUF,Ray Davis,RB,Questionable,Illness,Not Specified,2026-10-29T18:49,0,0,12
-BAL@BUF,BAL,Lamar Jackson,QB,Questionable,Ankle,Sprain,2026-10-29T20:55,0,0,
-BAL@BUF,BAL,Jaylinn Hawkins,S,Questionable,Knee,Not Specified,2026-10-29T19:53,0,1,73
-BAL@BUF,BAL,Olaivavega Ioane,G,Questionable,Knee - MCL,Sprain,2026-10-29T16:50,0,1,75
-BAL@BUF,BAL,Roquan Smith,LB,Questionable,Knee,Not Specified,2026-10-29T01:03,0,1,96
-BAL@BUF,BAL,Adam Randall,RB,Injured Reserve,Neck,Not Specified,2026-10-29T01:00,0,0,
-TEN@CIN,CIN,Joe Giles-Harris,LB,Questionable,Calf,Not Specified,2026-10-28T20:20,0,0,4
-TEN@CIN,CIN,Jordan Battle,S,Questionable,Hamstring,Not Specified,2026-10-28T20:19,0,1,96
-TEN@CIN,CIN,Erick All Jr.,TE,Injured Reserve,Knee - ACL,Surgery,2026-10-28T19:05,0,0,32
-TEN@CIN,CIN,Kyle Dugger,S,Out,Quadriceps,Not Specified,2026-10-26T21:53,0,0,
-TEN@CIN,CIN,Tanner Hudson,TE,Injured Reserve,Pectoral,Strain,2026-10-19T23:18,0,0,35
-TEN@CIN,TEN,Calvin Ridley,WR,Questionable,Hip,Not Specified,2026-10-29T22:10,0,0,58
-TEN@CIN,TEN,Tyjae Spears,RB,Questionable,Knee,Not Specified,2026-10-29T17:08,0,0,39
-TEN@CIN,TEN,Carnell Tate,WR,Questionable,Shoulder,Not Specified,2026-10-29T17:01,0,1,80
-TEN@CIN,TEN,John Franklin-Myers,DE,Questionable,Groin,Not Specified,2026-10-28T20:03,0,0,48
-TEN@CIN,TEN,Tommy Townsend,P,Questionable,Knee,Not Specified,2026-10-26T13:35,0,0,
-ARI@DAL,DAL,George Pickens,WR,Questionable,Shoulder,Not Specified,2026-10-29T21:15,0,1,79
-ARI@DAL,DAL,Luke Schoonmaker,TE,Questionable,Groin,Not Specified,2026-10-29T21:03,0,0,12
-ARI@DAL,DAL,Quinnen Williams,DT,Questionable,Hamstring,Not Specified,2026-10-29T01:18,0,0,59
-ARI@DAL,DAL,Caleb Downs,S,Questionable,Ankle,Not Specified,2026-10-29T01:16,0,1,95
-ARI@DAL,DAL,Dee Winters,LB,Questionable,Calf,Strain,2026-10-29T01:11,0,0,42
-ARI@DAL,ARI,Hjalte Froholdt,C,Questionable,Knee,,2026-10-29T23:08,0,1,100
-ARI@DAL,ARI,Michael Wilson,WR,Questionable,Ribs,Soreness,2026-10-29T20:42,0,1,89
-ARI@DAL,ARI,Andrew Wingard,S,Questionable,Knee,Bruise,2026-10-29T01:16,0,0,
-ARI@DAL,ARI,Mack Wilson Sr.,LB,Questionable,Knee,Not Specified,2026-10-29T01:12,0,1,100
-ARI@DAL,ARI,Tyler Allgeier,RB,Questionable,Toe,Not Specified,2026-10-29T00:16,0,0,49
-MIN@DET,DET,Kerby Joseph,S,Out,Knee,Not Specified,2026-10-28T23:32,0,0,
-MIN@DET,DET,Ennis Rakestraw Jr.,CB,Questionable,Ankle,Not Specified,2026-10-26T21:06,0,0,40
-MIN@DET,DET,Ben Bartch,G,Injured Reserve,Foot,Not Specified,2026-10-17T04:09,0,0,
-MIN@DET,DET,Devin White,LB,Injured Reserve,Forearm,Surgery,2026-10-17T02:00,0,0,22
-MIN@DET,DET,Tom Kennedy,WR,Injured Reserve,Knee - MCL,Surgery,2026-10-17T01:51,0,0,1
-MIN@DET,MIN,Aaron Jones Sr.,RB,Questionable,Knee,Not Specified,2026-10-29T21:28,0,1,62
-MIN@DET,MIN,Gavin Bartholomew,TE,Questionable,Ankle,Not Specified,2026-10-29T21:22,0,0,32
-MIN@DET,MIN,Donovan Jackson,G,Injured Reserve,Knee - Meniscus,Surgery,2026-10-07T00:34,0,0,9
-MIN@DET,MIN,Josh Oliver,TE,Injured Reserve,Biceps,Surgery,2026-09-30T00:26,0,0,
-MIN@DET,MIN,Nick Samac,C,Injured Reserve,Knee,Not Specified,2026-09-26T21:28,0,0,
-LV@NYJ,NYJ,Breece Hall,RB,Questionable,Quadriceps,Not Specified,2026-10-29T20:33,0,0,
-LV@NYJ,NYJ,Joseph Ossai,DE,Doubtful,Ankle,Not Specified,2026-10-29T01:27,0,0,32
-LV@NYJ,NYJ,David Bailey,LB,Questionable,Groin,Not Specified,2026-10-28T23:28,0,1,92
-LV@NYJ,NYJ,T'Vondre Sweat,DT,Doubtful,Knee,Not Specified,2026-10-28T23:24,0,0,49
-LV@NYJ,NYJ,Dylan Parham,G,Questionable,Knee,Not Specified,2026-10-27T13:11,0,0,
-LV@NYJ,LV,Jack Bech,WR,Injured Reserve,Forearm,Fracture,2026-10-29T22:37,0,0,
-LV@NYJ,LV,Jackson Powers-Johnson,G,Questionable,Back,Not Specified,2026-10-29T20:44,0,1,100
-LV@NYJ,LV,Patrick Johnson,DE,Questionable,Neck,Stinger,2026-10-29T01:49,0,0,7
-LV@NYJ,LV,Ian Thomas,TE,Questionable,Shoulder,Not Specified,2026-10-29T00:43,0,0,29
-LV@NYJ,LV,Folorunso Fatukasi,DT,Questionable,Shoulder,Not Specified,2026-10-28T21:16,0,0,47
-CLE@PIT,PIT,Ben Skowronek,WR,Questionable,Calf,Not Specified,2026-10-29T00:52,0,0,8
-CLE@PIT,PIT,Alex Highsmith,LB,Questionable,Groin,Not Specified,2026-10-28T21:32,0,1,64
-CLE@PIT,PIT,Doneiko Slaughter,CB,Questionable,Hamstring,Not Specified,2026-10-28T21:31,0,0,
-CLE@PIT,PIT,Brandin Echols,CB,Questionable,Hamstring,Not Specified,2026-10-27T13:11,0,0,4
-CLE@PIT,PIT,Sebastian Joseph-Day,DT,Injured Reserve,Triceps,Not Specified,2026-10-23T00:28,0,0,35
-CLE@PIT,CLE,Tytus Howard,OT,Questionable,Concussion,Concussion,2026-10-29T01:18,0,1,72
-CLE@PIT,CLE,Mike Hall Jr.,DT,Questionable,Ankle,Not Specified,2026-10-29T00:33,0,0,
-CLE@PIT,CLE,Myles Harden,CB,Questionable,Hamstring,Not Specified,2026-10-29T00:30,0,0,59
-CLE@PIT,CLE,Jared Verse,DE,Questionable,Knee,Inflammation,2026-10-29T00:27,0,1,68
-CLE@PIT,CLE,Daniel Thomas,S,Questionable,Ankle,Not Specified,2026-10-28T21:58,0,0,35
-ATL@TB,TB,Emeka Egbuka,WR,Questionable,Concussion,Concussion,2026-10-29T20:06,0,1,88
-ATL@TB,TB,Kenny Gainwell,RB,Questionable,Hip,Not Specified,2026-10-29T20:04,0,0,
-ATL@TB,TB,Josh Hayes,CB,Injured Reserve,Knee,Surgery,2026-10-29T01:52,0,0,
-ATL@TB,TB,Luke Goedeke,OT,Questionable,Calf,Not Specified,2026-10-27T13:11,0,1,100
-ATL@TB,TB,Christian Rozeboom,LB,Injured Reserve,Finger,Not Specified,2026-10-23T01:43,0,0,20
-ATL@TB,ATL,C.J. Henderson,CB,Questionable,Groin,Not Specified,2026-10-29T22:57,0,1,73
-ATL@TB,ATL,Kendal Daniels,LB,Questionable,Achilles,Not Specified,2026-10-29T22:44,0,1,74
-ATL@TB,ATL,Divine Deablo,LB,Questionable,Forearm,Not Specified,2026-10-29T22:35,0,1,66
-ATL@TB,ATL,Olamide Zaccheaus,WR,Questionable,Shoulder,Not Specified,2026-10-29T22:25,0,0,44
-ATL@TB,ATL,A.J. Terrell Jr.,CB,Questionable,Groin,Not Specified,2026-10-29T19:49,0,1,98
-IND@JAX,JAX,LeQuint Allen Jr.,RB,Questionable,Hamstring,Not Specified,2026-10-29T19:59,0,0,15
-IND@JAX,JAX,Jakobi Meyers,WR,Questionable,Hamstring,Not Specified,2026-10-29T19:55,0,1,81
-IND@JAX,JAX,Jahlani Tavai,LB,Questionable,Hamstring,Not Specified,2026-10-28T20:09,0,0,2
-IND@JAX,JAX,Ruke Orhorhoro,DT,Questionable,Ankle,Not Specified,2026-10-28T20:09,0,0,37
-IND@JAX,JAX,Anton Harrison,OT,Injured Reserve,Knee,Surgery,2026-10-24T01:25,0,1,79
-IND@JAX,IND,Tyler Warren,TE,Questionable,Groin,Not Specified,2026-10-29T20:14,0,1,94
-IND@JAX,IND,Drew Ogletree,TE,Questionable,Knee,Not Specified,2026-10-29T00:12,0,0,
-IND@JAX,IND,Anthony Gould,WR,Questionable,Concussion,Concussion,2026-10-29T00:08,0,0,1
-IND@JAX,IND,Cam Taylor-Britt,CB,Injured Reserve,Groin,Not Specified,2026-10-27T23:40,0,0,33
-IND@JAX,IND,Bryce Boettcher,LB,Questionable,Groin,Not Specified,2026-10-27T13:11,0,0,29
-LAC@LA,LA,Colby Parkinson,TE,Questionable,Ribs,Not Specified,2026-10-29T23:12,0,1,65
-LAC@LA,LA,Nate Landman,LB,Questionable,Concussion,Concussion,2026-10-29T00:49,0,0,
-LAC@LA,LA,Trent McDuffie,CB,Questionable,Groin,Not Specified,2026-10-29T00:44,0,1,100
-LAC@LA,LA,Coleman Shelton,C,Questionable,Hip,Not Specified,2026-10-28T23:32,0,1,100
-LAC@LA,LA,Joe Cardona,LS,Questionable,Ankle,Not Specified,2026-10-28T23:32,0,0,
-LAC@LA,LAC,Tre' Harris,WR,Questionable,Hamstring,Not Specified,2026-10-29T23:07,0,1,69
-LAC@LA,LAC,Ladd McConkey,WR,Questionable,Concussion,Concussion,2026-10-29T22:01,0,0,23
-LAC@LA,LAC,Denzel Perryman,LB,Injured Reserve,Undisclosed,Not Specified,2026-10-29T01:38,0,0,
-LAC@LA,LAC,Deane Leonard,CB,Questionable,Concussion,Concussion,2026-10-29T01:33,0,0,32
-LAC@LA,LAC,Brenen Thompson,WR,Questionable,Quadriceps,Not Specified,2026-10-28T23:57,0,0,
-KC@DEN,DEN,Jaylen Waddle,WR,Questionable,Chest,Not Specified,2026-10-29T21:35,0,1,62
-KC@DEN,DEN,RJ Harvey,RB,Questionable,Knee,Not Specified,2026-10-29T21:32,0,0,34
-KC@DEN,DEN,Brandon Jones,S,Questionable,Hamstring,Not Specified,2026-10-29T21:25,0,1,100
-KC@DEN,DEN,Garett Bolles,OT,Questionable,Hip,Not Specified,2026-10-28T21:53,0,1,100
-KC@DEN,DEN,Talanoa Hufanga,S,Questionable,Ankle,Not Specified,2026-10-27T13:11,0,1,66
-KC@DEN,KC,Mansoor Delane,CB,Questionable,Shoulder,Not Specified,2026-10-29T22:12,0,1,96
-KC@DEN,KC,Rashee Rice,WR,Questionable,Hamstring,Not Specified,2026-10-29T21:06,0,0,10
-KC@DEN,KC,Travis Kelce,TE,Questionable,Ankle,Not Specified,2026-10-29T21:01,0,1,77
-KC@DEN,KC,Jaylon Moore,OT,Questionable,Concussion,Concussion,2026-10-29T01:55,0,1,76
-KC@DEN,KC,Omarr Norman-Lott,DT,Out,Knee - ACL,Surgery,2026-10-29T01:48,0,0,
-NE@MIA,MIA,Greg Dulcich,TE,Questionable,Ankle,Not Specified,2026-10-29T22:05,0,1,63
-NE@MIA,MIA,Malik Washington,WR,Questionable,Knee,Not Specified,2026-10-29T20:20,0,1,82
-NE@MIA,MIA,Kadyn Proctor,OT,Questionable,Concussion,Concussion,2026-10-29T01:25,0,1,100
-NE@MIA,MIA,Jared Wayne,WR,Questionable,Knee,Not Specified,2026-10-29T00:33,0,0,15
-NE@MIA,MIA,Will Kacmarek,TE,Questionable,Hamstring,Not Specified,2026-10-29T00:27,0,0,48
-NE@MIA,NE,TreVeyon Henderson,RB,Questionable,Illness,Not Specified,2026-10-29T20:29,0,0,21
-NE@MIA,NE,A.J. Brown,WR,Questionable,Knee,Not Specified,2026-10-29T20:26,0,1,84
-NE@MIA,NE,Morgan Moses,OT,Questionable,Foot,Not Specified,2026-10-28T20:26,0,1,71
-NE@MIA,NE,DaQuan Jones,DT,Questionable,Back,Not Specified,2026-10-28T20:26,0,0,32
-NE@MIA,NE,Ben Brown,C,Questionable,Knee,Not Specified,2026-10-27T13:11,0,1,90
-PHI@WAS,WAS,Treylon Burks,WR,Questionable,Foot,Not Specified,2026-10-29T22:17,0,1,62
-PHI@WAS,WAS,Nick Allegretti,G,Questionable,Back,Not Specified,2026-10-29T21:34,0,0,3
-PHI@WAS,WAS,John Bates,TE,Questionable,Shoulder,Not Specified,2026-10-29T19:49,0,0,41
-PHI@WAS,WAS,Laremy Tunsil,OT,Injured Reserve,Triceps,Surgery,2026-10-29T01:29,0,0,
-PHI@WAS,WAS,Javon Kinlaw,DT,Doubtful,Knee,Not Specified,2026-10-28T23:37,0,1,62
-PHI@WAS,PHI,DeVonta Smith,WR,Questionable,Hamstring,Not Specified,2026-10-29T21:55,0,1,66
-PHI@WAS,PHI,Saquon Barkley,RB,Questionable,Hamstring,Not Specified,2026-10-29T21:50,0,0,15
-PHI@WAS,PHI,Marcus Epps,S,Questionable,Jaw,Not Specified,2026-10-29T21:46,0,0,
-PHI@WAS,PHI,Dontayvion Wicks,WR,Questionable,Ankle,Not Specified,2026-10-29T18:31,0,1,73
-PHI@WAS,PHI,Nolan Smith Jr.,LB,Questionable,Concussion,Concussion,2026-10-29T01:22,0,0,50
-CHI@SEA,SEA,Rashid Shaheed,WR,Questionable,Knee,Not Specified,2026-10-29T23:11,0,0,41
-CHI@SEA,SEA,Jadarian Price,RB,Injured Reserve,Chest,Not Specified,2026-10-29T23:10,0,0,
-CHI@SEA,SEA,Zach Charbonnet,RB,Questionable,Knee - ACL,Surgery,2026-10-29T23:06,0,0,
-CHI@SEA,SEA,Leonard Williams,DT,Questionable,Achilles,,2026-10-29T22:55,0,1,78
-CHI@SEA,SEA,Uchenna Nwosu,LB,Questionable,Ankle,,2026-10-29T22:54,0,0,53
-CHI@SEA,CHI,Anthony Johnson Jr.,S,Out,Undisclosed,Not Specified,2026-10-29T23:00,0,0,
-CHI@SEA,CHI,Kyle Monangai,RB,Questionable,Thumb,Sprain,2026-10-29T20:19,0,0,
-CHI@SEA,CHI,D'Marco Jackson,LB,Questionable,Ankle,,2026-10-29T20:13,0,1,88
+BAL@BUF,BUF,C.J. Gardner-Johnson,S,Suspension,Suspension,Not Specified,2026-11-02T00:15,1,1,79
+BAL@BUF,BUF,DJ Moore,WR,Questionable,Knee,Not Specified,2026-11-01T22:13,1,0,39
+BAL@BUF,BUF,Joshua Palmer,WR,Questionable,Hamstring,Not Specified,2026-11-01T20:28,1,0,
+BAL@BUF,BUF,Dee Alford,CB,Out,Ankle,Not Specified,2026-11-01T19:47,1,0,48
+BAL@BUF,BUF,Greg Gaines,DT,Out,Calf,Not Specified,2026-11-01T17:33,1,0,37
+BAL@BUF,BAL,Tyler Huntley,QB,Questionable,Toe,Not Specified,2026-11-01T23:37,1,1,100
+BAL@BUF,BAL,Joe Fagnano,QB,Out,Coach's Decision,Not Specified,2026-11-01T22:29,1,0,
+BAL@BUF,BAL,Lamar Jackson,QB,Out,Thumb,Not Specified,2026-11-01T21:50,1,0,
+BAL@BUF,BAL,Nate Wiggins,CB,Questionable,Neck,Stinger,2026-11-01T20:58,1,1,100
+BAL@BUF,BAL,Aeneas Peebles,DT,Out,Coach's Decision,Not Specified,2026-11-01T16:34,1,0,11
+TEN@CIN,CIN,Cashius Howell,DE,Questionable,Wrist,Not Specified,2026-11-01T21:12,1,0,34
+TEN@CIN,CIN,Cedric Johnson,DE,Questionable,Ankle,Not Specified,2026-11-01T21:10,1,0,23
+TEN@CIN,CIN,DJ Turner II,CB,Questionable,Ankle,Not Specified,2026-11-01T21:08,1,1,97
+TEN@CIN,CIN,Mitchell Tinsley,WR,Out,Coach's Decision,Not Specified,2026-11-01T16:51,1,0,36
+TEN@CIN,CIN,Landon Robinson,DT,Out,Coach's Decision,Not Specified,2026-11-01T16:37,1,0,
+TEN@CIN,TEN,Peter Skoronski,G,Questionable,Hamstring,Not Specified,2026-11-01T21:14,1,1,100
+TEN@CIN,TEN,JC Latham,OT,Questionable,Finger,Not Specified,2026-11-01T21:06,1,1,100
+TEN@CIN,TEN,James Williams Sr.,LB,Questionable,Groin,Not Specified,2026-11-01T20:55,1,0,
+TEN@CIN,TEN,Marcus Harris,CB,Questionable,Ankle,Not Specified,2026-11-01T20:39,1,1,71
+TEN@CIN,TEN,Jaylon Jones,CB,Out,Knee,Not Specified,2026-11-01T17:32,1,0,
+ARI@DAL,DAL,Jake Ferguson,TE,Questionable,Ankle,Sprain,2026-11-02T00:06,1,1,64
+ARI@DAL,DAL,Caleb Downs,S,Questionable,Concussion,Concussion,2026-11-01T20:52,1,1,95
+ARI@DAL,DAL,Luke Schoonmaker,TE,Out,Groin,Not Specified,2026-11-01T16:54,1,0,12
+ARI@DAL,DAL,KaVontae Turpin,WR,Out,Ribs,Not Specified,2026-11-01T16:36,1,0,40
+ARI@DAL,DAL,Tyrus Wheat,LB,Out,Coach's Decision,Not Specified,2026-11-01T16:36,1,0,8
+ARI@DAL,ARI,Michael Wilson,WR,Questionable,Ribs,Fracture,2026-11-01T22:47,0,1,89
+ARI@DAL,ARI,Jeremiyah Love,RB,Questionable,Ankle,Not Specified,2026-11-01T21:11,0,0,49
+ARI@DAL,ARI,Jayden Williams,OT,Questionable,Knee,Not Specified,2026-11-01T20:46,0,1,100
+ARI@DAL,ARI,Bam Knight,RB,Questionable,Concussion,,2026-11-01T20:22,0,0,
+ARI@DAL,ARI,Kendrick Bourne,WR,Questionable,Ankle,Sprain,2026-11-01T19:52,0,0,54
+MIN@DET,DET,Jack Campbell,LB,Doubtful,Neck,Not Specified,2026-11-02T00:19,0,1,100
+MIN@DET,DET,Jimmy Rolder,LB,Questionable,Hamstring,Not Specified,2026-11-01T21:13,0,0,9
+MIN@DET,DET,Cade Mays,C,Questionable,Ankle,Not Specified,2026-11-01T21:03,0,1,100
+MIN@DET,DET,D.J. Reed,CB,Questionable,Hip,Not Specified,2026-11-01T21:02,0,1,97
+MIN@DET,DET,Jacob Saylors,RB,Questionable,Neck,Not Specified,2026-11-01T20:44,0,0,
+MIN@DET,MIN,Kyler Murray,QB,Questionable,Hamstring,Not Specified,2026-11-01T22:10,1,1,100
+MIN@DET,MIN,Theo Jackson,S,Questionable,Quadriceps,Not Specified,2026-11-01T20:38,1,0,58
+MIN@DET,MIN,Max Brosmer,QB,Out,Coach's Decision,Not Specified,2026-11-01T17:22,1,0,
+MIN@DET,MIN,Jakobe Thomas,S,Out,Coach's Decision,Not Specified,2026-11-01T16:43,1,0,
+MIN@DET,MIN,Caleb Tiernan,OT,Out,Coach's Decision,Not Specified,2026-11-01T16:43,1,0,7
+LV@NYJ,NYJ,David Bailey,LB,Out,Groin,Not Specified,2026-11-01T16:51,1,1,92
+LV@NYJ,NYJ,Tim Patrick,WR,Out,Coach's Decision,Not Specified,2026-11-01T16:48,1,0,58
+LV@NYJ,NYJ,Nahshon Wright,CB,Out,Coach's Decision,Not Specified,2026-11-01T16:37,1,0,
+LV@NYJ,NYJ,Max Mitchell,OT,Out,Concussion,Concussion,2026-11-01T16:37,1,0,
+LV@NYJ,NYJ,Joseph Ossai,DE,Out,Ankle,Not Specified,2026-11-01T16:37,1,0,32
+LV@NYJ,LV,Darien Porter,CB,Questionable,Groin,Not Specified,2026-11-01T20:32,1,1,69
+LV@NYJ,LV,Malik Benson,WR,Out,Coach's Decision,Not Specified,2026-11-01T17:12,1,0,14
+LV@NYJ,LV,Dont'e Thornton Jr.,WR,Out,Coach's Decision,Not Specified,2026-11-01T17:10,1,0,
+LV@NYJ,LV,Aidan O'Connell,QB,Out,Coach's Decision,Not Specified,2026-11-01T16:40,1,0,
+LV@NYJ,LV,JJ Pegues,DT,Out,Coach's Decision,Not Specified,2026-11-01T16:40,1,0,13
+CLE@PIT,PIT,Will Howard,QB,Out,Coach's Decision,Not Specified,2026-11-01T17:13,1,0,
+CLE@PIT,PIT,Ben Skowronek,WR,Out,Calf,Not Specified,2026-11-01T17:04,1,0,8
+CLE@PIT,PIT,Doneiko Slaughter,CB,Out,Hamstring,Not Specified,2026-11-01T16:41,1,0,
+CLE@PIT,PIT,Eli Heidenreich,RB,Out,Coach's Decision,Not Specified,2026-11-01T16:41,1,0,
+CLE@PIT,PIT,Brandin Echols,CB,Out,Hamstring,Not Specified,2026-11-01T16:41,1,0,4
+CLE@PIT,CLE,Dillon Gabriel,QB,Out,Coach's Decision,Not Specified,2026-11-01T17:19,1,0,
+CLE@PIT,CLE,Taylen Green,QB,Out,Coach's Decision,Not Specified,2026-11-01T16:32,1,0,
+CLE@PIT,CLE,Noah Igbinoghene,CB,Out,Coach's Decision,Not Specified,2026-11-01T16:32,1,0,
+CLE@PIT,CLE,Justin Jefferson,LB,Out,Coach's Decision,Not Specified,2026-11-01T16:32,1,0,
+CLE@PIT,CLE,Parker Brailsford,C,Out,Coach's Decision,Not Specified,2026-11-01T16:32,1,0,
+ATL@TB,TB,Yaya Diaby,LB,Questionable,Knee,Not Specified,2026-11-01T19:33,1,0,52
+ATL@TB,TB,Billy Schrauth,G,Out,Coach's Decision,Not Specified,2026-11-01T16:37,1,0,
+ATL@TB,TB,Ayden Garnes,CB,Out,Coach's Decision,Not Specified,2026-11-01T16:37,1,0,2
+ATL@TB,TB,Luke Haggard,G,Out,Coach's Decision,Not Specified,2026-11-01T16:37,1,0,10
+ATL@TB,TB,DeMonte Capehart,DT,Out,Coach's Decision,Not Specified,2026-11-01T16:37,1,0,
+ATL@TB,ATL,Zachariah Branch,WR,Questionable,Hamstring,Not Specified,2026-11-01T20:59,1,0,29
+ATL@TB,ATL,Samson Ebukam,DE,Questionable,Hamstring,Not Specified,2026-11-01T20:56,1,0,51
+ATL@TB,ATL,Andy Dalton,QB,Out,Coach's Decision,Not Specified,2026-11-01T16:57,1,0,
+ATL@TB,ATL,Jack Strand,QB,Out,Coach's Decision,Not Specified,2026-11-01T16:35,1,0,
+ATL@TB,ATL,Robert Longerbeam,CB,Out,Coach's Decision,Not Specified,2026-11-01T16:35,1,0,
+IND@JAX,JAX,Travon Walker,DE,Questionable,Ribs,Not Specified,2026-11-01T20:42,1,1,87
+IND@JAX,JAX,DaVon Hamilton,DT,Questionable,Knee,Not Specified,2026-11-01T19:16,1,0,44
+IND@JAX,JAX,Ezra Cleveland,G,Questionable,Ankle,Not Specified,2026-11-01T19:05,1,1,100
+IND@JAX,JAX,Eric Murray,S,Questionable,Elbow,Not Specified,2026-11-01T18:47,1,1,78
+IND@JAX,JAX,CJ Williams,WR,Out,Coach's Decision,Not Specified,2026-11-01T16:35,1,0,
+IND@JAX,IND,Riley Leonard,QB,Out,Coach's Decision,Not Specified,2026-11-01T17:23,1,0,
+IND@JAX,IND,Bryce Boettcher,LB,Out,Groin,Not Specified,2026-11-01T16:38,1,0,29
+IND@JAX,IND,Justin Walley,CB,Out,Knee,Not Specified,2026-11-01T16:36,1,1,76
+IND@JAX,IND,Kevin Givens,DT,Out,Coach's Decision,Not Specified,2026-11-01T16:36,1,0,
+IND@JAX,IND,Anthony Gould,WR,Out,Concussion,Concussion,2026-11-01T16:36,1,0,1
+LAC@LA,LA,Trent McDuffie,CB,Questionable,Back,Not Specified,2026-11-01T23:28,1,1,100
+LAC@LA,LA,Jaylen Watson,CB,Questionable,Shoulder,Not Specified,2026-11-01T23:25,1,1,99
+LAC@LA,LA,Joe Cardona,LS,Out,Ankle,Not Specified,2026-11-01T20:28,1,0,
+LAC@LA,LA,Ty Simpson,QB,Out,Coach's Decision,Not Specified,2026-11-01T19:57,1,0,
+LAC@LA,LA,Colby Parkinson,TE,Out,Ribs,Not Specified,2026-11-01T19:50,1,1,65
+LAC@LA,LAC,Rodney Shelley,CB,Out,Hamstring,Not Specified,2026-11-01T20:13,1,0,28
+LAC@LA,LAC,Donte Jackson,CB,Out,Hamstring,Not Specified,2026-11-01T20:09,1,0,12
+LAC@LA,LAC,Theo Wease Jr.,WR,Out,Coach's Decision,Not Specified,2026-11-01T19:40,1,0,55
+LAC@LA,LAC,Brenen Thompson,WR,Out,Quadriceps,Not Specified,2026-11-01T19:40,1,0,
+LAC@LA,LAC,Deane Leonard,CB,Out,Concussion,Concussion,2026-11-01T19:40,1,0,32
+KC@DEN,DEN,Brandon Jones,S,Questionable,Hamstring,,2026-11-01T23:34,1,1,100
+KC@DEN,DEN,Kris Abrams-Draine,CB,Questionable,Ankle,,2026-11-01T22:59,1,1,78
+KC@DEN,DEN,Sam Ehlinger,QB,Out,Coach's Decision,Not Specified,2026-11-01T20:22,1,0,
+KC@DEN,DEN,Tyler Onyedim,DT,Out,Coach's Decision,Not Specified,2026-11-01T20:01,1,0,
+KC@DEN,DEN,Gavin Ortega,OT,Out,Coach's Decision,Not Specified,2026-11-01T20:01,1,0,
+KC@DEN,KC,Peter Woods,DT,Questionable,Neck,,2026-11-01T23:54,1,0,42
+KC@DEN,KC,Garrett Nussmeier,QB,Out,Coach's Decision,Not Specified,2026-11-01T20:25,1,0,
+KC@DEN,KC,Ben VanSumeren,FB,Out,Coach's Decision,Not Specified,2026-11-01T20:06,1,0,2
+KC@DEN,KC,Diego Pounds,OT,Out,Coach's Decision,Not Specified,2026-11-01T20:06,1,0,
+KC@DEN,KC,Jack Pyburn,LB,Out,Coach's Decision,Not Specified,2026-11-01T20:06,1,0,
+NE@MIA,MIA,Malik Herring,DE,Questionable,Undisclosed,,2026-11-01T22:38,1,0,30
+NE@MIA,MIA,Jared Wayne,WR,Out,Coach's Decision,Not Specified,2026-11-01T20:22,1,0,15
+NE@MIA,MIA,Jaylin Simpson,S,Out,Coach's Decision,Not Specified,2026-11-01T19:59,1,0,5
+NE@MIA,MIA,Kadyn Proctor,OT,Out,Concussion,Concussion,2026-11-01T19:59,1,1,100
+NE@MIA,MIA,Christian Haynes,G,Out,Coach's Decision,Not Specified,2026-11-01T19:59,1,0,
+NE@MIA,NE,Hunter Henry,TE,Out,Foot,Not Specified,2026-11-02T00:11,1,1,72
+NE@MIA,NE,Gabe Jacas,LB,Questionable,Knee,,2026-11-01T23:50,1,0,56
+NE@MIA,NE,Behren Morton,QB,Out,Coach's Decision,Not Specified,2026-11-01T20:20,1,0,
+NE@MIA,NE,Karon Prunty,CB,Out,Coach's Decision,Not Specified,2026-11-01T19:57,1,0,
+NE@MIA,NE,TreVeyon Henderson,RB,Out,Illness,Not Specified,2026-11-01T19:57,1,0,21
+PHI@WAS,WAS,Athan Kaliakmanis,QB,Out,Coach's Decision,Not Specified,2026-11-02T00:08,1,1,84
+PHI@WAS,WAS,Isaac Yiadom,CB,Out,Coach's Decision,Not Specified,2026-11-01T23:53,1,0,
+PHI@WAS,WAS,Tanoa Togiai,G,Out,Coach's Decision,Not Specified,2026-11-01T23:53,1,0,
+PHI@WAS,WAS,Fabian Moreau,CB,Out,Coach's Decision,Not Specified,2026-11-01T23:53,1,0,34
+PHI@WAS,WAS,Daron Payne,DT,Out,Foot,Surgery,2026-11-01T23:53,1,1,81
+PHI@WAS,PHI,Dontayvion Wicks,WR,Out,Ankle,Not Specified,2026-11-01T23:55,1,1,73
+PHI@WAS,PHI,DeVonta Smith,WR,Out,Hamstring,Not Specified,2026-11-01T23:55,1,1,66
+PHI@WAS,PHI,Jake Majors,C,Out,Coach's Decision,Not Specified,2026-11-01T23:55,1,1,100
+PHI@WAS,PHI,Jonathan Jones,CB,Out,Hamstring,Not Specified,2026-11-01T23:55,1,0,4
+PHI@WAS,PHI,Jihaad Campbell,LB,Out,Hamstring,Not Specified,2026-11-01T23:55,1,1,67
+CAR@GB,GB,Micah Parsons,DE,Out,Knee - ACL,Surgery,2026-10-31T14:09,1,0,
+CAR@GB,GB,Christian Watson,WR,Questionable,Ribs,Fracture,2026-10-30T04:06,1,1,73
+CAR@GB,GB,Kaleb Johnson,RB,Out,Coach's Decision,Not Specified,2026-10-29T23:10,1,0,5
+CAR@GB,GB,Jonnu Smith,TE,Out,Coach's Decision,Not Specified,2026-10-29T23:03,1,0,18
+CAR@GB,GB,Sean Rhyan,G,Out,Ankle,Sprain,2026-10-29T22:54,1,0,53
+CAR@GB,CAR,Corey Bullock,C,Questionable,Quadriceps,,2026-10-30T04:15,1,0,40
+CAR@GB,CAR,Will Lee III,CB,Questionable,Hamstring,Not Specified,2026-10-30T01:34,1,1,77
+CAR@GB,CAR,Akayleb Evans,CB,Injured Reserve,Triceps,Not Specified,2026-10-30T00:13,1,1,99
+CAR@GB,CAR,Bobby Brown III,DT,Out,Hand,Not Specified,2026-10-29T23:22,1,0,41
+CAR@GB,CAR,Haynes King,QB,Out,Coach's Decision,Not Specified,2026-10-29T23:16,1,0,
+CHI@SEA,SEA,Charles Cross,OT,Out,Ankle,Sprain,2026-11-01T03:18,0,1,94
+CHI@SEA,SEA,Velus Jones Jr.,RB,Out,Hamstring,Not Specified,2026-11-01T01:38,0,0,12
+CHI@SEA,SEA,Drew Lock,QB,Questionable,Elbow,Not Specified,2026-11-01T01:35,0,0,
+CHI@SEA,SEA,Uchenna Nwosu,LB,Doubtful,Ankle,Not Specified,2026-10-31T20:57,0,0,53
+CHI@SEA,SEA,Rashid Shaheed,WR,Out,Knee,Not Specified,2026-10-31T20:53,0,0,41
+CHI@SEA,CHI,Malik Muhammad II,CB,Questionable,Toe,Not Specified,2026-11-01T02:54,0,1,66
+CHI@SEA,CHI,D'Marco Jackson,LB,Questionable,Ankle,,2026-10-31T23:08,0,1,88
+CHI@SEA,CHI,Kyle Monangai,RB,Out,Thumb,Sprain,2026-10-31T16:55,0,0,
 CHI@SEA,CHI,Coby Bryant,S,Injured Reserve,Knee,Surgery,2026-10-28T23:52,0,0,
-CHI@SEA,CHI,Jack Sanborn,LB,Questionable,Concussion,Concussion,2026-10-27T13:11,0,0,16
+CHI@SEA,CHI,Cole Kmet,TE,Injured Reserve,Knee,Not Specified,2026-10-23T21:36,0,0,57
