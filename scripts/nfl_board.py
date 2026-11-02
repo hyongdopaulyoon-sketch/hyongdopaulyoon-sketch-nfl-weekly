@@ -6,7 +6,7 @@
 → 끝난 경기(한 줄로 접힘) → 별점별 적중 표 → 숫자 자세히(접힘) → 바닥글."""
 import argparse, base64, glob, html, json, os, re, sys, urllib.request
 from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import nfl_pull as N   # noqa: E402
@@ -44,7 +44,7 @@ thead th.sortable:hover{color:var(--acc)}
 thead th.s-d::after{content:" \\25BC";font-size:.7em;color:var(--acc)}
 thead th.s-a::after{content:" \\25B2";font-size:.7em;color:var(--acc)}
 tbody tr[data-g],.card[data-g]{cursor:pointer}
-.publist{display:grid;gap:6px}
+.publist{display:grid;gap:6px}.publist>*{min-width:0}.md{overflow-x:auto}   /* 10/29 휴대폰: 펼친 발행문의 비교표가 페이지를 671px 로 밀던 것 */
 details.pubd{background:var(--panel);border:1px solid var(--line)}
 details.pubd>summary{padding:8px 12px;cursor:pointer;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 details.pubd .md{padding:0 14px 14px;font-size:.88rem;overflow-wrap:anywhere}
@@ -88,10 +88,9 @@ a.goto{font-size:.8rem;color:var(--ink);cursor:pointer;text-decoration:underline
 .md table.vs td.hi{font-weight:700}.md table.vs td.lo{color:var(--muted)}.md table.vs td.vt{color:var(--muted);font-size:.78rem}
 .md .h2w{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:10px}
 .pth{font-size:.8rem;font-weight:700;margin:12px 0 2px}
-.pt2{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start;margin:4px 0}
-@media (max-width:980px){.pt2{grid-template-columns:1fr}}
+.pt2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,540px),1fr));gap:12px;align-items:start;margin:4px 0}
 .pt2>div{overflow-x:auto;min-width:0}
-table.ptab{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:2px;font-size:.72rem;font-variant-numeric:tabular-nums}
+table.ptab{width:100%;min-width:540px;table-layout:fixed;border-collapse:separate;border-spacing:2px;font-size:.72rem;font-variant-numeric:tabular-nums}
 table.ptab th{font-family:var(--mono);font-size:.64rem;color:var(--muted);font-weight:700;text-align:center;padding:3px 1px;white-space:nowrap;overflow:hidden}
 table.ptab tr.th0 th{font-family:var(--body);font-size:.84rem;color:var(--ink);text-align:left;padding:2px 2px 4px}
 table.ptab tr.gh th{border-top:1px solid var(--line);padding-top:6px}
@@ -552,7 +551,7 @@ CAT_OF = {"예측": "결론", "판단": "결론", "정리": "결론", "결론": 
           "선수 비교": "선수", "선수 표": "선수", "수비 표": "선수", "QB 비교": "선수", "키커": "선수",
           "팀 비교": "팀 비교", "맞대결": "팀 비교", "스탯 비교": "팀 비교", "매치업": "팀 비교", "맥락": "팀 비교",
           "심판": "심판"}
-_CAT_LAB = re.compile(r"^-\s+(?:\*\*)?(" + "|".join(map(re.escape, sorted(CAT_OF, key=len, reverse=True))) + r")(?:\*\*)?(?=[\s:：(]|$)")
+_CAT_LAB = re.compile(r"^-\s+(?:\*\*)?(" + "|".join(map(re.escape, sorted(CAT_OF, key=len, reverse=True))) + r")(?:\*\*)?(?=[\s:：(·]|$)")   # 10/28 NBA ab06fef — 「**팀 비교·맞대결**」처럼 라벨 바로 뒤 「·」도 라벨
 
 
 def pub_cats(body):
@@ -1324,6 +1323,9 @@ def main():
     wk_pred_rows = N.rd(PR.path(a.week))
     for r in wk_pred_rows:
         preds[r["game"]][r["src"]] = r
+    # 끝난 경기 결과 칩 라인(10/29 Paul 「A」 · NBA 32c84da): DK 마감(closing.csv · 화요일 채점 뒤) → 없으면 시장 예측 행(킥오프 때 동결 = 킥오프 전 마지막 수집 판)
+    _cp = os.path.join(wd, "closing.csv")
+    close_ln = {r["game"]: (P.fnum(r.get("spread_home")), P.fnum(r.get("total")), "DK 마감") for r in (N.rd(_cp) if os.path.exists(_cp) else [])}
     psum = PR.summary(PR.all_rows())
     wsum = PR.summary(wk_pred_rows)
 
@@ -1420,8 +1422,27 @@ def main():
         if mh0 is not None and ma0 is not None:
             fav0 = (H, g["ml_home"], mh0) if mh0 < ma0 else (A, g["ml_away"], ma0)
             ml_txt, ml_s = f"{fav0[0]} {fav0[1]}", f"{-fav0[2]:g}"
-        if fin:
-            res_txt, res_s = f'<span class="num">{esc(str(lv.get("sa")))} – {esc(str(lv.get("sh")))}</span> {phit(m_) if m_ else ""}', 2
+        if fin:   # 10/28 NBA 32c84da — 최종 점수에 팀 약칭(「종료 BUF 24 – 17 MIA」)
+            res_txt, res_s = (f'<span class="state">종료</span> <b class="num">{esc(A)} {esc(str(lv.get("sa")))} – {esc(str(lv.get("sh")))} {esc(H)}</b> '
+                              f'{phit(m_) if m_ else ""}'), 2
+            # 10/29 Paul 「A」(NBA 32c84da): 스프레드 커버 · 오버/언더 칩 — 값만, 칸은 안 늘림
+            sa_, sh_ = P.fnum(lv.get("sa")), P.fnum(lv.get("sh"))
+            spl, tl, lsrc = close_ln.get(gk) or ((P.fnum(m_.get("line_home")), P.fnum(m_.get("total_line")), "킥오프 전 마지막 수집 판") if m_ else (None, None, ""))
+            chips = []
+            if sa_ is not None and sh_ is not None and spl is not None:
+                cm_ = (sh_ - sa_) + spl   # 홈 점수 차 + 홈 스프레드 > 0 → 홈 커버
+                if cm_ == 0:
+                    chips.append(f'<span class="hit" title="점수 차 = 스프레드 · {esc(H)} 라인 {spl:+g}({lsrc})">스프레드 푸시</span>')
+                else:
+                    cv_, bpk = (H if cm_ > 0 else A), (b_ or {}).get("pick", "")
+                    cls_ = ("w" if cv_ == bpk else "l") if bpk in (A, H) else ""
+                    chips.append(f'<span class="hit {cls_}" title="점수 차 {esc(H)} {sh_ - sa_:+g} · {esc(H)} 라인 {spl:+g}({lsrc})'
+                                 f'{" · 발행 예측 " + esc(bpk) if bpk in (A, H) else " · 발행 없음(무색)"}">{esc(cv_)} 커버</span>')
+            if sa_ is not None and sh_ is not None and tl is not None:
+                sm_ = sa_ + sh_
+                chips.append(f'<span class="hit" title="합계 {sm_:g} vs 총점 라인 {tl:g}({lsrc})">{"오버" if sm_ > tl else "언더" if sm_ < tl else "총점 푸시"} {sm_:g}</span>')
+            if chips:
+                res_txt += "<br>" + " ".join(chips)
         elif st in IN_GAME:
             res_txt, res_s = f'<span class="state live">진행 중</span> <span class="num">{esc(str(lv.get("sa")))} – {esc(str(lv.get("sh")))}</span>', 1
         else:
@@ -1468,8 +1489,25 @@ def main():
     pre_cards.sort(key=lambda x: x[0])
     trows.sort(key=lambda x: x[0])
     cmp_tbl = ('<div class="tblwrap"><table class="cmp"><thead><tr><th>경기</th><th>시간(PT)</th><th>예측 승자(시장)</th><th>★</th><th>발행 예측</th>'
-               f'<th>{term("ML")} 페이버릿</th><th>판단</th><th>결과</th></tr></thead>'
+               f'<th>{term("ML")} 페이버릿</th><th>판단</th><th title="끝난 경기: 최종 점수 · 시장 예측 맞힘/틀림 · 스프레드 어느 쪽 커버(초록 = 발행 예측 팀 커버 · 빨강 = 못 함 · 발행 없으면 무색) · 오버/언더 + 두 팀 합계(라인 = DK 마감, 채점 전엔 킥오프 전 마지막 수집 판)">결과</th></tr></thead>'
                f'<tbody>{"".join(r for _, r in trows)}</tbody></table></div>')
+    # 미기록 경보(10/29 Paul 「넣기」 · NBA 1005810): 킥오프 15분 안 ~ 240분 지남인데 정식 발행 기록(predictions src=발행 · flag 없음)이 없는 경기 — 보드를 만든 순간 기준
+    _nowu, unrec = datetime.now(timezone.utc), []
+    for g in games:
+        gk = f'{g["away"]}@{g["home"]}'
+        b0 = preds.get(gk, {}).get("발행")
+        if b0 and not b0.get("flag"):
+            continue
+        try:
+            ko = datetime.strptime(g.get("kickoff_utc", ""), "%Y-%m-%dT%H:%MZ").replace(tzinfo=timezone.utc)
+        except ValueError:
+            continue
+        left = int((ko - _nowu).total_seconds() // 60)
+        if -240 <= left <= 15:
+            unrec.append((left, f'{gk} 킥오프 {g.get("kickoff_pt", "")} PT({f"{left}분 전" if left >= 0 else f"{-left}분 지남"}) — '
+                                + ("기록용만 있음(킥오프 뒤 발행 · 집계 제외)" if b0 else "발행 기록 없음"), not b0))
+    unrec_html = ('<div class="unrec"><b>미기록 경보</b> — ' + " · ".join(esc(x) for _, x, _ in sorted(unrec))
+                  + (" → 발행문을 보드 세션에 붙여 넣어 기록(킥오프 뒤면 기록용)" if any(m for _, _, m in unrec) else "") + "</div>") if unrec else ""
     # ── 경기별 발행문·보완 전문(최신 발행 + 보완 · 이전 판은 접어 둠)
     pub_secs = []
     if pcommon:
@@ -1592,6 +1630,7 @@ details.px td{{padding:3px 6px 3px 0;border-bottom:1px dashed var(--line);vertic
 .tag.obs{{border-style:dashed}}
 .hit{{font-size:.7rem;padding:0 5px;margin-left:2px;border:1px solid}}
 .hit.w{{color:var(--ok)}}.hit.l{{color:var(--bad)}}.hit.p{{color:var(--push)}}
+.unrec{{margin:10px 0 4px;padding:8px 12px;border:2px solid var(--bad);color:var(--bad);background:var(--panel);font-weight:600}}
 .donelist{{display:grid;gap:6px}}
 details.done{{background:var(--panel);border:1px solid var(--line)}}
 details.done summary{{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:space-between;padding:8px 12px;cursor:pointer;list-style:none}}
@@ -1620,12 +1659,12 @@ nav.weeks a{{color:var(--ink)}}nav.weeks b.cur{{color:var(--ink);text-decoration
     <div class="stat"><span class="k">승자 예측 이번 주</span><span class="v">{live_wl[0]}-{live_wl[1]}</span></div>
   </div>
   <div class="headline">{headline}</div>
-  <h2>{a.week}주차 전체 경기 <span class="muted" style="font-size:.9rem">— 머리 누르면 정렬 · 줄 누르면 발행문</span></h2>
+  {unrec_html}<h2>{a.week}주차 전체 경기 <span class="muted" style="font-size:.9rem">— 머리 누르면 정렬 · 줄 누르면 발행문</span></h2>
   {cmp_tbl}
   <section class="legend">
     <div><b>읽는 법</b> — 점선 밑줄 낱말에 손가락·마우스를 대면 뜻이 나와요.</div>
     <div><span class="star">★</span> = <b>이길 확률이 높은 정도</b>(2018~25 실제 적중 ★ 50% · ★★ 61% · ★★★ 71% · ★★★★ 82%). <b>돈 버는 신호가 아니에요</b> — 별이 많은 팀일수록 ML 배당이 비싸서, 맞혀도 남는 돈이 적어요.</div>
-    <div>{term("ML")} = 그냥 이길 팀 — 10/16부터 보드는 <b>이길 팀 예측(ML)만</b> 보여 줘요(점수 차·총점·방향은 뺐어요).</div>
+    <div>{term("ML")} = 그냥 이길 팀 — 10/16부터 보드는 <b>이길 팀 예측(ML)만</b> 보여 줘요(점수 차·총점·방향은 뺐어요). 끝난 경기의 「결과」 칸에만 스프레드 커버·오버/언더를 값으로 붙여요(10/29).</div>
     <div>{term("관찰", "관찰만")} = 돈 안 건 기록(라인 뒤 새 정보 · 각도 A3·A4) · 맞힘/틀림 = 예측·관찰 결과</div>
     <div><b>발행문 글자</b> — <b style="color:var(--acc2)">파란 굵은 팀</b> = 우리 예측 팀 · <b style="color:var(--acc)">주황 굵은 팀</b> = 상대 · <b>굵은 검정</b> = 선수(처음 나올 때 「팀 · 포지션 · 역할 · 상태」) · <b style="color:var(--muted)">회색 굵은 낱말</b> = 스탯 이름(EPA·CPOE·야드/캐리 …) · 긴 줄은 묶음·문장마다 줄을 바꾸고, 「NE 값 vs CHI 값」 줄은 비교표로 · 선수 표는 왼쪽 원정 / 오른쪽 홈, 색이 진할수록 큰 값(표 아래 풀이). 상자 순서: 결론 → 보완 → 시장 → 팀 상태 → 선수 → 팀 비교 → 심판.</div>
     {gloss_all()}
