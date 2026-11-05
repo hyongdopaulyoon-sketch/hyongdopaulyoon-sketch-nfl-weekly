@@ -34,7 +34,8 @@ def main():
         run("nfl_board.py", ["--week", str(a.grade)])   # 채점 결과 반영한 보드(2026-10-04)
         return
     wk = ["--week", str(a.week)] if a.week else []
-    run("nfl_pull.py", wk + (["--force"] if a.refresh else []))
+    fc = ["--force"] if a.refresh else []
+    run("nfl_pull.py", wk + fc + ["--skip", "digest"])   # 다이제스트는 각도 기록 뒤(아래) — 2026-11-04
     if a.week:
         w = str(a.week)
     else:
@@ -44,6 +45,7 @@ def main():
     run("picks.py", ["suggest", "--week", w])
     run("picks.py", ["wind", "--week", w])            # 바람 15mph+ 언더 페이퍼(2026-10-01) — 경기 당일 판만
     run("picks.py", ["angles", "--week", w])          # 최근 3시즌 약한 꼴 2개 페이퍼(2026-10-04)
+    run("nfl_pull.py", ["--week", w, "--phase", "digest"] + fc)   # 2026-11-04 Paul 「각도 — 발행문에 설명하도록」: 각도를 먼저 적어야 경기 절 🔎 관찰 각도 줄이 채워진다(전엔 첫 판 전 경기 「해당 없음」)
     run("predictions.py", ["record", "--week", w])     # 결과 예측 기록(2026-10-04 — 킥오프 지난 경기 동결)
     run("nfl_board.py", ["--week", w])                 # 보드 HTML(board/board-wNN.html) — Artifact 게시는 세션이 한다
     run("transmittal.py", ["--week", w])               # 남은 경기 전달문 + Google Drive 사본(2026-10-04 — 다운로드 없이 발행 세션이 Drive 로 읽음)

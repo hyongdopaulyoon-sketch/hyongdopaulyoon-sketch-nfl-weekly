@@ -1410,6 +1410,7 @@ def main():
     ap.add_argument("--week", type=int, default=None, help="주차(기본: ESPN 현재 주차)")
     ap.add_argument("--phase", default=None, help="한 단계만(sources/ratings/slate/injuries/model/digest/results)")
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--skip", default="", help="건너뛸 단계(쉼표) — weekly.py 가 digest 를 각도 기록 뒤로 미룰 때(2026-11-04)")
     a = ap.parse_args()
     week = a.week or current_week()
     if not week:
@@ -1420,7 +1421,7 @@ def main():
     global AS_OF_WEEK
     AS_OF_WEEK = week
     for name, fn in PHASES:
-        if a.phase and a.phase != name:
+        if (a.phase and a.phase != name) or name in a.skip.split(","):
             continue
         log(f"[{name}]"); fn(week, a.force)
     log(f"DONE -> {week_dir(week)}")

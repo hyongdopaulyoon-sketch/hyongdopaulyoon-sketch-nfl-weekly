@@ -230,31 +230,31 @@
 2026_07_CLE_TEN:ml:J,2026,7,CLE@TEN,ml,CLE ML,,-135,,,관심(발행),,suggested,,W,CLE 27-24 TEN,0.741,발행 판단 소액 관심,,,,-135,-2.3
 2026_07_MIA_NYJ:ml:J,2026,7,MIA@NYJ,ml,NYJ ML,,-218,,,관심(발행),,suggested,,L,MIA 28-25 NYJ,-1,발행 판단 소액 관심,,,,-218,-2.8
 2026_07_TB_CAR:ml:J,2026,7,TB@CAR,ml,CAR ML,,-166,,,관심(발행),,suggested,,L,TB 43-13 CAR,-1,발행 판단 소액 관심,,,,-170,-2.0
-2026_08_CAR_GB:spread:A3,2026,8,CAR@GB,spread,GB -3.5,-3.5,-110,,,각도 관찰 A3(결장 팀 반대 3점+ 이동 → 결장 팀),,suggested,,,,,"홈 GB 결장 확정 · 개장 -7 → 지금 -3.5(홈 기준, +3.5점 반대 이동) · 10-29 16:24 PT 판",,,,,
-2026_08_CAR_GB:spread:A6,2026,8,CAR@GB,spread,GB -3.5,-3.5,-110,,,각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS),,suggested,,,,,개장 -7 → 지금 -3.5(홈 기준) 키 넘버 넘김 · 이동 반대쪽 · 10-29 16:24 PT 판,,,,,
-2026_08_BAL_BUF:ml:A8,2026,8,BAL@BUF,ml,BUF ML,,-170,,,각도 관찰 A8(접전 .750+ 팀 → 그 팀 ML),,suggested,,,,,BUF 한 포제션 경기 4-1(80%) · 10-29 16:24 PT 판,,,,,
-2026_08_BAL_BUF:spread:A6,2026,8,BAL@BUF,spread,BAL +3,+3,-110,,,각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS),,suggested,,,,,개장 -2.5 → 지금 -3(홈 기준) 키 넘버 넘김 · 이동 반대쪽 · 10-29 16:24 PT 판,,,,,
-2026_08_TEN_CIN:ml:A10,2026,8,TEN@CIN,ml,TEN ML,,+455,,,각도 관찰 A10(색률 상위 8 수비 팀의 상대 → 상대 ML),,suggested,,,,,CIN 색률 8.9%(2위) → 상대 TEN · 10-29 16:24 PT 판,,,,,
-2026_08_TEN_CIN:spread:A6,2026,8,TEN@CIN,spread,TEN +11.5,+11.5,-110,,,각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS),,suggested,,,,,개장 -6.5 → 지금 -11.5(홈 기준) 키 넘버 넘김 · 이동 반대쪽 · 10-29 16:24 PT 판,,,,,
-2026_08_MIN_DET:ml:A5,2026,8,MIN@DET,ml,DET ML,,-170,,,각도 관찰 A5(3rd down 운 회귀 5~9주 → 상대 ML),,suggested,,,,,MIN 3rd down 17위 vs 공격 EPA 29위(+12) → 상대 DET · 8주차 · 10-29 16:24 PT 판,,,,,
-2026_08_MIN_DET:ml:A10,2026,8,MIN@DET,ml,MIN ML,,+142,,,각도 관찰 A10(색률 상위 8 수비 팀의 상대 → 상대 ML),,suggested,,,,,DET 색률 7.2%(7위) → 상대 MIN · 10-29 16:24 PT 판,,,,,
-2026_08_MIN_DET:ml:A8,2026,8,MIN@DET,ml,DET ML,,-170,,,각도 관찰 A8(접전 .750+ 팀 → 그 팀 ML),,suggested,,,,,DET 한 포제션 경기 3-1(75%) · 10-29 16:24 PT 판,,,,,
-2026_08_LV_NYJ:ml:A10,2026,8,LV@NYJ,ml,LV ML,,+102,,,각도 관찰 A10(색률 상위 8 수비 팀의 상대 → 상대 ML),,suggested,,,,,NYJ 색률 7.6%(5위) → 상대 LV · 10-29 16:24 PT 판,,,,,
-2026_08_CLE_PIT:ml:A10,2026,8,CLE@PIT,ml,PIT ML,,-192,,,각도 관찰 A10(색률 상위 8 수비 팀의 상대 → 상대 ML),,suggested,,,,,CLE 색률 7.5%(6위) → 상대 PIT · 10-29 16:24 PT 판,,,,,
-2026_08_CLE_PIT:ml:A8,2026,8,CLE@PIT,ml,PIT ML,,-192,,,각도 관찰 A8(접전 .750+ 팀 → 그 팀 ML),,suggested,,,,,PIT 한 포제션 경기 4-1(80%) · 10-29 16:24 PT 판,,,,,
-2026_08_ATL_TB:ml:A5,2026,8,ATL@TB,ml,ATL ML,,+120,,,각도 관찰 A5(3rd down 운 회귀 5~9주 → 상대 ML),,suggested,,,,,TB 3rd down 14위 vs 공격 EPA 28위(+14) → 상대 ATL · 8주차 · 10-29 16:24 PT 판,,,,,
-2026_08_ATL_TB:spread:A6,2026,8,ATL@TB,spread,TB -2.5,-2.5,-110,,,각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS),,suggested,,,,,개장 -4.5 → 지금 -2.5(홈 기준) 키 넘버 넘김 · 이동 반대쪽 · 10-29 16:24 PT 판,,,,,
-2026_08_IND_JAX:ml:A5,2026,8,IND@JAX,ml,JAX ML,,-500,,,각도 관찰 A5(3rd down 운 회귀 5~9주 → 상대 ML),,suggested,,,,,IND 3rd down 15위 vs 공격 EPA 27위(+12) → 상대 JAX · 8주차 · 10-29 16:24 PT 판,,,,,
-2026_08_IND_JAX:spread:A6,2026,8,IND@JAX,spread,IND +10,+10,-110,,,각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS),,suggested,,,,,개장 -4.5 → 지금 -10(홈 기준) 키 넘버 넘김 · 이동 반대쪽 · 10-29 16:24 PT 판,,,,,
-2026_08_KC_DEN:ml:A4,2026,8,KC@DEN,ml,DEN ML,,-102,,,각도 관찰 A4(작년 플옵팀 언더독 1~8주 → 그 팀 ML),,suggested,,,,,작년 플옵팀 DEN 언더독(무비그 48% · 상대 KC 비플옵) · 8주차 · 10-29 16:24 PT 판,,,,,
-2026_08_KC_DEN:ml:A10,2026,8,KC@DEN,ml,KC ML,,-118,,,각도 관찰 A10(색률 상위 8 수비 팀의 상대 → 상대 ML),,suggested,,,,,DEN 색률 7.1%(8위) → 상대 KC · 10-29 16:24 PT 판,,,,,
-2026_08_KC_DEN:ml:A8,2026,8,KC@DEN,ml,DEN ML,,-102,,,각도 관찰 A8(접전 .750+ 팀 → 그 팀 ML),,suggested,,,,,DEN 한 포제션 경기 4-0(100%) · 10-29 16:24 PT 판,,,,,
-2026_08_NE_MIA:ml:A5,2026,8,NE@MIA,ml,NE ML,,-325,,,각도 관찰 A5(3rd down 운 회귀 5~9주 → 상대 ML),,suggested,,,,,MIA 3rd down 12위 vs 공격 EPA 24위(+12) → 상대 NE · 8주차 · 10-29 16:24 PT 판,,,,,
-2026_08_NE_MIA:spread:A7,2026,8,NE@MIA,spread,MIA +7,+7,-110,,,각도 관찰 A7(홈 언더독 +7 이상 → 홈 ATS),,suggested,,,,,홈 MIA 언더독 +7 · 10-29 16:24 PT 판,,,,,
-2026_08_PHI_WAS:ml:A4,2026,8,PHI@WAS,ml,PHI ML,,+225,,,각도 관찰 A4(작년 플옵팀 언더독 1~8주 → 그 팀 ML),,suggested,,,,,작년 플옵팀 PHI 언더독(무비그 29% · 상대 WAS 비플옵) · 8주차 · 11-01 17:06 PT 판,,,,,
-2026_08_PHI_WAS:spread:A6,2026,8,PHI@WAS,spread,PHI +6,+6,-110,,,각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS),,suggested,,,,,개장 +2.5 → 지금 -6(홈 기준) 키 넘버 넘김 · 이동 반대쪽 · 11-01 17:06 PT 판,,,,,
-2026_08_CHI_SEA:ml:A10,2026,8,CHI@SEA,ml,SEA ML,,-166,,,각도 관찰 A10(색률 상위 8 수비 팀의 상대 → 상대 ML),,suggested,,,,,CHI 색률 8.4%(3위) → 상대 SEA · 11-01 17:06 PT 판,,,,,
-2026_08_PHI_WAS:spread:A3,2026,8,PHI@WAS,spread,PHI +6,+6,-110,,,각도 관찰 A3(결장 팀 반대 3점+ 이동 → 결장 팀),,suggested,,,,,"원정 PHI 결장 확정 · 개장 +2.5 → 지금 -6(홈 기준, +8.5점 반대 이동) · 11-01 17:06 PT 판",,,,,
+2026_08_CAR_GB:spread:A3,2026,8,CAR@GB,spread,GB -3.5,-3.5,-110,,,각도 관찰 A3(결장 팀 반대 3점+ 이동 → 결장 팀),,suggested,,W,CAR 19-27 GB,0.909,"홈 GB 결장 확정 · 개장 -7 → 지금 -3.5(홈 기준, +3.5점 반대 이동) · 10-29 16:24 PT 판",-3.5,+0,,-110,-2.4
+2026_08_CAR_GB:spread:A6,2026,8,CAR@GB,spread,GB -3.5,-3.5,-110,,,각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS),,suggested,,W,CAR 19-27 GB,0.909,개장 -7 → 지금 -3.5(홈 기준) 키 넘버 넘김 · 이동 반대쪽 · 10-29 16:24 PT 판,-3.5,+0,,-110,-2.4
+2026_08_BAL_BUF:ml:A8,2026,8,BAL@BUF,ml,BUF ML,,-170,,,각도 관찰 A8(접전 .750+ 팀 → 그 팀 ML),,suggested,,W,BAL 10-36 BUF,0.588,BUF 한 포제션 경기 4-1(80%) · 10-29 16:24 PT 판,,,,-162,-3.6
+2026_08_BAL_BUF:spread:A6,2026,8,BAL@BUF,spread,BAL +3,+3,-110,,,각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS),,suggested,,L,BAL 10-36 BUF,-1,개장 -2.5 → 지금 -3(홈 기준) 키 넘버 넘김 · 이동 반대쪽 · 10-29 16:24 PT 판,3,+0,,-105,-3.5
+2026_08_TEN_CIN:ml:A10,2026,8,TEN@CIN,ml,TEN ML,,+455,,,각도 관찰 A10(색률 상위 8 수비 팀의 상대 → 상대 ML),,suggested,,L,TEN 36-43 CIN,-1,CIN 색률 8.9%(2위) → 상대 TEN · 10-29 16:24 PT 판,,,,+625,-4.8
+2026_08_TEN_CIN:spread:A6,2026,8,TEN@CIN,spread,TEN +11.5,+11.5,-110,,,각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS),,suggested,,W,TEN 36-43 CIN,0.909,개장 -6.5 → 지금 -11.5(홈 기준) 키 넘버 넘김 · 이동 반대쪽 · 10-29 16:24 PT 판,13.5,-2,,,
+2026_08_MIN_DET:ml:A5,2026,8,MIN@DET,ml,DET ML,,-170,,,각도 관찰 A5(3rd down 운 회귀 5~9주 → 상대 ML),,suggested,,W,MIN 15-19 DET,0.588,MIN 3rd down 17위 vs 공격 EPA 29위(+12) → 상대 DET · 8주차 · 10-29 16:24 PT 판,,,,-175,-2.0
+2026_08_MIN_DET:ml:A10,2026,8,MIN@DET,ml,MIN ML,,+142,,,각도 관찰 A10(색률 상위 8 수비 팀의 상대 → 상대 ML),,suggested,,L,MIN 15-19 DET,-1,DET 색률 7.2%(7위) → 상대 MIN · 10-29 16:24 PT 판,,,,+145,-2.2
+2026_08_MIN_DET:ml:A8,2026,8,MIN@DET,ml,DET ML,,-170,,,각도 관찰 A8(접전 .750+ 팀 → 그 팀 ML),,suggested,,W,MIN 15-19 DET,0.588,DET 한 포제션 경기 3-1(75%) · 10-29 16:24 PT 판,,,,-175,-2.0
+2026_08_LV_NYJ:ml:A10,2026,8,LV@NYJ,ml,LV ML,,+102,,,각도 관찰 A10(색률 상위 8 수비 팀의 상대 → 상대 ML),,suggested,,W,LV 38-33 NYJ,1.020,NYJ 색률 7.6%(5위) → 상대 LV · 10-29 16:24 PT 판,,,,+110,-3.8
+2026_08_CLE_PIT:ml:A10,2026,8,CLE@PIT,ml,PIT ML,,-192,,,각도 관찰 A10(색률 상위 8 수비 팀의 상대 → 상대 ML),,suggested,,W,CLE 6-27 PIT,0.521,CLE 색률 7.5%(6위) → 상대 PIT · 10-29 16:24 PT 판,,,,-192,-2.7
+2026_08_CLE_PIT:ml:A8,2026,8,CLE@PIT,ml,PIT ML,,-192,,,각도 관찰 A8(접전 .750+ 팀 → 그 팀 ML),,suggested,,W,CLE 6-27 PIT,0.521,PIT 한 포제션 경기 4-1(80%) · 10-29 16:24 PT 판,,,,-192,-2.7
+2026_08_ATL_TB:ml:A5,2026,8,ATL@TB,ml,ATL ML,,+120,,,각도 관찰 A5(3rd down 운 회귀 5~9주 → 상대 ML),,suggested,,L,ATL 0-16 TB,-1,TB 3rd down 14위 vs 공격 EPA 28위(+14) → 상대 ATL · 8주차 · 10-29 16:24 PT 판,,,,+110,+0.3
+2026_08_ATL_TB:spread:A6,2026,8,ATL@TB,spread,TB -2.5,-2.5,-110,,,각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS),,suggested,,W,ATL 0-16 TB,0.909,개장 -4.5 → 지금 -2.5(홈 기준) 키 넘버 넘김 · 이동 반대쪽 · 10-29 16:24 PT 판,-2.5,+0,,-105,-3.5
+2026_08_IND_JAX:ml:A5,2026,8,IND@JAX,ml,JAX ML,,-500,,,각도 관찰 A5(3rd down 운 회귀 5~9주 → 상대 ML),,suggested,,W,IND 7-42 JAX,0.200,IND 3rd down 15위 vs 공격 EPA 27위(+12) → 상대 JAX · 8주차 · 10-29 16:24 PT 판,,,,-500,-3.3
+2026_08_IND_JAX:spread:A6,2026,8,IND@JAX,spread,IND +10,+10,-110,,,각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS),,suggested,,L,IND 7-42 JAX,-1,개장 -4.5 → 지금 -10(홈 기준) 키 넘버 넘김 · 이동 반대쪽 · 10-29 16:24 PT 판,10.5,-0.5,,,
+2026_08_KC_DEN:ml:A4,2026,8,KC@DEN,ml,DEN ML,,-102,,,각도 관찰 A4(작년 플옵팀 언더독 1~8주 → 그 팀 ML),,suggested,,W,KC 24-28 DEN,0.980,작년 플옵팀 DEN 언더독(무비그 48% · 상대 KC 비플옵) · 8주차 · 10-29 16:24 PT 판,,,,-115,+0.6
+2026_08_KC_DEN:ml:A10,2026,8,KC@DEN,ml,KC ML,,-118,,,각도 관찰 A10(색률 상위 8 수비 팀의 상대 → 상대 ML),,suggested,,L,KC 24-28 DEN,-1,DEN 색률 7.1%(8위) → 상대 KC · 10-29 16:24 PT 판,,,,-105,-5.2
+2026_08_KC_DEN:ml:A8,2026,8,KC@DEN,ml,DEN ML,,-102,,,각도 관찰 A8(접전 .750+ 팀 → 그 팀 ML),,suggested,,W,KC 24-28 DEN,0.980,DEN 한 포제션 경기 4-0(100%) · 10-29 16:24 PT 판,,,,-115,+0.6
+2026_08_NE_MIA:ml:A5,2026,8,NE@MIA,ml,NE ML,,-325,,,각도 관찰 A5(3rd down 운 회귀 5~9주 → 상대 ML),,suggested,,W,NE 24-19 MIA,0.308,MIA 3rd down 12위 vs 공격 EPA 24위(+12) → 상대 NE · 8주차 · 10-29 16:24 PT 판,,,,-345,-2.1
+2026_08_NE_MIA:spread:A7,2026,8,NE@MIA,spread,MIA +7,+7,-110,,,각도 관찰 A7(홈 언더독 +7 이상 → 홈 ATS),,suggested,,W,NE 24-19 MIA,0.909,홈 MIA 언더독 +7 · 10-29 16:24 PT 판,7,+0,,-110,-2.4
+2026_08_PHI_WAS:ml:A4,2026,8,PHI@WAS,ml,PHI ML,,+225,,,각도 관찰 A4(작년 플옵팀 언더독 1~8주 → 그 팀 ML),,suggested,,L,PHI 10-27 WAS,-1,작년 플옵팀 PHI 언더독(무비그 29% · 상대 WAS 비플옵) · 8주차 · 11-01 17:06 PT 판,,,,+205,+0.7
+2026_08_PHI_WAS:spread:A6,2026,8,PHI@WAS,spread,PHI +6,+6,-110,,,각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS),,suggested,,L,PHI 10-27 WAS,-1,개장 +2.5 → 지금 -6(홈 기준) 키 넘버 넘김 · 이동 반대쪽 · 11-01 17:06 PT 판,5.5,+0.5,,,
+2026_08_CHI_SEA:ml:A10,2026,8,CHI@SEA,ml,SEA ML,,-166,,,각도 관찰 A10(색률 상위 8 수비 팀의 상대 → 상대 ML),,suggested,,L,CHI 34-17 SEA,-1,CHI 색률 8.4%(3위) → 상대 SEA · 11-01 17:06 PT 판,,,,-166,-2.4
+2026_08_PHI_WAS:spread:A3,2026,8,PHI@WAS,spread,PHI +6,+6,-110,,,각도 관찰 A3(결장 팀 반대 3점+ 이동 → 결장 팀),,suggested,,L,PHI 10-27 WAS,-1,"원정 PHI 결장 확정 · 개장 +2.5 → 지금 -6(홈 기준, +8.5점 반대 이동) · 11-01 17:06 PT 판",5.5,+0.5,,,
 2026_09_JAX_BAL:spread:A3,2026,9,JAX@BAL,spread,BAL +10,+10,-110,,,각도 관찰 A3(결장 팀 반대 3점+ 이동 → 결장 팀),,suggested,,,,,"홈 BAL 결장 확정 · 개장 -4.5 → 지금 +10(홈 기준, +14.5점 반대 이동) · 11-04 22:58 PT 판",,,,,
 2026_09_JAX_BAL:spread:A7,2026,9,JAX@BAL,spread,BAL +10,+10,-110,,,각도 관찰 A7(홈 언더독 +7 이상 → 홈 ATS),,suggested,,,,,홈 BAL 언더독 +10 · 11-04 22:58 PT 판,,,,,
 2026_09_JAX_BAL:spread:A6,2026,9,JAX@BAL,spread,BAL +10,+10,-110,,,각도 관찰 A6(키 넘버 3·7 넘긴 이동 → 반대쪽 ATS),,suggested,,,,,개장 -4.5 → 지금 +10(홈 기준) 키 넘버 넘김 · 이동 반대쪽 · 11-04 22:58 PT 판,,,,,

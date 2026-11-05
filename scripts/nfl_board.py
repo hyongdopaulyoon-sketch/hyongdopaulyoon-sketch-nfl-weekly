@@ -1233,7 +1233,8 @@ def hub_html(live=None):
     w0, u0 = links[-1]
     items = "".join(f'<li><a href="{esc(u)}"><span class="d">{w}주차</span><span class="sp">{esc(span(w))}</span>{wl(w)}'
                     f'<span class="go">열기 →</span></a></li>' for w, u in reversed(links))
-    return f"""<meta charset="utf-8"><title>NFL 주간 보드</title>
+    return f"""<!DOCTYPE html>
+<meta charset="utf-8"><title>NFL 주간 보드</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@600;800&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <style>
 :root {{ --bg:#eef2ec; --sur:#ffffff; --ink:#14231b; --ink2:#5d6b62; --line:#d4ddd3; --acc:#e8590c; --accT:#fbe9df; }}
@@ -1573,7 +1574,8 @@ def main():
     star_rows = "".join(
         f'<tr><td class="star">{"★" * k}</td><td class="num">{w}-{l}</td><td class="num">{(f"{100 * w / (w + l):.0f}%") if w + l else "—"}</td><td class="num muted">{PR.STAR_HIT[k]}</td></tr>'
         for k, (w, l) in ms.get("stars", {}).items())
-    page = f'''<meta charset="utf-8"><title>NFL {a.week}주차 보드</title>
+    page = f'''<!DOCTYPE html>
+<meta charset="utf-8"><title>NFL {a.week}주차 보드</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@600;800&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
