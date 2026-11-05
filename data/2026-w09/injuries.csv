@@ -1,0 +1,31 @@
+﻿team,report_week,expected_qb,depth_qb1,season_main_qb,qb_report,qb_flag,qb_note,n_out,n_doubtful,n_questionable,out,doubtful,questionable,final_pending,n_dnp,n_limited,dnp,limited,n_starters_missing
+ARI,9,Gardner Minshew,Gardner Minshew II,J.Brissett,,백업 QB 선발 — 뎁스차트 QB1 Gardner Minshew II 대신 예상 선발 Gardner Minshew,,1,0,0,Jalen Brooks(WR · 스냅 58% · IR),,,,0,0,,,0
+ATL,9,Michael Penix Jr.,Michael Penix Jr.,M.Penix,,,,0,0,0,,,,,0,0,,,0
+BAL,9,Joe Fagnano,Tyler Huntley,T.Huntley,,백업 QB 선발 — 뎁스차트 QB1 Tyler Huntley 대신 예상 선발 Joe Fagnano,QB 연습 Lamar Jackson DNP(최종 지정 미발표 — 잠정),1,0,0,Tavius Robinson(LB · 스냅 49% · IR),,,미발표,5,3,Calais Campbell(DT · 스냅 40%) · Lamar Jackson(QB · 스냅 2%) · Tyler Huntley(QB · ★스냅 73%) · Jaylinn Hawkins(S · ★스냅 87%) · Tyler Loop(K),John Jenkins(DT · 스냅 27%) · John Simpson(G · ★스냅 100%) · Roger Rosengarten(T · ★스냅 100%),2
+BUF,9,Josh Allen,Josh Allen,J.Allen,,,,1,0,0,C.J. Gardner-Johnson(DB · ★스냅 68% · IR),,,,0,0,,,1
+CAR,9,Bryce Young,Bryce Young,B.Young,,,,3,0,0,Taylor Moton(OL · ★스냅 70% · IR) · Akayleb Evans(DB · ★스냅 99% · IR) · Thomas Incoom(LB · 스냅 5% · IR),,,,0,0,,,2
+CHI,9,Caleb Williams,Caleb Williams,C.Williams,,,,2,0,0,Cole Kmet(TE · ★스냅 64% · IR) · Nephi Sewell(LB · 스냅 35% · IR),,,,0,0,,,1
+CIN,9,Joe Burrow,Joe Burrow,J.Burrow,,,,3,0,0,Tanner Hudson(TE · 스냅 29% · IR) · Swayze Bozeman(LB · 스냅 2% · IR) · Erick All(TE · 스냅 40% · IR),,,,0,0,,,0
+CLE,9,Deshaun Watson,Deshaun Watson,D.Watson,,,일정표 예상 Shedeur Sanders 는 묵은 값 — 최근 8주 선발·뎁스차트 QB1 Deshaun Watson 로 정정,0,0,0,,,,,0,0,,,0
+DAL,9,Dak Prescott,Dak Prescott,D.Prescott,,,,0,0,0,,,,,0,0,,,0
+DEN,9,Bo Nix,Bo Nix,B.Nix,,,,3,0,0,Tyler Badie(RB · 스냅 7% · IR) · Jonah Elliss(LB · 스냅 45% · IR) · RJ Harvey(RB · 스냅 33% · IR),,,,0,0,,,0
+DET,9,Jared Goff,Jared Goff,J.Goff,,,,1,0,0,Devin White(LB · 스냅 22% · IR),,,,0,0,,,0
+GB,9,Jordan Love,Jordan Love,J.Love,,,,1,0,0,Jacob Monk(OL · 스냅 7% · IR),,,,0,0,,,0
+HOU,9,C.J. Stroud,C.J. Stroud,C.Stroud,,,,0,0,0,,,,,0,0,,,0
+IND,9,Daniel Jones,Daniel Jones,D.Jones,,,,1,0,0,Cam Taylor-Britt(DB · 스냅 47% · IR),,,,0,0,,,0
+JAX,9,Trevor Lawrence,Trevor Lawrence,T.Lawrence,,,,1,0,0,Anton Harrison(OL · 스냅 58% · IR),,,미발표,3,7,Eric Murray(S · ★스냅 98%) · DaVon Hamilton(DT · 스냅 37%) · Bhayshul Tuten(RB · 스냅 59%),Jakobi Meyers(WR · ★스냅 71%) · Ezra Cleveland(G · ★스냅 78%) · Travon Walker(DE · ★스냅 74%) · Antonio Johnson(S · ★스냅 70%) · Chris Rodriguez Jr.(RB · 스냅 21%) · Jarrian Jones(CB · ★스냅 72%) · Branson Combs(LB · 스냅 21%),1
+KC,9,Patrick Mahomes,Patrick Mahomes,P.Mahomes,,,,1,0,0,L'Jarius Sneed(DB · 스냅 34% · IR),,,,0,0,,,0
+LA,9,Matthew Stafford,Matthew Stafford,M.Stafford,,,,3,0,0,Davante Adams(WR · ★스냅 74% · IR) · Poona Ford(DL · 스냅 35% · IR) · Kobie Turner(DL · 스냅 32% · IR),,,,0,0,,,1
+LAC,9,Justin Herbert,Justin Herbert,J.Herbert,,,,1,0,0,Alec Ingold(RB · 스냅 19% · IR),,,,0,0,,,0
+LV,9,Kirk Cousins,Kirk Cousins,K.Cousins,,,,1,0,0,Patrick Johnson(LB · 스냅 8% · IR),,,,0,0,,,0
+MIA,9,Malik Willis,Malik Willis,M.Willis,,,,0,0,0,,,,,0,0,,,0
+MIN,9,Kyler Murray,Kyler Murray,K.Murray,,,,0,0,0,,,,,0,0,,,0
+NE,9,Drake Maye,Drake Maye,D.Maye,,,,2,0,0,Alijah Vera-Tucker(OL · 스냅 32% · IR) · Romeo Doubs(WR · 스냅 3% · IR),,,,0,0,,,0
+NO,9,Tyler Shough,Tyler Shough,T.Shough,,,,0,0,0,,,,,0,0,,,0
+NYG,9,J.J. McCarthy,J.J. McCarthy,J.Winston,,,"주전 복귀 — 시즌 드롭백 최다 J.Winston, 예상 선발 J.J. McCarthy(레이팅에 대체 QB 표본 섞임)",0,0,0,,,,,0,0,,,0
+NYJ,9,Geno Smith,Geno Smith,G.Smith,,,,1,0,0,T'Vondre Sweat(DL · 스냅 48% · IR),,,,0,0,,,0
+PHI,9,Tanner McKee,Tanner McKee,J.Hurts,,,"주전 복귀 — 시즌 드롭백 최다 J.Hurts, 예상 선발 Tanner McKee(레이팅에 대체 QB 표본 섞임) · 일정표 예상 Joe Milton III 는 묵은 값 — 최근 8주 선발·뎁스차트 QB1 Tanner McKee 로 정정",1,0,0,Dameon Pierce(RB · ★스냅 80% · IR),,,,0,0,,,1
+SEA,9,Sam Darnold,Sam Darnold,S.Darnold,,,일정표 예상 Drew Lock 는 묵은 값 — 최근 8주 선발·뎁스차트 QB1 Sam Darnold 로 정정,1,0,0,Elijah Arroyo(TE · 스냅 6% · IR),,,,0,0,,,0
+SF,9,Brock Purdy,Brock Purdy,B.Purdy,,,,0,0,0,,,,,0,0,,,0
+TB,9,Baker Mayfield,Baker Mayfield,B.Mayfield,,,,1,0,0,Christian Rozeboom(LB · 스냅 32% · IR),,,,0,0,,,0
+WAS,9,Jayden Daniels,Jayden Daniels,J.Daniels,,,,2,0,0,Terry McLaurin(WR · 스냅 34% · IR) · Jacory Croskey-Merritt(RB · 스냅 35% · IR),,,,0,0,,,0
