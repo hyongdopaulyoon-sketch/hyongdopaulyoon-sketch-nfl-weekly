@@ -85,7 +85,7 @@
 "LV@SF": {
 "spread_home": "-10.0",
 "total": "51.5",
-"ml": "+390/-520",
+"ml": "+380/-500",
 "qb": {
 "LV": "Kirk Cousins",
 "SF": "Brock Purdy"
@@ -97,6 +97,39 @@
 "스냅 8%"
 ],
 "SF": []
+}
+},
+"JAX@BAL": {
+"spread_home": "9.5",
+"total": "39.5",
+"ml": "-455/+350",
+"qb": {
+"JAX": "Trevor Lawrence",
+"BAL": "Joe Fagnano"
+},
+"out": {
+"JAX": [
+"Anton Harrison",
+"DaVon Hamilton",
+"Eric Murray",
+"IR)",
+"IR)",
+"IR)",
+"★스냅 98%",
+"스냅 37%",
+"스냅 58%"
+],
+"BAL": [
+"IR)",
+"Jaylinn Hawkins",
+"Lamar Jackson",
+"Tavius Robinson",
+"Tyler Huntley",
+"★스냅 73%)",
+"★스냅 87%)",
+"스냅 2%)",
+"스냅 49%"
+]
 }
 },
 "DEN@CAR": {
@@ -135,7 +168,7 @@
 "NYG@PHI": {
 "spread_home": "3.5",
 "total": "38.5",
-"ml": "-166/+140",
+"ml": "-162/+136",
 "qb": {
 "NYG": "J.J. McCarthy",
 "PHI": "Joe Milton III"
@@ -153,39 +186,6 @@
 "Dameon Pierce",
 "IR)",
 "★스냅 80%"
-]
-}
-},
-"JAX@BAL": {
-"spread_home": "10.0",
-"total": "39.5",
-"ml": "-500/+380",
-"qb": {
-"JAX": "Trevor Lawrence",
-"BAL": "Joe Fagnano"
-},
-"out": {
-"JAX": [
-"Anton Harrison",
-"DaVon Hamilton",
-"Eric Murray",
-"IR)",
-"IR)",
-"IR)",
-"★스냅 98%",
-"스냅 37%",
-"스냅 58%"
-],
-"BAL": [
-"IR)",
-"Jaylinn Hawkins",
-"Lamar Jackson",
-"Tavius Robinson",
-"Tyler Huntley",
-"★스냅 73%)",
-"★스냅 87%)",
-"스냅 2%)",
-"스냅 49%"
 ]
 }
 },
@@ -213,7 +213,7 @@
 "CIN@ATL": {
 "spread_home": "3.0",
 "total": "52.5",
-"ml": "-166/+140",
+"ml": "-170/+142",
 "qb": {
 "CIN": "Joe Burrow",
 "ATL": "Michael Penix Jr."
@@ -277,9 +277,30 @@
 "MIN": []
 }
 },
+"HOU@LAC": {
+"spread_home": "6.0",
+"total": "40.5",
+"ml": "-238/+195",
+"qb": {
+"HOU": "C.J. Stroud",
+"LAC": "Justin Herbert"
+},
+"out": {
+"HOU": [
+"IR)",
+"Jaylin Noel",
+"스냅 42%"
+],
+"LAC": [
+"Alec Ingold",
+"IR)",
+"스냅 19%"
+]
+}
+},
 "GB@NE": {
 "spread_home": "-3.0",
-"total": "45.5",
+"total": "44.5",
 "ml": "+140/-166",
 "qb": {
 "GB": "Jordan Love",
@@ -304,7 +325,7 @@
 "DET@MIA": {
 "spread_home": "7.0",
 "total": "50.5",
-"ml": "-355/+280",
+"ml": "-340/+270",
 "qb": {
 "DET": "Jared Goff",
 "MIA": "Malik Willis"
@@ -334,26 +355,5 @@
 "NO": []
 }
 },
-"HOU@LAC": {
-"spread_home": "4.5",
-"total": "40.5",
-"ml": "-218/+180",
-"qb": {
-"HOU": "C.J. Stroud",
-"LAC": "Justin Herbert"
-},
-"out": {
-"HOU": [
-"IR)",
-"Jaylin Noel",
-"스냅 42%"
-],
-"LAC": [
-"Alec Ingold",
-"IR)",
-"스냅 19%"
-]
-}
-},
-"_stamp": "11-05 12:10"
+"_stamp": "11-05 16:23"
 }
