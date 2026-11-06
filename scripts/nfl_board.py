@@ -1369,8 +1369,9 @@ def main():
         st = lv.get("state", g.get("status", ""))
         fin = st == "STATUS_FINAL"
         rows = by.get(gk, [])
-        # 10판 ML 전용(2026-10-16 Paul): 방향(스프레드/총점)·바람·A1·A2 페이퍼는 표시 안 함 — 새 정보·각도 A3·A4 관찰만
-        obs = [r for r in rows if r["grade"].startswith(("새 정보", "각도 관찰 A3", "각도 관찰 A4"))]   # 새 정보 = 관찰(:N)·대조군(:NC)
+        # 10판 ML 전용(2026-10-16 Paul): 방향(스프레드/총점)·바람·A1·A2 페이퍼는 표시 안 함 — 새 정보·각도 A3~ 관찰(11/05 Paul 「1」 전부 표시)
+        obs = [r for r in rows if r["grade"].startswith("새 정보")
+               or (re.match(r"각도 관찰 A\d+\(", r["grade"]) and not re.match(r"각도 관찰 A[12]\(", r["grade"]))]   # 새 정보 = 관찰(:N)·대조군(:NC)
         pub = pubs.get(gk, {})
         pr = preds.get(gk, {})
         m_, d_, b_ = pr.get("시장"), pr.get("모델"), pr.get("발행")
@@ -1412,7 +1413,8 @@ def main():
             if r["grade"].startswith("새 정보"):
                 lab = "새 정보(대조 — 판 이전 발표)" if "대조" in r["grade"] else "라인 뒤 새 정보"
             else:
-                lab = r["grade"].split("(")[0].replace("각도 관찰 ", "각도 ")
+                ma_ = re.match(r"각도 관찰 (A\d+)\((.*)\)$", r["grade"])   # 이름 + 짧은 뜻(11/05 Paul 「1」)
+                lab = f'각도 {ma_.group(1)} <span class="muted">{esc(ma_.group(2))}</span>' if ma_ else esc(r["grade"].split("(")[0].replace("각도 관찰 ", "각도 "))
             items.append(f'<li><span class="tag obs">{term("관찰", "관찰만")}</span> {lab} <b title="{esc(r.get("note", ""))}">{esc(r["side"])}</b> {hit(result_of(r, gk))}</li>')
         lines = f'<ul class="lines">{"".join(items)}</ul>' if items else ""
         div = '<span class="chip">디비전</span>' if g.get("div_game") == "1" else ""
@@ -1667,7 +1669,7 @@ nav.weeks a{{color:var(--ink)}}nav.weeks b.cur{{color:var(--ink);text-decoration
     <div><b>읽는 법</b> — 점선 밑줄 낱말에 손가락·마우스를 대면 뜻이 나와요.</div>
     <div><span class="star">★</span> = <b>이길 확률이 높은 정도</b>(2018~25 실제 적중 ★ 50% · ★★ 61% · ★★★ 71% · ★★★★ 82%). <b>돈 버는 신호가 아니에요</b> — 별이 많은 팀일수록 ML 배당이 비싸서, 맞혀도 남는 돈이 적어요.</div>
     <div>{term("ML")} = 그냥 이길 팀 — 10/16부터 보드는 <b>이길 팀 예측(ML)만</b> 보여 줘요(점수 차·총점·방향은 뺐어요). 끝난 경기의 「결과」 칸에만 스프레드 커버·오버/언더를 값으로 붙여요(10/29).</div>
-    <div>{term("관찰", "관찰만")} = 돈 안 건 기록(라인 뒤 새 정보 · 각도 A3·A4) · 맞힘/틀림 = 예측·관찰 결과</div>
+    <div>{term("관찰", "관찰만")} = 돈 안 건 기록(라인 뒤 새 정보 · 관찰 각도 A3~ — 회색 글씨가 각도 뜻, 스프레드·총점 각도도 관찰로만) · 맞힘/틀림 = 예측·관찰 결과</div>
     <div><b>발행문 글자</b> — <b style="color:var(--acc2)">파란 굵은 팀</b> = 우리 예측 팀 · <b style="color:var(--acc)">주황 굵은 팀</b> = 상대 · <b>굵은 검정</b> = 선수(처음 나올 때 「팀 · 포지션 · 역할 · 상태」) · <b style="color:var(--muted)">회색 굵은 낱말</b> = 스탯 이름(EPA·CPOE·야드/캐리 …) · 긴 줄은 묶음·문장마다 줄을 바꾸고, 「NE 값 vs CHI 값」 줄은 비교표로 · 선수 표는 왼쪽 원정 / 오른쪽 홈, 색이 진할수록 큰 값(표 아래 풀이). 상자 순서: 결론 → 보완 → 시장 → 팀 상태 → 선수 → 팀 비교 → 심판.</div>
     {gloss_all()}
     <div><b>카드나 표 줄을 누르면</b> 그 경기의 발행문·보완 전문이 아래에서 펼쳐져요. 표 머리(예측 승자·★·발행 예측 …)를 누르면 그 기준으로 정렬돼요.</div>
