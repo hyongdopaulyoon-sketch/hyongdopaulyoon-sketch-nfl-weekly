@@ -1106,7 +1106,7 @@ def ph_inactives(week, games, snap):
 
 
 ANGLE_NOTE = {   # 2026-10-17 — 각도별 실측 한 줄(예측시장 이후 24~25 기준 · 서술용). 정의·판정 기준은 picks.py 주석
-    "A3": "결장 팀 반대 3점+ 이동 → 결장 팀 ATS(역사 없음 · 전향 5-2)",
+    "A3": "결장 팀 반대 3점+ 이동 → 결장 팀 ATS(역사 없음 · 성적은 옆 「2026 실시간」)",
     "A4": "작년 플옵팀 언더독 1~8주 ML(18~25 24-14 +50% · 24~25 +4.6%p)",
     "A5": "3rd down 운 회귀 → 상대 ML(24~25 54-27 실제 67% vs 시장 56%)",
     "A6": "개장→마감 키 넘버 3·7 넘김 → 반대쪽 ATS(24~25 73-50 59%)",
@@ -1119,13 +1119,19 @@ ANGLE_NOTE = {   # 2026-10-17 — 각도별 실측 한 줄(예측시장 이후 2
 
 def _angles_line(week, g):
     """경기 절 「- 🔎 관찰 각도」 — 이 경기의 각도 페이퍼(picks.csv, 미채점)와 실측 한 줄. 돈 아님 · 발행 세션은 ML 각도가 예측 승자와 같으면 소액 관심 근거로, 그 밖은 변수 한 줄."""
-    rows = [r for r in rd(os.path.join(DATA, "picks.csv")) if r.get("id", "").startswith(str(g.get("game_id", "")) + ":") and r.get("grade", "").startswith("각도 관찰") and not r.get("result")]
+    allp = rd(os.path.join(DATA, "picks.csv"))
+    rows = [r for r in allp if r.get("id", "").startswith(str(g.get("game_id", "")) + ":") and r.get("grade", "").startswith("각도 관찰") and not r.get("result")]
+
+    def live(key):
+        xs = [r for r in allp if r.get("grade", "").startswith("각도 관찰") and r.get("id", "").split(":")[-1] == key and r.get("result") in ("W", "L")]
+        w = sum(1 for r in xs if r["result"] == "W")
+        return f"2026 실시간 {w}-{len(xs) - w}"
     if not rows:
         return "- 🔎 관찰 각도(페이퍼 · 돈 아님): 해당 없음"
     parts = []
     for r in sorted(rows, key=lambda r: r["id"]):
         key = r["id"].split(":")[-1]
-        parts.append(f'{key} {r["side"]}' + (f'({r["odds"]})' if r.get("market") == "ml" and r.get("odds") else "") + f' — {ANGLE_NOTE.get(key, r["grade"])} · {r.get("note", "").split(" · ")[0]}')
+        parts.append(f'{key} {r["side"]}' + (f'({r["odds"]})' if r.get("market") == "ml" and r.get("odds") else "") + f' — {ANGLE_NOTE.get(key, r["grade"])} · {live(key)} · {r.get("note", "").split(" · ")[0]}')
     return ("- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전 · 예측시장 이후 실측 기준): " + " / ".join(parts)
             + " ← ML 각도가 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄")
 
@@ -1164,7 +1170,14 @@ def _inactives_line(wd, g, a, h):
             n_star += "★" in x
             names.append((x.rstrip(")") + " · 주간 보고)") if "(" in x else x + "(주간 보고)")
         stars[t] = n_star
-        parts.append(f'{t} Out {len(names)}' + (f' — {" · ".join(names)}' if names else ""))
+        unk = []
+        for col in ("questionable", "doubtful"):
+            for x in [y.strip() for y in re.split(r"\)\s*·\s*", str(inj.get(t, {}).get(col) or "")) if y.strip()]:
+                nm = x.split("(")[0].strip()
+                if "★" in x and _norm_name(nm) not in seen:
+                    unk.append(f'{nm}({"Q" if col == "questionable" else "D"})')
+        parts.append(f'{t} Out {len(names)}' + (f' — {" · ".join(names)}' if names else "")
+                     + (f' · ⚠️ ★ 주중 Q/D 인데 ESPN 당일 명단에 없음: {", ".join(unk)} — 출전 여부 미확인(ESPN 이 생략하는 경로 있음 · 웹 확인 필수 · 「명단에 없으니 출전」으로 읽지 말 것)' if off and unk else ""))
     if off:
         return (f'- 🏥 결장 명단(ESPN 공식 비활성 · 발표 {ann_pt} PT ∪ 주간 보고 Out): ' + " / ".join(parts)
                 + f' · ★주전 결장 {a} {stars[a]} / {h} {stars[h]} — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · ESPN 당일 명단은 주중 Out 을 생략하니 발행 세션 웹 확인 유지')
