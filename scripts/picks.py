@@ -589,8 +589,13 @@ def angle_game_record(rows):
             continue
         k = (r["id"].split(":")[0], r.get("market", ""), str(r.get("side", "")).split(" ")[0])
         grp.setdefault(k, []).append(r["result"])
+    sides = defaultdict(set)
+    for (gid, mk, team) in grp:
+        sides[(gid, mk)].add(team)
+    conflict = {k for k, v in sides.items() if len(v) >= 2}   # 2026-11-05 복기/개선/수정: 상충 경기는 전적에서 뺀다
+    grp = {k: v for k, v in grp.items() if (k[0], k[1]) not in conflict}
     w = sum(1 for v in grp.values() if v[0] == "W"); l = sum(1 for v in grp.values() if v[0] == "L")
-    return w, l, len(grp) - w - l, len(grp), sum(1 for v in grp.values() if len(v) >= 2)
+    return w, l, len(grp) - w - l, len(grp), sum(1 for v in grp.values() if len(v) >= 2), len(conflict)
 
 
 def stats():
@@ -606,9 +611,9 @@ def stats():
     for k in ("A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10"):
         xs = [r for r in rows if r["grade"] == ANGLE_GRADES[k]]
         print(f"  {ANGLE_GRADES[k]}: {rec(xs) if xs else '0픽'} · 판정까지 {len(xs)}/{ANGLE_TARGET[k]}픽")
-    _w, _l, _p, _n, _dup = angle_game_record([r for r in rows if r["grade"] not in (ANGLE_GRADES["A1"], ANGLE_GRADES["A2"])])
+    _w, _l, _p, _n, _dup, _cf = angle_game_record([r for r in rows if r["grade"] not in (ANGLE_GRADES["A1"], ANGLE_GRADES["A2"])])
     print(f"  ▶ 경기 단위(같은 경기·같은 시장·같은 팀 쪽 각도는 1건): {_w}-{_l}" + (f"-{_p}" if _p else "")
-          + f" · {_n}건 중 각도 2개+ 겹친 건 {_dup} — 각도별 줄은 겹침을 중복으로 센다")
+          + f" · {_n}건 중 각도 2개+ 겹친 건 {_dup} · 상충(같은 경기 반대쪽 각도) {_cf}경기는 전적 제외 — 각도별 줄은 겹침을 중복으로 센다")
     print("— 아래는 10판 전 기록(참고 · 손익분기 52.4%(−110) 기준) —")
     # 2026-10-05 Paul 승인: 모델 페이퍼(관찰·참고)는 보고에서 뺀다(기록·추적기는 유지) · 발행 방향은 동전 — 적중률만(유닛 없음)
     print(f"■ 실베팅 {len(placed)}픽 {rec(placed)}")
