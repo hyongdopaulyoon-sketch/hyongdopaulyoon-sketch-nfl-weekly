@@ -13,7 +13,7 @@ import csv
 import os
 import sys
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE); DATA = os.path.join(ROOT, "data")
 PICKS = os.path.join(DATA, "picks.csv")
@@ -344,9 +344,42 @@ ANGLE_GRADES = {"A1": "각도 관찰 A1(원정 큰 페이버릿 반대)", "A2": 
                 "A7": "각도 관찰 A7(홈 언더독 +7 이상 → 홈 ATS)",                # 2026-10-17 「남는 종류 더」 — 아래 A7 주석
                 "A8": "각도 관찰 A8(접전 .750+ 팀 → 그 팀 ML)",                  # 아래 A8 주석
                 "A9": "각도 관찰 A9(12월~ 실외 → Over)",                           # 아래 A9 주석
-                "A10": "각도 관찰 A10(색률 상위 8 수비 팀의 상대 → 상대 ML)"}       # 2026-10-18 수비 데이터 탐색 — 아래 A10 주석
+                "A10": "각도 관찰 A10(색률 상위 8 수비 팀의 상대 → 상대 ML)",
+                "A11": "각도 관찰 A11(경기 당일 비·뇌우 실외 → Under)",          # 2026-11-05 Paul 「a」 — B1 백테스트 방향만(n77 −3.9점)
+                "A12": "각도 관찰 A12(첫 선발 백업 QB 상대 7+ 페이버릿 → 페이버릿 ML)"}   # 2026-11-05 Paul 「a」 — B3 방향만(n63 +7.8%p)       # 2026-10-18 수비 데이터 탐색 — 아래 A10 주석
 A3_MOVE = 3.0   # 개장→현재 스프레드 이동(점) 문턱 — 사전 등록, 조정 금지
-ANGLE_TARGET = {"A3": 30, "A4": 20, "A5": 20, "A6": 20, "A7": 20, "A8": 20, "A9": 20, "A10": 20}   # 사전 등록 판정 픽 수(pending_rules)
+ANGLE_TARGET = {"A3": 30, "A4": 20, "A5": 20, "A6": 20, "A7": 20, "A8": 20, "A9": 20, "A10": 20, "A11": 30, "A12": 30}
+# A11·A12(2026-11-05 사전 등록 · 조정 금지 · 서술 전용 점수 0 · 각 30픽 판정 — <50% 폐기 · ≥55% & 평균 CLV ≥0 이면 Paul 상정):
+# A11 = 실외·open & ESPN 날씨 문자열 rain|shower|thunder|storm|drizzle(snow|sleet|flurr 제외) → 그 시점 총점 Under · 판정은 경기 당일(PT) 판만, 킥오프 뒤 동결.
+# A12 = 언더독 팀 예상 선발 QB 가 2010~ 정규시즌 선발 기록 없음 & 그 팀 직전 경기 선발과 다름 & 상대가 스프레드 7+ 페이버릿 → 페이버릿 ML(현재 DK).
+import re as _re
+_RAIN = _re.compile(r"rain|shower|thunder|storm|drizzle", _re.I); _SNOWX = _re.compile(r"snow|sleet|flurr", _re.I)
+_QBHIST = None
+
+
+def _qkey(nm):
+    nm = _re.sub(r"[.,'’]", "", str(nm or "").lower()).strip()
+    return _re.sub(r"\s+(jr|sr|ii|iii|iv)$", "", nm)
+
+
+def _qb_history(week):
+    """(정규시즌 선발 QB 이름 키 집합 2010~ · {팀: 이번 시즌 이번 주 전 마지막 선발 키})"""
+    global _QBHIST
+    if _QBHIST is None:
+        seen, last = set(), {}
+        for g in sorted(rd(os.path.join(DATA, "cache", "games.csv")), key=lambda g: (int(g["season"]), int(g["week"]))):
+            if g.get("game_type") != "REG" or not g.get("result") or int(g["season"]) < 2010:
+                continue
+            if int(g["season"]) == SEASON and int(g["week"]) >= week:
+                continue
+            for sd in ("away", "home"):
+                k = _qkey(g.get(f"{sd}_qb_name"))
+                if k:
+                    seen.add(k)
+                    if int(g["season"]) == SEASON:
+                        last[g[f"{sd}_team"]] = k
+        _QBHIST = (seen, last)
+    return _QBHIST   # 사전 등록 판정 픽 수(pending_rules)
 # A4(2026-10-16 사전 등록 · 조정 금지): 작년 플레이오프 팀이 비플옵 팀 상대로 ML 언더독(무비그 <50%)인 1~8주 경기 → 그 팀 ML(현재 DK 배당).
 # 근거 2018~25 정규시즌(16개 각도 탐색 중 선택 — 사후 선택 위험): 1~4주 24-14 실제 63% vs 시장 40% 수익 +50%(z +3.0) · 5~8주 19-23 +6% · 9주~ 소멸(−6%)
 # · 시즌별 1~8주 6/8 플러스 · 2026 1~4주 3-2 +52%. 판정: 20픽에서 ≥50% & 수익 플러스면 유지, 아니면 폐기. 10판부터 A1·A2 는 생성 중단(기록만 남김).
@@ -499,6 +532,21 @@ def angles(week):
                 for t, opp, o_ in ((a, h, g.get("ml_home")), (h, a, g.get("ml_away"))):
                     if t in order[:A10_TOP]:
                         cand[f'{m["game_id"]}:ml:A10'] = (f"{a}@{h}", f"{opp} ML", "A10", f"{t} 색률 {100 * _SK[t]:.1f}%({order.index(t) + 1}위) → 상대 {opp}", "ml", "", o_ or "+100")
+        _w = str(g.get("weather") or "")
+        _tl11 = fnum(m.get("mkt_total"))
+        try:
+            _kd = (datetime.strptime(g.get("kickoff_utc", ""), "%Y-%m-%dT%H:%MZ") - timedelta(hours=8)).date()
+        except Exception:
+            _kd = None
+        if (_tl11 is not None and _kd == datetime.now().date() and (g.get("roof") or "").lower() in ("outdoors", "open")
+                and _RAIN.search(_w) and not _SNOWX.search(_w)):                 # A11 — 경기 당일 비·뇌우 → Under
+            cand[f'{m["game_id"]}:total:A11'] = (f"{a}@{h}", f"Under {_tl11:g}", "A11", f"경기 당일 날씨 「{_w}」 · 실외({g.get('roof')}) · 총점 {_tl11:g}", "total", f"{_tl11:g}", "-110")
+        if abs(hl) >= 7:                                                         # A12 — 첫 선발 백업 QB 상대 7+ 페이버릿 ML
+            seen_, last_ = _qb_history(week)
+            dog, fav, fo = (h, a, g.get("ml_away")) if hl > 0 else (a, h, g.get("ml_home"))
+            eq = _qkey((inj.get(dog) or {}).get("expected_qb"))
+            if eq and eq not in seen_ and last_.get(dog) not in (None, eq):
+                cand[f'{m["game_id"]}:ml:A12'] = (f"{a}@{h}", f"{fav} ML", "A12", f"{dog} 예상 선발 {(inj.get(dog) or {}).get('expected_qb')} 첫 선발(직전 선발과 다름) · {fav} {-abs(hl):+g} 페이버릿", "ml", "", fo or "-300")
         if hl >= A7_LINE:                                       # A7 — 홈 언더독 +7 이상(홈 ATS)
             cand[f'{m["game_id"]}:spread:A7'] = (f"{a}@{h}", f"{h} {hl:+g}", "A7", f"홈 {h} 언더독 {hl:+g}", "spread", f"{hl:+g}", "-110")
         if week >= 5:                                           # A8 — 접전 .750+ 팀 ML
@@ -608,7 +656,7 @@ def stats():
     placed = [r for r in rows if r["status"] == "placed"]; sug = [r for r in rows if r["status"] != "placed"]
     # 2026-10-21 10판 정리: 각도 페이퍼를 판정 진행도와 함께 맨 위에(사전 등록 목표 — A3 30픽 · A4~A10 20픽, 조정 금지)
     print(f"📊 NFL {SEASON} 페이퍼 성적(10판 ML · 각도 판정은 사전 등록 픽 수에서 · 유닛은 그 배당 기준)")
-    for k in ("A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10"):
+    for k in ("A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12"):
         xs = [r for r in rows if r["grade"] == ANGLE_GRADES[k]]
         print(f"  {ANGLE_GRADES[k]}: {rec(xs) if xs else '0픽'} · 판정까지 {len(xs)}/{ANGLE_TARGET[k]}픽")
     _w, _l, _p, _n, _dup, _cf = angle_game_record([r for r in rows if r["grade"] not in (ANGLE_GRADES["A1"], ANGLE_GRADES["A2"])])
