@@ -89,3 +89,15 @@ def test_price_helpers():
     co, cp = P.clv_price({"game": "PIT@CLE", "market": "spread", "side": "PIT -2.5", "odds": "-108"},
                          {"spread_home": "+2.5", "sp_home_odds": "+100", "sp_away_odds": "-120", "total": "38.5", "over_odds": "-105", "under_odds": "-115"})
     assert co == "-120" and abs(cp - 0.3) < 0.1
+
+
+def test_digest_header_rule_numbers():
+    """2026-11-05(발행 세션 요청 · 복기/개선/수정 동의 — NBA 방식): 규칙 개정 뒤 「적용 완료」 보고 전에 다이제스트 머리에
+    규칙 번호가 실제로 찍히는지. RULES 가 N0 부터 빠짐·중복 없이 이어지고, ph_digest 가 그대로 머리에 싣는다."""
+    import re
+    import nfl_pull as N
+    nums = [int(re.match(r"N(\d+)\.", r).group(1)) for r in N.RULES]
+    assert nums == list(range(len(nums))), nums
+    assert len(nums) >= 13
+    src = open(N.__file__, encoding="utf-8").read()
+    assert '["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES]' in src

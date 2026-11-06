@@ -580,6 +580,19 @@ def grade(week):
     save(rows); print(f"grade week {week}: {n}행 채점 · CLV {nc}행")
 
 
+def angle_game_record(rows):
+    """각도 페이퍼 경기 단위 성적(2026-11-05 Paul 승인 B2 — 같은 경기·같은 시장·같은 팀 쪽 각도 여러 개는 1건).
+    각도별 적립은 그대로 두고 집계만 묶는다. → (W, L, P, 묶음 수, 2개+ 겹친 묶음 수)"""
+    grp = {}
+    for r in rows:
+        if not str(r.get("grade", "")).startswith("각도 관찰") or r.get("result") not in ("W", "L", "P"):
+            continue
+        k = (r["id"].split(":")[0], r.get("market", ""), str(r.get("side", "")).split(" ")[0])
+        grp.setdefault(k, []).append(r["result"])
+    w = sum(1 for v in grp.values() if v[0] == "W"); l = sum(1 for v in grp.values() if v[0] == "L")
+    return w, l, len(grp) - w - l, len(grp), sum(1 for v in grp.values() if len(v) >= 2)
+
+
 def stats():
     rows = [r for r in rd(PICKS) if r["result"] in ("W", "L", "P")]
     def rec(xs, units=True):
@@ -593,6 +606,9 @@ def stats():
     for k in ("A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10"):
         xs = [r for r in rows if r["grade"] == ANGLE_GRADES[k]]
         print(f"  {ANGLE_GRADES[k]}: {rec(xs) if xs else '0픽'} · 판정까지 {len(xs)}/{ANGLE_TARGET[k]}픽")
+    _w, _l, _p, _n, _dup = angle_game_record([r for r in rows if r["grade"] not in (ANGLE_GRADES["A1"], ANGLE_GRADES["A2"])])
+    print(f"  ▶ 경기 단위(같은 경기·같은 시장·같은 팀 쪽 각도는 1건): {_w}-{_l}" + (f"-{_p}" if _p else "")
+          + f" · {_n}건 중 각도 2개+ 겹친 건 {_dup} — 각도별 줄은 겹침을 중복으로 센다")
     print("— 아래는 10판 전 기록(참고 · 손익분기 52.4%(−110) 기준) —")
     # 2026-10-05 Paul 승인: 모델 페이퍼(관찰·참고)는 보고에서 뺀다(기록·추적기는 유지) · 발행 방향은 동전 — 적중률만(유닛 없음)
     print(f"■ 실베팅 {len(placed)}픽 {rec(placed)}")

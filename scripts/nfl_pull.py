@@ -529,6 +529,22 @@ def _snap_pct():
     return {k: sum(v) / len(v) for k, v in acc.items()}
 
 
+def _last_snap():
+    """{(team, 정규화 이름): 그 팀 가장 최근 경기의 max(공격, 수비) 스냅 비율} — 그 경기에 없던 선수는 키 없음(= 0).
+    2026-11-05 A2(Paul 승인 Ⓑ · 복기/개선/수정 동의): ★(최근 3경기 중 출전 경기 평균)는 그대로 두고, 직전 경기 미출전을 따로 본다."""
+    rows = [r for r in rd(os.path.join(CACHE, f"snap_counts_{SEASON}.csv")) if r.get("game_type", "REG") == "REG"]
+    last = {}
+    for r in rows:
+        last[r["team"]] = max(last.get(r["team"], 0), int(r["week"]))
+    out = {}
+    for r in rows:
+        if int(r["week"]) == last.get(r["team"]):
+            v = max(fnum(r.get("offense_pct")) or 0, fnum(r.get("defense_pct")) or 0)
+            if v > 0:
+                out[(r["team"], _norm_name(r["player"]))] = v
+    return out
+
+
 def _press_by_team(season):
     """PFR 주간 고급 기록 → {team: (수비 압박/경기, 공격 피압박/경기, 경기 수)}."""
     d = rd(os.path.join(CACHE, f"advstats_week_def_{season}.csv")); o = rd(os.path.join(CACHE, f"advstats_week_pass_{season}.csv"))
@@ -1132,6 +1148,13 @@ def _angles_line(week, g):
     for r in sorted(rows, key=lambda r: r["id"]):
         key = r["id"].split(":")[-1]
         parts.append(f'{key} {r["side"]}' + (f'({r["odds"]})' if r.get("market") == "ml" and r.get("odds") else "") + f' — {ANGLE_NOTE.get(key, r["grade"])} · {live(key)} · {r.get("note", "").split(" · ")[0]}')
+    try:
+        import picks as _P
+        _w, _l, _p, _n, _dup = _P.angle_game_record([r for r in allp if r.get("id", "").split(":")[-1] not in ("A1", "A2")])
+        parts.append(f"(경기 단위 2026: {_w}-{_l} · 겹친 각도는 1건 — {_n}건 중 겹침 {_dup})" if len(rows) >= 2 else "")
+        parts = [x for x in parts if x]
+    except Exception:
+        pass
     return ("- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전 · 예측시장 이후 실측 기준): " + " / ".join(parts)
             + " ← ML 각도가 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄")
 
@@ -1153,15 +1176,28 @@ def _inactives_line(wd, g, a, h):
     except Exception:
         pass
     parts, stars = [], {}
+    try:
+        lsnap = _last_snap()
+    except Exception:
+        lsnap = {}
     for t in (a, h):
         seen, names, n_star = set(), [], 0
+        rep_names = {_norm_name(y.split("(")[0].strip()) for col in ("out", "doubtful", "questionable")
+                     for y in re.split(r"\)\s*·\s*", str(inj.get(t, {}).get(col) or "")) if y.strip()}
         for r in rows:
             if r["team"] != t or r["status"] != "Out":
                 continue
-            seen.add(_norm_name(r["player"]))
-            n_star += r["star"] == "1"
+            nk = _norm_name(r["player"])
+            seen.add(nk)
+            lv = lsnap.get((t, nk), 0)
+            healthy = str(r["reason"]).startswith("Coach")
+            # A2 Ⓑ(2026-11-05): 직전 경기 스냅 0 & 그 주 부상 보고에 없음(건강 제외) = 대체 출전 표본 — ★ 정의는 그대로, ★주전 결장 수·새 정보 후보에서만 뺀다
+            sub = r["star"] == "1" and healthy and lv == 0 and nk not in rep_names
+            n_star += r["star"] == "1" and not sub
             names.append(("★" if r["star"] == "1" else "") + f'{r["player"]}({r["pos"]}' + (f' · 스냅 {r["snap_pct"]}%' if r["snap_pct"] else "")
-                         + (" · 건강 제외" if str(r["reason"]).startswith("Coach") else (f' · {r["reason"]}' if r["reason"] else "")) + ")")
+                         + f' · 직전 경기 {lv * 100:.0f}%'
+                         + (" · 건강 제외" if healthy else (f' · {r["reason"]}' if r["reason"] else ""))
+                         + (" · 대체 출전 표본(직전 경기 미출전·부상 보고 없음 — ★주전 결장 수·새 정보에서 제외)" if sub else "") + ")")
         for x in [y.strip() for y in re.split(r"\)\s*·\s*", str(inj.get(t, {}).get("out") or "")) if y.strip()]:
             nm = x.split("(")[0].strip()
             if _norm_name(nm) in seen:
