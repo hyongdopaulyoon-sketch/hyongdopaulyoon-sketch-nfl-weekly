@@ -1,8 +1,8 @@
 {
 "LA@WAS": {
 "spread_home": "4.5",
-"total": "48.5",
-"ml": "-225/+185",
+"total": "47.5",
+"ml": "-218/+180",
 "qb": {
 "LA": "Matthew Stafford",
 "WAS": "Jayden Daniels"
@@ -38,27 +38,10 @@
 ]
 }
 },
-"DAL@IND": {
-"spread_home": "5.5",
-"total": "51.5",
-"ml": "-230/+190",
-"qb": {
-"DAL": "Dak Prescott",
-"IND": "Daniel Jones"
-},
-"out": {
-"DAL": [],
-"IND": [
-"Cam Taylor-Britt",
-"IR)",
-"스냅 47%"
-]
-}
-},
 "ARI@SEA": {
 "spread_home": "-8.5",
 "total": "39.5",
-"ml": "+350/-455",
+"ml": "+360/-470",
 "qb": {
 "ARI": "Gardner Minshew",
 "SEA": "Sam Darnold"
@@ -82,10 +65,74 @@
 ]
 }
 },
+"DAL@IND": {
+"spread_home": "4.5",
+"total": "51.5",
+"ml": "-225/+185",
+"qb": {
+"DAL": "Dak Prescott",
+"IND": "Daniel Jones"
+},
+"out": {
+"DAL": [],
+"IND": [
+"Cam Taylor-Britt",
+"IR)",
+"스냅 47%"
+]
+}
+},
+"JAX@BAL": {
+"spread_home": "8.5",
+"total": "40.5",
+"ml": "?/?",
+"qb": {
+"JAX": "Trevor Lawrence",
+"BAL": "Joe Fagnano"
+},
+"out": {
+"JAX": [
+"DaVon Hamilton",
+"Eric Murray",
+"IR)",
+"IR)",
+"★스냅 98%",
+"스냅 38%"
+],
+"BAL": [
+"Jaylinn Hawkins",
+"Lamar Jackson",
+"Tyler Huntley",
+"★스냅 60%)",
+"스냅 2%)"
+]
+}
+},
+"NYJ@KC": {
+"spread_home": "-8.5",
+"total": "48.5",
+"ml": "+350/-455",
+"qb": {
+"NYJ": "Geno Smith",
+"KC": "Patrick Mahomes"
+},
+"out": {
+"NYJ": [
+"IR)",
+"T'Vondre Sweat",
+"스냅 48%"
+],
+"KC": [
+"IR)",
+"L'Jarius Sneed",
+"스냅 34%"
+]
+}
+},
 "LV@SF": {
 "spread_home": "-10.0",
 "total": "51.5",
-"ml": "+380/-500",
+"ml": "+370/-485",
 "qb": {
 "LV": "Kirk Cousins",
 "SF": "Brock Purdy"
@@ -99,41 +146,8 @@
 "SF": []
 }
 },
-"JAX@BAL": {
-"spread_home": "9.5",
-"total": "39.5",
-"ml": "-455/+350",
-"qb": {
-"JAX": "Trevor Lawrence",
-"BAL": "Joe Fagnano"
-},
-"out": {
-"JAX": [
-"Anton Harrison",
-"DaVon Hamilton",
-"Eric Murray",
-"IR)",
-"IR)",
-"IR)",
-"★스냅 98%",
-"스냅 37%",
-"스냅 58%"
-],
-"BAL": [
-"IR)",
-"Jaylinn Hawkins",
-"Lamar Jackson",
-"Tavius Robinson",
-"Tyler Huntley",
-"★스냅 73%)",
-"★스냅 87%)",
-"스냅 2%)",
-"스냅 49%"
-]
-}
-},
 "DEN@CAR": {
-"spread_home": "2.5",
+"spread_home": "3.0",
 "total": "44.5",
 "ml": "-155/+130",
 "qb": {
@@ -166,9 +180,9 @@
 }
 },
 "NYG@PHI": {
-"spread_home": "3.5",
+"spread_home": "3.0",
 "total": "38.5",
-"ml": "-162/+136",
+"ml": "-155/+130",
 "qb": {
 "NYG": "J.J. McCarthy",
 "PHI": "Joe Milton III"
@@ -189,31 +203,10 @@
 ]
 }
 },
-"NYJ@KC": {
-"spread_home": "-10.0",
-"total": "47.5",
-"ml": "+425/-575",
-"qb": {
-"NYJ": "Geno Smith",
-"KC": "Patrick Mahomes"
-},
-"out": {
-"NYJ": [
-"IR)",
-"T'Vondre Sweat",
-"스냅 48%"
-],
-"KC": [
-"IR)",
-"L'Jarius Sneed",
-"스냅 34%"
-]
-}
-},
 "CIN@ATL": {
 "spread_home": "3.0",
 "total": "52.5",
-"ml": "-170/+142",
+"ml": "-180/+150",
 "qb": {
 "CIN": "Joe Burrow",
 "ATL": "Michael Penix Jr."
@@ -243,7 +236,7 @@
 "TB@CHI": {
 "spread_home": "-6.0",
 "total": "47.5",
-"ml": "+240/-298",
+"ml": "+230/-285",
 "qb": {
 "TB": "Baker Mayfield",
 "CHI": "Caleb Williams"
@@ -258,15 +251,18 @@
 "Cole Kmet",
 "IR)",
 "IR)",
+"IR)",
+"Kentavius Street",
 "Nephi Sewell",
 "★스냅 64%",
+"스냅 32%",
 "스냅 35%"
 ]
 }
 },
 "BUF@MIN": {
 "spread_home": "3.0",
-"total": "44.5",
+"total": "43.5",
 "ml": "-170/+142",
 "qb": {
 "BUF": "Josh Allen",
@@ -298,10 +294,43 @@
 ]
 }
 },
+"DET@MIA": {
+"spread_home": "6.5",
+"total": "49.5",
+"ml": "-290/+235",
+"qb": {
+"DET": "Jared Goff",
+"MIA": "Malik Willis"
+},
+"out": {
+"DET": [
+"Devin White",
+"IR)",
+"IR)",
+"Jimmy Rolder",
+"스냅 22%",
+"스냅 32%"
+],
+"MIA": []
+}
+},
+"CLE@NO": {
+"spread_home": "-3.5",
+"total": "42.5",
+"ml": "+142/-170",
+"qb": {
+"CLE": "Deshaun Watson",
+"NO": "Tyler Shough"
+},
+"out": {
+"CLE": [],
+"NO": []
+}
+},
 "GB@NE": {
 "spread_home": "-3.0",
 "total": "44.5",
-"ml": "+140/-166",
+"ml": "+142/-170",
 "qb": {
 "GB": "Jordan Love",
 "NE": "Drake Maye"
@@ -322,38 +351,5 @@
 ]
 }
 },
-"DET@MIA": {
-"spread_home": "7.0",
-"total": "50.5",
-"ml": "-340/+270",
-"qb": {
-"DET": "Jared Goff",
-"MIA": "Malik Willis"
-},
-"out": {
-"DET": [
-"Devin White",
-"IR)",
-"IR)",
-"Jimmy Rolder",
-"스냅 22%",
-"스냅 32%"
-],
-"MIA": []
-}
-},
-"CLE@NO": {
-"spread_home": "-3.0",
-"total": "42.5",
-"ml": "+136/-162",
-"qb": {
-"CLE": "Deshaun Watson",
-"NO": "Tyler Shough"
-},
-"out": {
-"CLE": [],
-"NO": []
-}
-},
-"_stamp": "11-05 16:23"
+"_stamp": "11-06 22:13"
 }
