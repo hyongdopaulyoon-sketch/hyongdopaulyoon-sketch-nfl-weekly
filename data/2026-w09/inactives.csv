@@ -14,11 +14,11 @@ DAL@IND,IND,Justin Walley,CB,Out,Knee,Not Specified,2026-11-07T02:55,0,1,80
 DAL@IND,IND,Jalen Travis,OT,Questionable,Thumb,,2026-11-06T20:38,0,1,100
 DAL@IND,IND,Akeem Davis-Gaither,LB,Out,Knee,Not Specified,2026-11-06T19:29,0,1,87
 DAL@IND,IND,Alec Pierce,WR,Injured Reserve,Heel,Not Specified,2026-11-04T17:54,0,0,
-DAL@IND,DAL,Jonathan Bullard,DT,Injured Reserve,Calf,Not Specified,2026-11-08T02:22,0,0,
-DAL@IND,DAL,Marist Liufau,LB,Questionable,Forearm,Fracture,2026-11-08T02:15,0,0,
-DAL@IND,DAL,Malachi Lawrence,LB,Injured Reserve,Ankle,Not Specified,2026-11-07T22:30,0,0,49
-DAL@IND,DAL,Joey Porter Jr.,CB,Questionable,Ankle,Not Specified,2026-11-07T00:43,0,0,56
-DAL@IND,DAL,DeMarvion Overshown,LB,Questionable,Hamstring,Not Specified,2026-11-07T00:32,0,1,69
+DAL@IND,DAL,George Pickens,WR,Out,Hamstring,Not Specified,2026-11-08T16:32,1,1,68
+DAL@IND,DAL,Jonathan Bullard,DT,Injured Reserve,Calf,Not Specified,2026-11-08T02:22,1,0,
+DAL@IND,DAL,Marist Liufau,LB,Questionable,Forearm,Fracture,2026-11-08T02:15,1,0,
+DAL@IND,DAL,Malachi Lawrence,LB,Injured Reserve,Ankle,Not Specified,2026-11-07T22:30,1,0,49
+DAL@IND,DAL,Joey Porter Jr.,CB,Questionable,Ankle,Not Specified,2026-11-07T00:43,1,0,56
 NYJ@KC,KC,Peter Woods,DT,Out,Neck,Stinger,2026-11-07T02:59,0,0,33
 NYJ@KC,KC,Nikko Remigio,WR,Questionable,Hip,Not Specified,2026-11-07T02:40,0,0,3
 NYJ@KC,KC,Mansoor Delane,CB,Out,Shoulder,Not Specified,2026-11-06T20:29,0,1,98
@@ -41,9 +41,9 @@ DET@MIA,DET,DJ Wonnum,LB,Out,Concussion,Concussion,2026-11-07T02:18,0,0,50
 DET@MIA,DET,D.J. Reed,CB,Out,Hip,Not Specified,2026-11-07T02:12,0,1,90
 CLE@NO,NO,Kelvin Banks Jr.,OT,Questionable,Ankle,Surgery,2026-11-08T03:02,0,0,
 CLE@NO,NO,Jordyn Tyson,WR,Questionable,Hamstring,Strain,2026-11-07T21:09,0,0,
-CLE@NO,NO,Martin Emerson Jr.,CB,Questionable,Shin,Not Specified,2026-11-07T00:17,0,1,65
+CLE@NO,NO,Martin Emerson Jr.,CB,Questionable,,,2026-11-07T00:17,0,1,65
 CLE@NO,NO,CJ Donaldson,RB,Out,Shoulder,Not Specified,2026-11-06T19:12,0,0,27
-CLE@NO,NO,Asim Richards,OT,Questionable,Thumb,Surgery,2026-11-04T22:03,0,1,97
+CLE@NO,NO,Asim Richards,OT,Questionable,,,2026-11-04T22:03,0,1,97
 CLE@NO,CLE,Deshaun Watson,QB,Questionable,Concussion,Concussion,2026-11-08T12:33,0,1,98
 CLE@NO,CLE,Maliek Collins,DT,Out,Elbow,,2026-11-06T19:45,0,1,62
 CLE@NO,CLE,Kalia Davis,DT,Injured Reserve,Quadriceps,Not Specified,2026-10-28T00:26,0,0,

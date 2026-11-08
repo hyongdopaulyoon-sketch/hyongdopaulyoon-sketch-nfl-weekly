@@ -147,10 +147,42 @@
 ]
 }
 },
+"NYJ@KC": {
+"spread_home": "-9.5",
+"total": "47.5",
+"ml": "+380/-500",
+"qb": {
+"NYJ": "Geno Smith",
+"KC": "Patrick Mahomes"
+},
+"out": {
+"NYJ": [
+"Garrett Wilson",
+"IR)",
+"Joseph Ossai",
+"Nahshon Wright",
+"T'Vondre Sweat",
+"Trevin Wallace",
+"VJ Payne",
+"★스냅 88%)",
+"스냅 48%"
+],
+"KC": [
+"IR)",
+"L'Jarius Sneed",
+"Mansoor Delane",
+"Omarr Norman-Lott",
+"Peter Woods",
+"★스냅 98%)",
+"스냅 33%)",
+"스냅 34%"
+]
+}
+},
 "DEN@CAR": {
-"spread_home": "2.5",
+"spread_home": "3.0",
 "total": "44.5",
-"ml": "-142/+120",
+"ml": "-155/+130",
 "qb": {
 "DEN": "Bo Nix",
 "CAR": "Bryce Young"
@@ -191,38 +223,6 @@
 "★스냅 99%",
 "스냅 44%)",
 "스냅 5%"
-]
-}
-},
-"NYJ@KC": {
-"spread_home": "-9.5",
-"total": "47.5",
-"ml": "+390/-520",
-"qb": {
-"NYJ": "Geno Smith",
-"KC": "Patrick Mahomes"
-},
-"out": {
-"NYJ": [
-"Garrett Wilson",
-"IR)",
-"Joseph Ossai",
-"Nahshon Wright",
-"T'Vondre Sweat",
-"Trevin Wallace",
-"VJ Payne",
-"★스냅 88%)",
-"스냅 48%"
-],
-"KC": [
-"IR)",
-"L'Jarius Sneed",
-"Mansoor Delane",
-"Omarr Norman-Lott",
-"Peter Woods",
-"★스냅 98%)",
-"스냅 33%)",
-"스냅 34%"
 ]
 }
 },
@@ -371,7 +371,7 @@
 },
 "DET@MIA": {
 "spread_home": "6.5",
-"total": "50.5",
+"total": "49.5",
 "ml": "-305/+245",
 "qb": {
 "DET": "Jared Goff",
@@ -483,5 +483,5 @@
 ]
 }
 },
-"_stamp": "11-08 08:28"
+"_stamp": "11-08 08:39"
 }
