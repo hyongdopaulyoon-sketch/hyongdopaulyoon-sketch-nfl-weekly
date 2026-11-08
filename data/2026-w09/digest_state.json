@@ -2,7 +2,7 @@
 "LA@WAS": {
 "spread_home": "4.5",
 "total": "47.5",
-"ml": "-218/+180",
+"ml": "-238/+195",
 "qb": {
 "LA": "Matthew Stafford",
 "WAS": "Jayden Daniels"
@@ -13,14 +13,18 @@
 "IR)",
 "IR)",
 "IR)",
+"Jaylen Watson",
 "Kobie Turner",
 "Poona Ford",
+"Terrance Ferguson",
 "★스냅 74%",
+"★스냅 88%)",
 "스냅 32%",
 "스냅 35%"
 ],
 "WAS": [
 "Daron Payne",
+"Dyami Brown",
 "IR)",
 "IR)",
 "IR)",
@@ -30,55 +34,90 @@
 "Javon Kinlaw",
 "Jeremy McNichols",
 "Terry McLaurin",
+"Treylon Burks",
+"★스냅 65%)",
 "★스냅 78%",
 "스냅 19%",
 "스냅 34%",
 "스냅 35%",
+"스냅 37%)",
 "스냅 54%"
-]
-}
-},
-"ARI@SEA": {
-"spread_home": "-8.5",
-"total": "39.5",
-"ml": "+360/-470",
-"qb": {
-"ARI": "Gardner Minshew",
-"SEA": "Sam Darnold"
-},
-"out": {
-"ARI": [
-"IR)",
-"IR)",
-"IR)",
-"Jalen Brooks",
-"Jeremiyah Love",
-"Kendrick Bourne",
-"스냅 19%",
-"스냅 48%",
-"스냅 58%"
-],
-"SEA": [
-"Elijah Arroyo",
-"IR)",
-"스냅 6%"
 ]
 }
 },
 "DAL@IND": {
 "spread_home": "4.5",
 "total": "51.5",
-"ml": "-225/+185",
+"ml": "-230/+190",
 "qb": {
 "DAL": "Dak Prescott",
 "IND": "Daniel Jones"
 },
 "out": {
-"DAL": [],
+"DAL": [
+"KaVontae Turpin",
+"Malachi Lawrence",
+"스냅 49%)"
+],
 "IND": [
+"A.J. Haulcy",
+"Akeem Davis-Gaither",
 "Cam Taylor-Britt",
 "IR)",
+"Justin Walley",
+"★스냅 80%)",
+"★스냅 87%)",
+"★스냅 91%)",
 "스냅 47%"
+]
+}
+},
+"BUF@MIN": {
+"spread_home": "3.0",
+"total": "43.5",
+"ml": "-175/+145",
+"qb": {
+"BUF": "Josh Allen",
+"MIN": "Kyler Murray"
+},
+"out": {
+"BUF": [
+"Josh Palmer",
+"스냅 17%)"
+],
+"MIN": [
+"Demond Claiborne",
+"Jauan Jennings",
+"Kyler Murray",
+"★스냅 100%)",
+"★스냅 60%)",
+"스냅 6%)"
+]
+}
+},
+"LV@SF": {
+"spread_home": "-9.5",
+"total": "51.5",
+"ml": "+340/-440",
+"qb": {
+"LV": "Kirk Cousins",
+"SF": "Brock Purdy"
+},
+"out": {
+"LV": [
+"IR)",
+"Patrick Johnson",
+"Thomas Booker",
+"스냅 41%)",
+"스냅 8%"
+],
+"SF": [
+"Christian Kirk",
+"Deebo Samuel Sr.",
+"Mike Evans",
+"스냅 30%)",
+"스냅 43%)",
+"스냅 52%)"
 ]
 }
 },
@@ -108,74 +147,82 @@
 ]
 }
 },
-"NYJ@KC": {
-"spread_home": "-8.5",
-"total": "48.5",
-"ml": "+350/-455",
-"qb": {
-"NYJ": "Geno Smith",
-"KC": "Patrick Mahomes"
-},
-"out": {
-"NYJ": [
-"IR)",
-"T'Vondre Sweat",
-"스냅 48%"
-],
-"KC": [
-"IR)",
-"L'Jarius Sneed",
-"스냅 34%"
-]
-}
-},
-"LV@SF": {
-"spread_home": "-10.0",
-"total": "51.5",
-"ml": "+370/-485",
-"qb": {
-"LV": "Kirk Cousins",
-"SF": "Brock Purdy"
-},
-"out": {
-"LV": [
-"IR)",
-"Patrick Johnson",
-"스냅 8%"
-],
-"SF": []
-}
-},
 "DEN@CAR": {
-"spread_home": "3.0",
+"spread_home": "2.5",
 "total": "44.5",
-"ml": "-155/+130",
+"ml": "-142/+120",
 "qb": {
 "DEN": "Bo Nix",
 "CAR": "Bryce Young"
 },
 "out": {
 "DEN": [
+"Brandon Jones",
+"Eyioma Uwazurike",
 "IR)",
 "IR)",
 "IR)",
 "Jonah Elliss",
+"Kris Abrams-Draine",
 "RJ Harvey",
 "Tyler Badie",
+"★스냅 67%)",
+"★스냅 78%)",
 "스냅 33%",
 "스냅 45%",
+"스냅 54%)",
 "스냅 7%"
 ],
 "CAR": [
 "Akayleb Evans",
+"Bobby Okereke",
+"Damien Lewis",
 "IR)",
 "IR)",
 "IR)",
+"Jaelan Phillips",
 "Taylor Moton",
 "Thomas Incoom",
+"Will Lee III",
 "★스냅 70%",
+"★스냅 77%)",
+"★스냅 88%)",
+"★스냅 96%)",
 "★스냅 99%",
+"스냅 44%)",
 "스냅 5%"
+]
+}
+},
+"NYJ@KC": {
+"spread_home": "-9.5",
+"total": "47.5",
+"ml": "+390/-520",
+"qb": {
+"NYJ": "Geno Smith",
+"KC": "Patrick Mahomes"
+},
+"out": {
+"NYJ": [
+"Garrett Wilson",
+"IR)",
+"Joseph Ossai",
+"Nahshon Wright",
+"T'Vondre Sweat",
+"Trevin Wallace",
+"VJ Payne",
+"★스냅 88%)",
+"스냅 48%"
+],
+"KC": [
+"IR)",
+"L'Jarius Sneed",
+"Mansoor Delane",
+"Omarr Norman-Lott",
+"Peter Woods",
+"★스냅 98%)",
+"스냅 33%)",
+"스냅 34%"
 ]
 }
 },
@@ -197,16 +244,24 @@
 "스냅 24%"
 ],
 "PHI": [
-"Dameon Pierce",
-"IR)",
-"★스냅 80%"
+"Britain Covey",
+"DeVonta Smith",
+"Dontayvion Wicks",
+"Jihaad Campbell",
+"Jonathan Jones",
+"Michael Carter II",
+"★스냅 62%)",
+"★스냅 66%)",
+"스냅 2%)",
+"스냅 3%)",
+"스냅 57%)"
 ]
 }
 },
 "CIN@ATL": {
 "spread_home": "3.0",
 "total": "52.5",
-"ml": "-180/+150",
+"ml": "?/?",
 "qb": {
 "CIN": "Joe Burrow",
 "ATL": "Michael Penix Jr."
@@ -219,6 +274,7 @@
 "IR)",
 "IR)",
 "IR)",
+"Kyle Dugger",
 "Swayze Bozeman",
 "Tanner Hudson",
 "스냅 2%",
@@ -227,8 +283,13 @@
 "스냅 40%"
 ],
 "ATL": [
+"Brian Robinson",
+"Cameron Williams",
 "IR)",
 "Samson Ebukam",
+"Zachariah Branch",
+"스냅 18%)",
+"스냅 26%)",
 "스냅 34%"
 ]
 }
@@ -236,7 +297,7 @@
 "TB@CHI": {
 "spread_home": "-6.0",
 "total": "47.5",
-"ml": "+230/-285",
+"ml": "+220/-270",
 "qb": {
 "TB": "Baker Mayfield",
 "CHI": "Caleb Williams"
@@ -245,7 +306,9 @@
 "TB": [
 "Christian Rozeboom",
 "IR)",
-"스냅 32%"
+"Yaya Diaby",
+"스냅 32%",
+"스냅 37%)"
 ],
 "CHI": [
 "Cole Kmet",
@@ -260,56 +323,77 @@
 ]
 }
 },
-"BUF@MIN": {
-"spread_home": "3.0",
-"total": "43.5",
-"ml": "-170/+142",
+"ARI@SEA": {
+"spread_home": "-8.5",
+"total": "39.5",
+"ml": "+340/-440",
 "qb": {
-"BUF": "Josh Allen",
-"MIN": "Kyler Murray"
+"ARI": "Gardner Minshew",
+"SEA": "Drew Lock"
 },
 "out": {
-"BUF": [],
-"MIN": []
-}
-},
-"HOU@LAC": {
-"spread_home": "6.0",
-"total": "40.5",
-"ml": "-238/+195",
-"qb": {
-"HOU": "C.J. Stroud",
-"LAC": "Justin Herbert"
-},
-"out": {
-"HOU": [
+"ARI": [
+"Bam Knight",
 "IR)",
-"Jaylin Noel",
-"스냅 42%"
+"IR)",
+"IR)",
+"Jalen Brooks",
+"Jayden Williams",
+"Jeremiyah Love",
+"Jon Gaines II",
+"Kendrick Bourne",
+"★스냅 100%)",
+"★스냅 87%)",
+"스냅 19%",
+"스냅 48%",
+"스냅 58%"
 ],
-"LAC": [
-"Alec Ingold",
+"SEA": [
+"Brandon Pili",
+"Charles Cross",
+"Elijah Arroyo",
 "IR)",
-"스냅 19%"
+"Leonard Williams",
+"Quenton Nelson",
+"Rashid Shaheed",
+"Sam Darnold",
+"Uchenna Nwosu",
+"★스냅 100%)",
+"★스냅 100%)",
+"★스냅 74%)",
+"★스냅 92%)",
+"스냅 39%)",
+"스냅 46%)",
+"스냅 6%",
+"스냅 9%)"
 ]
 }
 },
 "DET@MIA": {
 "spread_home": "6.5",
-"total": "49.5",
-"ml": "-290/+235",
+"total": "50.5",
+"ml": "-305/+245",
 "qb": {
 "DET": "Jared Goff",
 "MIA": "Malik Willis"
 },
 "out": {
 "DET": [
+"Cade Mays",
+"D.J. Reed",
+"DJ Wonnum",
 "Devin White",
 "IR)",
 "IR)",
+"Jack Campbell",
 "Jimmy Rolder",
+"Kerby Joseph",
+"★스냅 66%)",
+"★스냅 90%)",
+"★스냅 92%)",
 "스냅 22%",
-"스냅 32%"
+"스냅 32%",
+"스냅 50%)"
 ],
 "MIA": []
 }
@@ -317,14 +401,20 @@
 "CLE@NO": {
 "spread_home": "-3.5",
 "total": "42.5",
-"ml": "+142/-170",
+"ml": "+160/-192",
 "qb": {
 "CLE": "Deshaun Watson",
 "NO": "Tyler Shough"
 },
 "out": {
-"CLE": [],
-"NO": []
+"CLE": [
+"Maliek Collins",
+"★스냅 62%)"
+],
+"NO": [
+"CJ Donaldson",
+"스냅 27%)"
+]
 }
 },
 "GB@NE": {
@@ -339,17 +429,59 @@
 "GB": [
 "IR)",
 "Jacob Monk",
+"Josh Whyle",
+"Micah Parsons",
+"Sean Rhyan",
+"Travis Glover",
+"Zaire Franklin",
+"★스냅 100%)",
+"★스냅 100%)",
+"스냅 12%)",
+"스냅 53%)",
 "스냅 7%"
 ],
 "NE": [
+"A.J. Brown",
 "Alijah Vera-Tucker",
+"Greg Van Roten",
 "IR)",
 "IR)",
 "Romeo Doubs",
+"TreVeyon Henderson",
+"★스냅 84%)",
+"스냅 24%)",
 "스냅 3%",
 "스냅 32%"
 ]
 }
 },
-"_stamp": "11-06 22:13"
+"HOU@LAC": {
+"spread_home": "5.5",
+"total": "40.5",
+"ml": "-230/+190",
+"qb": {
+"HOU": "C.J. Stroud",
+"LAC": "Justin Herbert"
+},
+"out": {
+"HOU": [
+"David Montgomery",
+"IR)",
+"Jaylin Noel",
+"Reed Blankenship",
+"★스냅 72%)",
+"스냅 14%)",
+"스냅 42%"
+],
+"LAC": [
+"Alec Ingold",
+"Deane Leonard",
+"IR)",
+"Kendall Williamson",
+"스냅 19%",
+"스냅 40%)"
+]
+}
+},
+"_stamp": "11-08 08:28"
 }
