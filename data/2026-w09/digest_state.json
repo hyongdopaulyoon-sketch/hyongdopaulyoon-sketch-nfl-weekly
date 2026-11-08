@@ -45,33 +45,6 @@
 ]
 }
 },
-"DAL@IND": {
-"spread_home": "4.5",
-"total": "51.5",
-"ml": "-230/+190",
-"qb": {
-"DAL": "Dak Prescott",
-"IND": "Daniel Jones"
-},
-"out": {
-"DAL": [
-"KaVontae Turpin",
-"Malachi Lawrence",
-"스냅 49%)"
-],
-"IND": [
-"A.J. Haulcy",
-"Akeem Davis-Gaither",
-"Cam Taylor-Britt",
-"IR)",
-"Justin Walley",
-"★스냅 80%)",
-"★스냅 87%)",
-"★스냅 91%)",
-"스냅 47%"
-]
-}
-},
 "BUF@MIN": {
 "spread_home": "3.0",
 "total": "43.5",
@@ -92,6 +65,33 @@
 "★스냅 100%)",
 "★스냅 60%)",
 "스냅 6%)"
+]
+}
+},
+"DAL@IND": {
+"spread_home": "3.5",
+"total": "51.5",
+"ml": "-205/+170",
+"qb": {
+"DAL": "Dak Prescott",
+"IND": "Daniel Jones"
+},
+"out": {
+"DAL": [
+"KaVontae Turpin",
+"Malachi Lawrence",
+"스냅 49%)"
+],
+"IND": [
+"A.J. Haulcy",
+"Akeem Davis-Gaither",
+"Cam Taylor-Britt",
+"IR)",
+"Justin Walley",
+"★스냅 80%)",
+"★스냅 87%)",
+"★스냅 91%)",
+"스냅 47%"
 ]
 }
 },
@@ -483,5 +483,5 @@
 ]
 }
 },
-"_stamp": "11-08 08:39"
+"_stamp": "11-08 08:46"
 }
