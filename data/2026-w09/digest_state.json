@@ -1,8 +1,8 @@
 {
 "LA@WAS": {
 "spread_home": "4.5",
-"total": "47.5",
-"ml": "-225/+185",
+"total": "48.5",
+"ml": "?/?",
 "qb": {
 "LA": "Matthew Stafford",
 "WAS": "Jayden Daniels"
@@ -48,7 +48,7 @@
 "DAL@IND": {
 "spread_home": "4.5",
 "total": "51.5",
-"ml": "-218/+180",
+"ml": "?/?",
 "qb": {
 "DAL": "Dak Prescott",
 "IND": "Daniel Jones"
@@ -96,9 +96,9 @@
 }
 },
 "LV@SF": {
-"spread_home": "-9.5",
+"spread_home": "-8.5",
 "total": "51.5",
-"ml": "+340/-440",
+"ml": "?/?",
 "qb": {
 "LV": "Kirk Cousins",
 "SF": "Brock Purdy"
@@ -150,7 +150,7 @@
 "NYJ@KC": {
 "spread_home": "-9.5",
 "total": "47.5",
-"ml": "+380/-500",
+"ml": "?/?",
 "qb": {
 "NYJ": "Geno Smith",
 "KC": "Patrick Mahomes"
@@ -182,7 +182,7 @@
 "DEN@CAR": {
 "spread_home": "3.0",
 "total": "44.5",
-"ml": "-155/+130",
+"ml": "?/?",
 "qb": {
 "DEN": "Bo Nix",
 "CAR": "Bryce Young"
@@ -229,7 +229,7 @@
 "NYG@PHI": {
 "spread_home": "3.0",
 "total": "38.5",
-"ml": "-155/+130",
+"ml": "?/?",
 "qb": {
 "NYG": "J.J. McCarthy",
 "PHI": "Joe Milton III"
@@ -326,7 +326,7 @@
 "ARI@SEA": {
 "spread_home": "-8.5",
 "total": "39.5",
-"ml": "+340/-440",
+"ml": "?/?",
 "qb": {
 "ARI": "Gardner Minshew",
 "SEA": "Drew Lock"
@@ -369,39 +369,10 @@
 ]
 }
 },
-"DET@MIA": {
-"spread_home": "6.5",
-"total": "49.5",
-"ml": "-305/+245",
-"qb": {
-"DET": "Jared Goff",
-"MIA": "Malik Willis"
-},
-"out": {
-"DET": [
-"Cade Mays",
-"D.J. Reed",
-"DJ Wonnum",
-"Devin White",
-"IR)",
-"IR)",
-"Jack Campbell",
-"Jimmy Rolder",
-"Kerby Joseph",
-"★스냅 66%)",
-"★스냅 90%)",
-"★스냅 92%)",
-"스냅 22%",
-"스냅 32%",
-"스냅 50%)"
-],
-"MIA": []
-}
-},
 "CLE@NO": {
-"spread_home": "-3.5",
-"total": "42.5",
-"ml": "+160/-192",
+"spread_home": "-4.5",
+"total": "43.5",
+"ml": "?/?",
 "qb": {
 "CLE": "Deshaun Watson",
 "NO": "Tyler Shough"
@@ -420,7 +391,7 @@
 "GB@NE": {
 "spread_home": "-3.0",
 "total": "44.5",
-"ml": "+142/-170",
+"ml": "?/?",
 "qb": {
 "GB": "Jordan Love",
 "NE": "Drake Maye"
@@ -455,10 +426,39 @@
 ]
 }
 },
+"DET@MIA": {
+"spread_home": "6.5",
+"total": "49.5",
+"ml": "?/?",
+"qb": {
+"DET": "Jared Goff",
+"MIA": "Malik Willis"
+},
+"out": {
+"DET": [
+"Cade Mays",
+"D.J. Reed",
+"DJ Wonnum",
+"Devin White",
+"IR)",
+"IR)",
+"Jack Campbell",
+"Jimmy Rolder",
+"Kerby Joseph",
+"★스냅 66%)",
+"★스냅 90%)",
+"★스냅 92%)",
+"스냅 22%",
+"스냅 32%",
+"스냅 50%)"
+],
+"MIA": []
+}
+},
 "HOU@LAC": {
 "spread_home": "5.5",
 "total": "40.5",
-"ml": "-230/+190",
+"ml": "?/?",
 "qb": {
 "HOU": "C.J. Stroud",
 "LAC": "Justin Herbert"
@@ -483,5 +483,5 @@
 ]
 }
 },
-"_stamp": "11-08 09:06"
+"_stamp": "11-08 14:09"
 }
