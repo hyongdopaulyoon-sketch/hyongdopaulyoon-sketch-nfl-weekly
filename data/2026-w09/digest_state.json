@@ -371,8 +371,8 @@
 },
 "DET@MIA": {
 "spread_home": "6.5",
-"total": "49.5",
-"ml": "-305/+245",
+"total": "50.5",
+"ml": "-298/+240",
 "qb": {
 "DET": "Jared Goff",
 "MIA": "Malik Willis"
@@ -483,5 +483,5 @@
 ]
 }
 },
-"_stamp": "11-08 08:46"
+"_stamp": "11-08 08:54"
 }

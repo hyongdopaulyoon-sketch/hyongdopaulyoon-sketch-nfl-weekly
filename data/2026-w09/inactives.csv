@@ -14,21 +14,21 @@ DAL@IND,IND,Justin Walley,CB,Out,Knee,Not Specified,2026-11-07T02:55,0,1,80
 DAL@IND,IND,Jalen Travis,OT,Questionable,Thumb,,2026-11-06T20:38,0,1,100
 DAL@IND,IND,Akeem Davis-Gaither,LB,Out,Knee,Not Specified,2026-11-06T19:29,0,1,87
 DAL@IND,IND,Alec Pierce,WR,Injured Reserve,Heel,Not Specified,2026-11-04T17:54,0,0,
-DAL@IND,DAL,George Pickens,WR,Out,Hamstring,Not Specified,2026-11-08T16:32,1,1,68
-DAL@IND,DAL,Jonathan Bullard,DT,Injured Reserve,Calf,Not Specified,2026-11-08T02:22,1,0,
-DAL@IND,DAL,Marist Liufau,LB,Questionable,Forearm,Fracture,2026-11-08T02:15,1,0,
-DAL@IND,DAL,Malachi Lawrence,LB,Injured Reserve,Ankle,Not Specified,2026-11-07T22:30,1,0,49
-DAL@IND,DAL,Joey Porter Jr.,CB,Questionable,Ankle,Not Specified,2026-11-07T00:43,1,0,56
-NYJ@KC,KC,Peter Woods,DT,Out,Neck,Stinger,2026-11-07T02:59,0,0,33
-NYJ@KC,KC,Nikko Remigio,WR,Questionable,Hip,Not Specified,2026-11-07T02:40,0,0,3
-NYJ@KC,KC,Mansoor Delane,CB,Out,Shoulder,Not Specified,2026-11-06T20:29,0,1,98
-NYJ@KC,KC,L'Jarius Sneed,CB,Injured Reserve,Knee,Not Specified,2026-10-31T23:04,0,0,34
-NYJ@KC,KC,Omarr Norman-Lott,DT,Out,Knee - ACL,Surgery,2026-10-29T01:48,0,0,
-NYJ@KC,NYJ,VJ Payne,S,Injured Reserve,Knee,Bruise,2026-11-08T01:56,0,0,
-NYJ@KC,NYJ,Nahshon Wright,CB,Out,Back,Not Specified,2026-11-08T01:51,0,0,
-NYJ@KC,NYJ,Joseph Ossai,DE,Out,Ankle,Not Specified,2026-11-08T01:45,0,0,
-NYJ@KC,NYJ,Trevin Wallace,LB,Out,Groin,Not Specified,2026-11-06T20:52,0,0,
-NYJ@KC,NYJ,Garrett Wilson,WR,Out,Concussion,Concussion,2026-11-06T16:16,0,1,88
+DAL@IND,DAL,KaVontae Turpin,WR,Out,Ribs,Not Specified,2026-11-08T16:47,1,0,
+DAL@IND,DAL,Tyrus Wheat,LB,Out,Coach's Decision,Not Specified,2026-11-08T16:47,1,0,9
+DAL@IND,DAL,DeMarvion Overshown,LB,Out,Hamstring,Not Specified,2026-11-08T16:47,1,1,69
+DAL@IND,DAL,Joey Porter Jr.,CB,Out,Ankle,Not Specified,2026-11-08T16:47,1,0,56
+DAL@IND,DAL,Luke Schoonmaker,TE,Out,Groin,Not Specified,2026-11-08T16:47,1,0,14
+NYJ@KC,KC,Peter Woods,DT,Out,Neck,Stinger,2026-11-08T16:44,1,0,33
+NYJ@KC,KC,Ben VanSumeren,FB,Out,Coach's Decision,,2026-11-08T16:44,1,0,
+NYJ@KC,KC,Garrett Nussmeier,QB,Out,Coach's Decision,,2026-11-08T16:44,1,0,
+NYJ@KC,KC,Diego Pounds,OT,Out,Coach's Decision,,2026-11-08T16:44,1,0,
+NYJ@KC,KC,Jack Pyburn,LB,Out,Coach's Decision,,2026-11-08T16:44,1,0,
+NYJ@KC,NYJ,Trevin Wallace,LB,Out,Groin,Not Specified,2026-11-08T16:39,1,0,
+NYJ@KC,NYJ,Garrett Wilson,WR,Out,Concussion,Concussion,2026-11-08T16:39,1,1,88
+NYJ@KC,NYJ,Tim Patrick,WR,Out,Coach's Decision,,2026-11-08T16:39,1,0,40
+NYJ@KC,NYJ,Blake Freeland,OL,Out,Coach's Decision,,2026-11-08T16:39,1,0,
+NYJ@KC,NYJ,Kohl Levao,G,Out,Coach's Decision,,2026-11-08T16:39,1,0,
 DET@MIA,MIA,Jaylen Wright,RB,Questionable,Quadriceps,Not Specified,2026-11-08T12:39,0,0,13
 DET@MIA,MIA,Malik Herring,DE,Questionable,Neck,Stinger,2026-11-07T03:23,0,0,24
 DET@MIA,MIA,Kaytron Allen,RB,Questionable,Quadriceps,,2026-11-07T00:51,0,0,
@@ -44,28 +44,28 @@ CLE@NO,NO,Mason Murphy,OT,Out,Coach's Decision,,2026-11-08T16:35,1,0,5
 CLE@NO,NO,Mike Reid,CB,Out,Coach's Decision,,2026-11-08T16:35,1,0,
 CLE@NO,NO,John Ridgeway III,DT,Out,Coach's Decision,,2026-11-08T16:35,1,0,37
 CLE@NO,NO,Jaylan Ford,LB,Out,Coach's Decision,,2026-11-08T16:35,1,0,10
-CLE@NO,CLE,Deshaun Watson,QB,Out,Concussion,Concussion,2026-11-08T12:33,0,1,98
-CLE@NO,CLE,Maliek Collins,DT,Out,Elbow,,2026-11-06T19:45,0,1,62
-CLE@NO,CLE,Kalia Davis,DT,Injured Reserve,Quadriceps,Not Specified,2026-10-28T00:26,0,0,
-CLE@NO,CLE,Teven Jenkins,G,Injured Reserve,Back,Not Specified,2026-10-24T18:50,0,0,
-CLE@NO,CLE,Raheim Sanders,RB,Injured Reserve,Hip,Not Specified,2026-10-13T21:00,0,0,
+CLE@NO,CLE,Deshaun Watson,QB,Out,Concussion,Concussion,2026-11-08T16:38,1,1,98
+CLE@NO,CLE,Taylen Green,QB,Out,Coach's Decision,,2026-11-08T16:34,1,0,
+CLE@NO,CLE,Noah Igbinoghene,CB,Out,Coach's Decision,,2026-11-08T16:34,1,0,
+CLE@NO,CLE,Justin Jefferson,LB,Out,Coach's Decision,,2026-11-08T16:34,1,0,
+CLE@NO,CLE,Parker Brailsford,C,Out,Coach's Decision,,2026-11-08T16:34,1,0,
 NYG@PHI,PHI,Tanner McKee,QB,Questionable,Ribs,Not Specified,2026-11-08T12:17,0,1,100
 NYG@PHI,PHI,Jonathan Jones,CB,Out,Hamstring,Not Specified,2026-11-07T03:50,0,0,3
 NYG@PHI,PHI,Michael Carter II,CB,Out,Abdomen,Not Specified,2026-11-07T03:45,0,0,2
 NYG@PHI,PHI,Jihaad Campbell,LB,Out,Hamstring,Not Specified,2026-11-07T01:37,0,0,57
 NYG@PHI,PHI,Britain Covey,WR,Out,Knee,Not Specified,2026-11-07T01:32,0,0,
-NYG@PHI,NYG,Cam Skattebo,RB,Out,Hamstring,Not Specified,2026-11-08T15:26,0,0,42
-NYG@PHI,NYG,Charlie Jones,WR,Questionable,,,2026-11-04T21:27,0,0,26
-NYG@PHI,NYG,Tyrone Tracy Jr.,RB,Injured Reserve,Hamstring,Strain,2026-10-27T21:04,0,0,24
-NYG@PHI,NYG,Tremaine Edmunds,LB,Injured Reserve,Chest,Not Specified,2026-10-24T23:28,0,1,100
-NYG@PHI,NYG,Braxton Berrios,WR,Injured Reserve,Foot,Surgery,2026-10-14T21:17,0,0,
+NYG@PHI,NYG,Cam Skattebo,RB,Out,Hamstring,Not Specified,2026-11-08T16:40,1,0,42
+NYG@PHI,NYG,CJ Okoye,DT,Out,Coach's Decision,,2026-11-08T16:39,1,0,19
+NYG@PHI,NYG,Nikko Reed,CB,Out,Coach's Decision,,2026-11-08T16:39,1,0,
+NYG@PHI,NYG,Josh Sills,G,Out,Coach's Decision,,2026-11-08T16:39,1,0,
+NYG@PHI,NYG,Thomas Fidone II,TE,Out,Coach's Decision,,2026-11-08T16:39,1,0,24
 LA@WAS,WAS,Tanoa Togiai,G,Out,Coach's Decision,,2026-11-08T16:37,1,0,
 LA@WAS,WAS,Isaac Yiadom,CB,Out,Coach's Decision,,2026-11-08T16:37,1,0,
 LA@WAS,WAS,Fabian Moreau,CB,Out,Coach's Decision,,2026-11-08T16:37,1,0,29
 LA@WAS,WAS,Athan Kaliakmanis,QB,Out,Coach's Decision,,2026-11-08T16:37,1,0,
 LA@WAS,WAS,Treylon Burks,WR,Out,Foot,Not Specified,2026-11-08T16:37,1,1,65
 LA@WAS,LA,Jaylen Watson,CB,Injured Reserve,Shoulder,Surgery,2026-11-07T20:38,0,1,88
-LA@WAS,LA,Jordan Whittington,WR,Questionable,Back,Not Specified,2026-11-07T01:46,0,0,14
+LA@WAS,LA,Jordan Whittington,WR,Questionable,,,2026-11-07T01:46,0,0,14
 LA@WAS,LA,Terrance Ferguson,TE,Injured Reserve,Hamstring,Not Specified,2026-11-06T22:29,0,0,
 LA@WAS,LA,Colby Parkinson,TE,Questionable,,,2026-11-06T21:35,0,1,66
 LA@WAS,LA,Joe Cardona,LS,Doubtful,Ankle,Not Specified,2026-11-06T21:27,0,0,
