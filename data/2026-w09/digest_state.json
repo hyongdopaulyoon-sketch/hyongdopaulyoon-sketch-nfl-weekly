@@ -45,33 +45,10 @@
 ]
 }
 },
-"BUF@MIN": {
-"spread_home": "3.0",
-"total": "43.5",
-"ml": "-175/+145",
-"qb": {
-"BUF": "Josh Allen",
-"MIN": "Kyler Murray"
-},
-"out": {
-"BUF": [
-"Josh Palmer",
-"스냅 17%)"
-],
-"MIN": [
-"Demond Claiborne",
-"Jauan Jennings",
-"Kyler Murray",
-"★스냅 100%)",
-"★스냅 60%)",
-"스냅 6%)"
-]
-}
-},
 "DAL@IND": {
-"spread_home": "3.5",
+"spread_home": "4.5",
 "total": "51.5",
-"ml": "-205/+170",
+"ml": "-218/+180",
 "qb": {
 "DAL": "Dak Prescott",
 "IND": "Daniel Jones"
@@ -92,6 +69,29 @@
 "★스냅 87%)",
 "★스냅 91%)",
 "스냅 47%"
+]
+}
+},
+"BUF@MIN": {
+"spread_home": "3.0",
+"total": "43.5",
+"ml": "-175/+145",
+"qb": {
+"BUF": "Josh Allen",
+"MIN": "Kyler Murray"
+},
+"out": {
+"BUF": [
+"Josh Palmer",
+"스냅 17%)"
+],
+"MIN": [
+"Demond Claiborne",
+"Jauan Jennings",
+"Kyler Murray",
+"★스냅 100%)",
+"★스냅 60%)",
+"스냅 6%)"
 ]
 }
 },
@@ -483,5 +483,5 @@
 ]
 }
 },
-"_stamp": "11-08 08:54"
+"_stamp": "11-08 09:01"
 }
