@@ -1,0 +1,331 @@
+{
+"JAX@TEN": {
+"spread_home": "10.5",
+"total": "46.5",
+"ml": "-600/+440",
+"qb": {
+"JAX": "Trevor Lawrence",
+"TEN": "Cam Ward"
+},
+"out": {
+"JAX": [
+"DaVon Hamilton",
+"Eric Murray",
+"IR)",
+"IR)",
+"★스냅 98%",
+"스냅 38%"
+],
+"TEN": []
+}
+},
+"LA@ARI": {
+"spread_home": "9.5",
+"total": "39.5",
+"ml": "-500/+380",
+"qb": {
+"LA": "Matthew Stafford",
+"ARI": "Gardner Minshew"
+},
+"out": {
+"LA": [
+"IR)",
+"IR)",
+"Jaylen Watson",
+"Jordan Whittington",
+"★스냅 82%",
+"스냅 11%"
+],
+"ARI": [
+"Gardner Minshew",
+"IR)",
+"IR)",
+"IR)",
+"IR)",
+"IR)",
+"Jalen Brooks",
+"Jeremiyah Love",
+"Kendrick Bourne",
+"Michael Wilson",
+"★스냅 64%",
+"★스냅 71%",
+"★스냅 84%",
+"스냅 19%",
+"스냅 44%"
+]
+}
+},
+"BUF@NYJ": {
+"spread_home": "8.5",
+"total": "50.5",
+"ml": "-440/+340",
+"qb": {
+"BUF": "Josh Allen",
+"NYJ": "Geno Smith"
+},
+"out": {
+"BUF": [
+"IR)",
+"Josh Palmer",
+"스냅 17%"
+],
+"NYJ": [
+"IR)",
+"T'Vondre Sweat",
+"스냅 34%"
+]
+}
+},
+"SEA@LV": {
+"spread_home": "6.5",
+"total": "40.5",
+"ml": "-298/+240",
+"qb": {
+"SEA": "Sam Darnold",
+"LV": "Fernando Mendoza"
+},
+"out": {
+"SEA": [],
+"LV": [
+"IR)",
+"Patrick Johnson",
+"스냅 11%"
+]
+}
+},
+"MIN@GB": {
+"spread_home": "-3.0",
+"total": "41.5",
+"ml": "+124/-148",
+"qb": {
+"MIN": "Kirk Cousins",
+"GB": "Jordan Love"
+},
+"out": {
+"MIN": [],
+"GB": [
+"IR)",
+"Jacob Monk",
+"스냅 7%"
+]
+}
+},
+"MIA@IND": {
+"spread_home": "-3.5",
+"total": "38.5",
+"ml": "+170/-205",
+"qb": {
+"MIA": "Malik Willis",
+"IND": "Daniel Jones"
+},
+"out": {
+"MIA": [
+"IR)",
+"IR)",
+"Malik Willis",
+"Zach Sieler",
+"★스냅 100%",
+"★스냅 77%"
+],
+"IND": [
+"Cam Taylor-Britt",
+"IR)",
+"스냅 42%"
+]
+}
+},
+"LAC@BAL": {
+"spread_home": "-4.5",
+"total": "38.5",
+"ml": "+190/-230",
+"qb": {
+"LAC": "Justin Herbert",
+"BAL": "Tyler Huntley"
+},
+"out": {
+"LAC": [],
+"BAL": [
+"IR)",
+"IR)",
+"Lamar Jackson",
+"Tyler Huntley",
+"★스냅 60%",
+"스냅 2%"
+]
+}
+},
+"PIT@CIN": {
+"spread_home": "-3.5",
+"total": "49.5",
+"ml": "+150/-180",
+"qb": {
+"PIT": "Aaron Rodgers",
+"CIN": "Joe Burrow"
+},
+"out": {
+"PIT": [
+"IR)",
+"Sebastian Joseph-Day",
+"스냅 35%"
+],
+"CIN": [
+"Cashius Howell",
+"Erick All",
+"IR)",
+"IR)",
+"스냅 28%",
+"스냅 37%"
+]
+}
+},
+"NE@DET": {
+"spread_home": "-2.5",
+"total": "51.5",
+"ml": "+130/-155",
+"qb": {
+"NE": "Drake Maye",
+"DET": "Jared Goff"
+},
+"out": {
+"NE": [
+"Ben Brown",
+"Carlton Davis III",
+"TreVeyon Henderson",
+"★스냅 75%)",
+"스냅 24%)",
+"스냅 53%)"
+],
+"DET": [
+"IR)",
+"IR)",
+"Jack Campbell",
+"Jimmy Rolder",
+"★스냅 88%",
+"스냅 32%"
+]
+}
+},
+"WAS@NYG": {
+"spread_home": "-1.5",
+"total": "40.5",
+"ml": "+105/-125",
+"qb": {
+"WAS": "Jayden Daniels",
+"NYG": "J.J. McCarthy"
+},
+"out": {
+"WAS": [
+"Colson Yankoff",
+"Daron Payne",
+"Dyami Brown",
+"IR)",
+"IR)",
+"IR)",
+"IR)",
+"IR)",
+"Javon Kinlaw",
+"Jeremy McNichols",
+"Lucas Patrick",
+"Terry McLaurin",
+"★스냅 81%)",
+"★스냅 85%",
+"스냅 10%",
+"스냅 19%",
+"스냅 37%",
+"스냅 44%",
+"스냅 7%)"
+],
+"NYG": [
+"IR)",
+"IR)",
+"Tremaine Edmunds",
+"Tyrone Tracy Jr.",
+"★스냅 100%",
+"스냅 26%"
+]
+}
+},
+"KC@ATL": {
+"spread_home": "3.0",
+"total": "46.5",
+"ml": "-180/+150",
+"qb": {
+"KC": "Patrick Mahomes",
+"ATL": "Michael Penix Jr."
+},
+"out": {
+"KC": [
+"IR)",
+"L'Jarius Sneed",
+"스냅 20%"
+],
+"ATL": [
+"IR)",
+"Samson Ebukam",
+"스냅 24%"
+]
+}
+},
+"HOU@CLE": {
+"spread_home": "4.5",
+"total": "40.5",
+"ml": "-225/+185",
+"qb": {
+"HOU": "C.J. Stroud",
+"CLE": "Deshaun Watson"
+},
+"out": {
+"HOU": [
+"IR)",
+"Jaylin Noel",
+"스냅 40%"
+],
+"CLE": []
+}
+},
+"SF@DAL": {
+"spread_home": "3.5",
+"total": "55.5",
+"ml": "-205/+170",
+"qb": {
+"SF": "Brock Purdy",
+"DAL": "Dak Prescott"
+},
+"out": {
+"SF": [
+"Christian Kirk",
+"Gracen Halton",
+"IR)",
+"IR)",
+"스냅 30%",
+"스냅 41%"
+],
+"DAL": [
+"IR)",
+"Malachi Lawrence",
+"스냅 47%"
+]
+}
+},
+"CAR@NO": {
+"spread_home": "-2.5",
+"total": "48.5",
+"ml": "+110/-130",
+"qb": {
+"CAR": "Bryce Young",
+"NO": "Tyler Shough"
+},
+"out": {
+"CAR": [
+"Akayleb Evans",
+"IR)",
+"IR)",
+"Taylor Moton",
+"★스냅 100%",
+"스냅 41%"
+],
+"NO": []
+}
+},
+"_stamp": "11-12 16:00"
+}
