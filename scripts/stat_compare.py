@@ -304,7 +304,7 @@ def conclusion_line(a, h, sec, inj, m, g):
                 continue
             nm, role, st = c[0], c[1], c[9]
             tag = f"{nm}" + (f"({st})" if st and st != "—" else "")
-            if role == "QB" and pl[cur]["qb"] is None:
+            if role == "QB" and (pl[cur]["qb"] is None or "(예상 선발)" in nm):   # 2026-11-15(보드 제보): 표 첫 QB(드롭백 최다)가 아니라 이번 예상 선발을 비교(ARI Brissett → Carson Beck · LV Cousins → Mendoza)
                 pl[cur]["qb"] = f"{tag} {c[8]}"
             elif role == "리시버" and pl[cur]["rec"] is None:
                 pl[cur]["rec"] = f"{tag} {c[3].split('·')[0].strip()} · {c[8]}"

@@ -499,11 +499,11 @@ def _same_person(short, full):
         return False
     sfx = {"jr", "jr.", "sr", "sr.", "ii", "iii", "iv", "v"}
     ft = [w for w in full.replace(",", " ").split() if w.lower() not in sfx] or full.split()   # 「Michael Penix Jr.」 → 성 Penix(10/11 ATL 드롭백 0 오표시)
-    m = re.match(r"([A-Z])\.\s*(.+)", short)
+    m = re.match(r"([A-Z][a-z]{0,3})\.\s*(.+)", short)   # 2026-11-15: pbp 가 동명이인을 「Mi.Wilson」 처럼 적는다 — 한 글자 이니셜만 받아 상태 칸이 「—」 로 비던 것(ARI Michael Wilson IR)
     if not m:
         st = [w for w in short.split() if w.lower() not in sfx] or short.split()
         return st[-1].lower() == ft[-1].lower()
-    return ft[0][0].upper() == m.group(1) and ft[-1].lower() == m.group(2).split()[-1].lower()
+    return ft[0].lower().startswith(m.group(1).lower()) and ft[-1].lower() == m.group(2).split()[-1].lower()
 
 
 def _norm_name(n):
@@ -1008,6 +1008,14 @@ def ph_injuries(week, force=False):
                 prac[r["team"]].append(r)
     qb1, main_qb = _qb1_by_team()
     last_st = _last_starter_by_team()
+    _dcq = [r for r in rd(os.path.join(CACHE, f"depth_charts_{SEASON}.csv")) if r.get("pos_abb") == "QB"]
+    _dmx = {}
+    for r in _dcq:
+        _dmx[r["team"]] = max(_dmx.get(r["team"], ""), r["dt"])
+    qbdepth = defaultdict(list)   # 최신 뎁스차트 QB 순서(1번부터)
+    for r in sorted(_dcq, key=lambda r: int(fnum(r.get("pos_rank")) or 99)):
+        if r["dt"] == _dmx[r["team"]] and r["player_name"] not in qbdepth[r["team"]]:
+            qbdepth[r["team"]].append(r["player_name"])
     games = rd(os.path.join(wd, "games.csv"))
     teams = sorted({g["away"] for g in games} | {g["home"] for g in games})
     snap = _snap_pct()
@@ -1054,6 +1062,14 @@ def ph_injuries(week, force=False):
             ir_fix = f"{exp} {_unav[_norm_name(exp)]}"
             sched_note = f"일정표 예상 {exp} 는 {_unav[_norm_name(exp)]} — 뎁스차트 QB1 {d1_} 로 정정"
             exp = d1_
+        elif exp and _norm_name(exp) in _unav:
+            # 2026-11-15(NFL 보드 제보 · SEA Darnold 주간 보고 Out 인데 예상 QB·선수 핵심이 Darnold — 실제 선발 Drew Lock): QB1 도 결장이면 뎁스차트 다음 가용 QB(직전 경기 선발이 그중에 있으면 그 선수)
+            _cands = [n for n in qbdepth.get(t, []) if _norm_name(n) not in _unav]
+            _c = next((n for n in _cands if ls and _same_person(ls[1], n)), _cands[0] if _cands else "")
+            if _c:
+                sched_note = (f"예상 {exp} 는 {_unav[_norm_name(exp)]} — 뎁스차트 다음 QB {_c}"
+                              + (f"(직전 {ls[0]}주 선발)" if ls and _same_person(ls[1], _c) else "") + " 로 정정")
+                exp = _c
         # 벌점(qb_flag): ⓐ 예상 선발이 뎁스차트 QB1 이 아니다(백업 선발) ⓑ 보고가 QB Out/Doubtful.
         # 정보(qb_note): 예상 선발 = QB1 인데 시즌 드롭백 최다 QB 와 다르다 → 주전 복귀(레이팅은 대체 QB 표본이 섞여 있음) — 벌점 아님.
         flag, note = "", ""
@@ -1241,8 +1257,28 @@ def _angles_line(week, g):
         parts = [x for x in parts if x]
     except Exception:
         pass
-    return ("- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전 · 예측시장 이후 실측 기준): " + " / ".join(parts)
-            + " ← ML 각도가 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄")
+    # 2026-11-15(NFL 보드 제보 · LA@ARI A12): 꼬리가 「ML 각도면 소액 관심 근거 가능」 이라 A12 도 근거로 읽혔다 — A11·A12 는 11/5 사전 등록(d946c54) 「서술 전용 점수 0 · 30픽 판정」.
+    # 소액 관심 근거가 되는 ML 각도는 A4·A5·A8 뿐(발행 스킬 10판 목록 그대로).
+    _keys = {r["id"].split(":")[-1] for r in rows}
+    return ("- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전(A3·A11·A12 는 30픽) · 예측시장 이후 실측 기준): " + " / ".join(parts)
+            + " ← ML 각도 A4·A5·A8 이 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄"
+            + (" · A11·A12 는 서술 전용(점수 0 · 30픽 판정 전 — 소액 관심 근거 아님 · 「변수」·정리 줄에만)" if _keys & {"A11", "A12"} else ""))
+
+
+_ESPN_ONLY = {}
+
+
+def _espn_only_out(wd, t, x):
+    """부상·QB 줄 꼬리 — ESPN 명단엔 Out 인데 주간 보고·IR(올해 스냅 있는 선수) 목록엔 없는 선수 이름들(2026-11-15 보드 제보 · SF Brandon Aiyuk Personal:
+    🏥 줄 Out 4 vs 부상·QB 줄 Out 3). 표시만 — 결장 수·모델·각도 입력은 안 바꾼다."""
+    if wd not in _ESPN_ONLY:
+        d = defaultdict(list)
+        for r in rd(os.path.join(wd, "inactives.csv")):
+            if r.get("status") == "Out" and r["player"] not in d[r["team"]]:
+                d[r["team"]].append(r["player"])
+        _ESPN_ONLY[wd] = d
+    have = {_norm_name(y.split("(")[0]) for col in ("out", "doubtful", "questionable") for y in re.split(r"(?<=\))\s*·\s*", str(x.get(col) or "")) if y.strip()}
+    return [n for n in _ESPN_ONLY[wd].get(t, []) if _norm_name(n) not in have]
 
 
 def _inactives_line(wd, g, a, h):
@@ -1480,6 +1516,7 @@ def ph_digest(week, force=False):
                      + (f' — Questionable: {x["questionable"]}' if x.get("questionable") else "")
                      + (f' · ★주전급(스냅 60%+) {"Out/Doubtful" if not x.get("final_pending") else "연습 불참"} {x["n_starters_missing"]}명'
                         if str(x.get("n_starters_missing") or "0") not in ("0", "") else "")
+                     + ((lambda _eo: f' · ESPN 명단에만 Out {len(_eo)}: {" · ".join(_eo)}(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)' if _eo else "")(_espn_only_out(wd, t, x)))
                      + (f' (보고 {x.get("report_week")}주차)' if x.get("report_week") and str(x.get("report_week")) != str(week) else ""))
         L.append(_inactives_line(wd, g, a, h))    # 🏥 ESPN 공식 비활성 명단 — 2026-10-15 Paul 「여기서 수집」
         L.append(_angles_line(week, g))             # 🔎 관찰 각도(페이퍼) — 2026-10-17 Paul 「발행 시 반영되도록」
