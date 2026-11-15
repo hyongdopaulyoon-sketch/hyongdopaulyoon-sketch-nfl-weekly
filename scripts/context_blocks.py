@@ -336,7 +336,8 @@ def snapshot(g, m, inj):
     a, h = g["away"], g["home"]
     def outs(t):
         x = inj.get(t) or {}
-        return sorted(n.split("(")[0].strip() for n in str(x.get("out") or "").split(" · ") if n.strip())
+        import re as _re   # 2026-11-15: 「이름(포지션 · ★스냅 n%)」 를 " · " 로 쪼개 「★스냅 82%)」 조각이 이름으로 들어가던 것 → 닫는 괄호 뒤에서만 쪼갠다
+        return sorted(n.split("(")[0].strip() for n in _re.split(r"(?<=\))\s*·\s*", str(x.get("out") or "")) if n.strip())
     return {"spread_home": m.get("mkt_spread_home", ""), "total": m.get("mkt_total", ""), "ml": f'{g.get("ml_away") or "?"}/{g.get("ml_home") or "?"}',
             "qb": {t: (inj.get(t) or {}).get("expected_qb") or "?" for t in (a, h)}, "out": {t: outs(t) for t in (a, h)}}
 
@@ -352,7 +353,8 @@ def changes_line(prev, cur, stamp):
     for t, q in cur.get("qb", {}).items():
         if prev.get("qb", {}).get(t) not in (None, q): d.append(f"{t} 예상 QB {prev['qb'][t]} → {q}")
     for t, o in cur.get("out", {}).items():
-        po = set(prev.get("out", {}).get(t, [])); no = set(o)
+        _cl = lambda xs: {n for n in xs if n and "스냅" not in n and not n.endswith(")") and "(" not in n}   # 옛 판 상태 파일의 조각(「★스냅 82%)」「IR)」) 걸러 내기
+        po = _cl(prev.get("out", {}).get(t, [])); no = _cl(o)
         if no - po: d.append(f"{t} Out 추가 {', '.join(sorted(no - po))}")
         if po - no: d.append(f"{t} Out 해제 {', '.join(sorted(po - no))}")
     return f"- 🆕 직전 판({stamp}) 대비 변동: " + (" · ".join(d) if d else "없음")

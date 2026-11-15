@@ -1046,12 +1046,22 @@ def ph_injuries(week, force=False):
                 exp = exp_sched or d1_; sched_note = ""
         else:
             sched_note = ""
+        # 2026-11-15(NFL 보드 제보 · MIA Willis 11/10 IR 인데 예상 선발로 남음 · ARI Minshew 동일): 예상 선발이 로스터 결장(IR 등)·보고 Out/Doubtful 이면 뎁스차트 QB1 로
+        _unav = {_norm_name(_n): ("IR" if _s == "RES" else _s) for _n, (_p, _s) in AP.reserve_players(t).items() if _p == "QB"}
+        _unav.update({_norm_name(_n): "보고 Out/Doubtful" for _n in qb_bad})
+        ir_fix = ""
+        if exp and _norm_name(exp) in _unav and d1_ and _norm_name(d1_) not in _unav:
+            ir_fix = f"{exp} {_unav[_norm_name(exp)]}"
+            sched_note = f"일정표 예상 {exp} 는 {_unav[_norm_name(exp)]} — 뎁스차트 QB1 {d1_} 로 정정"
+            exp = d1_
         # 벌점(qb_flag): ⓐ 예상 선발이 뎁스차트 QB1 이 아니다(백업 선발) ⓑ 보고가 QB Out/Doubtful.
         # 정보(qb_note): 예상 선발 = QB1 인데 시즌 드롭백 최다 QB 와 다르다 → 주전 복귀(레이팅은 대체 QB 표본이 섞여 있음) — 벌점 아님.
         flag, note = "", ""
         d1 = qb1.get(t, "")
         if exp and d1 and d1.split()[-1].lower() != exp.split()[-1].lower():
             flag = f"백업 QB 선발 — 뎁스차트 QB1 {d1} 대신 예상 선발 {exp}"
+        elif ir_fix and not (main_qb.get(t) and _same_person(main_qb[t], exp)):   # 정정된 QB1 이 시즌 주전이 아니면 백업 선발(모델 벌점 유지)
+            flag = f"백업 QB 선발 — {ir_fix} · 예상 선발 {exp}(뎁스차트 QB1)"
         elif exp and main_qb.get(t) and not _same_person(main_qb[t], exp):
             note = f"주전 복귀 — 시즌 드롭백 최다 {main_qb[t]}, 예상 선발 {exp}(레이팅에 대체 QB 표본 섞임)"
         if qb_rep and ("Out" in qb_rep or "Doubtful" in qb_rep):
@@ -1108,8 +1118,11 @@ def ph_inactives(week, games, snap):
                     return datetime.strptime((x.get("date") or "")[:16], "%Y-%m-%dT%H:%M")
                 except Exception:
                     return None
-            official = any(str((x.get("details") or {}).get("type") or "").startswith("Coach") for x in items) or \
-                       any(ko and _dt(x) and 0 <= (ko - _dt(x)).total_seconds() <= 2 * 3600 for x in items)
+            def _near(x, hrs):
+                return bool(ko and _dt(x) and 0 <= (ko - _dt(x)).total_seconds() <= hrs * 3600)
+            # 2026-11-15(보드 제보 · JAX): 며칠 전 날짜의 「Coach's Decision」(지난주 건강 제외가 남은 행)만으로 「공식 발표」 로 찍던 것 → 킥오프 4시간 안 것만
+            official = any(str((x.get("details") or {}).get("type") or "").startswith("Coach") and (_near(x, 4) if ko else True) for x in items) or \
+                       any(_near(x, 2) for x in items)
             for x in items:
                 a_ = x.get("athlete") or {}
                 nm = a_.get("displayName", ""); pos = (a_.get("position") or {}).get("abbreviation", "")
@@ -1119,6 +1132,54 @@ def ph_inactives(week, games, snap):
                              (x.get("date") or "")[:16], int(official), 1 if (v or 0) >= STARTER_SNAP else 0,
                              f"{v * 100:.0f}" if v else ""])
     wcsv(os.path.join(wd, "inactives.csv"), ["game", "team", "player", "pos", "status", "reason", "detail", "announced_utc", "official", "star", "snap_pct"], rows)
+    try:
+        _overlay_official_out(wd)
+    except Exception as e:
+        print(f"  inactives 덮어쓰기 실패({type(e).__name__}: {e})")
+
+
+def _overlay_official_out(wd):
+    """2026-11-15(NFL 보드 제보 · KC Walker 주간 Questionable → 08:21 PT 공식 비활성 Out 인데 부상·QB 줄·선수 표는 Q): 주간 보고 Questionable/Doubtful
+    선수가 ESPN 공식 비활성(official=1 · Out)이면 injuries.csv 의 그 열에서 out 열로 옮긴다(「당일 비활성」 꼬리) — 부상·QB 줄·선수 표 상태·🆕 Out 추가·
+    ★주전 결장 수가 🏥 결장 명단 줄과 같은 값을 본다. 옮긴 수를 돌려준다."""
+    p = os.path.join(wd, "injuries.csv")
+    inj = rd(p)
+    if not inj:
+        return 0
+    hdr = list(inj[0].keys())
+    offs = defaultdict(set)
+    for r in rd(os.path.join(wd, "inactives.csv")):
+        if r.get("official") == "1" and r.get("status") == "Out":
+            offs[r["team"]].add(_norm_name(r["player"]))
+
+    def _split(s):
+        return [y.strip() for y in re.split(r"(?<=\))\s*·\s*", str(s or "")) if y.strip()]
+    n = 0
+    for x in inj:
+        names = offs.get(x["team"])
+        if not names:
+            continue
+        out, moved = _split(x.get("out")), []
+        for col in ("questionable", "doubtful"):
+            keep = []
+            for y in _split(x.get(col)):
+                (moved if _norm_name(y.split("(")[0]) in names else keep).append((col, y) if _norm_name(y.split("(")[0]) in names else y)
+            x[col] = " · ".join(keep); x["n_" + col] = len(keep)
+        if not moved:
+            continue
+        for col, y in moved:
+            out.append((y[:-1] + " · 당일 비활성)") if y.endswith(")") else y + "(당일 비활성)")
+            if col == "questionable" and "★" in y and not x.get("final_pending"):   # Doubtful ★ 은 이미 세어져 있다
+                x["n_starters_missing"] = int(fnum(x.get("n_starters_missing")) or 0) + 1
+            nm_ = y.split("(")[0].strip()
+            if "(QB" in y and _norm_name(nm_) == _norm_name(x.get("expected_qb") or ""):
+                x["qb_report"] = f"{nm_} Out(당일 비활성)"
+                x["qb_flag"] = ((x.get("qb_flag") or "") + " · " if x.get("qb_flag") else "") + f"QB 당일 비활성 {nm_} Out"
+        x["out"] = " · ".join(out); x["n_out"] = len(out)
+        n += len(moved)
+    if n:
+        wcsv(p, hdr, [[x.get(k, "") for k in hdr] for x in inj])
+    return n
 
 
 ANGLE_NOTE = {   # 2026-10-17 — 각도별 실측 한 줄(예측시장 이후 24~25 기준 · 서술용). 정의·판정 기준은 picks.py 주석
@@ -1173,8 +1234,8 @@ def _inactives_line(wd, g, a, h):
     try:
         ko = datetime.strptime(g["kickoff_utc"], "%Y-%m-%dT%H:%MZ")
         kp = datetime.strptime(g["kickoff_pt"], "%H:%M")
-        ds = [datetime.strptime(r["announced_utc"], "%Y-%m-%dT%H:%M") for r in rows if r["announced_utc"]]
-        ds = [d for d in ds if 0 <= (ko - d).total_seconds() <= 2 * 3600] or ds
+        ds = [datetime.strptime(r["announced_utc"], "%Y-%m-%dT%H:%M") for r in rows if r["announced_utc"] and off_t.get(r["team"])]
+        ds = [d for d in ds if 0 <= (ko - d).total_seconds() <= 4 * 3600]   # 2026-11-15: 며칠 전 날짜가 시각만 남아 「17:05 PT」 로 찍히던 것(JAX) — 발표된 팀의 당일 행만, 없으면 「?」
         if ds:
             ann_pt = (kp - (ko - min(ds))).strftime("%H:%M")
     except Exception:
