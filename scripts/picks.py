@@ -348,7 +348,13 @@ ANGLE_GRADES = {"A1": "각도 관찰 A1(원정 큰 페이버릿 반대)", "A2": 
                 "A11": "각도 관찰 A11(경기 당일 비·뇌우 실외 → Under)",          # 2026-11-05 Paul 「a」 — B1 백테스트 방향만(n77 −3.9점)
                 "A12": "각도 관찰 A12(첫 선발 백업 QB 상대 7+ 페이버릿 → 페이버릿 ML)"}   # 2026-11-05 Paul 「a」 — B3 방향만(n63 +7.8%p)       # 2026-10-18 수비 데이터 탐색 — 아래 A10 주석
 A3_MOVE = 3.0   # 개장→현재 스프레드 이동(점) 문턱 — 사전 등록, 조정 금지
-ANGLE_TARGET = {"A3": 30, "A4": 20, "A5": 20, "A6": 20, "A7": 20, "A8": 20, "A9": 20, "A10": 20, "A11": 30, "A12": 30}
+# 2026-11-15 조건부 스프레드 픽(Paul 「스프레드픽도 내자 · nfl도 스프레드 맞추는 방향으로」 → 검정 scripts/spread_lab.py → 「이대로 가자」 · 사전 등록 SP · 조정 금지):
+#  A7(홈 언더독 +7 이상 → 홈 · 역사 2018~25 106-82 56.4% 6/8 시즌) 또는 A6(키 넘버 3·7 넘긴 이동 반대쪽 · 2024~25 73-50 59.3%)이 걸린 경기만 · 둘이 반대쪽이면 픽 없음.
+#  11주차부터 {gid}:spread:SP 행(−110 · 현재 라인 · 킥오프 뒤 동결). 전향 30픽(푸시 제외) 52.4% 미만이면 폐기 · 조건별로도 보고 · 판정 Paul. 이길 팀 예측·★·ML 판단과 무관.
+SP_START_WEEK = 11
+SP_GRADE = "스프레드 픽(조건부 · A6·A7)"
+ANGLE_GRADES["SP"] = SP_GRADE
+ANGLE_TARGET = {"SP": 30, "A3": 30, "A4": 20, "A5": 20, "A6": 20, "A7": 20, "A8": 20, "A9": 20, "A10": 20, "A11": 30, "A12": 30}
 # 2026-11-15 Paul 「둘 다 추천대로」 — 9주차 채점 뒤 판정(사전 등록 조건 그대로):
 #  A10 폐기: 20픽 7-13(35.0%) −6.65u · 조건 ≥50% & 수익 플러스 미달 → 10주차부터 생성 중단(기록 행은 남김 · 경기 단위 성적에서 제외 — A1·A2 와 같은 처리)
 #  A6 유지: 23픽 14-9(60.9%) +3.73u · 조건 ≥52.4% 충족 → 관찰 줄 계속(서술 전용 · ATS 각도라 판단 근거 아님 · 10판 ML 전용 불변)
@@ -570,6 +576,11 @@ def angles(week):
                 moved_home = hl < os_                           # 홈 라인이 작아짐 = 홈 쪽으로 이동 → 반대 = 원정
                 side_ = f"{a} {-hl:+g}" if moved_home else f"{h} {hl:+g}"
                 cand[f'{m["game_id"]}:spread:A6'] = (f"{a}@{h}", side_, "A6", f"개장 {os_:+g} → 지금 {hl:+g}(홈 기준) 키 넘버 넘김 · 이동 반대쪽", "spread", side_.split()[1], "-110")
+    if week >= SP_START_WEEK:   # 조건부 스프레드 픽 — A6·A7 후보에서(한쪽만이거나 같은 팀이면 픽 · 반대면 없음)
+        for _gid in {k.split(":")[0] for k in cand}:
+            _c = [cand[k] for k in (f"{_gid}:spread:A7", f"{_gid}:spread:A6") if k in cand]
+            if _c and len({c[1].split()[0] for c in _c}) == 1:
+                cand[f"{_gid}:spread:SP"] = (_c[0][0], _c[0][1], "SP", " + ".join(c[2] for c in _c) + " 조건 — " + " / ".join(c[3] for c in _c), "spread", _c[0][5], "-110")
     n_new = n_del = 0
     for rid, r in list(keep.items()):
         if r["grade"] in ANGLE_GRADES.values() and int(r["week"]) == week and not r["result"] and rid not in cand:

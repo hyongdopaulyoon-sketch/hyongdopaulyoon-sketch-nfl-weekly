@@ -39,7 +39,8 @@ def rec(xs):
 
 STAR_CUTS = ((0.75, 4), (0.65, 3), (0.57, 2), (0.0, 1))   # predictions.STAR_CUTS 와 같은 값
 G_HDR = ["주차", "경기", "시장 승자", "시장 %", "발행 예측", "발행 %", "★", "기록 시각", "구분", "결과(승자)", "점수", "발행 적중",
-         "스프레드(홈)", "모델 마진(홈)", "차(모델−시장)", "스프레드 픽", "실제 마진(홈)", "스프레드 결과", "예측 승자 커버"]
+         "스프레드(홈)", "모델 마진(홈)", "차(모델−시장)", "스프레드 픽", "실제 마진(홈)", "스프레드 결과", "예측 승자 커버",
+         "개장 스프레드(홈)", "조건부 스프레드 픽", "조건", "조건부 결과"]
 T_HDR = ["팀", "팀 전적", "승자로 예측 W-L", "적중%", "상대를 승자로 예측 W-L", "적중%", "이 팀 경기 예측 합", "적중%",
          "팀 스프레드 성적 W-L(-P)", "커버%", "스프레드 픽 = 이 팀 W-L(-P)", "적중%", "스프레드 픽 = 상대 W-L(-P)", "적중%",
          "승자로 예측했을 때 커버 W-L(-P)", "커버%", "비고"]
@@ -55,6 +56,13 @@ def game_rows():
         for x in csv.DictReader(open(p, encoding="utf-8-sig", newline="")):
             if x.get("game_id") in G:
                 G[x["game_id"]]["_model"] = x
+    opens = {}   # (주차, 경기) → 개장 홈 라인(주차 폴더 games.csv · 1주차 등은 closing.csv)
+    for p in glob.glob(os.path.join(DATA, "*-w*", "closing.csv")) + glob.glob(os.path.join(DATA, "*-w*", "games.csv")):
+        wk = int(os.path.basename(os.path.dirname(p)).split("-w")[1])
+        for x in csv.DictReader(open(p, encoding="utf-8-sig", newline="")):
+            gm = x.get("game") or (f'{x.get("away")}@{x.get("home")}' if x.get("away") else "")
+            if gm and fnum(x.get("open_spread_home")) is not None:
+                opens[(wk, gm)] = fnum(x["open_spread_home"])
     out = []
     for gid, d in G.items():
         a, h = d["game"].split("@")
@@ -80,11 +88,21 @@ def game_rows():
                 sres = "" if cov is None else ("P" if cov == 0 else ("W" if (cov > 0) == (side == h) else "L"))
                 side_txt = f"{side} {line:+g}"
         fc = "" if cov is None or pw not in (a, h) else ("P" if cov == 0 else ("W" if (cov > 0) == (pw == h) else "L"))
+        # 조건부 스프레드 픽(2026-11-15 사전 등록 SP · 소급): A7 홈 언더독 +7 이상 → 홈 · A6 개장→마감이 3·7 을 넘겨 움직였으면 반대쪽 · 둘이 반대면 픽 없음
+        op = opens.get((d["week"], d["game"])); cv = []
+        if sp is not None and sp >= 7:
+            cv.append((h, "홈 언더독 +7"))
+        if sp is not None and op is not None and op != sp and any((abs(op) < kn <= abs(sp)) or (abs(sp) < kn <= abs(op)) for kn in (3.0, 7.0)):
+            cv.append((a if sp < op else h, "키 넘버 넘긴 이동 반대쪽"))
+        cside = cv[0][0] if cv and len({t for t, _ in cv}) == 1 else ""
+        ctxt = (f"{cside} {(sp if cside == h else -sp):+g}" if cside else ("상충" if cv else ""))
+        cres = "" if not cside or cov is None else ("P" if cov == 0 else ("W" if (cov > 0) == (cside == h) else "L"))
         out.append({"주차": d["week"], "경기": d["game"], "시장 승자": mk.get("pick", ""), "시장 %": round(100 * fnum(mk.get("p_pick"))) if fnum(mk.get("p_pick")) is not None else "",
                     "발행 예측": pw, "발행 %": round(100 * pp) if pp is not None else "", "★": "★" * next(n for c, n in STAR_CUTS if pp >= c) if pp is not None else "",
                     "기록 시각": at, "구분": kind, "결과(승자)": win, "점수": fin, "발행 적중": hit,
                     "스프레드(홈)": sp if sp is not None else "", "모델 마진(홈)": round(mm, 1) if mm is not None else "", "차(모델−시장)": diff,
                     "스프레드 픽": side_txt if side else "", "실제 마진(홈)": act if act is not None else "", "스프레드 결과": sres, "예측 승자 커버": fc,
+                    "개장 스프레드(홈)": op if op is not None else "", "조건부 스프레드 픽": ctxt, "조건": " + ".join(w for _, w in cv), "조건부 결과": cres,
                     "_a": a, "_h": h, "_side": side, "_cov": cov})
     out.sort(key=lambda r: (r["주차"], r["경기"]))
     return out
@@ -159,6 +177,10 @@ def pred_sheets(wb, head, fill):
     s.append(["스프레드 픽 전체(소급 · 기록용)"] + wlp(spr, "스프레드 결과") + ["모델 기대 마진이 스프레드보다 유리하게 보는 쪽 · 손익분기 52.4% · 돈 아님"])
     for lab, lo, hi in (("차 1점 미만", 0, 1), ("차 1~2점", 1, 2), ("차 2~3.5점", 2, 3.5), ("차 3.5~5점", 3.5, 5), ("차 5점+", 5, 99)):
         s.append([f"  {lab}"] + wlp([r for r in spr if lo <= abs(r["차(모델−시장)"]) < hi], "스프레드 결과") + [""])
+    cdr = [r for r in rows if r["조건부 결과"]]
+    s.append(["조건부 스프레드 픽(사전 등록 SP · 소급)"] + wlp(cdr, "조건부 결과") + ["조건이 걸린 경기만 · 상충은 픽 없음 · 마감 라인 채점 · 발행문 줄은 11주차~ · 전향 30픽 판정 · 손익분기 52.4%"])
+    for lab in ("홈 언더독 +7", "키 넘버 넘긴 이동 반대쪽"):
+        s.append([f"  {lab}"] + wlp([r for r in cdr if lab in r["조건"]], "조건부 결과") + [""])
     s.append(["예측 승자가 스프레드도 넘김"] + wlp([r for r in done if r["예측 승자 커버"]], "예측 승자 커버") + ["승자 예측 쪽 스프레드 성적(값만)"])
     s.column_dimensions["A"].width = 30; s.column_dimensions["C"].width = 12; s.column_dimensions["E"].width = 70
     t = wb.create_sheet("팀별"); t.append(T_HDR)

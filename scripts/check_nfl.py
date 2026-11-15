@@ -238,6 +238,26 @@ def main():
             miss.append("수비 표")
         if miss:
             문제.append(f"{k}: 필수 줄 없음(6판 10/11): {' '.join(miss)}")
+        # 2026-11-15 11판(Paul 「스프레드픽도 내자」 · 사전 등록 SP): 기준판에 📏 줄이 있으면 발행문 「- 스프레드 픽:」 줄이 같은 값(없음 포함)
+        _dsp = re.search(r"(?m)^- 📏 스프레드 픽: (?:\*\*([A-Z]{2,3}) ([+-]?\d+(?:\.\d+)?)\*\*|없음)", dsecs.get(k, ""))
+        if _dsp:
+            _want = f"{_dsp.group(1)} {float(_dsp.group(2)):+g}" if _dsp.group(1) else "없음"
+            _psp = re.search(LINE_HEAD + r"스프레드 픽\**\s*[:：]?\s*\**\s*(없음|([A-Z]{2,3})\s*([+-]?\d+(?:\.\d+)?))", body)
+            if not _psp:
+                문제.append(f"{k}: 「- 스프레드 픽:」 줄 없음 — 다이제스트 📏 줄 「{_want}」 을 그대로(11판 · 조건부 · 기록용)")
+            else:
+                _got = "없음" if _psp.group(1) == "없음" else f"{_psp.group(2)} {float(_psp.group(3)):+g}"
+                if _got != _want:
+                    문제.append(f"{k}: 「- 스프레드 픽:」 {_got} ≠ 다이제스트 📏 줄 {_want}(값 그대로 옮긴다)")
+        # 2026-11-15 Paul 「A4·N4 해당 이런 거 다 설명하게끔 풀어서 · 지금 성적도」: 발행문에 코드가 나오면 쉬운 이름도 같이 있어야 한다(🗒️ 규칙 풀이 줄)
+        try:
+            import nfl_pull as _NP
+            _names = {c: v[0].replace(" 관찰", "") for c, v in _NP.ANGLE_PLAIN.items()} | {"N4": "백업 QB 감점", "N3": "값 얇음"}
+            _bare = sorted({c for c in re.findall(r"(?<![A-Za-z0-9])([AN]\d{1,2})(?![A-Za-z0-9])", body) if c in _names and _names[c] not in body})
+            if _bare and "🗒️ 규칙 풀이" in dsecs.get(k, ""):
+                경고.append(f"{k}: 규칙 코드만 쓰고 풀이 없음 — {' · '.join(f'{c}(「{_names[c]}」)' for c in _bare)} · 다이제스트 🗒️ 규칙 풀이 줄의 쉬운 이름·뜻·지금 성적을 붙인다")
+        except Exception:
+            pass
         # 팀 비교·선수 비교 줄의 순위(「n위」)가 기준판 경기 절에 있나 — 환각 순위 검출(경고)
         dsec_ = dsecs.get(k, "")
         for ln in body.splitlines():
