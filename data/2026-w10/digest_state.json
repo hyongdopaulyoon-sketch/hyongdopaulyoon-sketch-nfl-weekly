@@ -2,7 +2,7 @@
 "MIN@GB": {
 "spread_home": "-2.5",
 "total": "42.5",
-"ml": "+124/-148",
+"ml": "+120/-142",
 "qb": {
 "MIN": "Kirk Cousins",
 "GB": "Jordan Love"
@@ -36,8 +36,8 @@
 },
 "JAX@TEN": {
 "spread_home": "10.5",
-"total": "46.5",
-"ml": "-750/+525",
+"total": "45.5",
+"ml": "-700/+500",
 "qb": {
 "JAX": "Trevor Lawrence",
 "TEN": "Cam Ward"
@@ -116,7 +116,7 @@
 "BUF@NYJ": {
 "spread_home": "8.5",
 "total": "50.5",
-"ml": "-470/+360",
+"ml": "-485/+370",
 "qb": {
 "BUF": "Josh Allen",
 "NYJ": "Geno Smith"
@@ -165,7 +165,7 @@
 "PIT@CIN": {
 "spread_home": "-3.5",
 "total": "49.5",
-"ml": "+154/-185",
+"ml": "+160/-192",
 "qb": {
 "PIT": "Aaron Rodgers",
 "CIN": "Joe Burrow"
@@ -229,7 +229,7 @@
 "NE@DET": {
 "spread_home": "-2.5",
 "total": "50.5",
-"ml": "+120/-142",
+"ml": "?/?",
 "qb": {
 "NE": "Drake Maye",
 "DET": "Jared Goff"
@@ -289,7 +289,7 @@
 "KC@ATL": {
 "spread_home": "3.0",
 "total": "47.5",
-"ml": "-180/+150",
+"ml": "-175/+145",
 "qb": {
 "KC": "Patrick Mahomes",
 "ATL": "Michael Penix Jr."
@@ -316,8 +316,8 @@
 },
 "HOU@CLE": {
 "spread_home": "4.5",
-"total": "40.5",
-"ml": "-225/+185",
+"total": "41.5",
+"ml": "-198/+164",
 "qb": {
 "HOU": "C.J. Stroud",
 "CLE": "Deshaun Watson"
@@ -411,7 +411,7 @@
 "CAR@NO": {
 "spread_home": "-1.5",
 "total": "48.5",
-"ml": "-102/-118",
+"ml": "-105/-115",
 "qb": {
 "CAR": "Bryce Young",
 "NO": "Tyler Shough"
@@ -439,5 +439,5 @@
 ]
 }
 },
-"_stamp": "11-15 05:25"
+"_stamp": "11-15 08:36"
 }
