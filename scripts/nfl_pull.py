@@ -871,7 +871,8 @@ def _team_profile():
 
 def _status_of(short, inj_row):
     """pbp 짧은 이름(「J.Jefferson」) → 그 팀 부상 줄의 상태 꼬리표(Out/Doubtful/Questionable/연습 DNP·Limited) 또는 ""."""
-    for key, lab in (("out", "Out"), ("doubtful", "Doubtful"), ("questionable", "Q"), ("dnp", "연습 DNP"), ("limited", "연습 Limited")):
+    # 2026-11-15(보드 제보 · SEA E.Wilson 건강 제외인데 선수 표 상태 칸 「—」): ESPN 명단에만 Out 인 선수(espn_only_out 열)도 상태 칸에
+    for key, lab in (("out", "Out"), ("espn_only_out", "Out(ESPN 명단)"), ("doubtful", "Doubtful"), ("questionable", "Q"), ("dnp", "연습 DNP"), ("limited", "연습 Limited")):
         for full in [x.split("(")[0].strip() for x in str(inj_row.get(key) or "").split(" · ") if x.strip()]:
             if full and _same_person(short, full):
                 return lab
@@ -1096,10 +1097,10 @@ def ph_injuries(week, force=False):
         if sched_note:
             note = (note + " · " if note else "") + sched_note
         rows.append([t, use or "", exp, d1, main_qb.get(t, ""), qb_rep, flag, note, len(out), len(dbt), len(q),
-                     " · ".join(out), " · ".join(dbt), " · ".join(q), pending, len(dnp), len(lim), " · ".join(dnp), " · ".join(lim), starters])
+                     " · ".join(out), " · ".join(dbt), " · ".join(q), pending, len(dnp), len(lim), " · ".join(dnp), " · ".join(lim), starters, ""])
     wcsv(os.path.join(wd, "injuries.csv"), ["team", "report_week", "expected_qb", "depth_qb1", "season_main_qb", "qb_report", "qb_flag", "qb_note",
                                              "n_out", "n_doubtful", "n_questionable", "out", "doubtful", "questionable",
-                                             "final_pending", "n_dnp", "n_limited", "dnp", "limited", "n_starters_missing"], rows)
+                                             "final_pending", "n_dnp", "n_limited", "dnp", "limited", "n_starters_missing", "espn_only_out"], rows)
     ph_inactives(week, games, snap)
 
 
@@ -1216,8 +1217,17 @@ def _overlay_official_out(wd):
                 x["qb_flag"] = ((x.get("qb_flag") or "") + " · " if x.get("qb_flag") else "") + f"QB 당일 비활성 {nm_} Out"
         x["out"] = " · ".join(out); x["n_out"] = len(out)
         n += len(moved)
-    if n:
-        wcsv(p, hdr, [[x.get(k, "") for k in hdr] for x in inj])
+    # ESPN 명단에만 Out(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장): 표시 전용 열(선수 표 상태 칸·부상·QB 줄 꼬리) — 결장 수·모델·각도 입력은 안 바꾼다
+    eo = defaultdict(list)
+    for r in rd(os.path.join(wd, "inactives.csv")):
+        if r.get("status") == "Out" and r["player"] not in eo[r["team"]]:
+            eo[r["team"]].append(r["player"])
+    if "espn_only_out" not in hdr:
+        hdr.append("espn_only_out")
+    for x in inj:
+        have = {_norm_name(y.split("(")[0]) for col in ("out", "doubtful", "questionable") for y in _split(x.get(col))}
+        x["espn_only_out"] = " · ".join(nm for nm in eo.get(x["team"], []) if _norm_name(nm) not in have)
+    wcsv(p, hdr, [[x.get(k, "") for k in hdr] for x in inj])
     return n
 
 
