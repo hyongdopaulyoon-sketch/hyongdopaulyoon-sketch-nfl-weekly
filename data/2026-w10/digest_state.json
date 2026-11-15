@@ -2,7 +2,7 @@
 "MIN@GB": {
 "spread_home": "-2.5",
 "total": "42.5",
-"ml": "+124/-148",
+"ml": "?/?",
 "qb": {
 "MIN": "Kirk Cousins",
 "GB": "Jordan Love"
@@ -30,7 +30,7 @@
 "JAX@TEN": {
 "spread_home": "10.5",
 "total": "45.5",
-"ml": "-650/+470",
+"ml": "?/?",
 "qb": {
 "JAX": "Trevor Lawrence",
 "TEN": "Cam Ward"
@@ -83,7 +83,7 @@
 "BUF@NYJ": {
 "spread_home": "8.5",
 "total": "50.5",
-"ml": "-500/+380",
+"ml": "?/?",
 "qb": {
 "BUF": "Josh Allen",
 "NYJ": "Geno Smith"
@@ -140,35 +140,6 @@
 ]
 }
 },
-"MIA@IND": {
-"spread_home": "-4.5",
-"total": "37.5",
-"ml": "+180/-218",
-"qb": {
-"MIA": "Kyle McCord",
-"IND": "Daniel Jones"
-},
-"out": {
-"MIA": [
-"Aaron Brewer",
-"Chris Bell",
-"Darrell Baker Jr.",
-"Jared Wayne",
-"Malik Willis",
-"Zach Sieler"
-],
-"IND": [
-"Akeem Davis-Gaither",
-"Cam Taylor-Britt",
-"Jalen Travis",
-"Jaylon Carlies",
-"Jerry Tillery",
-"Luke Rhodes",
-"Mo Alie-Cox",
-"Will Mallory"
-]
-}
-},
 "NE@DET": {
 "spread_home": "-2.5",
 "total": "50.5",
@@ -218,7 +189,7 @@
 "KC@ATL": {
 "spread_home": "3.0",
 "total": "47.5",
-"ml": "-175/+145",
+"ml": "?/?",
 "qb": {
 "KC": "Patrick Mahomes",
 "ATL": "Michael Penix Jr."
@@ -242,7 +213,7 @@
 "HOU@CLE": {
 "spread_home": "4.5",
 "total": "40.5",
-"ml": "-198/+164",
+"ml": "?/?",
 "qb": {
 "HOU": "C.J. Stroud",
 "CLE": "Deshaun Watson"
@@ -267,7 +238,7 @@
 "SEA@LV": {
 "spread_home": "6.5",
 "total": "40.5",
-"ml": "-290/+235",
+"ml": "-298/+240",
 "qb": {
 "SEA": "Sam Darnold",
 "LV": "Fernando Mendoza"
@@ -311,7 +282,7 @@
 "CAR@NO": {
 "spread_home": "-1.5",
 "total": "48.5",
-"ml": "-110/-110",
+"ml": "?/?",
 "qb": {
 "CAR": "Bryce Young",
 "NO": "Tyler Shough"
@@ -331,5 +302,34 @@
 ]
 }
 },
-"_stamp": "11-15 09:04"
+"MIA@IND": {
+"spread_home": "-4.5",
+"total": "37.5",
+"ml": "?/?",
+"qb": {
+"MIA": "Kyle McCord",
+"IND": "Daniel Jones"
+},
+"out": {
+"MIA": [
+"Aaron Brewer",
+"Chris Bell",
+"Darrell Baker Jr.",
+"Jared Wayne",
+"Malik Willis",
+"Zach Sieler"
+],
+"IND": [
+"Akeem Davis-Gaither",
+"Cam Taylor-Britt",
+"Jalen Travis",
+"Jaylon Carlies",
+"Jerry Tillery",
+"Luke Rhodes",
+"Mo Alie-Cox",
+"Will Mallory"
+]
+}
+},
+"_stamp": "11-15 11:42"
 }
