@@ -573,6 +573,9 @@ def angles(week):
     n_new = n_del = 0
     for rid, r in list(keep.items()):
         if r["grade"] in ANGLE_GRADES.values() and int(r["week"]) == week and not r["result"] and rid not in cand:
+            if rid.split(":")[-1] in RETIRED_KEYS:   # 2026-11-15: 폐기 각도의 미채점 행은 킥오프가 지났어도 지운다(A10 폐기 05:26 보다 05:25 리프레시가 먼저 돌아 10주차 5행이 남음 — 보드 제보)
+                del keep[rid]; n_del += 1
+                continue
             g = games.get(rid.split(":")[0]) or {}
             if g.get("kickoff_utc") and datetime.strptime(g["kickoff_utc"], "%Y-%m-%dT%H:%MZ").replace(tzinfo=timezone.utc) <= now:
                 continue                            # 킥오프 지남 — 동결
