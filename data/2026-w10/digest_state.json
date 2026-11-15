@@ -2,7 +2,7 @@
 "MIN@GB": {
 "spread_home": "-2.5",
 "total": "42.5",
-"ml": "+120/-142",
+"ml": "+124/-148",
 "qb": {
 "MIN": "Kirk Cousins",
 "GB": "Jordan Love"
@@ -11,6 +11,7 @@
 "MIN": [
 "Blake Cashman",
 "Jauan Jennings",
+"Jordan Addison",
 "Kyler Murray",
 "T.J. Hockenson",
 "Tyrion Ingram-Dawkins"
@@ -21,14 +22,15 @@
 "Josh Whyle",
 "Kevin Zeitler",
 "Micah Parsons",
-"Sean Rhyan"
+"Sean Rhyan",
+"Zaire Franklin"
 ]
 }
 },
 "JAX@TEN": {
 "spread_home": "10.5",
 "total": "45.5",
-"ml": "-675/+490",
+"ml": "-650/+470",
 "qb": {
 "JAX": "Trevor Lawrence",
 "TEN": "Cam Ward"
@@ -53,7 +55,7 @@
 "LA@ARI": {
 "spread_home": "9.5",
 "total": "38.5",
-"ml": "-485/+370",
+"ml": "-500/+380",
 "qb": {
 "LA": "Matthew Stafford",
 "ARI": "Carson Beck"
@@ -88,7 +90,8 @@
 },
 "out": {
 "BUF": [
-"Josh Palmer"
+"Josh Palmer",
+"Tyrell Shavers"
 ],
 "NYJ": [
 "Jarvis Brownlee Jr.",
@@ -140,7 +143,7 @@
 "MIA@IND": {
 "spread_home": "-4.5",
 "total": "37.5",
-"ml": "+185/-225",
+"ml": "+180/-218",
 "qb": {
 "MIA": "Kyle McCord",
 "IND": "Daniel Jones"
@@ -149,6 +152,7 @@
 "MIA": [
 "Aaron Brewer",
 "Chris Bell",
+"Darrell Baker Jr.",
 "Jared Wayne",
 "Malik Willis",
 "Zach Sieler"
@@ -160,7 +164,8 @@
 "Jaylon Carlies",
 "Jerry Tillery",
 "Luke Rhodes",
-"Mo Alie-Cox"
+"Mo Alie-Cox",
+"Will Mallory"
 ]
 }
 },
@@ -222,11 +227,13 @@
 "KC": [
 "Jaydn Ott",
 "Jaylon Moore",
+"Kenneth Walker III",
 "L'Jarius Sneed",
 "Omarr Norman-Lott",
 "Peter Woods"
 ],
 "ATL": [
+"Divine Deablo",
 "Samson Ebukam",
 "Zachariah Branch"
 ]
@@ -234,7 +241,7 @@
 },
 "HOU@CLE": {
 "spread_home": "4.5",
-"total": "41.5",
+"total": "40.5",
 "ml": "-198/+164",
 "qb": {
 "HOU": "C.J. Stroud",
@@ -245,6 +252,7 @@
 "Azeez Al-Shaair",
 "Brevin Jordan",
 "Danielle Hunter",
+"David Montgomery",
 "Jaylin Noel",
 "Keylan Rutledge",
 "Marvin Harrison Jr.",
@@ -303,7 +311,7 @@
 "CAR@NO": {
 "spread_home": "-1.5",
 "total": "48.5",
-"ml": "-105/-115",
+"ml": "-110/-110",
 "qb": {
 "CAR": "Bryce Young",
 "NO": "Tyler Shough"
@@ -323,5 +331,5 @@
 ]
 }
 },
-"_stamp": "11-15 08:52"
+"_stamp": "11-15 09:04"
 }
