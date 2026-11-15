@@ -1598,6 +1598,8 @@ def ph_digest(week, force=False):
             if week >= 11:                          # 📏 스프레드 픽 — 2026-11-15 Paul(사전 등록 SP · 11주차부터 — 진행 중이던 10주차는 그대로)
                 L.append(_spread_pick_line(week, g))
             L.append(_gloss_line(week, g, a, h, ia, ih, m))   # 🗒️ 규칙 풀이 — 2026-11-15 Paul 「코드 풀어서 · 지금 성적도」
+            import team_hex as _TH                           # 🔷 선수 육각형 — 2026-11-15 Paul 「nfl 더 정교하게 비교 · 선수 위주로 · 보드에 육각형」(값만)
+            L.append(_TH.digest_line(a, h, _TH.week_values(week).get(f"{a}@{h}")))
         except Exception as _e:
             L.append(f"- 🗒️ 규칙 풀이: 계산 실패({type(_e).__name__})")
         if g.get("neutral") == "1":                 # 🌍 국제·중립 경기 — 2026-10-18 Paul 「런던 게임 확실히 반영」
