@@ -1167,6 +1167,8 @@ def _inactives_line(wd, g, a, h):
     rows = [r for r in rd(os.path.join(wd, "inactives.csv")) if r["game"] == f"{a}@{h}"]
     inj = {r["team"]: r for r in rd(os.path.join(wd, "injuries.csv"))}
     off = bool(rows) and all(r["official"] == "1" for r in rows if r["team"] in (a, h)) and any(r["team"] == a for r in rows) and any(r["team"] == h for r in rows)
+    # 2026-11-15(보드 제보 · NE@DET 05:15판): 한 팀만 공식 명단이 들어온 「부분 발표」 를 통째로 「미발표」 로 찍던 것 → 팀별 발표 여부
+    off_t = {t: any(r["team"] == t for r in rows) and all(r["official"] == "1" for r in rows if r["team"] == t) for t in (a, h)}
     ann_pt = "?"
     try:
         ko = datetime.strptime(g["kickoff_utc"], "%Y-%m-%dT%H:%MZ")
@@ -1215,10 +1217,14 @@ def _inactives_line(wd, g, a, h):
                 if "★" in x and _norm_name(nm) not in seen:
                     unk.append(f'{nm}({"Q" if col == "questionable" else "D"})')
         parts.append(f'{t} Out {len(names)}' + (f' — {" · ".join(names)}' if names else "")
-                     + (f' · ⚠️ ★ 주중 Q/D 인데 ESPN 당일 명단에 없음: {", ".join(unk)} — 출전 여부 미확인(ESPN 이 생략하는 경로 있음 · 웹 확인 필수 · 「명단에 없으니 출전」으로 읽지 말 것)' if off and unk else ""))
+                     + (f' · ⚠️ ★ 주중 Q/D 인데 ESPN 당일 명단에 없음: {", ".join(unk)} — 출전 여부 미확인(ESPN 이 생략하는 경로 있음 · 웹 확인 필수 · 「명단에 없으니 출전」으로 읽지 말 것)' if off_t[t] and unk else ""))
     if off:
         return (f'- 🏥 결장 명단(ESPN 공식 비활성 · 발표 {ann_pt} PT ∪ 주간 보고 Out): ' + " / ".join(parts)
                 + f' · ★주전 결장 {a} {stars[a]} / {h} {stars[h]} — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · ESPN 당일 명단은 주중 Out 을 생략하니 발행 세션 웹 확인 유지')
+    if off_t[a] != off_t[h]:
+        _in, _no = (a, h) if off_t[a] else (h, a)
+        return (f'- 🏥 결장 명단(ESPN 부분 발표 — {_in} 공식 비활성 발표 {ann_pt} PT · {_no} 미발표(들어오면 리프레시) ∪ 주간 보고 Out): ' + " / ".join(parts)
+                + f' · {_in} ★주전 결장 {stars[_in]} — 값만 · {_no} 는 주간 보고 Out 기준')
     return ('- 🏥 결장 명단(ESPN): 공식 비활성 미발표(킥오프 90분 전 발표 — 그때 리프레시하면 이 줄이 채워진다) · 주간 보고 Out 기준 '
             + " / ".join(parts))
 
