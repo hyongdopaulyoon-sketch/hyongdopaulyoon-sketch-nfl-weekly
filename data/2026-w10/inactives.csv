@@ -1,14 +1,14 @@
 ﻿game,team,player,pos,status,reason,detail,announced_utc,official,star,snap_pct
-NE@DET,DET,Mekhi Wingo,DT,Out,Coach's Decision,,2026-11-15T13:02,1,0,
-NE@DET,DET,Amen Ogbongbemiga,LB,Out,Coach's Decision,,2026-11-15T13:02,1,0,
+NE@DET,DET,Mekhi Wingo,DT,Out,Coach's Decision,Not Specified,2026-11-15T13:02,1,0,
+NE@DET,DET,Amen Ogbongbemiga,LB,Out,Coach's Decision,Not Specified,2026-11-15T13:02,1,0,
 NE@DET,DET,D.J. Reed,CB,Out,Hip,Not Specified,2026-11-15T13:02,1,1,85
-NE@DET,DET,Ahmed Hassanein,DE,Out,Coach's Decision,,2026-11-15T13:02,1,0,
+NE@DET,DET,Ahmed Hassanein,DE,Out,Coach's Decision,Not Specified,2026-11-15T13:02,1,0,
 NE@DET,DET,Cade Mays,C,Out,Ankle,Sprain,2026-11-15T13:02,1,1,66
-NE@DET,NE,A.J. Brown,WR,Questionable,Knee,Not Specified,2026-11-15T11:10,0,1,91
-NE@DET,NE,Reggie Gilliam,FB,Questionable,Knee,Not Specified,2026-11-14T22:12,0,0,
-NE@DET,NE,TreVeyon Henderson,RB,Injured Reserve,Illness,Not Specified,2026-11-14T21:14,0,0,24
-NE@DET,NE,Brenden Schooler,S,Questionable,Hamstring,Not Specified,2026-11-13T22:38,0,0,1
-NE@DET,NE,Charles Woods,CB,Questionable,,,2026-11-13T22:34,0,0,29
+NE@DET,NE,Walter Rouse,OL,Out,Concussion,Concussion,2026-11-15T13:03,1,1,65
+NE@DET,NE,Brenden Schooler,S,Out,Hamstring,Not Specified,2026-11-15T13:03,1,0,1
+NE@DET,NE,Behren Morton,QB,Out,Coach's Decision,Not Specified,2026-11-15T13:03,1,0,
+NE@DET,NE,Ben Brown,C,Out,Knee,Not Specified,2026-11-15T13:03,1,0,53
+NE@DET,NE,Dametrious Crownover,OT,Out,Coach's Decision,Not Specified,2026-11-15T13:03,1,0,
 KC@ATL,ATL,Divine Deablo,LB,Out,Forearm,Not Specified,2026-11-14T22:57,0,0,53
 KC@ATL,ATL,Zachariah Branch,WR,Out,Hamstring,Not Specified,2026-11-13T19:42,0,0,22
 KC@ATL,ATL,Josh Woods,LB,Questionable,Ankle,Not Specified,2026-11-11T23:19,0,0,26
@@ -64,11 +64,11 @@ CAR@NO,NO,Travis Etienne Jr.,RB,Questionable,Hamstring,Strain,2026-11-14T21:11,0
 CAR@NO,NO,Erik McCoy,C,Out,Biceps,Not Specified,2026-11-14T01:55,0,1,91
 CAR@NO,NO,Taliese Fuaga,OT,Out,Knee,Sprain,2026-11-14T01:47,0,1,100
 CAR@NO,NO,Martin Emerson Jr.,CB,Questionable,Shin,Not Specified,2026-11-13T23:17,0,1,89
+CAR@NO,CAR,Jaelan Phillips,LB,Questionable,Hamstring,Not Specified,2026-11-15T13:08,0,0,
 CAR@NO,CAR,Brady Christensen,G,Injured Reserve,Hamstring,Not Specified,2026-11-14T19:38,0,0,
 CAR@NO,CAR,Mike Jackson,CB,Injured Reserve,Groin,Surgery,2026-11-14T19:23,0,0,
 CAR@NO,CAR,Jonathon Brooks,RB,Injured Reserve,Groin,Surgery,2026-11-14T19:01,0,0,
 CAR@NO,CAR,Xavier Legette,WR,Questionable,Knee,Not Specified,2026-11-14T18:56,0,0,
-CAR@NO,CAR,Will Lee III,CB,Questionable,Hamstring,,2026-11-13T22:41,0,1,65
 BUF@NYJ,NYJ,Garrett Wilson,WR,Questionable,Concussion,Concussion,2026-11-15T12:14,0,1,83
 BUF@NYJ,NYJ,VJ Payne,S,Questionable,Knee,Bruise,2026-11-15T01:01,0,0,
 BUF@NYJ,NYJ,Adonai Mitchell,WR,Questionable,Knee,Not Specified,2026-11-14T17:20,0,1,65
