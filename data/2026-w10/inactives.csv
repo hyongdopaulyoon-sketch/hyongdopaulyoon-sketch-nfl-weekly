@@ -1,14 +1,14 @@
 ﻿game,team,player,pos,status,reason,detail,announced_utc,official,star,snap_pct
-NE@DET,DET,Amon-Ra St. Brown,WR,Questionable,Ribs,Not Specified,2026-11-15T12:05,0,1,75
-NE@DET,DET,Sione Vaki,RB,Questionable,Ankle,Not Specified,2026-11-13T17:45,0,0,24
-NE@DET,DET,Cade Mays,C,Out,Ankle,Sprain,2026-11-13T01:26,0,1,66
-NE@DET,DET,D.J. Reed,CB,Out,Hip,Not Specified,2026-11-12T22:25,0,1,85
-NE@DET,DET,Kerby Joseph,S,Out,Knee,Not Specified,2026-11-12T22:13,0,0,
-NE@DET,NE,Rhamondre Stevenson,RB,Questionable,Knee,Not Specified,2026-11-15T11:14,0,1,69
+NE@DET,DET,Mekhi Wingo,DT,Out,Coach's Decision,,2026-11-15T13:02,1,0,
+NE@DET,DET,Amen Ogbongbemiga,LB,Out,Coach's Decision,,2026-11-15T13:02,1,0,
+NE@DET,DET,D.J. Reed,CB,Out,Hip,Not Specified,2026-11-15T13:02,1,1,85
+NE@DET,DET,Ahmed Hassanein,DE,Out,Coach's Decision,,2026-11-15T13:02,1,0,
+NE@DET,DET,Cade Mays,C,Out,Ankle,Sprain,2026-11-15T13:02,1,1,66
 NE@DET,NE,A.J. Brown,WR,Questionable,Knee,Not Specified,2026-11-15T11:10,0,1,91
-NE@DET,NE,Greg Van Roten,G,Questionable,Hamstring,Not Specified,2026-11-15T00:57,0,0,
 NE@DET,NE,Reggie Gilliam,FB,Questionable,Knee,Not Specified,2026-11-14T22:12,0,0,
 NE@DET,NE,TreVeyon Henderson,RB,Injured Reserve,Illness,Not Specified,2026-11-14T21:14,0,0,24
+NE@DET,NE,Brenden Schooler,S,Questionable,Hamstring,Not Specified,2026-11-13T22:38,0,0,1
+NE@DET,NE,Charles Woods,CB,Questionable,,,2026-11-13T22:34,0,0,29
 KC@ATL,ATL,Divine Deablo,LB,Out,Forearm,Not Specified,2026-11-14T22:57,0,0,53
 KC@ATL,ATL,Zachariah Branch,WR,Out,Hamstring,Not Specified,2026-11-13T19:42,0,0,22
 KC@ATL,ATL,Josh Woods,LB,Questionable,Ankle,Not Specified,2026-11-11T23:19,0,0,26
@@ -89,11 +89,11 @@ SEA@LV,SEA,Charles Cross,OT,Out,Ankle,Sprain,2026-11-14T02:36,0,1,83
 SEA@LV,SEA,Leonard Williams,DT,Out,Shoulder,Stinger,2026-11-14T00:38,0,1,69
 SEA@LV,SEA,Sam Darnold,QB,Out,Quadriceps,Not Specified,2026-11-10T00:15,0,1,100
 SEA@LV,SEA,Elijah Arroyo,TE,Injured Reserve,Shoulder,Surgery,2026-10-23T21:48,0,0,
+LA@ARI,ARI,Gardner Minshew II,QB,Injured Reserve,Elbow,Not Specified,2026-11-15T12:49,0,1,71
 LA@ARI,ARI,Hunter Long,TE,Questionable,Knee,Not Specified,2026-11-14T23:13,0,0,
 LA@ARI,ARI,Jayden Williams,OT,Questionable,Knee,Not Specified,2026-11-14T02:25,0,1,80
 LA@ARI,ARI,Zachary Carter,DT,Injured Reserve,Knee,Not Specified,2026-11-14T02:22,0,0,
 LA@ARI,ARI,Jon Gaines II,G,Out,Ankle,Not Specified,2026-11-14T01:35,0,0,
-LA@ARI,ARI,Hjalte Froholdt,C,Out,Concussion,Concussion,2026-11-14T01:31,0,1,100
 LA@ARI,LA,Steve Avila,G,Out,Hamstring,Not Specified,2026-11-14T02:16,0,1,73
 LA@ARI,LA,Trent McDuffie,CB,Questionable,Back,Not Specified,2026-11-14T00:23,0,1,80
 LA@ARI,LA,Kam Curl,S,Questionable,Toe,Not Specified,2026-11-14T00:21,0,0,
