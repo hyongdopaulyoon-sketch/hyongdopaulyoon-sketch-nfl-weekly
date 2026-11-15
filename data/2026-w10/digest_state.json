@@ -63,6 +63,7 @@
 "out": {
 "LA": [
 "Jaylen Watson",
+"Joe Cardona",
 "Jordan Whittington",
 "Puka Nacua",
 "Steve Avila",
@@ -72,6 +73,7 @@
 "Gardner Minshew",
 "Hjalte Froholdt",
 "Jalen Brooks",
+"Jayden Williams",
 "Jeremiyah Love",
 "Jon Gaines II",
 "Kendrick Bourne",
@@ -95,6 +97,7 @@
 ],
 "NYJ": [
 "Jarvis Brownlee Jr.",
+"Omar Cooper Jr.",
 "T'Vondre Sweat",
 "Trevin Wallace"
 ]
@@ -240,7 +243,7 @@
 "total": "40.5",
 "ml": "-298/+240",
 "qb": {
-"SEA": "Sam Darnold",
+"SEA": "Drew Lock",
 "LV": "Fernando Mendoza"
 },
 "out": {
@@ -251,7 +254,9 @@
 "Sam Darnold"
 ],
 "LV": [
-"Patrick Johnson"
+"Dont'e Thornton Jr.",
+"Patrick Johnson",
+"Thomas Booker"
 ]
 }
 },
@@ -331,5 +336,5 @@
 ]
 }
 },
-"_stamp": "11-15 11:42"
+"_stamp": "11-15 11:55"
 }

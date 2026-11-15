@@ -1,6 +1,6 @@
-# NFL 2026 Week 10 — 주간 다이제스트 (생성 11-15 11:42 PT · ESPN DraftKings 라인 · nflverse EPA)
+# NFL 2026 Week 10 — 주간 다이제스트 (생성 11-15 11:55 PT · ESPN DraftKings 라인 · nflverse EPA)
 
-> ⚠️ 이 판은 이번 주 6경기가 시작·종료된 뒤 생성됐다. 레이팅·모델·📈·📊·순위는 **10주차 결과를 뺀 값**(AS-OF 10주, 2026-10-11 누수 차단)이고, 끝난 경기의 DK 가격 칸은 비어 있다. 채점·관찰 기록은 킥오프 전 판 값으로만.
+> ⚠️ 이 판은 이번 주 9경기가 시작·종료된 뒤 생성됐다. 레이팅·모델·📈·📊·순위는 **10주차 결과를 뺀 값**(AS-OF 10주, 2026-10-11 누수 차단)이고, 끝난 경기의 DK 가격 칸은 비어 있다. 채점·관찰 기록은 킥오프 전 판 값으로만.
 
 ## 운용 규칙(N)
 
@@ -23,7 +23,7 @@
 | 항목 | 값 | 상태 | 비고 |
 |---|---|---|---|
 | 경기 수(ESPN vs nflverse 일정) | 14 / 14 | ✅ | 다르면 바이·연기 확인 |
-| DK 스프레드·총점·ML(안 시작한 경기) | 5/8 | ⚠️ | 끝난 경기는 가격이 빠지는 게 정상 · 빈 경기는 💵 블록 결측 |
+| DK 스프레드·총점·ML(안 시작한 경기) | 5/5 | ✅ | 끝난 경기는 가격이 빠지는 게 정상 · 빈 경기는 💵 블록 결측 |
 | Polymarket 가격 파일 | 14/14 | ✅ | 없으면 「더 좋은 가격」 비교 불가 |
 | 부상 보고(최종 지정 / 연습 보고만) | 28 / 0 팀(이번 주 28팀) | ✅ | 연습 보고만이면 Out/Q 웹 확인 필수 |
 | pbp 최신 주차 | 10주(이번 10주) | ✅ | 한 주 뒤면 레이팅·📈 가 지난주 값 |
@@ -109,16 +109,16 @@
 
 - 팀: **Minnesota Vikings**(미네소타 바이킹스) @ **Green Bay Packers**(그린베이 패커스) · 로고는 보드(Artifact)에서
     ↳ 우리 드라이브 모델(두 번째 의견 · 시장보다 덜 정확): MIN 17.5 – GB 21.0 → GB 61%
-- 🆕 직전 판(11-15 09:04) 대비 변동: ML +124/-148 → ?/?
+- 🆕 직전 판(11-15 11:42) 대비 변동: 없음
 
 - 시장(DK): 스프레드 홈 -2.5 · 총점 42.5 · ML MIN ? / GB ? · nflverse 라인 2.5/42.5
 - 레이팅: MIN 공격 -0.119(패 -0.148/러 -0.040) · 수비 -0.092(패 -0.125/러 -0.042) · 순마진 -1.7 · PF/PA 18.2/14.5
 - 레이팅: GB 공격 +0.076(패 +0.177/러 -0.042) · 수비 -0.023(패 +0.008/러 -0.026) · 순마진 +6.1 · PF/PA 24.0/21.2
 - 모델: 홈 마진 13.8 · 홈 승률 85.5% · 총점 31.7 · QB 조정 MIN -4.5 / GB 0.0
-- 부상·QB MIN: 예상 QB Kirk Cousins(시즌 주전 K.Murray) ⚠️ QB 보고 Kyler Murray Out · ⓘ 주전 복귀 — 시즌 드롭백 최다 K.Murray, 예상 선발 Kirk Cousins(레이팅에 대체 QB 표본 섞임) · Out 6 / Doubtful 0 / Questionable 2 — Out: Kyler Murray(QB · ★스냅 100%) · T.J. Hockenson(TE · ★스냅 80%) · Blake Cashman(LB · ★스냅 93%) · Jauan Jennings(WR · 스냅 56%) · Tyrion Ingram-Dawkins(DT · ★스냅 66%) · Jordan Addison(WR · ★스냅 92% · 당일 비활성) — Questionable: Kyle Van Noy(LB · 스냅 36%) · Josh Metellus(S · ★스냅 98%) · ★주전급(스냅 60%+) Out/Doubtful 5명
-- 부상·QB GB: 예상 QB Jordan Love(시즌 주전 J.Love) · Out 7 / Doubtful 0 / Questionable 6 — Out: Josh Jacobs(RB · 스냅 46%) · Micah Parsons(LB) · Sean Rhyan(C · 스냅 6%) · Josh Whyle(TE · 스냅 7%) · Jacob Monk(OL · 스냅 7% · IR) · Kevin Zeitler(G · 스냅 30% · 당일 비활성) · Zaire Franklin(LB · 당일 비활성) — Questionable: Xavier McKinney(S · ★스냅 94%) · Skyy Moore(WR) · Chris Brooks(RB) · Lukas Van Ness(LB · 스냅 59%) · Travis Glover(G · ★스냅 100%) · Javon Bullard(S · ★스냅 67%)
+- 부상·QB MIN: 예상 QB Kirk Cousins(시즌 주전 K.Murray) ⚠️ QB 보고 Kyler Murray Out · ⓘ 주전 복귀 — 시즌 드롭백 최다 K.Murray, 예상 선발 Kirk Cousins(레이팅에 대체 QB 표본 섞임) · Out 6 / Doubtful 0 / Questionable 2 — Out: Kyler Murray(QB · ★스냅 100%) · T.J. Hockenson(TE · ★스냅 80%) · Blake Cashman(LB · ★스냅 93%) · Jauan Jennings(WR · 스냅 56%) · Tyrion Ingram-Dawkins(DT · ★스냅 66%) · Jordan Addison(WR · ★스냅 92% · 당일 비활성) — Questionable: Kyle Van Noy(LB · 스냅 36%) · Josh Metellus(S · ★스냅 98%) · ★주전급(스냅 60%+) Out/Doubtful 5명 · ESPN 명단에만 Out 1: Max Brosmer(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
+- 부상·QB GB: 예상 QB Jordan Love(시즌 주전 J.Love) · Out 7 / Doubtful 0 / Questionable 6 — Out: Josh Jacobs(RB · 스냅 46%) · Micah Parsons(LB) · Sean Rhyan(C · 스냅 6%) · Josh Whyle(TE · 스냅 7%) · Jacob Monk(OL · 스냅 7% · IR) · Kevin Zeitler(G · 스냅 30% · 당일 비활성) · Zaire Franklin(LB · 당일 비활성) — Questionable: Xavier McKinney(S · ★스냅 94%) · Skyy Moore(WR) · Chris Brooks(RB) · Lukas Van Ness(LB · 스냅 59%) · Travis Glover(G · ★스냅 100%) · Javon Bullard(S · ★스냅 67%) · ESPN 명단에만 Out 2: Pierre Strong Jr. · Donovan Jennings(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
 - 🏥 결장 명단(ESPN 공식 비활성 · 발표 08:32 PT ∪ 주간 보고 Out): MIN Out 7 — Max Brosmer(QB · 스냅 17% · 직전 경기 17% · 건강 제외) · ★Jordan Addison(WR · 스냅 92% · 직전 경기 96% · Thumb · 발표 08:38) · ★T.J. Hockenson(TE · 스냅 80% · 직전 경기 81% · Wrist · 발표 08:32) · ★Tyrion Ingram-Dawkins(DE · 스냅 66% · 직전 경기 44% · Ankle · 발표 08:32) · Jauan Jennings(WR · 스냅 56% · 직전 경기 0% · Calf) · ★Blake Cashman(LB · 스냅 93% · 직전 경기 86% · Concussion · 발표 08:32) · ★Kyler Murray(QB · 스냅 100% · 직전 경기 0% · Hamstring) · 주중 Q/D → ESPN 출전 표시: Kyle Van Noy(Q → Active 09:36) · ⚠️ ★ 주중 Q/D 인데 ESPN 당일 명단에 없음: Josh Metellus(Q) — 출전 여부 미확인(ESPN 이 생략하는 경로 있음 · 웹 확인 필수 · 「명단에 없으니 출전」으로 읽지 말 것) / GB Out 9 — Kevin Zeitler(G · 스냅 30% · 직전 경기 30% · Ankle) · Zaire Franklin(LB · 직전 경기 0% · Shin) · Pierre Strong Jr.(RB · 스냅 23% · 직전 경기 45% · 건강 제외) · Sean Rhyan(G · 스냅 6% · 직전 경기 0% · Ankle) · Josh Jacobs(RB · 스냅 46% · 직전 경기 15% · Finger) · Donovan Jennings(G · 직전 경기 0% · 건강 제외) · Micah Parsons(DE · 직전 경기 0% · Knee - ACL) · Josh Whyle(TE · 스냅 7% · 주간 보고) · Jacob Monk(OL · 스냅 7% · IR · 주간 보고) · 주중 Q/D → ESPN 출전 표시: ★Xavier McKinney(Q → Active 09:08), Chris Brooks(Q → Active 08:47), Lukas Van Ness(Q → Active 09:18), ★Travis Glover(Q → Active 09:29), ★Javon Bullard(Q → Active 09:12) · ★주전 결장 MIN 5 / GB 0 — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · 팀별 발표 MIN 08:32~09:05 / GB 08:34~09:31 PT · ESPN 명단은 팀당 최근 25건(리그 injuries)이라 ⚠️ 미확인 표시만 웹 확인
-- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전 · 예측시장 이후 실측 기준): A8 GB ML(-148) — 접전 .750+ 팀 ML(24~25 실제 68% vs 시장 57% · 18~23 0) · 2026 실시간 13-2 · GB 한 포제션 경기 3-1(75%) / A6 GB -2.5 — 개장→마감 키 넘버 3·7 넘김 → 반대쪽 ATS(24~25 73-50 59%) · 2026 실시간 14-9 · 개장 -4.5 → 지금 -2.5(홈 기준) 키 넘버 넘김 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 — 75건 중 겹침 14 · 상충 1경기 제외) ← ML 각도가 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
+- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전(A3·A11·A12 는 30픽) · 예측시장 이후 실측 기준): A8 GB ML(-148) — 접전 .750+ 팀 ML(24~25 실제 68% vs 시장 57% · 18~23 0) · 2026 실시간 13-2 · GB 한 포제션 경기 3-1(75%) / A6 GB -2.5 — 개장→마감 키 넘버 3·7 넘김 → 반대쪽 ATS(24~25 73-50 59%) · 2026 실시간 14-9 · 개장 -4.5 → 지금 -2.5(홈 기준) 키 넘버 넘김 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 — 75건 중 겹침 14 · 상충 1경기 제외) ← ML 각도 A4·A5·A8 이 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
 - 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 · 괄호 = 2024~25 그 등급일 때 순위 높은 팀이 실제 이긴 비율와 시장이 준 확률(둘이 비슷 = 시장이 이미 반영) — 서술 전용, 확률·별점 영향 0)**:
 
 | 항목 | MIN | GB | 뜻 | 격차(서술 전용 · 실측 승률/시장) | 2025 시즌(작년·참고) |
@@ -192,7 +192,7 @@
 
   ↳ 읽는 법: 압박·색은 상대 OL·QB 색 허용률(선수 표)과 맞춰 보고, 커버리지 「타깃→허용」은 많이 노려진 CB 를 뜻한다(허용 수가 많다고 나쁜 것은 아님 — 야드/타깃이 기준). 놓친 태클은 상대 RB 야드/캐리와 함께. 전부 서술 재료 — 2018~25 백테스트에서 시장을 못 이겼고, 색률 상위 8 수비는 오히려 시장이 과대평가(A10 관찰).
 
-- 📌 **결론 재료(자동 — 10판 ML 전용 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: 스탯 격차 상위 3(32팀 순위 차 순): 3rd down 허용(수비): MIN 32% · 2위(상위) vs GB 44% · 24위(하위) — 중대 · MIN 쪽 / 패스 공격(드롭백당 EPA): MIN -0.112 · 27위(하위) vs GB +0.185 · 6위(상위) — 중대 · GB 쪽 / 색 허용률(공격): MIN 8.6% · 26위(하위) vs GB 4.7% · 9위(상위) — 중대 · GB 쪽 · 선수 핵심: QB MIN K.Murray(Out) EPA 31/39위·하위 vs GB J.Love (예상 선발) EPA 8/39위·상위 · 타깃 1위 MIN J.Jefferson 타깃 52 · 야드/타깃 83/190위·중간 vs GB M.Golden 타깃 93 · 야드/타깃 59/190위·상위 · 캐리 1위 MIN A.Jones 캐리 115 · 야드/캐리 32/72위·중간 vs GB M.Lloyd 캐리 57 · 야드/캐리 69/72위·하위 · ★주전 Out/Doubtful MIN 5명 / GB 0명 · 공식 비활성(ESPN 08:32 PT 발표): ★주전 MIN 5 / GB 0 — 🏥 줄 그대로 · 새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): MIN Josh Metellus(Q), GB Xavier McKinney(Q), GB Travis Glover(Q), GB Javon Bullard(Q) · 관찰 각도(페이퍼): A8 GB ML(-148) / A6 GB -2.5 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 · 로컬 페이퍼 관찰 있음(돈 아님): 관찰(큰 괴리 — 페이퍼) · 관찰(큰 괴리 — 페이퍼)
+- 📌 **결론 재료(자동 — 10판 ML 전용 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: 스탯 격차 상위 3(32팀 순위 차 순): 3rd down 허용(수비): MIN 32% · 2위(상위) vs GB 44% · 24위(하위) — 중대 · MIN 쪽 / 패스 공격(드롭백당 EPA): MIN -0.112 · 27위(하위) vs GB +0.185 · 6위(상위) — 중대 · GB 쪽 / 색 허용률(공격): MIN 8.6% · 26위(하위) vs GB 4.7% · 9위(상위) — 중대 · GB 쪽 · 선수 핵심: QB MIN Kirk Cousins (예상 선발) 표본 적음 vs GB J.Love (예상 선발) EPA 8/39위·상위 · 타깃 1위 MIN J.Jefferson 타깃 52 · 야드/타깃 83/190위·중간 vs GB M.Golden 타깃 93 · 야드/타깃 59/190위·상위 · 캐리 1위 MIN A.Jones 캐리 115 · 야드/캐리 32/72위·중간 vs GB M.Lloyd 캐리 57 · 야드/캐리 69/72위·하위 · ★주전 Out/Doubtful MIN 5명 / GB 0명 · 공식 비활성(ESPN 08:32 PT 발표): ★주전 MIN 5 / GB 0 — 🏥 줄 그대로 · 새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): MIN Josh Metellus(Q), GB Xavier McKinney(Q), GB Travis Glover(Q), GB Javon Bullard(Q) · 관찰 각도(페이퍼): A8 GB ML(-148) / A6 GB -2.5 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 · 로컬 페이퍼 관찰 있음(돈 아님): 관찰(큰 괴리 — 페이퍼) · 관찰(큰 괴리 — 페이퍼)
 
 - 🤝 **맞대결(최근 3시즌 2023~ · 플레이오프 포함 · 값만 — 2006~25 직전 맞대결 진 팀 리턴매치 커버 51.5%, 우연 범위)**:
 
@@ -278,14 +278,14 @@
 | 러시(EPA) | MIN -0.234(30위) vs GB -0.080(16위) | GB -0.236(31위) vs MIN -0.110(11위) |
 | 러시 성공률 | MIN 33%(31위) vs GB 44%(29위) | GB 35%(28위) vs MIN 35%(2위) |
 | 색 비율(드롭백당) | MIN 8.6%(26위) vs GB 7.0%(11위) | GB 4.7%(9위) vs MIN 10.7%(1위) |
-| 턴오버/경기(공격 잃음 · 수비 뺏음) | MIN 1.0(11위) vs GB 2.1(2위) | GB 1.1(14위) vs MIN 1.5(6위) |
+| 턴오버/경기(공격 잃음 · 수비 뺏음) | MIN 1.0(11위) vs GB 2.1(1위) | GB 1.1(14위) vs MIN 1.5(8위) |
 | 3rd down 전환 | MIN 36%(26위) vs GB 44%(24위) | GB 38%(20위) vs MIN 32%(2위) |
 | 패스 보호 vs 압박(PFR) | MIN 피압박 7.4/경기(8위) vs GB 압박 9.8/경기(10위) | GB 피압박 8.6/경기(17위) vs MIN 압박 12.8/경기(1위) |
 | 핵심 선수(2026 점유율) | J.Jefferson 타깃 24%·EPA/타깃 +0.19 · T.Hockenson 타깃 21%·EPA/타깃 +0.40 ⚠️Out · A.Jones 캐리 64%·EPA/캐리 -0.20 | M.Golden 타깃 28%·EPA/타깃 +0.22 · C.Watson 타깃 22%·EPA/타깃 +0.61 · M.Lloyd 캐리 29%·EPA/캐리 -0.35 |
 
 - 패스 매치업(서술 — 점수 아님) MIN 공격 → GB 수비: QB Kirk Cousins 투구 시간 2.88초 · CPOE +4.0 · 공격적 패스 20%(시도 315) · MIN 공격 피압박 경기당 7.4(적은 순 8위) vs GB 수비 압박 경기당 9.8(리그 10위) (2025 경기당: GB 압박 9.7 · MIN 피압박 8.8) · FTN: MIN 플레이액션 31%(많은 순 2위) · 블리츠 받을 때 EPA/드롭백 -0.33(좋은 순 32위 · 87회) · 가로채기 위험 패스 3.4% · vs GB 블리츠 34%(많은 순 11위)
 - 패스 매치업(서술 — 점수 아님) GB 공격 → MIN 수비: QB Jordan Love 투구 시간 2.60초 · CPOE +0.4 · 공격적 패스 16%(시도 341) · GB 공격 피압박 경기당 8.6(적은 순 17위) vs MIN 수비 압박 경기당 12.8(리그 1위) (2025 경기당: MIN 압박 9.1 · GB 피압박 6.7) · FTN: GB 플레이액션 18%(많은 순 26위) · 블리츠 받을 때 EPA/드롭백 +0.12(좋은 순 7위 · 128회) · 가로채기 위험 패스 3.6% · vs MIN 블리츠 73%(많은 순 1위)
-- 라인 이동: 스프레드(홈) -3.0 →  · 총점 41.5 →  (11-12 15:59 → 11-15 11:41) — 정보(뉴스 반영), 방향 근거 아님
+- 라인 이동: 스프레드(홈) -3.0 →  · 총점 41.5 →  (11-12 15:59 → 11-15 11:55) — 정보(뉴스 반영), 방향 근거 아님
 - 맥락(값만 — N5): 휴식 MIN 6일 / GB 7일 · 날씨 1 47°F · 지붕 outdoors
 - 리스크: MIN QB 보고 Kyler Murray Out → 모델 −4.5점 · MIN 주전 복귀 — 시즌 드롭백 최다 K.Murray, 예상 선발 Kirk Cousins(레이팅에 대체 QB 표본 섞임) · 〔직접 서술 — 값만, 단정 금지〕
 
@@ -293,16 +293,16 @@
 
 - 팀: **Jacksonville Jaguars**(잭슨빌 재규어스) @ **Tennessee Titans**(테네시 타이탄스) · 로고는 보드(Artifact)에서
     ↳ 우리 드라이브 모델(두 번째 의견 · 시장보다 덜 정확): JAX 26.2 – TEN 18.3 → JAX 73%
-- 🆕 직전 판(11-15 09:04) 대비 변동: ML -650/+470 → ?/?
+- 🆕 직전 판(11-15 11:42) 대비 변동: 없음
 
 - 시장(DK): 스프레드 홈 10.5 · 총점 45.5 · ML JAX ? / TEN ? · nflverse 라인 -10.5/45.5
 - 레이팅: JAX 공격 +0.062(패 +0.089/러 -0.001) · 수비 -0.102(패 -0.113/러 -0.050) · 순마진 +10.2 · PF/PA 28.6/15.1
 - 레이팅: TEN 공격 -0.100(패 -0.143/러 -0.040) · 수비 +0.072(패 +0.130/러 -0.002) · 순마진 -10.6 · PF/PA 18.0/24.9
 - 모델: 홈 마진 -19.3 · 홈 승률 6.8% · 총점 41.8
-- 부상·QB JAX: 예상 QB Trevor Lawrence(시즌 주전 T.Lawrence) · Out 5 / Doubtful 0 / Questionable 1 — Out: Jessie Bates(S) · Jordan Davis(DT) · BJ Green II(DE) · Eric Murray(DB · ★스냅 98% · IR) · DaVon Hamilton(DL · 스냅 38% · IR) — Questionable: Robert Hainsey(C · ★스냅 94%) · ★주전급(스냅 60%+) Out/Doubtful 1명
-- 부상·QB TEN: 예상 QB Cam Ward(시즌 주전 C.Ward) · Out 5 / Doubtful 0 / Questionable 1 — Out: Cody Barton(LB · 스냅 54%) · Tommy Townsend(P) · Peter Skoronski(G · ★스냅 93%) · Carnell Tate(WR · ★스냅 82%) · Anthony Hill Jr.(LB · ★스냅 99%) — Questionable: Tyjae Spears(RB · 스냅 24%) · ★주전급(스냅 60%+) Out/Doubtful 3명
+- 부상·QB JAX: 예상 QB Trevor Lawrence(시즌 주전 T.Lawrence) · Out 5 / Doubtful 0 / Questionable 1 — Out: Jessie Bates(S) · Jordan Davis(DT) · BJ Green II(DE) · Eric Murray(DB · ★스냅 98% · IR) · DaVon Hamilton(DL · 스냅 38% · IR) — Questionable: Robert Hainsey(C · ★스냅 94%) · ★주전급(스냅 60%+) Out/Doubtful 1명 · ESPN 명단에만 Out 3: CJ Williams · Wesley Williams · Albert Regis(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
+- 부상·QB TEN: 예상 QB Cam Ward(시즌 주전 C.Ward) · Out 5 / Doubtful 0 / Questionable 1 — Out: Cody Barton(LB · 스냅 54%) · Tommy Townsend(P) · Peter Skoronski(G · ★스냅 93%) · Carnell Tate(WR · ★스냅 82%) · Anthony Hill Jr.(LB · ★스냅 99%) — Questionable: Tyjae Spears(RB · 스냅 24%) · ★주전급(스냅 60%+) Out/Doubtful 3명 · ESPN 명단에만 Out 4: Nicholas Singleton · Jaylon Jones · Jackie Marshall · Brandon Crenshaw-Dickson(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
 - 🏥 결장 명단(ESPN 공식 비활성 · 발표 08:33 PT ∪ 주간 보고 Out): JAX Out 8 — CJ Williams(WR · 직전 경기 0% · 건강 제외) · Wesley Williams(DE · 직전 경기 0% · 건강 제외) · Albert Regis(DT · 스냅 39% · 직전 경기 39% · 건강 제외) · Jessie Bates III(S · 직전 경기 0% · 건강 제외) · Jordan Davis(DT · 주간 보고) · BJ Green II(DE · 주간 보고) · Eric Murray(DB · ★스냅 98% · IR · 주간 보고) · DaVon Hamilton(DL · 스냅 38% · IR · 주간 보고) · 주중 Q/D → ESPN 출전 표시: ★Robert Hainsey(Q → Active 11-14) / TEN Out 9 — Nicholas Singleton(RB · 직전 경기 0% · 건강 제외) · ★Carnell Tate(WR · 스냅 82% · 직전 경기 0% · Shoulder · 발표 08:34) · ★Anthony Hill Jr.(LB · 스냅 99% · 직전 경기 96% · Neck · 발표 08:34) · Jaylon Jones(CB · 직전 경기 0% · 건강 제외) · Jackie Marshall(DT · 직전 경기 0% · 건강 제외) · Cody Barton(LB · 스냅 54% · 직전 경기 53% · Concussion) · Brandon Crenshaw-Dickson(OT · 직전 경기 0% · 건강 제외) · Tommy Townsend(P · 주간 보고) · Peter Skoronski(G · ★스냅 93% · 주간 보고) · 주중 Q/D → ESPN 출전 표시: Tyjae Spears(Q → Active 08:33) · ★주전 결장 JAX 1 / TEN 3 — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · 팀별 발표 JAX 08:36~08:42 / TEN 08:34~08:40 PT · ESPN 명단은 팀당 최근 25건(리그 injuries)이라 ⚠️ 미확인 표시만 웹 확인
-- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전 · 예측시장 이후 실측 기준): A3 TEN +10.5 — 결장 팀 반대 3점+ 이동 → 결장 팀 ATS(역사 없음 · 성적은 옆 「2026 실시간」) · 2026 실시간 16-12 · 홈 TEN 결장 확정 / A6 TEN +10.5 — 개장→마감 키 넘버 3·7 넘김 → 반대쪽 ATS(24~25 73-50 59%) · 2026 실시간 14-9 · 개장 +2.5 → 지금 +10.5(홈 기준) 키 넘버 넘김 / A7 TEN +10.5 — 홈 언더독 +7 이상 → 홈 ATS(24~25 29-15 66% · 18~23 54%) · 2026 실시간 1-1 · 홈 TEN 언더독 +10.5 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 — 75건 중 겹침 14 · 상충 1경기 제외) ← ML 각도가 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
+- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전(A3·A11·A12 는 30픽) · 예측시장 이후 실측 기준): A3 TEN +10.5 — 결장 팀 반대 3점+ 이동 → 결장 팀 ATS(역사 없음 · 성적은 옆 「2026 실시간」) · 2026 실시간 16-12 · 홈 TEN 결장 확정 / A6 TEN +10.5 — 개장→마감 키 넘버 3·7 넘김 → 반대쪽 ATS(24~25 73-50 59%) · 2026 실시간 14-9 · 개장 +2.5 → 지금 +10.5(홈 기준) 키 넘버 넘김 / A7 TEN +10.5 — 홈 언더독 +7 이상 → 홈 ATS(24~25 29-15 66% · 18~23 54%) · 2026 실시간 1-1 · 홈 TEN 언더독 +10.5 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 — 75건 중 겹침 14 · 상충 1경기 제외) ← ML 각도 A4·A5·A8 이 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
 - 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 · 괄호 = 2024~25 그 등급일 때 순위 높은 팀이 실제 이긴 비율와 시장이 준 확률(둘이 비슷 = 시장이 이미 반영) — 서술 전용, 확률·별점 영향 0)**:
 
 | 항목 | JAX | TEN | 뜻 | 격차(서술 전용 · 실측 승률/시장) | 2025 시즌(작년·참고) |
@@ -459,14 +459,14 @@
 | 러시(EPA) | JAX +0.006(6위) vs TEN -0.072(18위) | TEN -0.076(17위) vs JAX -0.172(3위) |
 | 러시 성공률 | JAX 43%(12위) vs TEN 40%(15위) | TEN 40%(17위) vs JAX 36%(7위) |
 | 색 비율(드롭백당) | JAX 5.2%(11위) vs TEN 6.6%(14위) | TEN 4.6%(7위) vs JAX 5.5%(20위) |
-| 턴오버/경기(공격 잃음 · 수비 뺏음) | JAX 0.8(5위) vs TEN 1.4(11위) | TEN 1.2(20위) vs JAX 1.8(3위) |
+| 턴오버/경기(공격 잃음 · 수비 뺏음) | JAX 0.8(6위) vs TEN 1.4(10위) | TEN 1.2(21위) vs JAX 1.8(3위) |
 | 3rd down 전환 | JAX 47%(4위) vs TEN 44%(25위) | TEN 36%(28위) vs JAX 35%(8위) |
 | 패스 보호 vs 압박(PFR) | JAX 피압박 6.0/경기(3위) vs TEN 압박 10.0/경기(9위) | TEN 피압박 8.8/경기(19위) vs JAX 압박 9.1/경기(15위) |
 | 핵심 선수(2026 점유율) | P.Washington 타깃 25%·EPA/타깃 +0.41 · J.Meyers 타깃 17%·EPA/타깃 +0.58 ⚠️연습 Limited · B.Tuten 캐리 57%·EPA/캐리 -0.02 ⚠️연습 Limited | C.Tate 타깃 22%·EPA/타깃 +0.20 ⚠️Out · W.Robinson 타깃 21%·EPA/타깃 -0.01 · T.Pollard 캐리 77%·EPA/캐리 -0.06 |
 
 - 패스 매치업(서술 — 점수 아님) JAX 공격 → TEN 수비: QB Trevor Lawrence 투구 시간 2.75초 · CPOE +2.2 · 공격적 패스 15%(시도 224) · JAX 공격 피압박 경기당 6.0(적은 순 3위) vs TEN 수비 압박 경기당 10.0(리그 9위) (2025 경기당: TEN 압박 9.1 · JAX 피압박 8.3) · FTN: JAX 플레이액션 24%(많은 순 13위) · 블리츠 받을 때 EPA/드롭백 +0.10(좋은 순 10위 · 77회) · 가로채기 위험 패스 3.2% · vs TEN 블리츠 24%(많은 순 27위)
 - 패스 매치업(서술 — 점수 아님) TEN 공격 → JAX 수비: QB Cam Ward 투구 시간 2.81초 · CPOE -2.5 · 공격적 패스 11%(시도 248) · TEN 공격 피압박 경기당 8.8(적은 순 19위) vs JAX 수비 압박 경기당 9.1(리그 15위) (2025 경기당: JAX 압박 9.6 · TEN 피압박 10.6) · FTN: TEN 플레이액션 22%(많은 순 19위) · 블리츠 받을 때 EPA/드롭백 +0.08(좋은 순 11위 · 62회) · 가로채기 위험 패스 1.8% · vs JAX 블리츠 31%(많은 순 15위)
-- 라인 이동: 스프레드(홈) 10.5 →  · 총점 46.5 →  (11-12 15:59 → 11-15 11:41) — 정보(뉴스 반영), 방향 근거 아님
+- 라인 이동: 스프레드(홈) 10.5 →  · 총점 46.5 →  (11-12 15:59 → 11-15 11:55) — 정보(뉴스 반영), 방향 근거 아님
 - 맥락(값만 — N5): 휴식 JAX 10일 / TEN 14일 · 날씨 1 56°F · 지붕 outdoors
 - 리스크: 자동 항목 없음 · 〔직접 서술 — 값만, 단정 금지〕
 
@@ -475,23 +475,23 @@
 - 팀: **Los Angeles Rams**(LA 램스) @ **Arizona Cardinals**(애리조나 카디널스) · 로고는 보드(Artifact)에서
 - 🔮 **예측**: 이길 팀 **LA 80% ★★★★**(2018~25 이 별 적중 82%) · 예상 점수 **LA 24.0 – ARI 14.5** (시장 배당 기준 — 가장 정확) · 점수 차 LA 9.5 · 총점 38.5
     ↳ 우리 드라이브 모델(두 번째 의견 · 시장보다 덜 정확): LA 24.2 – ARI 20.4 → LA 61%
-- 🆕 직전 판(11-15 09:04) 대비 변동: 없음
+- 🆕 직전 판(11-15 11:42) 대비 변동: LA Out 추가 Joe Cardona · ARI Out 추가 Jayden Williams
 
 - 시장(Draft Kings): 스프레드 홈 9.5 · 총점 38.5 · ML LA -500 / ARI +380 · nflverse 라인 -9.5/38.5
-- 💵 가격(DK · 조회 11-15 11:42 PT): 스프레드 ARI +9.5 -105 / LA -9.5 -115 · 총점 38.5 O -108 / U -112 · ML LA -500 / ARI +380
+- 💵 가격(DK · 조회 11-15 11:56 PT): 스프레드 ARI +9.5 -105 / LA -9.5 -115 · 총점 38.5 O -108 / U -112 · ML LA -500 / ARI +380
     ↳ 무비그 확률(수수료 뺀 시장 확률): ARI 커버 48.9% / LA 커버 51.1% · Over 49.6% / Under 50.4% · 승리 LA 80.0% / ARI 20.0%
     ↳ 손익분기(지금 배당으로 이만큼 맞혀야 본전): ARI +9.5 51.2% · LA -9.5 53.5% · Over 51.9% · Under 52.8% · LA ML 83.3% · ARI ML 20.8%
     ↳ 개장 → 지금: 스프레드 ARI +10.5(-110) → +9.5(-105) · 총점 47.5(O -110) → 38.5(O -108) · ML ARI +400 → +380
-    ↳ Polymarket(사는 가격 · 조회 11:42 PT · 수수료 미반영): LA ML 81c(-426) · ARI ML 20c(+400) · ARI +9.5 48c(+108) · LA -9.5 53c(-113) · Over 38.5 51c(-104) · Under 38.5 50c(-100)
+    ↳ Polymarket(사는 가격 · 조회 11:56 PT · 수수료 미반영): LA ML 81c(-426) · ARI ML 20c(+400) · ARI +9.5 48c(+108) · LA -9.5 53c(-113) · Over 38.5 51c(-104) · Under 38.5 50c(-100)
     ↳ 쪽별 더 좋은 가격(같은 라인): LA ML: Polymarket -426 · ARI ML: Polymarket +400 · ARI +9.5: Polymarket +108 · LA -9.5: Polymarket -113 · Over 38.5: Polymarket -104 · Under 38.5: Polymarket -100
-    ↳ 라인 이력(우리 조회 시각): 11-12 15:59 ARI 9.5(-108) · 총점 39.5(O -108) | 11-15 08:35 ARI 9.5(-105) · 총점 38.5(O -108) | 11-15 08:51 ARI 9.5(-105) · 총점 38.5(O -108) | 11-15 09:04 ARI 9.5(-105) · 총점 38.5(O -108) | 11-15 11:41 ARI 9.5(-105) · 총점 38.5(O -108)
+    ↳ 라인 이력(우리 조회 시각): 11-12 15:59 ARI 9.5(-108) · 총점 39.5(O -108) | 11-15 08:51 ARI 9.5(-105) · 총점 38.5(O -108) | 11-15 09:04 ARI 9.5(-105) · 총점 38.5(O -108) | 11-15 11:41 ARI 9.5(-105) · 총점 38.5(O -108) | 11-15 11:55 ARI 9.5(-105) · 총점 38.5(O -108)
 - 레이팅: LA 공격 +0.077(패 +0.127/러 +0.022) · 수비 -0.076(패 -0.073/러 -0.050) · 순마진 +9.5 · PF/PA 23.8/20.1
 - 레이팅: ARI 공격 -0.026(패 -0.016/러 -0.038) · 수비 +0.065(패 +0.127/러 -0.011) · 순마진 -5.6 · PF/PA 19.8/28.3
 - 모델: 홈 마진 -18.1 · 홈 승률 8.2% · 총점 44.0 · QB 조정 LA 0.0 / ARI -4.5
-- 부상·QB LA: 예상 QB Matthew Stafford(시즌 주전 M.Stafford) · Out 5 / Doubtful 0 / Questionable 5 — Out: Steve Avila(G · ★스냅 73%) · Terrance Ferguson(TE) · Jaylen Watson(DB · ★스냅 82% · IR) · Puka Nacua(WR · ★스냅 91% · IR) · Jordan Whittington(WR · 스냅 11% · IR) — Questionable: Joe Cardona(LS) · Myles Garrett(LB · ★스냅 60%) · Kam Curl(S) · Trent McDuffie(CB · ★스냅 80%) · Davis Allen(TE · ★스냅 66%) · ★주전급(스냅 60%+) Out/Doubtful 3명
-- 부상·QB ARI: 예상 QB Carson Beck(시즌 주전 J.Brissett) ⚠️ 백업 QB 선발 — Gardner Minshew IR · 예상 선발 Carson Beck(뎁스차트 QB1) · ⓘ 일정표 예상 Gardner Minshew 는 IR — 뎁스차트 QB1 Carson Beck 로 정정 · Out 8 / Doubtful 0 / Questionable 6 — Out: Hjalte Froholdt(C · ★스냅 100%) · Zachary Carter(DT) · Jon Gaines II(G) · Kendrick Bourne(WR · 스냅 44% · IR) · Gardner Minshew(QB · ★스냅 71% · IR) · Michael Wilson(WR · ★스냅 84% · IR) · Jalen Brooks(WR · ★스냅 64% · IR) · Jeremiyah Love(RB · 스냅 19% · IR) — Questionable: Andrew Wingard(S · ★스냅 100%) · Roy Lopez(DT · 스냅 30%) · Hunter Long(TE) · Max Melton(CB · ★스냅 62%) · Darius Robinson(DT · 스냅 39%) · Jayden Williams(T · ★스냅 80%) · ★주전급(스냅 60%+) Out/Doubtful 4명
-- 🏥 결장 명단(ESPN): 공식 비활성 미발표(킥오프 90분 전 발표 — 그때 리프레시하면 이 줄이 채워진다) · 주간 보고 Out 기준 LA Out 5 — ★Steve Avila(G · 스냅 73% · 직전 경기 24% · Hamstring) · Terrance Ferguson(TE · 주간 보고) · Jaylen Watson(DB · ★스냅 82% · IR · 주간 보고) · Puka Nacua(WR · ★스냅 91% · IR · 주간 보고) · Jordan Whittington(WR · 스냅 11% · IR · 주간 보고) / ARI Out 8 — Jon Gaines II(G · 직전 경기 0% · Ankle) · ★Hjalte Froholdt(C · 스냅 100% · 직전 경기 100% · Concussion) · Zachary Carter(DT · 주간 보고) · Kendrick Bourne(WR · 스냅 44% · IR · 주간 보고) · Gardner Minshew(QB · ★스냅 71% · IR · 주간 보고) · Michael Wilson(WR · ★스냅 84% · IR · 주간 보고) · Jalen Brooks(WR · ★스냅 64% · IR · 주간 보고) · Jeremiyah Love(RB · 스냅 19% · IR · 주간 보고)
-- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전 · 예측시장 이후 실측 기준): A12 LA ML(-500) — 첫 선발 백업 QB 상대 7+ 페이버릿 ML(11~25 n63 시장 대비 +7.8%p · 방향만) · 2026 실시간 0-0 · ARI 예상 선발 Carson Beck 첫 선발(직전 선발과 다름) / A7 ARI +9.5 — 홈 언더독 +7 이상 → 홈 ATS(24~25 29-15 66% · 18~23 54%) · 2026 실시간 1-1 · 홈 ARI 언더독 +9.5 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 — 75건 중 겹침 14 · 상충 1경기 제외) ← ML 각도가 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
+- 부상·QB LA: 예상 QB Matthew Stafford(시즌 주전 M.Stafford) · Out 6 / Doubtful 0 / Questionable 4 — Out: Steve Avila(G · ★스냅 73%) · Terrance Ferguson(TE) · Jaylen Watson(DB · ★스냅 82% · IR) · Puka Nacua(WR · ★스냅 91% · IR) · Jordan Whittington(WR · 스냅 11% · IR) · Joe Cardona(LS · 당일 비활성) — Questionable: Myles Garrett(LB · ★스냅 60%) · Kam Curl(S) · Trent McDuffie(CB · ★스냅 80%) · Davis Allen(TE · ★스냅 66%) · ★주전급(스냅 60%+) Out/Doubtful 3명 · ESPN 명단에만 Out 5: Keagen Trost · Darryl Peterson III · Maximus Pulley · Ty Simpson · Desjuan Johnson(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
+- 부상·QB ARI: 예상 QB Carson Beck(시즌 주전 J.Brissett) ⚠️ 백업 QB 선발 — Gardner Minshew IR · 예상 선발 Carson Beck(뎁스차트 QB1) · ⓘ 일정표 예상 Gardner Minshew 는 IR — 뎁스차트 QB1 Carson Beck 로 정정 · Out 9 / Doubtful 0 / Questionable 5 — Out: Hjalte Froholdt(C · ★스냅 100%) · Zachary Carter(DT) · Jon Gaines II(G) · Kendrick Bourne(WR · 스냅 44% · IR) · Gardner Minshew(QB · ★스냅 71% · IR) · Michael Wilson(WR · ★스냅 84% · IR) · Jalen Brooks(WR · ★스냅 64% · IR) · Jeremiyah Love(RB · 스냅 19% · IR) · Jayden Williams(T · ★스냅 80% · 당일 비활성) — Questionable: Andrew Wingard(S · ★스냅 100%) · Roy Lopez(DT · 스냅 30%) · Hunter Long(TE) · Max Melton(CB · ★스냅 62%) · Darius Robinson(DT · 스냅 39%) · ★주전급(스냅 60%+) Out/Doubtful 5명 · ESPN 명단에만 Out 3: Starling Thomas V · Eku Leota · Joey Aguilar(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
+- 🏥 결장 명단(ESPN 공식 비활성 · 발표 11:37 PT ∪ 주간 보고 Out): LA Out 11 — Keagen Trost(OT · 직전 경기 0% · 건강 제외) · Darryl Peterson III(LB · 스냅 16% · 직전 경기 0% · 건강 제외) · Maximus Pulley(S · 직전 경기 0% · 건강 제외) · Ty Simpson(QB · 직전 경기 0% · 건강 제외) · Desjuan Johnson(DE · 스냅 9% · 직전 경기 0% · 건강 제외) · Joe Cardona(LS · 직전 경기 0% · Ankle) · ★Steve Avila(G · 스냅 73% · 직전 경기 24% · Hamstring · 발표 11:44) · Terrance Ferguson(TE · 주간 보고) · Jaylen Watson(DB · ★스냅 82% · IR · 주간 보고) · Puka Nacua(WR · ★스냅 91% · IR · 주간 보고) · Jordan Whittington(WR · 스냅 11% · IR · 주간 보고) · 주중 Q/D → ESPN 출전 표시: ★Myles Garrett(Q → Active 11:42), Kam Curl(Q → Active 11:44), ★Trent McDuffie(Q → Active 11:44), ★Davis Allen(Q → Active 11:44) / ARI Out 12 — ★Jayden Williams(OT · 스냅 80% · 직전 경기 0% · Knee · 발표 11:37) · Starling Thomas V(CB · 직전 경기 0% · 건강 제외) · Eku Leota(LB · 스냅 5% · 직전 경기 0% · 건강 제외) · ★Hjalte Froholdt(C · 스냅 100% · 직전 경기 100% · Concussion · 발표 11:37) · Jon Gaines II(G · 직전 경기 0% · Ankle) · Joey Aguilar(QB · 직전 경기 0% · 건강 제외) · Zachary Carter(DT · 주간 보고) · Kendrick Bourne(WR · 스냅 44% · IR · 주간 보고) · Gardner Minshew(QB · ★스냅 71% · IR · 주간 보고) · Michael Wilson(WR · ★스냅 84% · IR · 주간 보고) · Jalen Brooks(WR · ★스냅 64% · IR · 주간 보고) · Jeremiyah Love(RB · 스냅 19% · IR · 주간 보고) · 주중 Q/D → ESPN 출전 표시: ★Andrew Wingard(Q → Active 11:38), Roy Lopez(Q → Active 11:37), Hunter Long(Q → Active 11-14), ★Max Melton(Q → Active 11:38), Darius Robinson(Q → Active 11:38) · ★주전 결장 LA 3 / ARI 5 — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · 팀별 발표 LA 11:44 / ARI 11:37 PT · ESPN 명단은 팀당 최근 25건(리그 injuries)이라 ⚠️ 미확인 표시만 웹 확인
+- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전(A3·A11·A12 는 30픽) · 예측시장 이후 실측 기준): A12 LA ML(-500) — 첫 선발 백업 QB 상대 7+ 페이버릿 ML(11~25 n63 시장 대비 +7.8%p · 방향만) · 2026 실시간 0-0 · ARI 예상 선발 Carson Beck 첫 선발(직전 선발과 다름) / A7 ARI +9.5 — 홈 언더독 +7 이상 → 홈 ATS(24~25 29-15 66% · 18~23 54%) · 2026 실시간 1-1 · 홈 ARI 언더독 +9.5 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 — 75건 중 겹침 14 · 상충 1경기 제외) ← ML 각도 A4·A5·A8 이 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄 · A11·A12 는 서술 전용(점수 0 · 30픽 판정 전 — 소액 관심 근거 아님 · 「변수」·정리 줄에만)
 - 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 · 괄호 = 2024~25 그 등급일 때 순위 높은 팀이 실제 이긴 비율와 시장이 준 확률(둘이 비슷 = 시장이 이미 반영) — 서술 전용, 확률·별점 영향 0)**:
 
 | 항목 | LA | ARI | 뜻 | 격차(서술 전용 · 실측 승률/시장) | 2025 시즌(작년·참고) |
@@ -511,8 +511,8 @@
 | 턴오버(경기당 잃음) | 1.6 · 24위(하위) | 0.9 · 8위(상위) | 인터셉트·펌블로 공을 뺏기는 횟수(적을수록 좋음 · 운 지표 r .14) | 중대 · ARI 쪽(55% · 시장 63%) | LA 0.9(6위) / ARI 1.2(18위) |
 | 색 허용률(공격) | 3.6% · 4위(상위) | 6.0% · 15위(중간) | QB 가 던지기 전에 잡히는 비율(낮을수록 보호가 좋음) | 경미 · LA 쪽(57% · 시장 57%) | LA 3.7%(2위) / ARI 7.9%(25위) |
 | QB(예상 선발 · 순위는 드롭백 60+ QB 중) | M.Stafford · 드롭백 357 · 야드/시도 6.9(22/39위·중간) · 정확도 CPOE +0.0(22/39위·중간) · EPA/드롭백 +0.05(18/39위·중간) · 색% 3.6(4/39위·상위) | Carson Beck — 2026 기록 없음(표본 적음) | 야드/시도·EPA 는 실력(r .47~.48), 정확도 CPOE 는 중간, INT 는 운 | — | LA EPA/드롭백 +0.23(3/38위) · 야드/시도 7.9 / ARI — 작년 기록 없음 |
-| 주요 선수(리시버 2·러셔 1 · 순위는 타깃 15+/캐리 25+ 선수 중) | P.Nacua⚠️Out 타깃 93 · 야드/타깃 7.7(82/190위·중간) · 캐치율 75% · 분리도 3.2야드(37/118위·중간)[r 0.49·실력] · 기대 대비 YAC +1.1(29/118위·상위)[r 0.28·중간] · 드롭 5/93타깃(5%)[r -0.01·운] / D.Adams 타깃 49 · 야드/타깃 9.8(30/190위·상위) · 캐치율 61% · 분리도 2.2야드(109/118위·하위)[r 0.49·실력] · 기대 대비 YAC +1.3(22/118위·상위)[r 0.28·중간] · 드롭 2/49타깃(4%)[r -0.01·운] / K.Williams 캐리 127 · 야드/캐리 4.7(15/72위·상위) · 성공률 41% · 접촉 전 야드/캐리 2.6(27/85위·중간)[r 0.52·실력] · 접촉 후 2.1(23/85위·상위)[r 0.40·중간] · 태클 깨기 8[r 0.06·운] · 기대 대비 러시 야드/캐리 +0.31(19/45위·중간)[r 0.21·운] | T.McBride 타깃 94 · 야드/타깃 6.4(116/190위·중간) · 캐치율 78% · 분리도 2.6야드(92/118위·하위)[r 0.49·실력] · 기대 대비 YAC +0.2(67/118위·중간)[r 0.28·중간] · 드롭 1/94타깃(1%)[r -0.01·운] / Mi.Wilson 타깃 88 · 야드/타깃 6.2(121/190위·중간) · 캐치율 58% / T.Allgeier 캐리 89 · 야드/캐리 4.1(29/72위·중간) · 성공률 33% · 접촉 전 야드/캐리 2.3(43/85위·중간)[r 0.52·실력] · 접촉 후 1.9(37/85위·중간)[r 0.40·중간] · 태클 깨기 6[r 0.06·운] · 기대 대비 러시 야드/캐리 +0.61(12/45위·상위)[r 0.21·운] | ⚠️ = 부상 보고 상태 · 캐치율은 실력(r .50), TD 는 운 · [ ] 안 r = 2024~25 홀/짝 주 안정성(실력 ≥.45 / 중간 / 운 <.25 — 운 지표(드롭·태클 깨기·기대 대비 러시 야드)는 근거 금지) | — | — |
-| OL 연속성(최근 3경기 공격 스냅 상위 5명) | 주전 5명 중 결장 1명(Steve Avila) · 최근 3경기 기준 | 주전 5명 중 결장 2명(Hjalte Froholdt, Hayden Conner(IR)) · 최근 3경기 기준 | 오펜스 라인 주전이 몇 명 빠지나 — 2006~25 OL 2명+ 결장 ATS 45.2%(우연 범위, 시장 반영) | — | — |
+| 주요 선수(리시버 2·러셔 1 · 순위는 타깃 15+/캐리 25+ 선수 중) | P.Nacua⚠️Out 타깃 93 · 야드/타깃 7.7(82/190위·중간) · 캐치율 75% · 분리도 3.2야드(37/118위·중간)[r 0.49·실력] · 기대 대비 YAC +1.1(29/118위·상위)[r 0.28·중간] · 드롭 5/93타깃(5%)[r -0.01·운] / D.Adams 타깃 49 · 야드/타깃 9.8(30/190위·상위) · 캐치율 61% · 분리도 2.2야드(109/118위·하위)[r 0.49·실력] · 기대 대비 YAC +1.3(22/118위·상위)[r 0.28·중간] · 드롭 2/49타깃(4%)[r -0.01·운] / K.Williams 캐리 127 · 야드/캐리 4.7(15/72위·상위) · 성공률 41% · 접촉 전 야드/캐리 2.6(27/85위·중간)[r 0.52·실력] · 접촉 후 2.1(23/85위·상위)[r 0.40·중간] · 태클 깨기 8[r 0.06·운] · 기대 대비 러시 야드/캐리 +0.31(19/45위·중간)[r 0.21·운] | T.McBride 타깃 94 · 야드/타깃 6.4(116/190위·중간) · 캐치율 78% · 분리도 2.6야드(92/118위·하위)[r 0.49·실력] · 기대 대비 YAC +0.2(67/118위·중간)[r 0.28·중간] · 드롭 1/94타깃(1%)[r -0.01·운] / Mi.Wilson⚠️Out 타깃 88 · 야드/타깃 6.2(121/190위·중간) · 캐치율 58% · 분리도 2.7야드(84/118위·하위)[r 0.49·실력] · 기대 대비 YAC -0.4(99/118위·하위)[r 0.28·중간] · 드롭 1/88타깃(1%)[r -0.01·운] / T.Allgeier 캐리 89 · 야드/캐리 4.1(29/72위·중간) · 성공률 33% · 접촉 전 야드/캐리 2.3(43/85위·중간)[r 0.52·실력] · 접촉 후 1.9(37/85위·중간)[r 0.40·중간] · 태클 깨기 6[r 0.06·운] · 기대 대비 러시 야드/캐리 +0.61(12/45위·상위)[r 0.21·운] | ⚠️ = 부상 보고 상태 · 캐치율은 실력(r .50), TD 는 운 · [ ] 안 r = 2024~25 홀/짝 주 안정성(실력 ≥.45 / 중간 / 운 <.25 — 운 지표(드롭·태클 깨기·기대 대비 러시 야드)는 근거 금지) | — | — |
+| OL 연속성(최근 3경기 공격 스냅 상위 5명) | 주전 5명 중 결장 1명(Steve Avila) · 최근 3경기 기준 | 주전 5명 중 결장 3명(Hjalte Froholdt, Hayden Conner(IR), Jayden Williams) · 최근 3경기 기준 | 오펜스 라인 주전이 몇 명 빠지나 — 2006~25 OL 2명+ 결장 ATS 45.2%(우연 범위, 시장 반영) | — | — |
 | 키커(2024~26 FG 성공률 · 순위는 20킥+ 키커 중) | Brandon McManus FG 83%(48/58 · 29/46위·중간) · 50야드+ 67%(6/9) | Chad Ryland FG 84%(73/87 · 26/46위·중간) · 50야드+ 65%(11/17) | FG 하나가 3점 — 실외 강풍·추위면 40야드 밖 성공률이 떨어진다 | — | — |
 
   ↳ 한 줄: LA 공격 중간(12위) · 수비 상위(7위) · ARI 공격 중간(22위) · 수비 하위(30위) · LA QB M.Stafford EPA 중간(18/39위) — 순위는 2026 전체(얇은 표본 주의) · 마지막 열은 2025 풀시즌 값(작년 순위, 참고 — 올해 표본이 얇을 때 「원래 어떤 팀인가」). 이 표는 시장 라인에 이미 들어간 정보라 예측 확률을 바꾸지 않는다(초등학생 설명 재료).
@@ -538,7 +538,7 @@
 | T.Allgeier | 러셔 | 9 | 캐리 89 | 369 | 2[운] | 야드/캐리 4.1 · 성공률 33% | -0.10 | 야드/캐리 29/72위·중간 | — | 캐리 143 · 야드/캐리 3.6(46/49위) |
 | J.Love | 러셔 | 6 | 캐리 76 | 268 | 1[운] | 야드/캐리 3.5 · 성공률 41% | -0.15 | 야드/캐리 55/72위·하위 | Out | 캐리 10(표본 적음) |
 | T.McBride | 리시버 | 9 | 타깃 94 · 캐치 73 | 598 | 5[운] | 캐치율 78% · 야드/타깃 6.4 | +0.29 | 야드/타깃 116/190위·중간 | — | 타깃 170 · 야드/타깃 7.3(64/124위) |
-| Mi.Wilson | 리시버 | 9 | 타깃 88 · 캐치 51 | 546 | 2[운] | 캐치율 58% · 야드/타깃 6.2 | +0.02 | 야드/타깃 121/190위·중간 | — | 타깃 127 · 야드/타깃 7.9(44/124위) |
+| Mi.Wilson | 리시버 | 9 | 타깃 88 · 캐치 51 | 546 | 2[운] | 캐치율 58% · 야드/타깃 6.2 | +0.02 | 야드/타깃 121/190위·중간 | Out | 타깃 127 · 야드/타깃 7.9(44/124위) |
 | K.Bourne | 리시버 | 7 | 타깃 38 · 캐치 26 | 269 | 0[운] | 캐치율 68% · 야드/타깃 7.1 | +0.18 | 야드/타깃 98/190위·중간 | Out | 타깃 53 · 야드/타깃 10.4(7/124위) |
 | T.Allgeier | 리시버 | 9 | 타깃 25 · 캐치 23 | 128 | 1[운] | 캐치율 92% · 야드/타깃 5.1 | -0.02 | 야드/타깃 165/190위·하위 | — | 타깃 16(표본 적음) |
 | Chad Ryland | 키커 | — | FG 73/87(2024~26) | — | — | FG 84% · 50+ 11/17 | — | — | — | — |
@@ -565,7 +565,7 @@
 
   ↳ 읽는 법: 압박·색은 상대 OL·QB 색 허용률(선수 표)과 맞춰 보고, 커버리지 「타깃→허용」은 많이 노려진 CB 를 뜻한다(허용 수가 많다고 나쁜 것은 아님 — 야드/타깃이 기준). 놓친 태클은 상대 RB 야드/캐리와 함께. 전부 서술 재료 — 2018~25 백테스트에서 시장을 못 이겼고, 색률 상위 8 수비는 오히려 시장이 과대평가(A10 관찰).
 
-- 📌 **결론 재료(자동 — 10판 ML 전용 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: 이길 팀 LA 80% ★★★★(10판: 예상 점수·방향·스프레드/총점 판단은 쓰지 않는다 — ML 전용) · 스탯 격차 상위 3(32팀 순위 차 순): 패스 수비(허용 EPA): LA -0.069 · 6위(상위) vs ARI +0.248 · 31위(하위) — 중대 · LA 쪽 / 실점(경기당): LA 20.1점 · 8위(상위) vs ARI 28.3점 · 31위(하위) — 중대 · LA 쪽 / 수비 효율(내준 드라이브당 득점): LA 1.76 · 7위(상위) vs ARI 2.52 · 30위(하위) — 중대 · LA 쪽 · 선수 핵심: QB LA M.Stafford (예상 선발) EPA 18/39위·중간 vs ARI J.Brissett EPA 27/39위·하위 · 타깃 1위 LA P.Nacua(Out) 타깃 93 · 야드/타깃 82/190위·중간 vs ARI T.McBride 타깃 94 · 야드/타깃 116/190위·중간 · 캐리 1위 LA K.Williams 캐리 127 · 야드/캐리 15/72위·상위 vs ARI T.Allgeier 캐리 89 · 야드/캐리 29/72위·중간 · ★주전 Out/Doubtful LA 3명 / ARI 4명 · 공식 비활성 미발표(🏥 줄) · 새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): LA Myles Garrett(Q), LA Trent McDuffie(Q), LA Davis Allen(Q), ARI Andrew Wingard(Q), ARI Max Melton(Q), ARI Jayden Williams(Q) · 관찰 각도(페이퍼): A12 LA ML(-500) / A7 ARI +9.5 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 · 로컬 페이퍼 관찰 있음(돈 아님): 관찰(큰 괴리 — 페이퍼) · 관찰(큰 괴리 — 페이퍼)
+- 📌 **결론 재료(자동 — 10판 ML 전용 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: 이길 팀 LA 80% ★★★★(10판: 예상 점수·방향·스프레드/총점 판단은 쓰지 않는다 — ML 전용) · 스탯 격차 상위 3(32팀 순위 차 순): 패스 수비(허용 EPA): LA -0.069 · 6위(상위) vs ARI +0.248 · 31위(하위) — 중대 · LA 쪽 / 실점(경기당): LA 20.1점 · 8위(상위) vs ARI 28.3점 · 31위(하위) — 중대 · LA 쪽 / 수비 효율(내준 드라이브당 득점): LA 1.76 · 7위(상위) vs ARI 2.52 · 30위(하위) — 중대 · LA 쪽 · 선수 핵심: QB LA M.Stafford (예상 선발) EPA 18/39위·중간 vs ARI Carson Beck (예상 선발) 표본 적음 · 타깃 1위 LA P.Nacua(Out) 타깃 93 · 야드/타깃 82/190위·중간 vs ARI T.McBride 타깃 94 · 야드/타깃 116/190위·중간 · 캐리 1위 LA K.Williams 캐리 127 · 야드/캐리 15/72위·상위 vs ARI T.Allgeier 캐리 89 · 야드/캐리 29/72위·중간 · ★주전 Out/Doubtful LA 3명 / ARI 5명 · 공식 비활성(ESPN 11:37 PT 발표): ★주전 LA 3 / ARI 5 — 🏥 줄 그대로 · 새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): LA Myles Garrett(Q), LA Trent McDuffie(Q), LA Davis Allen(Q), ARI Andrew Wingard(Q), ARI Max Melton(Q) · 관찰 각도(페이퍼): A12 LA ML(-500) / A7 ARI +9.5 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 · 로컬 페이퍼 관찰 있음(돈 아님): 관찰(큰 괴리 — 페이퍼) · 관찰(큰 괴리 — 페이퍼)
 
 - 🤝 **맞대결(최근 3시즌 2023~ · 플레이오프 포함 · 값만 — 2006~25 직전 맞대결 진 팀 리턴매치 커버 51.5%, 우연 범위)**:
 
@@ -619,7 +619,7 @@
 | 패스 공격 vs 상대 패스 수비(드롭백 EPA) | 공격 +0.058 vs ARI 수비 +0.248 | 공격 -0.023 vs LA 수비 -0.069 | 0 — 팀 EPA 모델 점수 차 오차 10.48 > 시장 9.92(1,151경기) |
 | 휴식 | 7일 | 7일 · 디비전 | 0 — 2023~25 라인·일정 15항목 전부 잡음(BH) · 목요일 원정 48.9% |
 | 날씨 | indoor · Mostly sunny 74°F | (같은 구장) | 0 — 바람 15mph+ 언더는 따로 관찰 중(2006~25 55%, 최근 3년 53% — 약한 신호) |
-| 주전 결장(스냅 60%+) | ★주전 Out/Doubtful 3명 | ★주전 Out/Doubtful 4명 | 0 — 주전 결장 수 차 −0.15점/명 p .44(F1 · n2,110) · 라인 뒤 발표분만 「새 정보」 관찰 |
+| 주전 결장(스냅 60%+) | ★주전 Out/Doubtful 3명 | ★주전 Out/Doubtful 5명 | 0 — 주전 결장 수 차 −0.15점/명 p .44(F1 · n2,110) · 라인 뒤 발표분만 「새 정보」 관찰 |
 | 작년 성적 | 2025 12-5(0.706) | 2025 3-14(0.176) | 0 — 2007~25 작년 승률 .25+ 높은 팀 커버 50.3%(n1,934) · 시장 확률과 실제 승률 일치(37.5% vs 38.3%) |
 | 최근 맞대결(2023~ · 최근 4경기) | LA 3승 | ARI 1승 · 2025 ARI 20–37 LA · 2026 ARI 18–16 LA | 0 — 2006~25 직전 맞대결 진 팀 리턴매치 커버 51.5%(n2,594 · 손익분기 52.4% 미만, 우연 범위) · MLB H2H 도 기각(9/1·9/5) |
 | 라인 개장 → 지금 | 스프레드(홈) +10.5 → +9.5 · 총점 47.5 → 38.5 | | 정보 — 움직였다 = 시장이 이미 소화 |
@@ -637,7 +637,7 @@
 | 예상 득점 — 드라이브 모델(리그 2.05/드라이브 · 경기당 11드라이브) / 시장 내재 | 24.2 / 24.0 | 20.4 / 14.5 |
 | 승리 확률 — 시장(ML 무비그) | 80% | 20% |
 | QB(예상 선발 — 2026 실제 성적) | M.Stafford: 완성 67%(r 0.40·중간) · CPOE +0.0(r 0.41·중간) · 야드/시도 6.9(r 0.48·실력) · EPA/드롭백 +0.05(r 0.47·실력) · TD 4.7%(r 0.39·중간) · 색 3.6%(r 0.46·실력) · INT 2.6%(r 0.03·운) · 시도 344 · 드롭백 357 | Carson Beck: 2026 기록 없음(드롭백 0 ※ 얇음 — 근거 금지) |
-| 리시버 상위 2(타깃순) | P.Nacua ⚠️Out: 타깃 93 · 캐치율 75%(r 0.50·실력) · 야드/타깃 7.7(r 0.34·중간) · TD 4(r 0.18·운) / D.Adams: 타깃 49 · 캐치율 61%(r 0.50·실력) · 야드/타깃 9.8(r 0.34·중간) · TD 4(r 0.18·운) | T.McBride: 타깃 94 · 캐치율 78%(r 0.50·실력) · 야드/타깃 6.4(r 0.34·중간) · TD 5(r 0.18·운) / Mi.Wilson: 타깃 88 · 캐치율 58%(r 0.50·실력) · 야드/타깃 6.2(r 0.34·중간) · TD 2(r 0.18·운) |
+| 리시버 상위 2(타깃순) | P.Nacua ⚠️Out: 타깃 93 · 캐치율 75%(r 0.50·실력) · 야드/타깃 7.7(r 0.34·중간) · TD 4(r 0.18·운) / D.Adams: 타깃 49 · 캐치율 61%(r 0.50·실력) · 야드/타깃 9.8(r 0.34·중간) · TD 4(r 0.18·운) | T.McBride: 타깃 94 · 캐치율 78%(r 0.50·실력) · 야드/타깃 6.4(r 0.34·중간) · TD 5(r 0.18·운) / Mi.Wilson ⚠️Out: 타깃 88 · 캐치율 58%(r 0.50·실력) · 야드/타깃 6.2(r 0.34·중간) · TD 2(r 0.18·운) |
 | 러셔 1위(캐리순) | K.Williams: 캐리 127 · 야드/캐리 4.7(r 0.27·중간) · 성공률 41%(r 0.33·중간) | T.Allgeier: 캐리 89 · 야드/캐리 4.1(r 0.27·중간) · 성공률 33%(r 0.33·중간) |
 
   ↳ 읽는 법: r(안정성)이 높은 수치(드라이브당 득점·EPA·야드/시도·캐치율)는 실력이라 다음 경기에도 이어질 가능성이 크고, INT%·레드존 TD%·리시버 TD 수처럼 r 이 낮은 수치는 운이라 몇 경기 값으로 판단하지 않는다. 예상 득점은 드라이브 모델보다 **시장 내재 값이 더 정확**하다(2018~2025 1,618경기 점수 차 오차 시장 9.92 vs 드라이브 모델 10.38 · 총점 10.38 vs 10.83).
@@ -651,14 +651,14 @@
 | 러시(EPA) | LA +0.013(4위) vs ARI -0.136(7위) | ARI -0.058(14위) vs LA -0.176(2위) |
 | 러시 성공률 | LA 46%(5위) vs ARI 40%(14위) | ARI 40%(16위) vs LA 35%(4위) |
 | 색 비율(드롭백당) | LA 3.6%(4위) vs ARI 6.5%(15위) | ARI 6.0%(15위) vs LA 4.8%(29위) |
-| 턴오버/경기(공격 잃음 · 수비 뺏음) | LA 1.6(25위) vs ARI 0.8(30위) | ARI 0.9(8위) vs LA 1.1(19위) |
+| 턴오버/경기(공격 잃음 · 수비 뺏음) | LA 1.6(24위) vs ARI 0.8(30위) | ARI 0.9(8위) vs LA 1.1(19위) |
 | 3rd down 전환 | LA 44%(8위) vs ARI 43%(22위) | ARI 39%(16위) vs LA 32%(3위) |
 | 패스 보호 vs 압박(PFR) | LA 피압박 6.6/경기(4위) vs ARI 압박 6.4/경기(32위) | ARI 피압박 10.4/경기(31위) vs LA 압박 7.9/경기(23위) |
-| 핵심 선수(2026 점유율) | P.Nacua 타깃 28%·EPA/타깃 +0.23 ⚠️Out · D.Adams 타깃 15%·EPA/타깃 +0.45 · K.Williams 캐리 56%·EPA/캐리 -0.01 | T.McBride 타깃 27%·EPA/타깃 +0.29 · Mi.Wilson 타깃 26%·EPA/타깃 +0.02 · T.Allgeier 캐리 42%·EPA/캐리 -0.10 |
+| 핵심 선수(2026 점유율) | P.Nacua 타깃 28%·EPA/타깃 +0.23 ⚠️Out · D.Adams 타깃 15%·EPA/타깃 +0.45 · K.Williams 캐리 56%·EPA/캐리 -0.01 | T.McBride 타깃 27%·EPA/타깃 +0.29 · Mi.Wilson 타깃 26%·EPA/타깃 +0.02 ⚠️Out · T.Allgeier 캐리 42%·EPA/캐리 -0.10 |
 
 - 패스 매치업(서술 — 점수 아님) LA 공격 → ARI 수비: QB Matthew Stafford 투구 시간 2.69초 · CPOE +0.4 · 공격적 패스 14%(시도 346) · LA 공격 피압박 경기당 6.6(적은 순 4위) vs ARI 수비 압박 경기당 6.4(리그 32위) (2025 경기당: ARI 압박 6.8 · LA 피압박 6.9) · FTN: LA 플레이액션 25%(많은 순 11위) · 블리츠 받을 때 EPA/드롭백 +0.02(좋은 순 16위 · 112회) · 가로채기 위험 패스 3.8% · vs ARI 블리츠 34%(많은 순 12위)
 - 패스 매치업(서술 — 점수 아님) ARI 공격 → LA 수비: QB Carson Beck NGS 기록 없음 · ARI 공격 피압박 경기당 10.4(적은 순 31위) vs LA 수비 압박 경기당 7.9(리그 23위) (2025 경기당: LA 압박 10.6 · ARI 피압박 10.8) · FTN: ARI 플레이액션 17%(많은 순 29위) · 블리츠 받을 때 EPA/드롭백 -0.20(좋은 순 28위 · 104회) · 가로채기 위험 패스 2.1% · vs LA 블리츠 29%(많은 순 17위)
-- 라인 이동: 스프레드(홈) 9.5 → 9.5 · 총점 39.5 → 38.5 (11-12 15:59 → 11-15 11:41) — 정보(뉴스 반영), 방향 근거 아님
+- 라인 이동: 스프레드(홈) 9.5 → 9.5 · 총점 39.5 → 38.5 (11-12 15:59 → 11-15 11:55) — 정보(뉴스 반영), 방향 근거 아님
 - 맥락(값만 — N5): 휴식 LA 7일 / ARI 7일 · 날씨 Mostly sunny 74°F · 지붕 indoor
 - 리스크: ARI 백업 QB 선발 — Gardner Minshew IR · 예상 선발 Carson Beck(뎁스차트 QB1) → 모델 −4.5점 · ARI 일정표 예상 Gardner Minshew 는 IR — 뎁스차트 QB1 Carson Beck 로 정정 · 〔직접 서술 — 값만, 단정 금지〕
 
@@ -666,16 +666,16 @@
 
 - 팀: **Buffalo Bills**(버펄로 빌스) @ **New York Jets**(뉴욕 제츠) · 로고는 보드(Artifact)에서
     ↳ 우리 드라이브 모델(두 번째 의견 · 시장보다 덜 정확): BUF 28.5 – NYJ 22.6 → BUF 68%
-- 🆕 직전 판(11-15 09:04) 대비 변동: ML -500/+380 → ?/?
+- 🆕 직전 판(11-15 11:42) 대비 변동: NYJ Out 추가 Omar Cooper Jr.
 
 - 시장(DK): 스프레드 홈 8.5 · 총점 50.5 · ML BUF ? / NYJ ? · nflverse 라인 -8.5/50.5
 - 레이팅: BUF 공격 +0.101(패 +0.122/러 +0.075) · 수비 -0.034(패 -0.073/러 +0.037) · 순마진 +8.4 · PF/PA 32.0/23.4
 - 레이팅: NYJ 공격 -0.057(패 -0.076/러 -0.054) · 수비 +0.088(패 +0.177/러 +0.007) · 순마진 -9.0 · PF/PA 20.2/24.8
 - 모델: 홈 마진 -15.8 · 홈 승률 11.1% · 총점 52.1
-- 부상·QB BUF: 예상 QB Josh Allen(시즌 주전 J.Allen) · Out 2 / Doubtful 1 / Questionable 3 — Out: Josh Palmer(WR · 스냅 17% · IR) · Tyrell Shavers(WR · 당일 비활성) — Doubtful: Spencer Brown(T · ★스냅 98%) — Questionable: Sam Franklin Jr.(S · 스냅 2%) · Christian Benford(CB · ★스냅 81%) · Jordan Hancock(CB) · ★주전급(스냅 60%+) Out/Doubtful 1명
-- 부상·QB NYJ: 예상 QB Geno Smith(시즌 주전 G.Smith) · Out 3 / Doubtful 0 / Questionable 7 — Out: Trevin Wallace(LB) · T'Vondre Sweat(DL · 스냅 34% · IR) · Jarvis Brownlee Jr.(CB · 스냅 23% · 당일 비활성) — Questionable: Harrison Phillips(DT · 스냅 57%) · Joseph Ossai(DE) · Nahshon Wright(CB) · Garrett Wilson(WR · ★스냅 83%) · Adonai Mitchell(WR · ★스냅 65%) · VJ Payne(S) · Omar Cooper Jr.(WR · ★스냅 76%)
-- 🏥 결장 명단(ESPN 공식 비활성 · 발표 08:35 PT ∪ 주간 보고 Out): BUF Out 8 — Ar'maj Reed-Adams(G · 스냅 4% · 직전 경기 4% · 건강 제외) · Jalon Kilgore(S · 스냅 17% · 직전 경기 0% · 건강 제외) · Jude Bowry(OT · 스냅 4% · 직전 경기 4% · 건강 제외) · Mike Danna(DE · 직전 경기 0% · 건강 제외) · Greg Gaines(DT · 스냅 38% · 직전 경기 0% · 건강 제외) · Tyrell Shavers(WR · 직전 경기 0% · Knee - ACL) · Shane Buechele(QB · 직전 경기 0% · 건강 제외) · Josh Palmer(WR · 스냅 17% · IR · 주간 보고) · 주중 Q/D → ESPN 출전 표시: Sam Franklin Jr.(Q → Active 08:35), ★Christian Benford(Q → Active 08:58), Jordan Hancock(Q → Active 09:00), ★Spencer Brown(D → Active 09:40) / NYJ Out 6 — Jarvis Brownlee Jr.(CB · 스냅 23% · 직전 경기 3% · Illness) · Tim Patrick(WR · 스냅 12% · 직전 경기 0% · 건강 제외) · Jelani Woods(TE · 스냅 21% · 직전 경기 10% · 건강 제외) · Trevin Wallace(LB · 직전 경기 0% · Groin) · Nate Lynn(DE · 스냅 22% · 직전 경기 18% · 건강 제외) · T'Vondre Sweat(DL · 스냅 34% · IR · 주간 보고) · 주중 Q/D → ESPN 출전 표시: Harrison Phillips(Q → Active 09:14), Joseph Ossai(Q → Active 09:15), Nahshon Wright(Q → Active 09:37), ★Garrett Wilson(Q → Active 08:37), ★Adonai Mitchell(Q → Active 08:39), VJ Payne(Q → Active 09:39) · ⚠️ ★ 주중 Q/D 인데 ESPN 당일 명단에 없음: Omar Cooper Jr.(Q) — 출전 여부 미확인(ESPN 이 생략하는 경로 있음 · 웹 확인 필수 · 「명단에 없으니 출전」으로 읽지 말 것) · ★주전 결장 BUF 0 / NYJ 0 — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · 팀별 발표 BUF 08:35 / NYJ 08:36~09:09 PT · ESPN 명단은 팀당 최근 25건(리그 injuries)이라 ⚠️ 미확인 표시만 웹 확인
-- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전 · 예측시장 이후 실측 기준): A8 BUF ML(-500) — 접전 .750+ 팀 ML(24~25 실제 68% vs 시장 57% · 18~23 0) · 2026 실시간 13-2 · BUF 한 포제션 경기 4-1(80%) / A7 NYJ +8.5 — 홈 언더독 +7 이상 → 홈 ATS(24~25 29-15 66% · 18~23 54%) · 2026 실시간 1-1 · 홈 NYJ 언더독 +8.5 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 — 75건 중 겹침 14 · 상충 1경기 제외) ← ML 각도가 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
+- 부상·QB BUF: 예상 QB Josh Allen(시즌 주전 J.Allen) · Out 2 / Doubtful 1 / Questionable 3 — Out: Josh Palmer(WR · 스냅 17% · IR) · Tyrell Shavers(WR · 당일 비활성) — Doubtful: Spencer Brown(T · ★스냅 98%) — Questionable: Sam Franklin Jr.(S · 스냅 2%) · Christian Benford(CB · ★스냅 81%) · Jordan Hancock(CB) · ★주전급(스냅 60%+) Out/Doubtful 1명 · ESPN 명단에만 Out 6: Ar'maj Reed-Adams · Jalon Kilgore · Jude Bowry · Mike Danna · Greg Gaines · Shane Buechele(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
+- 부상·QB NYJ: 예상 QB Geno Smith(시즌 주전 G.Smith) · Out 4 / Doubtful 0 / Questionable 6 — Out: Trevin Wallace(LB) · T'Vondre Sweat(DL · 스냅 34% · IR) · Jarvis Brownlee Jr.(CB · 스냅 23% · 당일 비활성) · Omar Cooper Jr.(WR · ★스냅 76% · 당일 비활성) — Questionable: Harrison Phillips(DT · 스냅 57%) · Joseph Ossai(DE) · Nahshon Wright(CB) · Garrett Wilson(WR · ★스냅 83%) · Adonai Mitchell(WR · ★스냅 65%) · VJ Payne(S) · ★주전급(스냅 60%+) Out/Doubtful 1명 · ESPN 명단에만 Out 3: Tim Patrick · Jelani Woods · Nate Lynn(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
+- 🏥 결장 명단(ESPN 공식 비활성 · 발표 08:35 PT ∪ 주간 보고 Out): BUF Out 8 — Ar'maj Reed-Adams(G · 스냅 4% · 직전 경기 4% · 건강 제외) · Jalon Kilgore(S · 스냅 17% · 직전 경기 0% · 건강 제외) · Jude Bowry(OT · 스냅 4% · 직전 경기 4% · 건강 제외) · Mike Danna(DE · 직전 경기 0% · 건강 제외) · Greg Gaines(DT · 스냅 38% · 직전 경기 0% · 건강 제외) · Tyrell Shavers(WR · 직전 경기 0% · Knee - ACL) · Shane Buechele(QB · 직전 경기 0% · 건강 제외) · Josh Palmer(WR · 스냅 17% · IR · 주간 보고) · 주중 Q/D → ESPN 출전 표시: Sam Franklin Jr.(Q → Active 08:35), ★Christian Benford(Q → Active 08:58), Jordan Hancock(Q → Active 09:00), ★Spencer Brown(D → Active 09:40) / NYJ Out 7 — ★Omar Cooper Jr.(WR · 스냅 76% · 직전 경기 86% · Ankle) · Jarvis Brownlee Jr.(CB · 스냅 23% · 직전 경기 3% · Illness) · Tim Patrick(WR · 스냅 12% · 직전 경기 0% · 건강 제외) · Jelani Woods(TE · 스냅 21% · 직전 경기 10% · 건강 제외) · Trevin Wallace(LB · 직전 경기 0% · Groin) · Nate Lynn(DE · 스냅 22% · 직전 경기 18% · 건강 제외) · T'Vondre Sweat(DL · 스냅 34% · IR · 주간 보고) · 주중 Q/D → ESPN 출전 표시: Harrison Phillips(Q → Active 09:14), Joseph Ossai(Q → Active 09:15), Nahshon Wright(Q → Active 09:37), ★Garrett Wilson(Q → Active 08:37), ★Adonai Mitchell(Q → Active 08:39), VJ Payne(Q → Active 09:39) · ★주전 결장 BUF 0 / NYJ 1 — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · 팀별 발표 BUF 08:35 / NYJ 08:36~09:09 PT · ESPN 명단은 팀당 최근 25건(리그 injuries)이라 ⚠️ 미확인 표시만 웹 확인
+- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전(A3·A11·A12 는 30픽) · 예측시장 이후 실측 기준): A8 BUF ML(-500) — 접전 .750+ 팀 ML(24~25 실제 68% vs 시장 57% · 18~23 0) · 2026 실시간 13-2 · BUF 한 포제션 경기 4-1(80%) / A7 NYJ +8.5 — 홈 언더독 +7 이상 → 홈 ATS(24~25 29-15 66% · 18~23 54%) · 2026 실시간 1-1 · 홈 NYJ 언더독 +8.5 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 — 75건 중 겹침 14 · 상충 1경기 제외) ← ML 각도 A4·A5·A8 이 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
 - 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 · 괄호 = 2024~25 그 등급일 때 순위 높은 팀이 실제 이긴 비율와 시장이 준 확률(둘이 비슷 = 시장이 이미 반영) — 서술 전용, 확률·별점 영향 0)**:
 
 | 항목 | BUF | NYJ | 뜻 | 격차(서술 전용 · 실측 승률/시장) | 2025 시즌(작년·참고) |
@@ -747,7 +747,7 @@
 
   ↳ 읽는 법: 압박·색은 상대 OL·QB 색 허용률(선수 표)과 맞춰 보고, 커버리지 「타깃→허용」은 많이 노려진 CB 를 뜻한다(허용 수가 많다고 나쁜 것은 아님 — 야드/타깃이 기준). 놓친 태클은 상대 RB 야드/캐리와 함께. 전부 서술 재료 — 2018~25 백테스트에서 시장을 못 이겼고, 색률 상위 8 수비는 오히려 시장이 과대평가(A10 관찰).
 
-- 📌 **결론 재료(자동 — 10판 ML 전용 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: 스탯 격차 상위 3(32팀 순위 차 순): 득점(경기당): BUF 32.0점 · 1위(상위) vs NYJ 20.2점 · 25위(하위) — 중대 · BUF 쪽 / 3rd down 전환(공격): BUF 46% · 5위(상위) vs NYJ 37% · 24위(하위) — 중대 · BUF 쪽 / 공격 효율(드라이브당 득점): BUF 2.89 · 1위(상위) vs NYJ 1.92 · 19위(중간) — 중대 · BUF 쪽 · 선수 핵심: QB BUF J.Allen (예상 선발) EPA 7/39위·상위 vs NYJ G.Smith (예상 선발) EPA 16/39위·중간 · 타깃 1위 BUF K.Shakir 타깃 42 · 야드/타깃 36/190위·상위 vs NYJ G.Wilson(Q) 타깃 64 · 야드/타깃 64/190위·중간 · 캐리 1위 BUF J.Cook 캐리 169 · 야드/캐리 13/72위·상위 vs NYJ B.Allen 캐리 120 · 야드/캐리 8/72위·상위 · ★주전 Out/Doubtful BUF 1명 / NYJ 0명 · 공식 비활성(ESPN 08:35 PT 발표): ★주전 BUF 0 / NYJ 0 — 🏥 줄 그대로 · 새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): BUF Christian Benford(Q), BUF Spencer Brown(D), NYJ Garrett Wilson(Q), NYJ Adonai Mitchell(Q), NYJ Omar Cooper Jr.(Q) · 관찰 각도(페이퍼): A8 BUF ML(-500) / A7 NYJ +8.5 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 · 로컬 페이퍼 관찰 있음(돈 아님): 관찰(큰 괴리 — 페이퍼)
+- 📌 **결론 재료(자동 — 10판 ML 전용 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: 스탯 격차 상위 3(32팀 순위 차 순): 득점(경기당): BUF 32.0점 · 1위(상위) vs NYJ 20.2점 · 25위(하위) — 중대 · BUF 쪽 / 3rd down 전환(공격): BUF 46% · 5위(상위) vs NYJ 37% · 24위(하위) — 중대 · BUF 쪽 / 공격 효율(드라이브당 득점): BUF 2.89 · 1위(상위) vs NYJ 1.92 · 19위(중간) — 중대 · BUF 쪽 · 선수 핵심: QB BUF J.Allen (예상 선발) EPA 7/39위·상위 vs NYJ G.Smith (예상 선발) EPA 16/39위·중간 · 타깃 1위 BUF K.Shakir 타깃 42 · 야드/타깃 36/190위·상위 vs NYJ G.Wilson(Q) 타깃 64 · 야드/타깃 64/190위·중간 · 캐리 1위 BUF J.Cook 캐리 169 · 야드/캐리 13/72위·상위 vs NYJ B.Allen 캐리 120 · 야드/캐리 8/72위·상위 · ★주전 Out/Doubtful BUF 1명 / NYJ 1명 · 공식 비활성(ESPN 08:35 PT 발표): ★주전 BUF 0 / NYJ 1 — 🏥 줄 그대로 · 새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): BUF Christian Benford(Q), BUF Spencer Brown(D), NYJ Garrett Wilson(Q), NYJ Adonai Mitchell(Q) · 관찰 각도(페이퍼): A8 BUF ML(-500) / A7 NYJ +8.5 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 · 로컬 페이퍼 관찰 있음(돈 아님): 관찰(큰 괴리 — 페이퍼)
 
 - 🤝 **맞대결(최근 3시즌 2023~ · 플레이오프 포함 · 값만 — 2006~25 직전 맞대결 진 팀 리턴매치 커버 51.5%, 우연 범위)**:
 
@@ -800,7 +800,7 @@
 | 패스 공격 vs 상대 패스 수비(드롭백 EPA) | 공격 +0.253 vs NYJ 수비 +0.161 | 공격 +0.084 vs BUF 수비 +0.046 | 0 — 팀 EPA 모델 점수 차 오차 10.48 > 시장 9.92(1,151경기) |
 | 휴식 | 6일 | 7일 · 디비전 | 0 — 2023~25 라인·일정 15항목 전부 잡음(BH) · 목요일 원정 48.9% |
 | 날씨 | outdoors · 3 51°F | (같은 구장) | 0 — 바람 15mph+ 언더는 따로 관찰 중(2006~25 55%, 최근 3년 53% — 약한 신호) |
-| 주전 결장(스냅 60%+) | ★주전 Out/Doubtful 1명 | ★주전 Out/Doubtful 0명 | 0 — 주전 결장 수 차 −0.15점/명 p .44(F1 · n2,110) · 라인 뒤 발표분만 「새 정보」 관찰 |
+| 주전 결장(스냅 60%+) | ★주전 Out/Doubtful 1명 | ★주전 Out/Doubtful 1명 | 0 — 주전 결장 수 차 −0.15점/명 p .44(F1 · n2,110) · 라인 뒤 발표분만 「새 정보」 관찰 |
 | 작년 성적 | 2025 12-5(0.706) | 2025 3-14(0.176) | 0 — 2007~25 작년 승률 .25+ 높은 팀 커버 50.3%(n1,934) · 시장 확률과 실제 승률 일치(37.5% vs 38.3%) |
 | 최근 맞대결(2023~ · 최근 4경기) | BUF 4승 | NYJ 0승 · 2025 BUF 30–10 NYJ · 2025 NYJ 8–35 BUF | 0 — 2006~25 직전 맞대결 진 팀 리턴매치 커버 51.5%(n2,594 · 손익분기 52.4% 미만, 우연 범위) · MLB H2H 도 기각(9/1·9/5) |
 | 라인 개장 → 지금 | 스프레드 개장값 없음 | | 정보 — 움직였다 = 시장이 이미 소화 |
@@ -832,14 +832,14 @@
 | 러시(EPA) | BUF +0.003(7위) vs NYJ -0.112(9위) | NYJ -0.116(20위) vs BUF -0.115(8위) |
 | 러시 성공률 | BUF 47%(3위) vs NYJ 44%(28위) | NYJ 42%(14위) vs BUF 41%(18위) |
 | 색 비율(드롭백당) | BUF 6.1%(18위) vs NYJ 7.1%(10위) | NYJ 8.9%(28위) vs BUF 5.2%(21위) |
-| 턴오버/경기(공격 잃음 · 수비 뺏음) | BUF 1.5(23위) vs NYJ 1.0(24위) | NYJ 0.8(7위) vs BUF 1.5(8위) |
+| 턴오버/경기(공격 잃음 · 수비 뺏음) | BUF 1.5(23위) vs NYJ 1.0(24위) | NYJ 0.8(7위) vs BUF 1.5(9위) |
 | 3rd down 전환 | BUF 46%(5위) vs NYJ 43%(21위) | NYJ 37%(24위) vs BUF 39%(14위) |
 | 패스 보호 vs 압박(PFR) | BUF 피압박 7.0/경기(5위) vs NYJ 압박 8.6/경기(19위) | NYJ 피압박 8.1/경기(16위) vs BUF 압박 11.9/경기(3위) |
 | 핵심 선수(2026 점유율) | K.Shakir 타깃 19%·EPA/타깃 +0.49 · D.Kincaid 타깃 17%·EPA/타깃 +0.53 · J.Cook 캐리 74%·EPA/캐리 +0.02 | G.Wilson 타깃 25%·EPA/타깃 +0.39 ⚠️Q · A.Mitchell 타깃 13%·EPA/타깃 +0.38 ⚠️Q · B.Allen 캐리 57%·EPA/캐리 -0.05 |
 
 - 패스 매치업(서술 — 점수 아님) BUF 공격 → NYJ 수비: QB Josh Allen 투구 시간 2.89초 · CPOE +0.7 · 공격적 패스 13%(시도 236) · BUF 공격 피압박 경기당 7.0(적은 순 5위) vs NYJ 수비 압박 경기당 8.6(리그 19위) (2025 경기당: NYJ 압박 5.2 · BUF 피압박 5.8) · FTN: BUF 플레이액션 29%(많은 순 5위) · 블리츠 받을 때 EPA/드롭백 +0.06(좋은 순 13위 · 112회) · 가로채기 위험 패스 2.9% · vs NYJ 블리츠 39%(많은 순 5위)
 - 패스 매치업(서술 — 점수 아님) NYJ 공격 → BUF 수비: QB Geno Smith 투구 시간 2.92초 · CPOE +4.5 · 공격적 패스 15%(시도 271) · NYJ 공격 피압박 경기당 8.1(적은 순 16위) vs BUF 수비 압박 경기당 11.9(리그 3위) (2025 경기당: BUF 압박 7.8 · NYJ 피압박 9.1) · FTN: NYJ 플레이액션 22%(많은 순 16위) · 블리츠 받을 때 EPA/드롭백 +0.01(좋은 순 18위 · 88회) · 가로채기 위험 패스 1.6% · vs BUF 블리츠 37%(많은 순 6위)
-- 라인 이동: 스프레드(홈) 8.5 →  · 총점 50.5 →  (11-12 15:59 → 11-15 11:41) — 정보(뉴스 반영), 방향 근거 아님
+- 라인 이동: 스프레드(홈) 8.5 →  · 총점 50.5 →  (11-12 15:59 → 11-15 11:55) — 정보(뉴스 반영), 방향 근거 아님
 - 맥락(값만 — N5): 휴식 BUF 6일 / NYJ 7일 · 날씨 3 51°F · 지붕 outdoors
 - 리스크: 자동 항목 없음 · 〔직접 서술 — 값만, 단정 금지〕
 
@@ -848,23 +848,23 @@
 - 팀: **Los Angeles Chargers**(LA 차저스) @ **Baltimore Ravens**(볼티모어 레이븐스) · 로고는 보드(Artifact)에서
 - 🔮 **예측**: 이길 팀 **BAL 66% ★★★**(2018~25 이 별 적중 71%) · 예상 점수 **LAC 17.0 – BAL 21.5** (시장 배당 기준 — 가장 정확) · 점수 차 BAL 4.5 · 총점 38.5
     ↳ 우리 드라이브 모델(두 번째 의견 · 시장보다 덜 정확): LAC 17.4 – BAL 23.3 → BAL 67%
-- 🆕 직전 판(11-15 09:04) 대비 변동: 없음
+- 🆕 직전 판(11-15 11:42) 대비 변동: 없음
 
 - 시장(Draft Kings): 스프레드 홈 -4.5 · 총점 38.5 · ML LAC +185 / BAL -225 · nflverse 라인 4.5/38.5
-- 💵 가격(DK · 조회 11-15 11:43 PT): 스프레드 BAL -4.5 -112 / LAC +4.5 -108 · 총점 38.5 O -115 / U -105 · ML LAC +185 / BAL -225
+- 💵 가격(DK · 조회 11-15 11:56 PT): 스프레드 BAL -4.5 -112 / LAC +4.5 -108 · 총점 38.5 O -115 / U -105 · ML LAC +185 / BAL -225
     ↳ 무비그 확률(수수료 뺀 시장 확률): BAL 커버 50.4% / LAC 커버 49.6% · Over 51.1% / Under 48.9% · 승리 LAC 33.6% / BAL 66.4%
     ↳ 손익분기(지금 배당으로 이만큼 맞혀야 본전): BAL -4.5 52.8% · LAC +4.5 51.9% · Over 53.5% · Under 51.2% · LAC ML 35.1% · BAL ML 69.2%
     ↳ 개장 → 지금: 스프레드 BAL -2.5(-110) → -4.5(-112) · 총점 48.5(O -110) → 38.5(O -115) · ML BAL -142 → -225
-    ↳ Polymarket(사는 가격 · 조회 11:43 PT · 수수료 미반영): LAC ML 34c(+194) · BAL ML 67c(-203) · BAL -4.5 51c(-104) · LAC +4.5 50c(-100) · Over 38.5 53c(-113) · Under 38.5 48c(+108)
+    ↳ Polymarket(사는 가격 · 조회 11:56 PT · 수수료 미반영): LAC ML 34c(+194) · BAL ML 67c(-203) · BAL -4.5 51c(-104) · LAC +4.5 50c(-100) · Over 38.5 53c(-113) · Under 38.5 48c(+108)
     ↳ 쪽별 더 좋은 가격(같은 라인): LAC ML: Polymarket +194 · BAL ML: Polymarket -203 · BAL -4.5: Polymarket -104 · LAC +4.5: Polymarket -100 · Over 38.5: Polymarket -113 · Under 38.5: Polymarket +108
-    ↳ 라인 이력(우리 조회 시각): 11-12 15:59 BAL -4.5(-108) · 총점 38.5(O -110) | 11-15 08:35 BAL -4.5(-108) · 총점 38.5(O -110) | 11-15 08:51 BAL -4.5(-108) · 총점 38.5(O -110) | 11-15 09:04 BAL -4.5(-108) · 총점 38.5(O -110) | 11-15 11:41 BAL -4.5(-112) · 총점 38.5(O -115)
+    ↳ 라인 이력(우리 조회 시각): 11-12 15:59 BAL -4.5(-108) · 총점 38.5(O -110) | 11-15 08:51 BAL -4.5(-108) · 총점 38.5(O -110) | 11-15 09:04 BAL -4.5(-108) · 총점 38.5(O -110) | 11-15 11:41 BAL -4.5(-112) · 총점 38.5(O -115) | 11-15 11:55 BAL -4.5(-112) · 총점 38.5(O -115)
 - 레이팅: LAC 공격 -0.102(패 -0.094/러 -0.035) · 수비 -0.032(패 -0.035/러 -0.049) · 순마진 -4.3 · PF/PA 15.1/27.4
 - 레이팅: BAL 공격 -0.012(패 -0.035/러 +0.037) · 수비 +0.022(패 +0.069/러 -0.047) · 순마진 -2.1 · PF/PA 21.0/26.2
 - 모델: 홈 마진 -0.7 · 홈 승률 47.7% · 총점 33.8 · QB 조정 LAC 0.0 / BAL -4.5
 - 부상·QB LAC: 예상 QB Justin Herbert(시즌 주전 J.Herbert) · Out 3 / Doubtful 1 / Questionable 6 — Out: Kendall Williamson(S) · Isas Waxter(CB · 스냅 26%) · Branson Taylor(G · 스냅 12%) — Doubtful: Brenen Thompson(WR) — Questionable: Denzel Perryman(LB) · David Njoku(TE) · Trey Pipkins(T) · Kayode Awosika(G) · Justin Eboigbe(DE · 스냅 31%) · Ladd McConkey(WR · 스냅 51%)
 - 부상·QB BAL: 예상 QB Jacoby Brissett(시즌 주전 T.Huntley) ⚠️ 백업 QB 선발 — Tyler Huntley IR · 예상 선발 Jacoby Brissett(뎁스차트 QB1) · ⓘ 일정표 예상 Tyler Huntley 는 IR — 뎁스차트 QB1 Jacoby Brissett 로 정정 · Out 3 / Doubtful 0 / Questionable 1 — Out: Jaylinn Hawkins(S) · Lamar Jackson(QB · 스냅 2% · IR) · Tyler Huntley(QB · ★스냅 60% · IR) — Questionable: Adam Randall(RB) · ★주전급(스냅 60%+) Out/Doubtful 1명
-- 🏥 결장 명단(ESPN): 공식 비활성 미발표(킥오프 90분 전 발표 — 그때 리프레시하면 이 줄이 채워진다) · 주간 보고 Out 기준 LAC Out 3 — Branson Taylor(G · 스냅 12% · 직전 경기 12% · Ankle) · Kendall Williamson(S · 직전 경기 0% · Calf) · Isas Waxter(CB · 스냅 26% · 직전 경기 3% · Ankle) / BAL Out 3 — Jaylinn Hawkins(S · 직전 경기 0% · Knee) · Lamar Jackson(QB · 스냅 2% · IR · 주간 보고) · Tyler Huntley(QB · ★스냅 60% · IR · 주간 보고)
-- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전 · 예측시장 이후 실측 기준): A6 LAC +4.5 — 개장→마감 키 넘버 3·7 넘김 → 반대쪽 ATS(24~25 73-50 59%) · 2026 실시간 14-9 · 개장 -2.5 → 지금 -4.5(홈 기준) 키 넘버 넘김 ← ML 각도가 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
+- 🏥 결장 명단(ESPN): 공식 비활성 미발표(킥오프 90분 전 발표 — 그때 리프레시하면 이 줄이 채워진다) · 주간 보고 Out 기준 LAC Out 4 — Ladd McConkey(WR · 스냅 51% · 직전 경기 0% · Back) · Branson Taylor(G · 스냅 12% · 직전 경기 12% · Ankle) · Kendall Williamson(S · 직전 경기 0% · Calf) · Isas Waxter(CB · 스냅 26% · 직전 경기 3% · Ankle) / BAL Out 3 — Jaylinn Hawkins(S · 직전 경기 0% · Knee) · Lamar Jackson(QB · 스냅 2% · IR · 주간 보고) · Tyler Huntley(QB · ★스냅 60% · IR · 주간 보고)
+- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전(A3·A11·A12 는 30픽) · 예측시장 이후 실측 기준): A6 LAC +4.5 — 개장→마감 키 넘버 3·7 넘김 → 반대쪽 ATS(24~25 73-50 59%) · 2026 실시간 14-9 · 개장 -2.5 → 지금 -4.5(홈 기준) 키 넘버 넘김 ← ML 각도 A4·A5·A8 이 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
 - 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 · 괄호 = 2024~25 그 등급일 때 순위 높은 팀이 실제 이긴 비율와 시장이 준 확률(둘이 비슷 = 시장이 이미 반영) — 서술 전용, 확률·별점 영향 0)**:
 
 | 항목 | LAC | BAL | 뜻 | 격차(서술 전용 · 실측 승률/시장) | 2025 시즌(작년·참고) |
@@ -938,7 +938,7 @@
 
   ↳ 읽는 법: 압박·색은 상대 OL·QB 색 허용률(선수 표)과 맞춰 보고, 커버리지 「타깃→허용」은 많이 노려진 CB 를 뜻한다(허용 수가 많다고 나쁜 것은 아님 — 야드/타깃이 기준). 놓친 태클은 상대 RB 야드/캐리와 함께. 전부 서술 재료 — 2018~25 백테스트에서 시장을 못 이겼고, 색률 상위 8 수비는 오히려 시장이 과대평가(A10 관찰).
 
-- 📌 **결론 재료(자동 — 10판 ML 전용 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: 이길 팀 BAL 66% ★★★(10판: 예상 점수·방향·스프레드/총점 판단은 쓰지 않는다 — ML 전용) · 스탯 격차 상위 3(32팀 순위 차 순): 턴오버(경기당 잃음): LAC 2.2 · 32위(하위) vs BAL 1.1 · 13위(중간) — 중대 · BAL 쪽 / 러시 공격(러시당 EPA): LAC -0.248 · 32위(하위) vs BAL -0.074 · 16위(중간) — 중대 · BAL 쪽 / 공격 효율(드라이브당 득점): LAC 1.27 · 32위(하위) vs BAL 1.92 · 18위(중간) — 경미 · BAL 쪽 · 선수 핵심: QB LAC J.Herbert (예상 선발) EPA 38/39위·하위 vs BAL T.Huntley(Out) EPA 23/39위·중간 · 타깃 1위 LAC T.Harris 타깃 35 · 야드/타깃 89/190위·중간 vs BAL Z.Flowers 타깃 64 · 야드/타깃 34/190위·상위 · 캐리 1위 LAC O.Hampton 캐리 102 · 야드/캐리 51/72위·하위 vs BAL D.Henry 캐리 176 · 야드/캐리 39/72위·중간 · ★주전 Out/Doubtful LAC 0명 / BAL 1명 · 공식 비활성 미발표(🏥 줄) · 새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): 없음 · 관찰 각도(페이퍼): A6 LAC +4.5 · 로컬 페이퍼 관찰 있음(돈 아님): 관찰(큰 괴리 — 페이퍼)
+- 📌 **결론 재료(자동 — 10판 ML 전용 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: 이길 팀 BAL 66% ★★★(10판: 예상 점수·방향·스프레드/총점 판단은 쓰지 않는다 — ML 전용) · 스탯 격차 상위 3(32팀 순위 차 순): 턴오버(경기당 잃음): LAC 2.2 · 32위(하위) vs BAL 1.1 · 13위(중간) — 중대 · BAL 쪽 / 러시 공격(러시당 EPA): LAC -0.248 · 32위(하위) vs BAL -0.074 · 16위(중간) — 중대 · BAL 쪽 / 공격 효율(드라이브당 득점): LAC 1.27 · 32위(하위) vs BAL 1.92 · 18위(중간) — 경미 · BAL 쪽 · 선수 핵심: QB LAC J.Herbert (예상 선발) EPA 38/39위·하위 vs BAL Jacoby Brissett (예상 선발) 표본 적음 · 타깃 1위 LAC T.Harris 타깃 35 · 야드/타깃 89/190위·중간 vs BAL Z.Flowers 타깃 64 · 야드/타깃 34/190위·상위 · 캐리 1위 LAC O.Hampton 캐리 102 · 야드/캐리 51/72위·하위 vs BAL D.Henry 캐리 176 · 야드/캐리 39/72위·중간 · ★주전 Out/Doubtful LAC 0명 / BAL 1명 · 공식 비활성 미발표(🏥 줄) · 새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): 없음 · 관찰 각도(페이퍼): A6 LAC +4.5 · 로컬 페이퍼 관찰 있음(돈 아님): 관찰(큰 괴리 — 페이퍼)
 
 - 🤝 **맞대결(최근 3시즌 2023~ · 플레이오프 포함 · 값만 — 2006~25 직전 맞대결 진 팀 리턴매치 커버 51.5%, 우연 범위)**:
 
@@ -1019,7 +1019,7 @@
 | 러시(EPA) | LAC -0.248(32위) vs BAL -0.070(19위) | BAL -0.074(16위) vs LAC -0.062(20위) |
 | 러시 성공률 | LAC 35%(27위) vs BAL 42%(19위) | BAL 40%(18위) vs LAC 40%(16위) |
 | 색 비율(드롭백당) | LAC 10.5%(31위) vs BAL 5.2%(22위) | BAL 7.9%(24위) vs LAC 5.1%(25위) |
-| 턴오버/경기(공격 잃음 · 수비 뺏음) | LAC 2.2(32위) vs BAL 1.0(23위) | BAL 1.1(15위) vs LAC 1.4(12위) |
+| 턴오버/경기(공격 잃음 · 수비 뺏음) | LAC 2.2(32위) vs BAL 1.0(22위) | BAL 1.1(15위) vs LAC 1.4(11위) |
 | 3rd down 전환 | LAC 36%(29위) vs BAL 39%(13위) | BAL 39%(19위) vs LAC 35%(6위) |
 | 패스 보호 vs 압박(PFR) | LAC 피압박 10.0/경기(28위) vs BAL 압박 7.4/경기(28위) | BAL 피압박 7.9/경기(15위) vs LAC 압박 7.4/경기(29위) |
 | 핵심 선수(2026 점유율) | T.Harris 타깃 15%·EPA/타깃 +0.17 · Q.Johnston 타깃 13%·EPA/타깃 +0.30 · O.Hampton 캐리 51%·EPA/캐리 -0.29 | Z.Flowers 타깃 27%·EPA/타깃 +0.19 · M.Andrews 타깃 18%·EPA/타깃 -0.04 · D.Henry 캐리 74%·EPA/캐리 -0.11 |
@@ -1034,23 +1034,23 @@
 - 팀: **Pittsburgh Steelers**(피츠버그 스틸러스) @ **Cincinnati Bengals**(신시내티 벵골스) · 로고는 보드(Artifact)에서
 - 🔮 **예측**: 이길 팀 **CIN 63% ★★**(2018~25 이 별 적중 61%) · 예상 점수 **PIT 23.0 – CIN 26.5** (시장 배당 기준 — 가장 정확) · 점수 차 CIN 3.5 · 총점 49.5
     ↳ 우리 드라이브 모델(두 번째 의견 · 시장보다 덜 정확): PIT 20.5 – CIN 26.0 → CIN 66%
-- 🆕 직전 판(11-15 09:04) 대비 변동: 없음
+- 🆕 직전 판(11-15 11:42) 대비 변동: 없음
 
 - 시장(Draft Kings): 스프레드 홈 -3.5 · 총점 49.5 · ML PIT +160 / CIN -192 · nflverse 라인 3.5/49.5
-- 💵 가격(DK · 조회 11-15 11:43 PT): 스프레드 CIN -3.5 -110 / PIT +3.5 -110 · 총점 49.5 O -105 / U -115 · ML PIT +160 / CIN -192
+- 💵 가격(DK · 조회 11-15 11:56 PT): 스프레드 CIN -3.5 -110 / PIT +3.5 -110 · 총점 49.5 O -105 / U -115 · ML PIT +160 / CIN -192
     ↳ 무비그 확률(수수료 뺀 시장 확률): CIN 커버 50.0% / PIT 커버 50.0% · Over 48.9% / Under 51.1% · 승리 PIT 36.9% / CIN 63.1%
     ↳ 손익분기(지금 배당으로 이만큼 맞혀야 본전): CIN -3.5 52.4% · PIT +3.5 52.4% · Over 51.2% · Under 53.5% · PIT ML 38.5% · CIN ML 65.8%
     ↳ 개장 → 지금: 스프레드 CIN -3.5(-110) → -3.5(-110) · 총점 47.5(O -110) → 49.5(O -105) · ML CIN -192 → -192
-    ↳ Polymarket(사는 가격 · 조회 11:43 PT · 수수료 미반영): PIT ML 36c(+178) · CIN ML 65c(-186) · CIN -3.5 51c(-104) · PIT +3.5 50c(-100)
+    ↳ Polymarket(사는 가격 · 조회 11:56 PT · 수수료 미반영): PIT ML 36c(+178) · CIN ML 65c(-186) · CIN -3.5 51c(-104) · PIT +3.5 50c(-100)
     ↳ 쪽별 더 좋은 가격(같은 라인): PIT ML: Polymarket +178 · CIN ML: Polymarket -186 · CIN -3.5: Polymarket -104 · PIT +3.5: Polymarket -100
-    ↳ 라인 이력(우리 조회 시각): 11-12 15:59 CIN -3.5(-110) · 총점 49.5(O -108) | 11-15 08:35 CIN -3.5(-110) · 총점 49.5(O -105) | 11-15 08:51 CIN -3.5(-110) · 총점 49.5(O -105) | 11-15 09:04 CIN -3.5(-110) · 총점 49.5(O -105) | 11-15 11:41 CIN -3.5(-110) · 총점 49.5(O -105)
+    ↳ 라인 이력(우리 조회 시각): 11-12 15:59 CIN -3.5(-110) · 총점 49.5(O -108) | 11-15 08:51 CIN -3.5(-110) · 총점 49.5(O -105) | 11-15 09:04 CIN -3.5(-110) · 총점 49.5(O -105) | 11-15 11:41 CIN -3.5(-110) · 총점 49.5(O -105) | 11-15 11:55 CIN -3.5(-110) · 총점 49.5(O -105)
 - 레이팅: PIT 공격 +0.012(패 -0.008/러 +0.037) · 수비 -0.021(패 -0.001/러 -0.018) · 순마진 +2.0 · PF/PA 22.5/18.0
 - 레이팅: CIN 공격 +0.056(패 +0.064/러 +0.004) · 수비 +0.068(패 +0.087/러 +0.061) · 순마진 -0.7 · PF/PA 30.0/21.9
 - 모델: 홈 마진 -1.3 · 홈 승률 46.1% · 총점 53.1
 - 부상·QB PIT: 예상 QB Aaron Rodgers(시즌 주전 A.Rodgers) · Out 1 / Doubtful 0 / Questionable 1 — Out: Sebastian Joseph-Day(DL · 스냅 35% · IR) — Questionable: Derrick Harmon(DT)
 - 부상·QB CIN: 예상 QB Joe Burrow(시즌 주전 J.Burrow) · Out 3 / Doubtful 3 / Questionable 0 — Out: Kyle Dugger(S) · Erick All(TE · 스냅 28% · IR) · Cashius Howell(DL · 스냅 37% · IR) — Doubtful: Jalen Davis(CB) · Andrei Iosivas(WR) · Brian Parker II(G)
 - 🏥 결장 명단(ESPN): 공식 비활성 미발표(킥오프 90분 전 발표 — 그때 리프레시하면 이 줄이 채워진다) · 주간 보고 Out 기준 PIT Out 1 — Sebastian Joseph-Day(DL · 스냅 35% · IR · 주간 보고) / CIN Out 3 — Kyle Dugger(S · 직전 경기 0% · Quadriceps) · Erick All(TE · 스냅 28% · IR · 주간 보고) · Cashius Howell(DL · 스냅 37% · IR · 주간 보고)
-- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전 · 예측시장 이후 실측 기준): A8 PIT ML(+160) — 접전 .750+ 팀 ML(24~25 실제 68% vs 시장 57% · 18~23 0) · 2026 실시간 13-2 · PIT 한 포제션 경기 4-1(80%) ← ML 각도가 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
+- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전(A3·A11·A12 는 30픽) · 예측시장 이후 실측 기준): A8 PIT ML(+160) — 접전 .750+ 팀 ML(24~25 실제 68% vs 시장 57% · 18~23 0) · 2026 실시간 13-2 · PIT 한 포제션 경기 4-1(80%) ← ML 각도 A4·A5·A8 이 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
 - 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 · 괄호 = 2024~25 그 등급일 때 순위 높은 팀이 실제 이긴 비율와 시장이 준 확률(둘이 비슷 = 시장이 이미 반영) — 서술 전용, 확률·별점 영향 0)**:
 
 | 항목 | PIT | CIN | 뜻 | 격차(서술 전용 · 실측 승률/시장) | 2025 시즌(작년·참고) |
@@ -1208,7 +1208,7 @@
 | 러시(EPA) | PIT +0.119(1위) vs CIN -0.038(24위) | CIN -0.095(18위) vs PIT -0.161(4위) |
 | 러시 성공률 | PIT 45%(7위) vs CIN 36%(5위) | CIN 42%(13위) vs PIT 34%(1위) |
 | 색 비율(드롭백당) | PIT 7.3%(21위) vs CIN 7.3%(9위) | CIN 4.7%(8위) vs PIT 8.2%(4위) |
-| 턴오버/경기(공격 잃음 · 수비 뺏음) | PIT 1.0(10위) vs CIN 1.5(7위) | CIN 1.1(17위) vs PIT 1.5(5위) |
+| 턴오버/경기(공격 잃음 · 수비 뺏음) | PIT 1.0(10위) vs CIN 1.5(5위) | CIN 1.1(16위) vs PIT 1.5(7위) |
 | 3rd down 전환 | PIT 39%(15위) vs CIN 49%(28위) | CIN 56%(1위) vs PIT 35%(7위) |
 | 패스 보호 vs 압박(PFR) | PIT 피압박 7.9/경기(12위) vs CIN 압박 10.2/경기(6위) | CIN 피압박 9.5/경기(25위) vs PIT 압박 8.2/경기(21위) |
 | 핵심 선수(2026 점유율) | D.Metcalf 타깃 24%·EPA/타깃 -0.03 · G.Bernard 타깃 16%·EPA/타깃 -0.02 · J.Warren 캐리 66%·EPA/캐리 +0.13 | J.Chase 타깃 25%·EPA/타깃 +0.56 · T.Higgins 타깃 23%·EPA/타깃 +0.82 · C.Brown 캐리 64%·EPA/캐리 -0.15 |
@@ -1222,16 +1222,16 @@
 
 - 팀: **New England Patriots**(뉴잉글랜드 패트리어츠) @ **Detroit Lions**(디트로이트 라이언스) · 로고는 보드(Artifact)에서
     ↳ 우리 드라이브 모델(두 번째 의견 · 시장보다 덜 정확): NE 23.5 – DET 26.8 → DET 60%
-- 🆕 직전 판(11-15 09:04) 대비 변동: 없음
+- 🆕 직전 판(11-15 11:42) 대비 변동: 없음
 
 - 시장(DK): 스프레드 홈 -2.5 · 총점 50.5 · ML NE ? / DET ? · nflverse 라인 2.5/50.5
 - 레이팅: NE 공격 +0.088(패 +0.177/러 -0.001) · 수비 +0.004(패 +0.021/러 -0.041) · 순마진 +5.2 · PF/PA 23.4/23.0
 - 레이팅: DET 공격 +0.067(패 +0.136/러 -0.034) · 수비 +0.013(패 +0.030/러 -0.024) · 순마진 +3.3 · PF/PA 27.8/23.6
 - 모델: 홈 마진 -1.8 · 홈 승률 44.4% · 총점 56.6
-- 부상·QB NE: 예상 QB Drake Maye(시즌 주전 D.Maye) · Out 5 / Doubtful 0 / Questionable 7 — Out: Carlton Davis III(CB · ★스냅 75%) · Ben Brown(C · 스냅 53%) · TreVeyon Henderson(RB · 스냅 24%) · Brenden Schooler(S · 스냅 1% · 당일 비활성) · Walter Rouse(T · ★스냅 65% · 당일 비활성) — Questionable: Greg Van Roten(G) · Kevin Byard(S · ★스냅 95%) · A.J. Brown(WR · ★스냅 91%) · Reggie Gilliam(FB) · Rhamondre Stevenson(RB · ★스냅 69%) · Cameron Latu(TE · 스냅 10%) · Charles Woods(CB · 스냅 29%) · ★주전급(스냅 60%+) Out/Doubtful 2명
-- 부상·QB DET: 예상 QB Jared Goff(시즌 주전 J.Goff) · Out 5 / Doubtful 0 / Questionable 2 — Out: D.J. Reed(CB · ★스냅 85%) · Cade Mays(C · ★스냅 66%) · Kerby Joseph(S) · Jack Campbell(LB · ★스냅 88% · IR) · Jimmy Rolder(LB · 스냅 32% · IR) — Questionable: Amon-Ra St. Brown(WR · ★스냅 75%) · Sione Vaki(RB · 스냅 24%) · ★주전급(스냅 60%+) Out/Doubtful 3명
-- 🏥 결장 명단(ESPN 공식 비활성 · 발표 05:02 PT ∪ 주간 보고 Out): NE Out 7 — Brenden Schooler(S · 스냅 1% · 직전 경기 0% · Hamstring) · ★Walter Rouse(OL · 스냅 65% · 직전 경기 51% · Concussion · 발표 05:20) · Behren Morton(QB · 직전 경기 0% · 건강 제외) · Ben Brown(C · 스냅 53% · 직전 경기 49% · Knee) · Dametrious Crownover(OT · 직전 경기 0% · 건강 제외) · ★Carlton Davis III(CB · 스냅 75% · 직전 경기 53% · Knee · 발표 05:03) · TreVeyon Henderson(RB · 스냅 24% · 주간 보고) · 주중 Q/D → ESPN 출전 표시: Greg Van Roten(Q → Active 05:23), ★Kevin Byard(Q → Active 05:17), Reggie Gilliam(Q → Active 05:14), ★Rhamondre Stevenson(Q → Active 11-15), Cameron Latu(Q → Active 05:03), Charles Woods(Q → Active 05:19) · ⚠️ ★ 주중 Q/D 인데 ESPN 당일 명단에 없음: A.J. Brown(Q) — 출전 여부 미확인(ESPN 이 생략하는 경로 있음 · 웹 확인 필수 · 「명단에 없으니 출전」으로 읽지 말 것) / DET Out 9 — Mekhi Wingo(DT · 직전 경기 0% · 건강 제외) · Amen Ogbongbemiga(LB · 직전 경기 0% · 건강 제외) · ★D.J. Reed(CB · 스냅 85% · 직전 경기 0% · Hip · 발표 05:02) · Ahmed Hassanein(DE · 직전 경기 0% · 건강 제외) · ★Cade Mays(C · 스냅 66% · 직전 경기 0% · Ankle · 발표 05:02) · Keith Abney II(CB · 스냅 38% · 직전 경기 11% · 건강 제외) · Kerby Joseph(S · 직전 경기 0% · Knee) · Jack Campbell(LB · ★스냅 88% · IR · 주간 보고) · Jimmy Rolder(LB · 스냅 32% · IR · 주간 보고) · 주중 Q/D → ESPN 출전 표시: ★Amon-Ra St. Brown(Q → Active 05:03), Sione Vaki(Q → Active 11-15) · ★주전 결장 NE 2 / DET 3 — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · 팀별 발표 NE 05:03~05:23 / DET 05:02 PT · ESPN 명단은 팀당 최근 25건(리그 injuries)이라 ⚠️ 미확인 표시만 웹 확인
-- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전 · 예측시장 이후 실측 기준): A8 DET ML(-142) — 접전 .750+ 팀 ML(24~25 실제 68% vs 시장 57% · 18~23 0) · 2026 실시간 13-2 · DET 한 포제션 경기 4-1(80%) ← ML 각도가 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
+- 부상·QB NE: 예상 QB Drake Maye(시즌 주전 D.Maye) · Out 5 / Doubtful 0 / Questionable 7 — Out: Carlton Davis III(CB · ★스냅 75%) · Ben Brown(C · 스냅 53%) · TreVeyon Henderson(RB · 스냅 24%) · Brenden Schooler(S · 스냅 1% · 당일 비활성) · Walter Rouse(T · ★스냅 65% · 당일 비활성) — Questionable: Greg Van Roten(G) · Kevin Byard(S · ★스냅 95%) · A.J. Brown(WR · ★스냅 91%) · Reggie Gilliam(FB) · Rhamondre Stevenson(RB · ★스냅 69%) · Cameron Latu(TE · 스냅 10%) · Charles Woods(CB · 스냅 29%) · ★주전급(스냅 60%+) Out/Doubtful 2명 · ESPN 명단에만 Out 2: Behren Morton · Dametrious Crownover(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
+- 부상·QB DET: 예상 QB Jared Goff(시즌 주전 J.Goff) · Out 5 / Doubtful 0 / Questionable 2 — Out: D.J. Reed(CB · ★스냅 85%) · Cade Mays(C · ★스냅 66%) · Kerby Joseph(S) · Jack Campbell(LB · ★스냅 88% · IR) · Jimmy Rolder(LB · 스냅 32% · IR) — Questionable: Amon-Ra St. Brown(WR · ★스냅 75%) · Sione Vaki(RB · 스냅 24%) · ★주전급(스냅 60%+) Out/Doubtful 3명 · ESPN 명단에만 Out 4: Mekhi Wingo · Amen Ogbongbemiga · Ahmed Hassanein · Keith Abney II(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
+- 🏥 결장 명단(ESPN 공식 비활성 · 발표 05:02 PT ∪ 주간 보고 Out): NE Out 7 — Brenden Schooler(S · 스냅 1% · 직전 경기 0% · Hamstring) · ★Walter Rouse(OL · 스냅 65% · 직전 경기 51% · Concussion · 발표 05:20) · Behren Morton(QB · 직전 경기 0% · 건강 제외) · Ben Brown(C · 스냅 53% · 직전 경기 49% · Knee) · Dametrious Crownover(OT · 직전 경기 0% · 건강 제외) · ★Carlton Davis III(CB · 스냅 75% · 직전 경기 53% · Knee · 발표 05:03) · TreVeyon Henderson(RB · 스냅 24% · 주간 보고) · 주중 Q/D → ESPN 출전 표시: Greg Van Roten(Q → Active 05:23), ★Kevin Byard(Q → Active 05:17), Reggie Gilliam(Q → Active 05:14), ★Rhamondre Stevenson(Q → Active 11-15), Cameron Latu(Q → Active 05:03), Charles Woods(Q → Active 05:19) · ⚠️ ★ 주중 Q/D 인데 ESPN 당일 명단에 없음: A.J. Brown(Q) — 출전 여부 미확인(ESPN 이 생략하는 경로 있음 · 웹 확인 필수 · 「명단에 없으니 출전」으로 읽지 말 것) / DET Out 9 — Mekhi Wingo(DT · 직전 경기 0% · 건강 제외) · Amen Ogbongbemiga(LB · 직전 경기 0% · 건강 제외) · ★D.J. Reed(CB · 스냅 85% · 직전 경기 0% · Hip · 발표 05:02) · Ahmed Hassanein(DE · 직전 경기 0% · 건강 제외) · ★Cade Mays(C · 스냅 66% · 직전 경기 0% · Ankle · 발표 05:02) · Keith Abney II(CB · 스냅 38% · 직전 경기 11% · 건강 제외) · Kerby Joseph(S · 직전 경기 0% · Knee) · Jack Campbell(LB · ★스냅 88% · IR · 주간 보고) · Jimmy Rolder(LB · 스냅 32% · IR · 주간 보고) · 주중 Q/D → ESPN 출전 표시: ★Amon-Ra St. Brown(Q → Active 11-15), Sione Vaki(Q → Active 11-15) · ★주전 결장 NE 2 / DET 3 — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · 팀별 발표 NE 05:03~05:23 / DET 05:02 PT · ESPN 명단은 팀당 최근 25건(리그 injuries)이라 ⚠️ 미확인 표시만 웹 확인
+- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전(A3·A11·A12 는 30픽) · 예측시장 이후 실측 기준): A8 DET ML(-142) — 접전 .750+ 팀 ML(24~25 실제 68% vs 시장 57% · 18~23 0) · 2026 실시간 13-2 · DET 한 포제션 경기 4-1(80%) ← ML 각도 A4·A5·A8 이 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
 - 🌍 **국제·중립 경기**: FC Bayern Munich Stadium · 킥오프 06:30 PT(Sun 11-15 09:30 ET) · 홈 이점 0(모델 반영) · 양 팀 모두 원정·시차 — 2018~25 중립 경기 37: 페이버릿 ML 24-13(실제 65% vs 시장 63%) · ATS 19-18 · 언더 21-16 = 시장대로(축 아님) · **발행은 전날(토요일)** — 킥오프(런던 06:30 PT) 뒤 발행은 기록용(집계 제외)
 - 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 · 괄호 = 2024~25 그 등급일 때 순위 높은 팀이 실제 이긴 비율와 시장이 준 확률(둘이 비슷 = 시장이 이미 반영) — 서술 전용, 확률·별점 영향 0)**:
 
@@ -1384,14 +1384,14 @@
 | 러시(EPA) | NE -0.123(21위) vs DET -0.105(12위) | DET -0.048(13위) vs NE -0.105(13위) |
 | 러시 성공률 | NE 38%(20위) vs DET 36%(6위) | DET 47%(2위) vs NE 38%(11위) |
 | 색 비율(드롭백당) | NE 6.1%(17위) vs DET 7.6%(7위) | DET 6.4%(19위) vs NE 7.7%(5위) |
-| 턴오버/경기(공격 잃음 · 수비 뺏음) | NE 2.1(31위) vs DET 1.0(22위) | DET 0.6(2위) vs NE 0.9(26위) |
-| 3rd down 전환 | NE 43%(10위) vs DET 45%(26위) | DET 37%(23위) vs NE 38%(10위) |
+| 턴오버/경기(공격 잃음 · 수비 뺏음) | NE 2.1(31위) vs DET 1.0(23위) | DET 0.6(3위) vs NE 0.9(26위) |
+| 3rd down 전환 | NE 43%(10위) vs DET 45%(26위) | DET 37%(23위) vs NE 38%(11위) |
 | 패스 보호 vs 압박(PFR) | NE 피압박 8.7/경기(18위) vs DET 압박 11.8/경기(4위) | DET 피압박 7.4/경기(7위) vs NE 압박 8.6/경기(18위) |
 | 핵심 선수(2026 점유율) | D.Douglas 타깃 17%·EPA/타깃 +0.54 · H.Henry 타깃 14%·EPA/타깃 +0.60 ⚠️연습 Limited · R.Stevenson 캐리 47%·EPA/캐리 -0.05 ⚠️Q | A.St. Brown 타깃 32%·EPA/타깃 +0.28 ⚠️Q · S.LaPorta 타깃 18%·EPA/타깃 +0.68 · J.Gibbs 캐리 82%·EPA/캐리 -0.02 |
 
 - 패스 매치업(서술 — 점수 아님) NE 공격 → DET 수비: QB Drake Maye 투구 시간 3.16초 · CPOE +3.7 · 공격적 패스 12%(시도 272) · NE 공격 피압박 경기당 8.7(적은 순 18위) vs DET 수비 압박 경기당 11.8(리그 4위) (2025 경기당: DET 압박 9.2 · NE 피압박 7.8) · FTN: NE 플레이액션 21%(많은 순 23위) · 블리츠 받을 때 EPA/드롭백 +0.04(좋은 순 15위 · 98회) · 가로채기 위험 패스 4.2% · vs DET 블리츠 27%(많은 순 18위)
 - 패스 매치업(서술 — 점수 아님) DET 공격 → NE 수비: QB Jared Goff 투구 시간 2.84초 · CPOE +0.8 · 공격적 패스 17%(시도 273) · DET 공격 피압박 경기당 7.4(적은 순 7위) vs NE 수비 압박 경기당 8.6(리그 18위) (2025 경기당: NE 압박 7.1 · DET 피압박 9.4) · FTN: DET 플레이액션 31%(많은 순 4위) · 블리츠 받을 때 EPA/드롭백 +0.23(좋은 순 3위 · 107회) · 가로채기 위험 패스 1.7% · vs NE 블리츠 37%(많은 순 8위)
-- 라인 이동: 스프레드(홈) -2.5 →  · 총점 51.5 →  (11-12 15:59 → 11-15 11:41) — 정보(뉴스 반영), 방향 근거 아님
+- 라인 이동: 스프레드(홈) -2.5 →  · 총점 51.5 →  (11-12 15:59 → 11-15 11:55) — 정보(뉴스 반영), 방향 근거 아님
 - 맥락(값만 — N5): 휴식 NE 7일 / DET 7일 · 날씨 예보 없음 · 지붕 dome
 - 리스크: 중립 구장 — 홈 이점 0 · 〔직접 서술 — 값만, 단정 금지〕
 
@@ -1399,16 +1399,16 @@
 
 - 팀: **Washington Commanders**(워싱턴 커맨더스) @ **New York Giants**(뉴욕 자이언츠) · 로고는 보드(Artifact)에서
     ↳ 우리 드라이브 모델(두 번째 의견 · 시장보다 덜 정확): WAS 19.2 – NYG 23.5 → NYG 63%
-- 🆕 직전 판(11-15 09:04) 대비 변동: 없음
+- 🆕 직전 판(11-15 11:42) 대비 변동: 없음
 
 - 시장(DK): 스프레드 홈 -1.5 · 총점 40.5 · ML WAS ? / NYG ? · nflverse 라인 1.5/40.5
 - 레이팅: WAS 공격 -0.011(패 -0.014/러 +0.005) · 수비 +0.067(패 +0.102/러 +0.050) · 순마진 -4.8 · PF/PA 21.5/25.2
 - 레이팅: NYG 공격 +0.007(패 +0.009/러 +0.008) · 수비 +0.018(패 -0.011/러 +0.094) · 순마진 -0.7 · PF/PA 22.8/21.5
 - 모델: 홈 마진 5.6 · 홈 승률 66.8% · 총점 51.1
-- 부상·QB WAS: 예상 QB Jayden Daniels(시즌 주전 J.Daniels) · Out 4 / Doubtful 0 / Questionable 0 — Out: Lucas Patrick(C · ★스냅 72%) · Colson Yankoff(TE · 스냅 6%) · Jeremy McNichols(RB · 스냅 20% · IR) · Dyami Brown(WR · 스냅 25% · IR) · ★주전급(스냅 60%+) Out/Doubtful 1명
-- 부상·QB NYG: 예상 QB J.J. McCarthy(시즌 주전 J.Winston) · ⓘ 주전 복귀 — 시즌 드롭백 최다 J.Winston, 예상 선발 J.J. McCarthy(레이팅에 대체 QB 표본 섞임) · Out 2 / Doubtful 0 / Questionable 0 — Out: Tyrone Tracy Jr.(RB · 스냅 15% · IR) · Malik Harrison(LB · 스냅 4% · 당일 비활성)
+- 부상·QB WAS: 예상 QB Jayden Daniels(시즌 주전 J.Daniels) · Out 4 / Doubtful 0 / Questionable 0 — Out: Lucas Patrick(C · ★스냅 72%) · Colson Yankoff(TE · 스냅 6%) · Jeremy McNichols(RB · 스냅 20% · IR) · Dyami Brown(WR · 스냅 25% · IR) · ★주전급(스냅 60%+) Out/Doubtful 1명 · ESPN 명단에만 Out 4: Athan Kaliakmanis · Isaac Yiadom · Tanoa Togiai · Ricky Barber(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
+- 부상·QB NYG: 예상 QB J.J. McCarthy(시즌 주전 J.Winston) · ⓘ 주전 복귀 — 시즌 드롭백 최다 J.Winston, 예상 선발 J.J. McCarthy(레이팅에 대체 QB 표본 섞임) · Out 2 / Doubtful 0 / Questionable 0 — Out: Tyrone Tracy Jr.(RB · 스냅 15% · IR) · Malik Harrison(LB · 스냅 4% · 당일 비활성) · ESPN 명단에만 Out 6: Nikko Reed · Josh Sills · CJ Okoye · J.C. Davis · Thomas Fidone II · Paulson Adebo(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
 - 🏥 결장 명단(ESPN 공식 비활성 · 발표 15:47 PT ∪ 주간 보고 Out): WAS Out 8 — Athan Kaliakmanis(QB · 직전 경기 0% · 건강 제외) · Isaac Yiadom(CB · 직전 경기 0% · 건강 제외) · Tanoa Togiai(G · 직전 경기 0% · 건강 제외) · Ricky Barber(DT · 스냅 20% · 직전 경기 0% · 건강 제외) · ★Lucas Patrick(G · 스냅 72% · 직전 경기 0% · Concussion) · Colson Yankoff(TE · 스냅 6% · 직전 경기 0% · Knee) · Jeremy McNichols(RB · 스냅 20% · IR · 주간 보고) · Dyami Brown(WR · 스냅 25% · IR · 주간 보고) / NYG Out 8 — Malik Harrison(LB · 스냅 4% · 직전 경기 0% · Groin) · Nikko Reed(CB · 직전 경기 0% · 건강 제외) · Josh Sills(G · 직전 경기 0% · 건강 제외) · CJ Okoye(DT · 스냅 15% · 직전 경기 0% · 건강 제외) · J.C. Davis(OT · 스냅 1% · 직전 경기 0% · 건강 제외) · Thomas Fidone II(TE · 스냅 11% · 직전 경기 0% · 건강 제외) · ★Paulson Adebo(CB · 스냅 100% · 직전 경기 0% · 건강 제외 · 발표 15:53 · 대체 출전 표본(직전 경기 미출전·부상 보고 없음 — ★주전 결장 수·새 정보에서 제외)) · Tyrone Tracy Jr.(RB · 스냅 15% · IR · 주간 보고) · ★주전 결장 WAS 1 / NYG 0 — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · 팀별 발표 WAS 15:47~15:59 / NYG 15:53~16:04 PT · ESPN 명단은 팀당 최근 25건(리그 injuries)이라 ⚠️ 미확인 표시만 웹 확인
-- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전 · 예측시장 이후 실측 기준): A8 NYG ML(-125) — 접전 .750+ 팀 ML(24~25 실제 68% vs 시장 57% · 18~23 0) · 2026 실시간 13-2 · NYG 한 포제션 경기 4-1(80%) / A11 Under 40.5 — 경기 당일 비·뇌우 실외 Under(18~25 n77 총점 −3.9점 · 표본 적어 방향만) · 2026 실시간 1-0 · 경기 당일 날씨 「Rain」 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 — 75건 중 겹침 14 · 상충 1경기 제외) ← ML 각도가 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
+- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전(A3·A11·A12 는 30픽) · 예측시장 이후 실측 기준): A8 NYG ML(-125) — 접전 .750+ 팀 ML(24~25 실제 68% vs 시장 57% · 18~23 0) · 2026 실시간 13-2 · NYG 한 포제션 경기 4-1(80%) / A11 Under 40.5 — 경기 당일 비·뇌우 실외 Under(18~25 n77 총점 −3.9점 · 표본 적어 방향만) · 2026 실시간 1-0 · 경기 당일 날씨 「Rain」 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 — 75건 중 겹침 14 · 상충 1경기 제외) ← ML 각도 A4·A5·A8 이 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄 · A11·A12 는 서술 전용(점수 0 · 30픽 판정 전 — 소액 관심 근거 아님 · 「변수」·정리 줄에만)
 - 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 · 괄호 = 2024~25 그 등급일 때 순위 높은 팀이 실제 이긴 비율와 시장이 준 확률(둘이 비슷 = 시장이 이미 반영) — 서술 전용, 확률·별점 영향 0)**:
 
 | 항목 | WAS | NYG | 뜻 | 격차(서술 전용 · 실측 승률/시장) | 2025 시즌(작년·참고) |
@@ -1482,7 +1482,7 @@
 
   ↳ 읽는 법: 압박·색은 상대 OL·QB 색 허용률(선수 표)과 맞춰 보고, 커버리지 「타깃→허용」은 많이 노려진 CB 를 뜻한다(허용 수가 많다고 나쁜 것은 아님 — 야드/타깃이 기준). 놓친 태클은 상대 RB 야드/캐리와 함께. 전부 서술 재료 — 2018~25 백테스트에서 시장을 못 이겼고, 색률 상위 8 수비는 오히려 시장이 과대평가(A10 관찰).
 
-- 📌 **결론 재료(자동 — 10판 ML 전용 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: 스탯 격차 상위 3(32팀 순위 차 순): 3rd down 전환(공격): WAS 31% · 32위(하위) vs NYG 42% · 13위(중간) — 중대 · NYG 쪽 / 턴오버(경기당 잃음): WAS 0.6 · 2위(상위) vs NYG 1.2 · 19위(중간) — 중대 · WAS 쪽 / 상대 득점 드라이브 허용: WAS 41% · 20위(중간) vs NYG 31% · 5위(상위) — 경미 · NYG 쪽 · 선수 핵심: QB WAS J.Daniels (예상 선발) EPA 22/39위·중간 vs NYG J.Winston EPA 29/39위·하위 · 타깃 1위 WAS S.Diggs 타깃 49 · 야드/타깃 123/190위·중간 vs NYG M.Nabers 타깃 79 · 야드/타깃 68/190위·중간 · 캐리 1위 WAS J.Croskey-Merritt 캐리 67 · 야드/캐리 53/72위·하위 vs NYG C.Skattebo 캐리 98 · 야드/캐리 26/72위·중간 · ★주전 Out/Doubtful WAS 1명 / NYG 0명 · 공식 비활성(ESPN 15:47 PT 발표): ★주전 WAS 1 / NYG 0 — 🏥 줄 그대로 · 새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): 없음 · 관찰 각도(페이퍼): A8 NYG ML(-125) / A11 Under 40.5 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 · 로컬 페이퍼 관찰 있음(돈 아님): 관찰(큰 괴리 — 페이퍼) · 관찰(큰 괴리 — 페이퍼)
+- 📌 **결론 재료(자동 — 10판 ML 전용 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: 스탯 격차 상위 3(32팀 순위 차 순): 3rd down 전환(공격): WAS 31% · 32위(하위) vs NYG 42% · 13위(중간) — 중대 · NYG 쪽 / 턴오버(경기당 잃음): WAS 0.6 · 2위(상위) vs NYG 1.2 · 19위(중간) — 중대 · WAS 쪽 / 상대 득점 드라이브 허용: WAS 41% · 20위(중간) vs NYG 31% · 5위(상위) — 경미 · NYG 쪽 · 선수 핵심: QB WAS J.Daniels (예상 선발) EPA 22/39위·중간 vs NYG J.McCarthy (예상 선발) EPA 13/39위·중간 · 타깃 1위 WAS S.Diggs 타깃 49 · 야드/타깃 123/190위·중간 vs NYG M.Nabers 타깃 79 · 야드/타깃 68/190위·중간 · 캐리 1위 WAS J.Croskey-Merritt 캐리 67 · 야드/캐리 53/72위·하위 vs NYG C.Skattebo 캐리 98 · 야드/캐리 26/72위·중간 · ★주전 Out/Doubtful WAS 1명 / NYG 0명 · 공식 비활성(ESPN 15:47 PT 발표): ★주전 WAS 1 / NYG 0 — 🏥 줄 그대로 · 새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): 없음 · 관찰 각도(페이퍼): A8 NYG ML(-125) / A11 Under 40.5 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 · 로컬 페이퍼 관찰 있음(돈 아님): 관찰(큰 괴리 — 페이퍼) · 관찰(큰 괴리 — 페이퍼)
 
 - 🤝 **맞대결(최근 3시즌 2023~ · 플레이오프 포함 · 값만 — 2006~25 직전 맞대결 진 팀 리턴매치 커버 51.5%, 우연 범위)**:
 
@@ -1569,14 +1569,14 @@
 | 러시(EPA) | WAS -0.131(23위) vs NYG -0.087(14위) | NYG -0.109(19위) vs WAS -0.060(23위) |
 | 러시 성공률 | WAS 37%(21위) vs NYG 40%(13위) | NYG 36%(22위) vs WAS 46%(31위) |
 | 색 비율(드롭백당) | WAS 6.4%(20위) vs NYG 5.5%(19위) | NYG 8.9%(27위) vs WAS 5.1%(24위) |
-| 턴오버/경기(공격 잃음 · 수비 뺏음) | WAS 0.6(3위) vs NYG 1.1(18위) | NYG 1.2(22위) vs WAS 1.5(9위) |
+| 턴오버/경기(공격 잃음 · 수비 뺏음) | WAS 0.6(2위) vs NYG 1.1(17위) | NYG 1.2(20위) vs WAS 1.5(6위) |
 | 3rd down 전환 | WAS 31%(32위) vs NYG 38%(12위) | NYG 42%(13위) vs WAS 41%(18위) |
 | 패스 보호 vs 압박(PFR) | WAS 피압박 9.9/경기(27위) vs NYG 압박 7.1/경기(30위) | NYG 피압박 7.9/경기(13위) vs WAS 압박 10.2/경기(7위) |
 | 핵심 선수(2026 점유율) | S.Diggs 타깃 20%·EPA/타깃 +0.21 · A.Williams 타깃 16%·EPA/타깃 +0.21 · J.Croskey-Merritt 캐리 38%·EPA/캐리 -0.10 | M.Nabers 타깃 30%·EPA/타깃 +0.22 · I.Likely 타깃 27%·EPA/타깃 +0.26 · C.Skattebo 캐리 46%·EPA/캐리 -0.11 |
 
 - 패스 매치업(서술 — 점수 아님) WAS 공격 → NYG 수비: QB Jayden Daniels 투구 시간 2.78초 · CPOE +1.4 · 공격적 패스 13%(시도 213) · WAS 공격 피압박 경기당 9.9(적은 순 27위) vs NYG 수비 압박 경기당 7.1(리그 30위) (2025 경기당: NYG 압박 8.4 · WAS 피압박 6.1) · FTN: WAS 플레이액션 21%(많은 순 22위) · 블리츠 받을 때 EPA/드롭백 +0.06(좋은 순 14위 · 116회) · 가로채기 위험 패스 2.3% · vs NYG 블리츠 41%(많은 순 4위)
 - 패스 매치업(서술 — 점수 아님) NYG 공격 → WAS 수비: QB J.J. McCarthy 투구 시간 2.76초 · CPOE +4.0 · 공격적 패스 14%(시도 104) · NYG 공격 피압박 경기당 7.9(적은 순 13위) vs WAS 수비 압박 경기당 10.2(리그 7위) (2025 경기당: WAS 압박 7.5 · NYG 피압박 9.1) · FTN: NYG 플레이액션 20%(많은 순 24위) · 블리츠 받을 때 EPA/드롭백 -0.01(좋은 순 19위 · 117회) · 가로채기 위험 패스 3.8% · vs WAS 블리츠 42%(많은 순 3위)
-- 라인 이동: 스프레드(홈) -1.5 →  · 총점 40.5 →  (11-12 15:59 → 11-15 11:41) — 정보(뉴스 반영), 방향 근거 아님
+- 라인 이동: 스프레드(홈) -1.5 →  · 총점 40.5 →  (11-12 15:59 → 11-15 11:55) — 정보(뉴스 반영), 방향 근거 아님
 - 맥락(값만 — N5): 휴식 WAS 4일 / NYG 4일 · 날씨 예보 없음 · 지붕 outdoors · ⚠️ 목요일 경기(짧은 휴식)
 - 리스크: NYG 주전 복귀 — 시즌 드롭백 최다 J.Winston, 예상 선발 J.J. McCarthy(레이팅에 대체 QB 표본 섞임) · 〔직접 서술 — 값만, 단정 금지〕
 
@@ -1584,14 +1584,14 @@
 
 - 팀: **Kansas City Chiefs**(캔자스시티 치프스) @ **Atlanta Falcons**(애틀랜타 팰컨스) · 로고는 보드(Artifact)에서
     ↳ 우리 드라이브 모델(두 번째 의견 · 시장보다 덜 정확): KC 24.0 – ATL 20.4 → KC 61%
-- 🆕 직전 판(11-15 09:04) 대비 변동: ML -175/+145 → ?/?
+- 🆕 직전 판(11-15 11:42) 대비 변동: 없음
 
 - 시장(DK): 스프레드 홈 3.0 · 총점 47.5 · ML KC ? / ATL ? · nflverse 라인 -3/47.5
 - 레이팅: KC 공격 +0.059(패 +0.056/러 +0.033) · 수비 -0.034(패 -0.008/러 -0.048) · 순마진 +5.8 · PF/PA 25.2/17.9
 - 레이팅: ATL 공격 -0.035(패 -0.041/러 -0.014) · 수비 +0.006(패 +0.004/러 +0.006) · 순마진 -2.6 · PF/PA 20.9/24.8
 - 모델: 홈 마진 -6.9 · 홈 승률 29.9% · 총점 45.8
-- 부상·QB KC: 예상 QB Patrick Mahomes(시즌 주전 P.Mahomes) · Out 6 / Doubtful 0 / Questionable 1 — Out: Jaylon Moore(T · ★스냅 82%) · Omarr Norman-Lott(DT) · Peter Woods(DT · 스냅 26%) · L'Jarius Sneed(DB · 스냅 20% · IR) · Kenneth Walker III(RB · ★스냅 73% · 당일 비활성) · Jaydn Ott(RB · 스냅 6% · 당일 비활성) — Questionable: Mansoor Delane(CB · ★스냅 100%) · ★주전급(스냅 60%+) Out/Doubtful 2명
-- 부상·QB ATL: 예상 QB Michael Penix Jr.(시즌 주전 M.Penix) · Out 3 / Doubtful 0 / Questionable 3 — Out: Zachariah Branch(WR · 스냅 22%) · Samson Ebukam(DL · 스냅 24% · IR) · Divine Deablo(LB · 스냅 53% · 당일 비활성) — Questionable: Josh Woods(LB · 스냅 26%) · Gervon Dexter Sr.(DT · ★스냅 60%) · James Pearce Jr.(DE · 스냅 26%)
+- 부상·QB KC: 예상 QB Patrick Mahomes(시즌 주전 P.Mahomes) · Out 6 / Doubtful 0 / Questionable 1 — Out: Jaylon Moore(T · ★스냅 82%) · Omarr Norman-Lott(DT) · Peter Woods(DT · 스냅 26%) · L'Jarius Sneed(DB · 스냅 20% · IR) · Kenneth Walker III(RB · ★스냅 73% · 당일 비활성) · Jaydn Ott(RB · 스냅 6% · 당일 비활성) — Questionable: Mansoor Delane(CB · ★스냅 100%) · ★주전급(스냅 60%+) Out/Doubtful 2명 · ESPN 명단에만 Out 3: Garrett Nussmeier · Ben VanSumeren · Melvin Smith Jr.(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
+- 부상·QB ATL: 예상 QB Michael Penix Jr.(시즌 주전 M.Penix) · Out 3 / Doubtful 0 / Questionable 3 — Out: Zachariah Branch(WR · 스냅 22%) · Samson Ebukam(DL · 스냅 24% · IR) · Divine Deablo(LB · 스냅 53% · 당일 비활성) — Questionable: Josh Woods(LB · 스냅 26%) · Gervon Dexter Sr.(DT · ★스냅 60%) · James Pearce Jr.(DE · 스냅 26%) · ESPN 명단에만 Out 5: Andy Dalton · Avieon Terrell · Cameron Williams · Jack Strand · Robert Longerbeam(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
 - 🏥 결장 명단(ESPN 공식 비활성 · 발표 08:21 PT ∪ 주간 보고 Out): KC Out 9 — Garrett Nussmeier(QB · 직전 경기 0% · 건강 제외) · Jaydn Ott(RB · 스냅 6% · 직전 경기 6% · Hamstring) · Peter Woods(DT · 스냅 26% · 직전 경기 0% · Neck) · Ben VanSumeren(FB · 직전 경기 0% · 건강 제외) · ★Jaylon Moore(OT · 스냅 82% · 직전 경기 64% · Ankle · 발표 08:46) · Melvin Smith Jr.(CB · 직전 경기 0% · 건강 제외) · ★Kenneth Walker III(RB · 스냅 73% · 직전 경기 65% · Groin · 발표 08:21) · Omarr Norman-Lott(DT · 주간 보고) · L'Jarius Sneed(DB · 스냅 20% · IR · 주간 보고) · 주중 Q/D → ESPN 출전 표시: ★Mansoor Delane(Q → Active 08:52) / ATL Out 8 — Andy Dalton(QB · 직전 경기 0% · 건강 제외) · Avieon Terrell(CB · 스냅 18% · 직전 경기 18% · 건강 제외) · Cameron Williams(OL · 직전 경기 0% · 건강 제외) · Jack Strand(QB · 직전 경기 0% · 건강 제외) · Robert Longerbeam(CB · 직전 경기 0% · 건강 제외) · Zachariah Branch(WR · 스냅 22% · 직전 경기 0% · Hamstring) · Divine Deablo(LB · 스냅 53% · 직전 경기 53% · Forearm) · Samson Ebukam(DL · 스냅 24% · IR · 주간 보고) · 주중 Q/D → ESPN 출전 표시: Josh Woods(Q → Active 08:34), ★Gervon Dexter Sr.(Q → Active 08:34), James Pearce Jr.(Q → Active 08:34) · ★주전 결장 KC 2 / ATL 0 — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · 팀별 발표 KC 08:21~08:54 / ATL 08:34~08:45 PT · ESPN 명단은 팀당 최근 25건(리그 injuries)이라 ⚠️ 미확인 표시만 웹 확인
 - 🔎 관찰 각도(페이퍼 · 돈 아님): 해당 없음
 - 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 · 괄호 = 2024~25 그 등급일 때 순위 높은 팀이 실제 이긴 비율와 시장이 준 확률(둘이 비슷 = 시장이 이미 반영) — 서술 전용, 확률·별점 영향 0)**:
@@ -1746,14 +1746,14 @@
 | 러시(EPA) | KC +0.093(2위) vs ATL -0.060(21위) | ATL -0.000(8위) vs KC -0.156(6위) |
 | 러시 성공률 | KC 47%(4위) vs ATL 43%(25위) | ATL 44%(10위) vs KC 36%(8위) |
 | 색 비율(드롭백당) | KC 3.8%(6위) vs ATL 5.8%(18위) | ATL 5.6%(12위) vs KC 4.6%(31위) |
-| 턴오버/경기(공격 잃음 · 수비 뺏음) | KC 0.8(6위) vs ATL 1.1(21위) | ATL 1.7(28위) vs KC 1.2(14위) |
-| 3rd down 전환 | KC 42%(12위) vs ATL 43%(23위) | ATL 36%(27위) vs KC 38%(11위) |
+| 턴오버/경기(공격 잃음 · 수비 뺏음) | KC 0.8(5위) vs ATL 1.1(21위) | ATL 1.7(28위) vs KC 1.2(14위) |
+| 3rd down 전환 | KC 42%(12위) vs ATL 43%(23위) | ATL 36%(27위) vs KC 38%(10위) |
 | 패스 보호 vs 압박(PFR) | KC 피압박 7.6/경기(11위) vs ATL 압박 9.6/경기(12위) | ATL 피압박 4.7/경기(1위) vs KC 압박 7.6/경기(26위) |
 | 핵심 선수(2026 점유율) | T.Kelce 타깃 19%·EPA/타깃 +0.54 · X.Worthy 타깃 19%·EPA/타깃 +0.01 · K.Walker 캐리 82%·EPA/캐리 +0.08 ⚠️Out | D.London 타깃 28%·EPA/타깃 +0.47 · K.Pitts 타깃 15%·EPA/타깃 +0.02 · Bi.Robinson 캐리 63%·EPA/캐리 -0.03 |
 
 - 패스 매치업(서술 — 점수 아님) KC 공격 → ATL 수비: QB Patrick Mahomes 투구 시간 2.72초 · CPOE -1.0 · 공격적 패스 7%(시도 263) · KC 공격 피압박 경기당 7.6(적은 순 11위) vs ATL 수비 압박 경기당 9.6(리그 12위) (2025 경기당: ATL 압박 9.2 · KC 피압박 9.1) · FTN: KC 플레이액션 31%(많은 순 3위) · 블리츠 받을 때 EPA/드롭백 +0.16(좋은 순 4위 · 84회) · 가로채기 위험 패스 2.1% · vs ATL 블리츠 26%(많은 순 23위)
 - 패스 매치업(서술 — 점수 아님) ATL 공격 → KC 수비: QB Michael Penix Jr. 투구 시간 2.62초 · CPOE -3.1 · 공격적 패스 15%(시도 199) · ATL 공격 피압박 경기당 4.7(적은 순 1위) vs KC 수비 압박 경기당 7.6(리그 26위) (2025 경기당: KC 압박 7.9 · ATL 피압박 6.7) · FTN: ATL 플레이액션 21%(많은 순 21위) · 블리츠 받을 때 EPA/드롭백 -0.09(좋은 순 22위 · 105회) · 가로채기 위험 패스 5.2% · vs KC 블리츠 27%(많은 순 20위)
-- 라인 이동: 스프레드(홈) 3.0 →  · 총점 46.5 →  (11-12 15:59 → 11-15 11:41) — 정보(뉴스 반영), 방향 근거 아님
+- 라인 이동: 스프레드(홈) 3.0 →  · 총점 46.5 →  (11-12 15:59 → 11-15 11:55) — 정보(뉴스 반영), 방향 근거 아님
 - 맥락(값만 — N5): 휴식 KC 7일 / ATL 7일 · 날씨 1 55°F · 지붕 indoor
 - 리스크: 자동 항목 없음 · 〔직접 서술 — 값만, 단정 금지〕
 
@@ -1761,14 +1761,14 @@
 
 - 팀: **Houston Texans**(휴스턴 텍선스) @ **Cleveland Browns**(클리블랜드 브라운스) · 로고는 보드(Artifact)에서
     ↳ 우리 드라이브 모델(두 번째 의견 · 시장보다 덜 정확): HOU 23.1 – CLE 20.1 → HOU 59%
-- 🆕 직전 판(11-15 09:04) 대비 변동: ML -198/+164 → ?/?
+- 🆕 직전 판(11-15 11:42) 대비 변동: 없음
 
 - 시장(DK): 스프레드 홈 4.5 · 총점 40.5 · ML HOU ? / CLE ? · nflverse 라인 -4.5/40.5
 - 레이팅: HOU 공격 +0.024(패 +0.067/러 -0.059) · 수비 -0.060(패 -0.089/러 -0.040) · 순마진 +5.3 · PF/PA 26.1/24.0
 - 레이팅: CLE 공격 -0.116(패 -0.159/러 -0.059) · 수비 -0.050(패 -0.087/러 -0.021) · 순마진 -4.1 · PF/PA 17.9/21.8
 - 모델: 홈 마진 -7.9 · 홈 승률 27.2% · 총점 33.5
 - 부상·QB HOU: 예상 QB C.J. Stroud(시즌 주전 C.Stroud) · Out 8 / Doubtful 0 / Questionable 4 — Out: Danielle Hunter(DE · ★스냅 72%) · Azeez Al-Shaair(LB · ★스냅 93%) · Brevin Jordan(TE · 스냅 7%) · Marvin Harrison Jr.(WR · 스냅 29%) · Keylan Rutledge(G · ★스냅 100%) · Jaylin Noel(WR · 스냅 40% · IR) · Wyatt Teller(G · 당일 비활성) · David Montgomery(RB · 당일 비활성) — Questionable: Trent Brown(T · ★스냅 100%) · Jacob Hummel(LB) · Will Anderson Jr.(DE · ★스냅 74%) · Jaylin Smith(CB) · ★주전급(스냅 60%+) Out/Doubtful 3명
-- 부상·QB CLE: 예상 QB Deshaun Watson(시즌 주전 D.Watson) · Out 2 / Doubtful 0 / Questionable 1 — Out: Michael Burton(FB · 스냅 14%) · Ronnie Hickman Jr.(S · ★스냅 98%) — Questionable: Denzel Boston(WR · ★스냅 88%) · ★주전급(스냅 60%+) Out/Doubtful 1명
+- 부상·QB CLE: 예상 QB Deshaun Watson(시즌 주전 D.Watson) · Out 2 / Doubtful 0 / Questionable 1 — Out: Michael Burton(FB · 스냅 14%) · Ronnie Hickman Jr.(S · ★스냅 98%) — Questionable: Denzel Boston(WR · ★스냅 88%) · ★주전급(스냅 60%+) Out/Doubtful 1명 · ESPN 명단에만 Out 5: Dillon Gabriel · Noah Igbinoghene · Justin Jefferson · Parker Brailsford · Taylen Green(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
 - 🏥 결장 명단(ESPN 공식 비활성 · 발표 08:32 PT ∪ 주간 보고 Out): HOU Out 8 — Wyatt Teller(G · 직전 경기 0% · Illness) · ★Keylan Rutledge(G · 스냅 100% · 직전 경기 100% · Neck · 발표 08:37) · Marvin Harrison Jr.(WR · 스냅 29% · 직전 경기 46% · Hamstring) · ★Danielle Hunter(DE · 스냅 72% · 직전 경기 65% · Hamstring · 발표 08:37) · Brevin Jordan(TE · 스냅 7% · 직전 경기 11% · Finger) · ★Azeez Al-Shaair(LB · 스냅 93% · 직전 경기 96% · Groin · 발표 08:37) · David Montgomery(RB · 직전 경기 0% · Groin) · Jaylin Noel(WR · 스냅 40% · IR · 주간 보고) · 주중 Q/D → ESPN 출전 표시: ★Trent Brown(Q → Active 08:37), ★Will Anderson Jr.(Q → Active 08:49) / CLE Out 7 — Dillon Gabriel(QB · 직전 경기 0% · 건강 제외) · ★Ronnie Hickman(S · 스냅 98% · 직전 경기 99% · Concussion · 발표 08:32) · Noah Igbinoghene(CB · 직전 경기 0% · 건강 제외) · Justin Jefferson(LB · 직전 경기 0% · 건강 제외) · Parker Brailsford(C · 직전 경기 0% · 건강 제외) · Taylen Green(QB · 직전 경기 0% · 건강 제외) · Michael Burton(FB · 스냅 14% · 주간 보고) · 주중 Q/D → ESPN 출전 표시: ★Denzel Boston(Q → Active 08:34) · ★주전 결장 HOU 3 / CLE 1 — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · 팀별 발표 HOU 08:37~09:26 / CLE 08:32~08:38 PT · ESPN 명단은 팀당 최근 25건(리그 injuries)이라 ⚠️ 미확인 표시만 웹 확인
 - 🔎 관찰 각도(페이퍼 · 돈 아님): 해당 없음
 - 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 · 괄호 = 2024~25 그 등급일 때 순위 높은 팀이 실제 이긴 비율와 시장이 준 확률(둘이 비슷 = 시장이 이미 반영) — 서술 전용, 확률·별점 영향 0)**:
@@ -1931,7 +1931,7 @@
 
 - 패스 매치업(서술 — 점수 아님) HOU 공격 → CLE 수비: QB C.J. Stroud 투구 시간 2.86초 · CPOE +5.9 · 공격적 패스 19%(시도 282) · HOU 공격 피압박 경기당 7.6(적은 순 10위) vs CLE 수비 압박 경기당 8.4(리그 20위) (2025 경기당: CLE 압박 9.3 · HOU 피압박 7.8) · FTN: HOU 플레이액션 20%(많은 순 25위) · 블리츠 받을 때 EPA/드롭백 +0.38(좋은 순 1위 · 75회) · 가로채기 위험 패스 1.3% · vs CLE 블리츠 24%(많은 순 28위)
 - 패스 매치업(서술 — 점수 아님) CLE 공격 → HOU 수비: QB Deshaun Watson 투구 시간 2.82초 · CPOE -4.0 · 공격적 패스 13%(시도 249) · CLE 공격 피압박 경기당 10.2(적은 순 29위) vs HOU 수비 압박 경기당 10.6(리그 5위) (2025 경기당: HOU 압박 8.2 · CLE 피압박 11.2) · FTN: CLE 플레이액션 17%(많은 순 28위) · 블리츠 받을 때 EPA/드롭백 -0.09(좋은 순 23위 · 124회) · 가로채기 위험 패스 1.7% · vs HOU 블리츠 25%(많은 순 24위)
-- 라인 이동: 스프레드(홈) 4.5 →  · 총점 40.5 →  (11-12 15:59 → 11-15 11:41) — 정보(뉴스 반영), 방향 근거 아님
+- 라인 이동: 스프레드(홈) 4.5 →  · 총점 40.5 →  (11-12 15:59 → 11-15 11:55) — 정보(뉴스 반영), 방향 근거 아님
 - 맥락(값만 — N5): 휴식 HOU 7일 / CLE 7일 · 날씨 7 47°F · 지붕 outdoors
 - 리스크: 자동 항목 없음 · 〔직접 서술 — 값만, 단정 금지〕
 
@@ -1940,23 +1940,23 @@
 - 팀: **Seattle Seahawks**(시애틀 시호크스) @ **Las Vegas Raiders**(라스베이거스 레이더스) · 로고는 보드(Artifact)에서
 - 🔮 **예측**: 이길 팀 **SEA 72% ★★★**(2018~25 이 별 적중 71%) · 예상 점수 **SEA 23.5 – LV 17.0** (시장 배당 기준 — 가장 정확) · 점수 차 SEA 6.5 · 총점 40.5
     ↳ 우리 드라이브 모델(두 번째 의견 · 시장보다 덜 정확): SEA 23.8 – LV 24.1 → LV 51% · ⚠️ 시장과 이길 팀이 엇갈림
-- 🆕 직전 판(11-15 09:04) 대비 변동: ML -290/+235 → -298/+240
+- 🆕 직전 판(11-15 11:42) 대비 변동: SEA 예상 QB Sam Darnold → Drew Lock · LV Out 추가 Dont'e Thornton Jr., Thomas Booker
 
 - 시장(Draft Kings): 스프레드 홈 6.5 · 총점 40.5 · ML SEA -298 / LV +240 · nflverse 라인 -6.5/40.5
-- 💵 가격(DK · 조회 11-15 11:44 PT): 스프레드 LV +6.5 -110 / SEA -6.5 -110 · 총점 40.5 O -108 / U -112 · ML SEA -298 / LV +240
+- 💵 가격(DK · 조회 11-15 11:58 PT): 스프레드 LV +6.5 -110 / SEA -6.5 -110 · 총점 40.5 O -108 / U -112 · ML SEA -298 / LV +240
     ↳ 무비그 확률(수수료 뺀 시장 확률): LV 커버 50.0% / SEA 커버 50.0% · Over 49.6% / Under 50.4% · 승리 SEA 71.8% / LV 28.2%
     ↳ 손익분기(지금 배당으로 이만큼 맞혀야 본전): LV +6.5 52.4% · SEA -6.5 52.4% · Over 51.9% · Under 52.8% · SEA ML 74.9% · LV ML 29.4%
     ↳ 개장 → 지금: 스프레드 LV +7(-110) → +6.5(-110) · 총점 43.5(O -110) → 40.5(O -108) · ML LV +270 → +240
-    ↳ Polymarket(사는 가격 · 조회 11:44 PT · 수수료 미반영): SEA ML 72c(-257) · LV ML 29c(+245) · LV +6.5 51c(-104) · SEA -6.5 50c(-100) · Over 40.5 52c(-108) · Under 40.5 49c(+104)
+    ↳ Polymarket(사는 가격 · 조회 11:58 PT · 수수료 미반영): SEA ML 72c(-257) · LV ML 29c(+245) · LV +6.5 51c(-104) · SEA -6.5 50c(-100) · Over 40.5 52c(-108) · Under 40.5 49c(+104)
     ↳ 쪽별 더 좋은 가격(같은 라인): SEA ML: Polymarket -257 · LV ML: Polymarket +245 · LV +6.5: Polymarket -104 · SEA -6.5: Polymarket -100 · Over 40.5: DK -108 · Under 40.5: Polymarket +104
-    ↳ 라인 이력(우리 조회 시각): 11-12 15:59 LV 6.5(-108) · 총점 40.5(O -112) | 11-15 08:35 LV 6.5(-110) · 총점 40.5(O -108) | 11-15 08:51 LV 6.5(-110) · 총점 40.5(O -108) | 11-15 09:04 LV 6.5(-110) · 총점 40.5(O -108) | 11-15 11:41 LV 6.5(-110) · 총점 40.5(O -108)
+    ↳ 라인 이력(우리 조회 시각): 11-12 15:59 LV 6.5(-108) · 총점 40.5(O -112) | 11-15 08:51 LV 6.5(-110) · 총점 40.5(O -108) | 11-15 09:04 LV 6.5(-110) · 총점 40.5(O -108) | 11-15 11:41 LV 6.5(-110) · 총점 40.5(O -108) | 11-15 11:55 LV 6.5(-110) · 총점 40.5(O -108)
 - 레이팅: SEA 공격 -0.002(패 +0.065/러 -0.055) · 수비 -0.082(패 -0.078/러 -0.092) · 순마진 +4.9 · PF/PA 22.4/18.0
 - 레이팅: LV 공격 -0.102(패 -0.066/러 -0.192) · 수비 +0.061(패 +0.093/러 -0.009) · 순마진 -10.1 · PF/PA 26.4/29.8
 - 모델: 홈 마진 -9.1 · 홈 승률 24.2% · 총점 33.7 · QB 조정 SEA -4.5 / LV 0.0
-- 부상·QB SEA: 예상 QB Sam Darnold(시즌 주전 S.Darnold) ⚠️ QB 보고 Sam Darnold Out · Out 4 / Doubtful 0 / Questionable 0 — Out: Leonard Williams(DT · ★스냅 69%) · Quenton Nelson(G · ★스냅 100%) · Sam Darnold(QB · ★스냅 100%) · Charles Cross(T · ★스냅 83%) · ★주전급(스냅 60%+) Out/Doubtful 4명
-- 부상·QB LV: 예상 QB Fernando Mendoza(시즌 주전 K.Cousins) · ⓘ 주전 복귀 — 시즌 드롭백 최다 K.Cousins, 예상 선발 Fernando Mendoza(레이팅에 대체 QB 표본 섞임) · Out 1 / Doubtful 0 / Questionable 2 — Out: Patrick Johnson(LB · 스냅 11% · IR) — Questionable: Thomas Booker(DT · 스냅 45%) · Dont'e Thornton Jr.(WR)
-- 🏥 결장 명단(ESPN): 공식 비활성 미발표(킥오프 90분 전 발표 — 그때 리프레시하면 이 줄이 채워진다) · 주간 보고 Out 기준 SEA Out 4 — ★Quenton Nelson(G · 스냅 100% · 직전 경기 0% · Knee) · ★Charles Cross(OT · 스냅 83% · 직전 경기 0% · Ankle) · ★Leonard Williams(DT · 스냅 69% · 직전 경기 0% · Shoulder) · ★Sam Darnold(QB · 스냅 100% · 직전 경기 0% · Quadriceps) / LV Out 1 — Patrick Johnson(LB · 스냅 11% · IR · 주간 보고)
-- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전 · 예측시장 이후 실측 기준): A6 SEA -6.5 — 개장→마감 키 넘버 3·7 넘김 → 반대쪽 ATS(24~25 73-50 59%) · 2026 실시간 14-9 · 개장 +7 → 지금 +6.5(홈 기준) 키 넘버 넘김 ← ML 각도가 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
+- 부상·QB SEA: 예상 QB Drew Lock(시즌 주전 S.Darnold) ⚠️ 백업 QB 선발 — 뎁스차트 QB1 Sam Darnold 대신 예상 선발 Drew Lock · QB 보고 Sam Darnold Out · ⓘ 예상 Sam Darnold 는 보고 Out/Doubtful — 뎁스차트 다음 QB Drew Lock(직전 9주 선발) 로 정정 · Out 4 / Doubtful 0 / Questionable 0 — Out: Leonard Williams(DT · ★스냅 69%) · Quenton Nelson(G · ★스냅 100%) · Sam Darnold(QB · ★스냅 100%) · Charles Cross(T · ★스냅 83%) · ★주전급(스냅 60%+) Out/Doubtful 4명 · ESPN 명단에만 Out 3: Emanuel Wilson · Avery Smith · Deven Eastern(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
+- 부상·QB LV: 예상 QB Fernando Mendoza(시즌 주전 K.Cousins) · ⓘ 주전 복귀 — 시즌 드롭백 최다 K.Cousins, 예상 선발 Fernando Mendoza(레이팅에 대체 QB 표본 섞임) · Out 3 / Doubtful 0 / Questionable 0 — Out: Patrick Johnson(LB · 스냅 11% · IR) · Thomas Booker(DT · 스냅 45% · 당일 비활성) · Dont'e Thornton Jr.(WR · 당일 비활성) · ESPN 명단에만 Out 4: Tristin McCollum · Dalton Johnson · Malik Benson · Bryce Cabeldue(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
+- 🏥 결장 명단(ESPN 공식 비활성 · 발표 11:39 PT ∪ 주간 보고 Out): SEA Out 7 — ★Leonard Williams(DT · 스냅 69% · 직전 경기 0% · Shoulder · 발표 11:39) · Emanuel Wilson(RB · 스냅 48% · 직전 경기 0% · 건강 제외) · ★Quenton Nelson(G · 스냅 100% · 직전 경기 0% · Knee · 발표 11:39) · Avery Smith(CB · 직전 경기 0% · 건강 제외) · ★Charles Cross(OT · 스냅 83% · 직전 경기 0% · Ankle · 발표 11:39) · ★Sam Darnold(QB · 스냅 100% · 직전 경기 0% · Quadriceps · 발표 11:39) · Deven Eastern(DT · 직전 경기 0% · 건강 제외) / LV Out 7 — Dont'e Thornton Jr.(WR · 직전 경기 0% · Back) · Tristin McCollum(S · 직전 경기 0% · 건강 제외) · Dalton Johnson(S · 직전 경기 0% · 건강 제외) · Malik Benson(WR · 스냅 4% · 직전 경기 0% · 건강 제외) · Thomas Booker IV(DT · 스냅 45% · 직전 경기 0% · Ankle) · Bryce Cabeldue(G · 직전 경기 0% · 건강 제외) · Patrick Johnson(LB · 스냅 11% · IR · 주간 보고) · ★주전 결장 SEA 4 / LV 0 — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · 팀별 발표 SEA 11:39 / LV 11:45 PT · ESPN 명단은 팀당 최근 25건(리그 injuries)이라 ⚠️ 미확인 표시만 웹 확인
+- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전(A3·A11·A12 는 30픽) · 예측시장 이후 실측 기준): A6 SEA -6.5 — 개장→마감 키 넘버 3·7 넘김 → 반대쪽 ATS(24~25 73-50 59%) · 2026 실시간 14-9 · 개장 +7 → 지금 +6.5(홈 기준) 키 넘버 넘김 ← ML 각도 A4·A5·A8 이 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
 - 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 · 괄호 = 2024~25 그 등급일 때 순위 높은 팀이 실제 이긴 비율와 시장이 준 확률(둘이 비슷 = 시장이 이미 반영) — 서술 전용, 확률·별점 영향 0)**:
 
 | 항목 | SEA | LV | 뜻 | 격차(서술 전용 · 실측 승률/시장) | 2025 시즌(작년·참고) |
@@ -1975,19 +1975,19 @@
 | 3rd down 허용(수비) | 34% · 5위(상위) | 47% · 27위(하위) | 상대 3번째 시도를 막지 못하는 비율(낮을수록 좋음) | 중대 · SEA 쪽(56% · 시장 55%) | SEA 33%(1위) / LV 47%(30위) |
 | 턴오버(경기당 잃음) | 1.6 · 24위(하위) | 1.2 · 18위(중간) | 인터셉트·펌블로 공을 뺏기는 횟수(적을수록 좋음 · 운 지표 r .14) | 근접 · LV 쪽(43% · 시장 52%) | SEA 1.5(31위) / LV 1.3(23위) |
 | 색 허용률(공격) | 6.0% · 16위(중간) | 3.2% · 2위(상위) | QB 가 던지기 전에 잡히는 비율(낮을수록 보호가 좋음) | 경미 · LV 쪽(57% · 시장 57%) | SEA 5.2%(9위) / LV 10.7%(32위) |
-| QB(예상 선발 · 순위는 드롭백 60+ QB 중) | S.Darnold · 드롭백 228 · 야드/시도 7.0(20/39위·중간) · 정확도 CPOE -2.5(32/39위·하위) · EPA/드롭백 -0.07(25/39위·중간) · 색% 7.5(23/39위·중간) | F.Mendoza · 드롭백 8 ※ 얇음 · 야드/시도 6.0(표본 적음) · 정확도 CPOE +8.8(표본 적음) · EPA/드롭백 +0.16(표본 적음) · 색% 0.0(표본 적음) | 야드/시도·EPA 는 실력(r .47~.48), 정확도 CPOE 는 중간, INT 는 운 | — | SEA EPA/드롭백 +0.13(10/38위) · 야드/시도 8.5 / LV — 작년 기록 없음 |
+| QB(예상 선발 · 순위는 드롭백 60+ QB 중) | D.Lock · 드롭백 78 ※ 얇음 · 야드/시도 7.9(10/39위·상위) · 정확도 CPOE +3.3(10/39위·상위) · EPA/드롭백 +0.35(2/39위·상위) · 색% 2.6(1/39위·상위) | F.Mendoza · 드롭백 8 ※ 얇음 · 야드/시도 6.0(표본 적음) · 정확도 CPOE +8.8(표본 적음) · EPA/드롭백 +0.16(표본 적음) · 색% 0.0(표본 적음) | 야드/시도·EPA 는 실력(r .47~.48), 정확도 CPOE 는 중간, INT 는 운 | — | SEA 드롭백 3(표본 적음) / LV — 작년 기록 없음 |
 | 주요 선수(리시버 2·러셔 1 · 순위는 타깃 15+/캐리 25+ 선수 중) | J.Smith-Njigba 타깃 99 · 야드/타깃 10.5(23/190위·상위) · 캐치율 72% · 분리도 2.6야드(88/118위·하위)[r 0.49·실력] · 기대 대비 YAC +0.9(35/118위·상위)[r 0.28·중간] · 드롭 3/99타깃(3%)[r -0.01·운] / A.Barner 타깃 38 · 야드/타깃 5.5(156/190위·하위) · 캐치율 61% · 분리도 3.8야드(11/118위·상위)[r 0.49·실력] · 기대 대비 YAC +0.4(58/118위·중간)[r 0.28·중간] · 드롭 3/38타깃(8%)[r -0.01·운] / E.Wilson 캐리 111 · 야드/캐리 3.6(50/72위·하위) · 성공률 36% · 접촉 전 야드/캐리 2.3(45/85위·중간)[r 0.52·실력] · 접촉 후 1.4(68/85위·하위)[r 0.40·중간] · 태클 깨기 5[r 0.06·운] · 기대 대비 러시 야드/캐리 -0.59(41/45위·하위)[r 0.21·운] | B.Bowers 타깃 70 · 야드/타깃 9.4(40/190위·상위) · 캐치율 69% · 분리도 2.4야드(103/118위·하위)[r 0.49·실력] · 기대 대비 YAC +1.0(31/118위·상위)[r 0.28·중간] · 드롭 1/70타깃(1%)[r -0.01·운] / T.Tucker 타깃 56 · 야드/타깃 9.4(37/190위·상위) · 캐치율 59% · 분리도 2.5야드(99/118위·하위)[r 0.49·실력] · 기대 대비 YAC +0.8(42/118위·중간)[r 0.28·중간] · 드롭 1/56타깃(2%)[r -0.01·운] / A.Jeanty 캐리 114 · 야드/캐리 3.2(62/72위·하위) · 성공률 33% · 접촉 전 야드/캐리 1.5(80/85위·하위)[r 0.52·실력] · 접촉 후 1.7(48/85위·중간)[r 0.40·중간] · 태클 깨기 7[r 0.06·운] · 기대 대비 러시 야드/캐리 -0.28(32/45위·하위)[r 0.21·운] | ⚠️ = 부상 보고 상태 · 캐치율은 실력(r .50), TD 는 운 · [ ] 안 r = 2024~25 홀/짝 주 안정성(실력 ≥.45 / 중간 / 운 <.25 — 운 지표(드롭·태클 깨기·기대 대비 러시 야드)는 근거 금지) | — | — |
 | OL 연속성(최근 3경기 공격 스냅 상위 5명) | 주전 5명 중 결장 0명 · 최근 3경기 기준 | 주전 5명 중 결장 0명 · 최근 3경기 기준 | 오펜스 라인 주전이 몇 명 빠지나 — 2006~25 OL 2명+ 결장 ATS 45.2%(우연 범위, 시장 반영) | — | — |
 | 키커(2024~26 FG 성공률 · 순위는 20킥+ 키커 중) | Jason Myers FG 88%(91/104 · 15/46위·중간) · 50야드+ 78%(21/27) | Matt Gay FG 83%(67/81 · 30/46위·중간) · 50야드+ 45%(10/22) | FG 하나가 3점 — 실외 강풍·추위면 40야드 밖 성공률이 떨어진다 | — | — |
 
-  ↳ 한 줄: SEA 공격 중간(16위) · 수비 상위(2위) · LV 공격 상위(7위) · 수비 하위(32위) · SEA QB S.Darnold EPA 중간(25/39위) — 순위는 2026 전체(얇은 표본 주의) · 마지막 열은 2025 풀시즌 값(작년 순위, 참고 — 올해 표본이 얇을 때 「원래 어떤 팀인가」). 이 표는 시장 라인에 이미 들어간 정보라 예측 확률을 바꾸지 않는다(초등학생 설명 재료).
+  ↳ 한 줄: SEA 공격 중간(16위) · 수비 상위(2위) · LV 공격 상위(7위) · 수비 하위(32위) · SEA QB D.Lock EPA 상위(2/39위) — 순위는 2026 전체(얇은 표본 주의) · 마지막 열은 2025 풀시즌 값(작년 순위, 참고 — 올해 표본이 얇을 때 「원래 어떤 팀인가」). 이 표는 시장 라인에 이미 들어간 정보라 예측 확률을 바꾸지 않는다(초등학생 설명 재료).
 
 - 🧑‍🤝‍🧑 **선수 표(2026 정규시즌 전체 · 순위는 리그 자격자(QB 드롭백 60+ · 리시버 타깃 15+ · 러셔 캐리 25+) 중 · 상태 = 이번 주 부상 보고 · 발행문 「- 선수 표:」 아래 두 표 그대로 · 값만, 점수 0)**:
 
 | SEA 선수 | 역할 | 경기 | 표본 | 야드 | TD | 효율 | EPA/플레이 | 리그 순위 | 상태 | 2025(작년·참고) |
 |---|---|---|---|---|---|---|---|---|---|---|
-| S.Darnold (예상 선발) | QB | 7 | 드롭백 228 · 시도 211 | 1482 | 패스 10 · INT 9[운] | 완성 60% · 야드/시도 7.0 · 색 7.5% | -0.07 | EPA 25/39위·중간 | Out | EPA/드롭백 +0.13(10/38위) · 야드/시도 8.5 |
-| D.Lock | QB | 3 | 드롭백 78 · 시도 76 | 597 | 패스 5 · INT 0[운] | 완성 71% · 야드/시도 7.9 · 색 2.6% | +0.35 | EPA 2/39위·상위 | 연습 Limited | 드롭백 3(표본 적음) |
+| S.Darnold | QB | 7 | 드롭백 228 · 시도 211 | 1482 | 패스 10 · INT 9[운] | 완성 60% · 야드/시도 7.0 · 색 7.5% | -0.07 | EPA 25/39위·중간 | Out | EPA/드롭백 +0.13(10/38위) · 야드/시도 8.5 |
+| D.Lock (예상 선발) | QB | 3 | 드롭백 78 · 시도 76 | 597 | 패스 5 · INT 0[운] | 완성 71% · 야드/시도 7.9 · 색 2.6% | +0.35 | EPA 2/39위·상위 | 연습 Limited | 드롭백 3(표본 적음) |
 | E.Wilson | 러셔 | 7 | 캐리 111 | 403 | 3[운] | 야드/캐리 3.6 · 성공률 36% | -0.15 | 야드/캐리 50/72위·하위 | — | 캐리 125 · 야드/캐리 4.0(36/49위) |
 | J.Price | 러셔 | 5 | 캐리 47 | 172 | 0[운] | 야드/캐리 3.7 · 성공률 26% | -0.37 | 야드/캐리 49/72위·중간 | — | — 작년 기록 없음 |
 | J.Smith-Njigba | 리시버 | 9 | 타깃 99 · 캐치 71 | 1036 | 9[운] | 캐치율 72% · 야드/타깃 10.5 | +0.63 | 야드/타깃 23/190위·상위 | — | 타깃 163 · 야드/타깃 11.0(4/124위) |
@@ -2030,7 +2030,7 @@
 
   ↳ 읽는 법: 압박·색은 상대 OL·QB 색 허용률(선수 표)과 맞춰 보고, 커버리지 「타깃→허용」은 많이 노려진 CB 를 뜻한다(허용 수가 많다고 나쁜 것은 아님 — 야드/타깃이 기준). 놓친 태클은 상대 RB 야드/캐리와 함께. 전부 서술 재료 — 2018~25 백테스트에서 시장을 못 이겼고, 색률 상위 8 수비는 오히려 시장이 과대평가(A10 관찰).
 
-- 📌 **결론 재료(자동 — 10판 ML 전용 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: 이길 팀 SEA 72% ★★★(10판: 예상 점수·방향·스프레드/총점 판단은 쓰지 않는다 — ML 전용) · 스탯 격차 상위 3(32팀 순위 차 순): 수비 효율(내준 드라이브당 득점): SEA 1.45 · 2위(상위) vs LV 2.66 · 32위(하위) — 중대 · SEA 쪽 / 상대 득점 드라이브 허용: SEA 27% · 1위(상위) vs LV 45% · 30위(하위) — 중대 · SEA 쪽 / 실점(경기당): SEA 18.0점 · 4위(상위) vs LV 29.8점 · 32위(하위) — 중대 · SEA 쪽 · 선수 핵심: QB SEA S.Darnold (예상 선발)(Out) EPA 25/39위·중간 vs LV K.Cousins EPA 14/39위·중간 · 타깃 1위 SEA J.Smith-Njigba 타깃 99 · 야드/타깃 23/190위·상위 vs LV B.Bowers 타깃 70 · 야드/타깃 40/190위·상위 · 캐리 1위 SEA E.Wilson 캐리 111 · 야드/캐리 50/72위·하위 vs LV A.Jeanty 캐리 114 · 야드/캐리 62/72위·하위 · ★주전 Out/Doubtful SEA 4명 / LV 0명 · 공식 비활성 미발표(🏥 줄) · 새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): 없음 · 관찰 각도(페이퍼): A6 SEA -6.5 · 로컬 페이퍼 관찰 있음(돈 아님): 관찰(큰 괴리 — 페이퍼)
+- 📌 **결론 재료(자동 — 10판 ML 전용 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: 이길 팀 SEA 72% ★★★(10판: 예상 점수·방향·스프레드/총점 판단은 쓰지 않는다 — ML 전용) · 스탯 격차 상위 3(32팀 순위 차 순): 수비 효율(내준 드라이브당 득점): SEA 1.45 · 2위(상위) vs LV 2.66 · 32위(하위) — 중대 · SEA 쪽 / 상대 득점 드라이브 허용: SEA 27% · 1위(상위) vs LV 45% · 30위(하위) — 중대 · SEA 쪽 / 실점(경기당): SEA 18.0점 · 4위(상위) vs LV 29.8점 · 32위(하위) — 중대 · SEA 쪽 · 선수 핵심: QB SEA D.Lock (예상 선발)(연습 Limited) EPA 2/39위·상위 vs LV Fernando Mendoza (예상 선발) 표본 적음 · 타깃 1위 SEA J.Smith-Njigba 타깃 99 · 야드/타깃 23/190위·상위 vs LV B.Bowers 타깃 70 · 야드/타깃 40/190위·상위 · 캐리 1위 SEA E.Wilson 캐리 111 · 야드/캐리 50/72위·하위 vs LV A.Jeanty 캐리 114 · 야드/캐리 62/72위·하위 · ★주전 Out/Doubtful SEA 4명 / LV 0명 · 공식 비활성(ESPN 11:39 PT 발표): ★주전 SEA 4 / LV 0 — 🏥 줄 그대로 · 새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): 없음 · 관찰 각도(페이퍼): A6 SEA -6.5 · 로컬 페이퍼 관찰 있음(돈 아님): 관찰(큰 괴리 — 페이퍼)
 
 - 🤝 **맞대결(최근 3시즌 2023~ · 플레이오프 포함 · 값만 — 2006~25 직전 맞대결 진 팀 리턴매치 커버 51.5%, 우연 범위)**:
   ↳ 2023~2025 맞대결 없음
@@ -2060,7 +2060,7 @@
 | XP | 114/119 96% | 80/80 100% |
 | 최장·블록·올해 | 최장 59야드 · 블록 3 · 2026 16/18 · 50+ 3/3 100% | 최장 59야드 · 블록 0 · 2026 19/21 · 50+ 3/4 75% |
 
-  ↳ 이 경기 조건: indoor · Sunny — 실외 강풍·추위면 40야드 밖 성공률이 평균보다 떨어진다(값만, 총점·키 넘버 3 서술 재료). 키커 교체(부상·영입)는 발행 세션이 웹 확인.
+  ↳ 이 경기 조건: indoor · Mostly sunny — 실외 강풍·추위면 40야드 밖 성공률이 평균보다 떨어진다(값만, 총점·키 넘버 3 서술 재료). 키커 교체(부상·영입)는 발행 세션이 웹 확인.
 
 - 🧑‍⚖️ 심판 크루: nflverse 미배정(배정되면 자동 표시 — 보통 경기 주 후반) · 발행 세션이 웹으로 확인하면 「보도」 라벨
 
@@ -2068,11 +2068,11 @@
 
 | 항목 | SEA | LV | 점수 · 근거 |
 |---|---|---|---|
-| QB 수준(EPA/드롭백 · k=150) | S.Darnold 원 -0.07 → 보정 -0.03(드롭백 228) | F.Mendoza 원 +0.16 → 보정 +0.03(드롭백 8 ※ 얇음) | 0 — 2018~22 선수 모델 QB 조정 방향 45%(n370 · 시장이 더 정확, 7e975b8) |
+| QB 수준(EPA/드롭백 · k=150) | D.Lock 원 +0.35 → 보정 +0.14(드롭백 78 ※ 얇음) | F.Mendoza 원 +0.16 → 보정 +0.03(드롭백 8 ※ 얇음) | 0 — 2018~22 선수 모델 QB 조정 방향 45%(n370 · 시장이 더 정확, 7e975b8) |
 | 패스 보호 vs 상대 압박 | 피압박 9.2/경기 vs LV 압박 10.1/경기 | 피압박 8.9/경기 vs SEA 압박 9.7/경기 | 0 — 2018~22 압박 미스매치 −0.19점 p .64(F3 · n632) |
 | 패스 공격 vs 상대 패스 수비(드롭백 EPA) | 공격 +0.082 vs LV 수비 +0.185 | 공격 +0.106 vs SEA 수비 -0.086 | 0 — 팀 EPA 모델 점수 차 오차 10.48 > 시장 9.92(1,151경기) |
 | 휴식 | 7일 | 7일 | 0 — 2023~25 라인·일정 15항목 전부 잡음(BH) · 목요일 원정 48.9% |
-| 날씨 | indoor · Sunny 66°F | (같은 구장) | 0 — 바람 15mph+ 언더는 따로 관찰 중(2006~25 55%, 최근 3년 53% — 약한 신호) |
+| 날씨 | indoor · Mostly sunny 66°F | (같은 구장) | 0 — 바람 15mph+ 언더는 따로 관찰 중(2006~25 55%, 최근 3년 53% — 약한 신호) |
 | 주전 결장(스냅 60%+) | ★주전 Out/Doubtful 4명 | ★주전 Out/Doubtful 0명 | 0 — 주전 결장 수 차 −0.15점/명 p .44(F1 · n2,110) · 라인 뒤 발표분만 「새 정보」 관찰 |
 | 작년 성적 | 2025 14-3(0.824) | 2025 3-14(0.176) | 0 — 2007~25 작년 승률 .25+ 높은 팀 커버 50.3%(n1,934) · 시장 확률과 실제 승률 일치(37.5% vs 38.3%) |
 | 최근 맞대결(2023~ · 최근 0경기) | SEA 0승 | LV 0승 | 0 — 2006~25 직전 맞대결 진 팀 리턴매치 커버 51.5%(n2,594 · 손익분기 52.4% 미만, 우연 범위) · MLB H2H 도 기각(9/1·9/5) |
@@ -2090,7 +2090,7 @@
 | 상대 수비가 내준 드라이브당 득점(r 0.36·중간) — 원값 → 보정 | LV 수비 2.66 → 2.28 | SEA 수비 1.45 → 1.82 |
 | 예상 득점 — 드라이브 모델(리그 2.05/드라이브 · 경기당 11드라이브) / 시장 내재 | 23.8 / 23.5 | 24.1 / 17.0 |
 | 승리 확률 — 시장(ML 무비그) | 72% | 28% |
-| QB(예상 선발 — 2026 실제 성적) | S.Darnold: 완성 60%(r 0.40·중간) · CPOE -2.5(r 0.41·중간) · 야드/시도 7.0(r 0.48·실력) · EPA/드롭백 -0.07(r 0.47·실력) · TD 4.7%(r 0.39·중간) · 색 7.5%(r 0.46·실력) · INT 4.3%(r 0.03·운) · 시도 211 · 드롭백 228 | F.Mendoza: 완성 75%(r 0.40·중간) · CPOE +8.8(r 0.41·중간) · 야드/시도 6.0(r 0.48·실력) · EPA/드롭백 +0.16(r 0.47·실력) · TD 0.0%(r 0.39·중간) · 색 0.0%(r 0.46·실력) · INT 0.0%(r 0.03·운) · 시도 8 · 드롭백 8 · ※ 얇음(드롭백 8 < 150 — 근거 금지 · 보정 EPA +0.03) |
+| QB(예상 선발 — 2026 실제 성적) | D.Lock: 완성 71%(r 0.40·중간) · CPOE +3.3(r 0.41·중간) · 야드/시도 7.9(r 0.48·실력) · EPA/드롭백 +0.35(r 0.47·실력) · TD 6.6%(r 0.39·중간) · 색 2.6%(r 0.46·실력) · INT 0.0%(r 0.03·운) · 시도 76 · 드롭백 78 · ※ 얇음(드롭백 78 < 150 — 근거 금지 · 보정 EPA +0.14) | F.Mendoza: 완성 75%(r 0.40·중간) · CPOE +8.8(r 0.41·중간) · 야드/시도 6.0(r 0.48·실력) · EPA/드롭백 +0.16(r 0.47·실력) · TD 0.0%(r 0.39·중간) · 색 0.0%(r 0.46·실력) · INT 0.0%(r 0.03·운) · 시도 8 · 드롭백 8 · ※ 얇음(드롭백 8 < 150 — 근거 금지 · 보정 EPA +0.03) |
 | 리시버 상위 2(타깃순) | J.Smith-Njigba: 타깃 99 · 캐치율 72%(r 0.50·실력) · 야드/타깃 10.5(r 0.34·중간) · TD 9(r 0.18·운) / A.Barner: 타깃 38 · 캐치율 61%(r 0.50·실력) · 야드/타깃 5.5(r 0.34·중간) · TD 1(r 0.18·운) | B.Bowers: 타깃 70 · 캐치율 69%(r 0.50·실력) · 야드/타깃 9.4(r 0.34·중간) · TD 6(r 0.18·운) / T.Tucker: 타깃 56 · 캐치율 59%(r 0.50·실력) · 야드/타깃 9.4(r 0.34·중간) · TD 4(r 0.18·운) |
 | 러셔 1위(캐리순) | E.Wilson: 캐리 111 · 야드/캐리 3.6(r 0.27·중간) · 성공률 36%(r 0.33·중간) | A.Jeanty: 캐리 114 · 야드/캐리 3.2(r 0.27·중간) · 성공률 33%(r 0.33·중간) |
 
@@ -2110,33 +2110,33 @@
 | 패스 보호 vs 압박(PFR) | SEA 피압박 9.2/경기(24위) vs LV 압박 10.1/경기(8위) | LV 피압박 8.9/경기(22위) vs SEA 압박 9.7/경기(11위) |
 | 핵심 선수(2026 점유율) | J.Smith-Njigba 타깃 35%·EPA/타깃 +0.63 · A.Barner 타깃 14%·EPA/타깃 -0.37 · E.Wilson 캐리 46%·EPA/캐리 -0.15 | B.Bowers 타깃 22%·EPA/타깃 +0.53 · T.Tucker 타깃 18%·EPA/타깃 +0.21 · A.Jeanty 캐리 55%·EPA/캐리 -0.29 |
 
-- 패스 매치업(서술 — 점수 아님) SEA 공격 → LV 수비: QB Sam Darnold 투구 시간 2.98초 · CPOE +0.7 · 공격적 패스 18%(시도 211) · SEA 공격 피압박 경기당 9.2(적은 순 24위) vs LV 수비 압박 경기당 10.1(리그 8위) (2025 경기당: LV 압박 6.8 · SEA 피압박 6.4) · FTN: SEA 플레이액션 26%(많은 순 7위) · 블리츠 받을 때 EPA/드롭백 +0.14(좋은 순 5위 · 116회) · 가로채기 위험 패스 3.1% · vs LV 블리츠 27%(많은 순 19위)
+- 패스 매치업(서술 — 점수 아님) SEA 공격 → LV 수비: QB Drew Lock 투구 시간 2.64초 · CPOE +5.8 · 공격적 패스 21%(시도 76) · SEA 공격 피압박 경기당 9.2(적은 순 24위) vs LV 수비 압박 경기당 10.1(리그 8위) (2025 경기당: LV 압박 6.8 · SEA 피압박 6.4) · FTN: SEA 플레이액션 26%(많은 순 7위) · 블리츠 받을 때 EPA/드롭백 +0.14(좋은 순 5위 · 116회) · 가로채기 위험 패스 3.1% · vs LV 블리츠 27%(많은 순 19위)
 - 패스 매치업(서술 — 점수 아님) LV 공격 → SEA 수비: QB Fernando Mendoza NGS 기록 없음 · LV 공격 피압박 경기당 8.9(적은 순 22위) vs SEA 수비 압박 경기당 9.7(리그 11위) (2025 경기당: SEA 압박 11.5 · LV 피압박 8.0) · FTN: LV 플레이액션 24%(많은 순 12위) · 블리츠 받을 때 EPA/드롭백 +0.13(좋은 순 6위 · 101회) · 가로채기 위험 패스 3.2% · vs SEA 블리츠 25%(많은 순 25위)
-- 맥락(값만 — N5): 휴식 SEA 7일 / LV 7일 · 날씨 Sunny 66°F · 지붕 indoor
-- 리스크: SEA QB 보고 Sam Darnold Out → 모델 −4.5점 · LV 주전 복귀 — 시즌 드롭백 최다 K.Cousins, 예상 선발 Fernando Mendoza(레이팅에 대체 QB 표본 섞임) · 〔직접 서술 — 값만, 단정 금지〕
+- 맥락(값만 — N5): 휴식 SEA 7일 / LV 7일 · 날씨 Mostly sunny 66°F · 지붕 indoor
+- 리스크: SEA 백업 QB 선발 — 뎁스차트 QB1 Sam Darnold 대신 예상 선발 Drew Lock · QB 보고 Sam Darnold Out → 모델 −4.5점 · SEA 예상 Sam Darnold 는 보고 Out/Doubtful — 뎁스차트 다음 QB Drew Lock(직전 9주 선발) 로 정정 · LV 주전 복귀 — 시즌 드롭백 최다 K.Cousins, 예상 선발 Fernando Mendoza(레이팅에 대체 QB 표본 섞임) · 〔직접 서술 — 값만, 단정 금지〕
 
 ## SF@DAL  Sun 11-15 16:25 ET (13:25 PT) · AT&T Stadium · indoor · SF 7-1 / DAL 4-5
 
 - 팀: **San Francisco 49ers**(샌프란시스코 49ers) @ **Dallas Cowboys**(댈러스 카우보이스) · 로고는 보드(Artifact)에서
 - 🔮 **예측**: 이길 팀 **SF 66% ★★★**(2018~25 이 별 적중 71%) · 예상 점수 **SF 30.0 – DAL 25.5** (시장 배당 기준 — 가장 정확) · 점수 차 SF 4.5 · 총점 55.5
     ↳ 우리 드라이브 모델(두 번째 의견 · 시장보다 덜 정확): SF 28.2 – DAL 26.9 → SF 54%
-- 🆕 직전 판(11-15 09:04) 대비 변동: 없음
+- 🆕 직전 판(11-15 11:42) 대비 변동: 없음
 
 - 시장(Draft Kings): 스프레드 홈 4.5 · 총점 55.5 · ML SF -218 / DAL +180 · nflverse 라인 -4.5/55.5
-- 💵 가격(DK · 조회 11-15 11:44 PT): 스프레드 DAL +4.5 -112 / SF -4.5 -108 · 총점 55.5 O -118 / U -102 · ML SF -218 / DAL +180
+- 💵 가격(DK · 조회 11-15 11:58 PT): 스프레드 DAL +4.5 -112 / SF -4.5 -108 · 총점 55.5 O -118 / U -102 · ML SF -218 / DAL +180
     ↳ 무비그 확률(수수료 뺀 시장 확률): DAL 커버 50.4% / SF 커버 49.6% · Over 51.7% / Under 48.3% · 승리 SF 65.7% / DAL 34.3%
     ↳ 손익분기(지금 배당으로 이만큼 맞혀야 본전): DAL +4.5 52.8% · SF -4.5 51.9% · Over 54.1% · Under 50.5% · SF ML 68.6% · DAL ML 35.7%
     ↳ 개장 → 지금: 스프레드 DAL -1.5(-105) → +4.5(-112) · 총점 52.5(O -110) → 55.5(O -118) · ML DAL -120 → +180
-    ↳ Polymarket(사는 가격 · 조회 11:44 PT · 수수료 미반영): SF ML 65c(-186) · DAL ML 36c(+178) · DAL +4.5 54c(-117) · SF -4.5 47c(+113)
+    ↳ Polymarket(사는 가격 · 조회 11:58 PT · 수수료 미반영): SF ML 65c(-186) · DAL ML 36c(+178) · DAL +4.5 54c(-117) · SF -4.5 47c(+113)
     ↳ 쪽별 더 좋은 가격(같은 라인): SF ML: Polymarket -186 · DAL ML: DK +180 · DAL +4.5: DK -112 · SF -4.5: Polymarket +113
-    ↳ 라인 이력(우리 조회 시각): 11-12 15:59 DAL 3.5(-105) · 총점 55.5(O -118) | 11-15 08:35 DAL 4.5(-112) · 총점 55.5(O -118) | 11-15 08:51 DAL 4.5(-112) · 총점 55.5(O -118) | 11-15 09:04 DAL 4.5(-112) · 총점 55.5(O -118) | 11-15 11:41 DAL 4.5(-112) · 총점 55.5(O -118)
+    ↳ 라인 이력(우리 조회 시각): 11-12 15:59 DAL 3.5(-105) · 총점 55.5(O -118) | 11-15 08:51 DAL 4.5(-112) · 총점 55.5(O -118) | 11-15 09:04 DAL 4.5(-112) · 총점 55.5(O -118) | 11-15 11:41 DAL 4.5(-112) · 총점 55.5(O -118) | 11-15 11:55 DAL 4.5(-112) · 총점 55.5(O -118)
 - 레이팅: SF 공격 +0.096(패 +0.132/러 +0.021) · 수비 +0.003(패 +0.053/러 -0.025) · 순마진 +5.8 · PF/PA 29.4/19.5
 - 레이팅: DAL 공격 +0.076(패 +0.119/러 +0.007) · 수비 +0.094(패 +0.139/러 +0.054) · 순마진 -1.1 · PF/PA 27.3/26.2
 - 모델: 홈 마진 -5.4 · 홈 승률 33.9% · 총점 62.7
-- 부상·QB SF: 예상 QB Brock Purdy(시즌 주전 B.Purdy) · Out 3 / Doubtful 0 / Questionable 7 — Out: Mike Evans(WR · 스냅 40%) · Christian Kirk(WR · 스냅 30% · IR) · Gracen Halton(DL · 스냅 41% · IR) — Questionable: Trent Williams(T · ★스냅 97%) · Dre Greenlaw(LB · ★스냅 94%) · Deommodore Lenoir(CB · ★스냅 95%) · Nate Hobbs(CB) · Renardo Green(CB · ★스냅 95%) · Upton Stout(CB · 스냅 58%) · C.J. West(DT)
+- 부상·QB SF: 예상 QB Brock Purdy(시즌 주전 B.Purdy) · Out 3 / Doubtful 0 / Questionable 7 — Out: Mike Evans(WR · 스냅 40%) · Christian Kirk(WR · 스냅 30% · IR) · Gracen Halton(DL · 스냅 41% · IR) — Questionable: Trent Williams(T · ★스냅 97%) · Dre Greenlaw(LB · ★스냅 94%) · Deommodore Lenoir(CB · ★스냅 95%) · Nate Hobbs(CB) · Renardo Green(CB · ★스냅 95%) · Upton Stout(CB · 스냅 58%) · C.J. West(DT) · ESPN 명단에만 Out 1: Brandon Aiyuk(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
 - 부상·QB DAL: 예상 QB Dak Prescott(시즌 주전 D.Prescott) · Out 6 / Doubtful 1 / Questionable 5 — Out: P.J. Locke(S · ★스냅 76%) · Tyler Goodson(RB · 스냅 24%) · Jake Ferguson(TE · 스냅 32%) · Jonathan Mingo(WR · 스냅 31%) · Donovan Ezeiruaku(LB · 스냅 58%) · Malachi Lawrence(LB · 스냅 47% · IR) — Doubtful: Juanyeh Thomas(S · 스냅 12%) — Questionable: Jonathan Bullard(DT) · DaRon Bland(CB · ★스냅 96%) · Joey Porter Jr.(CB · ★스냅 60%) · Alijah Clark(S · 스냅 39%) · Devin Moore(CB) · ★주전급(스냅 60%+) Out/Doubtful 1명
 - 🏥 결장 명단(ESPN): 공식 비활성 미발표(킥오프 90분 전 발표 — 그때 리프레시하면 이 줄이 채워진다) · 주간 보고 Out 기준 SF Out 4 — Mike Evans(WR · 스냅 40% · 직전 경기 0% · Achilles) · Brandon Aiyuk(WR · 직전 경기 0% · Personal) · Christian Kirk(WR · 스냅 30% · IR · 주간 보고) · Gracen Halton(DL · 스냅 41% · IR · 주간 보고) / DAL Out 6 — Donovan Ezeiruaku(LB · 스냅 58% · 직전 경기 50% · Ankle) · Jonathan Mingo(WR · 스냅 31% · 직전 경기 39% · Ankle) · ★P.J. Locke(S · 스냅 76% · 직전 경기 67% · Concussion) · Jake Ferguson(TE · 스냅 32% · 직전 경기 34% · Knee) · Tyler Goodson(RB · 스냅 24% · 주간 보고) · Malachi Lawrence(LB · 스냅 47% · IR · 주간 보고)
-- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전 · 예측시장 이후 실측 기준): A3 DAL +4.5 — 결장 팀 반대 3점+ 이동 → 결장 팀 ATS(역사 없음 · 성적은 옆 「2026 실시간」) · 2026 실시간 16-12 · 홈 DAL 결장 확정 / A6 DAL +4.5 — 개장→마감 키 넘버 3·7 넘김 → 반대쪽 ATS(24~25 73-50 59%) · 2026 실시간 14-9 · 개장 -1.5 → 지금 +4.5(홈 기준) 키 넘버 넘김 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 — 75건 중 겹침 14 · 상충 1경기 제외) ← ML 각도가 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
+- 🔎 관찰 각도(페이퍼 · 돈 아님 · 20픽 판정 전(A3·A11·A12 는 30픽) · 예측시장 이후 실측 기준): A3 DAL +4.5 — 결장 팀 반대 3점+ 이동 → 결장 팀 ATS(역사 없음 · 성적은 옆 「2026 실시간」) · 2026 실시간 16-12 · 홈 DAL 결장 확정 / A6 DAL +4.5 — 개장→마감 키 넘버 3·7 넘김 → 반대쪽 ATS(24~25 73-50 59%) · 2026 실시간 14-9 · 개장 -1.5 → 지금 +4.5(홈 기준) 키 넘버 넘김 / (경기 단위 2026: 46-29 · 겹친 각도는 1건 — 75건 중 겹침 14 · 상충 1경기 제외) ← ML 각도 A4·A5·A8 이 🔮 예측 승자와 같은 쪽이면 「소액 관심 · ML」 근거 가능(근거에 「관찰 각도 An」), 반대쪽·ATS·총점 각도는 「변수」 한 줄
 - 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 · 괄호 = 2024~25 그 등급일 때 순위 높은 팀이 실제 이긴 비율와 시장이 준 확률(둘이 비슷 = 시장이 이미 반영) — 서술 전용, 확률·별점 영향 0)**:
 
 | 항목 | SF | DAL | 뜻 | 격차(서술 전용 · 실측 승률/시장) | 2025 시즌(작년·참고) |
@@ -2289,14 +2289,14 @@
 | 러시(EPA) | SF +0.018(3위) vs DAL -0.020(27위) | DAL -0.004(9위) vs SF -0.180(1위) |
 | 러시 성공률 | SF 50%(1위) vs DAL 43%(21위) | DAL 44%(9위) vs SF 43%(23위) |
 | 색 비율(드롭백당) | SF 3.1%(1위) vs DAL 5.1%(23위) | DAL 3.8%(5위) vs SF 5.0%(27위) |
-| 턴오버/경기(공격 잃음 · 수비 뺏음) | SF 1.1(16위) vs DAL 0.9(27위) | DAL 0.9(9위) vs SF 1.4(10위) |
+| 턴오버/경기(공격 잃음 · 수비 뺏음) | SF 1.1(17위) vs DAL 0.9(27위) | DAL 0.9(9위) vs SF 1.4(12위) |
 | 3rd down 전환 | SF 52%(2위) vs DAL 50%(31위) | DAL 47%(3위) vs SF 41%(17위) |
 | 패스 보호 vs 압박(PFR) | SF 피압박 5.4/경기(2위) vs DAL 압박 9.4/경기(13위) | DAL 피압박 9.6/경기(26위) vs SF 압박 9.2/경기(14위) |
 | 핵심 선수(2026 점유율) | G.Kittle 타깃 23%·EPA/타깃 +0.28 · C.McCaffrey 타깃 20%·EPA/타깃 +0.11 · C.McCaffrey 캐리 50%·EPA/캐리 +0.13 | C.Lamb 타깃 33%·EPA/타깃 +0.32 · G.Pickens 타깃 19%·EPA/타깃 +0.41 · J.Williams 캐리 72%·EPA/캐리 +0.01 |
 
 - 패스 매치업(서술 — 점수 아님) SF 공격 → DAL 수비: QB Brock Purdy 투구 시간 3.01초 · CPOE +4.3 · 공격적 패스 16%(시도 236) · SF 공격 피압박 경기당 5.4(적은 순 2위) vs DAL 수비 압박 경기당 9.4(리그 13위) (2025 경기당: DAL 압박 10.8 · SF 피압박 7.2) · FTN: SF 플레이액션 23%(많은 순 14위) · 블리츠 받을 때 EPA/드롭백 +0.32(좋은 순 2위 · 77회) · 가로채기 위험 패스 2.7% · vs DAL 블리츠 23%(많은 순 30위)
 - 패스 매치업(서술 — 점수 아님) DAL 공격 → SF 수비: QB Dak Prescott 투구 시간 2.79초 · CPOE +1.0 · 공격적 패스 20%(시도 336) · DAL 공격 피압박 경기당 9.6(적은 순 26위) vs SF 수비 압박 경기당 9.2(리그 14위) (2025 경기당: SF 압박 6.3 · DAL 피압박 7.8) · FTN: DAL 플레이액션 22%(많은 순 18위) · 블리츠 받을 때 EPA/드롭백 +0.02(좋은 순 17위 · 120회) · 가로채기 위험 패스 2.2% · vs SF 블리츠 31%(많은 순 16위)
-- 라인 이동: 스프레드(홈) 3.5 → 4.5 · 총점 55.5 → 55.5 (11-12 15:59 → 11-15 11:41) — 정보(뉴스 반영), 방향 근거 아님
+- 라인 이동: 스프레드(홈) 3.5 → 4.5 · 총점 55.5 → 55.5 (11-12 15:59 → 11-15 11:55) — 정보(뉴스 반영), 방향 근거 아님
 - 맥락(값만 — N5): 휴식 SF 7일 / DAL 7일 · 날씨 Showers 49°F · 지붕 indoor
 - 리스크: 자동 항목 없음 · 〔직접 서술 — 값만, 단정 금지〕
 
@@ -2304,14 +2304,14 @@
 
 - 팀: **Carolina Panthers**(캐롤라이나 팬서스) @ **New Orleans Saints**(뉴올리언스 세인츠) · 로고는 보드(Artifact)에서
     ↳ 우리 드라이브 모델(두 번째 의견 · 시장보다 덜 정확): CAR 24.4 – NO 24.6 → NO 50%
-- 🆕 직전 판(11-15 09:04) 대비 변동: ML -110/-110 → ?/?
+- 🆕 직전 판(11-15 11:42) 대비 변동: 없음
 
 - 시장(DK): 스프레드 홈 -1.5 · 총점 48.5 · ML CAR ? / NO ? · nflverse 라인 1.5/48.5
 - 레이팅: CAR 공격 -0.008(패 -0.017/러 -0.012) · 수비 +0.042(패 +0.073/러 +0.010) · 순마진 -3.1 · PF/PA 24.9/27.4
 - 레이팅: NO 공격 -0.054(패 -0.048/러 -0.069) · 수비 -0.015(패 -0.007/러 -0.044) · 순마진 -2.4 · PF/PA 23.1/27.0
 - 모델: 홈 마진 2.2 · 홈 승률 56.6% · 총점 43.9
-- 부상·QB CAR: 예상 QB Bryce Young(시즌 주전 B.Young) · Out 4 / Doubtful 2 / Questionable 3 — Out: Bobby Okereke(LB · ★스냅 95%) · Taylor Moton(OL · 스냅 41% · IR) · Akayleb Evans(DB · ★스냅 100% · IR) · Will Lee III(CB · ★스냅 65% · 당일 비활성) — Doubtful: Mike Jackson(CB) · Jonathon Brooks(RB) — Questionable: Jaelan Phillips(LB) · Brady Christensen(G) · Xavier Legette(WR) · ★주전급(스냅 60%+) Out/Doubtful 3명
-- 부상·QB NO: 예상 QB Tyler Shough(시즌 주전 T.Shough) · Out 4 / Doubtful 0 / Questionable 2 — Out: Erik McCoy(C · ★스냅 91%) · Taliese Fuaga(T · ★스냅 100%) · CJ Donaldson(RB · 스냅 20%) · Christen Miller(DT · 스냅 29%) — Questionable: Travis Etienne(RB) · Martin Emerson(CB · ★스냅 89%) · ★주전급(스냅 60%+) Out/Doubtful 2명
+- 부상·QB CAR: 예상 QB Bryce Young(시즌 주전 B.Young) · Out 4 / Doubtful 2 / Questionable 3 — Out: Bobby Okereke(LB · ★스냅 95%) · Taylor Moton(OL · 스냅 41% · IR) · Akayleb Evans(DB · ★스냅 100% · IR) · Will Lee III(CB · ★스냅 65% · 당일 비활성) — Doubtful: Mike Jackson(CB) · Jonathon Brooks(RB) — Questionable: Jaelan Phillips(LB) · Brady Christensen(G) · Xavier Legette(WR) · ★주전급(스냅 60%+) Out/Doubtful 3명 · ESPN 명단에만 Out 5: Haynes King · Ja'Tavion Sanders · Sam Hecht · AJ Dillon · TeRah Edwards(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
+- 부상·QB NO: 예상 QB Tyler Shough(시즌 주전 T.Shough) · Out 4 / Doubtful 0 / Questionable 2 — Out: Erik McCoy(C · ★스냅 91%) · Taliese Fuaga(T · ★스냅 100%) · CJ Donaldson(RB · 스냅 20%) · Christen Miller(DT · 스냅 29%) — Questionable: Travis Etienne(RB) · Martin Emerson(CB · ★스냅 89%) · ★주전급(스냅 60%+) Out/Doubtful 2명 · ESPN 명단에만 Out 3: Zach Wilson · Mike Reid · Jaylan Ford(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
 - 🏥 결장 명단(ESPN 공식 비활성 · 발표 08:34 PT ∪ 주간 보고 Out): CAR Out 9 — Haynes King(QB · 직전 경기 0% · 건강 제외) · ★Will Lee III(CB · 스냅 65% · 직전 경기 0% · Hamstring · 발표 09:23) · Ja'Tavion Sanders(TE · 직전 경기 0% · 건강 제외) · ★Bobby Okereke(LB · 스냅 95% · 직전 경기 0% · Foot · 발표 08:38) · Sam Hecht(C · 직전 경기 0% · 건강 제외) · AJ Dillon(RB · 직전 경기 0% · 건강 제외) · TeRah Edwards(DT · 스냅 26% · 직전 경기 0% · 건강 제외) · Taylor Moton(OL · 스냅 41% · IR · 주간 보고) · Akayleb Evans(DB · ★스냅 100% · IR · 주간 보고) · 주중 Q/D → ESPN 출전 표시: Jaelan Phillips(Q → Active 09:24), Xavier Legette(Q → Active 09:04) / NO Out 7 — Zach Wilson(QB · 직전 경기 0% · 건강 제외) · Mike Reid(CB · 직전 경기 0% · 건강 제외) · ★Erik McCoy(C · 스냅 91% · 직전 경기 75% · Biceps · 발표 08:34) · CJ Donaldson(RB · 스냅 20% · 직전 경기 0% · Shoulder) · Jaylan Ford(LB · 스냅 10% · 직전 경기 0% · 건강 제외) · ★Taliese Fuaga(OT · 스냅 100% · 직전 경기 100% · Knee · 발표 08:34) · Christen Miller(DT · 스냅 29% · 주간 보고) · 주중 Q/D → ESPN 출전 표시: Travis Etienne(Q → Active 08:38), ★Martin Emerson(Q → Active 08:56) · ★주전 결장 CAR 3 / NO 2 — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · 팀별 발표 CAR 08:38~09:26 / NO 08:34~09:21 PT · ESPN 명단은 팀당 최근 25건(리그 injuries)이라 ⚠️ 미확인 표시만 웹 확인
 - 🔎 관찰 각도(페이퍼 · 돈 아님): 해당 없음
 - 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 · 괄호 = 2024~25 그 등급일 때 순위 높은 팀이 실제 이긴 비율와 시장이 준 확률(둘이 비슷 = 시장이 이미 반영) — 서술 전용, 확률·별점 영향 0)**:
@@ -2470,14 +2470,14 @@
 | 러시(EPA) | CAR -0.041(12위) vs NO -0.020(28위) | NO -0.134(24위) vs CAR -0.032(25위) |
 | 러시 성공률 | CAR 40%(15위) vs NO 46%(32위) | NO 34%(30위) vs CAR 41%(17위) |
 | 색 비율(드롭백당) | CAR 7.5%(23위) vs NO 7.6%(8위) | NO 5.8%(14위) vs CAR 3.9%(32위) |
-| 턴오버/경기(공격 잃음 · 수비 뺏음) | CAR 1.2(19위) vs NO 0.9(29위) | NO 1.6(27위) vs CAR 1.1(17위) |
+| 턴오버/경기(공격 잃음 · 수비 뺏음) | CAR 1.2(22위) vs NO 0.9(29위) | NO 1.6(27위) vs CAR 1.1(18위) |
 | 3rd down 전환 | CAR 39%(17위) vs NO 50%(32위) | NO 43%(9위) vs CAR 49%(29위) |
 | 패스 보호 vs 압박(PFR) | CAR 피압박 13.0/경기(32위) vs NO 압박 8.0/경기(22위) | NO 피압박 9.0/경기(23위) vs CAR 압박 8.6/경기(17위) |
 | 핵심 선수(2026 점유율) | T.McMillan 타깃 25%·EPA/타깃 +0.38 · J.Coker 타깃 17%·EPA/타깃 +0.19 · C.Hubbard 캐리 77%·EPA/캐리 +0.06 | C.Olave 타깃 28%·EPA/타깃 +0.45 · D.Vele 타깃 18%·EPA/타깃 +0.40 · K.Miller 캐리 30%·EPA/캐리 -0.29 |
 
 - 패스 매치업(서술 — 점수 아님) CAR 공격 → NO 수비: QB Bryce Young 투구 시간 2.84초 · CPOE +1.1 · 공격적 패스 13%(시도 308) · CAR 공격 피압박 경기당 13.0(적은 순 32위) vs NO 수비 압박 경기당 8.0(리그 22위) (2025 경기당: NO 압박 8.5 · CAR 피압박 8.2) · FTN: CAR 플레이액션 25%(많은 순 8위) · 블리츠 받을 때 EPA/드롭백 -0.17(좋은 순 27위 · 94회) · 가로채기 위험 패스 1.4% · vs NO 블리츠 36%(많은 순 9위)
 - 패스 매치업(서술 — 점수 아님) NO 공격 → CAR 수비: QB Tyler Shough 투구 시간 2.73초 · CPOE +1.0 · 공격적 패스 17%(시도 308) · NO 공격 피압박 경기당 9.0(적은 순 23위) vs CAR 수비 압박 경기당 8.6(리그 17위) (2025 경기당: CAR 압박 5.8 · NO 피압박 7.4) · FTN: NO 플레이액션 16%(많은 순 31위) · 블리츠 받을 때 EPA/드롭백 -0.12(좋은 순 24위 · 113회) · 가로채기 위험 패스 2.6% · vs CAR 블리츠 36%(많은 순 10위)
-- 라인 이동: 스프레드(홈) -2.5 →  · 총점 48.5 →  (11-12 15:59 → 11-15 11:41) — 정보(뉴스 반영), 방향 근거 아님
+- 라인 이동: 스프레드(홈) -2.5 →  · 총점 48.5 →  (11-12 15:59 → 11-15 11:55) — 정보(뉴스 반영), 방향 근거 아님
 - 맥락(값만 — N5): 휴식 CAR 7일 / NO 7일 · 날씨 7 58°F · 지붕 indoor
 - 리스크: 자동 항목 없음 · 〔직접 서술 — 값만, 단정 금지〕
 
@@ -2485,14 +2485,14 @@
 
 - 팀: **Miami Dolphins**(마이애미 돌핀스) @ **Indianapolis Colts**(인디애나폴리스 콜츠) · 로고는 보드(Artifact)에서
     ↳ 우리 드라이브 모델(두 번째 의견 · 시장보다 덜 정확): MIA 20.7 – IND 23.5 → IND 58%
-- 🆕 직전 판(11-15 09:04) 대비 변동: ML +180/-218 → ?/?
+- 🆕 직전 판(11-15 11:42) 대비 변동: 없음
 
 - 시장(DK): 스프레드 홈 -4.5 · 총점 37.5 · ML MIA ? / IND ? · nflverse 라인 4.5/37.5
 - 레이팅: MIA 공격 -0.026(패 -0.021/러 -0.020) · 수비 +0.079(패 +0.119/러 +0.021) · 순마진 -6.5 · PF/PA 15.8/25.0
 - 레이팅: IND 공격 -0.027(패 -0.035/러 +0.045) · 수비 +0.028(패 +0.038/러 -0.013) · 순마진 -3.4 · PF/PA 20.4/27.7
 - 모델: 홈 마진 4.6 · 홈 승률 63.8% · 총점 49.4
-- 부상·QB MIA: 예상 QB Kyle McCord(시즌 주전 M.Willis) · ⓘ 주전 복귀 — 시즌 드롭백 최다 M.Willis, 예상 선발 Kyle McCord(레이팅에 대체 QB 표본 섞임) · Out 6 / Doubtful 0 / Questionable 0 — Out: Aaron Brewer(C · ★스냅 100%) · Jared Wayne(WR · 스냅 13%) · Zach Sieler(DL · ★스냅 77% · IR) · Malik Willis(QB · ★스냅 100% · IR) · Darrell Baker Jr.(CB · 당일 비활성) · Chris Bell(WR · ★스냅 60% · 당일 비활성) · ★주전급(스냅 60%+) Out/Doubtful 4명
-- 부상·QB IND: 예상 QB Daniel Jones(시즌 주전 D.Jones) · Out 8 / Doubtful 0 / Questionable 0 — Out: Luke Rhodes(LS) · Mo Alie-Cox(TE · 스냅 37%) · Jerry Tillery(DT · 스냅 34%) · Akeem Davis-Gaither(LB · ★스냅 82%) · Jaylon Carlies(LB · 스냅 33%) · Jalen Travis(T · ★스냅 80%) · Cam Taylor-Britt(DB · 스냅 42% · IR) · Will Mallory(TE · 스냅 24% · 당일 비활성) · ★주전급(스냅 60%+) Out/Doubtful 2명
+- 부상·QB MIA: 예상 QB Kyle McCord(시즌 주전 M.Willis) · ⓘ 주전 복귀 — 시즌 드롭백 최다 M.Willis, 예상 선발 Kyle McCord(레이팅에 대체 QB 표본 섞임) · Out 6 / Doubtful 0 / Questionable 0 — Out: Aaron Brewer(C · ★스냅 100%) · Jared Wayne(WR · 스냅 13%) · Zach Sieler(DL · ★스냅 77% · IR) · Malik Willis(QB · ★스냅 100% · IR) · Darrell Baker Jr.(CB · 당일 비활성) · Chris Bell(WR · ★스냅 60% · 당일 비활성) · ★주전급(스냅 60%+) Out/Doubtful 4명 · ESPN 명단에만 Out 3: Caedan Wallace · Justin Joly · Marcellas Dial Jr.(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
+- 부상·QB IND: 예상 QB Daniel Jones(시즌 주전 D.Jones) · Out 8 / Doubtful 0 / Questionable 0 — Out: Luke Rhodes(LS) · Mo Alie-Cox(TE · 스냅 37%) · Jerry Tillery(DT · 스냅 34%) · Akeem Davis-Gaither(LB · ★스냅 82%) · Jaylon Carlies(LB · 스냅 33%) · Jalen Travis(T · ★스냅 80%) · Cam Taylor-Britt(DB · 스냅 42% · IR) · Will Mallory(TE · 스냅 24% · 당일 비활성) · ★주전급(스냅 60%+) Out/Doubtful 2명 · ESPN 명단에만 Out 1: Riley Leonard(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)
 - 🏥 결장 명단(ESPN 공식 비활성 · 발표 08:36 PT ∪ 주간 보고 Out): MIA Out 9 — ★Chris Bell(WR · 스냅 60% · 직전 경기 63% · Knee · 발표 08:41) · Caedan Wallace(OT · 스냅 8% · 직전 경기 0% · 건강 제외) · Jared Wayne(WR · 스냅 13% · 직전 경기 11% · Quadriceps) · Justin Joly(TE · 직전 경기 0% · 건강 제외) · ★Aaron Brewer(C · 스냅 100% · 직전 경기 100% · Concussion · 발표 08:36) · Marcellas Dial Jr.(CB · 직전 경기 0% · 건강 제외) · Darrell Baker Jr.(CB · 직전 경기 0% · Knee) · Zach Sieler(DL · ★스냅 77% · IR · 주간 보고) · Malik Willis(QB · ★스냅 100% · IR · 주간 보고) / IND Out 9 — Riley Leonard(QB · 직전 경기 0% · 건강 제외) · Luke Rhodes(LS · 직전 경기 0% · Hamstring) · Jerry Tillery(DT · 스냅 34% · 직전 경기 28% · Calf) · ★Jalen Travis(OT · 스냅 80% · 직전 경기 41% · Knee · 발표 08:36) · Jaylon Carlies(LB · 스냅 33% · 직전 경기 15% · Neck) · Will Mallory(TE · 스냅 24% · 직전 경기 0% · Hamstring) · Mo Alie-Cox(TE · 스냅 37% · 주간 보고) · Akeem Davis-Gaither(LB · ★스냅 82% · 주간 보고) · Cam Taylor-Britt(DB · 스냅 42% · IR · 주간 보고) · ★주전 결장 MIA 4 / IND 2 — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · 팀별 발표 MIA 08:36~08:41 / IND 08:36~08:46 PT · ESPN 명단은 팀당 최근 25건(리그 injuries)이라 ⚠️ 미확인 표시만 웹 확인
 - 🔎 관찰 각도(페이퍼 · 돈 아님): 해당 없음
 - 📊 **스탯 비교(말로 — 발행문 「- 스탯 비교:」에 줄 단위로 옮긴다 · 2026 정규시즌 · 32팀 순위 · 상위 1~10 / 중간 11~22 / 하위 23~32 · 수비는 적게 내줄수록 높은 순위 · 점수 0, 시장이 이미 반영 · 격차 열 = 순위 차 0~4 차이 없음 / 5~9 근접 / 10~15 경미 / 16+ 중대 · 괄호 = 2024~25 그 등급일 때 순위 높은 팀이 실제 이긴 비율와 시장이 준 확률(둘이 비슷 = 시장이 이미 반영) — 서술 전용, 확률·별점 영향 0)**:
@@ -2567,7 +2567,7 @@
 
   ↳ 읽는 법: 압박·색은 상대 OL·QB 색 허용률(선수 표)과 맞춰 보고, 커버리지 「타깃→허용」은 많이 노려진 CB 를 뜻한다(허용 수가 많다고 나쁜 것은 아님 — 야드/타깃이 기준). 놓친 태클은 상대 RB 야드/캐리와 함께. 전부 서술 재료 — 2018~25 백테스트에서 시장을 못 이겼고, 색률 상위 8 수비는 오히려 시장이 과대평가(A10 관찰).
 
-- 📌 **결론 재료(자동 — 10판 ML 전용 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: 스탯 격차 상위 3(32팀 순위 차 순): 3rd down 허용(수비): MIA 50% · 30위(하위) vs IND 33% · 4위(상위) — 중대 · IND 쪽 / 러시 공격(러시당 EPA): MIA -0.127 · 22위(중간) vs IND +0.009 · 5위(상위) — 중대 · IND 쪽 / 득점 드라이브 비율: MIA 34% · 27위(하위) vs IND 38% · 16위(중간) — 경미 · IND 쪽 · 선수 핵심: QB MIA M.Willis(Out) EPA 33/39위·하위 vs IND D.Jones (예상 선발) EPA 36/39위·하위 · 타깃 1위 MIA M.Washington 타깃 48 · 야드/타깃 95/190위·중간 vs IND K.Allen 타깃 58 · 야드/타깃 128/190위·중간 · 캐리 1위 MIA O.Gordon 캐리 107 · 야드/캐리 22/72위·상위 vs IND J.Taylor 캐리 161 · 야드/캐리 36/72위·중간 · ★주전 Out/Doubtful MIA 4명 / IND 2명 · 공식 비활성(ESPN 08:36 PT 발표): ★주전 MIA 4 / IND 2 — 🏥 줄 그대로 · 새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): 없음 · 관찰 각도(페이퍼): 없음 · 로컬 페이퍼 관찰 있음(돈 아님): 관찰(큰 괴리 — 페이퍼)
+- 📌 **결론 재료(자동 — 10판 ML 전용 · MLB A9 방식 · 발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다, 값 재계산 금지)**: 스탯 격차 상위 3(32팀 순위 차 순): 3rd down 허용(수비): MIA 50% · 30위(하위) vs IND 33% · 4위(상위) — 중대 · IND 쪽 / 러시 공격(러시당 EPA): MIA -0.127 · 22위(중간) vs IND +0.009 · 5위(상위) — 중대 · IND 쪽 / 득점 드라이브 비율: MIA 34% · 27위(하위) vs IND 38% · 16위(중간) — 경미 · IND 쪽 · 선수 핵심: QB MIA Kyle McCord (예상 선발) 표본 적음 vs IND D.Jones (예상 선발) EPA 36/39위·하위 · 타깃 1위 MIA M.Washington 타깃 48 · 야드/타깃 95/190위·중간 vs IND K.Allen 타깃 58 · 야드/타깃 128/190위·중간 · 캐리 1위 MIA O.Gordon 캐리 107 · 야드/캐리 22/72위·상위 vs IND J.Taylor 캐리 161 · 야드/캐리 36/72위·중간 · ★주전 Out/Doubtful MIA 4명 / IND 2명 · 공식 비활성(ESPN 08:36 PT 발표): ★주전 MIA 4 / IND 2 — 🏥 줄 그대로 · 새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): 없음 · 관찰 각도(페이퍼): 없음 · 로컬 페이퍼 관찰 있음(돈 아님): 관찰(큰 괴리 — 페이퍼)
 
 - 🤝 **맞대결(최근 3시즌 2023~ · 플레이오프 포함 · 값만 — 2006~25 직전 맞대결 진 팀 리턴매치 커버 51.5%, 우연 범위)**:
 
@@ -2648,13 +2648,13 @@
 | 러시(EPA) | MIA -0.127(22위) vs IND +0.027(32위) | IND +0.009(5위) vs MIA -0.060(22위) |
 | 러시 성공률 | MIA 35%(26위) vs IND 44%(30위) | IND 45%(6위) vs MIA 43%(26위) |
 | 색 비율(드롭백당) | MIA 9.3%(30위) vs IND 6.4%(16위) | IND 7.3%(22위) vs MIA 4.9%(28위) |
-| 턴오버/경기(공격 잃음 · 수비 뺏음) | MIA 1.2(21위) vs IND 0.7(31위) | IND 1.9(29위) vs MIA 0.9(28위) |
+| 턴오버/경기(공격 잃음 · 수비 뺏음) | MIA 1.2(19위) vs IND 0.7(31위) | IND 1.9(30위) vs MIA 0.9(28위) |
 | 3rd down 전환 | MIA 43%(11위) vs IND 33%(4위) | IND 38%(21위) vs MIA 50%(30위) |
 | 패스 보호 vs 압박(PFR) | MIA 피압박 8.8/경기(20위) vs IND 압박 7.6/경기(27위) | IND 피압박 8.8/경기(21위) vs MIA 압박 7.0/경기(31위) |
 | 핵심 선수(2026 점유율) | M.Washington 타깃 24%·EPA/타깃 +0.17 · G.Dulcich 타깃 16%·EPA/타깃 +0.35 · O.Gordon 캐리 57%·EPA/캐리 -0.05 | K.Allen 타깃 20%·EPA/타깃 +0.12 · J.Downs 타깃 20%·EPA/타깃 +0.27 · J.Taylor 캐리 69%·EPA/캐리 -0.09 |
 
 - 패스 매치업(서술 — 점수 아님) MIA 공격 → IND 수비: QB Kyle McCord NGS 기록 없음 · MIA 공격 피압박 경기당 8.8(적은 순 20위) vs IND 수비 압박 경기당 7.6(리그 27위) (2025 경기당: IND 압박 9.9 · MIA 피압박 6.9) · FTN: MIA 플레이액션 23%(많은 순 15위) · 블리츠 받을 때 EPA/드롭백 -0.02(좋은 순 20위 · 83회) · 가로채기 위험 패스 2.3% · vs IND 블리츠 21%(많은 순 31위)
 - 패스 매치업(서술 — 점수 아님) IND 공격 → MIA 수비: QB Daniel Jones 투구 시간 2.82초 · CPOE -2.0 · 공격적 패스 13%(시도 302) · IND 공격 피압박 경기당 8.8(적은 순 21위) vs MIA 수비 압박 경기당 7.0(리그 31위) (2025 경기당: MIA 압박 7.6 · IND 피압박 6.8) · FTN: IND 플레이액션 29%(많은 순 6위) · 블리츠 받을 때 EPA/드롭백 -0.13(좋은 순 25위 · 109회) · 가로채기 위험 패스 5.3% · vs MIA 블리츠 23%(많은 순 29위)
-- 라인 이동: 스프레드(홈) -3.5 →  · 총점 38.5 →  (11-12 15:59 → 11-15 11:41) — 정보(뉴스 반영), 방향 근거 아님
+- 라인 이동: 스프레드(홈) -3.5 →  · 총점 38.5 →  (11-12 15:59 → 11-15 11:55) — 정보(뉴스 반영), 방향 근거 아님
 - 맥락(값만 — N5): 휴식 MIA 7일 / IND 7일 · 날씨 7 48°F · 지붕 indoor
 - 리스크: MIA 주전 복귀 — 시즌 드롭백 최다 M.Willis, 예상 선발 Kyle McCord(레이팅에 대체 QB 표본 섞임) · 〔직접 서술 — 값만, 단정 금지〕
