@@ -12,6 +12,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import nfl_pull as N   # noqa: E402
 import picks as P      # noqa: E402
 import predictions as PR   # noqa: E402
+import team_hex as TH   # noqa: E402  11/15 육각형(선수 위주)
 
 KR = N.TEAM_KR
 esc = html.escape
@@ -90,37 +91,62 @@ a.goto{font-size:.8rem;color:var(--ink);cursor:pointer;text-decoration:underline
 .pth{font-size:.8rem;font-weight:700;margin:12px 0 2px}
 .pt2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,540px),1fr));gap:12px;align-items:start;margin:4px 0}
 .pt2>div{overflow-x:auto;min-width:0}
-table.ptab{width:100%;min-width:540px;table-layout:fixed;border-collapse:separate;border-spacing:2px;font-size:.72rem;font-variant-numeric:tabular-nums}
+table.ptab{width:100%;min-width:540px;table-layout:fixed;border-collapse:collapse;font-size:.72rem;font-variant-numeric:tabular-nums}
 table.ptab th{font-family:var(--mono);font-size:.64rem;color:var(--muted);font-weight:700;text-align:center;padding:3px 1px;white-space:nowrap;overflow:hidden}
 table.ptab tr.th0 th{font-family:var(--body);font-size:.84rem;color:var(--ink);text-align:left;padding:2px 2px 4px}
 table.ptab tr.gh th{border-top:1px solid var(--line);padding-top:6px}
 table.ptab tr.gh th.pnm{text-align:left;color:var(--ink);font-family:var(--body);font-size:.72rem}
 table.ptab col.cn{width:128px}table.ptab .pnm{text-align:left}
-table.ptab td{padding:4px 1px;border-radius:3px;text-align:center;font-family:var(--mono);font-size:.94em;letter-spacing:-.02em}table.ptab td.n{white-space:nowrap}
+table.ptab td{padding:5px 1px;border-bottom:1px solid var(--line);text-align:center;font-family:var(--mono);font-size:.94em;letter-spacing:-.02em;color:var(--muted)}table.ptab td.n{white-space:nowrap}
+table.ptab td.lead{font-weight:800;color:var(--ink)}
 table.ptab td.pnm{font-family:var(--body);white-space:normal;border-bottom:1px solid var(--line);border-radius:0}
 table.ptab .pnn{display:block;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 table.ptab .psub{display:block;color:var(--muted);font-size:.86em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-table.ptab .stt{display:block;font-size:.86em;color:var(--wait);font-weight:700}
+table.ptab .stt{display:block;font-size:.86em;color:var(--ink);font-weight:700}
 table.ptab .smp{display:inline-block;margin-top:2px;padding:0 5px;border:1px dashed var(--muted);border-radius:4px;font-size:.82em;color:var(--muted)}
-table.ptab td.sm{color:var(--muted);font-style:italic;background:repeating-linear-gradient(135deg,transparent 0 4px,rgba(127,127,127,.10) 4px 8px)}
+table.ptab td.sm{color:var(--muted);font-style:italic}
 table.ptab td.tx{color:var(--muted);font-size:.92em;white-space:normal}
 table.ptab tr.out td{opacity:.5}
 table.ptab tr.sum td{color:var(--muted)}table.ptab tr.sum td.hi{font-weight:800;color:var(--ink)}
 table.ptab tr.sum td.pnm{background:var(--soft)}
-.smnote{margin:4px 0 6px;font-size:.8rem}.sznote{margin:2px 0 6px;font-size:.8rem;color:var(--muted)}.sznote b{color:var(--ink)}.smnote b{color:var(--wait)}
+.smnote{margin:4px 0 6px;font-size:.8rem}.sznote{margin:2px 0 6px;font-size:.8rem;color:var(--muted)}.sznote b{color:var(--ink)}.smnote b{color:var(--ink)}
 .ptcap{font-size:.7rem;color:var(--muted);margin:2px 0 10px;line-height:1.55}
-.ptcap .kc{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 3px 0 6px;vertical-align:-1px}
+details.ptd{margin:4px 0 8px}details.ptd>summary{cursor:pointer;font-size:.82rem;color:var(--muted);padding:4px 0}details.ptd[open]>summary{color:var(--ink);font-weight:700}
 .reft{margin:2px 0 4px}
 .gl{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:3px 22px;font-size:.76rem;line-height:1.45;margin:6px 0 4px;color:var(--ink)}
 .gl b{font-family:var(--mono);font-weight:800}.gl i{color:var(--muted);font-style:normal;font-size:.92em}
 .gl .gh2{grid-column:1/-1;font-weight:700;color:var(--muted);margin-top:6px;font-size:.74rem}
-.gl .kc{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;border:1px solid var(--line)}
 details.gloss{margin-top:4px}details.gloss>summary{cursor:pointer}
 nav.dnav{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.82rem}
 nav.dnav a,nav.dnav .cur{border:1px solid var(--line);border-radius:999px;padding:3px 11px;text-decoration:none;color:var(--ink);background:var(--panel)}
 nav.dnav a:hover{border-color:var(--ink)}nav.dnav .cur{border-color:var(--ink);font-weight:800}nav.dnav a.hub{font-weight:700}
 a.prevb{display:inline-block;border:1px solid var(--line);border-radius:8px;padding:8px 14px;text-decoration:none;color:var(--ink);background:var(--panel)}
 table.cmp{min-width:1100px}
+table.cmp tr.xrow>td{white-space:normal;padding:0;background:var(--soft);cursor:default}
+table.cmp tr.open>td{background:var(--soft)}table.cmp tr.open>td:first-child{box-shadow:inset 3px 0 0 var(--ink)}
+.xbody{position:sticky;left:0;width:min(calc(100vw - 52px),1286px);box-sizing:border-box;display:grid;gap:8px;padding:12px 14px 16px}
+.xbody .md{font-size:.88rem;overflow-wrap:anywhere}
+.sline{font-size:.95rem}
+.hexw{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;margin:4px 0 14px}
+.hexc{flex:0 1 300px;min-width:240px}
+.hexl{display:flex;gap:14px;justify-content:center;font-size:.8rem;color:var(--ink)}
+.hlg{display:inline-flex;align-items:center;gap:6px}
+.hlg i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.hexg{display:block;width:100%;max-width:300px;height:auto;margin:0 auto}
+.hgr{fill:none;stroke:var(--line);stroke-width:1}
+.hgm{stroke:var(--muted);stroke-dasharray:3 3}
+.hsr{fill-opacity:.14;stroke-width:2;stroke-linejoin:round}
+.hdot{stroke:var(--panel);stroke-width:2}
+.hhit{fill:transparent}
+.hlb{fill:var(--ink);font-size:12px;font-weight:600}
+.hexd{flex:1 1 340px;min-width:0}
+.hext{border-collapse:collapse;width:100%;font-size:.8rem}
+.hext th{color:var(--muted);font-weight:500;text-align:left;padding:3px 8px;border-bottom:1px solid var(--line)}
+.hext td{padding:3px 8px;border-bottom:1px solid var(--line)}
+.hext .n{text-align:center;font-variant-numeric:tabular-nums}
+.hext .hhi{font-weight:800}
+.hext .hsub{color:var(--muted);font-size:.76rem}
+.hcap{margin:6px 0 0;color:var(--muted);font-size:.76rem}
 """
 
 # 표 머리 클릭 정렬(숫자 열 첫 클릭 큰 값부터 · 경기·시간 열은 킥오프 순) + 줄·카드·「보기」 클릭 → 그 경기 발행문 펼침·스크롤
@@ -129,17 +155,13 @@ BOARD_JS = """
 <script>
 (function(){
   function openPub(g){
-    var d=document.querySelector('details.pubd[data-p="'+g+'"]');if(!d)return;
-    d.open=true;d.scrollIntoView({behavior:"smooth",block:"start"});
-    setTimeout(function(){if(Math.abs(d.getBoundingClientRect().top)>60)d.scrollIntoView({block:"start"});},700);
-    d.classList.add("flash");d.classList.remove("off");
-    setTimeout(function(){d.classList.add("off");},900);
-    setTimeout(function(){d.classList.remove("flash","off");},2400);
+    var x=document.querySelector('tr.xrow[data-x="'+g+'"]'),r=document.querySelector('tr[data-g="'+g+'"]');if(!x)return;
+    x.hidden=!x.hidden;if(r)r.classList.toggle("open",!x.hidden);
   }
   var tb=document.querySelector('.tblwrap table');
   if(tb&&tb.tHead){
     var ths=tb.tHead.rows[0].cells,tbody=tb.tBodies[0];
-    [].forEach.call(tbody.rows,function(r,i){r.dataset.i=i;});
+    [].forEach.call(tbody.querySelectorAll('tr[data-g]'),function(r,i){r.dataset.i=i;});
     var cur=-1,dir=0;
     function num(tr,i){
       var c=tr.cells[i];if(!c)return null;
@@ -147,7 +169,7 @@ BOARD_JS = """
       return null;
     }
     function apply(){
-      var rs=[].slice.call(tbody.rows);
+      var rs=[].slice.call(tbody.querySelectorAll('tr[data-g]'));
       rs.sort(function(a,b){
         var x=num(a,cur),y=num(b,cur);
         if(x===null&&y===null)return a.dataset.i-b.dataset.i;
@@ -155,7 +177,7 @@ BOARD_JS = """
         if(x!==y)return dir*(x-y);
         return a.dataset.i-b.dataset.i;
       });
-      rs.forEach(function(r){tbody.appendChild(r);});
+      rs.forEach(function(r){tbody.appendChild(r);var x=tbody.querySelector('tr.xrow[data-x="'+r.dataset.g+'"]');if(x)tbody.appendChild(x);});
     }
     [].forEach.call(ths,function(th,i){
       var has=[].some.call(tbody.rows,function(r){return r.cells[i]&&r.cells[i].dataset.s!==undefined;});
@@ -168,8 +190,8 @@ BOARD_JS = """
       });
     });
     [].forEach.call(tbody.rows,function(tr){
-      var g=tr.dataset.g;if(!g)return;tr.title="누르면 아래 발행문·보완으로 이동";
-      tr.addEventListener("click",function(){openPub(g);});
+      var g=tr.dataset.g;if(!g)return;tr.title="누르면 바로 아래 펼치기 · 다시 누르면 접기";
+      tr.addEventListener("click",function(e){if(e.target.closest("a,abbr"))return;openPub(g);});
     });
   }
   [].forEach.call(document.querySelectorAll('.card[data-g]'),function(c){
@@ -579,8 +601,8 @@ def _tbl_rows(lines):
 _PT_HEAD = re.compile(r"([A-Z]{2,3})\s+(선수|수비)")
 # ── 선수·수비 표(2026-10-24 NBA side_by_side·PT_COLS·_tile·SMALL_GP → 10/25 NFL 이식):
 # 두 팀 표를 나란히(원정 왼쪽 · 홈 오른쪽) · 포지션 묶음(QB/RB/WR·TE/K · 패스러시/커버리지)마다 열 머리(영어 약어 · 한국어 뜻은 툴팁·아래 풀이) ·
-# 숫자 = 열마다 다른 색 타일(진할수록 큰 값 · 투명도 0.14~0.72) · INT·SK%·수비 Y/TGT·MISS 는 빨강(나쁨) · EPA 는 초록 +/빨강 − ·
-# 다이제스트 「※ 얇음」(드롭백 150·캐리 40·타깃 30 미만)은 「표본 적음」 — 회색 기울임, 색칠·척도 계산 제외 · 포지션·경기·상태는 이름 칸 둘째 줄.
+# 숫자 = 색 없음(11/15 Paul 「색깔 없애버려 눈만 부시고」) · 두 팀 같은 포지션 열 1등만 굵게(INT·SK%·수비 Y/TGT·MISS 는 낮을수록 1등) ·
+# 다이제스트 「※ 얇음」(드롭백 150·캐리 40·타깃 30 미만)은 「표본 적음」 — 회색 기울임, 1등 비교 제외 · 포지션·경기·상태는 이름 칸 둘째 줄.
 STATUS_KR = {"Out": "결장", "IR": "결장(IR)", "Injured Reserve": "결장(IR)", "Doubtful": "결장 유력", "D": "결장 유력",
              "Questionable": "출전 불투명", "Q": "출전 불투명", "Probable": "출전 유력", "Day-To-Day": "당일 결정"}
 _GRP_OF = {"QB": "QB", "러셔": "RB", "리시버": "WR", "키커": "K", "패스러시": "PR", "커버리지": "CV", "합계": "TEAM"}
@@ -595,22 +617,18 @@ _DEF = [("PRS", "PRS", "압박 — QB 를 몰아붙인 횟수", "cnt", _BL), ("S
 PT_COLS = {
     "QB": [("ATT", "ATT", "패스 시도", "cnt", _BL), ("CMP%", "CMP%", "패스 성공률", "pct", _OR), ("YDS", "YDS", "패스 야드", "cnt", _GR),
            ("TD", "TD", "패스 TD", "cnt", _PU), ("INT", "INT", "인터셉션 — 적을수록 좋음(빨강 진할수록 많음)", "bad", _RD),
-           ("Y/A", "Y/A", "패스 1번당 야드", "rate", _TE), ("SK%", "SK%", "색 당한 비율 — 낮을수록 좋음", "badr", _RD), _EPA,
-           ("RK", "RK", "리그 순위(EPA/드롭백)", "txt", None), ("'25", "'25", "작년 EPA/드롭백(순위)", "txt", None)],
+           ("Y/A", "Y/A", "패스 1번당 야드", "rate", _TE), ("SK%", "SK%", "색 당한 비율 — 낮을수록 좋음", "badr", _RD), _EPA],
     "RB": [("CAR", "CAR", "캐리(러시 시도)", "cnt", _BL), ("YDS", "YDS", "러시 야드", "cnt", _GR), ("TD", "TD", "러시 TD", "cnt", _PU),
-           ("YPC", "YPC", "캐리 1번당 야드", "rate", _TE), ("SR%", "SR%", "성공 플레이 비율", "pct", _OR), _EPA,
-           ("RK", "RK", "리그 순위(YPC)", "txt", None), ("'25", "'25", "작년 YPC(순위)", "txt", None)],
+           ("YPC", "YPC", "캐리 1번당 야드", "rate", _TE), ("SR%", "SR%", "성공 플레이 비율", "pct", _OR), _EPA],
     "WR": [("TGT", "TGT", "타깃 — 패스 대상이 된 횟수", "cnt", _BL), ("REC", "REC", "받은 공", "cnt", _IN), ("YDS", "YDS", "리시브 야드", "cnt", _GR),
-           ("TD", "TD", "리시브 TD", "cnt", _PU), ("CT%", "CT%", "캐치율", "pct", _OR), ("Y/TGT", "Y/TGT", "타깃 1번당 야드", "rate", _TE), _EPA,
-           ("RK", "RK", "리그 순위(Y/TGT)", "txt", None), ("'25", "'25", "작년 Y/TGT(순위)", "txt", None)],
+           ("TD", "TD", "리시브 TD", "cnt", _PU), ("CT%", "CT%", "캐치율", "pct", _OR), ("Y/TGT", "Y/TGT", "타깃 1번당 야드", "rate", _TE), _EPA],
     "K": [("FG", "FG", "필드골 성공/시도(2024~26)", "txt", None), ("FG%", "FG%", "필드골 성공률", "pct", _OR), ("50+", "50+", "50야드+ 성공/시도", "txt", None)],
     "PR": _DEF, "CV": _DEF}
-_SIZE_COLS = [("HT", "HT", "키(cm) — 마우스를 대면 피트-인치", "size", (100, 116, 139)), ("WT", "WT", "몸무게(kg) — 마우스를 대면 파운드", "size", (180, 120, 60))]
 
 
 def cols_of(g):
-    """포지션 묶음의 표 열 — 맨 앞 HT·WT(10/25 NBA 0af7634 키 열 이식 · NFL 은 몸무게도) + 기록 열."""
-    return _SIZE_COLS + PT_COLS[g]
+    """포지션 묶음의 표 열 — 기록 열만(11/15 Paul: HT·WT 키·몸무게 · RK 순위 · '25 작년 열 뺌 — 체격은 표 위 「키·몸무게 비교」 한 줄)."""
+    return PT_COLS[g]
 
 
 _ROS = None
@@ -719,17 +737,9 @@ def parse_prow(hdr, r):
     return p
 
 
-def _tile(rgb, rel):
-    """색 타일 — rel 0~1(진하기) · NBA 10/24 「진하게」 투명도 0.14~0.72."""
-    a = 0.14 + 0.58 * max(0.0, min(1.0, rel))
-    return f' style="background:rgba({rgb[0]},{rgb[1]},{rgb[2]},{a:.2f})"'
-
-
 # ── 줄임말 풀이(10/25 Paul 「ATT CMP% YDS TD INT Y/A SK% EPA RK '25 이런 것들 밑에 풀어서 알 수 있도록 · 다른 미식축구 전용 줄임말도」)
 # 표 열 = 영어 원말 + 쉬운 한국어 · 표 밑에 그 표에 나온 열만 · 포지션·상태·발행문 용어는 맨 위 「미식축구 줄임말 풀이」에 전부.
-GLOSS = {"HT": ("Height", "키 — cm(마우스를 대면 피트-인치 · 6-4 = 6피트 4인치 = 193cm)"),
-         "WT": ("Weight", "몸무게 — kg(마우스를 대면 파운드)"),
-         "ATT": ("Attempts", "패스 시도 — QB 가 공을 던진 횟수"),
+GLOSS = {"ATT": ("Attempts", "패스 시도 — QB 가 공을 던진 횟수"),
          "CMP%": ("Completion %", "패스 성공률 — 던진 공 중 우리 편이 받은 비율"),
          "YDS": ("Yards", "전진 야드 — 공을 몇 야드 앞으로 옮겼나(QB 는 패스, RB 는 달리기, WR·TE 는 받은 공)"),
          "TD": ("Touchdown", "터치다운 — 엔드존에 공을 넣은 횟수(6점)"),
@@ -737,8 +747,6 @@ GLOSS = {"HT": ("Height", "키 — cm(마우스를 대면 피트-인치 · 6-4 =
          "Y/A": ("Yards per Attempt", "패스 1번당 평균 전진 야드"),
          "SK%": ("Sack %", "색 당한 비율 — 던지려다 QB 가 공을 든 채 태클당한 비율(낮을수록 좋음)"),
          "EPA": ("Expected Points Added", "플레이 하나가 우리 팀 기대 득점을 얼마나 바꿨나 — 플레이당 평균, + 면 좋고 − 면 나쁨"),
-         "RK": ("Rank", "리그 순위 — 14/35 = 35명 중 14위(QB 는 EPA, RB 는 YPC, WR·TE 는 Y/TGT 기준)"),
-         "'25": ("2025 season", "작년(2025) 같은 지표 — #숫자는 그때 순위, 「적음」은 작년 표본이 작음"),
          "CAR": ("Carries", "캐리 — 공을 들고 달린 횟수(러시 시도)"),
          "YPC": ("Yards per Carry", "캐리 1번당 평균 전진 야드"),
          "SR%": ("Success Rate", "성공 플레이 비율 — 그 상황에 필요한 만큼 전진한 플레이의 비율"),
@@ -749,8 +757,7 @@ GLOSS = {"HT": ("Height", "키 — cm(마우스를 대면 피트-인치 · 6-4 =
          "FG": ("Field Goal", "필드골 성공/시도(2024~26 합) — 차서 넣는 3점 킥"),
          "FG%": ("Field Goal %", "필드골 성공률"),
          "50+": ("50+ yards", "50야드 넘는 먼 필드골 성공/시도")}
-GLOSS_DEF = {"HT": ("Height", "키 — cm(마우스를 대면 피트-인치)"), "WT": ("Weight", "몸무게 — kg(마우스를 대면 파운드)"),
-             "PRS": ("Pressures", "압박 — QB 를 몰아붙여 서둘러 던지게 만든 횟수"),
+GLOSS_DEF = {"PRS": ("Pressures", "압박 — QB 를 몰아붙여 서둘러 던지게 만든 횟수"),
              "SK": ("Sacks", "색 — QB 가 던지기 전에 태클한 횟수(0.5 = 둘이 같이 잡음)"),
              "QBH": ("QB Hits", "QB 히트 — 던진 직후 QB 를 넘어뜨린 횟수"),
              "TGT": ("Targets", "그 수비수가 막던 선수에게 온 패스 수"),
@@ -782,7 +789,7 @@ TERM_GLOSS = [("ML", "Moneyline — 점수 차 상관없이 그냥 이길 팀"),
 
 
 def table_gloss(groups, kind):
-    """선수·수비 표 바로 밑 — 그 표에 나온 열 머리만 「약어(영어 원말) — 쉬운 뜻」, 열 색 칩 같이."""
+    """선수·수비 표 바로 밑 — 그 표에 나온 열 머리만 「약어(영어 원말) — 쉬운 뜻」."""
     src = GLOSS_DEF if kind == "수비" else GLOSS
     out, seen = [], set()
     if kind == "수비":
@@ -795,8 +802,7 @@ def table_gloss(groups, kind):
                 continue
             seen.add(c_[1])
             en, ko = src.get(c_[0], ("", c_[2]))
-            chip = f'<span class="kc" style="background:rgba({c_[4][0]},{c_[4][1]},{c_[4][2]},.65)"></span>' if c_[4] else '<span class="kc"></span>'
-            out.append(f'<div>{chip}<b>{esc(c_[1])}</b>{f" <i>{esc(en)}</i>" if en else ""} — {esc(ko)}</div>')
+            out.append(f'<div><b>{esc(c_[1])}</b>{f" <i>{esc(en)}</i>" if en else ""} — {esc(ko)}</div>')
     return '<div class="gl">' + "".join(out) + "</div>"
 
 
@@ -814,7 +820,7 @@ def gloss_all():
 
 
 def nfl_side_by_side(kind, grids, A, H, pick):
-    """두 팀 표(원정 왼쪽 · 홈 오른쪽) — 포지션 묶음마다 머리 줄, 색 타일, 표본 적음, RB·WR 합계 줄(두 팀 중 큰 값만 진하게)."""
+    """두 팀 표(원정 왼쪽 · 홈 오른쪽) — 포지션 묶음마다 머리 줄, 열 1등 굵게(색 없음), 표본 적음, RB·WR 합계 줄(두 팀 중 큰 값만 굵게)."""
     data = {t: [parse_prow(grids[t][0], r) for r in grids[t][1:]] for t in (A, H)}
     for t in (A, H):
         for p in data[t]:
@@ -824,22 +830,19 @@ def nfl_side_by_side(kind, grids, A, H, pick):
         for p in data[t]:
             if p["grp"] in PT_COLS and p["grp"] not in groups:
                 groups.append(p["grp"])
-    sc = {}
+    best, n_vals = {}, defaultdict(int)   # 열 1등 — 두 팀 같은 포지션 · 표본 적음 제외 · bad/badr 는 낮을수록 1등
     for t in (A, H):
         for p in data[t]:
             if p["small"] or p["grp"] not in PT_COLS:
                 continue
             for key, _, _, scale, _ in PT_COLS[p["grp"]]:
                 x = p["v"].get(key)
-                if x is None:
+                if x is None or scale == "txt":
                     continue
-                k2 = (p["grp"], key)
-                if scale in ("cnt", "bad"):
-                    sc[k2] = max(sc.get(k2, 0), x)
-                elif scale in ("pct", "rate", "badr"):
-                    lo, hi = sc.get(k2, (x, x)); sc[k2] = (min(lo, x), max(hi, x))
-                elif scale == "pm":
-                    sc[k2] = max(sc.get(k2, 0), abs(x))
+                k2 = (p["grp"], key); n_vals[k2] += 1
+                low = scale in ("bad", "badr")
+                if k2 not in best or (x < best[k2] if low else x > best[k2]):
+                    best[k2] = x
     sums = {t: defaultdict(float) for t in (A, H)}
     for t in (A, H):
         for p in data[t]:
@@ -848,13 +851,6 @@ def nfl_side_by_side(kind, grids, A, H, pick):
                     if scale == "cnt" and p["v"].get(key) is not None:
                         sums[t][(p["grp"], key)] += p["v"][key]
     ncol = max([len(cols_of(g)) for g in groups] or [1])
-    szr = {}   # 체격 색 척도 — 두 팀 같은 포지션 최저~최고(표본 적음 줄도 포함 — 경기 기록이 아니라서)
-    for t in (A, H):
-        for p in data[t]:
-            for key in ("HT", "WT"):
-                v = p.get("ht" if key == "HT" else "wt")
-                if v and p["grp"] in PT_COLS:
-                    lo, hi = szr.get((p["grp"], key), (v, v)); szr[(p["grp"], key)] = (min(lo, v), max(hi, v))
     lab = "선수" if kind == "선수" else "수비"
     tbls = []
     for t in (A, H):
@@ -873,46 +869,29 @@ def nfl_side_by_side(kind, grids, A, H, pick):
             for p in rows_g:
                 sub = " · ".join(x for x in (f'{p["g"]:g}경기' if p["g"] else "", p["ext"]) if x)
                 badge = f'<span class="stt">{esc(STATUS_KR.get(p["st"], p["st"]))}</span>' if p["st"] else ""
-                smb = (f'<span class="smp" title="{esc(p["vol"][0])} {p["vol"][1]:g} — 표본이 적어 숫자가 크게 부풀거나 작게 나올 수 있다(색칠·비교에서 뺐다)">표본 적음</span>'
+                smb = (f'<span class="smp" title="{esc(p["vol"][0])} {p["vol"][1]:g} — 표본이 적어 숫자가 크게 부풀거나 작게 나올 수 있다(1등 비교에서 뺐다)">표본 적음</span>'
                        if p["small"] else "")
                 cells = [f'<td class="pnm"><span class="pnn" title="{esc(p["name"])}">{esc(p["name"])}</span>'
                          + (f'<span class="psub">{esc(sub)}</span>' if sub else "") + smb + badge + "</td>"]
                 for key, _, _, scale, rgb in cols:
-                    if scale == "size":
-                        v = p.get("ht" if key == "HT" else "wt")
-                        if not v:
-                            cells.append('<td class="tx">—</td>'); continue
-                        lo, hi = szr.get((g, key), (v, v))
-                        cells.append(f'<td class="n" title="{_ftin(v) if key == "HT" else f"{v:g} lb"}"{_tile(rgb, 1.0 if hi <= lo else (v - lo) / (hi - lo))}>'
-                                     f'{_cm(v) if key == "HT" else _kg(v)}</td>'); continue
                     disp, x = p["d"].get(key, "—"), p["v"].get(key)
                     if scale == "txt":
                         cells.append(f'<td class="tx">{esc(disp)}</td>'); continue
                     if p["small"]:
                         cells.append(f'<td class="n sm">{esc(disp)}</td>'); continue
-                    sty, k2 = "", (g, key)
-                    if x is not None and k2 in sc:
-                        if scale in ("cnt", "bad") and sc[k2]:
-                            sty = _tile(rgb, x / sc[k2])
-                        elif scale in ("pct", "rate", "badr"):
-                            lo, hi = sc[k2]; sty = _tile(rgb, 1.0 if hi <= lo else (x - lo) / (hi - lo))
-                        elif scale == "pm" and sc[k2]:
-                            sty = _tile(_GR if x >= 0 else _RD, abs(x) / sc[k2])
-                    cells.append(f'<td class="n"{sty}>{esc(disp)}</td>')
+                    k2 = (g, key)
+                    lead = x is not None and n_vals[k2] > 1 and best.get(k2) == x
+                    cells.append(f'<td class="n{" lead" if lead else ""}">{esc(disp)}</td>')
                 cells += ["<td></td>"] * (ncol - len(cols))
                 trs.append(f'<tr{" class=out" if p["st"] in ("Out", "IR") else ""}>' + "".join(cells) + "</tr>")
             if g in ("RB", "WR") and len(rows_g) > 1:
                 cells = ['<td class="pnm"><span class="pnn">합계</span><span class="psub">표의 선수</span></td>']
                 for key, _, _, scale, rgb in cols:
-                    if scale == "size":   # 체격은 평균(좋고 나쁨이 아니라 색·굵게 없음)
-                        xs = [p.get("ht" if key == "HT" else "wt") for p in rows_g]
-                        xs = [x for x in xs if x]
-                        cells.append(f'<td class="tx" title="평균">{(_cm if key == "HT" else _kg)(sum(xs) / len(xs))}</td>' if xs else "<td></td>"); continue
                     v, w = sums[t].get((g, key)), sums[o].get((g, key))
                     if scale != "cnt" or not v:
                         cells.append("<td></td>"); continue
                     win = w is not None and v > w
-                    cells.append(f'<td class="n{" hi" if win else ""}"{_tile(rgb, 0.75) if win else ""}>{v:g}</td>')
+                    cells.append(f'<td class="n{" hi" if win else ""}">{v:g}</td>')
                 cells += ["<td></td>"] * (ncol - len(cols))
                 trs.append('<tr class="sum">' + "".join(cells) + "</tr>")
         tbls.append(f'<div><table class="ptab"><colgroup><col class="cn">{"<col>" * ncol}</colgroup>{"".join(trs)}</table></div>')
@@ -920,7 +899,7 @@ def nfl_side_by_side(kind, grids, A, H, pick):
     note = ""
     if any(small.values()):
         note = ('<p class="smnote"><b>표본 주의</b> — 드롭백 150·캐리 40·타깃 30 미만(다이제스트 「※ 얇음」 기준)은 몇 경기 숫자라 크게 부풀거나 작게 나온다. '
-                "회색 기울임으로 두고 색칠·비교에서 뺐다: " + " / ".join(f"{esc(t)}: {esc(', '.join(small[t]) or '없음')}" for t in (A, H)) + "</p>")
+                "회색 기울임으로 두고 1등 비교에서 뺐다: " + " / ".join(f"{esc(t)}: {esc(', '.join(small[t]) or '없음')}" for t in (A, H)) + "</p>")
     bits = []
     for g in [g_ for g_ in groups if g_ != "K"]:   # 키커 체격은 뺌
         av = {}
@@ -944,10 +923,11 @@ def nfl_side_by_side(kind, grids, A, H, pick):
         if tr_:
             bits = [tr_["raw"].get(k, "") for k in ("압박", "색", "놓친 태클")]
             teamrow.append(f'{esc(t)} 팀 — ' + " · ".join(esc(b) for b in bits if b and b not in ("—", "-")))
-    cap = (table_gloss(groups, kind) + '<div class="ptcap">색이 진할수록 큰 값(횟수는 두 팀 같은 포지션 최댓값 대비, 비율은 두 팀 최저~최고 사이) · '
-           "INT·SK%·수비 Y/TGT·MISS 는 빨강이 진할수록 나쁨 · EPA 는 초록 = +, 빨강 = − · 흐린 줄 = 결장 · 「합계」 줄은 두 팀 중 큰 값만 색칠·진하게"
+    cap = (table_gloss(groups, kind) + '<div class="ptcap">굵은 숫자 = 두 팀 같은 포지션에서 그 열 1등(INT·SK%·수비 Y/TGT·MISS 는 낮을수록 1등 · EPA 는 클수록) · '
+           "흐린 줄 = 결장 · 회색 기울임 = 표본 적음(1등 비교 제외) · 「합계」 줄은 두 팀 중 큰 값만 굵게"
            + ("<br>" + "<br>".join(teamrow) if teamrow else "") + "</div>")
-    return note + '<div class="pt2">' + "".join(tbls) + "</div>" + cap
+    return (f'<details class="ptd"><summary>{esc(lab)} 표 펼치기 — 왼쪽 {esc(A)} · 오른쪽 {esc(H)}</summary>'   # 11/15 Paul: 접어 두기
+            + note + '<div class="pt2">' + "".join(tbls) + "</div>" + cap + "</details>")
 
 
 def game_player_rows(texts, A, H):
@@ -1237,10 +1217,10 @@ def hub_html(live=None):
 <meta charset="utf-8"><title>NFL 주간 보드</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@600;800&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <style>
-:root {{ --bg:#eef2ec; --sur:#ffffff; --ink:#14231b; --ink2:#5d6b62; --line:#d4ddd3; --acc:#e8590c; --accT:#fbe9df; }}
+:root {{ --bg:#f3f5f8; --sur:#ffffff; --ink:#101828; --ink2:#556070; --line:#dde2ea; --acc:#e8590c; --accT:#fbe9df; }}
 @media (prefers-color-scheme: dark) {{ :root:not([data-theme="light"]) {{
-  --bg:#0f1712; --sur:#16211a; --ink:#e6efe7; --ink2:#97a69b; --line:#26352b; --acc:#ff7a2e; --accT:#2a1d14; color-scheme:dark; }} }}
-:root[data-theme="dark"] {{ --bg:#0f1712; --sur:#16211a; --ink:#e6efe7; --ink2:#97a69b; --line:#26352b; --acc:#ff7a2e; --accT:#2a1d14; color-scheme:dark; }}
+  --bg:#0e131a; --sur:#161d26; --ink:#e9eef4; --ink2:#9aa5b3; --line:#283240; --acc:#ff7a2e; --accT:#2a1d14; color-scheme:dark; }} }}
+:root[data-theme="dark"] {{ --bg:#0e131a; --sur:#161d26; --ink:#e9eef4; --ink2:#9aa5b3; --line:#283240; --acc:#ff7a2e; --accT:#2a1d14; color-scheme:dark; }}
 * {{ box-sizing:border-box; }}
 body {{ background:var(--bg); color:var(--ink); margin:0; font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif; line-height:1.55; }}
 .wrap {{ max-width:640px; margin:0 auto; padding:28px 16px 60px; font-variant-numeric:tabular-nums; }}
@@ -1272,6 +1252,53 @@ ol.list .go {{ margin-left:auto; color:var(--acc); font-size:.84rem; }}
 <h2>전체 주차<small>주차 · 날짜 · 승자 예측 맞힘-틀림</small></h2>
 <ol class="list">{items}</ol>
 </div>"""
+
+
+# ── 주전 결장(11/15 Paul 「비활성·활성 이렇게 말고 주전 중 빠진 게 몇 명인지 확실히 나오게」)
+_DIG_CACHE = {}
+
+
+def _dig_key(fname):
+    """DIGEST-MMDD-HHMM.md → 정렬 키(1~5월은 +12 — 시즌이 해를 넘김)."""
+    m = re.match(r"DIGEST-(\d\d)(\d\d)-(\d\d)(\d\d)\.md$", fname)
+    if not m:
+        return None
+    mo, d, hh, mi = map(int, m.groups())
+    return (mo + 12 if mo < 6 else mo, d, hh, mi)
+
+
+def _parse_starters(ln, A, H):
+    """🏥 결장 명단 줄 → {팀: [「이름(포지션)」]} — ★이름(… 공식 비활성 주전) 또는 (… ★스냅 …)(주간 보고 Out 주전).
+    「주중 Q/D → 출전 표시」·「⚠️ 미확인」 뒤는 결장이 아니라 뺀다(다이제스트 ★주전 결장 셈과 같음 — 10주차 14경기 대조 일치)."""
+    out = {}
+    pa, ph = re.search(rf"\b{A} Out \d+ —", ln), re.search(rf"\b{H} Out \d+ —", ln)
+    for t, mt, nxt in ((A, pa, ph), (H, ph, None)):
+        if not mt:
+            out[t] = []
+            continue
+        end = nxt.start() if (nxt and nxt.start() > mt.end()) else len(ln)
+        seg = re.split(r" · (?:주중 Q/D →|⚠️|★주전 결장)", ln[mt.end():end])[0]
+        out[t] = [f'{m.group(2).strip()}({m.group(3).split(" · ")[0].strip()})'
+                  for m in re.finditer(r"(★)?([A-Z][^()·/]*?)\(([^()]*)\)", seg) if m.group(1) or "★스냅" in m.group(3)]
+    return out
+
+
+def starters_out(wd, g):
+    """경기 주전 결장 → ({팀: [이름(포지션)]}, 판 파일 이름) · 킥오프 전 마지막 다이제스트 판(없으면 DIGEST.md) · 🏥 줄이 없으면 (None, "")."""
+    A, H = g["away"], g["home"]
+    m = re.match(r"\w+ (\d\d)-(\d\d)", g.get("kickoff_et", ""))
+    hm = re.match(r"(\d\d):(\d\d)", g.get("kickoff_pt", ""))
+    ko = (int(m.group(1)) + 12 if int(m.group(1)) < 6 else int(m.group(1)), int(m.group(2)), int(hm.group(1)), int(hm.group(2))) if m and hm else None
+    snaps = sorted((k, f) for f in os.listdir(wd) for k in [_dig_key(f)] if k)
+    for f in [f for k, f in snaps if ko is None or k < ko][::-1] + ["DIGEST.md"]:
+        p = os.path.join(wd, f)
+        if p not in _DIG_CACHE:
+            _DIG_CACHE[p] = open(p, encoding="utf-8").read() if os.path.exists(p) else ""
+        sec = re.search(rf"(?ms)^## {re.escape(A)}@{re.escape(H)} .*?(?=^## |\Z)", _DIG_CACHE[p])
+        ln = next((x for x in sec.group(0).splitlines() if x.startswith("- 🏥")), None) if sec else None
+        if ln:
+            return _parse_starters(ln, A, H), f
+    return None, ""
 
 
 def main():
@@ -1329,6 +1356,14 @@ def main():
     close_ln = {r["game"]: (P.fnum(r.get("spread_home")), P.fnum(r.get("total")), "DK 마감") for r in (N.rd(_cp) if os.path.exists(_cp) else [])}
     psum = PR.summary(PR.all_rows())
     wsum = PR.summary(wk_pred_rows)
+    # 스프레드 픽 칸(11/15 Paul 「보드에도 스프레드 픽 칸 넣어줘 둘 다」 · 사전 등록 SP · 11주차부터) — 표 칸 + 카드 줄
+    show_sp = a.week >= 11
+    _spg = [r for r in P.rd(P.PICKS) if r.get("grade") == P.SP_GRADE and r.get("result") in ("W", "L", "P")]
+    sp_rec = "-".join(str(sum(r["result"] == x for r in _spg)) for x in "WLP")
+    sp_n = sum(r["result"] in ("W", "L") for r in _spg)
+    _hx = os.path.join(wd, "hex.json")   # 육각형 값 — 리프레시(다이제스트)가 저장한 것만(다시 계산하면 30~60초)
+    hexv = json.load(open(_hx, encoding="utf-8")) if os.path.exists(_hx) else {}
+    xcard, pub_body = {}, {}   # 11/15 Paul 「표하나로」 — 표 줄 아래 펼침 재료(카드 내용 · 발행문)
 
     def result_of(r, gk):
         if r.get("result"):
@@ -1416,6 +1451,33 @@ def main():
                 ma_ = re.match(r"각도 관찰 (A\d+)\((.*)\)$", r["grade"])   # 이름 + 짧은 뜻(11/05 Paul 「1」)
                 lab = f'각도 {ma_.group(1)} <span class="muted">{esc(ma_.group(2))}</span>' if ma_ else esc(r["grade"].split("(")[0].replace("각도 관찰 ", "각도 "))
             items.append(f'<li><span class="tag obs">{term("관찰", "관찰만")}</span> {lab} <b title="{esc(r.get("note", ""))}">{esc(r["side"])}</b> {hit(result_of(r, gk))}</li>')
+        sp = next((r for r in rows if r.get("grade") == P.SP_GRADE), None)
+        so, so_src = starters_out(wd, g)
+        if so is not None:
+            so_n = {t: len(so[t]) for t in (A, H)}
+            so_mx = max(so_n.values())
+            so_tip = " / ".join(f"{t} " + (", ".join(so[t]) or "없음") for t in (A, H))
+            so_cell = (f'<td data-s="{so_mx}" title="{esc(so_tip)}">'
+                       + " · ".join((f"<b>{esc(t)} {so_n[t]}</b>" if so_n[t] == so_mx and so_mx else f"{esc(t)} {so_n[t]}") for t in (A, H)) + "</td>")
+            so_line = ('<div class="sline"><b>주전 결장</b> — '
+                       + " / ".join(f'<b>{esc(t)} {so_n[t]}명</b>' + (": " + esc(", ".join(so[t])) if so[t] else "") for t in (A, H))
+                       + f' <span class="muted">(주전 = 시즌 스냅 60%+ · 결장 확정만 — 공식 비활성·Out·IR · 출전 불투명·미확인은 안 셈 · {esc(so_src.replace(".md", ""))} 기준)</span></div>')
+        else:
+            so_cell, so_line = '<td data-s=""><span class="muted">—</span></td>', ""
+        hex_html = TH.block(A, H, pick_t, hexv.get(gk)) if hexv else ""
+        # 스프레드 칸 — 시장(DK · 예측 기록 판) · 우리(드라이브 모델 예상 점수 차) · 「KC -3」 = KC 가 3점 차 이상 이겨야
+        mkt_l = P.fnum(m_.get("line_home")) if m_ else None
+        mdl_l = (round(P.fnum(d_["score_away"]) - P.fnum(d_["score_home"]), 1)
+                 if d_ and P.fnum(d_.get("score_away")) is not None and P.fnum(d_.get("score_home")) is not None else None)
+
+        def _spt(x):
+            return "—" if x is None else "픽(0)" if x == 0 else (f"{H} {x:+g}" if x < 0 else f"{A} {-x:+g}")
+        spr_cell = (f'<td data-s="{abs(mkt_l) if mkt_l is not None else ""}"><div>시장 {esc(_spt(mkt_l))}</div>'
+                    f'<div class="muted">우리 {esc(_spt(mdl_l))}</div></td>')
+        sp_res = result_of(sp, gk) if sp else ""
+        if show_sp:
+            items.insert(0, f'<li><span class="tag obs" title="조건부 스프레드 픽 — 기록용 · 돈 아님 · 이길 팀 예측과 다른 장부">스프레드 픽</span> '
+                            + (f'<b title="{esc(sp.get("note", ""))}">{esc(sp["side"])}</b> {hit(sp_res)}' if sp else '<span class="muted">없음(걸린 조건 없음)</span>') + "</li>")
         lines = f'<ul class="lines">{"".join(items)}</ul>' if items else ""
         div = '<span class="chip">디비전</span>' if g.get("div_game") == "1" else ""
         neu = '<span class="chip">중립 구장</span>' if g.get("neutral") == "1" else ""
@@ -1454,19 +1516,19 @@ def main():
         bp_ = P.fnum(b_.get("p_pick")) if b_ else None
         pub_cell = (f'{esc(name_kr(b_["pick"]))} {pct(bp_)} {phit(b_)}{late_tag}' if b_ else '<span class="muted">—</span>')
         vw0 = verdict_word(pub.get("판단", ""))
-        trows.append((g.get("kickoff_utc", ""), f'<tr data-g="{esc(gk)}">'
+        trows.append((g.get("kickoff_utc", ""), gk, f'<tr data-g="{esc(gk)}">'
                       f'<td data-s="{kts}"><div>{ha(False)}{mini(A)} {nm(A)} <small class="muted">{esc(g.get("away_rec", ""))}</small></div><div>{ha(True)}{mini(H)} {nm(H)} <small class="muted">{esc(g.get("home_rec", ""))}</small></div></td>'
                       f'<td data-s="{kts}">{esc(g["kickoff_et"].split(" ", 1)[0])} {esc(g["kickoff_pt"])}</td>'
                       f'<td data-s="{pp if pp is not None else ""}">{(esc(name_kr(m_["pick"])) + " " + pct(pp)) if m_ else "—"}</td>'
                       f'<td class="star" data-s="{PR.stars(pp) if m_ else ""}">{PR.star_str(pp) if m_ else ""}</td>'
-                      f'<td data-s="{bp_ if bp_ is not None else ""}">{pub_cell}</td>'
-                      f'<td data-s="{ml_s}">{esc(ml_txt)}</td>'
-                      f'<td>{esc(vw0) or "—"}</td><td data-s="{res_s}">{res_txt}</td></tr>'))
+                      f'<td data-s="{bp_ if bp_ is not None else ""}">{pub_cell}</td>' + so_cell +
+                      f'<td data-s="{ml_s}">{esc(ml_txt)}</td>' + spr_cell +
+                      f'<td>{esc(vw0) or "—"}</td>'
+                      + ((f'<td data-s="{esc(sp["side"])}">{esc(sp["side"])} {hit(sp_res)}</td>' if sp else '<td data-s=""><span class="muted">없음</span></td>') if show_sp else "")
+                      + f'<td data-s="{res_s}">{res_txt}</td></tr>'))
+        xmeta = f'<div class="meta">{div}{neu}</div>' if (div or neu) else ""
         if fin:
-            done_rows.append(f'''<details class="done"><summary>
-  <span class="dm">{mini(A)}<b>{nm(A)}</b><small class="muted">{esc(g.get("away_rec", ""))}</small> <span class="num">{esc(str(lv.get("sa")))} – {esc(str(lv.get("sh")))}</span> <b>{nm(H)}</b><small class="muted">{esc(g.get("home_rec", ""))}</small>{mini(H)}</span>
-  <span class="dr">{f'예측 {esc(m_["pick"])} <span class="star">{PR.star_str(pp)}</span> {phit(m_)}' if m_ else ''}</span></summary>
-  <div class="dbody">{pred_html}{lines}<a class="goto" data-g="{esc(gk)}">발행문·보완 전문 보기 ↓</a></div></details>''')
+            xcard[gk] = so_line + hex_html + xmeta + pred_html + lines
             continue
         # ── 아직 안 한 경기 / 진행 중
         if st in IN_GAME:
@@ -1481,19 +1543,16 @@ def main():
                          f'<td class="muted">승리 {esc(A)} {pct(ma)} / {esc(H)} {pct(mh)}</td></tr>')
         mk = f'<div class="quick">{" · ".join(quick)}</div>' if quick else ""
         remaining += 1
-        if not (b_ or (ptext.get(gk) or {}).get("main")):   # 발행문 없는 경기는 카드 안 만듦 — 표에만(10/18 Paul 「심플하게」)
-            continue
-        key = (-PR.stars(pp), g["kickoff_utc"])   # 별 많은 순 → 킥오프(10/15 실베팅 우선 정렬 삭제)
-        pre_cards.append((key, f'''<article class="card" data-g="{esc(gk)}">
-  <header class="match2">{team(A, lv.get("na"), rec=g.get("away_rec_full", ""), pk=A == pick_t)}{team(H, lv.get("nh"), rec=g.get("home_rec_full", ""), pk=H == pick_t, home=True)}</header>
-  <div class="meta">{status}{div}{neu}</div>
-  {pred_html}{mk}{lines}
-</article>'''))
-    pre_cards.sort(key=lambda x: x[0])
+        xcard[gk] = so_line + hex_html + f'<div class="meta">{status}{div}{neu}</div>' + pred_html + mk + lines
+        if b_ or (ptext.get(gk) or {}).get("main"):
+            pre_cards.append(gk)   # 발행된 남은 경기 수(머리 한 줄)
     trows.sort(key=lambda x: x[0])
-    cmp_tbl = ('<div class="tblwrap"><table class="cmp"><thead><tr><th>경기</th><th>시간(PT)</th><th>예측 승자(시장)</th><th>★</th><th>발행 예측</th>'
-               f'<th>{term("ML")} 페이버릿</th><th>판단</th><th title="끝난 경기: 최종 점수 · 시장 예측 맞힘/틀림 · 스프레드 어느 쪽 커버(초록 = 발행 예측 팀 커버 · 빨강 = 못 함 · 발행 없으면 무색) · 오버/언더 + 두 팀 합계(라인 = DK 마감, 채점 전엔 킥오프 전 마지막 수집 판)">결과</th></tr></thead>'
-               f'<tbody>{"".join(r for _, r in trows)}</tbody></table></div>')
+    cmp_tbl = ('<div class="tblwrap"><table class="cmp"><thead><tr><th>경기</th><th>시간(PT)</th><th>예측 승자(시장)</th><th>★</th><th>발행 예측</th><th title="주전(시즌 스냅 60%+) 중 결장 확정(공식 비활성·Out·IR) 수 — 킥오프 전 마지막 다이제스트 판 · 많이 빠진 쪽 굵게 · 마우스를 대면 이름">주전 결장</th>'
+               f'<th>{term("ML")} 페이버릿</th><th title="시장 = DraftKings 스프레드(예측 기록 판 · 킥오프 때 동결) · 우리 = 우리 드라이브 모델 예상 점수 차 · 「KC -3」 = KC 가 3점 차 이상 이긴다는 뜻 · 표시용(이길 팀 예측·★과 무관)">스프레드 <small class="muted">시장 · 우리</small></th><th>판단</th>'
+               + (f'<th title="조건부 스프레드 픽(사전 등록 SP) — 홈 언더독 +7 이상(A7) · 키 넘버 3·7 을 넘긴 라인 이동의 반대쪽(A6)이 걸린 경기만 · '
+                  f'기록용(돈 아님) · 이길 팀 예측과 다른 장부 · 시즌 {sp_rec}(W-L-P · {sp_n}/30픽)">스프레드 픽 <small class="muted">{sp_rec}</small></th>' if show_sp else "")
+               + f'<th title="끝난 경기: 최종 점수 · 시장 예측 맞힘/틀림 · 스프레드 어느 쪽 커버(초록 = 발행 예측 팀 커버 · 빨강 = 못 함 · 발행 없으면 무색) · 오버/언더 + 두 팀 합계(라인 = DK 마감, 채점 전엔 킥오프 전 마지막 수집 판)">결과</th></tr></thead>'
+               '<tbody>%%ROWS%%</tbody></table></div>')
     # 미기록 경보(10/29 Paul 「넣기」 · NBA 1005810): 킥오프 15분 안 ~ 240분 지남인데 정식 발행 기록(predictions src=발행 · flag 없음)이 없는 경기 — 보드를 만든 순간 기준
     _nowu, unrec = datetime.now(timezone.utc), []
     for g in games:
@@ -1560,8 +1619,12 @@ def main():
             cnt = f"발행 {len(mains)}판" + (f" · 보완 {len(d['supp'])}" if d["supp"] else "")
         else:
             body, cnt = '<p class="muted">아직 이 경기 발행문이 없어요.</p>', "발행문 없음"
-        pub_secs.append(f'<details class="pubd" data-p="{esc(gk)}"><summary>{mini(A)} <span class="{"pk" if A == pk_ else ""}">{esc(name_kr(A))}</span> <small class="muted">{esc(g.get("away_rec", ""))}</small> @ <span class="{"pk" if H == pk_ else ""}">{esc(name_kr(H))}</span> <small class="muted">{esc(g.get("home_rec", ""))}</small> {mini(H)} {(f'<span class="star">{PR.star_str(star_of[gk])}</span> <span class="num">{esc(pk_)} {pct(star_of[gk])}</span> ') if pk_ and star_of.get(gk) is not None else ""}'
-                        f'<span class="muted">{esc(g["kickoff_et"].split(" ", 1)[0])} {esc(g["kickoff_pt"])} PT · {cnt}</span></summary><div class="md">{body}</div></details>')
+        pub_body[gk] = (body, cnt)
+    ncol = 10 + (1 if show_sp else 0)
+    cmp_tbl = cmp_tbl.replace("%%ROWS%%", "".join(
+        rh + f'<tr class="xrow" data-x="{esc(gk)}" hidden><td colspan="{ncol}"><div class="xbody">' + xcard.get(gk, "")
+        + '<div class="pubh">{}</div><div class="md">{}</div></div></td></tr>'.format(esc(pub_body.get(gk, ("", "발행문 없음"))[1]), pub_body.get(gk, ("", ""))[0])
+        for _, gk, rh in trows))
     logo_css = (".mini{display:inline-block;width:22px;height:22px;background-size:contain;background-repeat:no-repeat;vertical-align:middle}"
                 + ".tlogo{display:inline-block;width:36px;height:36px;flex:none;background-size:contain;background-repeat:no-repeat}"
                 + "".join(f'.lg-{t}{{background-image:url("{logo_uri(t)}")}}' for t in sorted(mini_used)))
@@ -1581,11 +1644,11 @@ def main():
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@600;800&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-/* 구장 라인 감성 — 잔디 기운의 중립색 위에 흰 분필선 · 10/22 Paul 「깔끔하게 — 팀명 색 빼」: 강조색(주황)은 진행 중·정렬 표시만, 색은 맞힘/틀림 칩 · 소제목(파랑) */
-:root{{--bg:#eef2ec;--panel:#ffffff;--ink:#14231b;--muted:#5d6b62;--line:#d4ddd3;--acc:#e8590c;--ok:#1f8a4c;--bad:#c2362b;--push:#8a7a1f;--term:#6b3fb5;--soft:#f6f8f4;--acc2:#2b5ea7;--wait:#8a7b5a;
+/* 11/15 Paul 「전체적인 색이 칙칙해」 → 잔디 기운 회녹색 걷어내고 맑은 회색·흰 판·짙은 남색 글자 · 원래: 구장 라인 감성 — 흰 분필선 · 10/22 Paul 「깔끔하게 — 팀명 색 빼」: 강조색(주황)은 진행 중·정렬 표시만, 색은 맞힘/틀림 칩 · 소제목(파랑) */
+:root{{--bg:#f3f5f8;--panel:#ffffff;--ink:#101828;--muted:#556070;--line:#dde2ea;--acc:#e8590c;--ok:#1f8a4c;--bad:#c2362b;--push:#8a7a1f;--term:#6b3fb5;--soft:#f1f4f8;--acc2:#2b5ea7;--wait:#8a7b5a;--hx1:#2b6cb8;--hx2:#c2552b;
   --display:"Saira Extra Condensed","Arial Narrow",sans-serif;--body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}}
-@media (prefers-color-scheme: dark){{:root:not([data-theme="light"]){{--bg:#0f1712;--panel:#16211a;--ink:#e6efe7;--muted:#97a69b;--line:#26352b;--acc:#ff7a2e;--ok:#4cc27a;--bad:#ef6a5f;--push:#cdbb52;--term:#b99af0;--soft:#1b281f;--acc2:#8cb4ef;--wait:#b7a67c;color-scheme:dark}}}}
-:root[data-theme="dark"]{{--bg:#0f1712;--panel:#16211a;--ink:#e6efe7;--muted:#97a69b;--line:#26352b;--acc:#ff7a2e;--ok:#4cc27a;--bad:#ef6a5f;--push:#cdbb52;--term:#b99af0;--soft:#1b281f;--acc2:#8cb4ef;--wait:#b7a67c;color-scheme:dark}}
+@media (prefers-color-scheme: dark){{:root:not([data-theme="light"]){{--bg:#0e131a;--panel:#161d26;--ink:#e9eef4;--muted:#9aa5b3;--line:#283240;--acc:#ff7a2e;--ok:#4cc27a;--bad:#ef6a5f;--push:#cdbb52;--term:#b99af0;--soft:#1b222c;--acc2:#8cb4ef;--wait:#b7a67c;--hx1:#6ea2e8;--hx2:#e0714f;color-scheme:dark}}}}
+:root[data-theme="dark"]{{--bg:#0e131a;--panel:#161d26;--ink:#e9eef4;--muted:#9aa5b3;--line:#283240;--acc:#ff7a2e;--ok:#4cc27a;--bad:#ef6a5f;--push:#cdbb52;--term:#b99af0;--soft:#1b222c;--acc2:#8cb4ef;--wait:#b7a67c;--hx1:#6ea2e8;--hx2:#e0714f;color-scheme:dark}}
 body{{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.55}}
 .wrap{{max-width:1320px;margin:0 auto;padding-inline:16px;padding-block:20px 40px;display:grid;gap:18px}}
 h1{{font-family:var(--display);font-weight:800;font-size:2.4rem;letter-spacing:.02em;margin:0;line-height:1}}
@@ -1663,22 +1726,18 @@ nav.weeks a{{color:var(--ink)}}nav.weeks b.cur{{color:var(--ink);text-decoration
     <div class="stat"><span class="k">승자 예측 이번 주</span><span class="v">{live_wl[0]}-{live_wl[1]}</span></div>
   </div>
   <div class="headline">{headline}</div>
-  {unrec_html}<h2>{a.week}주차 전체 경기 <span class="muted" style="font-size:.9rem">— 머리 누르면 정렬 · 줄 누르면 발행문</span></h2>
+  {unrec_html}<h2>{a.week}주차 전체 경기 <span class="muted" style="font-size:.9rem">— 머리 누르면 정렬 · 줄 누르면 바로 아래 펼침(다시 누르면 접힘)</span></h2>
   {cmp_tbl}
   <section class="legend">
     <div><b>읽는 법</b> — 점선 밑줄 낱말에 손가락·마우스를 대면 뜻이 나와요.</div>
     <div><span class="star">★</span> = <b>이길 확률이 높은 정도</b>(2018~25 실제 적중 ★ 50% · ★★ 61% · ★★★ 71% · ★★★★ 82%). <b>돈 버는 신호가 아니에요</b> — 별이 많은 팀일수록 ML 배당이 비싸서, 맞혀도 남는 돈이 적어요.</div>
-    <div>{term("ML")} = 그냥 이길 팀 — 10/16부터 보드는 <b>이길 팀 예측(ML)만</b> 보여 줘요(점수 차·총점·방향은 뺐어요). 끝난 경기의 「결과」 칸에만 스프레드 커버·오버/언더를 값으로 붙여요(10/29).</div>
+    <div>{term("ML")} = 그냥 이길 팀 — 예측의 주인공은 <b>이길 팀(ML)</b>이에요. 「스프레드」 칸(11/15)은 시장 스프레드와 우리 모델 예상 점수 차를 나란히 보여 주는 값이고(「KC -3」 = KC 가 3점 차 이상 이긴다는 뜻), 끝난 경기의 「결과」 칸엔 스프레드 커버·오버/언더를 붙여요.</div>
     <div>{term("관찰", "관찰만")} = 돈 안 건 기록(라인 뒤 새 정보 · 관찰 각도 A3~ — 회색 글씨가 각도 뜻, 스프레드·총점 각도도 관찰로만) · 맞힘/틀림 = 예측·관찰 결과</div>
     <div><b>발행문 글자</b> — <b style="color:var(--acc2)">파란 굵은 팀</b> = 우리 예측 팀 · <b style="color:var(--acc)">주황 굵은 팀</b> = 상대 · <b>굵은 검정</b> = 선수(처음 나올 때 「팀 · 포지션 · 역할 · 상태」) · <b style="color:var(--muted)">회색 굵은 낱말</b> = 스탯 이름(EPA·CPOE·야드/캐리 …) · 긴 줄은 묶음·문장마다 줄을 바꾸고, 「NE 값 vs CHI 값」 줄은 비교표로 · 선수 표는 왼쪽 원정 / 오른쪽 홈, 색이 진할수록 큰 값(표 아래 풀이). 상자 순서: 결론 → 보완 → 시장 → 팀 상태 → 선수 → 팀 비교 → 심판.</div>
     {gloss_all()}
-    <div><b>카드나 표 줄을 누르면</b> 그 경기의 발행문·보완 전문이 아래에서 펼쳐져요. 표 머리(예측 승자·★·발행 예측 …)를 누르면 그 기준으로 정렬돼요.</div>
+    <div><b>표 줄을 누르면</b> 그 줄 바로 아래에 주전 결장·예측·각도·발행문이 펼쳐지고, 다시 누르면 접혀요. 표 머리(예측 승자·★·발행 예측 …)를 누르면 그 기준으로 정렬돼요.</div>
   </section>
-  {f'<h2>끝난 경기 <span class="muted" style="font-size:.9rem">— 눌러서 펼치기</span></h2><section class="donelist">{"".join(done_rows)}</section>' if done_rows else ""}
-  <h2>아직 안 한 경기 — 발행된 경기 <span class="muted" style="font-size:.9rem">(발행 전 경기는 위 표에만)</span></h2>
-  {f'<section class="grid">{"".join(c for _, c in pre_cards)}</section>' if pre_cards else ('<p class="muted">이번 주 경기가 모두 끝났어요.</p>' if not remaining else '<p class="muted">아직 발행문이 나온 경기가 없어요.</p>')}
-  <h2>발행문·보완 전문 — 경기별 <span class="muted" style="font-size:.9rem">(카드·표 줄을 누르면 여기서 펼쳐져요)</span></h2>
-  <section class="publist">{"".join(pub_secs)}</section>
+  {f'<section class="publist">{"".join(pub_secs)}</section>' if pub_secs else ""}
   <h2>별점별 승자 적중 — 시즌(시장 예측)</h2>
   <div><table class="tiers"><thead><tr><th>별</th><th>W-L</th><th>올해</th><th>2018~25 기대</th></tr></thead><tbody>{star_rows}</tbody></table>
   <p class="note">1~4주차 일부는 마감 배당으로 소급한 기록이에요. 표본이 작아 몇 주는 기대와 어긋나는 게 정상이에요.</p></div>
