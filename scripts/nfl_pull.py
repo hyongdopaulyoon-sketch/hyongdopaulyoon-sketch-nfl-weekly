@@ -1152,7 +1152,7 @@ def _angles_line(week, g):
         parts.append(f'{key} {r["side"]}' + (f'({r["odds"]})' if r.get("market") == "ml" and r.get("odds") else "") + f' — {ANGLE_NOTE.get(key, r["grade"])} · {live(key)} · {r.get("note", "").split(" · ")[0]}')
     try:
         import picks as _P
-        _w, _l, _p, _n, _dup, _cf = _P.angle_game_record([r for r in allp if r.get("id", "").split(":")[-1] not in ("A1", "A2")])
+        _w, _l, _p, _n, _dup, _cf = _P.angle_game_record([r for r in allp if r.get("id", "").split(":")[-1] not in _P.RETIRED_KEYS])   # 2026-11-15: 폐기 각도(A1·A2·A10)는 경기 단위 성적에서 제외
         parts.append(f"(경기 단위 2026: {_w}-{_l} · 겹친 각도는 1건 — {_n}건 중 겹침 {_dup} · 상충 {_cf}경기 제외)" if len(rows) >= 2 else "")
         parts = [x for x in parts if x]
     except Exception:

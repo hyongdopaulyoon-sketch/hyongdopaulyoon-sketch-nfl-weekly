@@ -349,6 +349,12 @@ ANGLE_GRADES = {"A1": "각도 관찰 A1(원정 큰 페이버릿 반대)", "A2": 
                 "A12": "각도 관찰 A12(첫 선발 백업 QB 상대 7+ 페이버릿 → 페이버릿 ML)"}   # 2026-11-05 Paul 「a」 — B3 방향만(n63 +7.8%p)       # 2026-10-18 수비 데이터 탐색 — 아래 A10 주석
 A3_MOVE = 3.0   # 개장→현재 스프레드 이동(점) 문턱 — 사전 등록, 조정 금지
 ANGLE_TARGET = {"A3": 30, "A4": 20, "A5": 20, "A6": 20, "A7": 20, "A8": 20, "A9": 20, "A10": 20, "A11": 30, "A12": 30}
+# 2026-11-15 Paul 「둘 다 추천대로」 — 9주차 채점 뒤 판정(사전 등록 조건 그대로):
+#  A10 폐기: 20픽 7-13(35.0%) −6.65u · 조건 ≥50% & 수익 플러스 미달 → 10주차부터 생성 중단(기록 행은 남김 · 경기 단위 성적에서 제외 — A1·A2 와 같은 처리)
+#  A6 유지: 23픽 14-9(60.9%) +3.73u · 조건 ≥52.4% 충족 → 관찰 줄 계속(서술 전용 · ATS 각도라 판단 근거 아님 · 10판 ML 전용 불변)
+RETIRED_KEYS = ("A1", "A2", "A10")
+ANGLE_VERDICT = {"A10": "폐기(2026-11-15 Paul — 20픽 7-13 35% −6.65u · 조건 ≥50% & 수익 플러스 미달 · 생성 중단)",
+                 "A6": "유지(2026-11-15 Paul — 23픽 14-9 61% +3.73u · 조건 ≥52.4% 충족 · 계속 적립)"}
 # A11·A12(2026-11-05 사전 등록 · 조정 금지 · 서술 전용 점수 0 · 각 30픽 판정 — <50% 폐기 · ≥55% & 평균 CLV ≥0 이면 Paul 상정):
 # A11 = 실외·open & ESPN 날씨 문자열 rain|shower|thunder|storm|drizzle(snow|sleet|flurr 제외) → 그 시점 총점 Under · 판정은 경기 당일(PT) 판만, 킥오프 뒤 동결.
 # A12 = 언더독 팀 예상 선발 QB 가 2010~ 정규시즌 선발 기록 없음 & 그 팀 직전 경기 선발과 다름 & 상대가 스프레드 7+ 페이버릿 → 페이버릿 ML(현재 DK).
@@ -523,7 +529,7 @@ def angles(week):
                 r3, re_ = _rk(d3r, t), _rk(epar, t)
                 if r3 and re_ and re_ - r3 >= A5_GAP:
                     cand[f'{m["game_id"]}:ml:A5'] = (f"{a}@{h}", f"{opp} ML", "A5", f"{t} 3rd down {r3}위 vs 공격 EPA {re_}위(+{re_ - r3}) → 상대 {opp} · {week}주차", "ml", "", o_ or "+100")
-        if week >= 5:                                           # A10 — 색률 상위 8 수비 팀의 상대 ML
+        if week >= 5 and "A10" not in RETIRED_KEYS:             # A10 — 색률 상위 8 수비 팀의 상대 ML(2026-11-15 폐기 — 생성 중단)
             global _SK
             if _SK is None:
                 _SK = _sack_rate(week, T)
@@ -658,8 +664,8 @@ def stats():
     print(f"📊 NFL {SEASON} 페이퍼 성적(10판 ML · 각도 판정은 사전 등록 픽 수에서 · 유닛은 그 배당 기준)")
     for k in ("A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12"):
         xs = [r for r in rows if r["grade"] == ANGLE_GRADES[k]]
-        print(f"  {ANGLE_GRADES[k]}: {rec(xs) if xs else '0픽'} · 판정까지 {len(xs)}/{ANGLE_TARGET[k]}픽")
-    _w, _l, _p, _n, _dup, _cf = angle_game_record([r for r in rows if r["grade"] not in (ANGLE_GRADES["A1"], ANGLE_GRADES["A2"])])
+        print(f"  {ANGLE_GRADES[k]}: {rec(xs) if xs else '0픽'} · " + (f"판정 = {ANGLE_VERDICT[k]}" if k in ANGLE_VERDICT else f"판정까지 {len(xs)}/{ANGLE_TARGET[k]}픽"))
+    _w, _l, _p, _n, _dup, _cf = angle_game_record([r for r in rows if r["grade"] not in tuple(ANGLE_GRADES[k_] for k_ in RETIRED_KEYS)])
     print(f"  ▶ 경기 단위(같은 경기·같은 시장·같은 팀 쪽 각도는 1건): {_w}-{_l}" + (f"-{_p}" if _p else "")
           + f" · {_n}건 중 각도 2개+ 겹친 건 {_dup} · 상충(같은 경기 반대쪽 각도) {_cf}경기는 전적 제외 — 각도별 줄은 겹침을 중복으로 센다")
     print("— 아래는 10판 전 기록(참고 · 손익분기 52.4%(−110) 기준) —")
