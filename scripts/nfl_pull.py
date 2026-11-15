@@ -1088,6 +1088,7 @@ def ph_injuries(week, force=False):
 
 
 ESPN_SUMMARY = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event="
+ESPN_INJ = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/injuries"   # 리그 전체 · 팀당 최근 25건(Active 포함) — summary 는 팀당 5건에서 잘린다(2026-11-15 실측)
 
 
 def ph_inactives(week, games, snap):
@@ -1095,6 +1096,19 @@ def ph_inactives(week, games, snap):
     킥오프 90분 전 공식 비활성 명단이 type 「Coach's Decision」·발표 시각과 함께 온다(그 전엔 주간 보고 Out 만). 매 실행 새로 받는다."""
     wd = week_dir(week)
     rows = []
+    # 2026-11-15(NFL 보드 제보 · KC Walker·ATL Deablo 가 08:52판 명단에서 사라짐): summary 의 injuries 는 팀당 최근 5건만 준다 — 공식 비활성(6~7명)이 들어오면
+    # 앞서 Out 이던 선수가 밀려 나간다. 리그 injuries(팀당 25건 · Active 포함)를 합쳐 쓴다. Active 행 = 주중 Q/D 선수의 출전 표시.
+    league = {}
+    try:
+        lp = os.path.join(wd, "espn_summary_league_injuries.json")
+        fetch(ESPN_INJ, lp, 0, True)
+        for tb in json.load(open(lp, encoding="utf-8")).get("injuries", []) or []:
+            its = tb.get("injuries", []) or []
+            ab = next((((x.get("athlete") or {}).get("team") or {}).get("abbreviation") for x in its if ((x.get("athlete") or {}).get("team") or {}).get("abbreviation")), "")
+            if ab:
+                league[ESPN2NV.get(ab, ab)] = its
+    except Exception as e:
+        print(f"  inactives 리그 injuries 실패({type(e).__name__}) — summary(팀당 5건)만 사용")
     for g in games:
         if not g.get("espn_id") or g.get("status") in ("F", "final", "Final"):
             continue
@@ -1108,10 +1122,19 @@ def ph_inactives(week, games, snap):
             ko = datetime.strptime(g["kickoff_utc"], "%Y-%m-%dT%H:%MZ")
         except Exception:
             ko = None
+        _sm = {}
         for tb in j.get("injuries", []) or []:
             ab = (tb.get("team") or {}).get("abbreviation", "")
-            t = ESPN2NV.get(ab, ab)
-            items = tb.get("injuries", []) or []
+            _sm[ESPN2NV.get(ab, ab)] = tb.get("injuries", []) or []
+        for t in (g["away"], g["home"]):
+            _mg = {}
+            for x in list(_sm.get(t, [])) + list(league.get(t, [])):   # 같은 선수는 날짜가 늦은 행
+                k = _norm_name((x.get("athlete") or {}).get("displayName", ""))
+                if k and (k not in _mg or (x.get("date") or "") > (_mg[k].get("date") or "")):
+                    _mg[k] = x
+            items = sorted(_mg.values(), key=lambda x: x.get("date") or "", reverse=True)
+            if not items:
+                continue
             # 공식 비활성 판정: 「Coach's Decision」(건강한 제외)이 하나라도 있거나, 발표 시각이 킥오프 2시간 안
             def _dt(x):
                 try:
@@ -1245,6 +1268,18 @@ def _inactives_line(wd, g, a, h):
         lsnap = _last_snap()
     except Exception:
         lsnap = {}
+
+    def _pt(u):   # 발표 UTC → PT 시각(킥오프 4시간 안 것만 · 그 밖은 "")
+        try:
+            d = datetime.strptime(u, "%Y-%m-%dT%H:%M")
+            return (kp - (ko - d)).strftime("%H:%M") if 0 <= (ko - d).total_seconds() <= 4 * 3600 else ""
+        except Exception:
+            return ""
+    t_ann = {}
+    for t in (a, h):
+        _ts = sorted(x for x in (_pt(r["announced_utc"]) for r in rows if r["team"] == t and r["status"] == "Out") if x)
+        t_ann[t] = (_ts[0] if _ts[0] == _ts[-1] else f"{_ts[0]}~{_ts[-1]}") if _ts else "?"
+    act = {t: {_norm_name(r["player"]): (_pt(r["announced_utc"]) or r["announced_utc"][5:10]) for r in rows if r["team"] == t and r["status"] == "Active"} for t in (a, h)}
     for t in (a, h):
         seen, names, n_star = set(), [], 0
         rep_names = {_norm_name(y.split("(")[0].strip()) for col in ("out", "doubtful", "questionable")
@@ -1262,6 +1297,7 @@ def _inactives_line(wd, g, a, h):
             names.append(("★" if r["star"] == "1" else "") + f'{r["player"]}({r["pos"]}' + (f' · 스냅 {r["snap_pct"]}%' if r["snap_pct"] else "")
                          + f' · 직전 경기 {lv * 100:.0f}%'
                          + (" · 건강 제외" if healthy else (f' · {r["reason"]}' if r["reason"] else ""))
+                         + (f' · 발표 {_pt(r["announced_utc"])}' if r["star"] == "1" and _pt(r["announced_utc"]) else "")
                          + (" · 대체 출전 표본(직전 경기 미출전·부상 보고 없음 — ★주전 결장 수·새 정보에서 제외)" if sub else "") + ")")
         for x in [y.strip() for y in re.split(r"\)\s*·\s*", str(inj.get(t, {}).get("out") or "")) if y.strip()]:
             nm = x.split("(")[0].strip()
@@ -1271,17 +1307,22 @@ def _inactives_line(wd, g, a, h):
             n_star += "★" in x
             names.append((x.rstrip(")") + " · 주간 보고)") if "(" in x else x + "(주간 보고)")
         stars[t] = n_star
-        unk = []
+        unk, plays = [], []
         for col in ("questionable", "doubtful"):
             for x in [y.strip() for y in re.split(r"\)\s*·\s*", str(inj.get(t, {}).get(col) or "")) if y.strip()]:
                 nm = x.split("(")[0].strip()
-                if "★" in x and _norm_name(nm) not in seen:
+                if _norm_name(nm) in seen:
+                    continue
+                if _norm_name(nm) in act[t]:   # 2026-11-15: ESPN 이 Active 로 표시한 주중 Q/D — 「미확인」 경고 대신 출전 표시(값만)
+                    plays.append(("★" if "★" in x else "") + f'{nm}({"Q" if col == "questionable" else "D"} → Active {act[t][_norm_name(nm)]})')
+                elif "★" in x:
                     unk.append(f'{nm}({"Q" if col == "questionable" else "D"})')
         parts.append(f'{t} Out {len(names)}' + (f' — {" · ".join(names)}' if names else "")
+                     + (f' · 주중 Q/D → ESPN 출전 표시: {", ".join(plays)}' if plays else "")
                      + (f' · ⚠️ ★ 주중 Q/D 인데 ESPN 당일 명단에 없음: {", ".join(unk)} — 출전 여부 미확인(ESPN 이 생략하는 경로 있음 · 웹 확인 필수 · 「명단에 없으니 출전」으로 읽지 말 것)' if off_t[t] and unk else ""))
     if off:
         return (f'- 🏥 결장 명단(ESPN 공식 비활성 · 발표 {ann_pt} PT ∪ 주간 보고 Out): ' + " / ".join(parts)
-                + f' · ★주전 결장 {a} {stars[a]} / {h} {stars[h]} — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · ESPN 당일 명단은 주중 Out 을 생략하니 발행 세션 웹 확인 유지')
+                + f' · ★주전 결장 {a} {stars[a]} / {h} {stars[h]} — 값만(새 정보 여부는 판 시각 뒤 확정인지로) · 팀별 발표 {a} {t_ann[a]} / {h} {t_ann[h]} PT · ESPN 명단은 팀당 최근 25건(리그 injuries)이라 ⚠️ 미확인 표시만 웹 확인')
     if off_t[a] != off_t[h]:
         _in, _no = (a, h) if off_t[a] else (h, a)
         return (f'- 🏥 결장 명단(ESPN 부분 발표 — {_in} 공식 비활성 발표 {ann_pt} PT · {_no} 미발표(들어오면 리프레시) ∪ 주간 보고 Out): ' + " / ".join(parts)
