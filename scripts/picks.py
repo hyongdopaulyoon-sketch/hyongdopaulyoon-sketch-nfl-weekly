@@ -351,10 +351,15 @@ A3_MOVE = 3.0   # 개장→현재 스프레드 이동(점) 문턱 — 사전 등
 # 2026-11-15 조건부 스프레드 픽(Paul 「스프레드픽도 내자 · nfl도 스프레드 맞추는 방향으로」 → 검정 scripts/spread_lab.py → 「이대로 가자」 · 사전 등록 SP · 조정 금지):
 #  A7(홈 언더독 +7 이상 → 홈 · 역사 2018~25 106-82 56.4% 6/8 시즌) 또는 A6(키 넘버 3·7 넘긴 이동 반대쪽 · 2024~25 73-50 59.3%)이 걸린 경기만 · 둘이 반대쪽이면 픽 없음.
 #  11주차부터 {gid}:spread:SP 행(−110 · 현재 라인 · 킥오프 뒤 동결). 전향 30픽(푸시 제외) 52.4% 미만이면 폐기 · 조건별로도 보고 · 판정 Paul. 이길 팀 예측·★·ML 판단과 무관.
+#  2026-11-15(밤) 조건 A13 추가(Paul 「nfl도 육각형 결장 손실을 스프레드 조건에 넣을 수 있는지 봐줘」 → 「넣어」 · data/hex_loss_scan_2026-11-15.md):
+#  A13 = 러시 꼭짓점 결장 손실(team_hex: 전원 가용 가정 점수 − 이번 주 뛰는 러셔 기준 점수) 10점+ 인 팀의 **상대 쪽** ATS(현재 라인) · 두 팀 다 해당이면 제외.
+#  역사 2018~25 152-109 58.2% 6/8 시즌(4주차 이후 59.2% · 2018~21 62.9% → 2022~25 53.5%). 11주차부터 · 30픽 판정(<50% 폐기 · ≥52.4% 유지) · 조정 금지.
+A13_LOSS = 10
 SP_START_WEEK = 11
-SP_GRADE = "스프레드 픽(조건부 · A6·A7)"
+SP_GRADE = "스프레드 픽(조건부 · A6·A7)"   # 이름은 그대로 둔다(보드·기록 행이 이 문자열로 찾음) — 조건은 A7·A6·A13
 ANGLE_GRADES["SP"] = SP_GRADE
-ANGLE_TARGET = {"SP": 30, "A3": 30, "A4": 20, "A5": 20, "A6": 20, "A7": 20, "A8": 20, "A9": 20, "A10": 20, "A11": 30, "A12": 30}
+ANGLE_GRADES["A13"] = "각도 관찰 A13(러시 결장 손실 10점+ 팀의 상대 → 상대 ATS)"
+ANGLE_TARGET = {"SP": 30, "A13": 30, "A3": 30, "A4": 20, "A5": 20, "A6": 20, "A7": 20, "A8": 20, "A9": 20, "A10": 20, "A11": 30, "A12": 30}
 # 2026-11-15 Paul 「둘 다 추천대로」 — 9주차 채점 뒤 판정(사전 등록 조건 그대로):
 #  A10 폐기: 20픽 7-13(35.0%) −6.65u · 조건 ≥50% & 수익 플러스 미달 → 10주차부터 생성 중단(기록 행은 남김 · 경기 단위 성적에서 제외 — A1·A2 와 같은 처리)
 #  A6 유지: 23픽 14-9(60.9%) +3.73u · 조건 ≥52.4% 충족 → 관찰 줄 계속(서술 전용 · ATS 각도라 판단 근거 아님 · 10판 ML 전용 불변)
@@ -576,9 +581,30 @@ def angles(week):
                 moved_home = hl < os_                           # 홈 라인이 작아짐 = 홈 쪽으로 이동 → 반대 = 원정
                 side_ = f"{a} {-hl:+g}" if moved_home else f"{h} {hl:+g}"
                 cand[f'{m["game_id"]}:spread:A6'] = (f"{a}@{h}", side_, "A6", f"개장 {os_:+g} → 지금 {hl:+g}(홈 기준) 키 넘버 넘김 · 이동 반대쪽", "spread", side_.split()[1], "-110")
-    if week >= SP_START_WEEK:   # 조건부 스프레드 픽 — A6·A7 후보에서(한쪽만이거나 같은 팀이면 픽 · 반대면 없음)
+    if week >= SP_START_WEEK:   # A13 러시 결장 손실 → 상대 쪽(육각형 값 · 11주차~)
+        try:
+            import team_hex as _TH
+            _HX = _TH.week_values(week)
+        except Exception as _e:
+            _HX = {}; print(f"  A13 육각형 값 실패({type(_e).__name__}) — 이번 판 A13 없음")
+        for m in rd(os.path.join(wd, "model.csv")):
+            a, h = m["away"], m["home"]; hl = fnum(m["mkt_spread_home"]); v = _HX.get(f"{a}@{h}") or {}
+            if hl is None:
+                continue
+
+            def _loss(t):
+                x = v.get(t) or {}
+                return (x["full"]["러시"] - x["scores"]["러시"]) if x.get("full") and x.get("scores") else None
+            la, lh = _loss(a), _loss(h)
+            ya, yh = (la is not None and la >= A13_LOSS), (lh is not None and lh >= A13_LOSS)
+            if ya != yh:
+                lose, loss = (a, la) if ya else (h, lh)
+                side_ = f"{h} {hl:+g}" if ya else f"{a} {-hl:+g}"
+                cand[f'{m["game_id"]}:spread:A13'] = (f"{a}@{h}", side_, "A13", f'{lose} 러시 결장 손실 {loss}점(뛰는 러셔 기준 {v[lose]["scores"]["러시"]} · 전원 가용이면 {v[lose]["full"]["러시"]})',
+                                                      "spread", side_.split()[1], "-110")
+    if week >= SP_START_WEEK:   # 조건부 스프레드 픽 — A7·A6·A13 후보에서(하나뿐이거나 같은 팀이면 픽 · 반대면 없음)
         for _gid in {k.split(":")[0] for k in cand}:
-            _c = [cand[k] for k in (f"{_gid}:spread:A7", f"{_gid}:spread:A6") if k in cand]
+            _c = [cand[k] for k in (f"{_gid}:spread:A7", f"{_gid}:spread:A6", f"{_gid}:spread:A13") if k in cand]
             if _c and len({c[1].split()[0] for c in _c}) == 1:
                 cand[f"{_gid}:spread:SP"] = (_c[0][0], _c[0][1], "SP", " + ".join(c[2] for c in _c) + " 조건 — " + " / ".join(c[3] for c in _c), "spread", _c[0][5], "-110")
     n_new = n_del = 0
@@ -676,7 +702,7 @@ def stats():
     placed = [r for r in rows if r["status"] == "placed"]; sug = [r for r in rows if r["status"] != "placed"]
     # 2026-10-21 10판 정리: 각도 페이퍼를 판정 진행도와 함께 맨 위에(사전 등록 목표 — A3 30픽 · A4~A10 20픽, 조정 금지)
     print(f"📊 NFL {SEASON} 페이퍼 성적(10판 ML · 각도 판정은 사전 등록 픽 수에서 · 유닛은 그 배당 기준)")
-    for k in ("A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12"):
+    for k in ("A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "A13"):
         xs = [r for r in rows if r["grade"] == ANGLE_GRADES[k]]
         print(f"  {ANGLE_GRADES[k]}: {rec(xs) if xs else '0픽'} · " + (f"판정 = {ANGLE_VERDICT[k]}" if k in ANGLE_VERDICT else f"판정까지 {len(xs)}/{ANGLE_TARGET[k]}픽"))
     _w, _l, _p, _n, _dup, _cf = angle_game_record([r for r in rows if r["grade"] not in tuple(ANGLE_GRADES[k_] for k_ in RETIRED_KEYS)])

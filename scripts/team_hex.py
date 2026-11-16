@@ -330,6 +330,13 @@ def week_values(week):
     import adv_players as AP
     base = json.load(io.open(BASE, encoding="utf-8")) if os.path.exists(BASE) else {}
     wd = N.week_dir(week)
+    _hp, _ip = os.path.join(wd, "hex.json"), os.path.join(wd, "injuries.csv")
+    if os.path.exists(_hp) and os.path.exists(_ip) and os.path.getmtime(_hp) >= os.path.getmtime(_ip):
+        try:   # 같은 리프레시 안에서 이미 계산됨(각도 → 다이제스트 순서) — 부상 파일보다 새 hex.json 은 그대로 쓴다
+            _LIVE[week] = json.load(io.open(_hp, encoding="utf-8"))
+            return _LIVE[week]
+        except Exception:
+            pass
     S = season_tables(N.SEASON); PREV = prev_tot(season_tables(N.SEASON - 1))
     inj = {r["team"]: r for r in N.rd(os.path.join(wd, "injuries.csv"))}
     out = {}
