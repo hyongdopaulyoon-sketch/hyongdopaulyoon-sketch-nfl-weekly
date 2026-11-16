@@ -1170,7 +1170,10 @@ def ph_inactives(week, games, snap):
                 nm = a_.get("displayName", ""); pos = (a_.get("position") or {}).get("abbreviation", "")
                 d = x.get("details") or {}
                 v = snap.get((t, _norm_name(nm)))
-                rows.append([f'{g["away"]}@{g["home"]}', t, nm, pos, x.get("status", ""), d.get("type", ""), d.get("detail", ""),
+                _st, _rs = x.get("status", ""), d.get("type", "")
+                if _st == "Injured Reserve":   # 2026-11-15(보드 제보 · CIN Iosivas·Parker·Davis 가 주간 보고 Doubtful 로 남고 ESPN 표시 없음): ESPN 「Injured Reserve」 행도 결장(Out · 사유 앞에 IR)
+                    _st, _rs = "Out", ("IR · " + _rs if _rs else "IR")
+                rows.append([f'{g["away"]}@{g["home"]}', t, nm, pos, _st, _rs, d.get("detail", ""),
                              (x.get("date") or "")[:16], int(official), 1 if (v or 0) >= STARTER_SNAP else 0,
                              f"{v * 100:.0f}" if v else ""])
     wcsv(os.path.join(wd, "inactives.csv"), ["game", "team", "player", "pos", "status", "reason", "detail", "announced_utc", "official", "star", "snap_pct"], rows)
@@ -1189,10 +1192,13 @@ def _overlay_official_out(wd):
     if not inj:
         return 0
     hdr = list(inj[0].keys())
-    offs = defaultdict(set)
+    offs = defaultdict(set); _irn = set()
     for r in rd(os.path.join(wd, "inactives.csv")):
-        if r.get("official") == "1" and r.get("status") == "Out":
+        _ir = str(r.get("reason") or "").startswith("IR")
+        if r.get("status") == "Out" and (r.get("official") == "1" or _ir):   # IR 지정은 당일 명단 발표 전에도 확정
             offs[r["team"]].add(_norm_name(r["player"]))
+            if _ir:
+                _irn.add((r["team"], _norm_name(r["player"])))
 
     def _split(s):
         return [y.strip() for y in re.split(r"(?<=\))\s*·\s*", str(s or "")) if y.strip()]
@@ -1210,7 +1216,8 @@ def _overlay_official_out(wd):
         if not moved:
             continue
         for col, y in moved:
-            out.append((y[:-1] + " · 당일 비활성)") if y.endswith(")") else y + "(당일 비활성)")
+            _tl = "IR" if (x["team"], _norm_name(y.split("(")[0])) in _irn else "당일 비활성"
+            out.append((y[:-1] + f" · {_tl})") if y.endswith(")") else y + f"({_tl})")
             if col == "questionable" and "★" in y and not x.get("final_pending"):   # Doubtful ★ 은 이미 세어져 있다
                 x["n_starters_missing"] = int(fnum(x.get("n_starters_missing")) or 0) + 1
             nm_ = y.split("(")[0].strip()
