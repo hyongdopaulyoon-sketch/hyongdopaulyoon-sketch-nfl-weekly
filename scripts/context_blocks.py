@@ -376,7 +376,8 @@ def collection_check(week, games_rows, inj, rt, wd):
     L = ["## 📋 수집 점검(스크립트 자동 — ⚠️ 는 발행 전에 리프레시 또는 웹 확인)", "", "| 항목 | 값 | 상태 | 비고 |", "|---|---|---|---|",
          row("경기 수(ESPN vs nflverse 일정)", f"{len(games_rows)} / {len(nv)}", len(games_rows) == len(nv) and len(nv) > 0, "다르면 바이·연기 확인"),
          row("DK 스프레드·총점·ML(안 시작한 경기)", f"{sum(1 for g in games_rows if g.get('status') not in ('STATUS_FINAL', 'STATUS_IN_PROGRESS') and g.get('spread_home') and g.get('total') and g.get('ml_home'))}/{sum(1 for g in games_rows if g.get('status') not in ('STATUS_FINAL', 'STATUS_IN_PROGRESS'))}", all(g.get("spread_home") and g.get("total") and g.get("ml_home") for g in games_rows if g.get("status") not in ("STATUS_FINAL", "STATUS_IN_PROGRESS")), "끝난 경기는 가격이 빠지는 게 정상 · 빈 경기는 💵 블록 결측"),
-         row("Polymarket 가격 파일", f"{poly}/{len(games_rows)}", poly >= len(games_rows), "없으면 「더 좋은 가격」 비교 불가"),
+         row("Polymarket 가격 파일", f"{poly}/{len(games_rows)}", poly >= len(games_rows) or poly == 0,   # 2026-11-16(보드 대기 4): 이 점검은 경기 절보다 먼저 돌아 그 주 첫 판은 늘 0 — 거짓 경보라 0 은 ✅ 로 두고 비고에 적는다
+             "없으면 「더 좋은 가격」 비교 불가" + (" · 0 = 그 주 첫 판(가격 파일은 아래 경기 절에서 받는다 — 다음 판에 채워져야 정상)" if poly == 0 else "")),
          row("부상 보고(최종 지정 / 연습 보고만)", f"{inj_final} / {inj_pend} 팀(이번 주 {len(teams)}팀)", inj_final + inj_pend >= len(teams), "연습 보고만이면 Out/Q 웹 확인 필수"),
          row("pbp 최신 주차", f"{max((int(k) for k in pbp_w if k.isdigit()), default=0)}주(이번 {week}주)", max((int(k) for k in pbp_w if k.isdigit()), default=0) >= week - 1, "한 주 뒤면 레이팅·📈 가 지난주 값"),
          row("스냅 카운트 최신 주차", f"{max((int(k) for k in snap_w if k and k.isdigit()), default=0)}주", max((int(k) for k in snap_w if k and k.isdigit()), default=0) >= week - 1, "★주전 판정 기준"),

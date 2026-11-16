@@ -711,6 +711,9 @@ def stats():
     print("— 아래는 10판 전 기록(참고 · 손익분기 52.4%(−110) 기준) —")
     # 2026-10-05 Paul 승인: 모델 페이퍼(관찰·참고)는 보고에서 뺀다(기록·추적기는 유지) · 발행 방향은 동전 — 적중률만(유닛 없음)
     print(f"■ 실베팅 {len(placed)}픽 {rec(placed)}")
+    _pubj = [r for r in rows if r["grade"].startswith("관심(발행)") and r.get("result")]   # 2026-11-16(보드 대기 2): 발행 판단(관심·소액 관심) 성적 줄이 보고에 없던 것
+    if _pubj:
+        print(f"■ 발행 판단(관심·소액 관심 · 페이퍼) {len(_pubj)}픽 {rec(_pubj)}")
     dirs = [r for r in rows if r["grade"].startswith("방향(발행)")]
     if dirs:
         print(f"■ 발행 방향(예측 쪽 · 돈 아님) {rec(dirs, units=False)}")

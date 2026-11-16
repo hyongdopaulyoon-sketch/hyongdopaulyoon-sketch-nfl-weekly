@@ -1077,7 +1077,7 @@ def ph_injuries(week, force=False):
         # 정보(qb_note): 예상 선발 = QB1 인데 시즌 드롭백 최다 QB 와 다르다 → 주전 복귀(레이팅은 대체 QB 표본이 섞여 있음) — 벌점 아님.
         flag, note = "", ""
         d1 = qb1.get(t, "")
-        if exp and d1 and d1.split()[-1].lower() != exp.split()[-1].lower():
+        if exp and d1 and _norm_name(d1).split()[-1:] != _norm_name(exp).split()[-1:]:   # 2026-11-16(보드 대기 8): 「Gardner Minshew II」 vs 「Gardner Minshew」 — 접미사(Jr·II…)를 떼고 성 비교
             flag = f"백업 QB 선발 — 뎁스차트 QB1 {d1} 대신 예상 선발 {exp}"
         elif ir_fix and not (main_qb.get(t) and _same_person(main_qb[t], exp)):   # 정정된 QB1 이 시즌 주전이 아니면 백업 선발(모델 벌점 유지)
             flag = f"백업 QB 선발 — {ir_fix} · 예상 선발 {exp}(뎁스차트 QB1)"
