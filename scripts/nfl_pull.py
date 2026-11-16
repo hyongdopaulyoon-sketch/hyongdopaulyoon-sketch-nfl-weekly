@@ -1164,7 +1164,7 @@ def ph_inactives(week, games, snap):
                 return bool(ko and _dt(x) and 0 <= (ko - _dt(x)).total_seconds() <= hrs * 3600)
             # 2026-11-15(보드 제보 · JAX): 며칠 전 날짜의 「Coach's Decision」(지난주 건강 제외가 남은 행)만으로 「공식 발표」 로 찍던 것 → 킥오프 4시간 안 것만
             official = any(str((x.get("details") or {}).get("type") or "").startswith("Coach") and (_near(x, 4) if ko else True) for x in items) or \
-                       any(_near(x, 2) for x in items)
+                       any(_near(x, 2) and x.get("status") == "Out" for x in items)   # 2026-11-16(수집 제보 · LAC@BAL BAL 「발표 14:57」): 킥오프 2시간 안의 Active(연습 스쿼드 승격)·Injured Reserve 행은 비활성 명단이 아니다 — Out 행만 공식 발표로
             for x in items:
                 a_ = x.get("athlete") or {}
                 nm = a_.get("displayName", ""); pos = (a_.get("position") or {}).get("abbreviation", "")
