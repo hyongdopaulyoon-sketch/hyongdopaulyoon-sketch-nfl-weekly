@@ -35,8 +35,8 @@ def term(word, label=None):
 # 주차 비교표·발행문 펼침(2026-10-11 Paul 「MLB 보드처럼 카드 누르면 설명 · 전 경기 표 · 발행 설명문·보완 다 넣어」)
 EXTRA_CSS = """
 .tblwrap{overflow-x:auto;background:var(--panel);border:1px solid var(--line)}
-table.cmp{border-collapse:collapse;width:100%;font-size:.84rem;min-width:720px}
-table.cmp th{font-size:.72rem;color:var(--muted);font-weight:500;text-align:left;padding:6px 8px;border-bottom:2px solid var(--line);white-space:nowrap}
+table.cmp{border-collapse:collapse;width:100%;font-size:.92rem;min-width:720px}
+table.cmp th{font-size:.8rem;color:var(--muted);font-weight:500;text-align:left;padding:6px 8px;border-bottom:2px solid var(--line);white-space:nowrap}
 table.cmp td{padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:middle}
 table.cmp tbody tr:hover{background:var(--soft)}
 table.cmp .mini{vertical-align:middle}
@@ -56,7 +56,7 @@ details.pubd .md{padding:0 14px 14px;font-size:.88rem;overflow-wrap:anywhere}
 .md hr{border:0;border-top:1px dashed var(--line)}
 .md a{color:inherit;text-decoration:underline}
 .mdt{overflow-x:auto;margin:6px 0}
-.mdt table{border-collapse:collapse;font-size:.8rem}
+.mdt table{border-collapse:collapse;font-size:.86rem}
 .mdt th,.mdt td{border:1px solid var(--line);padding:3px 7px;text-align:left;vertical-align:top}
 .pubv{border-top:1px dashed var(--line);padding-top:8px;margin-top:8px}
 .pubv:first-child{border-top:0;margin-top:0}
@@ -91,14 +91,14 @@ a.goto{font-size:.8rem;color:var(--ink);cursor:pointer;text-decoration:underline
 .pth{font-size:.8rem;font-weight:700;margin:12px 0 2px}
 .pt2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,540px),1fr));gap:12px;align-items:start;margin:4px 0}
 .pt2>div{overflow-x:auto;min-width:0}
-table.ptab{width:100%;min-width:540px;table-layout:fixed;border-collapse:collapse;font-size:.72rem;font-variant-numeric:tabular-nums}
-table.ptab th{font-family:var(--mono);font-size:.64rem;color:var(--muted);font-weight:700;text-align:center;padding:3px 1px;white-space:nowrap;overflow:hidden}
+table.ptab{width:100%;min-width:540px;table-layout:fixed;border-collapse:collapse;font-size:.8rem;font-variant-numeric:tabular-nums}
+table.ptab th{font-family:var(--mono);font-size:.7rem;color:var(--muted);font-weight:700;text-align:center;padding:3px 1px;white-space:nowrap;overflow:hidden}
 table.ptab tr.th0 th{font-family:var(--body);font-size:.84rem;color:var(--ink);text-align:left;padding:2px 2px 4px}
 table.ptab tr.gh th{border-top:1px solid var(--line);padding-top:6px}
 table.ptab tr.gh th.pnm{text-align:left;color:var(--ink);font-family:var(--body);font-size:.72rem}
 table.ptab col.cn{width:128px}table.ptab .pnm{text-align:left}
-table.ptab td{padding:5px 1px;border-bottom:1px solid var(--line);text-align:center;font-family:var(--mono);font-size:.94em;letter-spacing:-.02em;color:var(--muted)}table.ptab td.n{white-space:nowrap}
-table.ptab td.lead{font-weight:800;color:var(--ink)}
+table.ptab td{padding:5px 1px;border-bottom:1px solid var(--line);text-align:center;font-family:var(--mono);font-size:.94em;letter-spacing:-.02em;color:var(--ink);font-weight:400}table.ptab td.n{white-space:nowrap}
+table.ptab td.lead{font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
 table.ptab td.pnm{font-family:var(--body);white-space:normal;border-bottom:1px solid var(--line);border-radius:0}
 table.ptab .pnn{display:block;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 table.ptab .psub{display:block;color:var(--muted);font-size:.86em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1215,21 +1215,21 @@ def hub_html(live=None):
                     f'<span class="go">열기 →</span></a></li>' for w, u in reversed(links))
     return f"""<!DOCTYPE html>
 <meta charset="utf-8"><title>NFL 주간 보드</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@600;800&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap">
 <style>
-:root {{ --bg:#f3f5f8; --sur:#ffffff; --ink:#101828; --ink2:#556070; --line:#dde2ea; --acc:#e8590c; --accT:#fbe9df; }}
+:root {{ --bg:#f3f5f8; --sur:#ffffff; --ink:#101828; --ink2:#3d4757; --line:#cfd5de; --acc:#e8590c; --accT:#fbe9df; }}
 @media (prefers-color-scheme: dark) {{ :root:not([data-theme="light"]) {{
-  --bg:#0e131a; --sur:#161d26; --ink:#e9eef4; --ink2:#9aa5b3; --line:#283240; --acc:#ff7a2e; --accT:#2a1d14; color-scheme:dark; }} }}
-:root[data-theme="dark"] {{ --bg:#0e131a; --sur:#161d26; --ink:#e9eef4; --ink2:#9aa5b3; --line:#283240; --acc:#ff7a2e; --accT:#2a1d14; color-scheme:dark; }}
+  --bg:#0e131a; --sur:#161d26; --ink:#e9eef4; --ink2:#b6c0cc; --line:#344155; --acc:#ff7a2e; --accT:#2a1d14; color-scheme:dark; }} }}
+:root[data-theme="dark"] {{ --bg:#0e131a; --sur:#161d26; --ink:#e9eef4; --ink2:#b6c0cc; --line:#344155; --acc:#ff7a2e; --accT:#2a1d14; color-scheme:dark; }}
 * {{ box-sizing:border-box; }}
-body {{ background:var(--bg); color:var(--ink); margin:0; font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif; line-height:1.55; }}
+body {{ background:var(--bg); color:var(--ink); margin:0; font-family:"IBM Plex Sans KR","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif; line-height:1.55; }}
 .wrap {{ max-width:640px; margin:0 auto; padding:28px 16px 60px; font-variant-numeric:tabular-nums; }}
-h1 {{ font-family:"Saira Extra Condensed","Arial Narrow",sans-serif; font-weight:800; font-size:2.2rem; margin:0; letter-spacing:.02em; line-height:1; }}
+h1 {{ font-family:"IBM Plex Sans KR","Arial Narrow",sans-serif; font-weight:800; font-size:2.2rem; margin:0; letter-spacing:.02em; line-height:1; }}
 .meta {{ color:var(--ink2); font-size:.86rem; margin:8px 0 18px; }}
 a.latest {{ display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; text-decoration:none; color:var(--ink);
   background:var(--sur); border:1px solid var(--line); border-left:5px solid var(--acc); padding:16px 18px; }}
 a.latest small {{ color:var(--acc); font-weight:700; letter-spacing:.08em; font-size:.74rem; }}
-a.latest b {{ font-family:"Saira Extra Condensed","Arial Narrow",sans-serif; font-size:1.6rem; }}
+a.latest b {{ font-family:"IBM Plex Sans KR","Arial Narrow",sans-serif; font-size:1.6rem; }}
 a.latest .go {{ margin-left:auto; color:var(--acc); font-weight:700; }}
 a.latest:hover, a.latest:focus-visible {{ border-color:var(--acc); outline:none; }}
 h2 {{ font-size:.8rem; margin:30px 0 10px; color:var(--acc); letter-spacing:.12em; }}
@@ -1449,7 +1449,9 @@ def main():
                 lab = "새 정보(대조 — 판 이전 발표)" if "대조" in r["grade"] else "라인 뒤 새 정보"
             else:
                 ma_ = re.match(r"각도 관찰 (A\d+)\((.*)\)$", r["grade"])   # 이름 + 짧은 뜻(11/05 Paul 「1」)
-                lab = f'각도 {ma_.group(1)} <span class="muted">{esc(ma_.group(2))}</span>' if ma_ else esc(r["grade"].split("(")[0].replace("각도 관찰 ", "각도 "))
+                _pl = N.ANGLE_PLAIN.get(ma_.group(1)) if ma_ else None   # 쉬운 이름(11/15 Paul 「코드는 쉬운 이름과 같이」 · A13 포함)
+                lab = (f'각도 {ma_.group(1)}' + (f' <span title="{esc(_pl[1])}">{esc(_pl[0])}</span>' if _pl else "")
+                       + f' <span class="muted">{esc(ma_.group(2))}</span>') if ma_ else esc(r["grade"].split("(")[0].replace("각도 관찰 ", "각도 "))
             items.append(f'<li><span class="tag obs">{term("관찰", "관찰만")}</span> {lab} <b title="{esc(r.get("note", ""))}">{esc(r["side"])}</b> {hit(result_of(r, gk))}</li>')
         sp = next((r for r in rows if r.get("grade") == P.SP_GRADE), None)
         so, so_src = starters_out(wd, g)
@@ -1549,7 +1551,7 @@ def main():
     trows.sort(key=lambda x: x[0])
     cmp_tbl = ('<div class="tblwrap"><table class="cmp"><thead><tr><th>경기</th><th>시간(PT)</th><th>예측 승자(시장)</th><th>★</th><th>발행 예측</th><th title="주전(시즌 스냅 60%+) 중 결장 확정(공식 비활성·Out·IR) 수 — 킥오프 전 마지막 다이제스트 판 · 많이 빠진 쪽 굵게 · 마우스를 대면 이름">주전 결장</th>'
                f'<th>{term("ML")} 페이버릿</th><th title="시장 = DraftKings 스프레드(예측 기록 판 · 킥오프 때 동결) · 우리 = 우리 드라이브 모델 예상 점수 차 · 「KC -3」 = KC 가 3점 차 이상 이긴다는 뜻 · 표시용(이길 팀 예측·★과 무관)">스프레드 <small class="muted">시장 · 우리</small></th><th>판단</th>'
-               + (f'<th title="조건부 스프레드 픽(사전 등록 SP) — 홈 언더독 +7 이상(A7) · 키 넘버 3·7 을 넘긴 라인 이동의 반대쪽(A6)이 걸린 경기만 · '
+               + (f'<th title="조건부 스프레드 픽(사전 등록 SP) — 조건 셋 중 하나가 걸린 경기만 — 홈 언더독 +7 이상(A7) · 키 넘버 3·7 을 넘긴 라인 이동의 반대쪽(A6) · 주력 러셔가 빠져 러시 점수(육각형)가 10점+ 깎인 팀의 상대(A13) · '
                   f'기록용(돈 아님) · 이길 팀 예측과 다른 장부 · 시즌 {sp_rec}(W-L-P · {sp_n}/30픽)">스프레드 픽 <small class="muted">{sp_rec}</small></th>' if show_sp else "")
                + f'<th title="끝난 경기: 최종 점수 · 시장 예측 맞힘/틀림 · 스프레드 어느 쪽 커버(초록 = 발행 예측 팀 커버 · 빨강 = 못 함 · 발행 없으면 무색) · 오버/언더 + 두 팀 합계(라인 = DK 마감, 채점 전엔 킥오프 전 마지막 수집 판)">결과</th></tr></thead>'
                '<tbody>%%ROWS%%</tbody></table></div>')
@@ -1642,14 +1644,14 @@ def main():
     page = f'''<!DOCTYPE html>
 <meta charset="utf-8"><title>NFL {a.week}주차 보드</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@600;800&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* 11/15 Paul 「전체적인 색이 칙칙해」 → 잔디 기운 회녹색 걷어내고 맑은 회색·흰 판·짙은 남색 글자 · 원래: 구장 라인 감성 — 흰 분필선 · 10/22 Paul 「깔끔하게 — 팀명 색 빼」: 강조색(주황)은 진행 중·정렬 표시만, 색은 맞힘/틀림 칩 · 소제목(파랑) */
-:root{{--bg:#f3f5f8;--panel:#ffffff;--ink:#101828;--muted:#556070;--line:#dde2ea;--acc:#e8590c;--ok:#1f8a4c;--bad:#c2362b;--push:#8a7a1f;--term:#6b3fb5;--soft:#f1f4f8;--acc2:#2b5ea7;--wait:#8a7b5a;--hx1:#2b6cb8;--hx2:#c2552b;
-  --display:"Saira Extra Condensed","Arial Narrow",sans-serif;--body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}}
-@media (prefers-color-scheme: dark){{:root:not([data-theme="light"]){{--bg:#0e131a;--panel:#161d26;--ink:#e9eef4;--muted:#9aa5b3;--line:#283240;--acc:#ff7a2e;--ok:#4cc27a;--bad:#ef6a5f;--push:#cdbb52;--term:#b99af0;--soft:#1b222c;--acc2:#8cb4ef;--wait:#b7a67c;--hx1:#6ea2e8;--hx2:#e0714f;color-scheme:dark}}}}
-:root[data-theme="dark"]{{--bg:#0e131a;--panel:#161d26;--ink:#e9eef4;--muted:#9aa5b3;--line:#283240;--acc:#ff7a2e;--ok:#4cc27a;--bad:#ef6a5f;--push:#cdbb52;--term:#b99af0;--soft:#1b222c;--acc2:#8cb4ef;--wait:#b7a67c;--hx1:#6ea2e8;--hx2:#e0714f;color-scheme:dark}}
-body{{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.55}}
+:root{{--bg:#f3f5f8;--panel:#ffffff;--ink:#101828;--muted:#3d4757;--line:#cfd5de;--acc:#e8590c;--ok:#1f8a4c;--bad:#c2362b;--push:#8a7a1f;--term:#6b3fb5;--soft:#f1f4f8;--acc2:#2b5ea7;--wait:#8a7b5a;--hx1:#2b6cb8;--hx2:#c2552b;
+  --display:"IBM Plex Sans KR","Arial Narrow",sans-serif;--body:"IBM Plex Sans KR","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}}
+@media (prefers-color-scheme: dark){{:root:not([data-theme="light"]){{--bg:#0e131a;--panel:#161d26;--ink:#e9eef4;--muted:#b6c0cc;--line:#344155;--acc:#ff7a2e;--ok:#4cc27a;--bad:#ef6a5f;--push:#cdbb52;--term:#b99af0;--soft:#1b222c;--acc2:#8cb4ef;--wait:#b7a67c;--hx1:#6ea2e8;--hx2:#e0714f;color-scheme:dark}}}}
+:root[data-theme="dark"]{{--bg:#0e131a;--panel:#161d26;--ink:#e9eef4;--muted:#b6c0cc;--line:#344155;--acc:#ff7a2e;--ok:#4cc27a;--bad:#ef6a5f;--push:#cdbb52;--term:#b99af0;--soft:#1b222c;--acc2:#8cb4ef;--wait:#b7a67c;--hx1:#6ea2e8;--hx2:#e0714f;color-scheme:dark}}
+body{{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55}}
 .wrap{{max-width:1320px;margin:0 auto;padding-inline:16px;padding-block:20px 40px;display:grid;gap:18px}}
 h1{{font-family:var(--display);font-weight:800;font-size:2.4rem;letter-spacing:.02em;margin:0;line-height:1}}
 h2{{font-family:var(--display);font-weight:600;font-size:1.35rem;letter-spacing:.03em;margin:0}}
