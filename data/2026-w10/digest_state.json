@@ -113,10 +113,14 @@
 "out": {
 "LAC": [
 "Branson Taylor",
+"David Njoku",
+"Denzel Perryman",
 "Isas Waxter",
-"Kendall Williamson"
+"Kendall Williamson",
+"Trey Pipkins"
 ],
 "BAL": [
+"Adam Randall",
 "Jaylinn Hawkins",
 "Lamar Jackson",
 "Tyler Huntley"
@@ -136,8 +140,11 @@
 "Sebastian Joseph-Day"
 ],
 "CIN": [
+"Andrei Iosivas",
+"Brian Parker II",
 "Cashius Howell",
 "Erick All",
+"Jalen Davis",
 "Kyle Dugger"
 ]
 }
@@ -227,6 +234,7 @@
 "Danielle Hunter",
 "David Montgomery",
 "Jaylin Noel",
+"Jaylin Smith",
 "Keylan Rutledge",
 "Marvin Harrison Jr.",
 "Wyatt Teller"
@@ -269,11 +277,14 @@
 },
 "out": {
 "SF": [
+"C.J. West",
 "Christian Kirk",
 "Gracen Halton",
-"Mike Evans"
+"Mike Evans",
+"Nate Hobbs"
 ],
 "DAL": [
+"Devin Moore",
 "Donovan Ezeiruaku",
 "Jake Ferguson",
 "Jonathan Mingo",
@@ -296,6 +307,9 @@
 "CAR": [
 "Akayleb Evans",
 "Bobby Okereke",
+"Brady Christensen",
+"Jonathon Brooks",
+"Mike Jackson",
 "Taylor Moton",
 "Will Lee III"
 ],
@@ -336,5 +350,5 @@
 ]
 }
 },
-"_stamp": "11-15 16:13"
+"_stamp": "11-15 16:21"
 }
