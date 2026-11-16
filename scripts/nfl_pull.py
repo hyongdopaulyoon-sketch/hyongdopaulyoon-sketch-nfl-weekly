@@ -873,6 +873,8 @@ def _status_of(short, inj_row):
     """pbp 짧은 이름(「J.Jefferson」) → 그 팀 부상 줄의 상태 꼬리표(Out/Doubtful/Questionable/연습 DNP·Limited) 또는 ""."""
     # 2026-11-15(보드 제보 · SEA E.Wilson 건강 제외인데 선수 표 상태 칸 「—」): ESPN 명단에만 Out 인 선수(espn_only_out 열)도 상태 칸에
     for key, lab in (("out", "Out"), ("espn_only_out", "Out(ESPN 명단)"), ("doubtful", "Doubtful"), ("questionable", "Q"), ("dnp", "연습 DNP"), ("limited", "연습 Limited")):
+        if key in ("dnp", "limited") and not inj_row.get("final_pending"):
+            continue   # 2026-11-15(보드 제보 · CIN Dexter Lawrence 「연습 DNP」): 최종 지정이 나온 뒤엔 주중 연습 기록만 있고 지정이 없는 선수 = 출전 — 상태 칸에 연습 꼬리표를 남기지 않는다
         for full in [x.split("(")[0].strip() for x in str(inj_row.get(key) or "").split(" · ") if x.strip()]:
             if full and _same_person(short, full):
                 return lab
