@@ -737,6 +737,34 @@ def stats():
         print("  소급 백테스트(기록용 · 전향 판정에 안 섞음): " + " · ".join(f'{g} {rec([r for r in rows if r["grade"] == g])}' for g in bk))
 
 
+def watch_obs():
+    """2026-11-16 Paul 「추천대로」(NFL 보드 대기 1·3 — 관찰만 · 예측·★ 무변경):
+    ① 동전 경기(시장 승자 확률 < 52%)에서 관찰 각도 2개+ 가 시장 승자의 **반대 팀**을 가리킨 경기 — 반대 팀 승-패(6주차 DAL@GB 가 계기 · 20경기 뒤 보고 · 폐기 각도·총점 각도 제외).
+    ② 시장 ★★★★(75%+) 경기 승-패 — 30경기 도달 시 보고(8주차까지 11-7)."""
+    import glob
+    rows = rd(PICKS)
+    ang = defaultdict(set)
+    for r in rows:
+        k = r["id"].split(":")[-1]
+        if r.get("grade", "").startswith("각도 관찰") and k not in RETIRED_KEYS and r.get("market") in ("ml", "spread"):
+            ang[(str(r["week"]), r["game"])].add((k, str(r["side"]).split()[0]))
+    w = l = 0; s4w = s4l = 0; ex = []
+    for pth in sorted(glob.glob(os.path.join(DATA, f"{SEASON}-w*", "predictions.csv"))):
+        for x in rd(pth):
+            if x.get("src") != "시장" or x.get("result") not in ("W", "L"):
+                continue
+            p_ = fnum(x.get("p_pick")) or 0
+            if p_ >= 0.75:
+                s4w += x["result"] == "W"; s4l += x["result"] == "L"
+            if p_ < 0.52:
+                a_, h_ = x["game"].split("@"); opp = h_ if x["pick"] == a_ else a_
+                ks = sorted(k for k, t in ang.get((str(x["week"]), x["game"]), ()) if t == opp)
+                if len(ks) >= 2:
+                    won = x["result"] == "L"; w += won; l += (not won); ex.append(f'{x["week"]}주 {x["game"]} {opp}({"·".join(ks)}) {"승" if won else "패"}')
+    print(f"■ 관찰(값만): 동전 경기(시장 <52%)에서 각도 2개+ 가 반대 팀 — {w + l}/20경기 반대 팀 {w}-{l}" + (" · 📣 20경기 도달 — Paul 에게 보고" if w + l >= 20 else "") + (f" · {' / '.join(ex[-4:])}" if ex else ""))
+    print(f"■ 관찰(값만): 시장 ★★★★(75%+) {s4w}-{s4l}" + (f" {100 * s4w / (s4w + s4l):.0f}%" if s4w + s4l else "") + f" · {s4w + s4l}/30경기(기대 82%)" + (" · 📣 30경기 도달 — Paul 에게 보고" if s4w + s4l >= 30 else ""))
+
+
 def main():
     ap = argparse.ArgumentParser(); sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("suggest"); s.add_argument("--week", type=int, required=True)
@@ -757,7 +785,12 @@ def main():
     elif a.cmd == "teaser": teaser(a.week, a.game, a.cents, a.src)
     elif a.cmd == "wind": wind(a.week)
     elif a.cmd == "angles": angles(a.week)
-    else: stats()
+    else:
+        stats()
+        try:
+            watch_obs()
+        except Exception as _e:
+            print(f"■ 관찰 집계 실패({type(_e).__name__})")
 
 
 if __name__ == "__main__":
