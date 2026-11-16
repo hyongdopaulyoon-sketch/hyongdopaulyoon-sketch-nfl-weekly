@@ -17,7 +17,6 @@
 "Tyrion Ingram-Dawkins"
 ],
 "GB": [
-"Jacob Monk",
 "Josh Jacobs",
 "Josh Whyle",
 "Kevin Zeitler",
@@ -39,7 +38,6 @@
 "JAX": [
 "BJ Green II",
 "DaVon Hamilton",
-"Eric Murray",
 "Jessie Bates",
 "Jordan Davis"
 ],
@@ -70,9 +68,9 @@
 "Terrance Ferguson"
 ],
 "ARI": [
+"Andrew Wingard",
 "Gardner Minshew",
 "Hjalte Froholdt",
-"Jalen Brooks",
 "Jayden Williams",
 "Jeremiyah Love",
 "Jon Gaines II",
@@ -97,14 +95,32 @@
 ],
 "NYJ": [
 "Jarvis Brownlee Jr.",
-"T'Vondre Sweat",
 "Trevin Wallace"
+]
+}
+},
+"PIT@CIN": {
+"spread_home": "-4.5",
+"total": "49.5",
+"ml": "?/?",
+"qb": {
+"PIT": "Aaron Rodgers",
+"CIN": "Joe Burrow"
+},
+"out": {
+"PIT": [],
+"CIN": [
+"Andrei Iosivas",
+"Brian Parker II",
+"Cashius Howell",
+"Jalen Davis",
+"Kyle Dugger"
 ]
 }
 },
 "LAC@BAL": {
 "spread_home": "-4.5",
-"total": "38.5",
+"total": "39.5",
 "ml": "+185/-225",
 "qb": {
 "LAC": "Justin Herbert",
@@ -113,8 +129,6 @@
 "out": {
 "LAC": [
 "Branson Taylor",
-"David Njoku",
-"Denzel Perryman",
 "Isas Waxter",
 "Kendall Williamson",
 "Trey Pipkins"
@@ -124,28 +138,6 @@
 "Jaylinn Hawkins",
 "Lamar Jackson",
 "Tyler Huntley"
-]
-}
-},
-"PIT@CIN": {
-"spread_home": "-3.5",
-"total": "49.5",
-"ml": "+160/-192",
-"qb": {
-"PIT": "Aaron Rodgers",
-"CIN": "Joe Burrow"
-},
-"out": {
-"PIT": [
-"Sebastian Joseph-Day"
-],
-"CIN": [
-"Andrei Iosivas",
-"Brian Parker II",
-"Cashius Howell",
-"Erick All",
-"Jalen Davis",
-"Kyle Dugger"
 ]
 }
 },
@@ -190,7 +182,6 @@
 "Lucas Patrick"
 ],
 "NYG": [
-"Malik Harrison",
 "Tyrone Tracy Jr."
 ]
 }
@@ -208,7 +199,6 @@
 "Jaydn Ott",
 "Jaylon Moore",
 "Kenneth Walker III",
-"L'Jarius Sneed",
 "Omarr Norman-Lott",
 "Peter Woods"
 ],
@@ -262,7 +252,6 @@
 ],
 "LV": [
 "Dont'e Thornton Jr.",
-"Patrick Johnson",
 "Thomas Booker"
 ]
 }
@@ -284,7 +273,7 @@
 "Nate Hobbs"
 ],
 "DAL": [
-"Devin Moore",
+"DaRon Bland",
 "Donovan Ezeiruaku",
 "Jake Ferguson",
 "Jonathan Mingo",
@@ -305,12 +294,10 @@
 },
 "out": {
 "CAR": [
-"Akayleb Evans",
 "Bobby Okereke",
 "Brady Christensen",
 "Jonathon Brooks",
 "Mike Jackson",
-"Taylor Moton",
 "Will Lee III"
 ],
 "NO": [
@@ -332,23 +319,19 @@
 "out": {
 "MIA": [
 "Aaron Brewer",
-"Chris Bell",
-"Darrell Baker Jr.",
 "Jared Wayne",
 "Malik Willis",
 "Zach Sieler"
 ],
 "IND": [
 "Akeem Davis-Gaither",
-"Cam Taylor-Britt",
 "Jalen Travis",
 "Jaylon Carlies",
 "Jerry Tillery",
 "Luke Rhodes",
-"Mo Alie-Cox",
-"Will Mallory"
+"Mo Alie-Cox"
 ]
 }
 },
-"_stamp": "11-15 16:21"
+"_stamp": "11-16 15:52"
 }
