@@ -53,9 +53,9 @@
 }
 },
 "LA@ARI": {
-"spread_home": "9.5",
+"spread_home": "10.0",
 "total": "38.5",
-"ml": "-500/+380",
+"ml": "?/?",
 "qb": {
 "LA": "Matthew Stafford",
 "ARI": "Carson Beck"
@@ -97,7 +97,6 @@
 ],
 "NYJ": [
 "Jarvis Brownlee Jr.",
-"Omar Cooper Jr.",
 "T'Vondre Sweat",
 "Trevin Wallace"
 ]
@@ -241,7 +240,7 @@
 "SEA@LV": {
 "spread_home": "6.5",
 "total": "40.5",
-"ml": "-298/+240",
+"ml": "?/?",
 "qb": {
 "SEA": "Drew Lock",
 "LV": "Fernando Mendoza"
@@ -261,9 +260,9 @@
 }
 },
 "SF@DAL": {
-"spread_home": "4.5",
+"spread_home": "3.5",
 "total": "55.5",
-"ml": "-218/+180",
+"ml": "?/?",
 "qb": {
 "SF": "Brock Purdy",
 "DAL": "Dak Prescott"
@@ -337,5 +336,5 @@
 ]
 }
 },
-"_stamp": "11-15 12:12"
+"_stamp": "11-15 15:57"
 }
