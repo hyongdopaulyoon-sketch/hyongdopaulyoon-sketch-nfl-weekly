@@ -238,6 +238,8 @@ def main():
             miss.append("수비 표")
         if miss:
             문제.append(f"{k}: 필수 줄 없음(6판 10/11): {' '.join(miss)}")
+        if "- 📒 팀별 기록" in dsecs.get(k, "") and not re.search(LINE_HEAD + r"팀별 기록", body):   # 2026-11-16 Paul 「nfl도 넣어」 — 팀별 추적기 값을 발행문에
+            문제.append(f"{k}: 「- 팀별 기록:」 줄 없음 — 다이제스트 📒 줄의 두 팀 값을 그대로(11판 추가)")
         # 2026-11-15 11판(Paul 「스프레드픽도 내자」 · 사전 등록 SP): 기준판에 📏 줄이 있으면 발행문 「- 스프레드 픽:」 줄이 같은 값(없음 포함)
         _dsp = re.search(r"(?m)^- 📏 스프레드 픽: (?:\*\*([A-Z]{2,3}) ([+-]?\d+(?:\.\d+)?)\*\*|없음)", dsecs.get(k, ""))
         if _dsp:
