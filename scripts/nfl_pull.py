@@ -804,6 +804,15 @@ def _real_stats_block(a, h, RS, inj, games_row, model_row):
             return "—"
         exp = (inj.get(t) or {}).get("expected_qb") or ""
         pid = next((pp for pp in agg if exp and _same_person(NM[pp][0], exp)), None)
+        if pid is None and exp:   # 2026-11-16(수집 제보): 시즌 중 이적 QB(BAL Brissett ← ARI 기록) — 이 표만 「기록 없음」 으로 남던 것
+            allq = defaultdict(lambda: defaultdict(float))
+            for (k_, p_, _g), x_ in P.items():
+                if k_ == "qb":
+                    for kk, vv in x_.items():
+                        allq[p_][kk] += vv
+            _tp = traded_qb_pid(exp, t, allq, NM, lambda p_: allq[p_].get("db", 0))
+            if _tp:
+                agg = {_tp: allq[_tp]}; pid = _tp
         if pid is None and exp:
             return f"{exp}: 2026 기록 없음(드롭백 0 ※ 얇음 — 근거 금지)"
         pid = pid or max(agg, key=lambda pp: agg[pp].get("db", 0))
@@ -1399,7 +1408,8 @@ def _inactives_line(wd, g, a, h):
     try:
         ko = datetime.strptime(g["kickoff_utc"], "%Y-%m-%dT%H:%MZ")
         kp = datetime.strptime(g["kickoff_pt"], "%H:%M")
-        ds = [datetime.strptime(r["announced_utc"], "%Y-%m-%dT%H:%M") for r in rows if r["announced_utc"] and off_t.get(r["team"])]
+        ds = [datetime.strptime(r["announced_utc"], "%Y-%m-%dT%H:%M") for r in rows if r["announced_utc"] and off_t.get(r["team"])
+              and r["status"] == "Out" and not str(r.get("reason") or "").startswith("IR")]   # 2026-11-16(수집 제보 · 「발표 14:48」 = Active 행 시각): 발표 시각도 당일 Out 행에서만
         ds = [d for d in ds if 0 <= (ko - d).total_seconds() <= 4 * 3600]   # 2026-11-15: 며칠 전 날짜가 시각만 남아 「17:05 PT」 로 찍히던 것(JAX) — 발표된 팀의 당일 행만, 없으면 「?」
         if ds:
             ann_pt = (kp - (ko - min(ds))).strftime("%H:%M")
