@@ -246,9 +246,13 @@ def player_tables(a, h, RS, inj, g):
         L += [f"| {t} 선수 | 역할 | 경기 | 표본 | 야드 | TD | 효율 | EPA/플레이 | 리그 순위 | 상태 | {N.SEASON - 1}(작년·참고) |", "|---|---|---|---|---|---|---|---|---|---|---|"]
         exp = inj_t.get("expected_qb") or ""
         qbs = sorted((p for p in qb if NM.get(p, ("", ""))[1] == t and qb[p].get("db", 0) >= 10), key=lambda p: -qb[p]["db"])[:2]
+        if exp and not any(N._same_person(NM[p][0], exp) for p in qbs):   # 2026-11-16: 시즌 중 이적한 예상 선발(BAL Brissett ← ARI 기록)
+            _tp = N.traded_qb_pid(exp, t, qb, NM, lambda p: qb[p].get("db", 0))
+            if _tp:
+                qbs = [_tp] + qbs[:1]
         for p in qbs:
             x = qb[p]; att = x.get("att", 0) or 1; db = x.get("db", 0) or 1
-            tag = " (예상 선발)" if exp and N._same_person(NM[p][0], exp) else ""
+            tag = (" (예상 선발" + (f" · {NM[p][1]} 때 기록" if NM[p][1] != t else "") + ")") if exp and N._same_person(NM[p][0], exp) else ""
             st = CB.N._status_of(NM[p][0], inj_t)
             L.append(f"| {NM[p][0]}{tag} | QB | {len(gcount[p])} | 드롭백 {int(db)} · 시도 {int(att)} | {int(x.get('yds', 0))} | 패스 {int(x.get('td', 0))} · INT {int(x.get('int', 0))}[운] | 완성 {100 * x.get('cmp', 0) / att:.0f}% · 야드/시도 {x.get('yds', 0) / att:.1f} · 색 {100 * x.get('sack', 0) / db:.1f}% | {x.get('epa', 0) / db:+.2f} | EPA {rk(qpool, p)} | {st or '—'} | {ly_player('qb', NM[p][0], t, p)} |")
         if exp and not any(N._same_person(NM[p][0], exp) for p in qbs):
@@ -406,6 +410,8 @@ def build(a, h, RS, PRO, rt, inj, g):
         for t in (a, h):
             exp = (inj.get(t) or {}).get("expected_qb") or ""
             pid = next((p for p in qb if exp and N._same_person(NM[p][0], exp) and NM[p][1] == t), None)
+            if pid is None:
+                pid = N.traded_qb_pid(exp, t, qb, NM, lambda p: qb[p].get("db", 0))   # 2026-11-16 시즌 중 이적 QB
             if pid is None:
                 qcells[t] = f"{exp or '?'} — 2026 기록 없음(표본 적음)"; continue
             n = len(pool)

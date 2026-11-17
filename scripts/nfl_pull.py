@@ -502,7 +502,12 @@ def _same_person(short, full):
     m = re.match(r"([A-Z][a-z]{0,3})\.\s*(.+)", short)   # 2026-11-15: pbp 가 동명이인을 「Mi.Wilson」 처럼 적는다 — 한 글자 이니셜만 받아 상태 칸이 「—」 로 비던 것(ARI Michael Wilson IR)
     if not m:
         st = [w for w in short.split() if w.lower() not in sfx] or short.split()
-        return st[-1].lower() == ft[-1].lower()
+        if st[-1].lower() != ft[-1].lower():
+            return False
+        if len(st) >= 2 and len(ft) >= 2:   # 2026-11-16(보드 제보 · LAC OL 「Logan Taylor」 ← Branson Taylor IR): 전체 이름끼리는 성만 같다고 같은 사람이 아니다 — 이름도 맞아야(Cam/Cameron 은 앞 글자 포함으로 허용)
+            a_, b_ = re.sub(r"[.'\-]", "", st[0].lower()), re.sub(r"[.'\-]", "", ft[0].lower())
+            return a_.startswith(b_) or b_.startswith(a_)
+        return True
     return ft[0].lower().startswith(m.group(1).lower()) and ft[-1].lower() == m.group(2).split()[-1].lower()
 
 
@@ -594,19 +599,32 @@ def _qb_shrunk(x, P):
     return (x.get("epa", 0) + K_QB * lg) / (x.get("db", 0) + K_QB)
 
 
+def traded_qb_pid(exp, t, qb_pids, NM, db_of, min_db=30):
+    """예상 선발 QB 가 그 팀 기록에 없을 때(시즌 중 이적 — 2026-11-16 BAL Jacoby Brissett: 기록은 ARI 322 드롭백) 리그 전체에서 이름이 맞는 QB 가 **한 명뿐**이면 그 선수 id."""
+    if not exp:
+        return None
+    c = [p for p in qb_pids if NM.get(p, ("", ""))[1] != t and _same_person(NM[p][0], exp) and db_of(p) >= min_db]
+    return c[0] if len(c) == 1 else None
+
+
 def _qb_of(t, RS, inj):
     """(이름, 드롭백, 원 EPA/드롭백, 보정 EPA) — 예상 선발 QB(없으면 드롭백 최다)."""
     if not RS:
         return None
     _T, P, NM = RS
-    agg = defaultdict(lambda: defaultdict(float))
+    agg = defaultdict(lambda: defaultdict(float)); allq = defaultdict(lambda: defaultdict(float))
     for (k, pid, g), x in P.items():
-        if k == "qb" and NM.get(pid, ("", ""))[1] == t:
+        if k == "qb":
             for kk, vv in x.items():
-                agg[pid][kk] += vv
+                allq[pid][kk] += vv
+                if NM.get(pid, ("", ""))[1] == t:
+                    agg[pid][kk] += vv
+    exp = (inj.get(t) or {}).get("expected_qb") or ""
+    _tp = traded_qb_pid(exp, t, allq, NM, lambda p: allq[p].get("db", 0)) if not any(exp and _same_person(NM[pp][0], exp) for pp in agg) else None
+    if _tp:
+        agg[_tp] = allq[_tp]
     if not agg:
         return None
-    exp = (inj.get(t) or {}).get("expected_qb") or ""
     pid = next((pp for pp in agg if exp and _same_person(NM[pp][0], exp)), None)
     if pid is None and exp:
         return exp, 0, None, None                     # 예상 선발이 2026 드롭백 0 — 다른 QB 값으로 채우지 않는다(10/5 ATL Penix ← C.Rush 오표시)
@@ -1192,13 +1210,15 @@ def _overlay_official_out(wd):
     if not inj:
         return 0
     hdr = list(inj[0].keys())
-    offs = defaultdict(set); _irn = set()
+    offs = defaultdict(set); _irn = set(); _espn = set()
     for r in rd(os.path.join(wd, "inactives.csv")):
         _ir = str(r.get("reason") or "").startswith("IR")
-        if r.get("status") == "Out" and (r.get("official") == "1" or _ir):   # IR 지정은 당일 명단 발표 전에도 확정
+        if r.get("status") == "Out":   # 2026-11-16(보드 제보 · LAC McConkey 주간 Q vs ESPN Out): ESPN 이 Out 으로 내린 선수는 당일 명단 발표 전에도 Out(주간 보고보다 새 지정)
             offs[r["team"]].add(_norm_name(r["player"]))
             if _ir:
                 _irn.add((r["team"], _norm_name(r["player"])))
+            elif r.get("official") != "1":
+                _espn.add((r["team"], _norm_name(r["player"])))
 
     def _split(s):
         return [y.strip() for y in re.split(r"(?<=\))\s*·\s*", str(s or "")) if y.strip()]
@@ -1216,7 +1236,8 @@ def _overlay_official_out(wd):
         if not moved:
             continue
         for col, y in moved:
-            _tl = "IR" if (x["team"], _norm_name(y.split("(")[0])) in _irn else "당일 비활성"
+            _k = (x["team"], _norm_name(y.split("(")[0]))
+            _tl = "IR" if _k in _irn else ("ESPN Out" if _k in _espn else "당일 비활성")
             out.append((y[:-1] + f" · {_tl})") if y.endswith(")") else y + f"({_tl})")
             if col == "questionable" and "★" in y and not x.get("final_pending"):   # Doubtful ★ 은 이미 세어져 있다
                 x["n_starters_missing"] = int(fnum(x.get("n_starters_missing")) or 0) + 1
