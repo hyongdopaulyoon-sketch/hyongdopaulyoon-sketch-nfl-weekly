@@ -363,8 +363,10 @@ ANGLE_TARGET = {"SP": 30, "A13": 30, "A3": 30, "A4": 20, "A5": 20, "A6": 20, "A7
 # 2026-11-15 Paul 「둘 다 추천대로」 — 9주차 채점 뒤 판정(사전 등록 조건 그대로):
 #  A10 폐기: 20픽 7-13(35.0%) −6.65u · 조건 ≥50% & 수익 플러스 미달 → 10주차부터 생성 중단(기록 행은 남김 · 경기 단위 성적에서 제외 — A1·A2 와 같은 처리)
 #  A6 유지: 23픽 14-9(60.9%) +3.73u · 조건 ≥52.4% 충족 → 관찰 줄 계속(서술 전용 · ATS 각도라 판단 근거 아님 · 10판 ML 전용 불변)
-RETIRED_KEYS = ("A1", "A2", "A10")
+#  A3 폐기(2026-11-17 Paul 「a3버리자」 · 10주차 채점 뒤 30픽 도달): 16-14(53.3%) +0.54u · 평균 CLV +0.07점 — 사전 등록 「<50% 폐기 · ≥55% & CLV≥0 상정」 어느 쪽도 아님(중간) → Paul 결정으로 폐기. 11주차부터 생성 중단(기록 행은 남김 · 경기 단위 성적·관찰 줄에서 제외 — A10 과 같은 처리)
+RETIRED_KEYS = ("A1", "A2", "A10", "A3")
 ANGLE_VERDICT = {"A10": "폐기(2026-11-15 Paul — 20픽 7-13 35% −6.65u · 조건 ≥50% & 수익 플러스 미달 · 생성 중단)",
+                 "A3": "폐기(2026-11-17 Paul 「a3버리자」 — 30픽 16-14 53% +0.54u · 승격 조건 ≥55% 미달 · 생성 중단)",
                  "A6": "유지(2026-11-15 Paul — 23픽 14-9 61% +3.73u · 조건 ≥52.4% 충족 · 계속 적립)"}
 # A11·A12(2026-11-05 사전 등록 · 조정 금지 · 서술 전용 점수 0 · 각 30픽 판정 — <50% 폐기 · ≥55% & 평균 CLV ≥0 이면 Paul 상정):
 # A11 = 실외·open & ESPN 날씨 문자열 rain|shower|thunder|storm|drizzle(snow|sleet|flurr 제외) → 그 시점 총점 Under · 판정은 경기 당일(PT) 판만, 킥오프 뒤 동결.
@@ -506,7 +508,7 @@ def angles(week):
         if hl is None:
             continue
         os_ = fnum(g.get("open_spread_home"))
-        if os_ is not None:                         # A3 — 결장 확정 팀 반대쪽으로 3점+ 이동
+        if os_ is not None and "A3" not in RETIRED_KEYS:   # A3 — 결장 확정 팀 반대쪽으로 3점+ 이동(2026-11-17 폐기 — 생성 중단)
             def absent(t):
                 x = inj.get(t) or {}
                 return bool(x.get("qb_flag")) or ((fnum(x.get("n_starters_missing")) or 0) > 0 and not x.get("final_pending"))
