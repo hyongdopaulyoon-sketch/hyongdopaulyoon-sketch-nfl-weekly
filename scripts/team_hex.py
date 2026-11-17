@@ -375,7 +375,7 @@ def digest_line(a, h, v):
     for t in (a, h):
         f, s = v[t].get("full"), v[t]["scores"]
         if f:
-            loss += [f"{t} {n} −{f[n] - s[n]}(전원 가용이면 {f[n]})" for n in VERTS if f[n] - s[n] >= 10]
+            loss += [f"{t} {n} −{f[n] - s[n]}(전원 가용이면 {f[n]})" for n in VERTS if f[n] - s[n] >= 5]   # 2026-11-16(보드 제보 · LAC 패스 무기 22 → 17): 표시 문턱 10 → 5점(스프레드 조건 A13 의 10점 문턱과는 별개)
     return ("- 🔷 선수 육각형(이번 주 뛰는 선수만 · 0~100 · 50 = 리그 평균 · 값만 — " + HIST_NOTE + "): " + one(a, sa) + " / " + one(h, sh)
             + f" · 15점+ 앞서는 꼭짓점: {a} {', '.join(ahead(a, sa, sh)) or '없음'} / {h} {', '.join(ahead(h, sh, sa)) or '없음'}"
             + " · 맞대결: " + mu + " · 결장으로 깎인 꼭짓점: " + (" · ".join(loss) if loss else "없음"))

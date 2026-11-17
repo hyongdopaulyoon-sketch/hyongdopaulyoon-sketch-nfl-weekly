@@ -249,7 +249,7 @@ def player_tables(a, h, RS, inj, g):
         if exp and not any(N._same_person(NM[p][0], exp) for p in qbs):   # 2026-11-16: 시즌 중 이적한 예상 선발(BAL Brissett ← ARI 기록)
             _tp = N.traded_qb_pid(exp, t, qb, NM, lambda p: qb[p].get("db", 0))
             if _tp:
-                qbs = [_tp] + qbs[:1]
+                qbs = [_tp] + qbs[:2]   # 2026-11-16(보드 제보): 이적 QB 를 앞에 넣으면서 팀 QB 둘째 행(BAL L.Jackson)이 빠지던 것 — 팀 QB 둘은 그대로 둔다
         for p in qbs:
             x = qb[p]; att = x.get("att", 0) or 1; db = x.get("db", 0) or 1
             tag = (" (예상 선발" + (f" · {NM[p][1]} 때 기록" if NM[p][1] != t else "") + ")") if exp and N._same_person(NM[p][0], exp) else ""
