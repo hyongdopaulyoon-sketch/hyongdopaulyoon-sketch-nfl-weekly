@@ -2,7 +2,7 @@
 "LV@DEN": {
 "spread_home": "-10.0",
 "total": "40.5",
-"ml": "+441/-590",
+"ml": "+439/-589",
 "qb": {
 "LV": "Fernando Mendoza",
 "DEN": "Bo Nix"
@@ -53,7 +53,7 @@
 "NO@CHI": {
 "spread_home": "-11.5",
 "total": "48.5",
-"ml": "+448/-610",
+"ml": "+447/-600",
 "qb": {
 "NO": "Tyler Shough",
 "CHI": "Caleb Williams"
@@ -72,7 +72,7 @@
 "IND@HOU": {
 "spread_home": "-12.5",
 "total": "44.5",
-"ml": "+500/-690",
+"ml": "+505/-700",
 "qb": {
 "IND": "Daniel Jones",
 "HOU": "C.J. Stroud"
@@ -86,6 +86,7 @@
 "Jaylon Carlies",
 "Jerry Tillery",
 "Mo Alie-Cox",
+"Sauce Gardner",
 "Will Mallory"
 ],
 "HOU": [
@@ -116,7 +117,7 @@
 "CIN@WAS": {
 "spread_home": "6.0",
 "total": "53.5",
-"ml": "-290/+237",
+"ml": "-283/+232",
 "qb": {
 "CIN": "Joe Burrow",
 "WAS": "Jayden Daniels"
@@ -209,7 +210,7 @@
 },
 "PIT@PHI": {
 "spread_home": "4.5",
-"total": "37.5",
+"total": "38.5",
 "ml": "-205/+172",
 "qb": {
 "PIT": "Aaron Rodgers",
@@ -225,7 +226,7 @@
 "TEN@DAL": {
 "spread_home": "-8.5",
 "total": "55.5",
-"ml": "+308/-388",
+"ml": "+307/-387",
 "qb": {
 "TEN": "Cam Ward",
 "DAL": "Dak Prescott"
@@ -241,5 +242,5 @@
 ]
 }
 },
-"_stamp": "11-19 15:14"
+"_stamp": "11-19 15:52"
 }
