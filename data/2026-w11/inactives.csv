@@ -24,6 +24,7 @@ IND@HOU,IND,Jonathan Taylor,RB,Active,,,2026-11-15T22:23,0,1,66
 IND@HOU,IND,Akeem Davis-Gaither,LB,Out,IR · Knee,Not Specified,2026-11-14T17:34,0,1,67
 IND@HOU,IND,Arden Key,DE,Active,,,2026-11-14T17:32,0,0,52
 IND@HOU,IND,Mo Alie-Cox,TE,Out,IR · Groin,Not Specified,2026-11-14T17:24,0,0,24
+IND@HOU,HOU,Xavier Hutchinson,WR,Active,,,2026-11-19T15:50,0,1,71
 IND@HOU,HOU,Jake Hummel,LB,Questionable,Groin,Not Specified,2026-11-19T02:19,0,0,
 IND@HOU,HOU,Jaylin Smith,CB,Out,IR · Hamstring,Strain,2026-11-19T02:10,0,0,
 IND@HOU,HOU,Kamari Lassiter,CB,Active,,,2026-11-19T00:31,0,1,99
@@ -45,7 +46,6 @@ IND@HOU,HOU,Keylan Rutledge,G,Active,,,2026-11-17T01:12,0,1,100
 IND@HOU,HOU,Azeez Al-Shaair,LB,Out,IR · Groin,Surgery,2026-11-17T01:03,0,1,98
 IND@HOU,HOU,Dalton Schultz,TE,Active,,,2026-11-16T05:08,0,0,56
 IND@HOU,HOU,Tank Dell,WR,Active,,,2026-11-16T01:16,0,0,40
-IND@HOU,HOU,Xavier Hutchinson,WR,Active,,,2026-11-16T01:12,0,1,71
 IND@HOU,HOU,C.J. Stroud,QB,Active,,,2026-11-15T23:56,0,1,96
 IND@HOU,HOU,Nico Collins,WR,Active,,,2026-11-15T22:17,0,1,75
 IND@HOU,HOU,Braden Smith,OT,Active,,,2026-11-15T17:28,0,0,41
@@ -579,6 +579,7 @@ MIN@SF,MIN,Joshua Metellus,S,Active,,,2026-11-15T17:03,0,0,
 MIN@SF,MIN,Carson Wentz,QB,Active,,,2026-11-13T22:03,0,1,83
 MIN@SF,MIN,DeeJay Dallas,RB,Active,,,2026-11-11T03:56,0,0,17
 MIN@SF,MIN,Caleb Banks,DT,Active,,,2026-11-10T15:44,0,0,24
+MIN@SF,SF,Christian Kirk,WR,Out,IR · Knee - Meniscus,Surgery,2026-11-19T15:22,0,0,30
 MIN@SF,SF,Ji'Ayir Brown,S,Questionable,Ankle,Not Specified,2026-11-19T01:56,0,1,79
 MIN@SF,SF,Mac Jones,QB,Questionable,Illness,Not Specified,2026-11-19T01:45,0,0,8
 MIN@SF,SF,Upton Stout,CB,Questionable,Shoulder,Not Specified,2026-11-18T23:27,0,1,79
@@ -603,7 +604,6 @@ MIN@SF,SF,Keenan Allen,WR,Active,,,2026-11-16T04:28,0,0,48
 MIN@SF,SF,George Kittle,TE,Active,,,2026-11-16T04:20,0,1,88
 MIN@SF,SF,Deebo Samuel Sr.,WR,Active,,,2026-11-16T04:14,0,1,68
 MIN@SF,SF,Brock Purdy,QB,Active,,,2026-11-16T03:50,0,1,97
-MIN@SF,SF,Christian McCaffrey,RB,Active,,,2026-11-16T03:03,0,1,60
 CIN@WAS,CIN,Joe Flacco,QB,Active,,,2026-11-18T15:36,0,0,5
 CIN@WAS,CIN,Jordan Battle,S,Active,,,2026-11-18T05:29,0,1,100
 CIN@WAS,CIN,Demetrius Knight Jr.,LB,Active,,,2026-11-18T05:22,0,1,79

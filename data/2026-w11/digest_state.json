@@ -1,23 +1,8 @@
 {
-"NYJ@LAC": {
-"spread_home": "-3.0",
-"total": "41.5",
-"ml": "+136/-162",
-"qb": {
-"NYJ": "Geno Smith",
-"LAC": "Justin Herbert"
-},
-"out": {
-"NYJ": [],
-"LAC": [
-"Branson Taylor"
-]
-}
-},
 "LV@DEN": {
 "spread_home": "-10.0",
 "total": "40.5",
-"ml": "+440/-600",
+"ml": "+423/-571",
 "qb": {
 "LV": "Fernando Mendoza",
 "DEN": "Bo Nix"
@@ -30,10 +15,64 @@
 ]
 }
 },
+"MIN@SF": {
+"spread_home": "-3.0",
+"total": "46.5",
+"ml": "+137/-164",
+"qb": {
+"MIN": "Kirk Cousins",
+"SF": "Brock Purdy"
+},
+"out": {
+"MIN": [
+"Bo Richter"
+],
+"SF": [
+"Christian Kirk",
+"Gracen Halton"
+]
+}
+},
+"JAX@NYG": {
+"spread_home": "6.0",
+"total": "46.5",
+"ml": "-268/+218",
+"qb": {
+"JAX": "Trevor Lawrence",
+"NYG": "J.J. McCarthy"
+},
+"out": {
+"JAX": [
+"DaVon Hamilton"
+],
+"NYG": [
+"Tyrone Tracy Jr."
+]
+}
+},
+"NO@CHI": {
+"spread_home": "-11.5",
+"total": "48.5",
+"ml": "+439/-597",
+"qb": {
+"NO": "Tyler Shough",
+"CHI": "Caleb Williams"
+},
+"out": {
+"NO": [
+"Christen Miller"
+],
+"CHI": [
+"Cole Kmet",
+"Kentavius Street",
+"Nephi Sewell"
+]
+}
+},
 "IND@HOU": {
 "spread_home": "-12.5",
 "total": "43.5",
-"ml": "+525/-750",
+"ml": "+523/-750",
 "qb": {
 "IND": "Daniel Jones",
 "HOU": "C.J. Stroud"
@@ -60,170 +99,25 @@
 ]
 }
 },
-"NO@CHI": {
-"spread_home": "-11.5",
-"total": "48.5",
-"ml": "+455/-625",
-"qb": {
-"NO": "Tyler Shough",
-"CHI": "Caleb Williams"
-},
-"out": {
-"NO": [
-"Christen Miller"
-],
-"CHI": [
-"Cole Kmet",
-"Kentavius Street",
-"Nephi Sewell"
-]
-}
-},
-"PIT@PHI": {
-"spread_home": "4.5",
-"total": "37.5",
-"ml": "-218/+180",
-"qb": {
-"PIT": "Aaron Rodgers",
-"PHI": "Joe Milton III"
-},
-"out": {
-"PIT": [
-"Mason McCormick"
-],
-"PHI": []
-}
-},
-"CIN@WAS": {
-"spread_home": "6.5",
-"total": "53.5",
-"ml": "-310/+250",
-"qb": {
-"CIN": "Joe Burrow",
-"WAS": "Jayden Daniels"
-},
-"out": {
-"CIN": [
-"Cashius Howell"
-],
-"WAS": [
-"Dyami Brown",
-"Jeremy McNichols"
-]
-}
-},
-"JAX@NYG": {
-"spread_home": "6.0",
-"total": "46.5",
-"ml": "-265/+215",
-"qb": {
-"JAX": "Trevor Lawrence",
-"NYG": "J.J. McCarthy"
-},
-"out": {
-"JAX": [
-"DaVon Hamilton"
-],
-"NYG": [
-"Tyrone Tracy Jr."
-]
-}
-},
-"MIN@SF": {
+"NYJ@LAC": {
 "spread_home": "-3.0",
-"total": "46.5",
-"ml": "+136/-162",
+"total": "41.5",
+"ml": "+135/-161",
 "qb": {
-"MIN": "Kirk Cousins",
-"SF": "Brock Purdy"
+"NYJ": "Geno Smith",
+"LAC": "Justin Herbert"
 },
 "out": {
-"MIN": [
-"Bo Richter"
-],
-"SF": [
-"Christian Kirk",
-"Gracen Halton"
-]
-}
-},
-"BAL@CAR": {
-"spread_home": "-2.5",
-"total": "43.5",
-"ml": "+114/-135",
-"qb": {
-"BAL": "Jacoby Brissett",
-"CAR": "Bryce Young"
-},
-"out": {
-"BAL": [
-"Lamar Jackson",
-"Tyler Huntley"
-],
-"CAR": []
-}
-},
-"TEN@DAL": {
-"spread_home": "-8.5",
-"total": "54.5",
-"ml": "+300/-380",
-"qb": {
-"TEN": "Cam Ward",
-"DAL": "Dak Prescott"
-},
-"out": {
-"TEN": [
-"Peter Skoronski",
-"Wan'Dale Robinson"
-],
-"DAL": [
-"Malachi Lawrence",
-"Tyler Goodson"
-]
-}
-},
-"TB@DET": {
-"spread_home": "-7.0",
-"total": "43.5",
-"ml": "+270/-340",
-"qb": {
-"TB": "Baker Mayfield",
-"DET": "Jared Goff"
-},
-"out": {
-"TB": [],
-"DET": [
-"Aidan Hutchinson",
-"Jack Campbell",
-"Jimmy Rolder"
-]
-}
-},
-"MIA@BUF": {
-"spread_home": "-16.5",
-"total": "45.5",
-"ml": "+850/-1450",
-"qb": {
-"MIA": "Kyle McCord",
-"BUF": "Josh Allen"
-},
-"out": {
-"MIA": [
-"Jordan Phillips",
-"Malik Willis",
-"Zach Sieler",
-"Zeek Biggers"
-],
-"BUF": [
-"Ar'maj Reed-Adams",
-"Josh Palmer"
+"NYJ": [],
+"LAC": [
+"Branson Taylor"
 ]
 }
 },
 "ARI@KC": {
 "spread_home": "-15.5",
 "total": "40.5",
-"ml": "+800/-1350",
+"ml": "+820/-1420",
 "qb": {
 "ARI": "Carson Beck",
 "KC": "Patrick Mahomes"
@@ -242,5 +136,111 @@
 ]
 }
 },
-"_stamp": "11-19 06:21"
+"CIN@WAS": {
+"spread_home": "6.5",
+"total": "53.5",
+"ml": "-311/+250",
+"qb": {
+"CIN": "Joe Burrow",
+"WAS": "Jayden Daniels"
+},
+"out": {
+"CIN": [
+"Cashius Howell"
+],
+"WAS": [
+"Dyami Brown",
+"Jeremy McNichols"
+]
+}
+},
+"BAL@CAR": {
+"spread_home": "-2.5",
+"total": "43.5",
+"ml": "+115/-137",
+"qb": {
+"BAL": "Jacoby Brissett",
+"CAR": "Bryce Young"
+},
+"out": {
+"BAL": [
+"Lamar Jackson",
+"Tyler Huntley"
+],
+"CAR": []
+}
+},
+"MIA@BUF": {
+"spread_home": "-16.5",
+"total": "44.5",
+"ml": "+840/-1480",
+"qb": {
+"MIA": "Kyle McCord",
+"BUF": "Josh Allen"
+},
+"out": {
+"MIA": [
+"Jordan Phillips",
+"Malik Willis",
+"Zach Sieler",
+"Zeek Biggers"
+],
+"BUF": [
+"Ar'maj Reed-Adams",
+"Josh Palmer"
+]
+}
+},
+"TB@DET": {
+"spread_home": "-7.0",
+"total": "43.5",
+"ml": "+272/-341",
+"qb": {
+"TB": "Baker Mayfield",
+"DET": "Jared Goff"
+},
+"out": {
+"TB": [],
+"DET": [
+"Aidan Hutchinson",
+"Jack Campbell",
+"Jimmy Rolder"
+]
+}
+},
+"PIT@PHI": {
+"spread_home": "4.5",
+"total": "37.5",
+"ml": "-216/+179",
+"qb": {
+"PIT": "Aaron Rodgers",
+"PHI": "Joe Milton III"
+},
+"out": {
+"PIT": [
+"Mason McCormick"
+],
+"PHI": []
+}
+},
+"TEN@DAL": {
+"spread_home": "-8.5",
+"total": "54.5",
+"ml": "+305/-388",
+"qb": {
+"TEN": "Cam Ward",
+"DAL": "Dak Prescott"
+},
+"out": {
+"TEN": [
+"Peter Skoronski",
+"Wan'Dale Robinson"
+],
+"DAL": [
+"Malachi Lawrence",
+"Tyler Goodson"
+]
+}
+},
+"_stamp": "11-19 08:22"
 }
