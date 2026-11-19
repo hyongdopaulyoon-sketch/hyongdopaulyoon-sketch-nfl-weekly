@@ -875,7 +875,12 @@ def _team_profile():
     공격/수비 각각: 드롭백 EPA·성공률 · 러시 EPA·성공률 · 색 비율 · 턴오버/경기 · 3rd down 전환율.
     선수: 타깃 점유율·EPA/타깃(리시버) · 캐리 점유율·EPA/캐리(러셔) — 상위 2명·1명."""
     o = defaultdict(lambda: defaultdict(float)); d = defaultdict(lambda: defaultdict(float))
-    games = defaultdict(set); rec = defaultdict(lambda: defaultdict(lambda: [0, 0.0])); rus = defaultdict(lambda: defaultdict(lambda: [0, 0.0]))
+    games = defaultdict(set); rec = defaultdict(lambda: defaultdict(lambda: [0, 0.0, ""])); rus = defaultdict(lambda: defaultdict(lambda: [0, 0.0, ""]))
+    last = {}   # 2026-11-19(보드 제보 · IND 핵심 선수 줄에 이적한 K.Allen→SF · J.Downs→KC): 선수 id → (마지막으로 뛴 주, 그 팀) — 떠난 선수는 핵심 선수 줄에서 뺀다(선수 표와 같은 기준)
+
+    def _seen(pid, wk, pt):
+        if pid and wk >= last.get(pid, (0, ""))[0]:
+            last[pid] = (wk, pt)
     for r in rd(os.path.join(CACHE, f"play_by_play_{SEASON}.csv.gz")):
         if r.get("season_type", "REG") != "REG" or not r.get("posteam") or r.get("play_type") not in ("pass", "run") or not _asof_ok(r.get("week")):
             continue
@@ -892,8 +897,10 @@ def _team_profile():
                 x["3n"] += 1; x["3c"] += fnum(r.get("first_down")) == 1 or fnum(r.get("touchdown")) == 1
         if db and r.get("receiver_player_name"):
             v = rec[pt][r["receiver_player_name"]]; v[0] += 1; v[1] += epa; o[pt]["tgt"] += 1
+            v[2] = r.get("receiver_player_id") or v[2]; _seen(r.get("receiver_player_id"), int(fnum(r.get("week")) or 0), pt)
         if not db and r.get("rusher_player_name"):
             v = rus[pt][r["rusher_player_name"]]; v[0] += 1; v[1] += epa; o[pt]["car"] += 1
+            v[2] = r.get("rusher_player_id") or v[2]; _seen(r.get("rusher_player_id"), int(fnum(r.get("week")) or 0), pt)
     out = {}
     for t in set(o) | set(d):
         x, y, g = o[t], d[t], max(len(games[t]), 1)
@@ -906,8 +913,12 @@ def _team_profile():
             row[pre + "_sack"] = z["sack"] / z["pn"] if z["pn"] else None
             row[pre + "_to"] = z["to"] / g
             row[pre + "_3rd"] = z["3c"] / z["3n"] if z["3n"] else None
-        row["rec"] = sorted(((n, c, e / c, c / x["tgt"]) for n, (c, e) in rec[t].items() if x["tgt"]), key=lambda v: -v[1])[:2]
-        row["rus"] = sorted(((n, c, e / c, c / x["car"]) for n, (c, e) in rus[t].items() if x["car"]), key=lambda v: -v[1])[:1]
+        _now = lambda pid: last.get(pid, (0, t))[1] if pid else t   # 그 선수가 마지막으로 뛴 팀
+        row["gone"] = []
+        for key, tbl, den, top in (("rec", rec[t], x["tgt"], 2), ("rus", rus[t], x["car"], 1)):
+            allp = sorted(((n, c, e / c, c / den, pid) for n, (c, e, pid) in tbl.items() if den), key=lambda v: -v[1])
+            row[key] = [v[:4] for v in allp if _now(v[4]) == t][:top]
+            row["gone"] += [(v[0], _now(v[4])) for v in allp[:top] if _now(v[4]) != t]
         out[t] = row
     return out
 
@@ -953,6 +964,8 @@ def _matchup_table(a, h, PRO, P26, inj):
         x, ir = PRO[t], inj.get(t, {})
         parts = [f'{n} 타깃 {sh * 100:.0f}%·EPA/타깃 {e:+.2f}' + (f' ⚠️{_status_of(n, ir)}' if _status_of(n, ir) else "") for n, c, e, sh in x["rec"]]
         parts += [f'{n} 캐리 {sh * 100:.0f}%·EPA/캐리 {e:+.2f}' + (f' ⚠️{_status_of(n, ir)}' if _status_of(n, ir) else "") for n, c, e, sh in x["rus"]]
+        if x.get("gone"):
+            parts.append("이적 제외: " + " · ".join(f"{n}→{to}" for n, to in x["gone"]))
         return " · ".join(parts) or "—"
 
     g = min(PRO[a]["g"], PRO[h]["g"])

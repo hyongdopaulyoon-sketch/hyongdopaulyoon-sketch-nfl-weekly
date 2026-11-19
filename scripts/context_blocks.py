@@ -91,12 +91,20 @@ def h2h_block(a, h):
     margins = [(_f(x["result"]) if x["home_team"] == h else -_f(x["result"])) for x in rows]   # 홈(h) 기준 점수 차
     tots = [_f(x["total"]) for x in rows if _f(x["total"]) is not None]
     L = hdr + ["", f"| 시즌·주차 | 날짜 | 장소 | 점수(원정–홈) | 승자·점수 차 | 마감 스프레드(홈) → ATS | 총점 라인 → O/U |", "|---|---|---|---|---|---|---|"]
+    _now_nm = {}   # 2026-11-19(보드 제보 · IND@HOU 머리 「Reliant Stadium」 vs 맞대결 표 「NRG Stadium」): 구장 id → 가장 최근 이름 — 이름이 바뀐 같은 구장이면 「옛 이름(지금 새 이름)」
+    for y in sorted(games(), key=lambda y: (y.get("season") or "", y.get("gameday") or "")):
+        if y.get("stadium_id") and y.get("stadium"):
+            _now_nm[y["stadium_id"]] = y["stadium"]
+
+    def _place(x):
+        nm = x["stadium"] or x["location"]; cur = _now_nm.get(x.get("stadium_id") or "", nm)
+        return nm + (f"(지금 {cur})" if x["stadium"] and cur != nm else "")
     for x in rows:
         r = _f(x["result"]); win = x["home_team"] if r > 0 else x["away_team"] if r < 0 else "무"
         wk = {"WC": "WC", "DIV": "DIV", "CON": "CONF", "SB": "SB"}.get(x["game_type"], f"{x['week']}주")
         s = _f(x["spread_line"]); tl = _f(x["total_line"])
         ats_h = _ats(x, x["home_team"]); ou_ = _ou(x)
-        L.append(f"| {x['season']} {wk} | {x['gameday']} | {x['stadium'] or x['location']}({x['home_team']} 홈{' · ' + x['roof'] if x.get('roof') else ''}) | "
+        L.append(f"| {x['season']} {wk} | {x['gameday']} | {_place(x)}({x['home_team']} 홈{' · ' + x['roof'] if x.get('roof') else ''}) | "
                  f"{x['away_team']} {_f(x['away_score']):g}–{_f(x['home_score']):g} {x['home_team']} | {win} {abs(r):g}점 | "
                  f"{'' if s is None else x['home_team'] + ' ' + format(-s, '+g')} → {('홈 커버' if ats_h == 'W' else '원정 커버' if ats_h == 'L' else '푸시') if ats_h else '—'} | "
                  f"{'' if tl is None else f'{tl:g}'} → {ou_ or '—'} |")
