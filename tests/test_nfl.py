@@ -101,3 +101,19 @@ def test_digest_header_rule_numbers():
     assert len(nums) >= 13
     src = open(N.__file__, encoding="utf-8").read()
     assert '["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES]' in src
+
+
+def test_qb_return_only_when_started_before_season_main():
+    """2026-11-19: 「주전 복귀」 는 시즌 주전보다 먼저 선발한 적이 있는 QB 만 — 주전이 빠져 올라온 백업은 벌점(N4)."""
+    import nfl_pull as N
+    old = dict(N._STARTS)
+    try:
+        N._STARTS.clear()
+        N._STARTS.update({"BAL": {1: "L.Jackson", 2: "L.Jackson", 5: "T.Huntley", 6: "T.Huntley", 7: "T.Huntley", 10: "J.Brissett"},
+                          "MIA": {1: "M.Willis", 2: "M.Willis", 10: "K.McCord"}})
+        assert N._is_qb_return("BAL", "Lamar Jackson", "T.Huntley")          # 먼저 선발 → 복귀
+        assert not N._is_qb_return("BAL", "Jacoby Brissett", "T.Huntley")    # 주전 뒤에 처음 선발 → 백업
+        assert not N._is_qb_return("MIA", "Kyle McCord", "M.Willis")
+        assert not N._is_qb_return("MIA", "Quinn Ewers", "M.Willis")         # 올해 선발 없음 → 백업
+    finally:
+        N._STARTS.clear(); N._STARTS.update(old)

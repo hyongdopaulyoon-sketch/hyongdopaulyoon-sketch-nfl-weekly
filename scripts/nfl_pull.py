@@ -490,7 +490,23 @@ def _last_starter_by_team():
     for (t, wk), v in db.items():
         if t not in out or wk > out[t][0]:
             out[t] = (wk, max(v, key=v.get))
+    _STARTS.clear()
+    for (t, wk), v in db.items():
+        _STARTS.setdefault(t, {})[wk] = max(v, key=v.get)
     return out
+
+
+_STARTS = {}   # {team: {week: 그 주 드롭백 최다 QB(pbp 짧은 이름)}} — _last_starter_by_team 이 채운다
+
+
+def _is_qb_return(team, exp, main):
+    """예상 선발 exp 가 「주전 복귀」 인가 — 올해 시즌 주전(드롭백 최다 main)의 첫 선발보다 **먼저** 선발한 적이 있을 때만 참.
+    2026-11-19(수집 세션 제보 · 11주차 백업 7팀이 「주전 복귀」 로 찍혀 N4 −4.5 가 0): 주전이 IR·결장·교체돼 뎁스차트 QB1 으로 올라온 백업은
+    주전보다 먼저 선발한 적이 없다 → 복귀가 아니라 백업 선발(벌점)."""
+    st = _STARTS.get(team) or {}
+    mw = [w for w, n in st.items() if n == main]
+    ew = [w for w, n in st.items() if _same_person(n, exp)]
+    return bool(mw and ew and min(ew) < min(mw))
 
 
 def _same_person(short, full):
@@ -1109,7 +1125,12 @@ def ph_injuries(week, force=False):
         elif ir_fix and not (main_qb.get(t) and _same_person(main_qb[t], exp)):   # 정정된 QB1 이 시즌 주전이 아니면 백업 선발(모델 벌점 유지)
             flag = f"백업 QB 선발 — {ir_fix} · 예상 선발 {exp}(뎁스차트 QB1)"
         elif exp and main_qb.get(t) and not _same_person(main_qb[t], exp):
-            note = f"주전 복귀 — 시즌 드롭백 최다 {main_qb[t]}, 예상 선발 {exp}(레이팅에 대체 QB 표본 섞임)"
+            if _is_qb_return(t, exp, main_qb[t]):
+                note = f"주전 복귀 — 시즌 드롭백 최다 {main_qb[t]}, 예상 선발 {exp}(레이팅에 대체 QB 표본 섞임)"
+            else:   # 2026-11-19: 시즌 주전보다 먼저 선발한 적이 없는 QB1 = 주전이 빠져 올라온 백업 → 벌점(N4 머리 문구 「예상 선발 QB 가 시즌 주전과 다르면 −4.5」 그대로)
+                _mst = next((v_ for k_, v_ in _unav.items() if _same_person(main_qb[t], k_)), "")
+                _n_st = sum(1 for n_ in (_STARTS.get(t) or {}).values() if _same_person(n_, exp))
+                flag = f"백업 QB 선발 — 시즌 주전 {main_qb[t]}{(' ' + _mst) if _mst else ''} 대신 예상 선발 {exp}(뎁스차트 QB1 · 올해 선발 {_n_st}경기)"
         if qb_rep and ("Out" in qb_rep or "Doubtful" in qb_rep):
             flag = (flag + " · " if flag else "") + f"QB 보고 {qb_rep}" + (f"({use}주차 보고 — 잠정)" if use and int(use) != int(week) else "")
         # 최종 지정(Out/Q) 전엔 nflverse 가 연습 보고만 올린다 → 「Out 0」이 아니라 「미발표」(2026-10-01 PIT@CLE: 다이제스트 0, 실제 C·G·WR Out)
