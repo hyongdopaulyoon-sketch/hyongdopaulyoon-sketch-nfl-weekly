@@ -2,7 +2,7 @@
 "LV@DEN": {
 "spread_home": "-10.0",
 "total": "40.5",
-"ml": "+427/-569",
+"ml": "+441/-590",
 "qb": {
 "LV": "Fernando Mendoza",
 "DEN": "Bo Nix"
@@ -35,7 +35,7 @@
 "MIN@SF": {
 "spread_home": "-3.5",
 "total": "46.5",
-"ml": "+146/-173",
+"ml": "+147/-175",
 "qb": {
 "MIN": "Kirk Cousins",
 "SF": "Brock Purdy"
@@ -72,7 +72,7 @@
 "IND@HOU": {
 "spread_home": "-12.5",
 "total": "44.5",
-"ml": "+502/-700",
+"ml": "+500/-690",
 "qb": {
 "IND": "Daniel Jones",
 "HOU": "C.J. Stroud"
@@ -101,7 +101,7 @@
 "NYJ@LAC": {
 "spread_home": "-3.0",
 "total": "41.5",
-"ml": "+143/-169",
+"ml": "+143/-170",
 "qb": {
 "NYJ": "Geno Smith",
 "LAC": "Justin Herbert"
@@ -113,8 +113,42 @@
 ]
 }
 },
+"CIN@WAS": {
+"spread_home": "6.0",
+"total": "53.5",
+"ml": "-290/+237",
+"qb": {
+"CIN": "Joe Burrow",
+"WAS": "Jayden Daniels"
+},
+"out": {
+"CIN": [
+"Cashius Howell"
+],
+"WAS": [
+"Dyami Brown",
+"Jeremy McNichols"
+]
+}
+},
+"BAL@CAR": {
+"spread_home": "-3.0",
+"total": "43.5",
+"ml": "+123/-146",
+"qb": {
+"BAL": "Jacoby Brissett",
+"CAR": "Bryce Young"
+},
+"out": {
+"BAL": [
+"Lamar Jackson",
+"Tyler Huntley"
+],
+"CAR": []
+}
+},
 "ARI@KC": {
-"spread_home": "-15.5",
+"spread_home": "-16.5",
 "total": "40.5",
 "ml": "+840/-1420",
 "qb": {
@@ -133,40 +167,6 @@
 "KC": [
 "Jared Wiley"
 ]
-}
-},
-"CIN@WAS": {
-"spread_home": "6.0",
-"total": "53.5",
-"ml": "-292/+239",
-"qb": {
-"CIN": "Joe Burrow",
-"WAS": "Jayden Daniels"
-},
-"out": {
-"CIN": [
-"Cashius Howell"
-],
-"WAS": [
-"Dyami Brown",
-"Jeremy McNichols"
-]
-}
-},
-"BAL@CAR": {
-"spread_home": "-3.0",
-"total": "43.5",
-"ml": "+124/-147",
-"qb": {
-"BAL": "Jacoby Brissett",
-"CAR": "Bryce Young"
-},
-"out": {
-"BAL": [
-"Lamar Jackson",
-"Tyler Huntley"
-],
-"CAR": []
 }
 },
 "MIA@BUF": {
@@ -210,7 +210,7 @@
 "PIT@PHI": {
 "spread_home": "4.5",
 "total": "37.5",
-"ml": "-207/+173",
+"ml": "-205/+172",
 "qb": {
 "PIT": "Aaron Rodgers",
 "PHI": "Joe Milton III"
@@ -225,7 +225,7 @@
 "TEN@DAL": {
 "spread_home": "-8.5",
 "total": "55.5",
-"ml": "+307/-387",
+"ml": "+308/-388",
 "qb": {
 "TEN": "Cam Ward",
 "DAL": "Dak Prescott"
@@ -241,5 +241,5 @@
 ]
 }
 },
-"_stamp": "11-19 14:14"
+"_stamp": "11-19 15:14"
 }
