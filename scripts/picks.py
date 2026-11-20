@@ -708,6 +708,13 @@ def stats():
     for k in ("A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "A13"):
         xs = [r for r in rows if r["grade"] == ANGLE_GRADES[k]]
         print(f"  {ANGLE_GRADES[k]}: {rec(xs) if xs else '0픽'} · " + (f"판정 = {ANGLE_VERDICT[k]}" if k in ANGLE_VERDICT else f"판정까지 {len(xs)}/{ANGLE_TARGET[k]}픽"))
+    # 2026-11-20 Paul 「nfl 처리해줘」(보드 복기 — IND@HOU 가 A6 관찰 행과 스프레드 픽 행에 둘 다 패로 적힘): 장부는 따로 두고(합산 없음) 겹침만 한 줄로 밝힌다
+    _sp = [r for r in rows if r["grade"] == SP_GRADE]
+    _spn = sum(1 for r in _sp if r["result"] in ("W", "L"))
+    _a6g = {(r["id"].split(":")[0], r["side"].split()[0]) for r in rows if r["grade"] == ANGLE_GRADES["A6"]}
+    _ov = sum(1 for r in _sp if (r["id"].split(":")[0], r["side"].split()[0]) in _a6g)
+    print(f"  {SP_GRADE}: {rec(_sp) if _sp else '0픽'} · 판정까지 {_spn}/{ANGLE_TARGET['SP']}픽(푸시 제외)"
+          + f" · 스프레드 픽 {len(_sp)}건 중 A6 조건 {_ov}건은 A6 장부와 같은 경기(장부는 따로 — 두 줄을 합산하지 않는다)")
     _w, _l, _p, _n, _dup, _cf = angle_game_record([r for r in rows if r["grade"] not in tuple(ANGLE_GRADES[k_] for k_ in RETIRED_KEYS)])
     print(f"  ▶ 경기 단위(같은 경기·같은 시장·같은 팀 쪽 각도는 1건): {_w}-{_l}" + (f"-{_p}" if _p else "")
           + f" · {_n}건 중 각도 2개+ 겹친 건 {_dup} · 상충(같은 경기 반대쪽 각도) {_cf}경기는 전적 제외 — 각도별 줄은 겹침을 중복으로 센다")
