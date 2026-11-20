@@ -1367,9 +1367,14 @@ def main():
     wsum = PR.summary(wk_pred_rows)
     # 스프레드 픽 칸(11/15 Paul 「보드에도 스프레드 픽 칸 넣어줘 둘 다」 · 사전 등록 SP · 11주차부터) — 표 칸 + 카드 줄
     show_sp = a.week >= 11
-    _spg = [r for r in P.rd(P.PICKS) if r.get("grade") == P.SP_GRADE and r.get("result") in ("W", "L", "P")]
+    _pk_g = [r for r in P.rd(P.PICKS) if r.get("result") in ("W", "L", "P")]
+    _spg = [r for r in _pk_g if r.get("grade") == P.SP_GRADE]
     sp_rec = "-".join(str(sum(r["result"] == x for r in _spg)) for x in "WLP")
     sp_n = sum(r["result"] in ("W", "L") for r in _spg)
+    # 11/20 Paul 「nfl 처리해줘」 — A6 겹침 한 줄(picks.py stats c0c5a58 과 같은 판정 · 장부 따로 · 합산 안 함)
+    _a6g = {(r["id"].split(":")[0], r["side"].split()[0]) for r in _pk_g if r.get("grade") == P.ANGLE_GRADES["A6"] and r.get("side")}
+    sp_ov = sum(1 for r in _spg if r.get("side") and (r["id"].split(":")[0], r["side"].split()[0]) in _a6g)
+    sp_ov_txt = f"스프레드 픽 {len(_spg)}건 중 A6 조건 {sp_ov}건은 A6 장부와 같은 경기(장부는 따로 — 두 줄을 합산하지 않는다)"
     _hx = os.path.join(wd, "hex.json")   # 육각형 값 — 리프레시(다이제스트)가 저장한 것만(다시 계산하면 30~60초)
     hexv = json.load(open(_hx, encoding="utf-8")) if os.path.exists(_hx) else {}
     xcard, pub_body = {}, {}   # 11/15 Paul 「표하나로」 — 표 줄 아래 펼침 재료(카드 내용 · 발행문)
@@ -1590,7 +1595,7 @@ def main():
     cmp_tbl = ('<div class="tblwrap"><table class="cmp"><thead><tr><th>경기</th><th>시간(PT)</th><th>예측 승자(시장)</th><th>★</th><th>발행 예측</th><th title="주전(시즌 스냅 60%+) 중 결장 확정(공식 비활성·Out·IR) 수 — 킥오프 전 마지막 다이제스트 판 · 많이 빠진 쪽 굵게 · 마우스를 대면 이름">주전 결장</th>'
                f'<th>{term("ML")} 페이버릿</th><th title="시장 = DraftKings 스프레드(예측 기록 판 · 킥오프 때 동결) · 우리 = 우리 드라이브 모델 예상 점수 차 · 「KC -3」 = KC 가 3점 차 이상 이긴다는 뜻 · 표시용(이길 팀 예측·★과 무관)">스프레드 <small class="muted">시장 · 우리</small></th><th>판단</th>'
                + (f'<th title="조건부 스프레드 픽(사전 등록 SP) — 조건 셋 중 하나가 걸린 경기만 — 홈 언더독 +7 이상(A7) · 키 넘버 3·7 을 넘긴 라인 이동의 반대쪽(A6) · 주력 러셔가 빠져 러시 점수(육각형)가 10점+ 깎인 팀의 상대(A13) · '
-                  f'기록용(돈 아님) · 이길 팀 예측과 다른 장부 · 시즌 {sp_rec}(W-L-P · {sp_n}/30픽)">스프레드 픽 <small class="muted">{sp_rec}</small></th>' if show_sp else "")
+                  f'기록용(돈 아님) · 이길 팀 예측과 다른 장부 · 시즌 {sp_rec}(W-L-P · {sp_n}/30픽) · {esc(sp_ov_txt)}">스프레드 픽 <small class="muted">{sp_rec}</small></th>' if show_sp else "")
                + f'<th title="끝난 경기: 최종 점수 · 시장 예측 맞힘/틀림 · 스프레드 어느 쪽 커버(초록 = 발행 예측 팀 커버 · 빨강 = 못 함 · 발행 없으면 무색) · 오버/언더 + 두 팀 합계(라인 = DK 마감, 채점 전엔 킥오프 전 마지막 수집 판)">결과</th></tr></thead>'
                '<tbody>%%ROWS%%</tbody></table></div>')
     # 미기록 경보(10/29 Paul 「넣기」 · NBA 1005810): 킥오프 15분 안 ~ 240분 지남인데 정식 발행 기록(predictions src=발행 · flag 없음)이 없는 경기 — 보드를 만든 순간 기준
@@ -1783,7 +1788,7 @@ nav.weeks a{{color:var(--ink)}}nav.weeks b.cur{{color:var(--ink);text-decoration
   <div><table class="tiers"><thead><tr><th>별</th><th>W-L</th><th>올해</th><th>2018~25 기대</th></tr></thead><tbody>{star_rows}</tbody></table>
   <p class="note">1~4주차 일부는 마감 배당으로 소급한 기록이에요. 표본이 작아 몇 주는 기대와 어긋나는 게 정상이에요.</p></div>
   <details class="more"><summary>숫자 자세히</summary>
-    <p>승자 예측 시즌 · 시장 {ms.get("w", 0)}-{ms.get("l", 0)} · 발행 {psum.get("발행", {}).get("w", 0)}-{psum.get("발행", {}).get("l", 0)} · 우리 모델 {psum.get("모델", {}).get("w", 0)}-{psum.get("모델", {}).get("l", 0)}</p>
+    <p>승자 예측 시즌 · 시장 {ms.get("w", 0)}-{ms.get("l", 0)} · 발행 {psum.get("발행", {}).get("w", 0)}-{psum.get("발행", {}).get("l", 0)} · 우리 모델 {psum.get("모델", {}).get("w", 0)}-{psum.get("모델", {}).get("l", 0)}{(f" · 스프레드 픽 {sp_rec}(W-L-P · 판정까지 {sp_n}/30픽) · " + esc(sp_ov_txt)) if show_sp else ""}</p>
   </details>
   {prev_week_link(a.week)}
   <p class="note">표시 전용 — 재계산 없음 · 정본은 다이제스트(DIGEST.md)·발행문·picks.csv · 배당은 DraftKings(ESPN), 경기가 시작되면 ESPN 에서 사라져 끝난 경기엔 표시하지 않아요.</p>
