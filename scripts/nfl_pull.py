@@ -1503,6 +1503,15 @@ def _inactives_line(wd, g, a, h):
                     plays.append(("★" if "★" in x else "") + f'{nm}({"Q" if col == "questionable" else "D"} → Active {act[t][_norm_name(nm)]})')
                 elif "★" in x:
                     unk.append(f'{nm}({"Q" if col == "questionable" else "D"})')
+        # 2026-11-19(보드 제보 · IND Heck 08:22판 Q → 13:35 ESPN Active 뒤 Q 줄에서만 사라짐): 주간 보고가 지정을 지운 선수도 연습 보고(Limited·DNP)에 남아 있고 ESPN 이 당일 Active 로 찍었으면 출전 표시에 남긴다(값만)
+        _shown = {_norm_name(p_.split("(")[0].lstrip("★")) for p_ in plays}
+        for col, lab in (("limited", "연습 Limited"), ("dnp", "연습 DNP")):
+            for x in [y.strip() for y in re.split(r"\)\s*·\s*", str(inj.get(t, {}).get(col) or "")) if y.strip()]:
+                nm = x.split("(")[0].strip(); nk = _norm_name(nm)
+                if nk in seen or nk in _shown or ":" not in str(act[t].get(nk) or ""):
+                    continue
+                _shown.add(nk)
+                plays.append(("★" if "★" in x else "") + f'{nm}({lab} → Active {act[t][nk]})')
         parts.append(f'{t} Out {len(names)}' + (f' — {" · ".join(names)}' if names else "")
                      + (f' · 주중 Q/D → ESPN 출전 표시: {", ".join(plays)}' if plays else "")
                      + (f' · ⚠️ ★ 주중 Q/D 인데 ESPN 당일 명단에 없음: {", ".join(unk)} — 출전 여부 미확인(ESPN 이 생략하는 경로 있음 · 웹 확인 필수 · 「명단에 없으니 출전」으로 읽지 말 것)' if off_t[t] and unk else ""))

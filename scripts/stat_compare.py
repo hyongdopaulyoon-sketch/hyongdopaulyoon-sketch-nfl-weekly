@@ -321,8 +321,11 @@ def conclusion_line(a, h, sec, inj, m, g):
     # ★주전 결장·새 정보 후보
     ia, ih = inj.get(a) or {}, inj.get(h) or {}
     _ina = re.search(r"- 🏥 결장 명단\(ESPN 공식 비활성 · 발표 (\S+) PT[^)]*\): .*?★주전 결장 ([A-Z]{2,3}) (\d+) / ([A-Z]{2,3}) (\d+)", txt)
+    # 2026-11-19(보드 제보 · IND@HOU 15:52판): 한 팀만 발표된 「부분 발표」 판에서 「공식 비활성 미발표」 로 남던 것 → 발표된 팀·시각·★주전 결장 수를 그대로
+    _inp = re.search(r"- 🏥 결장 명단\(ESPN 부분 발표 — ([A-Z]{2,3}) 공식 비활성 발표 (\S+) PT · ([A-Z]{2,3}) 미발표.*? · \1 ★주전 결장 (\d+) — 값만", txt)
     out.append(f"★주전 Out/Doubtful {a} {ia.get('n_starters_missing') or 0}명 / {h} {ih.get('n_starters_missing') or 0}명"
                + (f" · 공식 비활성(ESPN {_ina.group(1)} PT 발표): ★주전 {_ina.group(2)} {_ina.group(3)} / {_ina.group(4)} {_ina.group(5)} — 🏥 줄 그대로" if _ina else
+                  f" · 공식 비활성 부분 발표(ESPN {_inp.group(1)} {_inp.group(2)} PT 발표 · ★주전 결장 {_inp.group(1)} {_inp.group(4)} — 🏥 줄 그대로 · {_inp.group(3)} 미발표 — 들어오면 리프레시)" if _inp else
                   (" · ⚠️ 최종 지정 미발표(연습 보고) — 웹 확인 필수" if ia.get("final_pending") or ih.get("final_pending") else " · 공식 비활성 미발표(🏥 줄)")))
     cand = []
     for t, x in ((a, ia), (h, ih)):
