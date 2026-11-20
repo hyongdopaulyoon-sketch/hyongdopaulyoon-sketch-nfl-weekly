@@ -14,6 +14,7 @@ import picks as P      # noqa: E402
 import predictions as PR   # noqa: E402
 import team_hex as TH   # noqa: E402  11/15 육각형(선수 위주)
 import team_track as TT   # noqa: E402  11/16 팀별 기록(추적기 「팀별」 시트와 같은 값)
+import recent_chart as RC   # noqa: E402  11/19 최근 10경기 점수 차 막대(11주차~)
 
 KR = N.TEAM_KR
 esc = html.escape
@@ -89,7 +90,7 @@ a.goto{font-size:.8rem;color:var(--ink);cursor:pointer;text-decoration:underline
 .md .li.rich .lh{font-weight:700}.md .sh{font-weight:700}
 .md table.vs{table-layout:fixed}.md table.vs th:first-child{width:15%}.md table.vs th:nth-child(2),.md table.vs th:nth-child(3){width:30%}
 .md table.vs td{vertical-align:top;line-height:1.5}.md table.vs td.vl{color:var(--muted);font-weight:600}
-.md table.vs td.hi{font-weight:700}.md table.vs td.lo{color:var(--muted)}.md table.vs td.vt{color:var(--muted);font-size:.78rem}
+.md table.vs td.hi{font-weight:800;color:var(--ok)}.md table.vs td.lo{color:var(--muted)}.md table.vs td.vt{color:var(--muted);font-size:.78rem}
 .md .h2w{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:10px}
 .pth{font-size:.8rem;font-weight:700;margin:12px 0 2px}
 .pt2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,540px),1fr));gap:12px;align-items:start;margin:4px 0}
@@ -101,7 +102,7 @@ table.ptab tr.gh th{border-top:1px solid var(--line);padding-top:6px}
 table.ptab tr.gh th.pnm{text-align:left;color:var(--ink);font-family:var(--body);font-size:.72rem}
 table.ptab col.cn{width:128px}table.ptab .pnm{text-align:left}
 table.ptab td{padding:5px 1px;border-bottom:1px solid var(--line);text-align:center;font-family:var(--mono);font-size:.94em;letter-spacing:-.02em;color:var(--ink);font-weight:400}table.ptab td.n{white-space:nowrap}
-table.ptab td.lead{font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+table.ptab td.lead{font-weight:800;color:var(--ok)}
 table.ptab td.pnm{font-family:var(--body);white-space:normal;border-bottom:1px solid var(--line);border-radius:0}
 table.ptab .pnn{display:block;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 table.ptab .psub{display:block;color:var(--muted);font-size:.86em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -110,7 +111,7 @@ table.ptab .smp{display:inline-block;margin-top:2px;padding:0 5px;border:1px das
 table.ptab td.sm{color:var(--muted);font-style:italic}
 table.ptab td.tx{color:var(--muted);font-size:.92em;white-space:normal}
 table.ptab tr.out td{opacity:.5}
-table.ptab tr.sum td{color:var(--muted)}table.ptab tr.sum td.hi{font-weight:800;color:var(--ink)}
+table.ptab tr.sum td{color:var(--muted)}table.ptab tr.sum td.hi{font-weight:800;color:var(--ok)}
 table.ptab tr.sum td.pnm{background:var(--soft)}
 .smnote{margin:4px 0 6px;font-size:.8rem}.sznote{margin:2px 0 6px;font-size:.8rem;color:var(--muted)}.sznote b{color:var(--ink)}.smnote b{color:var(--ink)}
 .ptcap{font-size:.7rem;color:var(--muted);margin:2px 0 10px;line-height:1.55}
@@ -146,7 +147,8 @@ table.cmp tr.open>td{background:var(--soft)}table.cmp tr.open>td:first-child{box
 .hext th{color:var(--muted);font-weight:500;text-align:left;padding:3px 8px;border-bottom:1px solid var(--line)}
 .hext td{padding:3px 8px;border-bottom:1px solid var(--line)}
 .hext .n{text-align:center;font-variant-numeric:tabular-nums}
-.hext .hhi{font-weight:800}
+.hext .hhi{font-weight:800;color:var(--ok)}
+.better{color:var(--ok);font-weight:800}.worse{color:var(--bad);font-weight:800}.pkw{color:var(--acc2);font-weight:700}
 .hext .hsub{color:var(--muted);font-size:.76rem}
 .hcap{margin:6px 0 0;color:var(--muted);font-size:.76rem}
 """
@@ -1467,20 +1469,42 @@ def main():
             so_mx = max(so_n.values())
             so_tip = " / ".join(f"{t} " + (", ".join(so[t]) or "없음") for t in (A, H))
             so_cell = (f'<td data-s="{so_mx}" title="{esc(so_tip)}">'
-                       + " · ".join((f"<b>{esc(t)} {so_n[t]}</b>" if so_n[t] == so_mx and so_mx else f"{esc(t)} {so_n[t]}") for t in (A, H)) + "</td>")
+                       + " · ".join((f'<b class="worse">{esc(t)} {so_n[t]}</b>' if so_n[t] == so_mx and so_mx else f"{esc(t)} {so_n[t]}") for t in (A, H)) + "</td>")
             so_line = ('<div class="sline"><b>주전 결장</b> — '
-                       + " / ".join(f'<b>{esc(t)} {so_n[t]}명</b>' + (": " + esc(", ".join(so[t])) if so[t] else "") for t in (A, H))
+                       + " / ".join((f'<b class="worse">' if so_n[t] == so_mx and so_mx else '<b>') + f'{esc(t)} {so_n[t]}명</b>' + (": " + esc(", ".join(so[t])) if so[t] else "") for t in (A, H))
                        + f' <span class="muted">(주전 = 시즌 스냅 60%+ · 결장 확정만 — 공식 비활성·Out·IR · 출전 불투명·미확인은 안 셈 · {esc(so_src.replace(".md", ""))} 기준)</span></div>')
         else:
             so_cell, so_line = '<td data-s=""><span class="muted">—</span></td>', ""
         hex_html = TH.block(A, H, pick_t, hexv.get(gk)) if hexv else ""
         try:   # 팀별 기록(11/16 Paul 「보드에도 팀별 기록 넣어줘」) — 값만, 설명은 머리 안내에 한 번
             _tl = [TT.team_line(t).split(" — ", 1) for t in (A, H)]
+            _tb = TT.table()[0]
+
+            def _wp(t):   # 전적 승률(무승부 = 반 승)
+                try:
+                    n_ = [float(v) for v in str(_tb[t][1]).split("-")]
+                    return (n_[0] + (n_[2] / 2 if len(n_) > 2 else 0)) / sum(n_) if sum(n_) else None
+                except Exception:
+                    return None
+            _wa, _wh = _wp(A), _wp(H)
+            _bt = "" if _wa is None or _wh is None or _wa == _wh else (A if _wa > _wh else H)
+
+            def _ttx(t, x):
+                body = esc(x[1]) if len(x) > 1 else ""
+                if t == _bt and t in _tb:
+                    body = body.replace(f"전적 {esc(_tb[t][1])}", f'<span class="better">전적 {esc(_tb[t][1])}</span>', 1)
+                cls_ = ' class="pkw"' if t == pick_t else ""
+                return f'<div><b{cls_}>{esc(x[0])}</b> — {body}</div>'
             tt_line = ('<div class="sline"><b>팀별 기록</b>'
-                       + "".join(f'<div><b>{esc(x[0])}</b> — {esc(x[1]) if len(x) > 1 else ""}</div>' for x in _tl) + '</div>')
+                       + "".join(_ttx(t, x) for t, x in zip((A, H), _tl)) + '</div>')
         except Exception as e_:   # 추적 표를 못 읽어도 보드는 만든다
             print("팀별 기록 생략:", e_, file=sys.stderr)
             tt_line = ""
+        try:   # 최근 10경기 점수 차 막대(11/19 Paul 「nfl보드도 똑같이」 · 11주차~ · 값만)
+            rc_html = RC.team_block(a.week, A, H, pick_t)
+        except Exception as e_:
+            print("최근 경기 차트 생략:", e_, file=sys.stderr)
+            rc_html = ""
         # 스프레드 칸 — 시장(DK · 예측 기록 판) · 우리(드라이브 모델 예상 점수 차) · 「KC -3」 = KC 가 3점 차 이상 이겨야
         mkt_l = P.fnum(m_.get("line_home")) if m_ else None
         mdl_l = (round(P.fnum(d_["score_away"]) - P.fnum(d_["score_home"]), 1)
@@ -1530,12 +1554,12 @@ def main():
             res_txt, res_s = '<span class="muted">예정</span>', 0
         kts = re.sub(r"\D", "", g.get("kickoff_utc", ""))[:12] or ""
         bp_ = P.fnum(b_.get("p_pick")) if b_ else None
-        pub_cell = (f'{esc(nick(b_["pick"]))} {pct(bp_)} {phit(b_)}{late_tag}' if b_ else '<span class="muted">—</span>')
+        pub_cell = (f'<b class="pkw">{esc(nick(b_["pick"]))}</b> {pct(bp_)} {phit(b_)}{late_tag}' if b_ else '<span class="muted">—</span>')
         vw0 = verdict_word(pub.get("판단", ""))
         trows.append((g.get("kickoff_utc", ""), gk, f'<tr data-g="{esc(gk)}">'
                       f'<td data-s="{kts}"><div>{ha(False)}{mini(A)} {nm(A)} <small class="muted">{esc(g.get("away_rec", ""))}</small></div><div>{ha(True)}{mini(H)} {nm(H)} <small class="muted">{esc(g.get("home_rec", ""))}</small></div></td>'
                       f'<td data-s="{kts}">{esc(g["kickoff_et"].split(" ", 1)[0])} {esc(g["kickoff_pt"])}</td>'
-                      f'<td data-s="{pp if pp is not None else ""}">{(esc(nick(m_["pick"])) + " " + pct(pp)) if m_ else "—"}</td>'
+                      f'<td data-s="{pp if pp is not None else ""}">{('<b class="pkw">' + esc(nick(m_["pick"])) + "</b> " + pct(pp)) if m_ else "—"}</td>'
                       f'<td class="star" data-s="{PR.stars(pp) if m_ else ""}">{PR.star_str(pp) if m_ else ""}</td>'
                       f'<td data-s="{bp_ if bp_ is not None else ""}">{pub_cell}</td>' + so_cell +
                       f'<td data-s="{ml_s}">{esc(ml_txt)}</td>' + spr_cell +
@@ -1544,7 +1568,7 @@ def main():
                       + f'<td data-s="{res_s}">{res_txt}</td></tr>'))
         xmeta = f'<div class="meta">{div}{neu}</div>' if (div or neu) else ""
         if fin:
-            xcard[gk] = so_line + tt_line + hex_html + xmeta + pred_html + lines
+            xcard[gk] = so_line + tt_line + rc_html + hex_html + xmeta + pred_html + lines
             continue
         # ── 아직 안 한 경기 / 진행 중
         if st in IN_GAME:
@@ -1559,7 +1583,7 @@ def main():
                          f'<td class="muted">승리 {esc(A)} {pct(ma)} / {esc(H)} {pct(mh)}</td></tr>')
         mk = f'<div class="quick">{" · ".join(quick)}</div>' if quick else ""
         remaining += 1
-        xcard[gk] = so_line + tt_line + hex_html + f'<div class="meta">{status}{div}{neu}</div>' + pred_html + mk + lines
+        xcard[gk] = so_line + tt_line + rc_html + hex_html + f'<div class="meta">{status}{div}{neu}</div>' + pred_html + mk + lines
         if b_ or (ptext.get(gk) or {}).get("main"):
             pre_cards.append(gk)   # 발행된 남은 경기 수(머리 한 줄)
     trows.sort(key=lambda x: x[0])
@@ -1743,7 +1767,7 @@ nav.weeks a{{color:var(--ink)}}nav.weeks b.cur{{color:var(--ink);text-decoration
   </div>
   <div class="headline">{headline}</div>
   {unrec_html}<h2>{a.week}주차 전체 경기 <span class="muted" style="font-size:.9rem">— 머리 누르면 정렬 · 줄 누르면 바로 아래 펼침(다시 누르면 접힘)</span></h2>
-  {cmp_tbl}
+  {RC.CSS}{RC.logo_defs(logo_uri)}{cmp_tbl}
   <section class="legend">
     <div><b>읽는 법</b> — 점선 밑줄 낱말에 손가락·마우스를 대면 뜻이 나와요.</div>
     <div><span class="star">★</span> = <b>이길 확률이 높은 정도</b>(2018~25 실제 적중 ★ 50% · ★★ 61% · ★★★ 71% · ★★★★ 82%). <b>돈 버는 신호가 아니에요</b> — 별이 많은 팀일수록 ML 배당이 비싸서, 맞혀도 남는 돈이 적어요.</div>
@@ -1751,6 +1775,7 @@ nav.weeks a{{color:var(--ink)}}nav.weeks b.cur{{color:var(--ink);text-decoration
     <div>{term("관찰", "관찰만")} = 돈 안 건 기록(라인 뒤 새 정보 · 관찰 각도 A3~ — 회색 글씨가 각도 뜻, 스프레드·총점 각도도 관찰로만) · 맞힘/틀림 = 예측·관찰 결과</div>
     <div><b>발행문 글자</b> — <b style="color:var(--acc2)">파란 굵은 팀</b> = 우리 예측 팀 · <b style="color:var(--acc)">주황 굵은 팀</b> = 상대 · <b>굵은 검정</b> = 선수(처음 나올 때 「팀 · 포지션 · 역할 · 상태」) · <b style="color:var(--muted)">회색 굵은 낱말</b> = 스탯 이름(EPA·CPOE·야드/캐리 …) · 긴 줄은 묶음·문장마다 줄을 바꾸고, 「NE 값 vs CHI 값」 줄은 비교표로 · 선수 표는 왼쪽 원정 / 오른쪽 홈, 색이 진할수록 큰 값(표 아래 풀이). 상자 순서: 결론 → 보완 → 시장 → 팀 상태 → 선수 → 팀 비교 → 심판.</div>
     {gloss_all()}
+    <div><b>색 = 누가 더 좋은가</b> — <span class="better">초록 굵은 글씨</span> = 두 팀 중 더 좋은 값(선수·수비 표 열 1등 · 합계 · 육각형 · 팀 전적 · 발행문 비교표) · <span class="worse">빨강 굵게</span> = 주전이 더 많이 빠진 쪽 · <span class="pkw">파랑 굵게</span> = 예측 승자 · 최근 10경기 막대는 위 초록 = 이긴 점수 차, 아래 빨강 = 진 점수 차.</div>
     <div><b>표 줄을 누르면</b> 그 줄 바로 아래에 주전 결장·팀별 기록·예측·각도·발행문이 펼쳐지고, 다시 누르면 접혀요. <b>팀별 기록</b> = 올 시즌 그 팀 전적 · 우리가 그 팀을 승자로 예측했을 때 맞힘-틀림 · 상대를 승자로 예측했을 때 맞힘-틀림 · 팀 스프레드 커버 기록(마감 라인) — 추적기 엑셀 「팀별」 시트와 같은 값만, 예측 확률·★ 근거 아님. 표 머리(예측 승자·★·발행 예측 …)를 누르면 그 기준으로 정렬돼요.</div>
   </section>
   {f'<section class="publist">{"".join(pub_secs)}</section>' if pub_secs else ""}
