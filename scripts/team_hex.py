@@ -103,7 +103,7 @@ def season_tables(season):
     return S
 
 
-def materials(S, PREV, team, week, qb_full, plays):
+def materials(S, PREV, team, week, qb_full, plays, detail=None):
     """그 팀의 재료 값 dict(없으면 그 키 없음). plays(kind, name) → 그 선수가 뛰는가(kind = off|def|ol)."""
     out = {}
     # QB
@@ -163,6 +163,8 @@ def materials(S, PREV, team, week, qb_full, plays):
     cv = sorted((nm for nm in dtot if plays("def", nm) and dtot[nm][1] > 0), key=lambda nm: -dtot[nm][1])[:4]
     if len(cv) == 4 and sum(dtot[nm][1] for nm in cv) >= 30:
         out["cov"] = sum(dtot[nm][2] for nm in cv) / sum(dtot[nm][1] for nm in cv)
+        if detail is not None:   # 2026-11-20: 커버리지 넷의 선수별 타깃당 허용 야드(결장인데 값이 안 내려가는 선수 꼬리용)
+            detail["cov"] = {nm: dtot[nm][2] / dtot[nm][1] for nm in cv}
     return out
 
 
@@ -349,10 +351,15 @@ def week_values(week):
 
             def plays(kind, nm, absent=absent):
                 return not any(N._same_person(nm, f) or N._same_person(f, nm) or N._norm_name(nm) == N._norm_name(f) for f in absent)
-            mat = materials(S, PREV, t, week, x.get("expected_qb") or "", plays)
+            _dn, _df = {}, {}
+            mat = materials(S, PREV, t, week, x.get("expected_qb") or "", plays, _dn)
             sc = scores(base, mat) if base else None
-            full = scores(base, materials(S, PREV, t, week, x.get("expected_qb") or "", lambda kind, nm: True)) if base else None   # 전원 가용 가정(결장으로 깎인 폭 표시용)
-            out[gk][t] = {"scores": sc, "full": full, "mat": {k: round(v, 4) for k, v in mat.items()}}
+            _fm = materials(S, PREV, t, week, x.get("expected_qb") or "", lambda kind, nm: True, _df)
+            full = scores(base, _fm) if base else None   # 전원 가용 가정(결장으로 깎인 폭 표시용)
+            # 2026-11-20(보드 복기 · IND ★CB Gardner 결장인데 커버리지 3 → 6): 전원 가용 넷에 들던 결장 선수의 타깃당 허용 야드가 지금 넷 평균보다 나쁘면(크면) 빠져도 값이 안 내려간다 — 그 선수를 꼬리로 밝힌다(값만)
+            rev = [f"{nm}(타깃당 {yt:.1f}야드 · 지금 넷 평균 {mat['cov']:.1f})" for nm, yt in (_df.get("cov") or {}).items()
+                   if "cov" in mat and nm not in (_dn.get("cov") or {}) and yt > mat["cov"]]
+            out[gk][t] = {"scores": sc, "full": full, "mat": {k: round(v, 4) for k, v in mat.items()}, "rev": rev}
     p = os.path.join(wd, "hex.json")
     json.dump(out, io.open(p + ".tmp", "w", encoding="utf-8"), ensure_ascii=False); os.replace(p + ".tmp", p)
     _LIVE[week] = out
@@ -378,7 +385,8 @@ def digest_line(a, h, v):
             loss += [f"{t} {n} −{f[n] - s[n]}(전원 가용이면 {f[n]})" for n in VERTS if f[n] - s[n] >= 5]   # 2026-11-16(보드 제보 · LAC 패스 무기 22 → 17): 표시 문턱 10 → 5점(스프레드 조건 A13 의 10점 문턱과는 별개)
     return ("- 🔷 선수 육각형(이번 주 뛰는 선수만 · 0~100 · 50 = 리그 평균 · 값만 — " + HIST_NOTE + "): " + one(a, sa) + " / " + one(h, sh)
             + f" · 15점+ 앞서는 꼭짓점: {a} {', '.join(ahead(a, sa, sh)) or '없음'} / {h} {', '.join(ahead(h, sh, sa)) or '없음'}"
-            + " · 맞대결: " + mu + " · 결장으로 깎인 꼭짓점: " + (" · ".join(loss) if loss else "없음"))
+            + " · 맞대결: " + mu + " · 결장으로 깎인 꼭짓점: " + (" · ".join(loss) if loss else "없음")
+            + "".join(f" · {t} 커버리지 — 결장인데 값이 안 내려가는 선수(본인 타깃당 허용 야드가 대체 선수들보다 나쁨 · 값만): {', '.join(v[t]['rev'])}" for t in (a, h) if (v.get(t) or {}).get("rev")))
 
 
 # ---- 보드 조각(NBA team_hex 와 같은 모양 · 클래스 이름 hexw/hexg/hext — 보드 CSS 가 색 변수 --hx1/--hx2 를 정한다) ----
