@@ -2,7 +2,7 @@
 "LV@DEN": {
 "spread_home": "-10.0",
 "total": "40.5",
-"ml": "+439/-589",
+"ml": "+440/-589",
 "qb": {
 "LV": "Fernando Mendoza",
 "DEN": "Bo Nix"
@@ -72,7 +72,7 @@
 "IND@HOU": {
 "spread_home": "-12.5",
 "total": "44.5",
-"ml": "+505/-700",
+"ml": "+533/-750",
 "qb": {
 "IND": "Daniel Jones",
 "HOU": "C.J. Stroud"
@@ -95,7 +95,8 @@
 "Danielle Hunter",
 "Jaylin Noel",
 "Marvin Harrison Jr.",
-"Woody Marks"
+"Woody Marks",
+"Wyatt Teller"
 ]
 }
 },
@@ -117,7 +118,7 @@
 "CIN@WAS": {
 "spread_home": "6.0",
 "total": "53.5",
-"ml": "-283/+232",
+"ml": "-279/+228",
 "qb": {
 "CIN": "Joe Burrow",
 "WAS": "Jayden Daniels"
@@ -211,7 +212,7 @@
 "PIT@PHI": {
 "spread_home": "4.5",
 "total": "38.5",
-"ml": "-205/+172",
+"ml": "-205/+171",
 "qb": {
 "PIT": "Aaron Rodgers",
 "PHI": "Joe Milton III"
@@ -242,5 +243,5 @@
 ]
 }
 },
-"_stamp": "11-19 15:52"
+"_stamp": "11-19 16:14"
 }

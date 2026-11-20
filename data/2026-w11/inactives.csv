@@ -1,12 +1,12 @@
 ﻿game,team,player,pos,status,reason,detail,announced_utc,official,star,snap_pct
-IND@HOU,IND,Sauce Gardner,CB,Out,Calf,Not Specified,2026-11-19T23:48,1,1,84
-IND@HOU,IND,Jalen Travis,OT,Out,Knee,Not Specified,2026-11-19T23:48,1,1,70
-IND@HOU,IND,Jerry Tillery,DT,Out,Calf,Not Specified,2026-11-19T23:48,1,0,36
-IND@HOU,IND,Charvarius Ward,CB,Out,Knee,Not Specified,2026-11-19T23:48,1,1,78
-IND@HOU,IND,Will Mallory,TE,Out,Hamstring,Not Specified,2026-11-19T23:48,1,0,15
+IND@HOU,IND,Sauce Gardner,CB,Out,Calf,Not Specified,2026-11-20T00:04,1,1,84
+IND@HOU,IND,Anthony Gould,WR,Active,,,2026-11-19T23:51,1,0,28
 IND@HOU,IND,Bernhard Raimann,OT,Out,Concussion,Concussion,2026-11-19T23:48,1,1,66
+IND@HOU,IND,Jerry Tillery,DT,Out,Calf,Not Specified,2026-11-19T23:48,1,0,36
+IND@HOU,IND,Jalen Travis,OT,Out,Knee,Not Specified,2026-11-19T23:48,1,1,70
+IND@HOU,IND,Charvarius Ward,CB,Out,Knee,Not Specified,2026-11-19T23:48,1,1,78
 IND@HOU,IND,Riley Leonard,QB,Out,Coach's Decision,Not Specified,2026-11-19T23:48,1,0,
-IND@HOU,IND,Anthony Gould,WR,Active,,,2026-11-19T23:48,1,0,28
+IND@HOU,IND,Will Mallory,TE,Out,Hamstring,Not Specified,2026-11-19T23:48,1,0,15
 IND@HOU,IND,Luke Rhodes,LS,Active,,,2026-11-19T23:48,1,0,
 IND@HOU,IND,Charlie Heck,OT,Active,,,2026-11-19T21:35,1,0,
 IND@HOU,IND,Justin Walley,CB,Active,,,2026-11-18T17:53,1,1,78
@@ -24,31 +24,31 @@ IND@HOU,IND,Tyler Warren,TE,Active,,,2026-11-16T01:30,1,1,80
 IND@HOU,IND,Jonathan Taylor,RB,Active,,,2026-11-15T22:23,1,1,66
 IND@HOU,IND,Akeem Davis-Gaither,LB,Out,IR · Knee,Not Specified,2026-11-14T17:34,1,1,67
 IND@HOU,IND,Arden Key,DE,Active,,,2026-11-14T17:32,1,0,52
-IND@HOU,HOU,M.J. Stewart,S,Active,,,2026-11-19T20:44,0,1,87
-IND@HOU,HOU,Reed Blankenship,S,Active,,,2026-11-19T20:42,0,0,3
-IND@HOU,HOU,Xavier Hutchinson,WR,Active,,,2026-11-19T15:50,0,1,71
-IND@HOU,HOU,Jake Hummel,LB,Questionable,Groin,Not Specified,2026-11-19T02:19,0,0,
-IND@HOU,HOU,Jaylin Smith,CB,Questionable,Hamstring,Strain,2026-11-19T02:10,0,0,
-IND@HOU,HOU,Kamari Lassiter,CB,Active,,,2026-11-19T00:31,0,1,99
-IND@HOU,HOU,Danielle Hunter,DE,Out,Hamstring,Not Specified,2026-11-19T00:23,0,1,72
-IND@HOU,HOU,Brevin Jordan,TE,Out,Foot,Not Specified,2026-11-19T00:19,0,0,6
-IND@HOU,HOU,Emari Demercado,RB,Active,,,2026-11-18T21:32,0,0,28
-IND@HOU,HOU,Wyatt Teller,G,Questionable,Back,Not Specified,2026-11-18T21:19,0,0,
-IND@HOU,HOU,Marvin Harrison Jr.,WR,Out,Hamstring,Not Specified,2026-11-18T21:03,0,0,34
-IND@HOU,HOU,Woody Marks,RB,Out,Concussion,Concussion,2026-11-18T20:51,0,1,67
-IND@HOU,HOU,David Montgomery,RB,Active,,,2026-11-18T19:56,0,0,
-IND@HOU,HOU,Henry To'oTo'o,LB,Active,,,2026-11-18T02:37,0,1,95
-IND@HOU,HOU,Will Anderson Jr.,DE,Active,,,2026-11-18T02:35,0,1,75
-IND@HOU,HOU,Jake Hansen,LB,Active,,,2026-11-18T02:26,0,0,50
-IND@HOU,HOU,Kayshon Boutte,WR,Active,,,2026-11-17T05:25,0,0,45
-IND@HOU,HOU,Ka'imi Fairbairn,PK,Active,,,2026-11-17T03:47,0,0,
-IND@HOU,HOU,Dare Ogunbowale,RB,Active,,,2026-11-17T01:41,0,0,15
-IND@HOU,HOU,Keylan Rutledge,G,Active,,,2026-11-17T01:12,0,1,100
-IND@HOU,HOU,Azeez Al-Shaair,LB,Out,IR · Groin,Surgery,2026-11-17T01:03,0,1,98
-IND@HOU,HOU,Dalton Schultz,TE,Active,,,2026-11-16T05:08,0,0,56
-IND@HOU,HOU,Tank Dell,WR,Active,,,2026-11-16T01:16,0,0,40
-IND@HOU,HOU,C.J. Stroud,QB,Active,,,2026-11-15T23:56,0,1,96
-IND@HOU,HOU,Nico Collins,WR,Active,,,2026-11-15T22:17,0,1,75
+IND@HOU,HOU,Wyatt Teller,G,Out,Back,Not Specified,2026-11-19T23:50,1,0,
+IND@HOU,HOU,Nate Thomas,OT,Out,Coach's Decision,Not Specified,2026-11-19T23:50,1,0,
+IND@HOU,HOU,Woody Marks,RB,Out,Concussion,Concussion,2026-11-19T23:50,1,1,67
+IND@HOU,HOU,Marvin Harrison Jr.,WR,Out,Hamstring,Not Specified,2026-11-19T23:50,1,0,34
+IND@HOU,HOU,Jake Andrews,C,Out,Coach's Decision,Not Specified,2026-11-19T23:50,1,0,
+IND@HOU,HOU,M.J. Stewart,S,Active,,,2026-11-19T20:44,1,1,87
+IND@HOU,HOU,Reed Blankenship,S,Active,,,2026-11-19T20:42,1,0,3
+IND@HOU,HOU,Xavier Hutchinson,WR,Active,,,2026-11-19T15:50,1,1,71
+IND@HOU,HOU,Jake Hummel,LB,Active,,,2026-11-19T02:19,1,0,
+IND@HOU,HOU,Jaylin Smith,CB,Active,,,2026-11-19T02:10,1,0,
+IND@HOU,HOU,Kamari Lassiter,CB,Active,,,2026-11-19T00:31,1,1,99
+IND@HOU,HOU,Danielle Hunter,DE,Out,Hamstring,Not Specified,2026-11-19T00:23,1,1,72
+IND@HOU,HOU,Brevin Jordan,TE,Out,Foot,Not Specified,2026-11-19T00:19,1,0,6
+IND@HOU,HOU,Emari Demercado,RB,Active,,,2026-11-18T21:32,1,0,28
+IND@HOU,HOU,David Montgomery,RB,Active,,,2026-11-18T19:56,1,0,
+IND@HOU,HOU,Henry To'oTo'o,LB,Active,,,2026-11-18T02:37,1,1,95
+IND@HOU,HOU,Will Anderson Jr.,DE,Active,,,2026-11-18T02:35,1,1,75
+IND@HOU,HOU,Jake Hansen,LB,Active,,,2026-11-18T02:26,1,0,50
+IND@HOU,HOU,Kayshon Boutte,WR,Active,,,2026-11-17T05:25,1,0,45
+IND@HOU,HOU,Ka'imi Fairbairn,PK,Active,,,2026-11-17T03:47,1,0,
+IND@HOU,HOU,Dare Ogunbowale,RB,Active,,,2026-11-17T01:41,1,0,15
+IND@HOU,HOU,Keylan Rutledge,G,Active,,,2026-11-17T01:12,1,1,100
+IND@HOU,HOU,Azeez Al-Shaair,LB,Out,IR · Groin,Surgery,2026-11-17T01:03,1,1,98
+IND@HOU,HOU,Dalton Schultz,TE,Active,,,2026-11-16T05:08,1,0,56
+IND@HOU,HOU,Tank Dell,WR,Active,,,2026-11-16T01:16,1,0,40
 MIA@BUF,MIA,Chris Bell,WR,Questionable,Knee,Not Specified,2026-11-19T22:08,0,1,66
 MIA@BUF,MIA,Caleb Douglas,WR,Questionable,Shoulder,Not Specified,2026-11-19T22:08,0,1,81
 MIA@BUF,MIA,Andrew Meyer,C,Questionable,Neck,Stinger,2026-11-19T02:15,0,1,97
@@ -150,6 +150,7 @@ NO@CHI,CHI,D'Marco Jackson,LB,Active,,,2026-11-06T20:03,0,0,50
 NO@CHI,CHI,Zavier Scott,RB,Out,IR · Wrist,Not Specified,2026-11-05T21:19,0,0,
 NO@CHI,CHI,Kentavius Street,DT,Out,IR · Knee,Not Specified,2026-11-05T04:55,0,0,32
 NO@CHI,CHI,Braxton Jones,OT,Out,IR · Knee,Surgery,2026-11-05T03:40,0,0,
+TEN@DAL,TEN,Tyjae Spears,RB,Questionable,Knee,Not Specified,2026-11-19T23:40,0,0,28
 TEN@DAL,TEN,Carnell Tate,WR,Questionable,Shoulder,Not Specified,2026-11-19T21:13,0,1,89
 TEN@DAL,TEN,Kevin Winston Jr.,S,Questionable,Shoulder,,2026-11-19T21:13,0,1,97
 TEN@DAL,TEN,Cedric Gray,LB,Active,,,2026-11-19T02:26,0,1,64
@@ -158,7 +159,6 @@ TEN@DAL,TEN,Anthony Hill Jr.,LB,Questionable,Neck,Not Specified,2026-11-19T00:27
 TEN@DAL,TEN,John Franklin-Myers,DE,Active,,,2026-11-19T00:25,0,0,53
 TEN@DAL,TEN,Tony Adams,S,Questionable,Concussion,Concussion,2026-11-19T00:19,0,0,40
 TEN@DAL,TEN,Fernando Carmona,G,Out,IR · Ankle,Sprain,2026-11-18T21:49,0,0,
-TEN@DAL,TEN,Tyjae Spears,RB,Questionable,Knee,Not Specified,2026-11-18T21:45,0,0,28
 TEN@DAL,TEN,Wan'Dale Robinson,WR,Out,IR · Ankle,Not Specified,2026-11-18T17:29,0,1,63
 TEN@DAL,TEN,Julius Chestnut,RB,Active,,,2026-11-18T15:41,0,0,3
 TEN@DAL,TEN,Xavier Restrepo,WR,Active,,,2026-11-18T15:25,0,0,33
