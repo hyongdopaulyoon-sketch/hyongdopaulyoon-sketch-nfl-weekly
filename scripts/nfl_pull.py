@@ -1237,6 +1237,16 @@ def ph_inactives(week, games, snap):
                 rows.append([f'{g["away"]}@{g["home"]}', t, nm, pos, _st, _rs, d.get("detail", ""),
                              (x.get("date") or "")[:16], int(official), 1 if (v or 0) >= STARTER_SNAP else 0,
                              f"{v * 100:.0f}" if v else ""])
+    # 2026-11-19(보드 제보 · IND Gardner 발표 15:48 → 다음 판 16:04): ESPN 이 같은 Out 행을 다시 손보면 date 가 늦어진다 — 앞 판 inactives.csv 에서 본 더 이른 시각(6시간 안)을 지킨다
+    try:
+        _old = {(r["game"], r["team"], _norm_name(r["player"])): r["announced_utc"] for r in rd(os.path.join(wd, "inactives.csv")) if r.get("status") == "Out" and r.get("announced_utc")}
+        for r_ in rows:
+            o_ = _old.get((r_[0], r_[1], _norm_name(r_[2])))
+            if r_[4] == "Out" and o_ and r_[7] and o_ < r_[7]:
+                if (datetime.strptime(r_[7], "%Y-%m-%dT%H:%M") - datetime.strptime(o_, "%Y-%m-%dT%H:%M")).total_seconds() <= 6 * 3600:
+                    r_[7] = o_
+    except Exception as e:
+        print(f"  inactives 발표 시각 보존 실패({type(e).__name__})")
     wcsv(os.path.join(wd, "inactives.csv"), ["game", "team", "player", "pos", "status", "reason", "detail", "announced_utc", "official", "star", "snap_pct"], rows)
     try:
         _overlay_official_out(wd)
@@ -1466,6 +1476,17 @@ def _inactives_line(wd, g, a, h):
         _ts = sorted(x for x in (_pt(r["announced_utc"]) for r in rows if r["team"] == t and r["status"] == "Out") if x)
         t_ann[t] = (_ts[0] if _ts[0] == _ts[-1] else f"{_ts[0]}~{_ts[-1]}") if _ts else "?"
     act = {t: {_norm_name(r["player"]): (_pt(r["announced_utc"]) or r["announced_utc"][5:10]) for r in rows if r["team"] == t and r["status"] == "Active"} for t in (a, h)}
+    # 2026-11-19(보드 제보 · HOU 주간 보고 「Jacob Hummel」 Q ↔ ESPN 「Jake Hummel」 Active): 이름 표기가 달라 출전 표시가 안 붙던 것 — 성·이름 첫 글자가 같은 Active 행이 그 팀에 하나뿐이면 같은 선수
+    for t in (a, h):
+        _keys = list(act[t])
+        for col in ("questionable", "doubtful", "limited", "dnp"):
+            for y in re.split(r"\)\s*·\s*", str(inj.get(t, {}).get(col) or "")):
+                nk = _norm_name(y.split("(")[0].strip())
+                if not nk or nk in act[t] or len(nk.split()) < 2:
+                    continue
+                c_ = [k for k in _keys if len(k.split()) >= 2 and k.split()[-1] == nk.split()[-1] and k[0] == nk[0]]
+                if len(c_) == 1:
+                    act[t][nk] = act[t][c_[0]]
     for t in (a, h):
         seen, names, n_star = set(), [], 0
         rep_names = {_norm_name(y.split("(")[0].strip()) for col in ("out", "doubtful", "questionable")
