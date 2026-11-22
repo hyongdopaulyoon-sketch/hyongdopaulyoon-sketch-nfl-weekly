@@ -9,6 +9,7 @@
 },
 "out": {
 "LV": [
+"Brock Bowers",
 "Tonka Hemingway"
 ],
 "DEN": [
@@ -21,7 +22,7 @@
 "MIN@SF": {
 "spread_home": "-3.5",
 "total": "46.5",
-"ml": "+147/-175",
+"ml": "+162/-194",
 "qb": {
 "MIN": "Kirk Cousins",
 "SF": "Brock Purdy"
@@ -97,7 +98,7 @@
 "NYJ@LAC": {
 "spread_home": "-3.0",
 "total": "43.5",
-"ml": "+150/-178",
+"ml": "+151/-179",
 "qb": {
 "NYJ": "Geno Smith",
 "LAC": "Justin Herbert"
@@ -106,13 +107,16 @@
 "NYJ": [
 "David Onyemata",
 "Isaiah Williams",
-"Omar Cooper Jr."
+"Omar Cooper Jr.",
+"Trevin Wallace"
 ],
 "LAC": [
 "Branson Taylor",
+"Brenen Thompson",
 "Daiyan Henley",
 "Kendall Williamson",
-"Rodney Shelley"
+"Rodney Shelley",
+"Tarheeb Still"
 ]
 }
 },
@@ -206,6 +210,7 @@
 "BJ Green II",
 "DaVon Hamilton",
 "Danny Striggow",
+"Matt Dickerson",
 "Robert Hainsey"
 ],
 "NYG": [
@@ -315,5 +320,5 @@
 ]
 }
 },
-"_stamp": "11-22 11:42"
+"_stamp": "11-22 12:04"
 }
