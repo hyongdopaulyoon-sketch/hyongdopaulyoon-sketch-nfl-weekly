@@ -2,7 +2,7 @@
 "LV@DEN": {
 "spread_home": "-10.5",
 "total": "40.5",
-"ml": "+471/-640",
+"ml": "+469/-640",
 "qb": {
 "LV": "Fernando Mendoza",
 "DEN": "Bo Nix"
@@ -21,7 +21,7 @@
 "JAX@NYG": {
 "spread_home": "6.0",
 "total": "45.5",
-"ml": "-273/+224",
+"ml": "-266/+219",
 "qb": {
 "JAX": "Trevor Lawrence",
 "NYG": "J.J. McCarthy"
@@ -41,7 +41,7 @@
 "MIN@SF": {
 "spread_home": "-3.5",
 "total": "46.5",
-"ml": "+147/-175",
+"ml": "+148/-176",
 "qb": {
 "MIN": "Kirk Cousins",
 "SF": "Brock Purdy"
@@ -61,8 +61,8 @@
 },
 "NO@CHI": {
 "spread_home": "-11.5",
-"total": "48.5",
-"ml": "+462/-630",
+"total": "47.5",
+"ml": "+475/-650",
 "qb": {
 "NO": "Tyler Shough",
 "CHI": "Caleb Williams"
@@ -116,7 +116,7 @@
 "NYJ@LAC": {
 "spread_home": "-3.0",
 "total": "42.5",
-"ml": "+149/-177",
+"ml": "+145/-173",
 "qb": {
 "NYJ": "Geno Smith",
 "LAC": "Justin Herbert"
@@ -213,7 +213,7 @@
 "MIA@BUF": {
 "spread_home": "-16.5",
 "total": "44.5",
-"ml": "+860/-1460",
+"ml": "+890/-1560",
 "qb": {
 "MIA": "Kyle McCord",
 "BUF": "Josh Allen"
@@ -259,7 +259,7 @@
 "TB@DET": {
 "spread_home": "-3.5",
 "total": "48.5",
-"ml": "+183/-220",
+"ml": "+183/-219",
 "qb": {
 "TB": "Baker Mayfield",
 "DET": "Jared Goff"
@@ -280,7 +280,7 @@
 "TEN@DAL": {
 "spread_home": "-7.5",
 "total": "54.5",
-"ml": "+309/-390",
+"ml": "+310/-391",
 "qb": {
 "TEN": "Cam Ward",
 "DAL": "Dak Prescott"
@@ -304,5 +304,5 @@
 ]
 }
 },
-"_stamp": "11-22 07:05"
+"_stamp": "11-22 07:58"
 }
