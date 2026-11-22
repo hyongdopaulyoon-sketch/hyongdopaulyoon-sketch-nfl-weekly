@@ -1768,6 +1768,9 @@ RULES = [
 ]
 
 
+_SKC_T = {}   # 색 맥락 줄의 그 주 순위표(한 번 실행에 한 번 계산)
+
+
 def ph_digest(week, force=False):
     wd = week_dir(week)
     games = rd(os.path.join(wd, "games.csv"))
@@ -1884,6 +1887,15 @@ def ph_digest(week, force=False):
         wx = f'{g["weather"]} {g["temp_f"]}°F' if g["weather"] else (f'{g["temp_f"]}°F(날씨 문구 없음)' if g.get("temp_f") else "예보 없음")
         L.append(f'- 맥락(값만 — N5): 휴식 {a} {g["away_rest"] or "?"}일 / {h} {g["home_rest"] or "?"}일 · 날씨 {wx} · 지붕 {g["roof"] or "?"}'
                  + (" · ⚠️ 목요일 경기(짧은 휴식)" if any(str(x) == "4" for x in (g["away_rest"], g["home_rest"])) else ""))
+        try:   # 2026-11-22 Paul 「색 관련은 더 파줘봐」 → 「추천대로」: 색 맥락 한 줄(값만 — 예측·★·판단·스프레드 픽 무관 · scripts/sack_context.py)
+            import sack_context as _SKC
+            if week not in _SKC_T:
+                _SKC_T[week] = _SKC.week_table(week, {r_["team"]: (r_.get("expected_qb") or "") for r_ in rd(os.path.join(wd, "injuries.csv"))})
+            _sl = _SKC.digest_line(a, h, week, {a: ia, h: ih}, _SKC_T[week])
+            if _sl:
+                L.append(_sl)
+        except Exception as _e:
+            L.append(f"- 🧱 색 맥락: 계산 실패({type(_e).__name__})")
         risks = []
         if ia.get("qb_flag"): risks.append(f'{a} {ia["qb_flag"]} → 모델 −{QB_ADJ}점')
         if ih.get("qb_flag"): risks.append(f'{h} {ih["qb_flag"]} → 모델 −{QB_ADJ}점')

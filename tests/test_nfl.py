@@ -103,6 +103,18 @@ def test_digest_header_rule_numbers():
     assert '["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES]' in src
 
 
+def test_sack_context_line_and_flag(monkeypatch):
+    """2026-11-22: 색 맥락 줄 — 수비 색률·QB 본인 색률 순위(값만) · 「색 잘 당하는 QB 대 색률 상위 8 수비」 는 한쪽만 해당일 때 꼬리."""
+    import sack_context as SC
+    T = {f"T{i:02d}": {"dsr": 0.10 - i * 0.002, "dsr_rank": i + 1, "qsr": 0.03 + i * 0.002, "qsr_rank": 24 - i, "qb": f"QB{i}"} for i in range(24)}
+    assert SC.flag(T, "T00", "T23") and not SC.flag(T, "T23", "T00") and not SC.flag(T, "T00", "T05")
+    monkeypatch.setattr(SC, "season_record", lambda before_week=None: (10, 4, 1, 10, 5))
+    ln = SC.digest_line("T23", "T00", 11, {}, T)
+    assert ln.startswith("- 🧱 색 맥락(값만") and "T00 10.0%(1위)" in ln and "QB23 7.6%(1위 — 색을 잘 당하는 쪽)" in ln
+    assert "해당: 색 잘 당하는 QB(T23) 대 색률 상위 8 수비(T00)" in ln and "올해 수비 쪽 스프레드 10-4-1(승자 10-5)" in ln
+    assert "해당:" not in SC.digest_line("T10", "T12", 11, {}, T) and SC.digest_line("X", "Y", 11, {}, T) == ""
+
+
 def test_official_list_needs_scratches_or_three_outs():
     """2026-11-22: 킥오프 직전 Out 한 줄(LV Bowers Q → Out)만으로는 「공식 비활성 명단 도착」 이 아니다 · 건강 제외 행이 있거나 Out 3개+ 면 도착."""
     import nfl_pull as P
