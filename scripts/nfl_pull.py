@@ -1443,6 +1443,17 @@ def _live_rec(allp, pred):
     return f"{w}-{l}" + (f"-{p}" if p else ""), w + l
 
 
+def _first_piece(note):
+    """note 의 첫 토막(「 · 」 구분) — 괄호가 안 닫힌 채 끊기면 닫힐 때까지 다음 토막을 붙인다(2026-11-21 보드 제보 · ARI@KC A13 사유 괄호 안 닫힘)."""
+    parts = str(note or "").split(" · ")
+    out = parts[0] if parts else ""
+    for nx in parts[1:]:
+        if out.count("(") <= out.count(")"):
+            break
+        out += " · " + nx
+    return out
+
+
 def _spread_pick_line(week, g):
     """경기 절 「- 📏 스프레드 픽」(2026-11-15 Paul 「스프레드픽도 내자」 · 사전 등록 SP · 11주차~) — 조건(A7 홈 언더독 +7 · A6 키 넘버 넘긴 이동 반대쪽)이 걸린 경기만.
     발행문 「- 스프레드 픽:」 줄이 값·사유를 그대로 옮긴다. 이길 팀 예측·★·ML 판단과 무관 · 기록용(돈 아님)."""
@@ -1457,7 +1468,7 @@ def _spread_pick_line(week, g):
 
     def why(k, r):
         lr, _ = _live_rec(allp, lambda x, k=k: x.get("id", "").split(":")[-1] == k)
-        return f'{ANGLE_PLAIN[k][0].replace(" 관찰", "")}({r.get("note", "").split(" · ")[0]} · {SP_HIST[k]} · 올해 {lr})'
+        return f'{ANGLE_PLAIN[k][0].replace(" 관찰", "")}({_first_piece(r.get("note", ""))} · {SP_HIST[k]} · 올해 {lr})'
     if len({r["side"].split()[0] for _, r in cs}) > 1:
         return "- 📏 스프레드 픽: 없음(조건 상충 — " + " vs ".join(f'{r["side"]} 쪽 {why(k, r)}' for k, r in cs) + ")" + tail
     return f'- 📏 스프레드 픽: **{cs[0][1]["side"]}** — ' + " + ".join(why(k, r) for k, r in cs) + tail

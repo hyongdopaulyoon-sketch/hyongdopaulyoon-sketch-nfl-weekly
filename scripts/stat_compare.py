@@ -245,7 +245,11 @@ def player_tables(a, h, RS, inj, g):
         inj_t = inj.get(t) or {}
         L += [f"| {t} 선수 | 역할 | 경기 | 표본 | 야드 | TD | 효율 | EPA/플레이 | 리그 순위 | 상태 | {N.SEASON - 1}(작년·참고) |", "|---|---|---|---|---|---|---|---|---|---|---|"]
         exp = inj_t.get("expected_qb") or ""
-        qbs = sorted((p for p in qb if NM.get(p, ("", ""))[1] == t and qb[p].get("db", 0) >= 10), key=lambda p: -qb[p]["db"])[:2]
+        _qall = sorted((p for p in qb if NM.get(p, ("", ""))[1] == t and qb[p].get("db", 0) >= 10), key=lambda p: -qb[p]["db"])
+        qbs = _qall[:2]
+        _mine = next((p for p in _qall[2:] if exp and N._same_person(NM[p][0], exp)), None)   # 2026-11-21(보드 제보 · PHI Joe Milton III 드롭백 40 = 팀 3위): 예상 선발은 순위와 무관하게 표에 넣는다
+        if _mine:
+            qbs = [_mine] + qbs
         if exp and not any(N._same_person(NM[p][0], exp) for p in qbs):   # 2026-11-16: 시즌 중 이적한 예상 선발(BAL Brissett ← ARI 기록)
             _tp = N.traded_qb_pid(exp, t, qb, NM, lambda p: qb[p].get("db", 0))
             if _tp:

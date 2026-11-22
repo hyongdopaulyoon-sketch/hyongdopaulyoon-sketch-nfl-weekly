@@ -103,6 +103,14 @@ def test_digest_header_rule_numbers():
     assert '["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES]' in src
 
 
+def test_first_piece_keeps_parentheses_closed():
+    """2026-11-21: 스프레드 픽 사유 첫 토막이 괄호 안에서 끊기지 않는다."""
+    import nfl_pull as N
+    assert N._first_piece("KC 러시 결장 손실 12점(뛰는 러셔 기준 80 · 전원 가용이면 92)") == "KC 러시 결장 손실 12점(뛰는 러셔 기준 80 · 전원 가용이면 92)"
+    assert N._first_piece("홈 ARI 언더독 +15.5 · 다른 토막") == "홈 ARI 언더독 +15.5"
+    assert N._first_piece("") == ""
+
+
 def test_expected_qb_out_moves_to_next_qb(tmp_path):
     """2026-11-21(ARI Beck 주간 Q → 토요일 ESPN Out): 예상 QB 가 Out 이면 일정표 예상 → 뎁스차트 다음 QB, 꼬리표는 실제 지정 종류, qb_flag(N4)는 남는다."""
     import nfl_pull as N
