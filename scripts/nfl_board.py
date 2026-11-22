@@ -1418,7 +1418,40 @@ def _rec_wp(rec):
         return None
 
 
-def team_state_html(week, g, pk, so, so_src, inj):
+def poly_ml(g, wd):
+    """수집이 받아 둔 poly_nfl-<원정>-<홈>-<UTC 날짜>.json 만 읽는다(보드는 네트워크로 받지 않음) → ({팀: 사는 가격 0~1}, 파일 시각) · 없으면 ({}, "").
+    해석은 nfl_pull._poly 의 moneyline 부분과 같음(outcomes[0] = 원정 · 두 번째 쪽 = 1 − bestBid)."""
+    try:
+        p = os.path.join(wd, f"poly_nfl-{g['away'].lower()}-{g['home'].lower()}-{g['kickoff_utc'][:10]}.json")
+        ev = (json.load(open(p, encoding="utf-8")) or [None])[0]
+        tm = datetime.fromtimestamp(os.path.getmtime(p)).strftime("%m/%d %H:%M")
+    except Exception:
+        return {}, ""
+    out = {}
+    for m in (ev or {}).get("markets", []) or []:
+        if m.get("sportsMarketType") != "moneyline" or m.get("closed"):
+            continue
+        try:
+            oc = json.loads(m.get("outcomes") or "[]"); ask0 = float(m.get("bestAsk")); bid0 = float(m.get("bestBid"))
+        except (TypeError, ValueError):
+            continue
+        if len(oc) == 2:
+            out[g["away"]], out[g["home"]] = ask0, 1 - bid0
+    return out, tm
+
+
+def weather_chip(g):
+    """펼침 상태 줄 칩 — 「실외 · Partly sunny · 66°F」 · 돔은 「돔(실내)」 (games.csv · 값만)."""
+    roof = (g.get("roof") or "").strip()
+    if roof in ("dome", "indoor"):
+        return '<span class="chip">돔(실내)</span>'
+    wx = (g.get("weather") or "").strip()
+    bits = [{"outdoors": "실외", "open": "개폐식 지붕 열림"}.get(roof, roof)] + ([wx] if re.search(r"[A-Za-z가-힣]", wx) else []) + ([f'{g["temp_f"]}°F'] if (g.get("temp_f") or "").strip() else [])
+    bits = [b_ for b_ in bits if b_]
+    return f'<span class="chip">{esc(" · ".join(bits))}</span>' if bits else ""
+
+
+def team_state_html(week, g, pk, so, so_src, inj, hexg=None, poly=({}, "")):
     """펼침 맨 위 「팀 상태」 표 — 두 팀 나란히(행 = 항목 · 열 = 원정 | 홈) · 값만. 초록 = 더 좋은 값 · 빨강 = 주전 결장 많은 쪽 · 파랑 = 예측 승자."""
     A, H = g["away"], g["home"]
     rows = []
@@ -1462,6 +1495,27 @@ def team_state_html(week, g, pk, so, so_src, inj):
         mx = max(n_.values())
         rows.append(("주전 결장", f"{n_[A]}명" + (": " + ", ".join(so[A]) if so[A] else ""), f"{n_[H]}명" + (": " + ", ".join(so[H]) if so[H] else ""),
                      (A if n_[A] > n_[H] else H) if n_[A] != n_[H] and mx else "", "worse", f"확정만 · {so_src.replace('.md', '')} 기준"))
+    if hexg:   # ④ 육각형 결장 깎임 — 전원 가용 가정 → 이번 주 뛰는 선수만(hex.json full → scores)
+        def _loss(t):
+            d = hexg.get(t) or {}
+            sc, fu = d.get("scores") or {}, d.get("full") or {}
+            return [(k, sc[k] - fu[k], fu[k], sc[k]) for k in fu if k in sc and sc[k] < fu[k]]
+        la, lh = _loss(A), _loss(H)
+        fmt = lambda xs: " · ".join(f"{k} {dd:+g}({f_}→{s_})" for k, dd, f_, s_ in xs) or "없음"
+        sa_, sh_ = -sum(x[1] for x in la), -sum(x[1] for x in lh)
+        rows.append(("결장 깎임(육각형)", fmt(la), fmt(lh), (A if sa_ > sh_ else H) if sa_ != sh_ and max(sa_, sh_) > 0 else "", "worse",
+                     "육각형 꼭짓점 — 전원 가용이면 → 이번 주 뛰는 선수만(50 = 리그 평균) · 내려간 꼭짓점만(올라간 건 빠진 선수가 대신 뛰는 선수보다 약했던 경우라 뺌) · 값만"))
+    mla, mlh = g.get("ml_away"), g.get("ml_home")
+    if mla and mlh:   # ⑥ 가격 — DK ML 과 그 가격의 손익분기(비그 포함) · Polymarket 사는 가격
+        be = lambda o: f"{o} · 손익분기 {N._implied(o) * 100:.1f}%" if N._implied(o) else str(o)
+        rows.append(("ML 가격(DK)", be(mla), be(mlh), "", "", "DraftKings(ESPN) · 손익분기 = 이 가격에서 본전이 되는 승률(비그 포함) · 값만"))
+        pm, ptm = poly
+        if pm.get(A) is not None and pm.get(H) is not None:
+            def _pc(t, dk):
+                c, d = pm[t], N._implied(dk)
+                tail = "" if d is None else (" · DK보다 쌈" if c < d - 1e-9 else " · DK가 더 쌈" if d < c - 1e-9 else " · DK와 같음")
+                return f"{c * 100:.0f}¢({N._cents_to_us(c)}){tail}"
+            rows.append(("ML 가격(Polymarket)", _pc(A, mla), _pc(H, mlh), "", "", f"사는 가격 · 수집 파일 {ptm} PT · 수수료 미반영 · 값만"))
     try:
         tl = {t: [b_.rsplit(" ", 1) for b_ in TT.team_line(t).split(" — ", 1)[-1].split(" · ") if re.fullmatch(r".+ \d+-\d+(?:-\d+)?", b_)] for t in (A, H)}
         labs = [k for k, _ in tl[A] if k != "전적"] + [k for k, _ in tl[H] if k != "전적" and k not in [k2 for k2, _ in tl[A]]]
@@ -1667,7 +1721,10 @@ def main():
                          f'<span class="star" title="2018~25 이 별 승자 적중 {PR.STAR_HIT.get(PR.stars(pp), "")}">{stars}</span> {phit(m_)}</div>')
             if b_ and (b_["pick"] != m_["pick"] or abs((P.fnum(b_.get("p_pick")) or 0) - (pp or 0)) >= 0.005 or late_tag):
                 pred_html += f'<div class="sub">발행 예측 {esc(b_["pick"])} {pct(P.fnum(b_.get("p_pick")))} {phit(b_)}{late_tag}</div>'
-            if d_ and d_["pick"] != m_["pick"]:
+            if d_ and NEWTBL["on"]:   # 11/21 밤 — 발행문 변수 줄 「우리 드라이브 모델 BUF 81%」 를 늘 한 줄로(값만)
+                pred_html += (f'<div class="sub">우리 모델(두 번째 의견 · 시장이 더 정확) {esc(d_["pick"])} {pct(P.fnum(d_.get("p_pick")))}'
+                              + (" — 시장과 반대" if d_["pick"] != m_["pick"] else "") + "</div>")
+            elif d_ and d_["pick"] != m_["pick"]:
                 pred_html += f'<div class="sub">우리 모델은 {esc(d_["pick"])} 쪽 — 시장과 반대(덜 정확한 두 번째 의견)</div>'
             pred_html += "</div>"
         # ── 결론 줄(낱말만, 근거는 title)
@@ -1778,7 +1835,7 @@ def main():
                         '<th>항목</th><th>이 경기 쪽·라인</th><th>지금 성적</th><th>용도</th><th>결과</th></tr></thead><tbody>'
                         + "".join(f"<tr><td>{a1}</td><td>{a2}</td><td class=\"num\">{esc(a3)}</td><td>{esc(a4)}</td><td>{a5}</td></tr>" for a1, a2, a3, a4, a5 in orows)
                         + "</tbody></table></div>") if orows else "") + (f'<div class="none1">해당 없음 — {esc(" · ".join(none_))}</div>' if none_ else "")
-            so_line, tt_line, lines = team_state_html(a.week, g, pick_t, so, so_src, inj), "", obs_tbl
+            so_line, tt_line, lines = team_state_html(a.week, g, pick_t, so, so_src, inj, (hexv or {}).get(gk), poly_ml(g, wd)), "", obs_tbl
         div = '<span class="chip">디비전</span>' if g.get("div_game") == "1" else ""
         neu = '<span class="chip">중립 구장</span>' if g.get("neutral") == "1" else ""
         # ── 주차 전체 비교표 한 줄(MLB 서열표처럼 — 머리 누르면 정렬, 줄 누르면 발행문 펼침 · 10/11 Paul · 10/16 ML 전용)
@@ -1826,7 +1883,8 @@ def main():
                       f'<td>{esc(vw0) or "—"}</td>'
                       + ((f'<td data-s="{esc(sp["side"])}">{esc(sp["side"])} {hit(sp_res)}</td>' if sp else '<td data-s=""><span class="muted">없음</span></td>') if show_sp else "")
                       + f'<td data-s="{res_s}">{res_txt}</td></tr>'))
-        xmeta = f'<div class="meta">{div}{neu}</div>' if (div or neu) else ""
+        wxc = weather_chip(g) if NEWTBL["on"] else ""
+        xmeta = f'<div class="meta">{div}{neu}{wxc}</div>' if (div or neu or wxc) else ""
         if fin:
             xcard[gk] = so_line + tt_line + rc_html + hex_html + xmeta + pred_html + lines
             continue
@@ -1841,9 +1899,9 @@ def main():
             quick.append(f'{term("ML")} {esc(A)} <span class="num">{esc(g.get("ml_away"))}</span> / {esc(H)} <span class="num">{esc(g.get("ml_home"))}</span>')
             price.append(f'<tr><td>{term("ML")}</td><td>{esc(A)} <span class="num">{esc(g.get("ml_away"))}</span> · {esc(H)} <span class="num">{esc(g.get("ml_home"))}</span></td>'
                          f'<td class="muted">승리 {esc(A)} {pct(ma)} / {esc(H)} {pct(mh)}</td></tr>')
-        mk = f'<div class="quick">{" · ".join(quick)}</div>' if quick else ""
+        mk = f'<div class="quick">{" · ".join(quick)}</div>' if quick and not NEWTBL["on"] else ""   # 11주차~ ML 은 팀 상태 표 「ML 가격」 행
         remaining += 1
-        xcard[gk] = so_line + tt_line + rc_html + hex_html + f'<div class="meta">{status}{div}{neu}</div>' + pred_html + mk + lines
+        xcard[gk] = so_line + tt_line + rc_html + hex_html + f'<div class="meta">{status}{div}{neu}{wxc}</div>' + pred_html + mk + lines
         if b_ or (ptext.get(gk) or {}).get("main"):
             pre_cards.append(gk)   # 발행된 남은 경기 수(머리 한 줄)
     trows.sort(key=lambda x: x[0])
