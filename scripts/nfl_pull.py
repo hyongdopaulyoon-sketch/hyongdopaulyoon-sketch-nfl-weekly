@@ -479,6 +479,19 @@ def _qb1_by_team():
     return {t: v["name"] for t, v in dc.items()}, main_qb
 
 
+def _qb_depth_order():
+    """최신 뎁스차트 QB 순서 {team: [1번, 2번, …]}."""
+    dcq = [r for r in rd(os.path.join(CACHE, f"depth_charts_{SEASON}.csv")) if r.get("pos_abb") == "QB"]
+    mx = {}
+    for r in dcq:
+        mx[r["team"]] = max(mx.get(r["team"], ""), r["dt"])
+    out = defaultdict(list)
+    for r in sorted(dcq, key=lambda r: int(fnum(r.get("pos_rank")) or 99)):
+        if r["dt"] == mx[r["team"]] and r["player_name"] not in out[r["team"]]:
+            out[r["team"]].append(r["player_name"])
+    return out
+
+
 def _last_starter_by_team():
     """pbp 2026 팀별 **가장 최근 주차**에 드롭백이 가장 많은 QB {team: (week, 짧은 이름)} — 일정표 예상 QB(nflverse home/away_qb_name)가 묵을 때의 정본
     (10/11 SEA: 일정표 3~5주 Drew Lock, 실제 3·4주 Darnold 선발 → 모델 −4.5 오적용)."""
@@ -1067,14 +1080,7 @@ def ph_injuries(week, force=False):
                 prac[r["team"]].append(r)
     qb1, main_qb = _qb1_by_team()
     last_st = _last_starter_by_team()
-    _dcq = [r for r in rd(os.path.join(CACHE, f"depth_charts_{SEASON}.csv")) if r.get("pos_abb") == "QB"]
-    _dmx = {}
-    for r in _dcq:
-        _dmx[r["team"]] = max(_dmx.get(r["team"], ""), r["dt"])
-    qbdepth = defaultdict(list)   # 최신 뎁스차트 QB 순서(1번부터)
-    for r in sorted(_dcq, key=lambda r: int(fnum(r.get("pos_rank")) or 99)):
-        if r["dt"] == _dmx[r["team"]] and r["player_name"] not in qbdepth[r["team"]]:
-            qbdepth[r["team"]].append(r["player_name"])
+    qbdepth = _qb_depth_order()   # 최신 뎁스차트 QB 순서(1번부터)
     games = rd(os.path.join(wd, "games.csv"))
     teams = sorted({g["away"] for g in games} | {g["home"] for g in games})
     snap = _snap_pct()
@@ -1254,6 +1260,41 @@ def ph_inactives(week, games, snap):
         print(f"  inactives 덮어쓰기 실패({type(e).__name__}: {e})")
 
 
+def _requalify_expected_qb(wd, inj, offs, irn, espn, depth=None):
+    """2026-11-21(NFL 수집 제보 · 11주차 ARI Carson Beck 주간 Questionable → 토요일 ESPN Out 인데 예상 QB 로 남고, 맞는 일정표 값 Josh Johnson 은
+    「묵은 값」 으로 버려짐): 예상 QB 가 ESPN·공식 명단 Out 이면 다음 QB 로 바꾼다 — 일정표 예상(다른 선수 · Out 아님) → 뎁스차트 다음 가용 QB.
+    qb_flag 는 비우지 않는다(모델 N4 −4.5 는 qb_flag 유무로만 건다 — 시즌 주전이 그대로 나올 때만 비움). 바꾼 팀 수를 돌려준다."""
+    sched = {}
+    for g in rd(os.path.join(wd, "games.csv")):
+        sched[g["away"]] = g.get("away_qb") or ""; sched[g["home"]] = g.get("home_qb") or ""
+    depth = depth if depth is not None else _qb_depth_order()
+    n = 0
+    for x in inj:
+        t, old = x["team"], (x.get("expected_qb") or "").strip()
+        names = offs.get(t) or set()
+        if not old or _norm_name(old) not in names:
+            continue
+        k = (t, _norm_name(old))
+        tl = "IR" if k in irn else ("ESPN Out" if k in espn else "당일 비활성")
+        src, new = "", ""
+        for s_, c in [("일정표 예상", sched.get(t, ""))] + [("뎁스차트 다음 QB", d) for d in depth.get(t, [])]:
+            if c and _norm_name(c) not in names and _norm_name(c) != _norm_name(old):
+                src, new = s_, c
+                break
+        x["qb_report"] = f"{old} Out({tl})"
+        if not new:
+            continue
+        main = x.get("season_main_qb") or ""
+        x["expected_qb"] = new
+        x["qb_flag"] = "" if (main and _same_person(main, new)) else (
+            f"백업 QB 선발 — " + (f"시즌 주전 {main} · " if main and not _same_person(main, old) else "")
+            + f"{'뎁스차트 QB1 ' if _norm_name(x.get('depth_qb1') or '') == _norm_name(old) else ''}{old} Out({tl}) 대신 예상 선발 {new}")
+        keep = [s for s in str(x.get("qb_note") or "").split(" · ") if s and "묵은 값" not in s and "로 정정" not in s]
+        x["qb_note"] = " · ".join(keep + [f"예상 {old} 는 Out({tl}) — {src} {new} 로 정정"])
+        n += 1
+    return n
+
+
 def _overlay_official_out(wd):
     """2026-11-15(NFL 보드 제보 · KC Walker 주간 Questionable → 08:21 PT 공식 비활성 Out 인데 부상·QB 줄·선수 표는 Q): 주간 보고 Questionable/Doubtful
     선수가 ESPN 공식 비활성(official=1 · Out)이면 injuries.csv 의 그 열에서 out 열로 옮긴다(「당일 비활성」 꼬리) — 부상·QB 줄·선수 표 상태·🆕 Out 추가·
@@ -1296,10 +1337,14 @@ def _overlay_official_out(wd):
                 x["n_starters_missing"] = int(fnum(x.get("n_starters_missing")) or 0) + 1
             nm_ = y.split("(")[0].strip()
             if "(QB" in y and _norm_name(nm_) == _norm_name(x.get("expected_qb") or ""):
-                x["qb_report"] = f"{nm_} Out(당일 비활성)"
-                x["qb_flag"] = ((x.get("qb_flag") or "") + " · " if x.get("qb_flag") else "") + f"QB 당일 비활성 {nm_} Out"
+                x["qb_report"] = f"{nm_} Out({_tl})"   # 2026-11-21(수집 제보 · ARI Beck 토요일 ESPN Out 이 「당일 비활성」 으로 찍힘): 꼬리표는 실제 지정 종류
+                x["qb_flag"] = ((x.get("qb_flag") or "") + " · " if x.get("qb_flag") else "") + f"QB {nm_} Out({_tl})"
         x["out"] = " · ".join(out); x["n_out"] = len(out)
         n += len(moved)
+    try:
+        _requalify_expected_qb(wd, inj, offs, _irn, _espn)
+    except Exception as e:
+        print(f"  예상 QB 재지정 실패({type(e).__name__}: {e})")
     # ESPN 명단에만 Out(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장): 표시 전용 열(선수 표 상태 칸·부상·QB 줄 꼬리) — 결장 수·모델·각도 입력은 안 바꾼다
     eo = defaultdict(list)
     for r in rd(os.path.join(wd, "inactives.csv")):

@@ -103,6 +103,25 @@ def test_digest_header_rule_numbers():
     assert '["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES]' in src
 
 
+def test_expected_qb_out_moves_to_next_qb(tmp_path):
+    """2026-11-21(ARI Beck 주간 Q → 토요일 ESPN Out): 예상 QB 가 Out 이면 일정표 예상 → 뎁스차트 다음 QB, 꼬리표는 실제 지정 종류, qb_flag(N4)는 남는다."""
+    import nfl_pull as N
+    wd = str(tmp_path)
+    N.wcsv(os.path.join(wd, "games.csv"), ["away", "home", "away_qb", "home_qb"], [["ARI", "KC", "Josh Johnson", "Patrick Mahomes"], ["SEA", "LA", "Sam Darnold", "Matthew Stafford"]])
+    mk = lambda t, exp, d1, main, note: {"team": t, "expected_qb": exp, "depth_qb1": d1, "season_main_qb": main, "qb_report": "", "qb_flag": "백업 QB 선발 — 옛 문구", "qb_note": note}
+    inj = [mk("ARI", "Carson Beck", "Carson Beck", "J.Brissett", "일정표 예상 Josh Johnson 는 묵은 값 — 최근 10주 선발·뎁스차트 QB1 Carson Beck 로 정정"),
+           mk("SEA", "Sam Darnold", "Sam Darnold", "S.Darnold", ""), mk("KC", "Patrick Mahomes", "Patrick Mahomes", "P.Mahomes", "")]
+    inj[2]["qb_flag"] = ""
+    offs = {"ARI": {N._norm_name("Carson Beck")}, "SEA": {N._norm_name("Sam Darnold")}}
+    n = N._requalify_expected_qb(wd, inj, offs, set(), {("ARI", N._norm_name("Carson Beck"))}, depth={"ARI": ["Carson Beck", "Josh Johnson"], "SEA": ["Sam Darnold", "Drew Lock"]})
+    assert n == 2
+    ari, sea, kc = inj
+    assert ari["expected_qb"] == "Josh Johnson" and ari["qb_report"] == "Carson Beck Out(ESPN Out)"
+    assert ari["qb_flag"].startswith("백업 QB 선발") and "Josh Johnson" in ari["qb_flag"] and "묵은 값" not in ari["qb_note"] and "일정표 예상 Josh Johnson 로 정정" in ari["qb_note"]
+    assert sea["expected_qb"] == "Drew Lock" and "당일 비활성" in sea["qb_report"] and "뎁스차트 다음 QB Drew Lock" in sea["qb_note"] and sea["qb_flag"]
+    assert kc["expected_qb"] == "Patrick Mahomes" and kc["qb_flag"] == ""
+
+
 def test_qb_return_only_when_started_before_season_main():
     """2026-11-19: 「주전 복귀」 는 시즌 주전보다 먼저 선발한 적이 있는 QB 만 — 주전이 빠져 올라온 백업은 벌점(N4)."""
     import nfl_pull as N
