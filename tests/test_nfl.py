@@ -103,6 +103,14 @@ def test_digest_header_rule_numbers():
     assert '["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES]' in src
 
 
+def test_wx_text_picks_the_worded_field():
+    """2026-11-22: ESPN 이 날씨 문구와 조건 번호를 뒤바꿔 보내도(「1」/「Sunny」) 글자 있는 쪽을 쓴다 · 둘 다 숫자면 빈칸."""
+    import nfl_pull as P
+    assert P._wx_text({"displayValue": "1", "conditionId": "Sunny"}) == "Sunny"
+    assert P._wx_text({"displayValue": "Rain", "conditionId": "18"}) == "Rain"
+    assert P._wx_text({"displayValue": "1", "conditionId": "18"}) == "" and P._wx_text(None) == "" and P._wx_text({}) == ""
+
+
 def test_first_piece_keeps_parentheses_closed():
     """2026-11-21: 스프레드 픽 사유 첫 토막이 괄호 안에서 끊기지 않는다."""
     import nfl_pull as N

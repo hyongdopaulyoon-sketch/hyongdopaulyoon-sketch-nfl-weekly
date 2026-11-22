@@ -211,6 +211,16 @@ def ph_ratings(week, force=False):
     return rows
 
 
+def _wx_text(wx):
+    """ESPN 날씨 문구. 2026-11-22(보드 제보 · 11주차 MIA@BUF 「1 61°F」): ESPN 이 displayValue 와 conditionId 를 뒤바꿔 보내는 경기가 있다
+    (displayValue "1" · conditionId "Sunny"). 글자가 있는 쪽을 쓰고, 둘 다 숫자뿐이면 빈칸(= 「예보 없음」)."""
+    for k in ("displayValue", "conditionId"):
+        v = str((wx or {}).get(k) or "").strip()
+        if re.search(r"[A-Za-z]", v):
+            return v
+    return ""
+
+
 def _parse_spread(details, home_abbr):
     """ESPN 'PIT -3' → 홈 기준 스프레드(홈이 3점 페이버릿이면 -3.0). 못 읽으면 None."""
     m = re.match(r"([A-Z]{2,3}) ([+-]?[\d.]+)", str(details or ""))
@@ -443,7 +453,7 @@ def ph_slate(week, force=False):
         rows.append([ev["id"], g.get("game_id", ""), ev["date"], et.strftime("%a %m-%d %H:%M"), pt.strftime("%H:%M"),
                      away, home, arec, hrec, c.get("venue", {}).get("fullName", ""), "indoor" if c.get("venue", {}).get("indoor") else g.get("roof", ""),
                      "1" if c.get("neutralSite") else "",
-                     wx.get("displayValue", ""), wx.get("temperature", ""),
+                     _wx_text(wx), wx.get("temperature", ""),
                      "" if spread_home is None else spread_home, odds.get("overUnder", ""), ml_a or "", ml_h or "", (odds.get("provider") or {}).get("name", ""),
                      g.get("spread_line", ""), g.get("total_line", ""), g.get("away_rest", ""), g.get("home_rest", ""),
                      g.get("away_qb_name", ""), g.get("home_qb_name", ""), g.get("div_game", ""),
@@ -1788,7 +1798,7 @@ def ph_digest(week, force=False):
         hist = [x for x in rd(os.path.join(wd, "line_history.csv")) if x["game"] == f"{a}@{h}"]
         if len(hist) >= 2 and (hist[0]["spread_home"] != hist[-1]["spread_home"] or hist[0]["total"] != hist[-1]["total"]):
             L.append(f'- 라인 이동: 스프레드(홈) {hist[0]["spread_home"]} → {hist[-1]["spread_home"]} · 총점 {hist[0]["total"]} → {hist[-1]["total"]} ({hist[0]["pulled_at"]} → {hist[-1]["pulled_at"]}) — 정보(뉴스 반영), 방향 근거 아님')
-        wx = f'{g["weather"]} {g["temp_f"]}°F' if g["weather"] else "예보 없음"
+        wx = f'{g["weather"]} {g["temp_f"]}°F' if g["weather"] else (f'{g["temp_f"]}°F(날씨 문구 없음)' if g.get("temp_f") else "예보 없음")
         L.append(f'- 맥락(값만 — N5): 휴식 {a} {g["away_rest"] or "?"}일 / {h} {g["home_rest"] or "?"}일 · 날씨 {wx} · 지붕 {g["roof"] or "?"}'
                  + (" · ⚠️ 목요일 경기(짧은 휴식)" if any(str(x) == "4" for x in (g["away_rest"], g["home_rest"])) else ""))
         risks = []
