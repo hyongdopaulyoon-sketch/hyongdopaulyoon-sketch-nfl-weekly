@@ -2,7 +2,7 @@
 "LV@DEN": {
 "spread_home": "-10.5",
 "total": "40.5",
-"ml": "+444/-596",
+"ml": "+445/-597",
 "qb": {
 "LV": "Fernando Mendoza",
 "DEN": "Bo Nix"
@@ -62,7 +62,7 @@
 "NO@CHI": {
 "spread_home": "-11.5",
 "total": "47.5",
-"ml": "+490/-680",
+"ml": "+486/-670",
 "qb": {
 "NO": "Tyler Shough",
 "CHI": "Caleb Williams"
@@ -159,6 +159,8 @@
 "Jared Wiley",
 "Jaylon Moore",
 "Kenneth Walker III",
+"Omarr Norman-Lott",
+"Peter Woods",
 "Trey Smith"
 ]
 }
@@ -166,7 +168,7 @@
 "BAL@CAR": {
 "spread_home": "-2.5",
 "total": "44.5",
-"ml": "+122/-144",
+"ml": "+120/-142",
 "qb": {
 "BAL": "Jacoby Brissett",
 "CAR": "Bryce Young"
@@ -213,7 +215,7 @@
 "MIA@BUF": {
 "spread_home": "-16.5",
 "total": "45.5",
-"ml": "+930/-1680",
+"ml": "+1000/-1900",
 "qb": {
 "MIA": "Kyle McCord",
 "BUF": "Josh Allen"
@@ -221,7 +223,9 @@
 "out": {
 "MIA": [
 "Bradley Pinion",
+"Dante Trader Jr.",
 "Jared Wayne",
+"Jaylin Simpson",
 "Jordan Phillips",
 "Malik Willis",
 "Zach Sieler",
@@ -230,8 +234,10 @@
 "BUF": [
 "Ar'maj Reed-Adams",
 "Christian Benford",
+"Dalton Kincaid",
 "Dorian Williams",
-"Josh Palmer"
+"Josh Palmer",
+"T.J. Sanders"
 ]
 }
 },
@@ -252,6 +258,7 @@
 ],
 "PHI": [
 "Dontayvion Wicks",
+"Smael Mondon Jr.",
 "Zack Baun"
 ]
 }
@@ -272,6 +279,8 @@
 "DET": [
 "Aidan Hutchinson",
 "Cade Mays",
+"D.J. Reed",
+"Ennis Rakestraw Jr.",
 "Jack Campbell",
 "Jimmy Rolder"
 ]
@@ -279,8 +288,8 @@
 },
 "TEN@DAL": {
 "spread_home": "-7.5",
-"total": "54.5",
-"ml": "+309/-390",
+"total": "55.5",
+"ml": "+270/-336",
 "qb": {
 "TEN": "Cam Ward",
 "DAL": "Dak Prescott"
@@ -294,6 +303,7 @@
 ],
 "DAL": [
 "DaRon Bland",
+"Jaishawn Barham",
 "Jake Ferguson",
 "Jalen Thompson",
 "Jonathan Mingo",
@@ -304,5 +314,5 @@
 ]
 }
 },
-"_stamp": "11-22 08:37"
+"_stamp": "11-22 08:48"
 }
