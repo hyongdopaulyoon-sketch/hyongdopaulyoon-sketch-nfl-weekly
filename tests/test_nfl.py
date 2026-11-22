@@ -103,6 +103,15 @@ def test_digest_header_rule_numbers():
     assert '["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES]' in src
 
 
+def test_recent_start_run_counts_back_from_latest_game(monkeypatch):
+    """2026-11-22 Paul: 교체된 QB 의 최근 연속 선발 수(NYG McCarthy 7·9·10주 = 3) — 3경기부터 새 주전(N4 감점 없음)."""
+    import nfl_pull as P
+    monkeypatch.setattr(P, "_STARTS", {"NYG": {1: "J.Dart", 2: "J.Winston", 6: "J.Winston", 7: "J.McCarthy", 9: "J.McCarthy", 10: "J.McCarthy"},
+                                       "LV": {9: "K.Cousins", 10: "F.Mendoza"}})
+    assert P._recent_start_run("NYG", "J.J. McCarthy") == 3 and P._recent_start_run("NYG", "Jameis Winston") == 0
+    assert P._recent_start_run("LV", "Fernando Mendoza") == 1 and P._recent_start_run("SF", "Anyone") == 0 and P.QB_SETTLED_RUN == 3
+
+
 def test_final_report_with_zero_designations_is_not_pending():
     """2026-11-22: 지정 0명 팀(NYG)은 같은 시각·이후 킥오프 팀에 지정이 있으면 「최종 보고 나옴」 · 더 이른 팀에만 있으면 아직 미발표."""
     import nfl_pull as P
