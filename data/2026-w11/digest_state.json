@@ -18,26 +18,6 @@
 ]
 }
 },
-"JAX@NYG": {
-"spread_home": "6.0",
-"total": "45.5",
-"ml": "-264/+218",
-"qb": {
-"JAX": "Trevor Lawrence",
-"NYG": "J.J. McCarthy"
-},
-"out": {
-"JAX": [
-"BJ Green II",
-"DaVon Hamilton",
-"Danny Striggow",
-"Robert Hainsey"
-],
-"NYG": [
-"Tyrone Tracy Jr."
-]
-}
-},
 "MIN@SF": {
 "spread_home": "-3.5",
 "total": "46.5",
@@ -117,7 +97,7 @@
 "NYJ@LAC": {
 "spread_home": "-3.0",
 "total": "43.5",
-"ml": "+150/-178",
+"ml": "+149/-178",
 "qb": {
 "NYJ": "Geno Smith",
 "LAC": "Justin Herbert"
@@ -213,6 +193,26 @@
 ]
 }
 },
+"JAX@NYG": {
+"spread_home": "6.0",
+"total": "45.5",
+"ml": "-265/+218",
+"qb": {
+"JAX": "Trevor Lawrence",
+"NYG": "J.J. McCarthy"
+},
+"out": {
+"JAX": [
+"BJ Green II",
+"DaVon Hamilton",
+"Danny Striggow",
+"Robert Hainsey"
+],
+"NYG": [
+"Tyrone Tracy Jr."
+]
+}
+},
 "MIA@BUF": {
 "spread_home": "-16.5",
 "total": "45.5",
@@ -267,7 +267,7 @@
 "TB@DET": {
 "spread_home": "-3.5",
 "total": "48.5",
-"ml": "+184/-221",
+"ml": "?/?",
 "qb": {
 "TB": "Baker Mayfield",
 "DET": "Jared Goff"
@@ -289,8 +289,8 @@
 },
 "TEN@DAL": {
 "spread_home": "-7.5",
-"total": "54.5",
-"ml": "+297/-373",
+"total": "55.5",
+"ml": "?/?",
 "qb": {
 "TEN": "Cam Ward",
 "DAL": "Dak Prescott"
@@ -315,5 +315,5 @@
 ]
 }
 },
-"_stamp": "11-22 10:04"
+"_stamp": "11-22 11:04"
 }
