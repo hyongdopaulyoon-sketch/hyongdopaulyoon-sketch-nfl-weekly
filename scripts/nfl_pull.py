@@ -1227,6 +1227,26 @@ ESPN_SUMMARY = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summa
 ESPN_INJ = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/injuries"   # 리그 전체 · 팀당 최근 25건(Active 포함) — summary 는 팀당 5건에서 잘린다(2026-11-15 실측)
 
 
+OFFICIAL_MIN_OUT = 3   # 건강 제외(Coach's Decision) 행 없이 「공식 발표」 로 보려면 킥오프 2시간 안 Out 행이 이만큼은 있어야 한다
+
+
+def _official_list(items, ko):
+    """ESPN 행들이 「당일 공식 비활성 명단」 인가. ① 킥오프 4시간 안의 「Coach's Decision」(건강 제외) 행이 하나라도 있거나 ② 킥오프 2시간 안 Out 행이 3개 이상.
+    2026-11-22(보드 제보 · 11주차 LV@DEN 12:04판): LV 는 Bowers 가 11:58 에 Q → Out 으로 바뀐 행 하나뿐인데 「공식 비활성 발표」 로 찍혀,
+    웹 명단의 건강 제외 5명(Thornton·Benson·McCollum·Johnson·Cabeldue)이 아직 안 들어온 것을 「명단 완료」 처럼 읽게 했다 — Out 한두 개만으로는 명단 도착으로 보지 않는다."""
+    def _dt(x):
+        try:
+            return datetime.strptime((x.get("date") or "")[:16], "%Y-%m-%dT%H:%M")
+        except Exception:
+            return None
+
+    def _near(x, hrs):
+        return bool(ko and _dt(x) and 0 <= (ko - _dt(x)).total_seconds() <= hrs * 3600)
+    if any(str((x.get("details") or {}).get("type") or "").startswith("Coach") and (_near(x, 4) if ko else True) for x in items):
+        return True
+    return sum(1 for x in items if _near(x, 2) and x.get("status") == "Out") >= OFFICIAL_MIN_OUT
+
+
 def _carry_ir_rows(rows, old):
     """ESPN 리그 injuries 는 팀당 최근 25건뿐이라, 당일 비활성 명단(6~7명 + Active 표시)이 들어오면 먼저 올라 있던 IR 행이 밀려 나간다
     (2026-11-22 보드 제보 · PHI 시즌 주전 QB Jalen Hurts(IR · Calf)가 07:58판 🏥 줄엔 있고 08:58판엔 없음 · 선수 표 상태 칸 「—」).
@@ -1302,8 +1322,7 @@ def ph_inactives(week, games, snap):
             def _near(x, hrs):
                 return bool(ko and _dt(x) and 0 <= (ko - _dt(x)).total_seconds() <= hrs * 3600)
             # 2026-11-15(보드 제보 · JAX): 며칠 전 날짜의 「Coach's Decision」(지난주 건강 제외가 남은 행)만으로 「공식 발표」 로 찍던 것 → 킥오프 4시간 안 것만
-            official = any(str((x.get("details") or {}).get("type") or "").startswith("Coach") and (_near(x, 4) if ko else True) for x in items) or \
-                       any(_near(x, 2) and x.get("status") == "Out" for x in items)   # 2026-11-16(수집 제보 · LAC@BAL BAL 「발표 14:57」): 킥오프 2시간 안의 Active(연습 스쿼드 승격)·Injured Reserve 행은 비활성 명단이 아니다 — Out 행만 공식 발표로
+            official = _official_list(items, ko)   # 2026-11-16: 킥오프 2시간 안의 Active·Injured Reserve 행은 명단이 아니다(Out 행만) · 2026-11-22: Out 한두 개만으로는 명단 도착으로 보지 않는다(_official_list)
             for x in items:
                 a_ = x.get("athlete") or {}
                 nm = a_.get("displayName", ""); pos = (a_.get("position") or {}).get("abbreviation", "")

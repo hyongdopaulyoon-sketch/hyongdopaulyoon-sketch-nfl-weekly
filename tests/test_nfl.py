@@ -103,6 +103,19 @@ def test_digest_header_rule_numbers():
     assert '["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES]' in src
 
 
+def test_official_list_needs_scratches_or_three_outs():
+    """2026-11-22: 킥오프 직전 Out 한 줄(LV Bowers Q → Out)만으로는 「공식 비활성 명단 도착」 이 아니다 · 건강 제외 행이 있거나 Out 3개+ 면 도착."""
+    import nfl_pull as P
+    from datetime import datetime
+    ko = datetime(2026, 11, 22, 21, 5)
+    out = lambda hm, typ="Ankle": {"status": "Out", "date": f"2026-11-22T{hm}", "details": {"type": typ}}
+    assert P._official_list([out("19:58"), {"status": "Active", "date": "2026-11-22T20:00", "details": {}}], ko) is False
+    assert P._official_list([out("19:58"), out("19:40"), out("19:41")], ko) is True
+    assert P._official_list([out("19:40", "Coach's Decision")], ko) is True
+    assert P._official_list([out("10:00", "Coach's Decision"), out("19:58")], ko) is False      # 11시간 전 건강 제외 행은 지난 것
+    assert P._official_list([{"status": "Out", "date": "2026-11-16T19:40", "details": {"type": "Coach's Decision"}}], ko) is False
+
+
 def test_recent_start_run_counts_back_from_latest_game(monkeypatch):
     """2026-11-22 Paul: 교체된 QB 의 최근 연속 선발 수(NYG McCarthy 7·9·10주 = 3) — 3경기부터 새 주전(N4 감점 없음)."""
     import nfl_pull as P
