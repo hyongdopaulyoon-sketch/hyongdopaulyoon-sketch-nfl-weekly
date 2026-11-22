@@ -1191,6 +1191,28 @@ ESPN_SUMMARY = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summa
 ESPN_INJ = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/injuries"   # 리그 전체 · 팀당 최근 25건(Active 포함) — summary 는 팀당 5건에서 잘린다(2026-11-15 실측)
 
 
+def _carry_ir_rows(rows, old):
+    """ESPN 리그 injuries 는 팀당 최근 25건뿐이라, 당일 비활성 명단(6~7명 + Active 표시)이 들어오면 먼저 올라 있던 IR 행이 밀려 나간다
+    (2026-11-22 보드 제보 · PHI 시즌 주전 QB Jalen Hurts(IR · Calf)가 07:58판 🏥 줄엔 있고 08:58판엔 없음 · 선수 표 상태 칸 「—」).
+    앞 판 inactives.csv 에 IR Out 으로 있던 선수가 이번에 그 팀 행 어디에도 없으면 그대로 이어 붙인다(IR 은 경기 당일 풀리지 않는다 · 이번에 Active 등으로 다시 나온 선수는 새 행이 이긴다).
+    rows = 이번 판 행 리스트(리스트의 리스트) · old = 앞 판 dict 행들. 붙인 수를 돌려준다."""
+    have = {(r[0], r[1], _norm_name(r[2])) for r in rows}
+    off = {}
+    for r in rows:
+        off[(r[0], r[1])] = max(off.get((r[0], r[1]), 0), int(r[8] or 0))
+    n = 0
+    for o in old:
+        k = (o.get("game"), o.get("team"))
+        if k not in off or o.get("status") != "Out" or not str(o.get("reason") or "").startswith("IR"):
+            continue
+        if (k[0], k[1], _norm_name(o.get("player") or "")) in have:
+            continue
+        rows.append([o["game"], o["team"], o["player"], o.get("pos", ""), "Out", o.get("reason", ""), o.get("detail", ""), o.get("announced_utc", ""),
+                     off[k], int(o.get("star") or 0), o.get("snap_pct", "")])
+        have.add((k[0], k[1], _norm_name(o["player"]))); n += 1
+    return n
+
+
 def ph_inactives(week, games, snap):
     """ESPN summary 의 injuries → data/2026-wNN/inactives.csv (2026-10-15 Paul 「발행세션 말고 여기서 수집」).
     킥오프 90분 전 공식 비활성 명단이 type 「Coach's Decision」·발표 시각과 함께 온다(그 전엔 주간 보고 Out 만). 매 실행 새로 받는다."""
@@ -1267,6 +1289,12 @@ def ph_inactives(week, games, snap):
                     r_[7] = o_
     except Exception as e:
         print(f"  inactives 발표 시각 보존 실패({type(e).__name__})")
+    try:
+        _nc = _carry_ir_rows(rows, rd(os.path.join(wd, "inactives.csv")))
+        if _nc:
+            print(f"  inactives: ESPN 25건 밖으로 밀린 IR {_nc}명 앞 판에서 이어 붙임")
+    except Exception as e:
+        print(f"  inactives IR 이어 붙이기 실패({type(e).__name__})")
     wcsv(os.path.join(wd, "inactives.csv"), ["game", "team", "player", "pos", "status", "reason", "detail", "announced_utc", "official", "star", "snap_pct"], rows)
     try:
         _overlay_official_out(wd)

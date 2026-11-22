@@ -103,6 +103,20 @@ def test_digest_header_rule_numbers():
     assert '["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES]' in src
 
 
+def test_carry_ir_rows_keeps_ir_pushed_out_of_espn_list():
+    """2026-11-22: ESPN 25건 밖으로 밀린 IR 선수(PHI Hurts)는 앞 판 행을 이어 붙인다 · 이번 판에 다시 나온 선수·IR 아닌 Out·이번 판에 행이 없는 팀은 건드리지 않는다."""
+    import nfl_pull as P
+    rows = [["PIT@PHI", "PHI", "Cole Payton", "QB", "Out", "Coach's Decision", "", "2026-11-22T16:38", 1, 0, ""],
+            ["PIT@PHI", "PHI", "Will Shipley", "RB", "Active", "", "", "2026-11-22T16:41", 1, 0, ""]]
+    old = [{"game": "PIT@PHI", "team": "PHI", "player": "Jalen Hurts", "pos": "QB", "status": "Out", "reason": "IR · Calf", "detail": "", "announced_utc": "2026-10-20T18:00", "official": "0", "star": "0", "snap_pct": ""},
+           {"game": "PIT@PHI", "team": "PHI", "player": "Will Shipley", "pos": "RB", "status": "Out", "reason": "IR · Knee", "detail": "", "announced_utc": "2026-10-01T18:00", "official": "0", "star": "0", "snap_pct": ""},
+           {"game": "PIT@PHI", "team": "PHI", "player": "Old Guy", "pos": "LB", "status": "Out", "reason": "Ankle", "detail": "", "announced_utc": "2026-11-20T18:00", "official": "0", "star": "0", "snap_pct": ""},
+           {"game": "MIN@SF", "team": "SF", "player": "Far Away", "pos": "WR", "status": "Out", "reason": "IR · Knee", "detail": "", "announced_utc": "2026-11-01T18:00", "official": "0", "star": "0", "snap_pct": ""}]
+    assert P._carry_ir_rows(rows, old) == 1
+    assert rows[-1][:6] == ["PIT@PHI", "PHI", "Jalen Hurts", "QB", "Out", "IR · Calf"] and rows[-1][8] == 1 and len(rows) == 3
+    assert P._carry_ir_rows(rows, old) == 0
+
+
 def test_wx_text_picks_the_worded_field():
     """2026-11-22: ESPN 이 날씨 문구와 조건 번호를 뒤바꿔 보내도(「1」/「Sunny」) 글자 있는 쪽을 쓴다 · 둘 다 숫자면 빈칸."""
     import nfl_pull as P
