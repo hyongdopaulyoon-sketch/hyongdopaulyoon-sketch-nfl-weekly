@@ -2,7 +2,7 @@
 "LV@DEN": {
 "spread_home": "-10.5",
 "total": "40.5",
-"ml": "+444/-596",
+"ml": "+438/-586",
 "qb": {
 "LV": "Fernando Mendoza",
 "DEN": "Bo Nix"
@@ -13,6 +13,7 @@
 "Tonka Hemingway"
 ],
 "DEN": [
+"Brandon Jones",
 "Caleb Lohner",
 "Eyioma Uwazurike",
 "RJ Harvey"
@@ -22,7 +23,7 @@
 "MIN@SF": {
 "spread_home": "-3.5",
 "total": "46.5",
-"ml": "+162/-194",
+"ml": "+159/-190",
 "qb": {
 "MIN": "Kirk Cousins",
 "SF": "Brock Purdy"
@@ -98,7 +99,7 @@
 "NYJ@LAC": {
 "spread_home": "-3.0",
 "total": "43.5",
-"ml": "+151/-179",
+"ml": "+152/-181",
 "qb": {
 "NYJ": "Geno Smith",
 "LAC": "Justin Herbert"
@@ -200,7 +201,7 @@
 "JAX@NYG": {
 "spread_home": "6.0",
 "total": "45.5",
-"ml": "-265/+218",
+"ml": "-269/+221",
 "qb": {
 "JAX": "Trevor Lawrence",
 "NYG": "J.J. McCarthy"
@@ -320,5 +321,5 @@
 ]
 }
 },
-"_stamp": "11-22 12:04"
+"_stamp": "11-22 12:22"
 }
