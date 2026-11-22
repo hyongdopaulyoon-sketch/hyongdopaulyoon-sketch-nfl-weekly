@@ -2,7 +2,7 @@
 "LV@DEN": {
 "spread_home": "-10.5",
 "total": "40.5",
-"ml": "+469/-640",
+"ml": "+444/-596",
 "qb": {
 "LV": "Fernando Mendoza",
 "DEN": "Bo Nix"
@@ -62,7 +62,7 @@
 "NO@CHI": {
 "spread_home": "-11.5",
 "total": "47.5",
-"ml": "+475/-650",
+"ml": "+490/-680",
 "qb": {
 "NO": "Tyler Shough",
 "CHI": "Caleb Williams"
@@ -115,8 +115,8 @@
 },
 "NYJ@LAC": {
 "spread_home": "-3.0",
-"total": "42.5",
-"ml": "+145/-173",
+"total": "43.5",
+"ml": "+146/-173",
 "qb": {
 "NYJ": "Geno Smith",
 "LAC": "Justin Herbert"
@@ -138,7 +138,7 @@
 "ARI@KC": {
 "spread_home": "-15.5",
 "total": "40.5",
-"ml": "+850/-1440",
+"ml": "+860/-1460",
 "qb": {
 "ARI": "Josh Johnson",
 "KC": "Patrick Mahomes"
@@ -160,6 +160,30 @@
 "Jaylon Moore",
 "Kenneth Walker III",
 "Trey Smith"
+]
+}
+},
+"BAL@CAR": {
+"spread_home": "-2.5",
+"total": "44.5",
+"ml": "+122/-144",
+"qb": {
+"BAL": "Jacoby Brissett",
+"CAR": "Bryce Young"
+},
+"out": {
+"BAL": [
+"Jaylinn Hawkins",
+"Lamar Jackson",
+"Marlon Humphrey",
+"Nnamdi Madubuike",
+"Tyler Huntley"
+],
+"CAR": [
+"Bobby Okereke",
+"Brady Christensen",
+"Isaiah Simmons",
+"Jonathon Brooks"
 ]
 }
 },
@@ -186,34 +210,10 @@
 ]
 }
 },
-"BAL@CAR": {
-"spread_home": "-3.0",
-"total": "44.5",
-"ml": "+123/-145",
-"qb": {
-"BAL": "Jacoby Brissett",
-"CAR": "Bryce Young"
-},
-"out": {
-"BAL": [
-"Jaylinn Hawkins",
-"Lamar Jackson",
-"Marlon Humphrey",
-"Nnamdi Madubuike",
-"Tyler Huntley"
-],
-"CAR": [
-"Bobby Okereke",
-"Brady Christensen",
-"Isaiah Simmons",
-"Jonathon Brooks"
-]
-}
-},
 "MIA@BUF": {
 "spread_home": "-16.5",
-"total": "44.5",
-"ml": "+890/-1560",
+"total": "45.5",
+"ml": "+930/-1680",
 "qb": {
 "MIA": "Kyle McCord",
 "BUF": "Josh Allen"
@@ -238,7 +238,7 @@
 "PIT@PHI": {
 "spread_home": "3.5",
 "total": "37.5",
-"ml": "-200/+168",
+"ml": "-199/+166",
 "qb": {
 "PIT": "Aaron Rodgers",
 "PHI": "Joe Milton III"
@@ -259,7 +259,7 @@
 "TB@DET": {
 "spread_home": "-3.5",
 "total": "48.5",
-"ml": "+183/-219",
+"ml": "+183/-220",
 "qb": {
 "TB": "Baker Mayfield",
 "DET": "Jared Goff"
@@ -280,7 +280,7 @@
 "TEN@DAL": {
 "spread_home": "-7.5",
 "total": "54.5",
-"ml": "+310/-391",
+"ml": "+309/-390",
 "qb": {
 "TEN": "Cam Ward",
 "DAL": "Dak Prescott"
@@ -304,5 +304,5 @@
 ]
 }
 },
-"_stamp": "11-22 07:58"
+"_stamp": "11-22 08:37"
 }
