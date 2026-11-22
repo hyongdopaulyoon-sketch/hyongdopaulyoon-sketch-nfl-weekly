@@ -151,6 +151,17 @@ table.cmp tr.open>td{background:var(--soft)}table.cmp tr.open>td:first-child{box
 .better{color:var(--ok);font-weight:800}.worse{color:var(--bad);font-weight:800}.pkw{color:var(--acc2);font-weight:700}
 .hext .hsub{color:var(--muted);font-size:.76rem}
 .hcap{margin:6px 0 0;color:var(--muted);font-size:.76rem}
+.bt{overflow-x:auto;margin:4px 0 8px}
+.bt table{border-collapse:collapse;width:100%;font-size:.84rem}
+.bt th,.bt td{border-bottom:1px solid var(--line);padding:4px 8px;text-align:left;vertical-align:top}
+.bt th{font-size:.76rem;color:var(--muted);font-weight:600}
+.bt td.k{color:var(--muted);font-weight:600;white-space:nowrap}
+.bt .sub2{display:block;color:var(--muted);font-size:.76rem}
+.bt2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:10px;align-items:start}
+.bt2>div{min-width:0}
+.bth{font-size:.82rem;font-weight:700;margin:8px 0 2px}
+.none1{font-size:.8rem;color:var(--muted);margin:4px 0}
+.rnote{font-size:.8rem;color:var(--muted);margin:2px 0 6px}
 """
 
 # 표 머리 클릭 정렬(숫자 열 첫 클릭 큰 값부터 · 경기·시간 열은 킥오프 순) + 줄·카드·「보기」 클릭 → 그 경기 발행문 펼침·스크롤
@@ -475,6 +486,7 @@ def md_html(txt, hl=None, teams=None):
     맞대결 표는 우리 픽 팀 마감 ML 열 + 7경기+ 는 반씩 두 칸."""
     def inline(s):
         s = esc(s)
+        s = unfold_codes(s)
         s = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", s)
         return re.sub(r"\[([^\]]+)\]\((https?://[^)\s]+)\)", r'<a href="\2" target="_blank" rel="noopener">\1</a>', s)
     out, tbl, vs = [], [], []
@@ -539,6 +551,7 @@ def md_html(txt, hl=None, teams=None):
             return f'<div class="li rich"{style}>{rich(s_)}</div>'
         return f'<div class="li"{style}>• {deco(inline(s_), hl)}</div>'
     for ln in txt.splitlines():
+        ln = fold_codes(ln)
         if ln.lstrip().startswith("|"):
             flush_vs(); tbl.append(ln); continue
         flush()
@@ -1267,6 +1280,207 @@ ol.list .go {{ margin-left:auto; color:var(--acc); font-size:.84rem; }}
 _DIG_CACHE = {}
 
 
+# 11/21 밤 Paul 「nfl 보드도 똑같이 적용해줘」(NBA 「이런 내용들 정리해서 깔끔하게 보드에」) — 11주차~ 글 덩어리 → 표 ·
+# 같은 설명은 경기마다 반복하지 않고 범례에 한 번 · 「해당 없음」 은 한 줄로 · 표시만(예측·★·판단·기록 무변경)
+NEWTBL = {"on": False}
+CODE_GLOSS = {}   # 규칙 코드 → 풀이(이 보드 발행문에 처음 나온 것) — 범례 접는 설명
+_CODE_OPEN = re.compile(r"\(((?:A|N|B)\d{1,2})\s+—\s+")
+_PH0, _PH1, _PH2 = "\ue000", "\ue001", "\ue002"
+
+
+def fold_codes(s_):
+    """「(N4 — 긴 풀이 · 지금 성적 올해 15-5)」 → 「(N4 · 지금 성적 올해 15-5)」 — 풀이는 점선 낱말(마우스·손가락) + 범례에 한 번."""
+    if not NEWTBL["on"] or "—" not in s_:
+        return s_
+    out_, i = [], 0
+    for m in _CODE_OPEN.finditer(s_):
+        if m.start() < i:
+            continue
+        depth, j = 1, m.end()
+        while j < len(s_) and depth:
+            if s_[j] == "(":
+                depth += 1
+            elif s_[j] == ")":
+                depth -= 1
+            j += 1
+        if depth:
+            break
+        parts = _top_split(s_[m.end():j - 1])
+        keep = [x.strip() for x in parts if re.match(r"\s*(?:지금 성적|올해 \d)", x)]
+        gl = " · ".join(x.strip() for x in parts if x.strip() not in keep)
+        if not gl:
+            continue
+        CODE_GLOSS.setdefault(m.group(1), gl)
+        out_.append(s_[i:m.start()] + "(" + _PH0 + m.group(1) + _PH1 + gl + _PH2 + "".join(" · " + x for x in keep) + ")")
+        i = j
+    out_.append(s_[i:])
+    return "".join(out_)
+
+
+def unfold_codes(h_):
+    """esc 된 글의 자리표 → <abbr class="term" title="풀이">코드</abbr>."""
+    return re.sub(_PH0 + "(.*?)" + _PH1 + "(.*?)" + _PH2, lambda m: f'<abbr class="term" title="{m.group(2)}">{m.group(1)}</abbr>', h_) if _PH0 in h_ else h_
+
+
+_NONE_LN = re.compile(r"^-\s+(?:\*\*)?([^:：*]{1,20}?)(?:\*\*)?\s*[:：]\s*(.*)$")
+
+
+def tidy_body(b):
+    """발행문 경기 절(보드 표시용): 「- 팀별 기록:」「- 스프레드 픽:」 줄은 펼침 맨 위 표와 같은 값이라 뺀다 · 「- X: 없음」 줄은 모아 「- 해당 없음:」 한 줄(판단 줄 뒤)."""
+    if not NEWTBL["on"]:
+        return b
+    out_, none_ = [], []
+    for ln in b.splitlines():
+        m = _NONE_LN.match(ln)
+        if m:
+            lab, val = m.group(1).strip(), m.group(2).strip()
+            if lab in ("팀별 기록", "스프레드 픽"):
+                continue
+            if len(val) <= 40 and re.search(r"없음[.)]?$|^없음", val):
+                extra = val.replace(lab, "").replace("없음", "").strip(" .·()")
+                none_.append(lab + (f"({extra})" if extra else ""))
+                continue
+        out_.append(ln)
+    if none_:
+        k = next((i for i, x in enumerate(out_) if re.match(r"^-\s+(?:\*\*)?판단", x)), -1)
+        out_.insert(k + 1, "- 해당 없음: " + " · ".join(none_))
+    return "\n".join(out_)
+
+
+_ROSL = re.compile(r"^\s*[-*]\s+([A-Z]{2,3})\s+((?:공식\s+)?비활성(?:·Out)?(?:\([^)]*\))?|Out|Doubtful|Questionable|Q|IR)\s*:\s+(.+)$")
+_ROS_SEG = re.compile(r"(?:^|(?<=\.)\s+)((?:공식\s+)?비활성(?:·Out)?(?:\([^)]*\))?|Out|Doubtful|Questionable|Q|IR)\s*:\s+")
+_ITEM = re.compile(r"^(★)?\s*([^()]+?)\s*\((.+)\)\.?$")
+
+
+def roster_parse(ln, teams):
+    """「  - MIA Out: ★A(QB · IR · 스냅 100%) · B(P · Groin). Doubtful: …」 → (팀, [행], [메모 문장]) · 못 읽으면 None."""
+    m = _ROSL.match(ln)
+    if not m or m.group(1) not in teams:
+        return None
+    t, body = m.group(1), m.group(2) + ": " + m.group(3)
+    segs = list(_ROS_SEG.finditer(body))
+    rows, notes = [], []
+    for i, sm in enumerate(segs):
+        seg = body[sm.end():segs[i + 1].start() if i + 1 < len(segs) else len(body)].strip()
+        sts = sm.group(1)
+        ss = _sentences(seg)
+        if not ss:
+            continue
+        for x in _top_split(ss[0].rstrip(".")):
+            mi = _ITEM.match(x.strip())
+            if not mi:
+                notes.append(x.strip()); continue
+            toks = [y.strip() for y in _top_split(mi.group(3)) if y.strip()]
+            star = bool(mi.group(1)) or any(y.startswith("★스냅") for y in toks)
+            pos = toks.pop(0) if toks and re.fullmatch(r"[A-Z]{1,4}(?:[·/][A-Z]{1,4})?", toks[0]) else ""
+            st_, snap, memo = sts, "", []
+            for y in toks:
+                if y == "IR":
+                    st_ += " · IR"
+                elif re.fullmatch(r"★?스냅 \d+%", y):
+                    snap = y.lstrip("★").replace("스냅 ", "")
+                else:
+                    memo.append(y)
+            rows.append((star, mi.group(2).strip(), pos, st_, snap, " · ".join(memo)))
+        notes += [y for y in ss[1:] if y.strip()]
+    return (t, rows, notes) if rows else None
+
+
+def roster_tables(runs, A, H, pk):
+    """명단 줄 묶음 → 팀별 표(원정 왼쪽 · 홈 오른쪽 · 주전(★) 먼저). 주전 결장(Out·비활성 ★)이 더 많은 쪽 머리 빨강 · 예측 승자 파랑."""
+    by_t = {A: ([], []), H: ([], [])}
+    for t, rows, notes in runs:
+        by_t[t][0].extend(rows); by_t[t][1].extend(notes)
+    so = {t: sum(1 for r in by_t[t][0] if r[0] and not re.match(r"(?:Doubtful|Questionable|Q)\b", r[3])) for t in (A, H)}
+    mx = max(so.values())
+    cells = []
+    for t in (A, H):
+        rows, notes = by_t[t]
+        if not rows and not notes:
+            continue
+        rows = sorted(rows, key=lambda r: not r[0])
+        nm_ = f'<b class="pkw">{esc(t)}</b>' if t == pk else f"<b>{esc(t)}</b>"
+        cnt = f'주전 결장 {so[t]}'
+        cnt = f'<b class="worse">{cnt}</b>' if so[t] == mx and mx and so[A] != so[H] else cnt
+        tb = ("".join(f'<tr><td>{"<b>★" + esc(n) + "</b>" if st else esc(n)}</td><td>{esc(p)}</td><td>{esc(s2)}</td><td class="num">{esc(sn) or "—"}</td><td>{esc(mm) or ""}</td></tr>'
+                      for st, n, p, s2, sn, mm in rows))
+        cells.append(f'<div><div class="bth">{nm_}({"원정" if t == A else "홈"}) 명단 · {cnt} <span class="muted">· {len(rows)}명</span></div>'
+                     f'<div class="bt"><table><thead><tr><th>선수</th><th>포지션</th><th>상태</th><th>스냅</th><th>사유·메모</th></tr></thead><tbody>{tb}</tbody></table></div>'
+                     + "".join(f'<div class="rnote">{esc(x)}</div>' for x in notes) + "</div>")
+    return f'<div class="bt2">{"".join(cells)}</div>' if cells else ""
+
+
+def _rec_wp(rec):
+    try:
+        n_ = [float(v) for v in str(rec).split("-")]
+        return (n_[0] + (n_[2] / 2 if len(n_) > 2 else 0)) / sum(n_) if sum(n_) else None
+    except Exception:
+        return None
+
+
+def team_state_html(week, g, pk, so, so_src, inj):
+    """펼침 맨 위 「팀 상태」 표 — 두 팀 나란히(행 = 항목 · 열 = 원정 | 홈) · 값만. 초록 = 더 좋은 값 · 빨강 = 주전 결장 많은 쪽 · 파랑 = 예측 승자."""
+    A, H = g["away"], g["home"]
+    rows = []
+
+    def better(va, vh, hi=True):
+        if va is None or vh is None or va == vh:
+            return ""
+        return A if (va > vh) == hi else H
+    rows.append(("전적", g.get("away_rec_full", "") or "—", g.get("home_rec_full", "") or "—",
+                 better(_rec_wp(g.get("away_rec")), _rec_wp(g.get("home_rec"))), "better", "전체 · 홈 경기 · 원정 경기"))
+    ra, rh = P.fnum(g.get("away_rest")), P.fnum(g.get("home_rest"))
+    if ra is not None or rh is not None:
+        rows.append(("휴식", f"{ra:g}일" if ra is not None else "—", f"{rh:g}일" if rh is not None else "—", better(ra, rh), "better", "직전 경기 뒤 날 수(일정표)"))
+
+    def last(t):
+        try:
+            r = RC.team_recent(t, week, 1)
+        except Exception:
+            r = []
+        if not r:
+            return "—"
+        x = r[-1]
+        wl = "승" if x["margin"] > 0 else "패" if x["margin"] < 0 else "무"
+        return (f'{x["week"]}주 {"홈" if x["home"] else "원정"} {x["opp"]} {x["pf"]}-{x["pa"]} {wl}({x["margin"]:+d})'
+                + (" · 그다음 주 쉬는 주" if x["week"] < week - 1 else ""))
+    rows.append(("직전 경기", last(A), last(H), "", "", "올 시즌 · 점수 = 이 팀-상대"))
+
+    def qb(t, sd):
+        x = inj.get(t, {})
+        q = x.get("expected_qb") or g.get(f"{sd}_qb", "")
+        if not q:
+            return "—", ""
+        main, flag = x.get("season_main_qb", ""), x.get("qb_flag", "")
+        same = (not main) or N._same_person(main, q) or main == q
+        txt = q + ("" if same else f" · 시즌 주전 {main}") + (" · 모델 −4.5" if flag else (" · 시즌 주전" if same and main else ""))
+        return txt, " · ".join(y for y in (flag, x.get("qb_note", "")) if y)
+    (qa, ta), (qh, th) = qb(A, "away"), qb(H, "home")
+    rows.append(("예상 선발 QB", qa, qh, "", "", "모델 −4.5 = 백업 QB 감점(N4) — 우리 모델 점수에만, 발행 확률은 시장 값" + (f" · {A}: {ta}" if ta else "") + (f" · {H}: {th}" if th else "")))
+    if so is not None:
+        n_ = {t: len(so[t]) for t in (A, H)}
+        mx = max(n_.values())
+        rows.append(("주전 결장", f"{n_[A]}명" + (": " + ", ".join(so[A]) if so[A] else ""), f"{n_[H]}명" + (": " + ", ".join(so[H]) if so[H] else ""),
+                     (A if n_[A] > n_[H] else H) if n_[A] != n_[H] and mx else "", "worse", f"확정만 · {so_src.replace('.md', '')} 기준"))
+    try:
+        tl = {t: [b_.rsplit(" ", 1) for b_ in TT.team_line(t).split(" — ", 1)[-1].split(" · ") if re.fullmatch(r".+ \d+-\d+(?:-\d+)?", b_)] for t in (A, H)}
+        labs = [k for k, _ in tl[A] if k != "전적"] + [k for k, _ in tl[H] if k != "전적" and k not in [k2 for k2, _ in tl[A]]]
+        for k in labs:
+            da, dh = dict(tl[A]).get(k, "—"), dict(tl[H]).get(k, "—")
+            rows.append((k, da, dh, "", "", "팀별 기록 — 추적기 엑셀 「팀별」 시트와 같은 값"))
+    except Exception as e_:
+        print("팀별 기록 생략:", e_, file=sys.stderr)
+
+    def cell(v, t, side, cls):
+        return f'<span class="{cls}">{esc(v)}</span>' if side == t and cls else esc(v)
+    pkc = {t: (' class="pkw"' if t == pk else "") for t in (A, H)}
+    hd = "".join(f'<th>{"원정" if t == A else "홈"} <b{pkc[t]}>{esc(t)}</b> <span class="muted">{esc(name_kr(t))}</span></th>' for t in (A, H))
+    tb = "".join(f'<tr><td class="k" title="{esc(tip)}">{esc(k)}</td><td>{cell(va, A, sd, cls)}</td><td>{cell(vh, H, sd, cls)}</td></tr>'
+                 for k, va, vh, sd, cls, tip in rows)
+    return (f'<div class="bth">팀 상태 <span class="muted">— 값만(예측 확률·★·판단 근거 아님)</span></div>'
+            f'<div class="bt"><table><thead><tr><th>항목</th>{hd}</tr></thead><tbody>{tb}</tbody></table></div>')
+
+
 def _dig_key(fname):
     """DIGEST-MMDD-HHMM.md → 정렬 키(1~5월은 +12 — 시즌이 해를 넘김)."""
     m = re.match(r"DIGEST-(\d\d)(\d\d)-(\d\d)(\d\d)\.md$", fname)
@@ -1367,6 +1581,10 @@ def main():
     wsum = PR.summary(wk_pred_rows)
     # 스프레드 픽 칸(11/15 Paul 「보드에도 스프레드 픽 칸 넣어줘 둘 다」 · 사전 등록 SP · 11주차부터) — 표 칸 + 카드 줄
     show_sp = a.week >= 11
+    NEWTBL["on"] = show_sp; CODE_GLOSS.clear(); used_codes = set()   # 11/21 밤 글 덩어리 → 표(11주차~)
+    _allp = P.rd(P.PICKS)
+    _ij = os.path.join(wd, "injuries.csv")
+    inj = {r["team"]: r for r in N.rd(_ij)} if os.path.exists(_ij) else {}
     _pk_g = [r for r in P.rd(P.PICKS) if r.get("result") in ("W", "L", "P")]
     _spg = [r for r in _pk_g if r.get("grade") == P.SP_GRADE]
     sp_rec = "-".join(str(sum(r["result"] == x for r in _spg)) for x in "WLP")
@@ -1524,6 +1742,43 @@ def main():
             items.insert(0, f'<li><span class="tag obs" title="조건부 스프레드 픽 — 기록용 · 돈 아님 · 이길 팀 예측과 다른 장부">스프레드 픽</span> '
                             + (f'<b title="{esc(sp.get("note", ""))}">{esc(sp["side"])}</b> {hit(sp_res)}' if sp else '<span class="muted">없음(걸린 조건 없음)</span>') + "</li>")
         lines = f'<ul class="lines">{"".join(items)}</ul>' if items else ""
+        if NEWTBL["on"]:   # 11/21 밤 — 주전 결장·팀별 기록 줄 → 팀 상태 표 · 관찰 목록 → 관찰 표(「해당 없음」 한 줄)
+            orows, none_ = [], []
+            if vw in ("관심", "소액 관심"):
+                _sd = re.sub(r"^\s*(?:소액\s*)?관심\s*(?:·\s*)?(?:ML\s*·\s*)?", "", pub.get("판단", ""))
+                orows.append((f'<span class="tag pub">발행</span> 판단 <b>{esc(vw)}</b>', f"<b>{esc(_sd)}</b>", "—", "발행 세션 판단", ""))
+            if sp:
+                _cm = re.match(r"(A\d+) 조건 — (.*)$", sp.get("note", ""))
+                _k = _cm.group(1) if _cm else ""
+                _why = re.sub(r"\s*·\s*\d{1,2}-\d{1,2} \d{1,2}:\d{2} PT 판$", "", _cm.group(2) if _cm else sp.get("note", ""))
+                _pl = N.ANGLE_PLAIN.get(_k)
+                used_codes.update([_k] if _pl else [])
+                orows.append((f'스프레드 픽 <span class="muted">— {esc(_k)} {esc(_pl[0].replace(" 관찰", "")) if _pl else ""}</span>',
+                              f'<b>{esc(sp["side"])}</b><span class="sub2">{esc(_why)}{(" · " + esc(N.SP_HIST[_k])) if _k in N.SP_HIST else ""}</span>',
+                              N._live_rec(_allp, lambda x: x.get("grade") == P.SP_GRADE)[0] + " · 판정 30픽", "기록용(돈 아님)", hit(sp_res)))
+            elif show_sp:
+                none_.append("스프레드 픽(걸린 조건 없음)")
+            for r in obs:
+                _why = re.sub(r"\s*·\s*\d{1,2}-\d{1,2} \d{1,2}:\d{2} PT 판$", "", r.get("note", ""))
+                if r["grade"].startswith("새 정보"):
+                    _rec, _ = N._live_rec(_allp, lambda x, g_=r["grade"]: x.get("grade") == g_)
+                    _lab = "새 정보(대조 — 판 이전 발표)" if "대조" in r["grade"] else "라인 뒤 새 정보"
+                    orows.append((esc(_lab), f'<b>{esc(r["side"])}</b><span class="sub2">{esc(_why)}</span>', _rec, "관찰 기록만", hit(result_of(r, gk))))
+                    continue
+                _ma = re.match(r"각도 관찰 (A\d+)\(", r["grade"])
+                _k = _ma.group(1) if _ma else ""
+                _pl = N.ANGLE_PLAIN.get(_k)
+                used_codes.update([_k] if _pl else [])
+                _rec, _ = N._live_rec(_allp, lambda x, k_=_k: x.get("id", "").split(":")[-1] == k_)
+                _tg = P.ANGLE_TARGET.get(_k)
+                orows.append((f'{esc(_k)} ' + (f'<abbr class="term" title="{esc(_pl[1])}">{esc(_pl[0].replace(" 관찰", ""))}</abbr>' if _pl else esc(r["grade"])),
+                              f'<b>{esc(r["side"])}</b><span class="sub2">{esc(_why)}</span>',
+                              _rec + (f" · 판정 {_tg}픽" if _tg else ""), N.ANGLE_USE.get(_k, "관찰 기록만"), hit(result_of(r, gk))))
+            obs_tbl = (('<div class="bth">관찰 각도 · 스프레드 픽 <span class="muted">— 돈 안 건 기록 · 성적은 올해</span></div><div class="bt"><table><thead><tr>'
+                        '<th>항목</th><th>이 경기 쪽·라인</th><th>지금 성적</th><th>용도</th><th>결과</th></tr></thead><tbody>'
+                        + "".join(f"<tr><td>{a1}</td><td>{a2}</td><td class=\"num\">{esc(a3)}</td><td>{esc(a4)}</td><td>{a5}</td></tr>" for a1, a2, a3, a4, a5 in orows)
+                        + "</tbody></table></div>") if orows else "") + (f'<div class="none1">해당 없음 — {esc(" · ".join(none_))}</div>' if none_ else "")
+            so_line, tt_line, lines = team_state_html(a.week, g, pick_t, so, so_src, inj), "", obs_tbl
         div = '<span class="chip">디비전</span>' if g.get("div_game") == "1" else ""
         neu = '<span class="chip">중립 구장</span>' if g.get("neutral") == "1" else ""
         # ── 주차 전체 비교표 한 줄(MLB 서열표처럼 — 머리 누르면 정렬, 줄 누르면 발행문 펼침 · 10/11 Paul · 10/16 ML 전용)
@@ -1634,22 +1889,45 @@ def main():
         def mk(x):
             return md_html(annotate_pos(x, full_, short_), hl_, (A, H, pk_))
 
+        def status_html(t):   # 11/21 밤 — 「TEAM Out: …」 명단 줄 묶음 → 팀별 표, 나머지 줄은 그대로
+            out_, buf, runs = [], [], []
+
+            def fl():
+                if runs:
+                    out_.append(roster_tables(runs, A, H, pk_)); runs.clear()
+            for ln in t.splitlines():
+                rp = roster_parse(ln, (A, H))
+                if rp:
+                    if buf:
+                        out_.append(mk("\n".join(buf))); buf.clear()
+                    runs.append(rp)
+                else:
+                    if ln.strip():
+                        fl()
+                    buf.append(ln)
+            fl()
+            if buf:
+                out_.append(mk("\n".join(buf)))
+            return "".join(out_)
+
         def boxes(b, cats=None):
             cats = pub_cats(b) if cats is None else cats
             if [c for c, _ in cats] == ["기타"]:   # 라벨 없는 글(서술형 보완)은 상자 이름 없이
                 return mk(b)
             return "".join(f'<div class="cat"><h5>{esc(c)}</h5>'
-                           f'{players_html(annotate_pos(t, full_, short_), A, H, pk_, hl_) if c == "선수" else (ref_html if c == "심판" else "") + mk(t)}</div>'
+                           f'{players_html(annotate_pos(t, full_, short_), A, H, pk_, hl_) if c == "선수" else status_html(t) if (c == "팀 상태" and NEWTBL["on"]) else (ref_html if c == "심판" else "") + mk(t)}</div>'
                            for c, t in cats)
         if d and (d["main"] or d["supp"]):
             body, mains, supp_html = "", d["main"], ""
             for l1, h1, b1 in d["supp"]:
+                b1 = tidy_body(b1)
                 # 보완 머리 「**DEN@LAC** — LAC 오펜스 라인이 더 비어요」 의 뒷말도 보인다(10/11 11:35 보완 — 경기 코드만 떼고)
                 h1r = re.sub(r"^(?:#{1,4}\s*)?(?:🏈\s*)?(?:\*\*)?[A-Z]{2,3}@[A-Z]{2,3}(?:\*\*)?\s*(?:[—·-]\s*)?", "", h1).strip()
                 supp_html += (f'<div class="cat supp"><h5>보완 — {esc(l1)}</h5>'
                               + (f'<div class="pubh">{mk(h1r)}</div>' if h1r else "") + boxes(b1) + "</div>")
             if mains:
                 l0, h0, b0 = mains[-1]
+                b0 = tidy_body(b0)
                 h0r = re.sub(r"^(?:#{1,4}\s*)?(?:🏈\s*)?(?:\*\*)?[A-Z]{2,3}\s*@\s*[A-Z]{2,3}(?:\*\*)?\s*(?:[—·-]\s*)?", "", h0).strip()
                 cats = pub_cats(b0)
                 body += (f'<div class="pubh">{esc(l0)} 발행{(" · " + esc(h0r)) if h0r else ""}</div>'
@@ -1684,6 +1962,18 @@ def main():
     star_rows = "".join(
         f'<tr><td class="star">{"★" * k}</td><td class="num">{w}-{l}</td><td class="num">{(f"{100 * w / (w + l):.0f}%") if w + l else "—"}</td><td class="num muted">{PR.STAR_HIT[k]}</td></tr>'
         for k, (w, l) in ms.get("stars", {}).items())
+    leg_new = ""
+    if NEWTBL["on"]:   # 11/21 밤 — 경기마다 반복되던 설명은 여기 한 번
+        _gl = dict(CODE_GLOSS)
+        for k in sorted(used_codes):
+            _gl.setdefault(k, N.ANGLE_PLAIN[k][0] + " — " + N.ANGLE_PLAIN[k][1])
+        leg_new = ('<div><b>펼침 맨 위 표</b> — <b>팀 상태</b> = 전적(전체 · 홈 · 원정)·휴식·직전 경기·예상 선발 QB·주전 결장·팀별 기록을 두 팀 나란히(값만 · 예측 확률·★ 근거 아님). '
+                   '주전 결장 = 시즌 스냅 60%+ 중 결장 확정(공식 비활성·Out·IR)만, 출전 불투명·미확인은 안 셈 · 킥오프 전 마지막 다이제스트 판 기준. 「모델 −4.5」 = 백업 QB 감점(우리 모델 점수에만 · 발행 확률은 시장 값). '
+                   '<b>관찰 각도 · 스프레드 픽</b> = 돈 안 건 기록 — 스프레드 픽은 조건부 · 기록용 · 사전 등록 SP · 30픽에서 판정 · 이길 팀 예측·★·ML 판단과 무관'
+                   f'(시즌 {esc(sp_rec)}(W-L-P) · {esc(sp_ov_txt)}). 발행문 명단은 팀별 표(★ = 주전 · 스냅 = 시즌 스냅 비율 · 주전 먼저), 「없음」 줄은 「해당 없음」 한 줄로 모았어요.</div>'
+                   + (('<details class="more"><summary>규칙 코드 풀이 — 발행문 괄호 속 코드(점선 밑줄)의 뜻</summary><ul>'
+                       + "".join(f"<li><b>{esc(k)}</b> — {esc(v)}</li>" for k, v in sorted(_gl.items(), key=lambda kv: (kv[0][0], int(re.sub(r'\D', '', kv[0]) or 0))))
+                       + "</ul></details>") if _gl else ""))
     page = f'''<!DOCTYPE html>
 <meta charset="utf-8"><title>NFL {a.week}주차 보드</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1780,8 +2070,9 @@ nav.weeks a{{color:var(--ink)}}nav.weeks b.cur{{color:var(--ink);text-decoration
     <div>{term("관찰", "관찰만")} = 돈 안 건 기록(라인 뒤 새 정보 · 관찰 각도 A3~ — 회색 글씨가 각도 뜻, 스프레드·총점 각도도 관찰로만) · 맞힘/틀림 = 예측·관찰 결과</div>
     <div><b>발행문 글자</b> — <b style="color:var(--acc2)">파란 굵은 팀</b> = 우리 예측 팀 · <b style="color:var(--acc)">주황 굵은 팀</b> = 상대 · <b>굵은 검정</b> = 선수(처음 나올 때 「팀 · 포지션 · 역할 · 상태」) · <b style="color:var(--muted)">회색 굵은 낱말</b> = 스탯 이름(EPA·CPOE·야드/캐리 …) · 긴 줄은 묶음·문장마다 줄을 바꾸고, 「NE 값 vs CHI 값」 줄은 비교표로 · 선수 표는 왼쪽 원정 / 오른쪽 홈, 색이 진할수록 큰 값(표 아래 풀이). 상자 순서: 결론 → 보완 → 시장 → 팀 상태 → 선수 → 팀 비교 → 심판.</div>
     {gloss_all()}
+    {leg_new}
     <div><b>색 = 누가 더 좋은가</b> — <span class="better">초록 굵은 글씨</span> = 두 팀 중 더 좋은 값(선수·수비 표 열 1등 · 합계 · 육각형 · 팀 전적 · 발행문 비교표) · <span class="worse">빨강 굵게</span> = 주전이 더 많이 빠진 쪽 · <span class="pkw">파랑 굵게</span> = 예측 승자 · 최근 10경기 막대는 위 초록 = 이긴 점수 차, 아래 빨강 = 진 점수 차.</div>
-    <div><b>표 줄을 누르면</b> 그 줄 바로 아래에 주전 결장·팀별 기록·예측·각도·발행문이 펼쳐지고, 다시 누르면 접혀요. <b>팀별 기록</b> = 올 시즌 그 팀 전적 · 우리가 그 팀을 승자로 예측했을 때 맞힘-틀림 · 상대를 승자로 예측했을 때 맞힘-틀림 · 팀 스프레드 커버 기록(마감 라인) — 추적기 엑셀 「팀별」 시트와 같은 값만, 예측 확률·★ 근거 아님. 표 머리(예측 승자·★·발행 예측 …)를 누르면 그 기준으로 정렬돼요.</div>
+    <div><b>표 줄을 누르면</b> 그 줄 바로 아래에 {"팀 상태 표·최근 10경기·육각형·예측·관찰 표·발행문" if NEWTBL["on"] else "주전 결장·팀별 기록·예측·각도·발행문"}이 펼쳐지고, 다시 누르면 접혀요. <b>팀별 기록</b> = 올 시즌 그 팀 전적 · 우리가 그 팀을 승자로 예측했을 때 맞힘-틀림 · 상대를 승자로 예측했을 때 맞힘-틀림 · 팀 스프레드 커버 기록(마감 라인) — 추적기 엑셀 「팀별」 시트와 같은 값만, 예측 확률·★ 근거 아님. 표 머리(예측 승자·★·발행 예측 …)를 누르면 그 기준으로 정렬돼요.</div>
   </section>
   {f'<section class="publist">{"".join(pub_secs)}</section>' if pub_secs else ""}
   <h2>별점별 승자 적중 — 시즌(시장 예측)</h2>
