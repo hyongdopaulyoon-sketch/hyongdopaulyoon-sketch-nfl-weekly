@@ -1,8 +1,8 @@
 {
 "LV@DEN": {
-"spread_home": "-10.5",
-"total": "40.5",
-"ml": "+438/-586",
+"spread_home": "-11.5",
+"total": "41.5",
+"ml": "?/?",
 "qb": {
 "LV": "Fernando Mendoza",
 "DEN": "Bo Nix"
@@ -99,7 +99,7 @@
 "NYJ@LAC": {
 "spread_home": "-3.0",
 "total": "43.5",
-"ml": "+152/-181",
+"ml": "?/?",
 "qb": {
 "NYJ": "Geno Smith",
 "LAC": "Justin Herbert"
@@ -201,7 +201,7 @@
 "JAX@NYG": {
 "spread_home": "6.0",
 "total": "45.5",
-"ml": "-269/+221",
+"ml": "?/?",
 "qb": {
 "JAX": "Trevor Lawrence",
 "NYG": "J.J. McCarthy"
@@ -321,5 +321,5 @@
 ]
 }
 },
-"_stamp": "11-22 12:22"
+"_stamp": "11-22 14:19"
 }
