@@ -21,7 +21,7 @@
 "MIN@SF": {
 "spread_home": "-3.0",
 "total": "46.5",
-"ml": "+141/-167",
+"ml": "+144/-170",
 "qb": {
 "MIN": "Kirk Cousins",
 "SF": "Brock Purdy"
@@ -111,7 +111,7 @@
 "total": "40.5",
 "ml": "+910/-1620",
 "qb": {
-"ARI": "Carson Beck",
+"ARI": "Josh Johnson",
 "KC": "Patrick Mahomes"
 },
 "out": {
@@ -299,5 +299,5 @@
 ]
 }
 },
-"_stamp": "11-21 19:50"
+"_stamp": "11-21 20:01"
 }
