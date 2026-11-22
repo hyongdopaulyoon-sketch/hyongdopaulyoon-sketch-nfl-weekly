@@ -2,7 +2,7 @@
 "LV@DEN": {
 "spread_home": "-10.5",
 "total": "40.5",
-"ml": "+445/-597",
+"ml": "+443/-594",
 "qb": {
 "LV": "Fernando Mendoza",
 "DEN": "Bo Nix"
@@ -74,6 +74,7 @@
 "Erik McCoy",
 "Justin Reid",
 "Martin Emerson",
+"Pete Werner",
 "Taliese Fuaga"
 ],
 "CHI": [
@@ -138,7 +139,7 @@
 "ARI@KC": {
 "spread_home": "-15.5",
 "total": "40.5",
-"ml": "+860/-1460",
+"ml": "+850/-1460",
 "qb": {
 "ARI": "Josh Johnson",
 "KC": "Patrick Mahomes"
@@ -244,7 +245,7 @@
 "PIT@PHI": {
 "spread_home": "3.5",
 "total": "37.5",
-"ml": "-199/+166",
+"ml": "-198/+166",
 "qb": {
 "PIT": "Aaron Rodgers",
 "PHI": "Joe Milton III"
@@ -266,7 +267,7 @@
 "TB@DET": {
 "spread_home": "-3.5",
 "total": "48.5",
-"ml": "+183/-220",
+"ml": "+182/-218",
 "qb": {
 "TB": "Baker Mayfield",
 "DET": "Jared Goff"
@@ -314,5 +315,5 @@
 ]
 }
 },
-"_stamp": "11-22 08:48"
+"_stamp": "11-22 08:58"
 }
