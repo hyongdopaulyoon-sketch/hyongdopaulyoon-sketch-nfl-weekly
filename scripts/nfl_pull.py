@@ -1075,6 +1075,19 @@ def _pass_matchup_lines(off_t, def_t, qb, P26, P25, F=None):
             + (f" (2025 경기당: {' · '.join(p25)})" if p25 else "") + _ftn_text(off_t, def_t, F))
 
 
+def _final_report_out(t, by, prac, games):
+    """지정(Out/Doubtful/Questionable)이 0명인 팀의 최종 보고가 이미 나왔는가. 2026-11-22(보드 제보 · 11주차 NYG 「최종 지정 미발표 — 연습 보고만」 인데
+    실제로는 금요일 최종 보고 지정 0명): nflverse 는 「아직 안 나옴」 과 「나왔는데 0명」 을 구분해 주지 않는다 — 같은 시각이나 더 늦게 킥오프하는 팀에
+    지정이 올라와 있으면 이 팀 최종 보고도 나온 것(최종 보고는 킥오프 순서대로 나온다)."""
+    if by.get(t) or not prac.get(t):
+        return False
+    ko = {}
+    for g in games:
+        ko[g["away"]] = ko[g["home"]] = g.get("kickoff_utc") or ""
+    k = ko.get(t)
+    return bool(k) and any(o != t and ko[o] >= k and by.get(o) for o in ko)
+
+
 def ph_injuries(week, force=False):
     """nflverse 부상 보고(해당 주, 없으면 최신 주) + 뎁스차트 QB1 → data/2026-wNN/injuries.csv (팀별 한 줄)"""
     wd = week_dir(week)
@@ -1167,10 +1180,11 @@ def ph_injuries(week, force=False):
         if qb_rep and ("Out" in qb_rep or "Doubtful" in qb_rep):
             flag = (flag + " · " if flag else "") + f"QB 보고 {qb_rep}" + (f"({use}주차 보고 — 잠정)" if use and int(use) != int(week) else "")
         # 최종 지정(Out/Q) 전엔 nflverse 가 연습 보고만 올린다 → 「Out 0」이 아니라 「미발표」(2026-10-01 PIT@CLE: 다이제스트 0, 실제 C·G·WR Out)
-        pending = "" if by[t] else ("미발표" if prac[t] else "")
+        _fz = _final_report_out(t, by, prac, games)
+        pending = "" if (by[t] or _fz) else ("미발표" if prac[t] else "")
         dnp = [nm(r) for r in prac[t] if r["practice_status"].startswith("Did Not")]
         lim = [nm(r) for r in prac[t] if r["practice_status"].startswith("Limited")]
-        starters = n_star([r for r in by[t] if r["report_status"] in ("Out", "Doubtful")]) if by[t] else n_star(
+        starters = n_star([r for r in by[t] if r["report_status"] in ("Out", "Doubtful")]) if (by[t] or _fz) else n_star(
             [r for r in prac[t] if r["practice_status"].startswith("Did Not")])
         starters += sum(1 for x in out if x.endswith("· IR)") and "★" in x)   # IR 간 ★주전도 결장 수에(10/11)
         qb_prac = next((f'{r["full_name"]} {"DNP" if r["practice_status"].startswith("Did Not") else "Limited"}' for r in prac[t]
@@ -1179,6 +1193,8 @@ def ph_injuries(week, force=False):
             note = (note + " · " if note else "") + f"QB 연습 {qb_prac}(최종 지정 미발표 — 잠정)"
         if sched_note:
             note = (note + " · " if note else "") + sched_note
+        if _fz:
+            note = (note + " · " if note else "") + f"최종 부상 보고 지정 0명(같은 시각·이후 킥오프 팀은 지정이 올라와 있음 — 주중 연습 DNP {len(dnp)}·Limited {len(lim)} 는 지정 없이 끝남)"
         rows.append([t, use or "", exp, d1, main_qb.get(t, ""), qb_rep, flag, note, len(out), len(dbt), len(q),
                      " · ".join(out), " · ".join(dbt), " · ".join(q), pending, len(dnp), len(lim), " · ".join(dnp), " · ".join(lim), starters, ""])
     wcsv(os.path.join(wd, "injuries.csv"), ["team", "report_week", "expected_qb", "depth_qb1", "season_main_qb", "qb_report", "qb_flag", "qb_note",

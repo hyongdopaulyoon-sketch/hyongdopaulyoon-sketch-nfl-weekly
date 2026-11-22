@@ -103,6 +103,29 @@ def test_digest_header_rule_numbers():
     assert '["## 운용 규칙(N)", ""] + [f"- {r}" for r in RULES]' in src
 
 
+def test_final_report_with_zero_designations_is_not_pending():
+    """2026-11-22: 지정 0명 팀(NYG)은 같은 시각·이후 킥오프 팀에 지정이 있으면 「최종 보고 나옴」 · 더 이른 팀에만 있으면 아직 미발표."""
+    import nfl_pull as P
+    games = [{"away": "JAX", "home": "NYG", "kickoff_utc": "2026-11-22T21:05Z"}, {"away": "MIA", "home": "BUF", "kickoff_utc": "2026-11-22T18:00Z"},
+             {"away": "CIN", "home": "WAS", "kickoff_utc": "2026-11-24T01:15Z"}]
+    prac = {"NYG": [{"x": 1}], "CIN": [{"x": 1}], "JAX": [{"x": 1}]}
+    assert P._final_report_out("NYG", {"JAX": [{"x": 1}]}, prac, games) is True
+    assert P._final_report_out("NYG", {"MIA": [{"x": 1}]}, prac, games) is False     # 더 이른 경기 팀만 지정 → 판단 못 함
+    assert P._final_report_out("CIN", {"JAX": [{"x": 1}], "MIA": [{"x": 1}]}, prac, games) is False   # 월요일 팀은 일요일 팀 지정으로 판단하지 않는다
+    assert P._final_report_out("NYG", {"NYG": [{"x": 1}], "JAX": [{"x": 1}]}, prac, games) is False and P._final_report_out("BUF", {"JAX": [{"x": 1}]}, prac, games) is False
+
+
+def test_team_table_counts_ties():
+    """2026-11-22: 무승부 경기가 팀 전적(5-3-1)과 스프레드 결과에 들어간다."""
+    import tracker_xlsx as TX
+    base = {"발행 적중": "", "발행 예측": "", "예측 승자 커버": "", "스프레드 결과": "", "_side": ""}
+    rows = [dict(base, _a="DAL", _h="NYG", **{"결과(승자)": "", "실제 마진(홈)": 0.0}, _cov=3.0),
+            dict(base, _a="NYG", _h="PHI", **{"결과(승자)": "NYG", "실제 마진(홈)": -7.0}, _cov=-4.0),
+            dict(base, _a="SF", _h="NYG", **{"결과(승자)": "", "실제 마진(홈)": ""}, _cov=None)]
+    t = {r[0]: r for r in TX.team_table(rows)}
+    assert t["NYG"][1] == "1-0-1" and t["DAL"][1] == "0-0-1" and t["PHI"][1] == "0-1" and t["NYG"][8] == "2-0" and "SF" not in t
+
+
 def test_carry_ir_rows_keeps_ir_pushed_out_of_espn_list():
     """2026-11-22: ESPN 25건 밖으로 밀린 IR 선수(PHI Hurts)는 앞 판 행을 이어 붙인다 · 이번 판에 다시 나온 선수·IR 아닌 Out·이번 판에 행이 없는 팀은 건드리지 않는다."""
     import nfl_pull as P

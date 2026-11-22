@@ -112,10 +112,11 @@ def team_table(rows):
     T = defaultdict(lambda: defaultdict(int))
     for r in rows:
         a, h, win = r["_a"], r["_h"], r["결과(승자)"]
-        if not win:
+        tie = (not win) and r.get("실제 마진(홈)") == 0   # 2026-11-22(보드 제보 · NYG 5-3 vs 팀 비교 표 5-3-1): 무승부도 전적·스프레드 결과에 센다(승자 예측 적중은 빈칸 그대로)
+        if not win and not tie:
             continue
         for t in (a, h):
-            T[t]["w" if win == t else "l"] += 1
+            T[t]["t" if tie else ("w" if win == t else "l")] += 1
         if r["발행 적중"] in ("W", "L") and r["발행 예측"] in (a, h):
             pw = r["발행 예측"]; opp = h if pw == a else a
             T[pw]["for_" + r["발행 적중"]] += 1; T[opp]["ag_" + r["발행 적중"]] += 1
@@ -136,7 +137,7 @@ def team_table(rows):
     out = []
     for t in sorted(T):
         d = T[t]; n = d["for_W"] + d["for_L"] + d["ag_W"] + d["ag_L"]
-        out.append([t, f'{d["w"]}-{d["l"]}', f'{d["for_W"]}-{d["for_L"]}', pct(d["for_W"], d["for_L"]), f'{d["ag_W"]}-{d["ag_L"]}', pct(d["ag_W"], d["ag_L"]),
+        out.append([t, f'{d["w"]}-{d["l"]}' + (f'-{d["t"]}' if d["t"] else ""), f'{d["for_W"]}-{d["for_L"]}', pct(d["for_W"], d["for_L"]), f'{d["ag_W"]}-{d["ag_L"]}', pct(d["ag_W"], d["ag_L"]),
                     f'{d["for_W"] + d["ag_W"]}-{d["for_L"] + d["ag_L"]}', pct(d["for_W"] + d["ag_W"], d["for_L"] + d["ag_L"]),
                     wlp(d, "ats"), pct(d["ats_W"], d["ats_L"]), wlp(d, "sp"), pct(d["sp_W"], d["sp_L"]), wlp(d, "spo"), pct(d["spo_W"], d["spo_L"]),
                     wlp(d, "fc"), pct(d["fc_W"], d["fc_L"]), "표본 적음" if n < 5 else ""])
