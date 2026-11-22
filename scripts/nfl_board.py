@@ -1500,11 +1500,27 @@ def team_state_html(week, g, pk, so, so_src, inj, hexg=None, poly=({}, "")):
             d = hexg.get(t) or {}
             sc, fu = d.get("scores") or {}, d.get("full") or {}
             return [(k, sc[k] - fu[k], fu[k], sc[k]) for k in fu if k in sc and sc[k] < fu[k]]
+        def _rise(t):   # 11/22 Paul 「다추천대로」 — 결장으로 오른 꼭짓점(회색 · 강조 없음)
+            d = hexg.get(t) or {}
+            sc, fu = d.get("scores") or {}, d.get("full") or {}
+            out = []
+            for k in fu:
+                if k in sc and sc[k] > fu[k]:
+                    why = "빠진 선수가 대신 뛰는 선수보다 값이 나빴음"
+                    if k == "커버리지" and d.get("rev"):
+                        nm = [re.sub(r"\(타깃당 ([\d.]+)야드 · 지금 넷 평균 ([\d.]+)\)$", r" \1야드", x_) for x_ in d["rev"]]
+                        avg = re.search(r"지금 넷 평균 ([\d.]+)", d["rev"][0])
+                        why = f"빠진 선수의 타깃당 허용 야드가 대체 선수보다 나쁨: {' · '.join(nm)}" + (f" > 지금 넷 평균 {avg.group(1)}야드" if avg else "")
+                    out.append(f"{k} {sc[k] - fu[k]:+g}({fu[k]}→{sc[k]}) — 결장으로 오름({why})")
+            return " · ".join(out)
         la, lh = _loss(A), _loss(H)
-        fmt = lambda xs: " · ".join(f"{k} {dd:+g}({f_}→{s_})" for k, dd, f_, s_ in xs) or "없음"
+        ra_, rh_ = _rise(A), _rise(H)
+        fmt = lambda xs, up: " · ".join(f"{k} {dd:+g}({f_}→{s_})" for k, dd, f_, s_ in xs) or ("내려간 것 없음" if up else "없음")
         sa_, sh_ = -sum(x[1] for x in la), -sum(x[1] for x in lh)
-        rows.append(("결장 깎임(육각형)", fmt(la), fmt(lh), (A if sa_ > sh_ else H) if sa_ != sh_ and max(sa_, sh_) > 0 else "", "worse",
-                     "육각형 꼭짓점 — 전원 가용이면 → 이번 주 뛰는 선수만(50 = 리그 평균) · 내려간 꼭짓점만(올라간 건 빠진 선수가 대신 뛰는 선수보다 약했던 경우라 뺌) · 값만"))
+        rows.append(("결장 깎임·오름(육각형)" if (ra_ or rh_) else "결장 깎임(육각형)", (fmt(la, ra_), ra_), (fmt(lh, rh_), rh_),
+                     (A if sa_ > sh_ else H) if sa_ != sh_ and max(sa_, sh_) > 0 else "", "worse",
+                     "육각형 꼭짓점 — 전원 가용이면 → 이번 주 뛰는 선수만(50 = 리그 평균) · 내려간 꼭짓점 = 깎임(많이 깎인 쪽 빨강) · "
+                     "회색 = 결장으로 오른 꼭짓점(빠진 선수가 대신 뛰는 선수보다 값이 나빴던 경우 — 「더 좋아졌다」는 뜻이 아니라 값의 한계 표시) · 값만"))
     mla, mlh = g.get("ml_away"), g.get("ml_home")
     if mla and mlh:   # ⑥ 가격 — DK ML 과 그 가격의 손익분기(비그 포함) · Polymarket 사는 가격
         be = lambda o: f"{o} · 손익분기 {N._implied(o) * 100:.1f}%" if N._implied(o) else str(o)
@@ -1526,7 +1542,9 @@ def team_state_html(week, g, pk, so, so_src, inj, hexg=None, poly=({}, "")):
         print("팀별 기록 생략:", e_, file=sys.stderr)
 
     def cell(v, t, side, cls):
-        return f'<span class="{cls}">{esc(v)}</span>' if side == t and cls else esc(v)
+        v, extra = v if isinstance(v, tuple) else (v, "")   # (본값, 회색 꼬리) — 꼬리는 강조 없음
+        main = f'<span class="{cls}">{esc(v)}</span>' if side == t and cls else esc(v)
+        return main + (f'<br><span class="muted">{esc(extra)}</span>' if extra else "")
     pkc = {t: (' class="pkw"' if t == pk else "") for t in (A, H)}
     hd = "".join(f'<th>{"원정" if t == A else "홈"} <b{pkc[t]}>{esc(t)}</b> <span class="muted">{esc(name_kr(t))}</span></th>' for t in (A, H))
     tb = "".join(f'<tr><td class="k" title="{esc(tip)}">{esc(k)}</td><td>{cell(va, A, sd, cls)}</td><td>{cell(vh, H, sd, cls)}</td></tr>'
