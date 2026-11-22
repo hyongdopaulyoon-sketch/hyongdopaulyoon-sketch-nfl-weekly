@@ -1196,7 +1196,7 @@ def ph_injuries(week, force=False):
                     # 교체된 QB 가 최근 3경기 연속 선발이면 새 주전으로 본다 — 팀 평점에 그 QB 경기가 이미 섞여 있어 −4.5 는 과하다. 주전이 결장 중이면 그대로 백업 선발(감점).
                     note = f"QB 교체 정착 — 시즌 드롭백 최다 {main_qb[t]}(결장 아님) 대신 {exp} 가 최근 {_run}경기 연속 선발 · 새 주전으로 봄 · 감점 없음"
                 else:
-                    flag = f"백업 QB 선발 — 시즌 주전 {main_qb[t]}{(' ' + _mst) if _mst else ''} 대신 예상 선발 {exp}(뎁스차트 QB1 · 올해 선발 {_n_st}경기)"
+                    flag = f"백업 QB 선발 — 시즌 주전 {main_qb[t]}{(' ' + _mst) if _mst else ''} 대신 예상 선발 {exp}(뎁스차트 QB1 · 올해 이 팀에서 선발 {_n_st}경기)"
         if qb_rep and ("Out" in qb_rep or "Doubtful" in qb_rep):
             flag = (flag + " · " if flag else "") + f"QB 보고 {qb_rep}" + (f"({use}주차 보고 — 잠정)" if use and int(use) != int(week) else "")
         # 최종 지정(Out/Q) 전엔 nflverse 가 연습 보고만 올린다 → 「Out 0」이 아니라 「미발표」(2026-10-01 PIT@CLE: 다이제스트 0, 실제 C·G·WR Out)

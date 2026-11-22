@@ -110,7 +110,7 @@ def test_sack_context_line_and_flag(monkeypatch):
     assert SC.flag(T, "T00", "T23") and not SC.flag(T, "T23", "T00") and not SC.flag(T, "T00", "T05")
     monkeypatch.setattr(SC, "season_record", lambda before_week=None: (10, 4, 1, 10, 5))
     ln = SC.digest_line("T23", "T00", 11, {}, T)
-    assert ln.startswith("- 🧱 색 맥락(값만") and "T00 10.0%(1위)" in ln and "QB23 7.6%(1위 — 색을 잘 당하는 쪽)" in ln
+    assert ln.startswith("- 🧱 색 맥락(값만") and "이번 주 경기하는 24팀 중" in ln and "올해+작년 드롭백 합 · 이번 주 선발 24명 중" in ln and "T00 10.0%(1위)" in ln and "QB23 7.6%(1위 — 색을 잘 당하는 쪽)" in ln
     assert "해당: 색 잘 당하는 QB(T23) 대 색률 상위 8 수비(T00)" in ln and "올해 수비 쪽 스프레드 10-4-1(승자 10-5)" in ln
     assert "해당:" not in SC.digest_line("T10", "T12", 11, {}, T) and SC.digest_line("X", "Y", 11, {}, T) == ""
 

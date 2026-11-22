@@ -127,7 +127,10 @@ def digest_line(a, h, wk, inj, T=None):
 
     def q_(t, v):
         return (f"{t} {v['qb']} {100 * v['qsr']:.1f}%({v['qsr_rank']}위" + (" — 색을 잘 당하는 쪽" if v["qsr_rank"] <= TOP else "") + ")") if "qsr" in v and "qsr_rank" in v else f"{t} 값 없음(드롭백 150 미만)"
-    s = (f"- 🧱 색 맥락(값만 — 방향 근거 아님 · 순위 1 = 색률 가장 높음): 수비 색률 {d_(a, va)} / {d_(h, vh)} · 선발 QB 본인 색률 {q_(a, va)} / {q_(h, vh)} · {PERSIST}")
+    nd, nq = sum(1 for v in T.values() if "dsr_rank" in v), sum(1 for v in T.values() if "qsr_rank" in v)
+    # 2026-11-22(보드 제보 · MIN@SF): 수비 표(32팀 순위)·선수 표(올해 색% · 낮을수록 위)와 기준이 달라 값·순위가 엇갈려 보였다 → 기준을 줄에 적는다(정의는 검정 그대로)
+    s = (f"- 🧱 색 맥락(값만 — 방향 근거 아님): 수비 색률(이번 주 경기하는 {nd}팀 중 · 1위 = 색을 가장 많이 냄 · 🛡️ 수비 표의 32팀 순위와 다를 수 있음) {d_(a, va)} / {d_(h, vh)} · "
+         f"선발 QB 본인 색률(올해+작년 드롭백 합 · 이번 주 선발 {nq}명 중 · 1위 = 색을 가장 많이 당함 · 선수 표의 올해 색%·순위와 기준이 다름) {q_(a, va)} / {q_(h, vh)} · {PERSIST}")
     fh, fa = flag(T, h, a), flag(T, a, h)
     if fh != fa:
         dt_, qt_ = (h, a) if fh else (a, h)
