@@ -23,7 +23,7 @@
 "MIN@SF": {
 "spread_home": "-4.5",
 "total": "44.5",
-"ml": "+171/-205",
+"ml": "+165/-197",
 "qb": {
 "MIN": "Kirk Cousins",
 "SF": "Brock Purdy"
@@ -31,12 +31,16 @@
 "out": {
 "MIN": [
 "Bo Richter",
+"Isaiah Rodgers",
+"Jay Ward",
 "Jordan Addison",
 "Kyler Murray"
 ],
 "SF": [
 "Christian Kirk",
+"Dre Greenlaw",
 "Gracen Halton",
+"Khalid Kareem",
 "Nate Hobbs"
 ]
 }
@@ -321,5 +325,5 @@
 ]
 }
 },
-"_stamp": "11-22 15:57"
+"_stamp": "11-22 16:19"
 }
