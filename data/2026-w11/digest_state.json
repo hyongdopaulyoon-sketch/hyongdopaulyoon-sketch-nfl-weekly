@@ -15,15 +15,14 @@
 "DEN": [
 "Brandon Jones",
 "Caleb Lohner",
-"Eyioma Uwazurike",
-"RJ Harvey"
+"Eyioma Uwazurike"
 ]
 }
 },
 "MIN@SF": {
 "spread_home": "-4.5",
 "total": "44.5",
-"ml": "+165/-197",
+"ml": "?/?",
 "qb": {
 "MIN": "Kirk Cousins",
 "SF": "Brock Purdy"
@@ -37,7 +36,6 @@
 "Kyler Murray"
 ],
 "SF": [
-"Christian Kirk",
 "Dre Greenlaw",
 "Gracen Halton",
 "Khalid Kareem",
@@ -56,7 +54,6 @@
 "out": {
 "NO": [
 "Asim Richards",
-"Christen Miller",
 "Erik McCoy",
 "Justin Reid",
 "Martin Emerson",
@@ -64,10 +61,8 @@
 "Taliese Fuaga"
 ],
 "CHI": [
-"Cole Kmet",
 "Kentavius Street",
-"Kyler Gordon",
-"Nephi Sewell"
+"Kyler Gordon"
 ]
 }
 },
@@ -138,10 +133,8 @@
 "Andrew Wingard",
 "Carson Beck",
 "Gardner Minshew",
-"Jeremiyah Love",
 "Jon Gaines II",
 "Jordan Burch",
-"Kendrick Bourne",
 "Michael Wilson",
 "Zachary Carter"
 ],
@@ -166,10 +159,8 @@
 "out": {
 "BAL": [
 "Jaylinn Hawkins",
-"Lamar Jackson",
 "Marlon Humphrey",
-"Nnamdi Madubuike",
-"Tyler Huntley"
+"Nnamdi Madubuike"
 ],
 "CAR": [
 "Bobby Okereke",
@@ -182,7 +173,7 @@
 "CIN@WAS": {
 "spread_home": "6.0",
 "total": "54.5",
-"ml": "-296/+241",
+"ml": "-291/+237",
 "qb": {
 "CIN": "Joe Burrow",
 "WAS": "Jayden Daniels"
@@ -192,12 +183,11 @@
 "Andrei Iosivas",
 "Cashius Howell",
 "Dalton Risner",
-"Oren Burks",
-"Swayze Bozeman"
+"Jalen Davis",
+"Oren Burks"
 ],
 "WAS": [
 "Dyami Brown",
-"Jacory Croskey-Merritt",
 "Jeremy McNichols"
 ]
 }
@@ -213,14 +203,11 @@
 "out": {
 "JAX": [
 "BJ Green II",
-"DaVon Hamilton",
 "Danny Striggow",
 "Matt Dickerson",
 "Robert Hainsey"
 ],
-"NYG": [
-"Tyrone Tracy Jr."
-]
+"NYG": []
 }
 },
 "MIA@BUF": {
@@ -247,7 +234,6 @@
 "Christian Benford",
 "Dalton Kincaid",
 "Dorian Williams",
-"Josh Palmer",
 "T.J. Sanders"
 ]
 }
@@ -291,9 +277,7 @@
 "Aidan Hutchinson",
 "Cade Mays",
 "D.J. Reed",
-"Ennis Rakestraw Jr.",
-"Jack Campbell",
-"Jimmy Rolder"
+"Ennis Rakestraw Jr."
 ]
 }
 },
@@ -310,6 +294,7 @@
 "Fernando Carmona",
 "Peter Skoronski",
 "Tyjae Spears",
+"Tyjae Spears",
 "Wan'Dale Robinson"
 ],
 "DAL": [
@@ -318,12 +303,11 @@
 "Jake Ferguson",
 "Jalen Thompson",
 "Jonathan Mingo",
-"Malachi Lawrence",
 "P.J. Locke",
 "Tyler Booker",
 "Tyler Goodson"
 ]
 }
 },
-"_stamp": "11-22 16:19"
+"_stamp": "11-23 15:14"
 }

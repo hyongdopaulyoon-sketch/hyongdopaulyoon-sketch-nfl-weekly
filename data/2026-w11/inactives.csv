@@ -1,613 +1,14 @@
 ﻿game,team,player,pos,status,reason,detail,announced_utc,official,star,snap_pct
-LV@DEN,LV,Tim Keenan III,DT,Questionable,Knee,,2026-11-22T23:22,1,0,36
-LV@DEN,LV,Adam Butler,DT,Questionable,Concussion,,2026-11-22T23:19,1,0,57
-LV@DEN,LV,Dareke Young,WR,Questionable,Undisclosed,,2026-11-22T22:53,1,0,5
-LV@DEN,LV,Michael Mayer,TE,Active,,,2026-11-22T20:14,1,1,79
-LV@DEN,LV,Dont'e Thornton Jr.,WR,Out,Coach's Decision,Not Specified,2026-11-22T20:01,1,0,
-LV@DEN,LV,Folorunso Fatukasi,DT,Active,,,2026-11-22T20:10,1,0,49
-LV@DEN,LV,Dalton Johnson,S,Out,Coach's Decision,Not Specified,2026-11-22T20:01,1,0,
-LV@DEN,LV,Matt Gay,PK,Active,,,2026-11-22T20:01,1,0,
-LV@DEN,LV,Tristin McCollum,S,Out,Coach's Decision,Not Specified,2026-11-22T20:01,1,0,
-LV@DEN,LV,Bryce Cabeldue,G,Out,Coach's Decision,Not Specified,2026-11-22T20:01,1,0,
-LV@DEN,LV,Tonka Hemingway,DT,Out,Upper Body,Stinger,2026-11-22T20:01,1,0,42
-LV@DEN,LV,Malik Benson,WR,Out,Coach's Decision,Not Specified,2026-11-22T20:01,1,0,
-LV@DEN,LV,Brock Bowers,TE,Out,Ankle,Not Specified,2026-11-22T19:58,1,1,68
-LV@DEN,LV,Carter Runyon,TE,Active,,,2026-11-22T00:13,1,0,3
-LV@DEN,LV,Ian Thomas,TE,Active,,,2026-11-20T22:00,1,0,32
-LV@DEN,LV,Trey Zuhn III,C,Active,,,2026-11-20T22:00,1,1,87
-LV@DEN,LV,Thomas Booker IV,DT,Active,,,2026-11-19T02:15,1,0,45
-LV@DEN,LV,Kwity Paye,DE,Active,,,2026-11-19T01:37,1,1,64
-LV@DEN,LV,Jeremy Chinn,S,Active,,,2026-11-18T03:34,1,1,100
-LV@DEN,LV,Quay Walker,LB,Active,,,2026-11-18T03:27,1,1,98
-LV@DEN,LV,Nakobe Dean,LB,Active,,,2026-11-18T03:16,1,1,100
-LV@DEN,LV,Maxx Crosby,DE,Active,,,2026-11-18T03:08,1,1,93
-LV@DEN,LV,Jack Bech,WR,Active,,,2026-11-18T01:46,1,0,43
-LV@DEN,LV,Jalen Nailor,WR,Active,,,2026-11-16T16:44,1,1,69
-LV@DEN,LV,Dylan Laube,RB,Active,,,2026-11-16T15:51,1,0,2
-LV@DEN,DEN,Pat Bryant,WR,Active,,,2026-11-22T23:32,1,1,68
-LV@DEN,DEN,Lil'Jordan Humphrey,WR,Out,Coach's Decision,Not Specified,2026-11-22T20:01,1,0,22
-LV@DEN,DEN,Brandon Jones,S,Out,Hamstring,Not Specified,2026-11-22T20:01,1,1,68
-LV@DEN,DEN,Sam Ehlinger,QB,Out,Coach's Decision,Not Specified,2026-11-22T20:01,1,0,
-LV@DEN,DEN,Gavin Ortega,OT,Out,Coach's Decision,Not Specified,2026-11-22T20:01,1,0,
-LV@DEN,DEN,Kage Casey,OT,Out,Coach's Decision,Not Specified,2026-11-22T20:01,1,0,
-LV@DEN,DEN,Jordan Jackson,DT,Out,Coach's Decision,Not Specified,2026-11-22T20:01,1,0,20
-LV@DEN,DEN,Dallen Bentley,TE,Out,Coach's Decision,Not Specified,2026-11-22T20:01,1,0,
-LV@DEN,DEN,Cody Schrader,RB,Active,,,2026-11-22T05:01,1,0,3
-LV@DEN,DEN,Taylor Rapp,S,Active,,,2026-11-22T00:55,1,1,71
-LV@DEN,DEN,Talanoa Hufanga,S,Active,,,2026-11-21T00:34,1,0,
-LV@DEN,DEN,Caleb Lohner,TE,Out,IR · Foot,Surgery,2026-11-21T00:17,1,0,
-LV@DEN,DEN,Riley Moss,CB,Active,,,2026-11-21T00:13,1,1,75
-LV@DEN,DEN,Jaylen Waddle,WR,Active,,,2026-11-20T21:57,1,0,40
-LV@DEN,DEN,Kris Abrams-Draine,CB,Active,,,2026-11-20T02:45,1,0,58
-LV@DEN,DEN,Adam Prentice,FB,Active,,,2026-11-19T01:27,1,0,19
-LV@DEN,DEN,Alex Singleton,LB,Active,,,2026-11-12T03:09,1,1,100
-LV@DEN,DEN,Adam Trautman,TE,Active,,,2026-11-11T02:55,1,0,57
-LV@DEN,DEN,Marvin Mims Jr.,WR,Active,,,2026-11-11T02:45,1,0,27
-LV@DEN,DEN,Troy Franklin,WR,Active,,,2026-11-11T02:37,1,0,57
-LV@DEN,DEN,Evan Engram,TE,Active,,,2026-11-10T03:26,1,0,46
-LV@DEN,DEN,Wil Lutz,PK,Active,,,2026-11-10T02:43,1,0,
-LV@DEN,DEN,J.K. Dobbins,RB,Active,,,2026-11-09T01:31,1,0,20
-LV@DEN,DEN,Courtland Sutton,WR,Active,,,2026-11-08T23:55,1,1,79
-LV@DEN,DEN,Jonah Coleman,RB,Active,,,2026-11-08T23:51,1,1,64
-JAX@NYG,JAX,Walker Little,OT,Questionable,Knee,,2026-11-23T00:13,1,1,100
-JAX@NYG,JAX,Jarrian Jones,CB,Questionable,Chest,,2026-11-22T23:17,1,0,45
-JAX@NYG,JAX,Matt Dickerson,DE,Out,Neck,Not Specified,2026-11-22T19:58,1,0,37
-JAX@NYG,JAX,CJ Williams,WR,Out,Coach's Decision,Not Specified,2026-11-22T19:58,1,0,
-JAX@NYG,JAX,Danny Striggow,DE,Out,Concussion,Concussion,2026-11-22T19:58,1,0,27
-JAX@NYG,JAX,Albert Regis,DT,Out,Coach's Decision,Not Specified,2026-11-22T19:58,1,0,39
-JAX@NYG,JAX,Robert Hainsey,C,Out,Knee,Sprain,2026-11-22T19:58,1,1,79
-JAX@NYG,JAX,Jalen Huskey,S,Out,Coach's Decision,Not Specified,2026-11-22T19:58,1,0,24
-JAX@NYG,JAX,Jordan Davis,DT,Active,,,2026-11-22T14:11,1,0,
-JAX@NYG,JAX,Jessie Bates III,S,Active,,,2026-11-22T14:09,1,0,
-JAX@NYG,JAX,B.J. Green II,DE,Out,IR · Forearm,Not Specified,2026-11-21T01:27,1,0,
-JAX@NYG,JAX,Travon Walker,DE,Active,,,2026-11-21T00:00,1,1,69
-JAX@NYG,JAX,Antonio Johnson,S,Active,,,2026-11-20T23:57,1,1,91
-JAX@NYG,JAX,LeQuint Allen Jr.,RB,Active,,,2026-11-20T21:37,1,0,11
-JAX@NYG,JAX,Chris Rodriguez Jr.,RB,Active,,,2026-11-20T21:35,1,0,27
-JAX@NYG,JAX,Jalen McLeod,LB,Active,,,2026-11-20T21:24,1,0,12
-JAX@NYG,JAX,Jonah Monheim,C,Active,,,2026-11-20T21:24,1,0,34
-JAX@NYG,JAX,Jakobi Meyers,WR,Active,,,2026-11-20T21:11,1,1,68
-JAX@NYG,JAX,Bhayshul Tuten,RB,Active,,,2026-11-20T17:28,1,0,52
-JAX@NYG,JAX,Foyesade Oluokun,LB,Active,,,2026-11-18T02:55,1,1,84
-JAX@NYG,JAX,Cam Little,PK,Active,,,2026-11-17T02:34,1,0,
-JAX@NYG,JAX,Travis Hunter,WR,Active,,,2026-11-17T01:33,1,1,87
-JAX@NYG,JAX,Wesley Williams,DE,Active,,,2026-11-16T19:22,1,0,
-JAX@NYG,JAX,Cam'Ron Silmon-Craig,S,Active,,,2026-11-16T16:51,1,0,
-JAX@NYG,JAX,Josh Cameron,WR,Active,,,2026-11-16T02:00,1,0,43
-JAX@NYG,JAX,Brian Thomas Jr.,WR,Active,,,2026-11-16T01:40,1,0,45
-JAX@NYG,NYG,Greg Newsome II,CB,Questionable,Ankle,Not Specified,2026-11-22T23:59,1,1,100
-JAX@NYG,NYG,Jason Pinnock,S,Out,Coach's Decision,Not Specified,2026-11-22T20:05,1,0,55
-JAX@NYG,NYG,Josh Sills,G,Out,Coach's Decision,Not Specified,2026-11-22T20:05,1,0,
-JAX@NYG,NYG,Nic Jones,CB,Out,Coach's Decision,Not Specified,2026-11-22T20:05,1,0,
-JAX@NYG,NYG,J.C. Davis,OT,Out,Coach's Decision,Not Specified,2026-11-22T20:05,1,0,1
-JAX@NYG,NYG,Greg Desrosiers Jr.,RB,Out,Coach's Decision,Not Specified,2026-11-22T20:05,1,0,
-JAX@NYG,NYG,Thomas Fidone II,TE,Out,Coach's Decision,Not Specified,2026-11-22T20:05,1,0,11
-JAX@NYG,NYG,Darius Alexander,DT,Out,Coach's Decision,Not Specified,2026-11-22T20:05,1,0,40
-JAX@NYG,NYG,Phil Mafah,RB,Active,,,2026-11-22T00:35,1,0,
-JAX@NYG,NYG,Isaiah Likely,TE,Active,,,2026-11-20T17:17,1,1,83
-JAX@NYG,NYG,Malik Harrison,LB,Active,,,2026-11-20T02:31,1,0,4
-JAX@NYG,NYG,Tyrone Tracy Jr.,RB,Out,IR · Hamstring,Strain,2026-11-18T20:16,1,0,15
-JAX@NYG,NYG,Jameis Winston,QB,Active,,,2026-11-18T16:31,1,0,12
-JAX@NYG,NYG,Xavier Gipson,WR,Active,,,2026-11-17T00:21,1,0,
-JAX@NYG,NYG,Paulson Adebo,CB,Active,,,2026-11-16T19:34,1,1,100
-JAX@NYG,NYG,CJ Okoye,DT,Active,,,2026-11-16T19:34,1,0,15
-JAX@NYG,NYG,Nikko Reed,CB,Active,,,2026-11-16T19:34,1,0,
-JAX@NYG,NYG,Micah McFadden,LB,Active,,,2026-11-14T02:59,1,1,100
-JAX@NYG,NYG,Jevon Holland,S,Active,,,2026-11-14T02:56,1,1,100
-JAX@NYG,NYG,Ar'Darius Washington,S,Active,,,2026-11-14T02:53,1,1,82
-JAX@NYG,NYG,Arvell Reese,LB,Active,,,2026-11-14T02:50,1,1,100
-JAX@NYG,NYG,Dominic Zvada,PK,Active,,,2026-11-14T01:27,1,0,
-JAX@NYG,NYG,Theo Johnson,TE,Active,,,2026-11-14T01:18,1,0,23
-JAX@NYG,NYG,Darnell Mooney,WR,Active,,,2026-11-14T01:12,1,1,60
-JAX@NYG,NYG,Devin Singletary,RB,Active,,,2026-11-13T20:40,1,0,43
-MIA@BUF,MIA,Kyle McCord,QB,Active,,,2026-11-22T23:57,1,1,100
-MIA@BUF,MIA,Ollie Gordon II,RB,Active,,,2026-11-22T23:54,1,1,75
-MIA@BUF,MIA,JuJu Brents,CB,Questionable,Shoulder,Not Specified,2026-11-22T20:53,1,0,
-MIA@BUF,MIA,Chris Bell,WR,Active,,,2026-11-22T20:01,1,1,66
-MIA@BUF,MIA,Jonah Savaiinaea,G,Active,,,2026-11-22T19:54,1,1,100
-MIA@BUF,MIA,Jaylin Simpson,S,Out,Knee,Not Specified,2026-11-22T16:40,1,0,3
-MIA@BUF,MIA,Aaron Brewer,C,Active,,,2026-11-22T17:15,1,1,100
-MIA@BUF,MIA,Darrell Baker Jr.,CB,Active,,,2026-11-22T17:11,1,0,
-MIA@BUF,MIA,Dante Trader Jr.,S,Out,Shoulder,Not Specified,2026-11-22T16:40,1,1,99
-MIA@BUF,MIA,Caedan Wallace,OT,Out,Coach's Decision,Not Specified,2026-11-22T16:40,1,0,
-MIA@BUF,MIA,Jared Wayne,WR,Out,Quadriceps,Not Specified,2026-11-22T16:40,1,0,11
-MIA@BUF,MIA,Justin Joly,TE,Out,Coach's Decision,Not Specified,2026-11-22T16:40,1,0,
-MIA@BUF,MIA,Bradley Pinion,P,Out,Groin,Not Specified,2026-11-22T16:40,1,0,
-MIA@BUF,MIA,Christian Haynes,G,Out,Coach's Decision,Not Specified,2026-11-22T16:40,1,0,
-MIA@BUF,MIA,Marcellas Dial Jr.,CB,Active,,,2026-11-22T16:40,1,0,
-MIA@BUF,MIA,Daniel Carlson,PK,Active,,,2026-11-21T19:34,1,0,
-MIA@BUF,MIA,Andrew Meyer,C,Active,,,2026-11-21T01:22,1,1,97
-MIA@BUF,MIA,Tucker Addington,LS,Active,,,2026-11-20T20:56,1,0,
-MIA@BUF,MIA,Caleb Douglas,WR,Active,,,2026-11-20T20:21,1,1,81
-MIA@BUF,MIA,Jordan Phillips,DT,Out,IR · Biceps,Surgery,2026-11-18T19:24,1,1,60
-MIA@BUF,MIA,Jordyn Brooks,LB,Active,,,2026-11-18T03:49,1,1,100
-MIA@BUF,MIA,Jacob Rodriguez,LB,Active,,,2026-11-18T03:43,1,1,100
-MIA@BUF,MIA,Michael Taaffe,S,Active,,,2026-11-18T03:36,1,1,100
-MIA@BUF,MIA,Chris Johnson,CB,Active,,,2026-11-18T03:29,1,1,100
-MIA@BUF,MIA,Kevin Coleman Jr.,WR,Active,,,2026-11-18T02:10,1,0,31
-MIA@BUF,BUF,Khalil Shakir,WR,Active,,,2026-11-22T23:56,1,1,61
-MIA@BUF,BUF,DJ Moore,WR,Active,,,2026-11-22T21:31,1,1,61
-MIA@BUF,BUF,James Cook III,RB,Active,,,2026-11-22T21:26,1,0,60
-MIA@BUF,BUF,Josh Allen,QB,Active,,,2026-11-22T21:19,1,1,95
-MIA@BUF,BUF,Damar Hamlin,S,Active,,,2026-11-22T17:21,1,1,72
-MIA@BUF,BUF,Tyrell Shavers,WR,Active,,,2026-11-22T17:11,1,0,
-MIA@BUF,BUF,T.J. Sanders,DT,Out,Shoulder,Not Specified,2026-11-22T16:37,1,0,39
-MIA@BUF,BUF,Ed Oliver,DT,Active,,,2026-11-22T17:05,1,0,54
-MIA@BUF,BUF,Jackson Hawes,TE,Active,,,2026-11-22T16:58,1,0,47
-MIA@BUF,BUF,Skyler Bell,WR,Out,Coach's Decision,Not Specified,2026-11-22T16:37,1,0,35
-MIA@BUF,BUF,Dorian Williams,LB,Out,Calf,Not Specified,2026-11-22T16:37,1,0,47
-MIA@BUF,BUF,Mike Danna,DE,Out,Coach's Decision,Not Specified,2026-11-22T16:37,1,0,
-MIA@BUF,BUF,Christian Benford,CB,Out,Groin,Not Specified,2026-11-22T16:37,1,1,74
-MIA@BUF,BUF,Jude Bowry,OT,Out,Coach's Decision,Not Specified,2026-11-22T16:37,1,0,4
-MIA@BUF,BUF,Dalton Kincaid,TE,Out,Thumb,Not Specified,2026-11-22T16:34,1,0,51
-MIA@BUF,BUF,Dee Alford,CB,Active,,,2026-11-21T00:51,1,0,52
-MIA@BUF,BUF,Dawson Knox,TE,Active,,,2026-11-20T23:11,1,1,71
-MIA@BUF,BUF,Amani Hooker,S,Active,,,2026-11-20T22:20,1,1,100
-MIA@BUF,BUF,Ray Davis,RB,Active,,,2026-11-20T20:25,1,0,19
-MIA@BUF,BUF,Cole Bishop,S,Active,,,2026-11-20T01:06,1,1,95
-MIA@BUF,BUF,TJ Parker,LB,Active,,,2026-11-19T02:39,1,0,50
-MIA@BUF,BUF,Ty Johnson,RB,Active,,,2026-11-18T02:27,1,0,21
-MIA@BUF,BUF,Ar'maj Reed-Adams,G,Out,IR · Back,Not Specified,2026-11-18T01:37,1,0,4
-MIA@BUF,BUF,Tyler Bass,PK,Active,,,2026-11-17T03:54,1,0,
-MIA@BUF,BUF,Keon Coleman,WR,Active,,,2026-11-17T00:27,1,1,64
-NO@CHI,NO,Jordyn Tyson,WR,Active,,,2026-11-22T23:33,1,0,48
-NO@CHI,NO,Travis Etienne Jr.,RB,Active,,,2026-11-22T23:30,1,0,33
-NO@CHI,NO,Tyler Shough,QB,Active,,,2026-11-22T23:23,1,1,100
-NO@CHI,NO,Chris Olave,WR,Active,,,2026-11-22T23:19,1,1,84
-NO@CHI,NO,Juwan Johnson,TE,Questionable,Hamstring,Not Specified,2026-11-22T20:20,1,0,59
-NO@CHI,NO,Zach Wilson,QB,Out,Coach's Decision,Not Specified,2026-11-22T16:39,1,0,
-NO@CHI,NO,Pete Werner,LB,Out,Hamstring,Not Specified,2026-11-22T16:45,1,1,74
-NO@CHI,NO,Audric Estime,RB,Out,Coach's Decision,Not Specified,2026-11-22T16:43,1,0,45
-NO@CHI,NO,Erik McCoy,C,Out,Biceps,Not Specified,2026-11-22T16:39,1,1,88
-NO@CHI,NO,Asim Richards,OT,Out,Knee,Not Specified,2026-11-22T16:39,1,1,90
-NO@CHI,NO,Martin Emerson Jr.,CB,Out,Concussion,Concussion,2026-11-22T16:39,1,1,82
-NO@CHI,NO,Taliese Fuaga,OT,Out,Knee,Sprain,2026-11-22T16:39,1,1,100
-NO@CHI,NO,Decamerion Richardson,CB,Active,,,2026-11-22T16:39,1,0,
-NO@CHI,NO,Charlie Smyth,PK,Active,,,2026-11-21T16:50,1,0,
-NO@CHI,NO,CJ Donaldson,RB,Active,,,2026-11-19T00:57,1,0,7
-NO@CHI,NO,Kaden Elliss,LB,Active,,,2026-11-18T03:01,1,1,100
-NO@CHI,NO,Bryce Lance,WR,Active,,,2026-11-18T00:54,1,0,48
-NO@CHI,NO,Noah Fant,TE,Active,,,2026-11-17T02:18,1,0,46
-NO@CHI,NO,Devaughn Vele,WR,Active,,,2026-11-17T02:13,1,1,90
-NO@CHI,NO,Jaylan Ford,LB,Active,,,2026-11-16T19:32,1,0,
-NO@CHI,NO,Mike Reid,CB,Active,,,2026-11-16T19:32,1,0,
-NO@CHI,NO,Alvin Kamara,RB,Active,,,2026-11-16T01:43,1,0,43
-NO@CHI,NO,Christen Miller,DT,Out,IR · Knee,Not Specified,2026-11-15T01:04,1,0,28
-NO@CHI,NO,David Edwards,G,Active,,,2026-11-14T01:59,1,1,100
-NO@CHI,NO,Kelvin Banks Jr.,OT,Active,,,2026-11-14T01:57,1,1,100
-NO@CHI,CHI,Colston Loveland,TE,Active,,,2026-11-22T23:14,1,1,88
-NO@CHI,CHI,Rome Odunze,WR,Active,,,2026-11-22T22:35,1,1,89
-NO@CHI,CHI,Luther Burden III,WR,Active,,,2026-11-22T22:24,1,0,58
-NO@CHI,CHI,Caleb Williams,QB,Active,,,2026-11-22T22:20,1,1,100
-NO@CHI,CHI,Kyle Monangai,RB,Active,,,2026-11-22T22:15,1,0,
-NO@CHI,CHI,D'Andre Swift,RB,Active,,,2026-11-22T22:10,1,1,78
-NO@CHI,CHI,Roschon Johnson,RB,Questionable,Ankle,Not Specified,2026-11-22T19:58,1,0,17
-NO@CHI,CHI,Case Keenum,QB,Out,Coach's Decision,Not Specified,2026-11-22T16:40,1,0,
-NO@CHI,CHI,Zavion Thomas,WR,Active,,,2026-11-22T16:49,1,0,11
-NO@CHI,CHI,Jayden Loving,DT,Out,Coach's Decision,Not Specified,2026-11-22T16:40,1,0,
-NO@CHI,CHI,Jordan McFadden,G,Out,Coach's Decision,Not Specified,2026-11-22T16:40,1,0,
-NO@CHI,CHI,Keyshaun Elliott,LB,Out,Coach's Decision,Not Specified,2026-11-22T16:40,1,0,
-NO@CHI,CHI,Kyler Gordon,CB,Out,Shoulder,Not Specified,2026-11-22T16:40,1,1,65
-NO@CHI,CHI,Salvon Ahmed,RB,Active,,,2026-11-22T00:17,1,0,28
-NO@CHI,CHI,Jeffery Simmons,DT,Active,,,2026-11-20T20:54,1,1,92
-NO@CHI,CHI,Tyrique Stevenson Sr.,CB,Active,,,2026-11-19T00:37,1,1,71
-NO@CHI,CHI,Malik Muhammad II,CB,Active,,,2026-11-18T21:11,1,0,33
-NO@CHI,CHI,Jaylon Johnson,CB,Active,,,2026-11-12T03:48,1,1,99
-NO@CHI,CHI,Cam Lewis,CB,Active,,,2026-11-12T03:43,1,0,
-NO@CHI,CHI,Sam Roush,TE,Active,,,2026-11-11T02:28,1,0,42
-NO@CHI,CHI,Kalif Raymond,WR,Active,,,2026-11-11T01:16,1,1,70
-NO@CHI,CHI,Cairo Santos,PK,Active,,,2026-11-10T02:46,1,0,
-NO@CHI,CHI,Grady Jarrett,DE,Active,,,2026-11-07T00:17,1,1,68
-NO@CHI,CHI,Theo Benedet,OT,Active,,,2026-11-06T20:03,1,1,91
-NO@CHI,CHI,D'Marco Jackson,LB,Active,,,2026-11-06T20:03,1,0,50
-TEN@DAL,TEN,Cam Ward,QB,Active,,,2026-11-22T23:38,1,1,100
-TEN@DAL,TEN,Carnell Tate,WR,Active,,,2026-11-22T23:27,1,1,89
-TEN@DAL,TEN,Tony Pollard,RB,Active,,,2026-11-22T22:32,1,1,76
-TEN@DAL,TEN,Dan Moore Jr.,OT,Questionable,Knee,Not Specified,2026-11-22T20:34,1,1,100
-TEN@DAL,TEN,Terrell Burgess,S,Questionable,Knee,Not Specified,2026-11-22T20:32,1,0,8
-TEN@DAL,TEN,Cor'Dale Flott,CB,Questionable,Neck,Not Specified,2026-11-22T19:36,1,1,100
-TEN@DAL,TEN,Tony Adams,S,Questionable,Illness,Not Specified,2026-11-22T18:52,1,0,40
-TEN@DAL,TEN,Nicholas Singleton,RB,Out,Coach's Decision,Not Specified,2026-11-22T16:36,1,0,
-TEN@DAL,TEN,Anthony Hill Jr.,LB,Active,,,2026-11-22T16:48,1,1,98
-TEN@DAL,TEN,Jaylon Jones,CB,Out,Coach's Decision,Not Specified,2026-11-22T16:36,1,0,
-TEN@DAL,TEN,Jackie Marshall,DT,Out,Coach's Decision,Not Specified,2026-11-22T16:36,1,0,
-TEN@DAL,TEN,Brandon Crenshaw-Dickson,OT,Out,Coach's Decision,Not Specified,2026-11-22T16:36,1,0,
-TEN@DAL,TEN,Mohamoud Diabate,LB,Out,Coach's Decision,Not Specified,2026-11-22T16:36,1,0,12
-TEN@DAL,TEN,Micah Robinson,CB,Active,,,2026-11-22T16:36,1,0,1
-TEN@DAL,TEN,Jaylen Harrell,LB,Out,IR · Knee - ACL,Not Specified,2026-11-22T00:41,1,0,
-TEN@DAL,TEN,Michael Carter,RB,Active,,,2026-11-21T20:17,1,0,21
-TEN@DAL,TEN,Tyjae Spears,RB,Out,IR · Knee,Not Specified,2026-11-21T18:44,1,0,28
-TEN@DAL,TEN,Kevin Winston Jr.,S,Active,,,2026-11-20T22:56,1,1,97
-TEN@DAL,TEN,Cody Barton,LB,Active,,,2026-11-20T22:47,1,0,55
-TEN@DAL,TEN,John Franklin-Myers,DE,Active,,,2026-11-20T00:37,1,0,53
-TEN@DAL,TEN,Cedric Gray,LB,Active,,,2026-11-19T02:26,1,1,64
-TEN@DAL,TEN,Fernando Carmona,G,Out,IR · Ankle,Sprain,2026-11-18T21:49,1,0,
-TEN@DAL,TEN,Wan'Dale Robinson,WR,Out,IR · Ankle,Not Specified,2026-11-18T17:29,1,1,63
-TEN@DAL,TEN,Julius Chestnut,RB,Active,,,2026-11-18T15:41,1,0,3
-TEN@DAL,TEN,Xavier Restrepo,WR,Active,,,2026-11-18T15:25,1,0,33
-TEN@DAL,DAL,Javonte Williams,RB,Active,,,2026-11-22T22:27,1,1,72
-TEN@DAL,DAL,George Pickens,WR,Active,,,2026-11-22T22:17,1,1,73
-TEN@DAL,DAL,CeeDee Lamb,WR,Active,,,2026-11-22T22:11,1,1,86
-TEN@DAL,DAL,Dak Prescott,QB,Active,,,2026-11-22T22:05,1,1,100
-TEN@DAL,DAL,Dee Winters,LB,Questionable,Knee,Bruise,2026-11-22T20:37,1,1,90
-TEN@DAL,DAL,Jaishawn Barham,LB,Out,Hip,Not Specified,2026-11-22T16:31,1,0,19
-TEN@DAL,DAL,Luke Schoonmaker,TE,Active,,,2026-11-22T16:45,1,0,34
-TEN@DAL,DAL,P.J. Locke,S,Out,Concussion,Concussion,2026-11-22T16:31,1,1,76
-TEN@DAL,DAL,Jonathan Mingo,WR,Out,Ankle,Not Specified,2026-11-22T16:31,1,0,29
-TEN@DAL,DAL,Jake Ferguson,TE,Out,Knee,Not Specified,2026-11-22T16:31,1,0,20
-TEN@DAL,DAL,Tyler Booker,G,Out,Ankle,Sprain,2026-11-22T16:31,1,1,80
-TEN@DAL,DAL,Jonathan Bullard,DT,Out,Coach's Decision,Not Specified,2026-11-22T16:31,1,0,29
-TEN@DAL,DAL,Jashaun Corbin,RB,Active,,,2026-11-22T00:08,1,0,
-TEN@DAL,DAL,Jalen Thompson,S,Out,IR · Hamstring,Not Specified,2026-11-22T00:05,1,0,
-TEN@DAL,DAL,DaRon Bland,CB,Out,IR · Ankle,Sprain,2026-11-22T00:03,1,1,71
-TEN@DAL,DAL,Donovan Ezeiruaku,LB,Active,,,2026-11-20T22:37,1,0,54
-TEN@DAL,DAL,Shavon Revel Jr.,CB,Active,,,2026-11-20T20:34,1,0,5
-TEN@DAL,DAL,KaVontae Turpin,WR,Active,,,2026-11-20T02:03,1,0,17
-TEN@DAL,DAL,Juanyeh Thomas,S,Active,,,2026-11-19T21:40,1,0,
-TEN@DAL,DAL,Brevyn Spann-Ford,TE,Active,,,2026-11-18T01:54,1,1,75
-TEN@DAL,DAL,Brandon Aubrey,PK,Active,,,2026-11-17T02:53,1,0,
-TEN@DAL,DAL,Israel Abanikanda,RB,Active,,,2026-11-17T01:24,1,0,7
-TEN@DAL,DAL,Derion Kendrick,CB,Active,,,2026-11-16T19:08,1,0,
-TEN@DAL,DAL,Ryan Flournoy,WR,Active,,,2026-11-16T01:44,1,1,82
-TEN@DAL,DAL,Otito Ogbonnia,DT,Active,,,2026-11-15T23:15,1,0,40
-TB@DET,TB,Baker Mayfield,QB,Active,,,2026-11-23T00:01,1,1,97
-TB@DET,TB,Bucky Irving,RB,Active,,,2026-11-22T23:02,1,0,59
-TB@DET,TB,Benjamin Morrison,CB,Questionable,Hamstring,Not Specified,2026-11-22T20:21,1,0,
-TB@DET,TB,Jacob Parrish,CB,Questionable,Back,Not Specified,2026-11-22T19:39,1,1,99
-TB@DET,TB,Yaya Diaby,LB,Active,,,2026-11-22T17:22,1,0,26
-TB@DET,TB,Easton Stick,QB,Out,Coach's Decision,Not Specified,2026-11-22T16:44,1,0,
-TB@DET,TB,Jalon Daniels,QB,Active,,,2026-11-22T17:00,1,0,10
-TB@DET,TB,Antoine Winfield Jr.,S,Out,Ankle,Not Specified,2026-11-22T16:44,1,1,72
-TB@DET,TB,Billy Schrauth,G,Out,Coach's Decision,Not Specified,2026-11-22T16:44,1,0,
-TB@DET,TB,Trevor Keegan,G,Out,Coach's Decision,Not Specified,2026-11-22T16:44,1,0,
-TB@DET,TB,DeMonte Capehart,DT,Out,Coach's Decision,Not Specified,2026-11-22T16:44,1,0,
-TB@DET,TB,Ayden Garnes,CB,Out,Coach's Decision,Not Specified,2026-11-22T16:44,1,0,
-TB@DET,TB,Josh Hayes,CB,Out,IR · Knee,Surgery,2026-11-21T01:19,1,0,
-TB@DET,TB,Tykee Smith,S,Active,,,2026-11-12T04:07,1,1,91
-TB@DET,TB,Zyon McCollum,CB,Active,,,2026-11-12T04:05,1,1,100
-TB@DET,TB,Alex Anzalone,LB,Active,,,2026-11-12T03:58,1,1,97
-TB@DET,TB,Josiah Trotter,LB,Active,,,2026-11-12T03:54,1,1,93
-TB@DET,TB,Kameron Johnson,WR,Active,,,2026-11-11T15:26,1,0,2
-TB@DET,TB,Ted Hurst III,WR,Active,,,2026-11-11T03:00,1,0,33
-TB@DET,TB,Tez Johnson,WR,Active,,,2026-11-11T00:51,1,1,62
-TB@DET,TB,Sean Tucker,RB,Active,,,2026-11-10T05:51,1,0,14
-TB@DET,TB,Chase McLaughlin,PK,Active,,,2026-11-10T02:37,1,0,
-TB@DET,TB,Cade Otton,TE,Active,,,2026-11-10T02:15,1,1,95
-TB@DET,TB,Jalen McMillan,WR,Out,IR · Knee - PCL,Sprain,2026-11-09T19:19,1,0,
-TB@DET,TB,Chris Godwin Jr.,WR,Active,,,2026-11-09T05:30,1,1,82
-TB@DET,DET,Jameson Williams,WR,Active,,,2026-11-22T23:53,1,1,82
-TB@DET,DET,Jared Goff,QB,Active,,,2026-11-22T23:45,1,1,95
-TB@DET,DET,Amon-Ra St. Brown,WR,Active,,,2026-11-22T22:55,1,1,71
-TB@DET,DET,Jahmyr Gibbs,RB,Active,,,2026-11-22T22:37,1,1,71
-TB@DET,DET,Khalil Dorsey,CB,Active,,,2026-11-22T19:14,1,0,35
-TB@DET,DET,Ennis Rakestraw Jr.,CB,Out,Shoulder,Not Specified,2026-11-22T16:42,1,0,15
-TB@DET,DET,Tyler Lacy,DT,Active,,,2026-11-22T17:08,1,0,38
-TB@DET,DET,D.J. Reed,CB,Out,Hip,Not Specified,2026-11-22T16:42,1,1,79
-TB@DET,DET,Sione Vaki,RB,Active,,,2026-11-22T16:49,1,0,28
-TB@DET,DET,Mekhi Wingo,DT,Out,Coach's Decision,Not Specified,2026-11-22T16:42,1,0,
-TB@DET,DET,Tyrus Wheat,LB,Out,Coach's Decision,Not Specified,2026-11-22T16:42,1,0,
-TB@DET,DET,Amen Ogbongbemiga,LB,Out,Coach's Decision,Not Specified,2026-11-22T16:42,1,0,
-TB@DET,DET,Joe Bachie,LB,Active,,,2026-11-22T16:42,1,0,2
-TB@DET,DET,Keith Abney II,CB,Out,Coach's Decision,Not Specified,2026-11-22T16:42,1,0,32
-TB@DET,DET,Cade Mays,C,Out,IR · Ankle,Sprain,2026-11-22T00:57,1,0,31
-TB@DET,DET,Roger McCreary,CB,Active,,,2026-11-19T03:05,1,1,92
-TB@DET,DET,Kerby Joseph,S,Active,,,2026-11-19T00:40,1,0,
-TB@DET,DET,Aidan Hutchinson,DE,Out,IR · Knee - ACL,Surgery,2026-11-18T22:02,1,1,66
-TB@DET,DET,Tyler Conklin,TE,Active,,,2026-11-18T17:14,1,0,29
-TB@DET,DET,Jacob Saylors,RB,Active,,,2026-11-18T02:57,1,0,8
-TB@DET,DET,Brock Wright,TE,Active,,,2026-11-18T02:51,1,1,65
-TB@DET,DET,Ahmed Hassanein,DE,Active,,,2026-11-16T19:11,1,0,
-TB@DET,DET,Sam LaPorta,TE,Active,,,2026-11-15T20:07,1,1,87
-TB@DET,DET,Jake Bates,PK,Active,,,2026-11-15T19:35,1,0,
-TB@DET,DET,Isaac TeSlaa,WR,Active,,,2026-11-15T19:32,1,0,51
-ARI@KC,ARI,Bam Knight,RB,Active,,,2026-11-22T23:51,1,0,
-ARI@KC,ARI,Tyler Allgeier,RB,Active,,,2026-11-22T23:47,1,1,67
-ARI@KC,ARI,Josh Johnson,QB,Active,,,2026-11-22T23:43,1,0,
-ARI@KC,ARI,Trey McBride,TE,Active,,,2026-11-22T23:39,1,1,87
-ARI@KC,ARI,Cody Simon,LB,Questionable,Calf,Not Specified,2026-11-22T20:06,1,0,31
-ARI@KC,ARI,Starling Thomas V,CB,Out,Coach's Decision,Not Specified,2026-11-22T16:34,1,0,
-ARI@KC,ARI,Kingsley Eguakun,C,Out,Coach's Decision,Not Specified,2026-11-22T16:34,1,0,
-ARI@KC,ARI,Jon Gaines II,G,Out,Ankle,Not Specified,2026-11-22T16:34,1,0,
-ARI@KC,ARI,Andrew Billings,DT,Out,Coach's Decision,Not Specified,2026-11-22T16:34,1,0,31
-ARI@KC,ARI,Zay Jones,WR,Active,,,2026-11-22T00:19,1,0,20
-ARI@KC,ARI,Carson Beck,QB,Out,Back,Spasms,2026-11-21T19:25,1,1,100
-ARI@KC,ARI,Hjalte Froholdt,C,Active,,,2026-11-21T01:37,1,1,100
-ARI@KC,ARI,Zachary Carter,DT,Out,IR · Knee,Not Specified,2026-11-21T01:35,1,0,
-ARI@KC,ARI,Roy Lopez,DT,Active,,,2026-11-20T22:06,1,0,32
-ARI@KC,ARI,Jayden Williams,OT,Active,,,2026-11-20T02:46,1,1,60
-ARI@KC,ARI,Walter Nolen III,DT,Active,,,2026-11-20T00:25,1,0,57
-ARI@KC,ARI,Max Melton,CB,Active,,,2026-11-19T23:23,1,0,51
-ARI@KC,ARI,Budda Baker,S,Active,,,2026-11-19T02:53,1,1,97
-ARI@KC,ARI,Mack Wilson Sr.,LB,Active,,,2026-11-19T02:46,1,1,100
-ARI@KC,ARI,James Conner,RB,Out,IR · Foot,Surgery,2026-11-18T21:40,1,0,
-ARI@KC,ARI,Harrison Wallace III,WR,Active,,,2026-11-18T14:52,1,0,9
-ARI@KC,ARI,Gardner Minshew II,QB,Out,IR · Elbow,Surgery,2026-11-18T04:40,1,1,71
-ARI@KC,ARI,Jordan Burch,LB,Out,IR · Knee - MCL,Not Specified,2026-11-18T01:52,1,0,37
-ARI@KC,ARI,Elijah Higgins,TE,Active,,,2026-11-18T01:38,1,0,56
-ARI@KC,ARI,Devin Duvernay,WR,Active,,,2026-11-18T01:32,1,0,39
-ARI@KC,KC,Josh Downs,WR,Active,,,2026-11-22T23:20,1,0,17
-ARI@KC,KC,Rashee Rice,WR,Active,,,2026-11-22T23:16,1,0,54
-ARI@KC,KC,Travis Kelce,TE,Active,,,2026-11-22T23:10,1,0,60
-ARI@KC,KC,Patrick Mahomes,QB,Active,,,2026-11-22T21:57,1,1,96
-ARI@KC,KC,Emmett Johnson,RB,Active,,,2026-11-22T21:45,1,0,46
-ARI@KC,KC,Ben VanSumeren,FB,Questionable,Knee,Not Specified,2026-11-22T20:49,1,0,
-ARI@KC,KC,Noah Gray,TE,Questionable,Ribs,Not Specified,2026-11-22T20:48,1,1,67
-ARI@KC,KC,Omarr Norman-Lott,DT,Out,Knee - ACL,Surgery,2026-11-22T16:37,1,0,
-ARI@KC,KC,Peter Woods,DT,Out,Neck,Not Specified,2026-11-22T16:37,1,0,5
-ARI@KC,KC,Garrett Nussmeier,QB,Out,Coach's Decision,Not Specified,2026-11-22T16:37,1,0,
-ARI@KC,KC,Melvin Smith Jr.,CB,Out,Coach's Decision,Not Specified,2026-11-22T16:37,1,0,
-ARI@KC,KC,Trey Smith,G,Out,Concussion,Concussion,2026-11-22T16:37,1,1,72
-ARI@KC,KC,Kenneth Walker III,RB,Out,Groin,Soreness,2026-11-22T16:37,1,1,73
-ARI@KC,KC,Jaylon Moore,OT,Out,Ankle,Not Specified,2026-11-22T16:37,1,1,82
-ARI@KC,KC,Nate Carter,RB,Active,,,2026-11-22T00:33,1,0,
-ARI@KC,KC,Nick Bolton,LB,Active,,,2026-11-20T00:32,1,1,94
-ARI@KC,KC,Jared Wiley,TE,Out,IR · Ankle,Fracture,2026-11-19T01:06,1,0,7
-ARI@KC,KC,Jaydn Ott,RB,Active,,,2026-11-19T00:50,1,0,6
-ARI@KC,KC,Drue Tranquill,LB,Active,,,2026-11-18T03:19,1,1,87
-ARI@KC,KC,Nohl Williams,CB,Active,,,2026-11-18T03:09,1,1,100
-ARI@KC,KC,Jake Briningstool,TE,Active,,,2026-11-18T02:54,1,0,19
-ARI@KC,KC,Harrison Butker,PK,Active,,,2026-11-17T03:56,1,0,
-ARI@KC,KC,Andrew Armstrong,WR,Active,,,2026-11-16T03:36,1,0,30
-ARI@KC,KC,Cyrus Allen,WR,Active,,,2026-11-16T02:45,1,0,36
-ARI@KC,KC,Xavier Worthy,WR,Active,,,2026-11-16T00:50,1,1,85
-PIT@PHI,PIT,Aaron Rodgers,QB,Active,,,2026-11-22T23:13,1,1,92
-PIT@PHI,PIT,Rico Dowdle,RB,Active,,,2026-11-22T23:11,1,0,47
-PIT@PHI,PIT,Jaylen Warren,RB,Active,,,2026-11-22T23:10,1,0,53
-PIT@PHI,PIT,DK Metcalf,WR,Active,,,2026-11-22T20:33,1,1,89
-PIT@PHI,PIT,Alex Highsmith,LB,Questionable,Ankle,Not Specified,2026-11-22T19:43,1,1,62
-PIT@PHI,PIT,Kaden Wetjen,WR,Out,Coach's Decision,Not Specified,2026-11-22T16:39,1,0,
-PIT@PHI,PIT,Patrick Queen,LB,Active,,,2026-11-22T17:00,1,1,100
-PIT@PHI,PIT,DeShon Elliott,S,Active,,,2026-11-22T16:58,1,0,34
-PIT@PHI,PIT,Will Howard,QB,Out,Coach's Decision,Not Specified,2026-11-22T16:51,1,0,
-PIT@PHI,PIT,Roman Wilson,WR,Active,,,2026-11-22T16:49,1,0,
-PIT@PHI,PIT,Gabriel Rubio,DE,Out,Coach's Decision,Not Specified,2026-11-22T16:39,1,0,25
-PIT@PHI,PIT,Sean Murphy-Bunting,CB,Out,Coach's Decision,Not Specified,2026-11-22T16:39,1,0,
-PIT@PHI,PIT,Eli Heidenreich,RB,Out,Coach's Decision,Not Specified,2026-11-22T16:39,1,0,
-PIT@PHI,PIT,Drew Allar,QB,Out,Coach's Decision,Not Specified,2026-11-22T16:39,1,0,
-PIT@PHI,PIT,Max Hurleman,WR,Active,,,2026-11-22T00:06,1,0,
-PIT@PHI,PIT,Michael Pittman Jr.,WR,Out,IR · Foot,Plantar Fasciitis,2026-11-21T20:06,1,0,
-PIT@PHI,PIT,Nick Herbig,LB,Out,Hip,Not Specified,2026-11-21T18:52,1,0,50
-PIT@PHI,PIT,Gennings Dunker,G,Out,IR · Knee,Not Specified,2026-11-19T02:00,1,0,
-PIT@PHI,PIT,Mason McCormick,G,Out,IR · Ankle,Dislocated,2026-11-19T01:44,1,1,78
-PIT@PHI,PIT,Jaquan Brisker,S,Active,,,2026-11-18T05:57,1,1,100
-PIT@PHI,PIT,Payton Wilson,LB,Active,,,2026-11-18T05:39,1,1,91
-PIT@PHI,PIT,Chris Boswell,PK,Active,,,2026-11-17T03:59,1,0,
-PIT@PHI,PIT,Germie Bernard,WR,Active,,,2026-11-17T01:36,1,1,90
-PIT@PHI,PIT,Darnell Washington,TE,Active,,,2026-11-17T00:47,1,0,56
-PIT@PHI,PIT,Mason Rudolph,QB,Active,,,2026-11-16T15:58,1,0,12
-PIT@PHI,PHI,Saquon Barkley,RB,Questionable,Arm,Not Specified,2026-11-22T22:41,1,0,35
-PIT@PHI,PHI,DeVonta Smith,WR,Active,,,2026-11-22T22:23,1,0,
-PIT@PHI,PHI,Jonathan Jones,CB,Questionable,Foot,Not Specified,2026-11-22T22:18,1,0,6
-PIT@PHI,PHI,Quinyon Mitchell,CB,Questionable,Hamstring,Not Specified,2026-11-22T20:56,1,1,98
-PIT@PHI,PHI,Will Shipley,RB,Active,,,2026-11-22T16:41,1,0,
-PIT@PHI,PHI,Smael Mondon Jr.,LB,Out,Ankle,Not Specified,2026-11-22T16:40,1,0,39
-PIT@PHI,PHI,Cole Payton,QB,Out,Coach's Decision,Not Specified,2026-11-22T16:38,1,0,
-PIT@PHI,PHI,Jalen Carter,DT,Active,,,2026-11-22T16:37,1,1,85
-PIT@PHI,PHI,Jake Majors,C,Out,Coach's Decision,Not Specified,2026-11-22T16:33,1,0,
-PIT@PHI,PHI,Mac McWilliams,CB,Out,Coach's Decision,Not Specified,2026-11-22T16:33,1,0,
-PIT@PHI,PHI,Ajani Cornelius,OT,Out,Coach's Decision,Not Specified,2026-11-22T16:33,1,0,
-PIT@PHI,PHI,Zack Baun,LB,Out,IR · Back,Not Specified,2026-11-22T00:14,1,1,83
-PIT@PHI,PHI,Dontayvion Wicks,WR,Out,IR · Ankle,Not Specified,2026-11-21T21:09,1,0,
-PIT@PHI,PHI,Michael Carter II,CB,Active,,,2026-11-21T01:28,1,0,2
-PIT@PHI,PHI,Nolan Smith Jr.,LB,Active,,,2026-11-21T00:20,1,1,72
-PIT@PHI,PHI,Britain Covey,WR,Active,,,2026-11-21T00:12,1,0,
-PIT@PHI,PHI,Makai Lemon,WR,Active,,,2026-11-20T23:24,1,1,93
-PIT@PHI,PHI,Jihaad Campbell,LB,Active,,,2026-11-19T01:38,1,0,54
-PIT@PHI,PHI,Tanner McKee,QB,Active,,,2026-11-18T20:12,1,1,100
-PIT@PHI,PHI,Joe Milton,QB,Active,,,2026-11-18T17:33,1,1,100
-PIT@PHI,PHI,Jaydon Blue,RB,Active,,,2026-11-18T00:54,1,0,12
-PIT@PHI,PHI,Zach Ertz,TE,Active,,,2026-11-16T18:31,1,0,
-PIT@PHI,PHI,Jeremiah Trotter Jr.,LB,Active,,,2026-11-12T02:12,1,1,74
-PIT@PHI,PHI,Elijah Moore,WR,Active,,,2026-11-11T02:24,1,0,32
-PIT@PHI,PHI,Darius Cooper,WR,Active,,,2026-11-11T01:14,1,1,94
-BAL@CAR,BAL,Zay Flowers,WR,Active,,,2026-11-23T00:00,1,1,79
-BAL@CAR,BAL,Derrick Henry,RB,Active,,,2026-11-22T21:53,1,0,50
-BAL@CAR,BAL,Roger Rosengarten,OT,Active,,,2026-11-22T20:30,1,1,100
-BAL@CAR,BAL,Trey Hendrickson,LB,Active,,,2026-11-22T20:15,1,1,62
-BAL@CAR,BAL,Elijah Sarratt,WR,Out,Coach's Decision,Not Specified,2026-11-22T16:32,1,0,
-BAL@CAR,BAL,Adam Randall,RB,Out,Coach's Decision,Not Specified,2026-11-22T16:32,1,0,
-BAL@CAR,BAL,Kedon Slovis,QB,Out,Coach's Decision,Not Specified,2026-11-22T16:32,1,0,
-BAL@CAR,BAL,Emery Jones Jr.,OT,Out,Coach's Decision,Not Specified,2026-11-22T16:32,1,0,
-BAL@CAR,BAL,Nnamdi Madubuike,DT,Out,Hamstring,Not Specified,2026-11-22T16:32,1,1,63
-BAL@CAR,BAL,Jaylinn Hawkins,S,Out,Knee,Not Specified,2026-11-22T16:32,1,0,
-BAL@CAR,BAL,Marlon Humphrey,CB,Out,Personal,Not Specified,2026-11-22T16:32,1,1,70
-BAL@CAR,BAL,Nick Vannett,TE,Active,,,2026-11-22T00:10,1,0,25
-BAL@CAR,BAL,Olaivavega Ioane,G,Active,,,2026-11-20T00:37,1,1,76
-BAL@CAR,BAL,Rasheen Ali,RB,Active,,,2026-11-18T16:14,1,0,6
-BAL@CAR,BAL,Lamar Jackson,QB,Out,IR · Thumb,Surgery,2026-11-18T15:52,1,0,2
-BAL@CAR,BAL,Roquan Smith,LB,Active,,,2026-11-18T04:29,1,1,86
-BAL@CAR,BAL,Kyle Hamilton,S,Active,,,2026-11-18T04:26,1,1,83
-BAL@CAR,BAL,Mike Green,LB,Active,,,2026-11-18T04:03,1,1,66
-BAL@CAR,BAL,Josh Cuevas,TE,Active,,,2026-11-18T02:36,1,0,19
-BAL@CAR,BAL,Riley Patterson,PK,Active,,,2026-11-18T01:56,1,0,
-BAL@CAR,BAL,Justice Hill,RB,Active,,,2026-11-18T00:33,1,0,50
-BAL@CAR,BAL,Chandler Rivers,CB,Active,,,2026-11-17T12:17,1,0,
-BAL@CAR,BAL,Aeneas Peebles,DT,Active,,,2026-11-17T12:17,1,0,
-BAL@CAR,BAL,Rashod Bateman,WR,Active,,,2026-11-17T06:09,1,1,76
-BAL@CAR,BAL,Ja'Kobi Lane,WR,Active,,,2026-11-17T06:03,1,1,62
-BAL@CAR,CAR,Jalen Coker,WR,Questionable,Concussion,Concussion,2026-11-22T21:49,1,1,83
-BAL@CAR,CAR,Mike Jackson,CB,Active,,,2026-11-22T17:31,1,0,
-BAL@CAR,CAR,Ja'Tavion Sanders,TE,Out,Coach's Decision,Not Specified,2026-11-22T16:46,1,0,
-BAL@CAR,CAR,Haynes King,QB,Out,Coach's Decision,Not Specified,2026-11-22T16:46,1,0,
-BAL@CAR,CAR,Tommy Tremble,TE,Active,,,2026-11-22T16:47,1,1,66
-BAL@CAR,CAR,Marco Wilson,CB,Out,Coach's Decision,Not Specified,2026-11-22T16:46,1,1,100
-BAL@CAR,CAR,Bobby Okereke,LB,Out,Foot,Not Specified,2026-11-22T16:46,1,1,100
-BAL@CAR,CAR,AJ Dillon,RB,Out,Coach's Decision,Not Specified,2026-11-22T16:46,1,0,
-BAL@CAR,CAR,TeRah Edwards,DT,Out,Coach's Decision,Not Specified,2026-11-22T16:46,1,0,26
-BAL@CAR,CAR,Sam Hecht,C,Out,Coach's Decision,Not Specified,2026-11-22T16:46,1,0,
-BAL@CAR,CAR,Darren Waller,TE,Active,,,2026-11-22T16:40,1,0,59
-BAL@CAR,CAR,Brady Christensen,G,Out,IR · Hamstring,Not Specified,2026-11-22T00:59,1,0,
-BAL@CAR,CAR,Isaiah Simmons,S,Out,IR · Knee,Not Specified,2026-11-22T00:57,1,0,
-BAL@CAR,CAR,Jonathon Brooks,RB,Out,IR · Groin,Surgery,2026-11-21T21:13,1,0,
-BAL@CAR,CAR,Will Lee III,CB,Active,,,2026-11-19T00:17,1,0,30
-BAL@CAR,CAR,Bryce Young,QB,Active,,,2026-11-18T21:09,1,1,100
-BAL@CAR,CAR,Tyrel Dodson,LB,Active,,,2026-11-18T03:52,1,1,100
-BAL@CAR,CAR,Devin Lloyd,LB,Active,,,2026-11-18T03:44,1,1,98
-BAL@CAR,CAR,Xavier Legette,WR,Active,,,2026-11-18T02:46,1,0,3
-BAL@CAR,CAR,John Metchie III,WR,Active,,,2026-11-18T02:34,1,0,36
-BAL@CAR,CAR,Trevor Etienne,RB,Active,,,2026-11-18T02:32,1,0,11
-BAL@CAR,CAR,Ryan Fitzgerald,PK,Active,,,2026-11-17T03:15,1,0,
-BAL@CAR,CAR,Tetairoa McMillan,WR,Active,,,2026-11-16T02:44,1,1,83
-BAL@CAR,CAR,Chuba Hubbard,RB,Active,,,2026-11-16T02:42,1,1,88
-BAL@CAR,CAR,Jaelan Phillips,LB,Active,,,2026-11-15T17:24,1,1,87
-NYJ@LAC,NYJ,Dylan Parham,G,Active,,,2026-11-22T19:49,1,1,73
-NYJ@LAC,NYJ,Trevin Wallace,LB,Out,Groin,Not Specified,2026-11-22T19:43,1,0,
-NYJ@LAC,NYJ,Harrison Phillips,DT,Active,,,2026-11-22T19:41,1,0,51
-NYJ@LAC,NYJ,Isaiah Williams,WR,Out,Ribs,Not Specified,2026-11-22T19:37,1,0,49
-NYJ@LAC,NYJ,Jelani Woods,TE,Out,Coach's Decision,Not Specified,2026-11-22T19:37,1,0,19
-NYJ@LAC,NYJ,Nate Lynn,DE,Out,Coach's Decision,Not Specified,2026-11-22T19:37,1,0,31
-NYJ@LAC,NYJ,Omar Cooper Jr.,WR,Out,Ankle,Not Specified,2026-11-22T19:37,1,0,55
-NYJ@LAC,NYJ,Joseph Ossai,DE,Active,,,2026-11-22T19:37,1,0,28
-NYJ@LAC,NYJ,Jarvis Brownlee Jr.,CB,Out,Coach's Decision,Not Specified,2026-11-22T19:37,1,0,23
-NYJ@LAC,NYJ,Sterling Shepard,WR,Active,,,2026-11-21T19:36,1,0,
-NYJ@LAC,NYJ,Breece Hall,RB,Active,,,2026-11-21T15:12,1,0,50
-NYJ@LAC,NYJ,David Onyemata,DT,Out,IR · Abdomen,Surgery,2026-11-21T01:01,1,0,
-NYJ@LAC,NYJ,Geno Smith,QB,Active,,,2026-11-20T20:44,1,1,83
-NYJ@LAC,NYJ,Mason Taylor,TE,Active,,,2026-11-20T17:18,1,1,66
-NYJ@LAC,NYJ,Kenyon Sadiq,TE,Active,,,2026-11-20T17:16,1,0,49
-NYJ@LAC,NYJ,Adonai Mitchell,WR,Active,,,2026-11-20T17:13,1,1,79
-NYJ@LAC,NYJ,Dane Belton,S,Active,,,2026-11-18T05:03,1,1,100
-NYJ@LAC,NYJ,Demario Davis,LB,Active,,,2026-11-18T04:59,1,1,97
-NYJ@LAC,NYJ,Jamien Sherwood,LB,Active,,,2026-11-18T04:52,1,1,98
-NYJ@LAC,NYJ,Jason Sanders,PK,Active,,,2026-11-17T02:54,1,0,
-NYJ@LAC,NYJ,Isaiah Davis,RB,Active,,,2026-11-17T00:49,1,0,17
-NYJ@LAC,NYJ,Tim Patrick,WR,Active,,,2026-11-16T19:35,1,0,
-NYJ@LAC,NYJ,Braelon Allen,RB,Active,,,2026-11-16T00:54,1,1,63
-NYJ@LAC,NYJ,Cade Klubnik,QB,Active,,,2026-11-15T23:54,1,0,52
-NYJ@LAC,NYJ,Garrett Wilson,WR,Active,,,2026-11-15T22:05,1,1,88
-NYJ@LAC,LAC,Keaton Mitchell,RB,Questionable,Knee,,2026-11-22T22:42,1,0,26
-NYJ@LAC,LAC,Akheem Mesidor,LB,Questionable,Ankle,,2026-11-22T22:23,1,1,66
-NYJ@LAC,LAC,David Njoku,TE,Active,,,2026-11-22T21:50,1,0,33
-NYJ@LAC,LAC,Trey Pipkins III,OT,Active,,,2026-11-22T20:07,1,0,
-NYJ@LAC,LAC,Isas Waxter,CB,Active,,,2026-11-22T19:52,1,0,24
-NYJ@LAC,LAC,Tarheeb Still,CB,Out,Ankle,Not Specified,2026-11-22T19:51,1,1,100
-NYJ@LAC,LAC,Brenen Thompson,WR,Out,Hamstring,Not Specified,2026-11-22T19:48,1,0,
-NYJ@LAC,LAC,KeAndre Lambert-Smith,WR,Out,Coach's Decision,Not Specified,2026-11-22T19:46,1,0,20
-NYJ@LAC,LAC,Charlie Kolar,TE,Active,,,2026-11-22T19:44,1,1,66
-NYJ@LAC,LAC,Kendall Williamson,S,Out,Calf,Not Specified,2026-11-22T19:43,1,0,
-NYJ@LAC,LAC,Daiyan Henley,LB,Out,Knee,Soreness,2026-11-22T19:43,1,1,82
-NYJ@LAC,LAC,Alex Harkey,G,Out,Coach's Decision,Not Specified,2026-11-22T19:43,1,0,35
-NYJ@LAC,LAC,Ladd McConkey,WR,Active,,,2026-11-22T19:39,1,1,90
-NYJ@LAC,LAC,Rodney Shelley,CB,Out,IR · Ankle,Not Specified,2026-11-22T00:49,1,0,12
-NYJ@LAC,LAC,Bud Dupree,LB,Active,,,2026-11-21T03:18,1,0,
-NYJ@LAC,LAC,Justin Eboigbe,DT,Active,,,2026-11-21T00:30,1,0,28
-NYJ@LAC,LAC,Omarion Hampton,RB,Active,,,2026-11-20T23:06,1,0,44
-NYJ@LAC,LAC,Donte Jackson,CB,Active,,,2026-11-20T22:05,1,1,67
-NYJ@LAC,LAC,Dalvin Tomlinson,DT,Active,,,2026-11-19T02:47,1,0,57
-NYJ@LAC,LAC,Del'Shawn Phillips,LB,Active,,,2026-11-19T02:39,1,0,50
-NYJ@LAC,LAC,Cameron Dicker,PK,Active,,,2026-11-18T01:55,1,0,
-NYJ@LAC,LAC,Oronde Gadsden,TE,Active,,,2026-11-18T00:24,1,0,38
-NYJ@LAC,LAC,Kimani Vidal,RB,Active,,,2026-11-18T00:13,1,0,37
-NYJ@LAC,LAC,Quentin Johnston,WR,Active,,,2026-11-17T05:58,1,1,81
-NYJ@LAC,LAC,Tre' Harris,WR,Active,,,2026-11-17T05:53,1,1,77
-MIN@SF,MIN,Max Brosmer,QB,Out,Coach's Decision,Not Specified,2026-11-23T00:06,1,0,17
-MIN@SF,MIN,Jay Ward,S,Out,Knee,Not Specified,2026-11-23T00:00,1,0,16
-MIN@SF,MIN,Kyler Murray,QB,Out,Hamstring,Strain,2026-11-23T00:00,1,1,100
-MIN@SF,MIN,Isaiah Rodgers,CB,Out,Quadriceps,Not Specified,2026-11-23T00:00,1,1,71
-MIN@SF,MIN,Jordan Addison,WR,Out,Thumb,Surgery,2026-11-23T00:00,1,1,97
-MIN@SF,MIN,Gavin Bartholomew,TE,Active,,,2026-11-21T00:44,1,0,31
-MIN@SF,MIN,Jeshaun Jones,WR,Active,,,2026-11-20T22:29,1,0,9
-MIN@SF,MIN,Andrew Van Ginkel,LB,Active,,,2026-11-20T22:24,1,1,73
-MIN@SF,MIN,Blake Cashman,LB,Active,,,2026-11-20T22:22,1,1,92
-MIN@SF,MIN,T.J. Hockenson,TE,Active,,,2026-11-20T19:18,1,1,82
-MIN@SF,MIN,Kyle Van Noy,LB,Active,,,2026-11-19T22:12,1,0,42
-MIN@SF,MIN,Eric Wilson,LB,Active,,,2026-11-19T02:30,1,1,98
-MIN@SF,MIN,Bo Richter,LB,Out,IR · Foot,Not Specified,2026-11-19T01:59,1,0,6
-MIN@SF,MIN,Jauan Jennings,WR,Active,,,2026-11-18T22:30,1,0,55
-MIN@SF,MIN,Tyrion Ingram-Dawkins,DE,Active,,,2026-11-18T22:23,1,1,62
-MIN@SF,MIN,Will Reichard,PK,Active,,,2026-11-17T03:05,1,0,
-MIN@SF,MIN,Myles Price,WR,Active,,,2026-11-17T01:10,1,0,37
-MIN@SF,MIN,Tai Felton,WR,Active,,,2026-11-17T01:01,1,0,34
-MIN@SF,MIN,Aaron Jones Sr.,RB,Active,,,2026-11-16T00:29,1,0,39
-MIN@SF,MIN,Jordan Mason,RB,Active,,,2026-11-16T00:27,1,0,43
-MIN@SF,MIN,Kirk Cousins,QB,Active,,,2026-11-16T00:23,1,1,100
-MIN@SF,MIN,Justin Jefferson,WR,Active,,,2026-11-16T00:09,1,1,95
-MIN@SF,MIN,Joshua Metellus,S,Active,,,2026-11-15T17:03,1,0,
-MIN@SF,MIN,Carson Wentz,QB,Active,,,2026-11-13T22:03,1,1,83
-MIN@SF,MIN,DeeJay Dallas,RB,Active,,,2026-11-11T03:56,1,0,17
-MIN@SF,SF,Demarcus Robinson,WR,Out,Coach's Decision,Not Specified,2026-11-23T00:02,1,0,42
-MIN@SF,SF,Kurtis Rourke,QB,Out,Coach's Decision,Not Specified,2026-11-23T00:02,1,0,
-MIN@SF,SF,Khalid Kareem,DE,Out,Ankle,Not Specified,2026-11-23T00:02,1,0,14
-MIN@SF,SF,Enrique Cruz Jr.,OT,Out,Coach's Decision,Not Specified,2026-11-23T00:02,1,0,
-MIN@SF,SF,Dre Greenlaw,LB,Out,Neck,Not Specified,2026-11-23T00:02,1,1,92
-MIN@SF,SF,Luke Gifford,LB,Active,,,2026-11-23T00:02,1,0,
-MIN@SF,SF,Mac Jones,QB,Active,,,2026-11-23T00:02,1,0,8
-MIN@SF,SF,Jordan James,RB,Active,,,2026-11-23T00:02,1,0,7
-MIN@SF,SF,Upton Stout,CB,Active,,,2026-11-23T00:02,1,1,79
-MIN@SF,SF,Mike Evans,WR,Active,,,2026-11-22T23:56,1,0,
-MIN@SF,SF,Nate Hobbs,CB,Out,IR · Groin,Not Specified,2026-11-22T00:25,1,0,
-MIN@SF,SF,C.J. West,DT,Active,,,2026-11-22T00:22,1,0,
-MIN@SF,SF,Ji'Ayir Brown,S,Active,,,2026-11-21T00:52,1,1,79
-MIN@SF,SF,Renardo Green,CB,Active,,,2026-11-20T02:08,1,1,83
-MIN@SF,SF,Isaac Guerendo,RB,Out,Pectoral,Surgery,2026-11-20T00:28,1,0,
-MIN@SF,SF,Siran Neal,S,Active,,,2026-11-19T23:37,1,0,14
-MIN@SF,SF,Christian Kirk,WR,Out,IR · Knee - Meniscus,Surgery,2026-11-19T15:22,1,0,30
-MIN@SF,SF,De'Zhaun Stribling,WR,Out,IR · Ankle,Surgery,2026-11-18T20:26,1,0,
-MIN@SF,SF,Brandon Aiyuk,WR,Out,Personal,Not Specified,2026-11-18T17:55,1,0,
-MIN@SF,SF,Fred Warner,LB,Active,,,2026-11-18T02:55,1,1,100
-MIN@SF,SF,Jacob Cowing,WR,Active,,,2026-11-18T02:48,1,0,27
-MIN@SF,SF,Jordan Watkins,WR,Active,,,2026-11-17T05:21,1,1,74
-MIN@SF,SF,Eddy Pineiro,PK,Active,,,2026-11-17T03:37,1,0,
-MIN@SF,SF,Tatum Bethune,LB,Active,,,2026-11-16T19:37,1,0,
-MIN@SF,SF,Keenan Allen,WR,Active,,,2026-11-16T04:28,1,0,48
-IND@HOU,IND,Alec Pierce,WR,Out,IR · Heel,Not Specified,2026-11-22T12:52,1,0,
-IND@HOU,IND,Bryce Boettcher,LB,Active,,,2026-11-21T03:31,1,1,77
-IND@HOU,IND,Adetomiwa Adebawore,DT,Active,,,2026-11-21T03:29,1,1,81
-IND@HOU,IND,A.J. Haulcy,S,Active,,,2026-11-21T03:27,1,1,82
-IND@HOU,IND,CJ Allen,LB,Active,,,2026-11-21T03:24,1,1,100
-IND@HOU,IND,Quez Watkins,WR,Active,,,2026-11-21T01:54,1,0,10
-IND@HOU,IND,Ashton Dulin,WR,Active,,,2026-11-21T01:51,1,0,29
-IND@HOU,IND,Deion Burks,WR,Active,,,2026-11-21T01:48,1,0,50
-IND@HOU,IND,Spencer Shrader,PK,Active,,,2026-11-21T01:45,1,0,
-IND@HOU,IND,Riley Leonard,QB,Out,Coach's Decision,Not Specified,2026-11-20T20:31,1,0,
-IND@HOU,IND,Anthony Richardson Sr.,QB,Active,,,2026-11-20T18:16,1,0,6
-IND@HOU,IND,DJ Giddens,RB,Active,,,2026-11-20T16:36,1,0,8
-IND@HOU,IND,Laquon Treadwell,WR,Active,,,2026-11-20T16:07,1,1,83
-IND@HOU,IND,Anthony Gould,WR,Active,,,2026-11-20T05:16,1,0,38
-IND@HOU,IND,Tyler Warren,TE,Active,,,2026-11-20T05:05,1,1,82
-IND@HOU,IND,Jonathan Taylor,RB,Active,,,2026-11-20T04:46,1,1,68
-IND@HOU,IND,Seth McGowan,RB,Questionable,Hamstring,Not Specified,2026-11-20T03:28,1,0,26
-IND@HOU,IND,Luke Rhodes,LS,Active,,,2026-11-20T00:09,1,0,
-IND@HOU,IND,Sauce Gardner,CB,Out,Calf,Not Specified,2026-11-20T00:04,1,1,80
-IND@HOU,IND,Bernhard Raimann,OT,Out,Concussion,Concussion,2026-11-19T23:48,1,0,55
-IND@HOU,IND,Jerry Tillery,DT,Out,Calf,Not Specified,2026-11-19T23:48,1,0,28
-IND@HOU,IND,Jalen Travis,OT,Out,Knee,Not Specified,2026-11-19T23:48,1,0,41
-IND@HOU,IND,Charvarius Ward,CB,Out,Knee,Not Specified,2026-11-19T23:48,1,1,70
-IND@HOU,IND,Will Mallory,TE,Out,Hamstring,Not Specified,2026-11-19T23:48,1,0,
-IND@HOU,IND,Charlie Heck,OT,Active,,,2026-11-19T21:35,1,0,
-IND@HOU,HOU,M.J. Stewart,S,Active,,,2026-11-21T03:59,1,1,84
-IND@HOU,HOU,Henry To'oTo'o,LB,Active,,,2026-11-21T03:56,1,1,99
-IND@HOU,HOU,Will Anderson Jr.,DE,Active,,,2026-11-21T03:48,1,1,74
-IND@HOU,HOU,Foster Moreau,TE,Active,,,2026-11-21T01:48,1,0,35
-IND@HOU,HOU,Ka'imi Fairbairn,PK,Active,,,2026-11-21T01:45,1,0,
-IND@HOU,HOU,Emari Demercado,RB,Active,,,2026-11-20T16:25,1,0,27
-IND@HOU,HOU,Kayshon Boutte,WR,Questionable,Hip,Not Specified,2026-11-20T16:18,1,0,52
-IND@HOU,HOU,Xavier Hutchinson,WR,Active,,,2026-11-20T16:10,1,1,80
-IND@HOU,HOU,Marlin Klein,TE,Active,,,2026-11-20T05:24,1,0,21
-IND@HOU,HOU,Dalton Schultz,TE,Active,,,2026-11-20T05:13,1,0,55
-IND@HOU,HOU,Tank Dell,WR,Active,,,2026-11-20T05:09,1,0,47
-IND@HOU,HOU,C.J. Stroud,QB,Active,,,2026-11-20T04:52,1,1,96
-IND@HOU,HOU,Nico Collins,WR,Active,,,2026-11-20T04:41,1,1,82
-IND@HOU,HOU,David Montgomery,RB,Active,,,2026-11-20T04:36,1,1,73
-IND@HOU,HOU,Keylan Rutledge,G,Questionable,Undisclosed,Stinger,2026-11-20T04:23,1,1,91
-IND@HOU,HOU,Trent Brown,OT,Active,,,2026-11-20T02:55,1,1,70
-IND@HOU,HOU,Sheldon Rankins,DT,Questionable,Ankle,Not Specified,2026-11-20T02:50,1,0,58
-IND@HOU,HOU,Chris Braswell,DE,Doubtful,Knee,Not Specified,2026-11-20T01:51,1,0,
-IND@HOU,HOU,Wyatt Teller,G,Out,Back,Not Specified,2026-11-19T23:50,1,0,
-IND@HOU,HOU,Jake Hummel,LB,Active,,,2026-11-20T00:16,1,0,
-IND@HOU,HOU,Jaylin Smith,CB,Active,,,2026-11-20T00:06,1,0,
-IND@HOU,HOU,Nate Thomas,OT,Out,Coach's Decision,Not Specified,2026-11-19T23:50,1,0,
-IND@HOU,HOU,Woody Marks,RB,Out,Concussion,Concussion,2026-11-19T23:50,1,0,56
-IND@HOU,HOU,Marvin Harrison Jr.,WR,Out,Hamstring,Not Specified,2026-11-19T23:50,1,0,46
-IND@HOU,HOU,Jake Andrews,C,Out,Coach's Decision,Not Specified,2026-11-19T23:50,1,0,
+CIN@WAS,CIN,Swayze Bozeman,LB,Questionable,Forearm,Not Specified,2026-11-23T22:39,0,0,
+CIN@WAS,CIN,Brian Parker II,OT,Questionable,Knee,Not Specified,2026-11-23T22:38,0,0,
+CIN@WAS,CIN,Andrei Iosivas,WR,Out,IR · Thumb,Surgery,2026-11-23T22:36,0,0,
+CIN@WAS,CIN,Jalen Davis,CB,Out,IR · Hamstring,Not Specified,2026-11-23T16:23,0,0,
 CIN@WAS,CIN,Kyle Dugger,S,Questionable,Quadriceps,Not Specified,2026-11-22T00:54,0,0,
 CIN@WAS,CIN,Dalton Risner,G,Out,Knee,Not Specified,2026-11-22T00:42,0,1,83
 CIN@WAS,CIN,Dax Hill,CB,Questionable,Illness,Not Specified,2026-11-22T00:17,0,0,
-CIN@WAS,CIN,Andrei Iosivas,WR,Out,IR · Thumb,Surgery,2026-11-21T21:54,0,0,
 CIN@WAS,CIN,Joe Burrow,QB,Active,,,2026-11-21T21:30,0,1,98
 CIN@WAS,CIN,Oren Burks,LB,Out,IR · Groin,Not Specified,2026-11-21T19:53,0,0,10
 CIN@WAS,CIN,Myles Hinton,OT,Active,,,2026-11-20T02:30,0,0,
-CIN@WAS,CIN,Swayze Bozeman,LB,Out,IR · Forearm,Fracture,2026-11-20T01:56,0,0,
 CIN@WAS,CIN,Tee Higgins,WR,Active,,,2026-11-19T21:34,0,1,78
 CIN@WAS,CIN,Dylan Fairchild,G,Questionable,Oblique,Not Specified,2026-11-19T21:30,0,1,98
 CIN@WAS,CIN,Joe Flacco,QB,Active,,,2026-11-18T15:36,0,0,5
@@ -623,12 +24,10 @@ CIN@WAS,CIN,Landon Robinson,DT,Active,,,2026-11-16T19:06,0,0,
 CIN@WAS,CIN,Tahj Brooks,RB,Active,,,2026-11-16T18:46,0,0,5
 CIN@WAS,CIN,Mike Gesicki,TE,Active,,,2026-11-16T05:21,0,0,52
 CIN@WAS,CIN,Chase Brown,RB,Active,,,2026-11-16T04:51,0,1,68
-CIN@WAS,CIN,Ja'Marr Chase,WR,Active,,,2026-11-16T04:47,0,1,90
-CIN@WAS,CIN,DJ Turner II,CB,Active,,,2026-11-13T00:49,0,1,86
+CIN@WAS,WAS,Jacory Croskey-Merritt,RB,Active,,,2026-11-23T21:20,0,0,
 CIN@WAS,WAS,Lucas Patrick,G,Questionable,Concussion,Concussion,2026-11-22T00:59,0,1,72
 CIN@WAS,WAS,Quan Martin,S,Active,,,2026-11-22T00:28,0,0,51
 CIN@WAS,WAS,Amik Robertson,CB,Questionable,Ankle,Not Specified,2026-11-22T00:26,0,1,98
-CIN@WAS,WAS,Jacory Croskey-Merritt,RB,Out,IR · Groin,Not Specified,2026-11-21T23:35,0,0,
 CIN@WAS,WAS,Treylon Burks,WR,Active,,,2026-11-21T21:46,0,1,64
 CIN@WAS,WAS,Rachaad White,RB,Questionable,Heel,Not Specified,2026-11-21T21:21,0,0,52
 CIN@WAS,WAS,Laremy Tunsil,OT,Out,IR · Triceps,Surgery,2026-11-21T00:56,0,0,
@@ -650,15 +49,629 @@ CIN@WAS,WAS,Stefon Diggs,WR,Active,,,2026-11-13T05:01,0,1,63
 CIN@WAS,WAS,Jayden Daniels,QB,Active,,,2026-11-13T04:56,0,1,100
 CIN@WAS,WAS,Chig Okonkwo,TE,Active,,,2026-11-13T04:38,0,1,70
 CIN@WAS,WAS,Shy Tuttle,DT,Active,,,2026-11-10T23:18,0,0,52
-MIA@BUF,MIA,Zeek Biggers,DT,Out,IR · Knee - Meniscus,Surgery,2026-11-18T00:26,1,0,45
-ARI@KC,ARI,Andrew Wingard,S,Out,IR · Wrist,Not Specified,2026-11-18T01:19,1,1,100
-LV@DEN,LV,Patrick Johnson,DE,Out,IR · Neck,Stinger,2026-11-01T02:52,1,0,
-LV@DEN,DEN,Eyioma Uwazurike,DE,Out,IR · Shoulder,Not Specified,2026-11-08T03:38,1,0,54
-LV@DEN,DEN,RJ Harvey,RB,Out,IR · Knee,Not Specified,2026-10-31T20:18,1,0,26
-LV@DEN,DEN,Tyler Badie,RB,Out,IR · Thumb,Fracture,2026-10-24T23:25,1,0,
-JAX@NYG,NYG,Tremaine Edmunds,LB,Out,IR · Chest,Not Specified,2026-10-24T23:28,1,0,
-JAX@NYG,NYG,Braxton Berrios,WR,Out,IR · Foot,Surgery,2026-10-14T21:17,1,0,
-JAX@NYG,NYG,Chauncey Golston,DE,Out,IR · Neck,Not Specified,2026-10-11T01:28,1,0,
-JAX@NYG,NYG,Jaxson Dart,QB,Out,IR · Knee - Meniscus,Surgery,2026-09-30T20:35,1,0,
-NYJ@LAC,LAC,Branson Taylor,G,Out,IR · Ankle,Not Specified,2026-11-16T23:41,1,0,12
-JAX@NYG,JAX,Eric Murray,S,Out,IR · Elbow,Not Specified,2026-11-04T01:11,1,0,
+CIN@WAS,WAS,Dyami Brown,WR,Out,IR · Calf,Not Specified,2026-11-07T23:15,0,0,25
+IND@HOU,IND,Seth McGowan,RB,Out,Hamstring,Not Specified,2026-11-23T20:02,0,0,26
+IND@HOU,IND,Alec Pierce,WR,Out,IR · Heel,Not Specified,2026-11-23T19:48,0,0,
+IND@HOU,IND,Drew Ogletree,TE,Active,,,2026-11-23T17:42,0,0,
+IND@HOU,IND,Pharaoh Brown,TE,Active,,,2026-11-23T17:31,0,0,19
+IND@HOU,IND,Jerry Tillery,DT,Out,Calf,Not Specified,2026-11-23T15:33,0,0,28
+IND@HOU,IND,Jalen Travis,OT,Out,Knee,Not Specified,2026-11-23T15:33,0,0,41
+IND@HOU,IND,Charvarius Ward,CB,Out,Knee,Not Specified,2026-11-23T15:33,0,1,70
+IND@HOU,IND,Will Mallory,TE,Out,Hamstring,Not Specified,2026-11-23T15:33,0,0,
+IND@HOU,IND,Bernhard Raimann,OT,Out,Concussion,Concussion,2026-11-23T15:33,0,0,55
+IND@HOU,IND,Sauce Gardner,CB,Out,Calf,Not Specified,2026-11-23T15:33,0,1,80
+IND@HOU,IND,Riley Leonard,QB,Active,,,2026-11-23T15:33,0,0,
+IND@HOU,IND,Bryce Boettcher,LB,Active,,,2026-11-21T03:31,0,1,77
+IND@HOU,IND,Adetomiwa Adebawore,DT,Active,,,2026-11-21T03:29,0,1,81
+IND@HOU,IND,A.J. Haulcy,S,Active,,,2026-11-21T03:27,0,1,82
+IND@HOU,IND,CJ Allen,LB,Active,,,2026-11-21T03:24,0,1,100
+IND@HOU,IND,Quez Watkins,WR,Active,,,2026-11-21T01:54,0,0,10
+IND@HOU,IND,Ashton Dulin,WR,Active,,,2026-11-21T01:51,0,0,29
+IND@HOU,IND,Deion Burks,WR,Active,,,2026-11-21T01:48,0,0,50
+IND@HOU,IND,Spencer Shrader,PK,Active,,,2026-11-21T01:45,0,0,
+IND@HOU,IND,Anthony Richardson Sr.,QB,Active,,,2026-11-20T18:16,0,0,6
+IND@HOU,IND,DJ Giddens,RB,Active,,,2026-11-20T16:36,0,0,8
+IND@HOU,IND,Laquon Treadwell,WR,Active,,,2026-11-20T16:07,0,1,83
+IND@HOU,IND,Anthony Gould,WR,Active,,,2026-11-20T05:16,0,0,38
+IND@HOU,IND,Tyler Warren,TE,Active,,,2026-11-20T05:05,0,1,82
+IND@HOU,IND,Jonathan Taylor,RB,Active,,,2026-11-20T04:46,0,1,68
+IND@HOU,HOU,Woody Marks,RB,Out,Concussion,Concussion,2026-11-23T19:05,0,0,56
+IND@HOU,HOU,Chris Braswell,DE,Out,Knee,Not Specified,2026-11-23T17:38,0,0,
+IND@HOU,HOU,Wyatt Teller,G,Out,Back,Not Specified,2026-11-23T15:31,0,0,
+IND@HOU,HOU,Brevin Jordan,TE,Out,Foot,Not Specified,2026-11-23T15:31,0,0,11
+IND@HOU,HOU,Marvin Harrison Jr.,WR,Out,Hamstring,Strain,2026-11-23T15:31,0,0,46
+IND@HOU,HOU,Danielle Hunter,DE,Out,Hamstring,Strain,2026-11-23T15:31,0,1,65
+IND@HOU,HOU,Nate Thomas,OT,Active,,,2026-11-23T15:31,0,0,
+IND@HOU,HOU,Jake Andrews,C,Active,,,2026-11-23T15:31,0,0,
+IND@HOU,HOU,M.J. Stewart,S,Active,,,2026-11-21T03:59,0,1,84
+IND@HOU,HOU,Henry To'oTo'o,LB,Active,,,2026-11-21T03:56,0,1,99
+IND@HOU,HOU,Will Anderson Jr.,DE,Active,,,2026-11-21T03:48,0,1,74
+IND@HOU,HOU,Foster Moreau,TE,Active,,,2026-11-21T01:48,0,0,35
+IND@HOU,HOU,Ka'imi Fairbairn,PK,Active,,,2026-11-21T01:45,0,0,
+IND@HOU,HOU,Emari Demercado,RB,Active,,,2026-11-20T16:25,0,0,27
+IND@HOU,HOU,Kayshon Boutte,WR,Questionable,Hip,Not Specified,2026-11-20T16:18,0,0,52
+IND@HOU,HOU,Xavier Hutchinson,WR,Active,,,2026-11-20T16:10,0,1,80
+IND@HOU,HOU,Marlin Klein,TE,Active,,,2026-11-20T05:24,0,0,21
+IND@HOU,HOU,Dalton Schultz,TE,Active,,,2026-11-20T05:13,0,0,55
+IND@HOU,HOU,Tank Dell,WR,Active,,,2026-11-20T05:09,0,0,47
+IND@HOU,HOU,C.J. Stroud,QB,Active,,,2026-11-20T04:52,0,1,96
+IND@HOU,HOU,Nico Collins,WR,Active,,,2026-11-20T04:41,0,1,82
+IND@HOU,HOU,David Montgomery,RB,Active,,,2026-11-20T04:36,0,1,73
+IND@HOU,HOU,Keylan Rutledge,G,Questionable,Undisclosed,Stinger,2026-11-20T04:23,0,1,91
+IND@HOU,HOU,Trent Brown,OT,Active,,,2026-11-20T02:55,0,1,70
+IND@HOU,HOU,Sheldon Rankins,DT,Questionable,Ankle,Not Specified,2026-11-20T02:50,0,0,58
+MIA@BUF,MIA,Ronnie Harrison Jr.,LB,Out,IR · Hamstring,Not Specified,2026-11-23T20:47,0,0,
+MIA@BUF,MIA,JuJu Brents,CB,Questionable,Shoulder,Not Specified,2026-11-23T20:38,0,0,
+MIA@BUF,MIA,Malik Willis,QB,Out,IR · Abdomen,Not Specified,2026-11-23T17:19,0,1,100
+MIA@BUF,MIA,Jared Wayne,WR,Out,Quadriceps,Not Specified,2026-11-23T15:39,0,0,11
+MIA@BUF,MIA,Bradley Pinion,P,Out,Groin,Not Specified,2026-11-23T15:39,0,0,
+MIA@BUF,MIA,Christian Haynes,G,Active,,,2026-11-23T15:39,0,0,
+MIA@BUF,MIA,Caedan Wallace,OT,Active,,,2026-11-23T15:39,0,0,
+MIA@BUF,MIA,Justin Joly,TE,Active,,,2026-11-23T15:39,0,0,
+MIA@BUF,MIA,Daniel Carlson,PK,Active,,,2026-11-23T05:26,0,0,
+MIA@BUF,MIA,Malik Washington,WR,Active,,,2026-11-23T04:22,0,1,84
+MIA@BUF,MIA,Greg Dulcich,TE,Active,,,2026-11-23T04:15,0,1,62
+MIA@BUF,MIA,Caleb Douglas,WR,Active,,,2026-11-23T01:57,0,1,78
+MIA@BUF,MIA,Kyle McCord,QB,Active,,,2026-11-22T23:57,0,1,100
+MIA@BUF,MIA,Ollie Gordon II,RB,Active,,,2026-11-22T23:54,0,1,72
+MIA@BUF,MIA,Chris Bell,WR,Active,,,2026-11-22T20:01,0,1,63
+MIA@BUF,MIA,Jonah Savaiinaea,G,Active,,,2026-11-22T19:54,0,1,98
+MIA@BUF,MIA,Jaylin Simpson,S,Out,Knee,Not Specified,2026-11-22T16:40,0,0,3
+MIA@BUF,MIA,Aaron Brewer,C,Active,,,2026-11-22T17:15,0,1,100
+MIA@BUF,MIA,Darrell Baker Jr.,CB,Active,,,2026-11-22T17:11,0,0,23
+MIA@BUF,MIA,Dante Trader Jr.,S,Out,Shoulder,Not Specified,2026-11-22T16:40,0,1,100
+MIA@BUF,MIA,Marcellas Dial Jr.,CB,Active,,,2026-11-22T16:40,0,0,1
+MIA@BUF,MIA,Andrew Meyer,C,Active,,,2026-11-21T01:22,0,1,97
+MIA@BUF,MIA,Tucker Addington,LS,Active,,,2026-11-20T20:56,0,0,
+MIA@BUF,MIA,Jordan Phillips,DT,Out,IR · Biceps,Surgery,2026-11-18T19:24,0,0,59
+MIA@BUF,MIA,Jordyn Brooks,LB,Active,,,2026-11-18T03:49,0,1,99
+MIA@BUF,BUF,Dalton Kincaid,TE,Out,Thumb,Not Specified,2026-11-23T22:53,0,0,48
+MIA@BUF,BUF,Keleki Latu,TE,Active,,,2026-11-23T16:44,0,0,28
+MIA@BUF,BUF,Dorian Williams,LB,Out,Calf,Not Specified,2026-11-23T15:20,0,0,43
+MIA@BUF,BUF,Christian Benford,CB,Out,Groin,Not Specified,2026-11-23T15:20,0,1,66
+MIA@BUF,BUF,Mike Danna,DE,Active,,,2026-11-23T15:20,0,0,
+MIA@BUF,BUF,Jude Bowry,OT,Active,,,2026-11-23T15:20,0,0,4
+MIA@BUF,BUF,Tyler Bass,PK,Active,,,2026-11-23T05:10,0,0,
+MIA@BUF,BUF,Keon Coleman,WR,Active,,,2026-11-23T04:49,0,1,65
+MIA@BUF,BUF,Ray Davis,RB,Active,,,2026-11-23T03:48,0,0,16
+MIA@BUF,BUF,Dawson Knox,TE,Active,,,2026-11-23T01:58,0,1,68
+MIA@BUF,BUF,Khalil Shakir,WR,Active,,,2026-11-22T23:56,0,1,65
+MIA@BUF,BUF,DJ Moore,WR,Active,,,2026-11-22T21:31,0,1,64
+MIA@BUF,BUF,James Cook III,RB,Active,,,2026-11-22T21:26,0,0,59
+MIA@BUF,BUF,Josh Allen,QB,Active,,,2026-11-22T21:19,0,1,97
+MIA@BUF,BUF,Damar Hamlin,S,Active,,,2026-11-22T17:21,0,0,42
+MIA@BUF,BUF,Tyrell Shavers,WR,Active,,,2026-11-22T17:11,0,0,37
+MIA@BUF,BUF,T.J. Sanders,DT,Out,Shoulder,Not Specified,2026-11-22T16:37,0,0,38
+MIA@BUF,BUF,Ed Oliver,DT,Active,,,2026-11-22T17:05,0,0,55
+MIA@BUF,BUF,Jackson Hawes,TE,Active,,,2026-11-22T16:58,0,0,41
+MIA@BUF,BUF,Skyler Bell,WR,Active,,,2026-11-22T16:55,0,0,35
+MIA@BUF,BUF,Dee Alford,CB,Active,,,2026-11-21T00:51,0,0,42
+MIA@BUF,BUF,Amani Hooker,S,Active,,,2026-11-20T22:20,0,1,90
+MIA@BUF,BUF,Cole Bishop,S,Active,,,2026-11-20T01:06,0,1,92
+MIA@BUF,BUF,TJ Parker,LB,Active,,,2026-11-19T02:39,0,0,51
+MIA@BUF,BUF,Ty Johnson,RB,Active,,,2026-11-18T02:27,0,0,25
+MIA@BUF,BUF,Ar'maj Reed-Adams,G,Out,IR · Back,Not Specified,2026-11-18T01:37,0,0,4
+NO@CHI,NO,Juwan Johnson,TE,Questionable,Hamstring,Not Specified,2026-11-23T20:13,0,0,53
+NO@CHI,NO,Charlie Smyth,PK,Active,,,2026-11-23T19:17,0,0,
+NO@CHI,NO,Asim Richards,OT,Out,Knee,Not Specified,2026-11-23T15:44,0,1,81
+NO@CHI,NO,Erik McCoy,C,Out,Biceps,Not Specified,2026-11-23T15:44,0,1,75
+NO@CHI,NO,Martin Emerson Jr.,CB,Out,Concussion,Concussion,2026-11-23T15:44,0,1,76
+NO@CHI,NO,Taliese Fuaga,OT,Out,Knee,Sprain,2026-11-23T15:43,0,1,100
+NO@CHI,NO,Alvin Kamara,RB,Active,,,2026-11-23T04:02,0,0,28
+NO@CHI,NO,Devaughn Vele,WR,Active,,,2026-11-23T01:51,0,1,90
+NO@CHI,NO,Jordyn Tyson,WR,Active,,,2026-11-22T23:33,0,0,48
+NO@CHI,NO,Travis Etienne Jr.,RB,Active,,,2026-11-22T23:30,0,0,38
+NO@CHI,NO,Tyler Shough,QB,Active,,,2026-11-22T23:23,0,1,100
+NO@CHI,NO,Chris Olave,WR,Active,,,2026-11-22T23:19,0,1,87
+NO@CHI,NO,Zach Wilson,QB,Active,,,2026-11-22T16:48,0,0,
+NO@CHI,NO,Pete Werner,LB,Out,Hamstring,Not Specified,2026-11-22T16:45,0,1,60
+NO@CHI,NO,Audric Estime,RB,Active,,,2026-11-22T16:43,0,0,45
+NO@CHI,NO,Decamerion Richardson,CB,Active,,,2026-11-22T16:39,0,0,
+NO@CHI,NO,CJ Donaldson,RB,Active,,,2026-11-19T00:57,0,0,44
+NO@CHI,NO,Kaden Elliss,LB,Active,,,2026-11-18T03:01,0,1,100
+NO@CHI,NO,Bryce Lance,WR,Active,,,2026-11-18T00:54,0,0,31
+NO@CHI,NO,Noah Fant,TE,Active,,,2026-11-17T02:18,0,0,53
+NO@CHI,NO,Jaylan Ford,LB,Active,,,2026-11-16T19:32,0,0,
+NO@CHI,NO,Mike Reid,CB,Active,,,2026-11-16T19:32,0,0,
+NO@CHI,NO,Christen Miller,DT,Out,IR · Knee,Not Specified,2026-11-15T01:04,0,0,
+NO@CHI,NO,David Edwards,G,Active,,,2026-11-14T01:59,0,1,100
+NO@CHI,NO,Kelvin Banks Jr.,OT,Active,,,2026-11-14T01:57,0,1,100
+NO@CHI,CHI,Marlen Sewell,S,Active,,,2026-11-23T21:25,0,0,
+NO@CHI,CHI,Stephen Carlson,TE,Active,,,2026-11-23T16:56,0,0,14
+NO@CHI,CHI,Kyler Gordon,CB,Out,Shoulder,Not Specified,2026-11-23T15:21,0,1,69
+NO@CHI,CHI,Jayden Loving,DT,Active,,,2026-11-23T15:21,0,0,
+NO@CHI,CHI,Jordan McFadden,G,Active,,,2026-11-23T15:21,0,0,
+NO@CHI,CHI,Keyshaun Elliott,LB,Active,,,2026-11-23T15:21,0,0,
+NO@CHI,CHI,Colston Loveland,TE,Active,,,2026-11-22T23:14,0,1,91
+NO@CHI,CHI,Rome Odunze,WR,Active,,,2026-11-22T22:35,0,1,89
+NO@CHI,CHI,Luther Burden III,WR,Active,,,2026-11-22T22:24,0,0,57
+NO@CHI,CHI,Caleb Williams,QB,Active,,,2026-11-22T22:20,0,1,100
+NO@CHI,CHI,Kyle Monangai,RB,Active,,,2026-11-22T22:15,0,0,38
+NO@CHI,CHI,D'Andre Swift,RB,Active,,,2026-11-22T22:10,0,1,65
+NO@CHI,CHI,Roschon Johnson,RB,Questionable,Ankle,Not Specified,2026-11-22T19:58,0,0,20
+NO@CHI,CHI,Case Keenum,QB,Active,,,2026-11-22T16:56,0,0,
+NO@CHI,CHI,Zavion Thomas,WR,Active,,,2026-11-22T16:49,0,0,17
+NO@CHI,CHI,Salvon Ahmed,RB,Active,,,2026-11-22T00:17,0,0,22
+NO@CHI,CHI,Jeffery Simmons,DT,Active,,,2026-11-20T20:54,0,1,91
+NO@CHI,CHI,Tyrique Stevenson Sr.,CB,Active,,,2026-11-19T00:37,0,1,80
+NO@CHI,CHI,Malik Muhammad II,CB,Active,,,2026-11-18T21:11,0,0,11
+NO@CHI,CHI,Jaylon Johnson,CB,Active,,,2026-11-12T03:48,0,1,98
+NO@CHI,CHI,Cam Lewis,CB,Active,,,2026-11-12T03:43,0,0,
+NO@CHI,CHI,Sam Roush,TE,Active,,,2026-11-11T02:28,0,0,50
+NO@CHI,CHI,Kalif Raymond,WR,Active,,,2026-11-11T01:16,0,1,69
+NO@CHI,CHI,Cairo Santos,PK,Active,,,2026-11-10T02:46,0,0,
+NO@CHI,CHI,Grady Jarrett,DE,Active,,,2026-11-07T00:17,0,1,68
+NO@CHI,CHI,Zavier Scott,RB,Out,IR · Wrist,Not Specified,2026-11-05T21:19,0,0,
+NO@CHI,CHI,Kentavius Street,DT,Out,IR · Knee,Not Specified,2026-11-05T04:55,0,0,21
+NO@CHI,CHI,Braxton Jones,OT,Out,IR · Knee,Surgery,2026-11-05T03:40,0,0,
+TEN@DAL,TEN,Jackie Marshall,DT,Active,,,2026-11-23T15:52,0,0,
+TEN@DAL,TEN,Brandon Crenshaw-Dickson,OT,Active,,,2026-11-23T15:52,0,0,
+TEN@DAL,TEN,Mohamoud Diabate,LB,Active,,,2026-11-23T15:52,0,0,12
+TEN@DAL,TEN,Jaylon Jones,CB,Active,,,2026-11-23T15:52,0,0,
+TEN@DAL,TEN,Joey Slye,PK,Active,,,2026-11-23T05:34,0,0,
+TEN@DAL,TEN,Gunnar Helm,TE,Active,,,2026-11-23T03:51,0,1,72
+TEN@DAL,TEN,Chimere Dike,WR,Active,,,2026-11-23T02:13,0,1,85
+TEN@DAL,TEN,Calvin Ridley,WR,Active,,,2026-11-23T01:41,0,0,32
+TEN@DAL,TEN,Cam Ward,QB,Active,,,2026-11-22T23:38,0,1,100
+TEN@DAL,TEN,Carnell Tate,WR,Active,,,2026-11-22T23:27,0,1,90
+TEN@DAL,TEN,Tony Pollard,RB,Active,,,2026-11-22T22:32,0,1,78
+TEN@DAL,TEN,Dan Moore Jr.,OT,Questionable,Knee,Not Specified,2026-11-22T20:34,0,1,87
+TEN@DAL,TEN,Terrell Burgess,S,Questionable,Knee,Not Specified,2026-11-22T20:32,0,0,15
+TEN@DAL,TEN,Cor'Dale Flott,CB,Questionable,Neck,Not Specified,2026-11-22T19:36,0,1,85
+TEN@DAL,TEN,Tony Adams,S,Questionable,Illness,Not Specified,2026-11-22T18:52,0,0,53
+TEN@DAL,TEN,Nicholas Singleton,RB,Active,,,2026-11-22T16:55,0,0,
+TEN@DAL,TEN,Anthony Hill Jr.,LB,Active,,,2026-11-22T16:48,0,1,98
+TEN@DAL,TEN,Micah Robinson,CB,Active,,,2026-11-22T16:36,0,0,46
+TEN@DAL,TEN,Jaylen Harrell,LB,Out,IR · Knee - ACL,Not Specified,2026-11-22T00:41,0,0,
+TEN@DAL,TEN,Michael Carter,RB,Active,,,2026-11-21T20:17,0,0,18
+TEN@DAL,TEN,Tyjae Spears,RB,Out,IR · Knee,Not Specified,2026-11-21T18:44,0,0,28
+TEN@DAL,TEN,Kevin Winston Jr.,S,Active,,,2026-11-20T22:56,0,1,97
+TEN@DAL,TEN,Cody Barton,LB,Active,,,2026-11-20T22:47,0,0,39
+TEN@DAL,TEN,John Franklin-Myers,DE,Active,,,2026-11-20T00:37,0,0,51
+TEN@DAL,TEN,Cedric Gray,LB,Active,,,2026-11-19T02:26,0,1,79
+TEN@DAL,DAL,Jake Ferguson,TE,Out,Knee,Not Specified,2026-11-23T23:01,0,0,34
+TEN@DAL,DAL,DaRon Bland,CB,Out,IR · Ankle,Sprain,2026-11-23T21:40,0,0,57
+TEN@DAL,DAL,James Mitchell,TE,Active,,,2026-11-23T17:24,0,0,14
+TEN@DAL,DAL,P.J. Locke,S,Out,Concussion,Concussion,2026-11-23T15:26,0,1,67
+TEN@DAL,DAL,Jonathan Mingo,WR,Out,Ankle,Not Specified,2026-11-23T15:26,0,0,39
+TEN@DAL,DAL,Tyler Booker,G,Out,Ankle,Sprain,2026-11-23T15:26,0,1,70
+TEN@DAL,DAL,Jonathan Bullard,DT,Active,,,2026-11-23T15:26,0,0,29
+TEN@DAL,DAL,Brandon Aubrey,PK,Active,,,2026-11-23T05:55,0,0,
+TEN@DAL,DAL,Ryan Flournoy,WR,Active,,,2026-11-23T04:09,0,1,77
+TEN@DAL,DAL,KaVontae Turpin,WR,Active,,,2026-11-23T02:34,0,0,16
+TEN@DAL,DAL,Javonte Williams,RB,Active,,,2026-11-22T22:27,0,1,69
+TEN@DAL,DAL,George Pickens,WR,Active,,,2026-11-22T22:17,0,1,82
+TEN@DAL,DAL,CeeDee Lamb,WR,Active,,,2026-11-22T22:11,0,1,89
+TEN@DAL,DAL,Dak Prescott,QB,Active,,,2026-11-22T22:05,0,1,100
+TEN@DAL,DAL,Dee Winters,LB,Questionable,Knee,Bruise,2026-11-22T20:37,0,1,65
+TEN@DAL,DAL,Jaishawn Barham,LB,Out,Hip,Not Specified,2026-11-22T16:31,0,0,18
+TEN@DAL,DAL,Luke Schoonmaker,TE,Active,,,2026-11-22T16:45,0,0,36
+TEN@DAL,DAL,Jashaun Corbin,RB,Active,,,2026-11-22T00:08,0,0,28
+TEN@DAL,DAL,Jalen Thompson,S,Out,IR · Hamstring,Not Specified,2026-11-22T00:05,0,0,
+TEN@DAL,DAL,Donovan Ezeiruaku,LB,Active,,,2026-11-20T22:37,0,0,50
+TEN@DAL,DAL,Shavon Revel Jr.,CB,Active,,,2026-11-20T20:34,0,0,12
+TEN@DAL,DAL,Juanyeh Thomas,S,Active,,,2026-11-19T21:40,0,0,25
+TEN@DAL,DAL,Brevyn Spann-Ford,TE,Active,,,2026-11-18T01:54,0,1,68
+TEN@DAL,DAL,Israel Abanikanda,RB,Active,,,2026-11-17T01:24,0,0,7
+TEN@DAL,DAL,Derion Kendrick,CB,Active,,,2026-11-16T19:08,0,0,20
+TB@DET,TB,Jacob Parrish,CB,Questionable,Back,Not Specified,2026-11-23T20:54,0,1,69
+TB@DET,TB,Elijah Simmons,DT,Questionable,Concussion,Concussion,2026-11-23T17:32,0,0,23
+TB@DET,TB,Antoine Winfield Jr.,S,Out,Ankle,Not Specified,2026-11-23T15:51,0,1,72
+TB@DET,TB,Ayden Garnes,CB,Active,,,2026-11-23T15:51,0,0,
+TB@DET,TB,Trevor Keegan,G,Active,,,2026-11-23T15:51,0,0,
+TB@DET,TB,Billy Schrauth,G,Active,,,2026-11-23T15:51,0,0,
+TB@DET,TB,DeMonte Capehart,DT,Active,,,2026-11-23T15:51,0,0,
+TB@DET,TB,Sean Tucker,RB,Active,,,2026-11-23T04:36,0,0,
+TB@DET,TB,Cade Otton,TE,Active,,,2026-11-23T04:18,0,1,97
+TB@DET,TB,Chris Godwin Jr.,WR,Active,,,2026-11-23T02:55,0,1,87
+TB@DET,TB,Ted Hurst III,WR,Active,,,2026-11-23T01:22,0,0,36
+TB@DET,TB,Kenny Gainwell,RB,Active,,,2026-11-23T00:51,0,0,
+TB@DET,TB,Emeka Egbuka,WR,Active,,,2026-11-23T00:37,0,1,74
+TB@DET,TB,Baker Mayfield,QB,Active,,,2026-11-23T00:01,0,1,100
+TB@DET,TB,Bucky Irving,RB,Active,,,2026-11-22T23:02,0,1,62
+TB@DET,TB,Benjamin Morrison,CB,Questionable,Hamstring,Not Specified,2026-11-22T20:21,0,0,50
+TB@DET,TB,Yaya Diaby,LB,Active,,,2026-11-22T17:22,0,0,32
+TB@DET,TB,Easton Stick,QB,Active,,,2026-11-22T17:15,0,0,
+TB@DET,TB,Jalon Daniels,QB,Active,,,2026-11-22T17:00,0,0,
+TB@DET,TB,Josh Hayes,CB,Out,IR · Knee,Surgery,2026-11-21T01:19,0,0,
+TB@DET,TB,Tykee Smith,S,Active,,,2026-11-12T04:07,0,1,91
+TB@DET,TB,Zyon McCollum,CB,Active,,,2026-11-12T04:05,0,1,100
+TB@DET,TB,Alex Anzalone,LB,Active,,,2026-11-12T03:58,0,1,100
+TB@DET,TB,Josiah Trotter,LB,Active,,,2026-11-12T03:54,0,1,94
+TB@DET,TB,Kameron Johnson,WR,Active,,,2026-11-11T15:26,0,0,2
+TB@DET,DET,Mekhi Wingo,DT,Active,,,2026-11-23T15:27,0,0,
+TB@DET,DET,Tyrus Wheat,LB,Active,,,2026-11-23T15:27,0,0,
+TB@DET,DET,Amen Ogbongbemiga,LB,Active,,,2026-11-23T15:27,0,0,
+TB@DET,DET,Keith Abney II,CB,Active,,,2026-11-23T15:27,0,0,11
+TB@DET,DET,Sam LaPorta,TE,Active,,,2026-11-23T00:45,0,1,87
+TB@DET,DET,Jameson Williams,WR,Active,,,2026-11-22T23:53,0,1,80
+TB@DET,DET,Jared Goff,QB,Active,,,2026-11-22T23:45,0,1,95
+TB@DET,DET,Amon-Ra St. Brown,WR,Active,,,2026-11-22T22:55,0,1,73
+TB@DET,DET,Jahmyr Gibbs,RB,Active,,,2026-11-22T22:37,0,1,70
+TB@DET,DET,Khalil Dorsey,CB,Active,,,2026-11-22T19:14,0,0,26
+TB@DET,DET,Ennis Rakestraw Jr.,CB,Out,Shoulder,Not Specified,2026-11-22T16:42,0,0,22
+TB@DET,DET,Tyler Lacy,DT,Active,,,2026-11-22T17:08,0,0,34
+TB@DET,DET,D.J. Reed,CB,Out,Hip,Not Specified,2026-11-22T16:42,0,0,
+TB@DET,DET,Sione Vaki,RB,Active,,,2026-11-22T16:49,0,0,26
+TB@DET,DET,Joe Bachie,LB,Active,,,2026-11-22T16:42,0,0,2
+TB@DET,DET,Cade Mays,C,Out,IR · Ankle,Sprain,2026-11-22T00:57,0,0,
+TB@DET,DET,Roger McCreary,CB,Active,,,2026-11-19T03:05,0,1,97
+TB@DET,DET,Kerby Joseph,S,Active,,,2026-11-19T00:40,0,1,67
+TB@DET,DET,Aidan Hutchinson,DE,Out,IR · Knee - ACL,Surgery,2026-11-18T22:02,0,0,52
+TB@DET,DET,Tyler Conklin,TE,Active,,,2026-11-18T17:14,0,0,28
+TB@DET,DET,Jacob Saylors,RB,Active,,,2026-11-18T02:57,0,0,6
+TB@DET,DET,Brock Wright,TE,Active,,,2026-11-18T02:51,0,1,64
+TB@DET,DET,Ahmed Hassanein,DE,Active,,,2026-11-16T19:11,0,0,17
+TB@DET,DET,Jake Bates,PK,Active,,,2026-11-15T19:35,0,0,
+TB@DET,DET,Isaac TeSlaa,WR,Active,,,2026-11-15T19:32,0,0,53
+TB@DET,DET,Jack Campbell,LB,Out,IR · Neck,Not Specified,2026-11-07T22:18,0,0,
+ARI@KC,ARI,Jeremiyah Love,RB,Out,IR · Ankle,Sprain,2026-11-23T22:34,0,0,
+ARI@KC,ARI,Teagan Quitoriano,TE,Active,,,2026-11-23T16:31,0,0,22
+ARI@KC,ARI,Hunter Long,TE,Active,,,2026-11-23T16:29,0,0,49
+ARI@KC,ARI,Jon Gaines II,G,Out,Ankle,Not Specified,2026-11-23T15:17,0,0,
+ARI@KC,ARI,Carson Beck,QB,Out,Back,Spasms,2026-11-23T15:17,0,1,100
+ARI@KC,ARI,Kingsley Eguakun,C,Active,,,2026-11-23T15:17,0,0,
+ARI@KC,ARI,Andrew Billings,DT,Active,,,2026-11-23T15:17,0,0,35
+ARI@KC,ARI,Starling Thomas V,CB,Active,,,2026-11-23T15:17,0,0,
+ARI@KC,ARI,Bam Knight,RB,Active,,,2026-11-22T23:51,0,0,
+ARI@KC,ARI,Tyler Allgeier,RB,Active,,,2026-11-22T23:47,0,1,65
+ARI@KC,ARI,Josh Johnson,QB,Active,,,2026-11-22T23:43,0,1,100
+ARI@KC,ARI,Trey McBride,TE,Active,,,2026-11-22T23:39,0,1,82
+ARI@KC,ARI,Cody Simon,LB,Questionable,Calf,Not Specified,2026-11-22T20:06,0,0,34
+ARI@KC,ARI,Zay Jones,WR,Active,,,2026-11-22T00:19,0,0,38
+ARI@KC,ARI,Hjalte Froholdt,C,Active,,,2026-11-21T01:37,0,1,100
+ARI@KC,ARI,Zachary Carter,DT,Out,IR · Knee,Not Specified,2026-11-21T01:35,0,0,
+ARI@KC,ARI,Roy Lopez,DT,Active,,,2026-11-20T22:06,0,0,37
+ARI@KC,ARI,Jayden Williams,OT,Active,,,2026-11-20T02:46,0,1,100
+ARI@KC,ARI,Walter Nolen III,DT,Active,,,2026-11-20T00:25,0,0,55
+ARI@KC,ARI,Max Melton,CB,Active,,,2026-11-19T23:23,0,0,52
+ARI@KC,ARI,Budda Baker,S,Active,,,2026-11-19T02:53,0,1,95
+ARI@KC,ARI,Mack Wilson Sr.,LB,Active,,,2026-11-19T02:46,0,1,100
+ARI@KC,ARI,James Conner,RB,Out,IR · Foot,Surgery,2026-11-18T21:40,0,0,
+ARI@KC,ARI,Harrison Wallace III,WR,Active,,,2026-11-18T14:52,0,0,27
+ARI@KC,ARI,Gardner Minshew II,QB,Out,IR · Elbow,Surgery,2026-11-18T04:40,0,1,100
+ARI@KC,KC,Kenneth Walker III,RB,Out,Groin,Soreness,2026-11-23T22:45,0,1,65
+ARI@KC,KC,Trey Smith,G,Out,Concussion,Concussion,2026-11-23T15:35,0,0,58
+ARI@KC,KC,Jaylon Moore,OT,Out,Ankle,Not Specified,2026-11-23T15:35,0,1,64
+ARI@KC,KC,Melvin Smith Jr.,CB,Active,,,2026-11-23T15:35,0,0,
+ARI@KC,KC,Harrison Butker,PK,Active,,,2026-11-23T05:41,0,0,
+ARI@KC,KC,Xavier Worthy,WR,Active,,,2026-11-23T03:29,0,1,76
+ARI@KC,KC,Josh Downs,WR,Active,,,2026-11-22T23:20,0,0,20
+ARI@KC,KC,Rashee Rice,WR,Active,,,2026-11-22T23:16,0,0,49
+ARI@KC,KC,Travis Kelce,TE,Active,,,2026-11-22T23:10,0,0,58
+ARI@KC,KC,Patrick Mahomes,QB,Active,,,2026-11-22T21:57,0,1,91
+ARI@KC,KC,Emmett Johnson,RB,Active,,,2026-11-22T21:45,0,1,67
+ARI@KC,KC,Ben VanSumeren,FB,Questionable,Knee,Not Specified,2026-11-22T20:49,0,0,1
+ARI@KC,KC,Noah Gray,TE,Questionable,Ribs,Not Specified,2026-11-22T20:48,0,1,71
+ARI@KC,KC,Omarr Norman-Lott,DT,Out,Knee - ACL,Surgery,2026-11-22T16:37,0,0,
+ARI@KC,KC,Peter Woods,DT,Out,Neck,Not Specified,2026-11-22T16:37,0,0,
+ARI@KC,KC,Garrett Nussmeier,QB,Active,,,2026-11-22T16:50,0,0,
+ARI@KC,KC,Nate Carter,RB,Active,,,2026-11-22T00:33,0,0,
+ARI@KC,KC,Nick Bolton,LB,Active,,,2026-11-20T00:32,0,1,84
+ARI@KC,KC,Jared Wiley,TE,Out,IR · Ankle,Fracture,2026-11-19T01:06,0,0,7
+ARI@KC,KC,Jaydn Ott,RB,Active,,,2026-11-19T00:50,0,0,12
+ARI@KC,KC,Drue Tranquill,LB,Active,,,2026-11-18T03:19,0,1,77
+ARI@KC,KC,Nohl Williams,CB,Active,,,2026-11-18T03:09,0,1,90
+ARI@KC,KC,Jake Briningstool,TE,Active,,,2026-11-18T02:54,0,0,29
+ARI@KC,KC,Andrew Armstrong,WR,Active,,,2026-11-16T03:36,0,0,29
+ARI@KC,KC,Cyrus Allen,WR,Active,,,2026-11-16T02:45,0,0,29
+PIT@PHI,PIT,DK Metcalf,WR,Active,,,2026-11-23T21:08,0,1,79
+PIT@PHI,PIT,Michael Pittman Jr.,WR,Out,IR · Foot,Plantar Fasciitis,2026-11-23T20:37,0,0,
+PIT@PHI,PIT,Alex Highsmith,LB,Doubtful,Ankle,Not Specified,2026-11-23T20:06,0,0,46
+PIT@PHI,PIT,Nick Herbig,LB,Out,Hip,Not Specified,2026-11-23T15:50,0,0,48
+PIT@PHI,PIT,Sean Murphy-Bunting,CB,Active,,,2026-11-23T15:50,0,0,
+PIT@PHI,PIT,Gabriel Rubio,DE,Active,,,2026-11-23T15:50,0,0,16
+PIT@PHI,PIT,Drew Allar,QB,Active,,,2026-11-23T15:50,0,0,
+PIT@PHI,PIT,Eli Heidenreich,RB,Active,,,2026-11-23T15:50,0,0,
+PIT@PHI,PIT,Chris Boswell,PK,Active,,,2026-11-23T05:23,0,0,
+PIT@PHI,PIT,Darnell Washington,TE,Active,,,2026-11-23T04:38,0,0,57
+PIT@PHI,PIT,Pat Freiermuth,TE,Active,,,2026-11-23T04:02,0,0,55
+PIT@PHI,PIT,Max Hurleman,WR,Active,,,2026-11-23T01:48,0,0,31
+PIT@PHI,PIT,Aaron Rodgers,QB,Active,,,2026-11-22T23:13,0,1,92
+PIT@PHI,PIT,Rico Dowdle,RB,Active,,,2026-11-22T23:11,0,0,43
+PIT@PHI,PIT,Jaylen Warren,RB,Active,,,2026-11-22T23:10,0,0,55
+PIT@PHI,PIT,Kaden Wetjen,WR,Active,,,2026-11-22T17:19,0,0,
+PIT@PHI,PIT,Patrick Queen,LB,Active,,,2026-11-22T17:00,0,1,100
+PIT@PHI,PIT,DeShon Elliott,S,Active,,,2026-11-22T16:58,0,0,30
+PIT@PHI,PIT,Will Howard,QB,Active,,,2026-11-22T16:51,0,0,
+PIT@PHI,PIT,Roman Wilson,WR,Active,,,2026-11-22T16:49,0,1,69
+PIT@PHI,PIT,Gennings Dunker,G,Out,IR · Knee,Not Specified,2026-11-19T02:00,0,0,
+PIT@PHI,PIT,Mason McCormick,G,Out,IR · Ankle,Dislocated,2026-11-19T01:44,0,1,67
+PIT@PHI,PIT,Jaquan Brisker,S,Active,,,2026-11-18T05:57,0,1,91
+PIT@PHI,PIT,Payton Wilson,LB,Active,,,2026-11-18T05:39,0,1,89
+PIT@PHI,PIT,Germie Bernard,WR,Active,,,2026-11-17T01:36,0,1,91
+PIT@PHI,PHI,Will Shipley,RB,Questionable,Illness,Not Specified,2026-11-23T22:14,0,0,36
+PIT@PHI,PHI,Tanner McKee,QB,Questionable,Ribs,Not Specified,2026-11-23T22:14,0,1,100
+PIT@PHI,PHI,Arnold Ebiketie,LB,Questionable,Oblique,Not Specified,2026-11-23T22:13,0,0,39
+PIT@PHI,PHI,Dallas Goedert,TE,Questionable,Shin,Not Specified,2026-11-23T22:07,0,1,83
+PIT@PHI,PHI,Saquon Barkley,RB,Questionable,Neck,Not Specified,2026-11-23T22:04,0,0,52
+PIT@PHI,PHI,Ajani Cornelius,OT,Active,,,2026-11-23T15:49,0,0,
+PIT@PHI,PHI,Jake Majors,C,Active,,,2026-11-23T15:49,0,0,
+PIT@PHI,PHI,Mac McWilliams,CB,Active,,,2026-11-23T15:49,0,0,
+PIT@PHI,PHI,Smael Mondon Jr.,LB,Out,Ankle,Not Specified,2026-11-23T15:48,0,0,39
+PIT@PHI,PHI,Jake Elliott,PK,Active,,,2026-11-23T05:05,0,0,
+PIT@PHI,PHI,Makai Lemon,WR,Active,,,2026-11-23T01:41,0,1,90
+PIT@PHI,PHI,Joe Milton,QB,Active,,,2026-11-23T01:37,0,1,100
+PIT@PHI,PHI,DeVonta Smith,WR,Active,,,2026-11-22T22:23,0,1,81
+PIT@PHI,PHI,Jonathan Jones,CB,Questionable,Ankle,Not Specified,2026-11-22T22:18,0,0,49
+PIT@PHI,PHI,Quinyon Mitchell,CB,Questionable,Hamstring,Not Specified,2026-11-22T20:56,0,1,93
+PIT@PHI,PHI,Cole Payton,QB,Active,,,2026-11-22T16:38,0,0,
+PIT@PHI,PHI,Jalen Carter,DT,Active,,,2026-11-22T16:37,0,1,85
+PIT@PHI,PHI,Zack Baun,LB,Out,IR · Back,Not Specified,2026-11-22T00:14,0,1,74
+PIT@PHI,PHI,Dontayvion Wicks,WR,Out,IR · Ankle,Not Specified,2026-11-21T21:09,0,0,
+PIT@PHI,PHI,Michael Carter II,CB,Active,,,2026-11-21T01:28,0,0,8
+PIT@PHI,PHI,Nolan Smith Jr.,LB,Active,,,2026-11-21T00:20,0,1,65
+PIT@PHI,PHI,Britain Covey,WR,Active,,,2026-11-21T00:12,0,0,2
+PIT@PHI,PHI,Jihaad Campbell,LB,Active,,,2026-11-19T01:38,0,1,82
+PIT@PHI,PHI,Jaydon Blue,RB,Active,,,2026-11-18T00:54,0,0,12
+PIT@PHI,PHI,Zach Ertz,TE,Active,,,2026-11-16T18:31,0,0,11
+BAL@CAR,BAL,Matt Hibner,TE,Active,,,2026-11-23T16:39,0,0,
+BAL@CAR,BAL,Marlon Humphrey,CB,Out,Coach's Decision,Not Specified,2026-11-23T15:19,0,1,76
+BAL@CAR,BAL,Nnamdi Madubuike,DT,Out,Hamstring,Not Specified,2026-11-23T15:19,0,1,61
+BAL@CAR,BAL,Jaylinn Hawkins,S,Out,Knee,Not Specified,2026-11-23T15:19,0,0,
+BAL@CAR,BAL,Emery Jones Jr.,OT,Active,,,2026-11-23T15:19,0,0,
+BAL@CAR,BAL,Rashod Bateman,WR,Active,,,2026-11-23T01:42,0,1,81
+BAL@CAR,BAL,Mark Andrews,TE,Active,,,2026-11-23T00:25,0,0,59
+BAL@CAR,BAL,Justice Hill,RB,Active,,,2026-11-23T00:21,0,0,52
+BAL@CAR,BAL,Jacoby Brissett,QB,Active,,,2026-11-23T00:13,0,1,100
+BAL@CAR,BAL,Zay Flowers,WR,Active,,,2026-11-23T00:00,0,1,81
+BAL@CAR,BAL,Derrick Henry,RB,Active,,,2026-11-22T21:53,0,0,51
+BAL@CAR,BAL,Roger Rosengarten,OT,Active,,,2026-11-22T20:30,0,1,100
+BAL@CAR,BAL,Trey Hendrickson,LB,Active,,,2026-11-22T20:15,0,1,64
+BAL@CAR,BAL,Elijah Sarratt,WR,Active,,,2026-11-22T16:43,0,0,
+BAL@CAR,BAL,Adam Randall,RB,Active,,,2026-11-22T16:39,0,0,
+BAL@CAR,BAL,Kedon Slovis,QB,Active,,,2026-11-22T16:35,0,0,
+BAL@CAR,BAL,Nick Vannett,TE,Active,,,2026-11-22T00:10,0,0,22
+BAL@CAR,BAL,Olaivavega Ioane,G,Active,,,2026-11-20T00:37,0,1,84
+BAL@CAR,BAL,Rasheen Ali,RB,Active,,,2026-11-18T16:14,0,0,
+BAL@CAR,BAL,Lamar Jackson,QB,Out,IR · Thumb,Surgery,2026-11-18T15:52,0,0,
+BAL@CAR,BAL,Roquan Smith,LB,Active,,,2026-11-18T04:29,0,1,98
+BAL@CAR,BAL,Kyle Hamilton,S,Active,,,2026-11-18T04:26,0,1,84
+BAL@CAR,BAL,Mike Green,LB,Active,,,2026-11-18T04:03,0,1,71
+BAL@CAR,BAL,Josh Cuevas,TE,Active,,,2026-11-18T02:36,0,0,18
+BAL@CAR,BAL,Riley Patterson,PK,Active,,,2026-11-18T01:56,0,0,
+BAL@CAR,BAL,Adisa Isaac,LB,Questionable,Hamstring,Not Specified,2026-11-06T03:14,0,0,
+BAL@CAR,CAR,Jaycee Horn,CB,Out,IR · Quadriceps,Strain,2026-11-23T21:53,0,0,
+BAL@CAR,CAR,Jalen Coker,WR,Active,,,2026-11-23T18:42,0,1,82
+BAL@CAR,CAR,Feleipe Franks,TE,Active,,,2026-11-23T16:47,0,0,4
+BAL@CAR,CAR,Bobby Okereke,LB,Out,Foot,Not Specified,2026-11-23T15:21,0,0,
+BAL@CAR,CAR,TeRah Edwards,DT,Active,,,2026-11-23T15:21,0,0,
+BAL@CAR,CAR,Marco Wilson,CB,Active,,,2026-11-23T15:21,0,1,100
+BAL@CAR,CAR,Sam Hecht,C,Active,,,2026-11-23T15:21,0,0,
+BAL@CAR,CAR,AJ Dillon,RB,Active,,,2026-11-23T15:21,0,0,
+BAL@CAR,CAR,Mitchell Evans,TE,Active,,,2026-11-23T01:46,0,0,46
+BAL@CAR,CAR,Darren Waller,TE,Active,,,2026-11-23T01:00,0,0,53
+BAL@CAR,CAR,Bryce Young,QB,Active,,,2026-11-23T00:55,0,1,100
+BAL@CAR,CAR,Tetairoa McMillan,WR,Active,,,2026-11-23T00:51,0,1,81
+BAL@CAR,CAR,Chuba Hubbard,RB,Active,,,2026-11-23T00:39,0,1,85
+BAL@CAR,CAR,Mike Jackson,CB,Active,,,2026-11-22T17:31,0,0,
+BAL@CAR,CAR,Ja'Tavion Sanders,TE,Active,,,2026-11-22T17:25,0,0,
+BAL@CAR,CAR,Haynes King,QB,Active,,,2026-11-22T17:06,0,0,
+BAL@CAR,CAR,Tommy Tremble,TE,Active,,,2026-11-22T16:47,0,1,73
+BAL@CAR,CAR,Brady Christensen,G,Out,IR · Hamstring,Not Specified,2026-11-22T00:59,0,0,
+BAL@CAR,CAR,Isaiah Simmons,S,Out,IR · Knee,Not Specified,2026-11-22T00:57,0,0,
+BAL@CAR,CAR,Jonathon Brooks,RB,Out,IR · Groin,Surgery,2026-11-21T21:13,0,0,
+BAL@CAR,CAR,Will Lee III,CB,Active,,,2026-11-19T00:17,0,1,100
+BAL@CAR,CAR,Tyrel Dodson,LB,Active,,,2026-11-18T03:52,0,1,98
+BAL@CAR,CAR,Devin Lloyd,LB,Active,,,2026-11-18T03:44,0,1,98
+BAL@CAR,CAR,Xavier Legette,WR,Active,,,2026-11-18T02:46,0,0,3
+BAL@CAR,CAR,John Metchie III,WR,Active,,,2026-11-18T02:34,0,0,31
+NYJ@LAC,NYJ,Isaiah Williams,WR,Out,Ribs,Not Specified,2026-11-23T15:45,0,1,65
+NYJ@LAC,NYJ,Omar Cooper Jr.,WR,Out,Ankle,Not Specified,2026-11-23T15:45,0,0,44
+NYJ@LAC,NYJ,Jelani Woods,TE,Active,,,2026-11-23T15:45,0,0,10
+NYJ@LAC,NYJ,Jarvis Brownlee Jr.,CB,Active,,,2026-11-23T15:45,0,0,3
+NYJ@LAC,NYJ,Nate Lynn,DE,Active,,,2026-11-23T15:45,0,0,18
+NYJ@LAC,NYJ,Jason Sanders,PK,Active,,,2026-11-23T05:41,0,0,
+NYJ@LAC,NYJ,Mason Taylor,TE,Active,,,2026-11-23T04:48,0,1,74
+NYJ@LAC,NYJ,Isaiah Davis,RB,Active,,,2026-11-23T04:40,0,0,
+NYJ@LAC,NYJ,Kenyon Sadiq,TE,Active,,,2026-11-23T04:32,0,0,52
+NYJ@LAC,NYJ,Adonai Mitchell,WR,Active,,,2026-11-23T04:31,0,1,79
+NYJ@LAC,NYJ,Sterling Shepard,WR,Active,,,2026-11-23T01:37,0,0,37
+NYJ@LAC,NYJ,Braelon Allen,RB,Active,,,2026-11-23T01:06,0,0,48
+NYJ@LAC,NYJ,Geno Smith,QB,Active,,,2026-11-23T00:56,0,1,83
+NYJ@LAC,NYJ,Garrett Wilson,WR,Active,,,2026-11-23T00:54,0,1,92
+NYJ@LAC,NYJ,Breece Hall,RB,Active,,,2026-11-23T00:50,0,0,55
+NYJ@LAC,NYJ,Dylan Parham,G,Active,,,2026-11-22T19:49,0,1,73
+NYJ@LAC,NYJ,Trevin Wallace,LB,Out,Groin,Not Specified,2026-11-22T19:43,0,0,
+NYJ@LAC,NYJ,Harrison Phillips,DT,Active,,,2026-11-22T19:41,0,0,47
+NYJ@LAC,NYJ,Joseph Ossai,DE,Active,,,2026-11-22T19:37,0,0,38
+NYJ@LAC,NYJ,David Onyemata,DT,Out,IR · Abdomen,Surgery,2026-11-21T01:01,0,0,
+NYJ@LAC,NYJ,Dane Belton,S,Active,,,2026-11-18T05:03,0,1,100
+NYJ@LAC,NYJ,Demario Davis,LB,Active,,,2026-11-18T04:59,0,1,96
+NYJ@LAC,NYJ,Jamien Sherwood,LB,Active,,,2026-11-18T04:52,0,1,98
+NYJ@LAC,NYJ,Tim Patrick,WR,Active,,,2026-11-16T19:35,0,0,42
+NYJ@LAC,NYJ,Cade Klubnik,QB,Active,,,2026-11-15T23:54,0,0,52
+NYJ@LAC,NYJ,Max Mitchell,OT,Out,IR · Concussion,Concussion,2026-11-04T01:56,0,0,
+NYJ@LAC,LAC,Kendall Williamson,S,Out,Calf,Not Specified,2026-11-23T15:37,0,0,
+NYJ@LAC,LAC,Daiyan Henley,LB,Out,Knee,Soreness,2026-11-23T15:37,0,1,88
+NYJ@LAC,LAC,Alex Harkey,G,Active,,,2026-11-23T15:37,0,0,35
+NYJ@LAC,LAC,Quentin Johnston,WR,Active,,,2026-11-23T03:15,0,1,79
+NYJ@LAC,LAC,Kimani Vidal,RB,Active,,,2026-11-23T01:29,0,0,36
+NYJ@LAC,LAC,Tre' Harris,WR,Active,,,2026-11-23T01:23,0,1,83
+NYJ@LAC,LAC,Ladd McConkey,WR,Active,,,2026-11-23T01:20,0,1,78
+NYJ@LAC,LAC,Omarion Hampton,RB,Active,,,2026-11-23T01:15,0,0,53
+NYJ@LAC,LAC,Justin Herbert,QB,Questionable,Concussion,Concussion,2026-11-23T00:32,0,1,93
+NYJ@LAC,LAC,Akheem Mesidor,LB,Questionable,Ankle,Not Specified,2026-11-22T22:23,0,0,53
+NYJ@LAC,LAC,Keaton Mitchell,RB,Questionable,Knee,Not Specified,2026-11-22T21:54,0,0,17
+NYJ@LAC,LAC,David Njoku,TE,Active,,,2026-11-22T21:50,0,0,38
+NYJ@LAC,LAC,Trey Pipkins III,OT,Active,,,2026-11-22T20:07,0,0,
+NYJ@LAC,LAC,Isas Waxter,CB,Active,,,2026-11-22T19:52,0,0,8
+NYJ@LAC,LAC,Tarheeb Still,CB,Out,Ankle,Not Specified,2026-11-22T19:51,0,1,100
+NYJ@LAC,LAC,Brenen Thompson,WR,Out,Hamstring,Not Specified,2026-11-22T19:48,0,0,
+NYJ@LAC,LAC,KeAndre Lambert-Smith,WR,Active,,,2026-11-22T19:46,0,0,29
+NYJ@LAC,LAC,Charlie Kolar,TE,Active,,,2026-11-22T19:44,0,1,62
+NYJ@LAC,LAC,Rodney Shelley,CB,Out,IR · Ankle,Not Specified,2026-11-22T00:49,0,0,12
+NYJ@LAC,LAC,Bud Dupree,LB,Active,,,2026-11-21T03:18,0,0,5
+NYJ@LAC,LAC,Justin Eboigbe,DT,Active,,,2026-11-21T00:30,0,0,22
+NYJ@LAC,LAC,Donte Jackson,CB,Active,,,2026-11-20T22:05,0,1,72
+NYJ@LAC,LAC,Dalvin Tomlinson,DT,Active,,,2026-11-19T02:47,0,0,54
+NYJ@LAC,LAC,Del'Shawn Phillips,LB,Active,,,2026-11-19T02:39,0,0,49
+NYJ@LAC,LAC,Cameron Dicker,PK,Active,,,2026-11-18T01:55,0,0,
+LV@DEN,LV,Tonka Hemingway,DT,Out,Upper Body,Stinger,2026-11-23T15:36,0,0,53
+LV@DEN,LV,Bryce Cabeldue,G,Active,,,2026-11-23T15:36,0,0,
+LV@DEN,LV,Malik Benson,WR,Active,,,2026-11-23T15:36,0,0,
+LV@DEN,LV,Dalton Johnson,S,Active,,,2026-11-23T15:36,0,0,
+LV@DEN,LV,Tristin McCollum,S,Active,,,2026-11-23T15:36,0,0,
+LV@DEN,LV,Jalen Nailor,WR,Active,,,2026-11-23T04:25,0,1,81
+LV@DEN,LV,Tre Tucker,WR,Active,,,2026-11-23T03:52,0,1,77
+LV@DEN,LV,Mike Washington Jr.,RB,Active,,,2026-11-23T02:44,0,0,28
+LV@DEN,LV,Michael Mayer,TE,Active,,,2026-11-23T02:20,0,1,75
+LV@DEN,LV,Fernando Mendoza,QB,Active,,,2026-11-23T02:09,0,1,100
+LV@DEN,LV,Ashton Jeanty,RB,Active,,,2026-11-23T01:44,0,1,73
+LV@DEN,LV,Jack Bech,WR,Active,,,2026-11-23T01:31,0,0,56
+LV@DEN,LV,Brock Bowers,TE,Out,Ankle,Not Specified,2026-11-22T19:58,0,0,60
+LV@DEN,LV,JJ Pegues,DT,Questionable,Forearm,Not Specified,2026-11-23T00:36,0,0,27
+LV@DEN,LV,Tim Keenan III,DT,Questionable,Knee,Not Specified,2026-11-22T23:22,0,0,30
+LV@DEN,LV,Adam Butler,DT,Questionable,Concussion,Concussion,2026-11-22T23:19,0,0,48
+LV@DEN,LV,Dareke Young,WR,Questionable,Neck,Stinger,2026-11-22T22:53,0,0,3
+LV@DEN,LV,Dont'e Thornton Jr.,WR,Active,,,2026-11-22T20:12,0,0,
+LV@DEN,LV,Folorunso Fatukasi,DT,Active,,,2026-11-22T20:10,0,0,52
+LV@DEN,LV,Matt Gay,PK,Active,,,2026-11-22T20:01,0,0,
+LV@DEN,LV,Carter Runyon,TE,Active,,,2026-11-22T00:13,0,0,3
+LV@DEN,LV,Ian Thomas,TE,Active,,,2026-11-20T22:00,0,0,34
+LV@DEN,LV,Trey Zuhn III,C,Active,,,2026-11-20T22:00,0,1,87
+LV@DEN,LV,Thomas Booker IV,DT,Active,,,2026-11-19T02:15,0,0,30
+LV@DEN,LV,Kwity Paye,DE,Active,,,2026-11-19T01:37,0,1,66
+LV@DEN,DEN,Nate Adkins,TE,Active,,,2026-11-23T17:28,0,0,32
+LV@DEN,DEN,Gavin Ortega,OT,Active,,,2026-11-23T15:27,0,0,
+LV@DEN,DEN,Jordan Jackson,DT,Active,,,2026-11-23T15:27,0,0,20
+LV@DEN,DEN,Dallen Bentley,TE,Active,,,2026-11-23T15:27,0,0,
+LV@DEN,DEN,Kage Casey,OT,Active,,,2026-11-23T15:27,0,0,
+LV@DEN,DEN,Pat Bryant,WR,Active,,,2026-11-23T03:46,0,1,62
+LV@DEN,DEN,J.K. Dobbins,RB,Active,,,2026-11-23T03:10,0,0,12
+LV@DEN,DEN,Courtland Sutton,WR,Active,,,2026-11-23T02:32,0,1,78
+LV@DEN,DEN,Evan Engram,TE,Active,,,2026-11-23T02:15,0,0,48
+LV@DEN,DEN,Bo Nix,QB,Active,,,2026-11-23T02:01,0,1,100
+LV@DEN,DEN,Jaylen Waddle,WR,Active,,,2026-11-23T01:52,0,0,39
+LV@DEN,DEN,Jonah Coleman,RB,Active,,,2026-11-23T01:33,0,1,76
+LV@DEN,DEN,Lil'Jordan Humphrey,WR,Active,,,2026-11-22T20:16,0,0,19
+LV@DEN,DEN,Brandon Jones,S,Out,Hamstring,Not Specified,2026-11-22T20:01,0,0,35
+LV@DEN,DEN,Sam Ehlinger,QB,Active,,,2026-11-22T20:12,0,0,
+LV@DEN,DEN,Cody Schrader,RB,Active,,,2026-11-22T05:01,0,0,3
+LV@DEN,DEN,Taylor Rapp,S,Active,,,2026-11-22T00:55,0,1,66
+LV@DEN,DEN,Talanoa Hufanga,S,Active,,,2026-11-21T00:34,0,1,99
+LV@DEN,DEN,Caleb Lohner,TE,Out,IR · Foot,Surgery,2026-11-21T00:17,0,0,
+LV@DEN,DEN,Riley Moss,CB,Active,,,2026-11-21T00:13,0,1,75
+LV@DEN,DEN,Kris Abrams-Draine,CB,Active,,,2026-11-20T02:45,0,0,
+LV@DEN,DEN,Adam Prentice,FB,Active,,,2026-11-19T01:27,0,0,21
+LV@DEN,DEN,Alex Singleton,LB,Active,,,2026-11-12T03:09,0,1,100
+LV@DEN,DEN,Adam Trautman,TE,Active,,,2026-11-11T02:55,0,0,57
+LV@DEN,DEN,Marvin Mims Jr.,WR,Active,,,2026-11-11T02:45,0,0,25
+LV@DEN,DEN,Eyioma Uwazurike,DE,Out,IR · Shoulder,Not Specified,2026-11-08T03:38,0,0,45
+LV@DEN,DEN,RJ Harvey,RB,Out,IR · Knee,Not Specified,2026-10-31T20:18,0,0,
+LV@DEN,DEN,Tyler Badie,RB,Out,IR · Thumb,Fracture,2026-10-24T23:25,0,0,
+JAX@NYG,JAX,Bhayshul Tuten,RB,Questionable,Ankle,Not Specified,2026-11-23T19:28,0,0,50
+JAX@NYG,JAX,Quintin Morris,TE,Active,,,2026-11-23T17:57,0,0,11
+JAX@NYG,JAX,Tanner Koziol,TE,Active,,,2026-11-23T17:54,0,0,12
+JAX@NYG,JAX,Nate Boerkircher,TE,Active,,,2026-11-23T17:49,0,0,45
+JAX@NYG,JAX,Danny Striggow,DE,Out,Concussion,Concussion,2026-11-23T15:34,0,0,19
+JAX@NYG,JAX,Matt Dickerson,DE,Out,Neck,Not Specified,2026-11-23T15:34,0,0,30
+JAX@NYG,JAX,Robert Hainsey,C,Out,Knee,Sprain,2026-11-23T15:34,0,1,78
+JAX@NYG,JAX,CJ Williams,WR,Active,,,2026-11-23T15:34,0,0,
+JAX@NYG,JAX,Jalen Huskey,S,Active,,,2026-11-23T15:34,0,0,18
+JAX@NYG,JAX,Albert Regis,DT,Active,,,2026-11-23T15:34,0,0,39
+JAX@NYG,JAX,Cam Little,PK,Active,,,2026-11-23T15:03,0,0,
+JAX@NYG,JAX,Brenton Strange,TE,Active,,,2026-11-23T03:18,0,1,80
+JAX@NYG,JAX,Chris Rodriguez Jr.,RB,Active,,,2026-11-23T03:11,0,0,32
+JAX@NYG,JAX,Jakobi Meyers,WR,Active,,,2026-11-23T02:45,0,1,77
+JAX@NYG,JAX,Brian Thomas Jr.,WR,Active,,,2026-11-23T02:40,0,0,44
+JAX@NYG,JAX,Trevor Lawrence,QB,Active,,,2026-11-23T02:38,0,1,100
+JAX@NYG,JAX,Parker Washington,WR,Active,,,2026-11-23T02:04,0,1,76
+JAX@NYG,JAX,Walker Little,OT,Questionable,Knee,Not Specified,2026-11-23T00:22,0,1,88
+JAX@NYG,JAX,Jarrian Jones,CB,Questionable,Chest,Not Specified,2026-11-22T23:17,0,0,58
+JAX@NYG,JAX,Jordan Davis,DT,Active,,,2026-11-22T14:11,0,0,50
+JAX@NYG,JAX,Jessie Bates III,S,Active,,,2026-11-22T14:09,0,1,94
+JAX@NYG,JAX,B.J. Green II,DE,Out,IR · Forearm,Not Specified,2026-11-21T01:27,0,0,
+JAX@NYG,JAX,Travon Walker,DE,Active,,,2026-11-21T00:00,0,1,85
+JAX@NYG,JAX,Antonio Johnson,S,Active,,,2026-11-20T23:57,0,1,94
+JAX@NYG,JAX,LeQuint Allen Jr.,RB,Active,,,2026-11-20T21:37,0,0,14
+JAX@NYG,NYG,Greg Newsome II,CB,Out,Ankle,Sprain,2026-11-23T22:14,0,1,68
+JAX@NYG,NYG,J.C. Davis,OT,Active,,,2026-11-23T15:44,0,0,1
+JAX@NYG,NYG,Thomas Fidone II,TE,Active,,,2026-11-23T15:44,0,0,
+JAX@NYG,NYG,Jason Pinnock,S,Active,,,2026-11-23T15:44,0,0,34
+JAX@NYG,NYG,Greg Desrosiers Jr.,RB,Active,,,2026-11-23T15:44,0,0,
+JAX@NYG,NYG,Darius Alexander,DT,Active,,,2026-11-23T15:44,0,0,44
+JAX@NYG,NYG,Josh Sills,G,Active,,,2026-11-23T15:44,0,0,
+JAX@NYG,NYG,Nic Jones,CB,Active,,,2026-11-23T15:44,0,0,
+JAX@NYG,NYG,Dominic Zvada,PK,Active,,,2026-11-23T05:12,0,0,
+JAX@NYG,NYG,J.J. McCarthy,QB,Active,,,2026-11-23T02:57,0,1,88
+JAX@NYG,NYG,Isaiah Likely,TE,Active,,,2026-11-23T02:52,0,1,80
+JAX@NYG,NYG,Cam Skattebo,RB,Active,,,2026-11-23T02:32,0,1,86
+JAX@NYG,NYG,Malik Nabers,WR,Active,,,2026-11-23T02:10,0,1,78
+JAX@NYG,NYG,Phil Mafah,RB,Active,,,2026-11-22T00:35,0,0,
+JAX@NYG,NYG,Malik Harrison,LB,Active,,,2026-11-20T02:31,0,0,3
+JAX@NYG,NYG,Tyrone Tracy Jr.,RB,Out,IR · Hamstring,Strain,2026-11-18T20:16,0,0,
+JAX@NYG,NYG,Jameis Winston,QB,Active,,,2026-11-18T16:31,0,0,12
+JAX@NYG,NYG,Xavier Gipson,WR,Active,,,2026-11-17T00:21,0,0,1
+JAX@NYG,NYG,Paulson Adebo,CB,Active,,,2026-11-16T19:34,0,1,93
+JAX@NYG,NYG,CJ Okoye,DT,Active,,,2026-11-16T19:34,0,0,21
+JAX@NYG,NYG,Nikko Reed,CB,Active,,,2026-11-16T19:34,0,0,
+JAX@NYG,NYG,Micah McFadden,LB,Active,,,2026-11-14T02:59,0,1,99
+JAX@NYG,NYG,Jevon Holland,S,Active,,,2026-11-14T02:56,0,1,100
+JAX@NYG,NYG,Ar'Darius Washington,S,Active,,,2026-11-14T02:53,0,1,82
+JAX@NYG,NYG,Arvell Reese,LB,Active,,,2026-11-14T02:50,0,1,100
+JAX@NYG,NYG,Tremaine Edmunds,LB,Out,IR · Chest,Not Specified,2026-10-24T23:28,0,0,
+JAX@NYG,NYG,Braxton Berrios,WR,Out,IR · Foot,Surgery,2026-10-14T21:17,0,0,
+JAX@NYG,NYG,Chauncey Golston,DE,Out,IR · Neck,Not Specified,2026-10-11T01:28,0,0,
+MIN@SF,MIN,Jordan Addison,WR,Out,Thumb,Surgery,2026-11-23T20:30,0,1,96
+MIN@SF,MIN,Kyler Murray,QB,Out,Hamstring,Strain,2026-11-23T15:41,0,0,
+MIN@SF,MIN,Tai Felton,WR,Active,,,2026-11-23T05:03,0,0,57
+MIN@SF,MIN,Jordan Mason,RB,Active,,,2026-11-23T05:02,0,0,48
+MIN@SF,MIN,Aaron Jones Sr.,RB,Active,,,2026-11-23T05:01,0,0,39
+MIN@SF,MIN,T.J. Hockenson,TE,Active,,,2026-11-23T05:00,0,1,66
+MIN@SF,MIN,Jauan Jennings,WR,Active,,,2026-11-23T04:56,0,1,78
+MIN@SF,MIN,Kirk Cousins,QB,Active,,,2026-11-23T04:55,0,1,95
+MIN@SF,MIN,Justin Jefferson,WR,Active,,,2026-11-23T04:43,0,1,90
+MIN@SF,MIN,Christian Darrisaw,OT,Active,,,2026-11-23T03:22,0,1,89
+MIN@SF,MIN,Jay Ward,S,Out,Knee,Not Specified,2026-11-23T00:00,0,0,16
+MIN@SF,MIN,Isaiah Rodgers,CB,Out,Quadriceps,Not Specified,2026-11-23T00:00,0,1,70
+MIN@SF,MIN,Max Brosmer,QB,Active,,,2026-11-23T00:06,0,0,17
+MIN@SF,MIN,Gavin Bartholomew,TE,Active,,,2026-11-21T00:44,0,0,39
+MIN@SF,MIN,Jeshaun Jones,WR,Active,,,2026-11-20T22:29,0,0,12
+MIN@SF,MIN,Andrew Van Ginkel,LB,Active,,,2026-11-20T22:24,0,1,67
+MIN@SF,MIN,Blake Cashman,LB,Active,,,2026-11-20T22:22,0,1,90
+MIN@SF,MIN,Kyle Van Noy,LB,Active,,,2026-11-19T22:12,0,0,47
+MIN@SF,MIN,Eric Wilson,LB,Active,,,2026-11-19T02:30,0,1,87
+MIN@SF,MIN,Bo Richter,LB,Out,IR · Foot,Not Specified,2026-11-19T01:59,0,0,6
+MIN@SF,MIN,Tyrion Ingram-Dawkins,DE,Active,,,2026-11-18T22:23,0,0,44
+MIN@SF,MIN,Will Reichard,PK,Active,,,2026-11-17T03:05,0,0,
+MIN@SF,MIN,Myles Price,WR,Active,,,2026-11-17T01:10,0,0,41
+MIN@SF,MIN,Joshua Metellus,S,Active,,,2026-11-15T17:03,0,0,
+MIN@SF,MIN,Carson Wentz,QB,Active,,,2026-11-13T22:03,0,0,46
+MIN@SF,SF,Colton McKivitz,OT,Out,Ankle,Surgery,2026-11-23T19:42,0,1,77
+MIN@SF,SF,Deommodore Lenoir,CB,Questionable,Foot,Not Specified,2026-11-23T19:29,0,1,89
+MIN@SF,SF,Brandon Aiyuk,WR,Active,,,2026-11-23T19:16,0,0,
+MIN@SF,SF,Enrique Cruz Jr.,OT,Active,,,2026-11-23T15:50,0,0,
+MIN@SF,SF,Kurtis Rourke,QB,Active,,,2026-11-23T15:50,0,0,
+MIN@SF,SF,Keenan Allen,WR,Active,,,2026-11-23T05:13,0,0,52
+MIN@SF,SF,Kaelon Black,RB,Active,,,2026-11-23T05:07,0,0,32
+MIN@SF,SF,Deebo Samuel Sr.,WR,Active,,,2026-11-23T05:01,0,1,60
+MIN@SF,SF,George Kittle,TE,Active,,,2026-11-23T04:53,0,1,82
+MIN@SF,SF,Brock Purdy,QB,Active,,,2026-11-23T04:52,0,1,94
+MIN@SF,SF,Mike Evans,WR,Active,,,2026-11-23T04:44,0,0,43
+MIN@SF,SF,Christian McCaffrey,RB,Active,,,2026-11-23T04:41,0,1,64
+MIN@SF,SF,Dre Greenlaw,LB,Out,Neck,Not Specified,2026-11-23T00:02,0,1,92
+MIN@SF,SF,Jordan James,RB,Active,,,2026-11-23T00:21,0,0,8
+MIN@SF,SF,Khalid Kareem,DE,Out,Ankle,Not Specified,2026-11-23T00:02,0,0,4
+MIN@SF,SF,Mac Jones,QB,Active,,,2026-11-23T00:17,0,0,10
+MIN@SF,SF,Demarcus Robinson,WR,Active,,,2026-11-23T00:12,0,0,42
+MIN@SF,SF,Luke Gifford,LB,Active,,,2026-11-23T00:02,0,0,
+MIN@SF,SF,Upton Stout,CB,Active,,,2026-11-23T00:02,0,1,74
+MIN@SF,SF,Nate Hobbs,CB,Out,IR · Groin,Not Specified,2026-11-22T00:25,0,0,
+MIN@SF,SF,C.J. West,DT,Active,,,2026-11-22T00:22,0,0,28
+MIN@SF,SF,Ji'Ayir Brown,S,Active,,,2026-11-21T00:52,0,1,66
+MIN@SF,SF,Renardo Green,CB,Active,,,2026-11-20T02:08,0,1,80
+MIN@SF,SF,Isaac Guerendo,RB,Out,Pectoral,Surgery,2026-11-20T00:28,0,0,
+MIN@SF,SF,Siran Neal,S,Active,,,2026-11-19T23:37,0,0,12
+TEN@DAL,TEN,Fernando Carmona,G,Out,IR · Ankle,Sprain,2026-11-18T21:49,0,0,
+TEN@DAL,TEN,Wan'Dale Robinson,WR,Out,IR · Ankle,Not Specified,2026-11-18T17:29,0,1,63
+TB@DET,TB,Jalen McMillan,WR,Out,IR · Knee - PCL,Sprain,2026-11-09T19:19,0,0,
+ARI@KC,ARI,Jordan Burch,LB,Out,IR · Knee - MCL,Not Specified,2026-11-18T01:52,0,0,37
+MIN@SF,SF,Christian Kirk,WR,Out,IR · Knee - Meniscus,Surgery,2026-11-19T15:22,0,0,30
+MIN@SF,SF,De'Zhaun Stribling,WR,Out,IR · Ankle,Surgery,2026-11-18T20:26,0,0,
+MIA@BUF,MIA,Zeek Biggers,DT,Out,IR · Knee - Meniscus,Surgery,2026-11-18T00:26,0,0,45
+ARI@KC,ARI,Andrew Wingard,S,Out,IR · Wrist,Not Specified,2026-11-18T01:19,0,1,100
+LV@DEN,LV,Patrick Johnson,DE,Out,IR · Neck,Stinger,2026-11-01T02:52,0,0,
+JAX@NYG,NYG,Jaxson Dart,QB,Out,IR · Knee - Meniscus,Surgery,2026-09-30T20:35,0,0,
+NYJ@LAC,LAC,Branson Taylor,G,Out,IR · Ankle,Not Specified,2026-11-16T23:41,0,0,12
+JAX@NYG,JAX,Eric Murray,S,Out,IR · Elbow,Not Specified,2026-11-04T01:11,0,0,
