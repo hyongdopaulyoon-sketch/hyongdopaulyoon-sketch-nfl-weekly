@@ -41,7 +41,7 @@ table.cmp{border-collapse:collapse;width:100%;font-size:.88rem;min-width:640px}
 table.cmp th{font-size:.8rem;color:var(--muted);font-weight:500;text-align:left;padding:5px 6px;border-bottom:2px solid var(--line);word-break:keep-all}
 table.cmp td{padding:5px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
 table.cmp>tbody>tr:not(.xrow)>td{word-break:keep-all}
-table.cmp>tbody>tr:not(.xrow)>td:nth-child(4),table.cmp>tbody>tr:not(.xrow)>td:not(:first-child)>div,table.cmp .num,table.cmp .tn{white-space:nowrap}
+table.cmp>tbody>tr:not(.xrow)>td:nth-child(4),table.cmp>tbody>tr:not(.xrow)>td:not(:first-child)>div,table.cmp .num{white-space:nowrap}
 table.cmp tbody tr:hover{background:var(--soft)}
 table.cmp .mini{vertical-align:middle}
 thead th.sortable{cursor:pointer;user-select:none}
