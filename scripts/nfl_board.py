@@ -1512,15 +1512,21 @@ def team_state_html(week, g, pk, so, so_src, inj, hexg=None, poly=({}, "")):
                         avg = re.search(r"지금 넷 평균 ([\d.]+)", d["rev"][0])
                         why = f"빠진 선수의 타깃당 허용 야드가 대체 선수보다 나쁨: {' · '.join(nm)}" + (f" > 지금 넷 평균 {avg.group(1)}야드" if avg else "")
                     out.append(f"{k} {sc[k] - fu[k]:+g}({fu[k]}→{sc[k]}) — 결장으로 오름({why})")
-            return " · ".join(out)
+            up = bool(out)
+            if d.get("cov_raw") is not None and "커버리지" in fu:   # 11/24 Paul 「추천대로」 — 커버리지 상한(결장으로는 못 오름 · 4a8fe96)
+                nm = [re.sub(r"\(타깃당 ([\d.]+)야드 · 지금 넷 평균 ([\d.]+)\)$", r" \1야드", x_) for x_ in (d.get("rev") or [])]
+                out.append(f"커버리지 결장으로는 못 오름 — 상한 적용(뛰는 선수만 {d['cov_raw']} → 전원 가용 {fu['커버리지']}으로 표시"
+                           + (f" · 빠진 선수 {' · '.join(nm)}" if nm else "") + ")")
+            return " · ".join(out), up
         la, lh = _loss(A), _loss(H)
-        ra_, rh_ = _rise(A), _rise(H)
+        (ra_, ua_), (rh_, uh_) = _rise(A), _rise(H)
         fmt = lambda xs, up: " · ".join(f"{k} {dd:+g}({f_}→{s_})" for k, dd, f_, s_ in xs) or ("내려간 것 없음" if up else "없음")
         sa_, sh_ = -sum(x[1] for x in la), -sum(x[1] for x in lh)
-        rows.append(("결장 깎임·오름(육각형)" if (ra_ or rh_) else "결장 깎임(육각형)", (fmt(la, ra_), ra_), (fmt(lh, rh_), rh_),
+        rows.append(("결장 깎임·오름(육각형)" if (ua_ or uh_) else "결장 깎임(육각형)", (fmt(la, ra_), ra_), (fmt(lh, rh_), rh_),
                      (A if sa_ > sh_ else H) if sa_ != sh_ and max(sa_, sh_) > 0 else "", "worse",
                      "육각형 꼭짓점 — 전원 가용이면 → 이번 주 뛰는 선수만(50 = 리그 평균) · 내려간 꼭짓점 = 깎임(많이 깎인 쪽 빨강) · "
-                     "회색 = 결장으로 오른 꼭짓점(빠진 선수가 대신 뛰는 선수보다 값이 나빴던 경우 — 「더 좋아졌다」는 뜻이 아니라 값의 한계 표시) · 값만"))
+                     "회색 = 결장으로 오른 꼭짓점(빠진 선수가 대신 뛰는 선수보다 값이 나빴던 경우 — 「더 좋아졌다」는 뜻이 아니라 값의 한계 표시) · "
+                     "커버리지는 12주차~ 상한 적용(결장으로는 못 오름 — 뛰는 선수만의 값이 더 높으면 전원 가용 값으로 표시 · 11/24) · 값만"))
     mla, mlh = g.get("ml_away"), g.get("ml_home")
     if mla and mlh:   # ⑥ 가격 — DK ML 과 그 가격의 손익분기(비그 포함) · Polymarket 사는 가격
         be = lambda o: f"{o} · 손익분기 {N._implied(o) * 100:.1f}%" if N._implied(o) else str(o)
