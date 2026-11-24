@@ -359,7 +359,28 @@ SP_START_WEEK = 11
 SP_GRADE = "스프레드 픽(조건부 · A6·A7)"   # 이름은 그대로 둔다(보드·기록 행이 이 문자열로 찾음) — 조건은 A7·A6·A13
 ANGLE_GRADES["SP"] = SP_GRADE
 ANGLE_GRADES["A13"] = "각도 관찰 A13(러시 결장 손실 10점+ 팀의 상대 → 상대 ATS)"
-ANGLE_TARGET = {"SP": 30, "A13": 30, "A3": 30, "A4": 20, "A5": 20, "A6": 20, "A7": 20, "A8": 20, "A9": 20, "A10": 20, "A11": 30, "A12": 30}
+# 2026-11-24 A14 사전 등록(Paul 「추천대로」 · data/cov_cap_lab_2026-11-24.md · 값만 — 서술 전용 점수 0 · 스프레드 픽 조건 아님 · 조정 금지):
+#  A14 = 결장으로 커버리지 꼭짓점이 15점+ 오른 팀(team_hex: 뛰는 선수만의 상한 전 점수 cov_raw − 전원 가용 점수 ≥ 15 — 주전 커버리지 선수가 빠져 후보가 넷에 들어온 경우)의 **상대 쪽** ATS(현재 라인) · 두 팀 다 해당이면 제외.
+#  역사 2018~25 상대 쪽 180-148 54.9%(그 팀 승률 43.1% · 스프레드 50% 미만 시즌 6/8 · 2022~25 100-60) — 검정 뒤 눈에 띈 결과라 전향 확인. 12주차부터 · 30픽 판정(<50% 폐기 · ≥55% 면 Paul 상정).
+A14_RISE = 15
+A14_START_WEEK = 12
+ANGLE_GRADES["A14"] = "각도 관찰 A14(결장으로 커버리지 15점+ 오른 팀의 상대 → 상대 ATS)"
+
+
+def a14_side(v, a, h, hl):
+    """v = team_hex.week_values 의 경기 dict → (픽 문자열 「팀 ±라인」, 오른 팀, 오른 폭, 상한 전, 전원 가용) 또는 None(해당 없음·두 팀 다)."""
+    def rise(t):
+        x = v.get(t) or {}
+        return (x["cov_raw"] - x["full"]["커버리지"]) if x.get("cov_raw") is not None and x.get("full") else None
+    ra, rh = rise(a), rise(h)
+    ya, yh = (ra is not None and ra >= A14_RISE), (rh is not None and rh >= A14_RISE)
+    if ya == yh:
+        return None
+    up, r_ = (a, ra) if ya else (h, rh)
+    return (f"{h} {hl:+g}" if ya else f"{a} {-hl:+g}"), up, r_, v[up]["cov_raw"], v[up]["full"]["커버리지"]
+
+
+ANGLE_TARGET = {"SP": 30, "A13": 30, "A14": 30, "A3": 30, "A4": 20, "A5": 20, "A6": 20, "A7": 20, "A8": 20, "A9": 20, "A10": 20, "A11": 30, "A12": 30}
 # 2026-11-15 Paul 「둘 다 추천대로」 — 9주차 채점 뒤 판정(사전 등록 조건 그대로):
 #  A10 폐기: 20픽 7-13(35.0%) −6.65u · 조건 ≥50% & 수익 플러스 미달 → 10주차부터 생성 중단(기록 행은 남김 · 경기 단위 성적에서 제외 — A1·A2 와 같은 처리)
 #  A6 유지: 23픽 14-9(60.9%) +3.73u · 조건 ≥52.4% 충족 → 관찰 줄 계속(서술 전용 · ATS 각도라 판단 근거 아님 · 10판 ML 전용 불변)
@@ -605,6 +626,10 @@ def angles(week):
                 side_ = f"{h} {hl:+g}" if ya else f"{a} {-hl:+g}"
                 cand[f'{m["game_id"]}:spread:A13'] = (f"{a}@{h}", side_, "A13", f'{lose} 러시 결장 손실 {loss}점(뛰는 러셔 기준 {v[lose]["scores"]["러시"]} · 전원 가용이면 {v[lose]["full"]["러시"]})',
                                                       "spread", side_.split()[1], "-110")
+            if week >= A14_START_WEEK:   # A14 결장으로 커버리지 15점+ 오른 팀 → 상대 쪽(값만 · 스프레드 픽 조건 아님)
+                _a14 = a14_side(v, a, h, hl)
+                if _a14:
+                    cand[f'{m["game_id"]}:spread:A14'] = (f"{a}@{h}", _a14[0], "A14", f"{_a14[1]} 커버리지 결장으로 +{_a14[2]}점(뛰는 선수만 {_a14[3]} · 전원 가용이면 {_a14[4]})", "spread", _a14[0].split()[1], "-110")
     if week >= SP_START_WEEK:   # 조건부 스프레드 픽 — A7·A6·A13 후보에서(하나뿐이거나 같은 팀이면 픽 · 반대면 없음)
         for _gid in {k.split(":")[0] for k in cand}:
             _c = [cand[k] for k in (f"{_gid}:spread:A7", f"{_gid}:spread:A6", f"{_gid}:spread:A13") if k in cand]
@@ -705,7 +730,7 @@ def stats():
     placed = [r for r in rows if r["status"] == "placed"]; sug = [r for r in rows if r["status"] != "placed"]
     # 2026-10-21 10판 정리: 각도 페이퍼를 판정 진행도와 함께 맨 위에(사전 등록 목표 — A3 30픽 · A4~A10 20픽, 조정 금지)
     print(f"📊 NFL {SEASON} 페이퍼 성적(10판 ML · 각도 판정은 사전 등록 픽 수에서 · 유닛은 그 배당 기준)")
-    for k in ("A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "A13"):
+    for k in ("A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "A13", "A14"):
         xs = [r for r in rows if r["grade"] == ANGLE_GRADES[k]]
         print(f"  {ANGLE_GRADES[k]}: {rec(xs) if xs else '0픽'} · " + (f"판정 = {ANGLE_VERDICT[k]}" if k in ANGLE_VERDICT else f"판정까지 {len(xs)}/{ANGLE_TARGET[k]}픽"))
     # 2026-11-20 Paul 「nfl 처리해줘」(보드 복기 — IND@HOU 가 A6 관찰 행과 스프레드 픽 행에 둘 다 패로 적힘): 장부는 따로 두고(합산 없음) 겹침만 한 줄로 밝힌다

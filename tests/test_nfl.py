@@ -6,6 +6,22 @@ import nfl_pull as N   # noqa: E402
 import picks as P      # noqa: E402
 
 
+def test_cov_cap_and_a14_side():
+    """2026-11-24: 커버리지 점수는 결장으로 못 오른다(상한 = 전원 가용 값 · 상한 전 값은 cov_raw) · A14 = 15점+ 오른 팀의 상대 쪽(두 팀 다면 없음)."""
+    import team_hex as TH
+    sc, raw = TH.cap_cov({"커버리지": 87, "러시": 40}, {"커버리지": 38, "러시": 55})
+    assert sc == {"커버리지": 38, "러시": 40} and raw == 87
+    assert TH.cap_cov({"커버리지": 30}, {"커버리지": 45}) == ({"커버리지": 30}, None) and TH.cap_cov(None, None) == (None, None)
+    v = {"DET": {"cov_raw": 87, "full": {"커버리지": 38}}, "GB": {"cov_raw": None, "full": {"커버리지": 60}}}
+    assert P.a14_side(v, "DET", "GB", -3.5) == ("GB -3.5", "DET", 49, 87, 38)
+    assert P.a14_side(v, "GB", "DET", -3.5) == ("GB +3.5", "DET", 49, 87, 38)
+    v["GB"] = {"cov_raw": 80, "full": {"커버리지": 60}}
+    assert P.a14_side(v, "DET", "GB", -3.5) is None
+    v["GB"] = {"cov_raw": 70, "full": {"커버리지": 60}}; v["DET"]["cov_raw"] = 50
+    assert P.a14_side(v, "DET", "GB", -3.5) is None     # +12 · +10 — 둘 다 15 미만
+    assert "A14" in P.ANGLE_GRADES and P.ANGLE_TARGET["A14"] == 30
+
+
 def test_parse_spread_home_perspective():
     assert N._parse_spread("PIT -3", "CLE") == 3.0        # 원정 PIT 페이버릿 → 홈 +3
     assert N._parse_spread("BUF -7", "BUF") == -7.0       # 홈 페이버릿 → 홈 -7

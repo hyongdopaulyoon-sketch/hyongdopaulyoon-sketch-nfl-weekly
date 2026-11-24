@@ -323,6 +323,15 @@ def backtest(seasons=range(2018, 2026)):
 
 
 _LIVE = {}
+COV = "커버리지"
+
+
+def cap_cov(sc, full):
+    """커버리지 점수 상한(2026-11-24 Paul 「추천대로」 · data/cov_cap_lab_2026-11-24.md): 결장으로는 못 오른다 — 뛰는 선수 점수가 전원 가용 점수보다 높으면 전원 가용 점수로.
+    검정 2018~25 1,778경기: 커버리지 차의 승패 상관 +0.069 → +0.087 · 커버 상관 −0.020 → −0.015. → (점수 dict, 상한 전 값 또는 None)"""
+    if sc and full and sc.get(COV) is not None and full.get(COV) is not None and sc[COV] > full[COV]:
+        return dict(sc, **{COV: full[COV]}), sc[COV]
+    return sc, None
 
 
 def week_values(week):
@@ -359,7 +368,8 @@ def week_values(week):
             # 2026-11-20(보드 복기 · IND ★CB Gardner 결장인데 커버리지 3 → 6): 전원 가용 넷에 들던 결장 선수의 타깃당 허용 야드가 지금 넷 평균보다 나쁘면(크면) 빠져도 값이 안 내려간다 — 그 선수를 꼬리로 밝힌다(값만)
             rev = [f"{nm}(타깃당 {yt:.1f}야드 · 지금 넷 평균 {mat['cov']:.1f})" for nm, yt in (_df.get("cov") or {}).items()
                    if "cov" in mat and nm not in (_dn.get("cov") or {}) and yt > mat["cov"]]
-            out[gk][t] = {"scores": sc, "full": full, "mat": {k: round(v, 4) for k, v in mat.items()}, "rev": rev}
+            sc, cov_raw = cap_cov(sc, full)
+            out[gk][t] = {"scores": sc, "full": full, "mat": {k: round(v, 4) for k, v in mat.items()}, "rev": rev, "cov_raw": cov_raw}   # cov_raw = 상한 전 커버리지(결장으로 올랐을 때만 · A14 관찰용)
     p = os.path.join(wd, "hex.json")
     json.dump(out, io.open(p + ".tmp", "w", encoding="utf-8"), ensure_ascii=False); os.replace(p + ".tmp", p)
     _LIVE[week] = out
@@ -386,6 +396,7 @@ def digest_line(a, h, v):
     return ("- 🔷 선수 육각형(이번 주 뛰는 선수만 · 0~100 · 50 = 리그 평균 · 값만 — " + HIST_NOTE + "): " + one(a, sa) + " / " + one(h, sh)
             + f" · 15점+ 앞서는 꼭짓점: {a} {', '.join(ahead(a, sa, sh)) or '없음'} / {h} {', '.join(ahead(h, sh, sa)) or '없음'}"
             + " · 맞대결: " + mu + " · 결장으로 깎인 꼭짓점: " + (" · ".join(loss) if loss else "없음")
+            + "".join(f" · {t} 커버리지 상한 적용(결장으로는 못 오름 — 뛰는 선수만으로는 {v[t]['cov_raw']} 이지만 전원 가용 값 {v[t]['scores'][COV]} 로 표시)" for t in (a, h) if (v.get(t) or {}).get("cov_raw") is not None)
             + "".join(f" · {t} 커버리지 — 결장인데 값이 안 내려가는 선수(본인 타깃당 허용 야드가 대체 선수들보다 나쁨 · 값만): {', '.join(v[t]['rev'])}" for t in (a, h) if (v.get(t) or {}).get("rev")))
 
 
