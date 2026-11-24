@@ -142,8 +142,6 @@
 "Jared Wiley",
 "Jaylon Moore",
 "Kenneth Walker III",
-"Omarr Norman-Lott",
-"Peter Woods",
 "Trey Smith"
 ]
 }
@@ -173,7 +171,7 @@
 "CIN@WAS": {
 "spread_home": "6.0",
 "total": "54.5",
-"ml": "-291/+237",
+"ml": "-302/+246",
 "qb": {
 "CIN": "Joe Burrow",
 "WAS": "Jayden Daniels"
@@ -184,9 +182,11 @@
 "Cashius Howell",
 "Dalton Risner",
 "Jalen Davis",
+"Kyle Dugger",
 "Oren Burks"
 ],
 "WAS": [
+"Amik Robertson",
 "Dyami Brown",
 "Jeremy McNichols"
 ]
@@ -309,5 +309,5 @@
 ]
 }
 },
-"_stamp": "11-23 15:14"
+"_stamp": "11-23 16:14"
 }
