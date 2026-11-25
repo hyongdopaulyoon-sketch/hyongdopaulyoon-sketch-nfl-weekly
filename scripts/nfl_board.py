@@ -1515,7 +1515,7 @@ def team_state_html(week, g, pk, so, so_src, inj, hexg=None, poly=({}, "")):
             up = bool(out)
             if d.get("cov_raw") is not None and "커버리지" in fu:   # 11/24 Paul 「추천대로」 — 커버리지 상한(결장으로는 못 오름 · 4a8fe96)
                 nm = [re.sub(r"\(타깃당 ([\d.]+)야드 · 지금 넷 평균 ([\d.]+)\)$", r" \1야드", x_) for x_ in (d.get("rev") or [])]
-                out.append(f"커버리지 결장으로는 못 오름 — 상한 적용(뛰는 선수만 {d['cov_raw']} → 전원 가용 {fu['커버리지']}으로 표시"
+                out.append(f"커버리지 결장으로는 못 오름 — 상한 적용(뛰는 선수만 {d['cov_raw']} · 표시는 전원 가용 값 {fu['커버리지']}"
                            + (f" · 빠진 선수 {' · '.join(nm)}" if nm else "") + ")")
             return " · ".join(out), up
         la, lh = _loss(A), _loss(H)
