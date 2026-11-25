@@ -2,7 +2,7 @@
 "ATL@MIN": {
 "spread_home": "-7.0",
 "total": "41.5",
-"ml": "+252/-310",
+"ml": "+252/-309",
 "qb": {
 "ATL": "Michael Penix Jr.",
 "MIN": "Kirk Cousins"
@@ -19,7 +19,7 @@
 "LV@CLE": {
 "spread_home": "-4.5",
 "total": "39.5",
-"ml": "+199/-240",
+"ml": "+201/-244",
 "qb": {
 "LV": "Fernando Mendoza",
 "CLE": "Deshaun Watson"
@@ -34,7 +34,7 @@
 "NO@CIN": {
 "spread_home": "-10.0",
 "total": "49.5",
-"ml": "+410/-541",
+"ml": "+409/-539",
 "qb": {
 "NO": "Tyler Shough",
 "CIN": "Joe Burrow"
@@ -63,10 +63,25 @@
 "JAX": []
 }
 },
+"BAL@HOU": {
+"spread_home": "-6.5",
+"total": "47.5",
+"ml": "+258/-320",
+"qb": {
+"BAL": "Jacoby Brissett",
+"HOU": "C.J. Stroud"
+},
+"out": {
+"BAL": [],
+"HOU": [
+"Azeez Al-Shaair"
+]
+}
+},
 "GB@LA": {
 "spread_home": "-2.5",
 "total": "43.5",
-"ml": "+117/-138",
+"ml": "+116/-137",
 "qb": {
 "GB": "Jordan Love",
 "LA": "Matthew Stafford"
@@ -89,7 +104,7 @@
 "CHI@DET": {
 "spread_home": "1.5",
 "total": "55.5",
-"ml": "-122/+103",
+"ml": "-120/+101",
 "qb": {
 "CHI": "Caleb Williams",
 "DET": "Jared Goff"
@@ -100,21 +115,6 @@
 ],
 "DET": [
 "Aidan Hutchinson"
-]
-}
-},
-"BAL@HOU": {
-"spread_home": "-7.0",
-"total": "47.5",
-"ml": "+263/-327",
-"qb": {
-"BAL": "Jacoby Brissett",
-"HOU": "C.J. Stroud"
-},
-"out": {
-"BAL": [],
-"HOU": [
-"Azeez Al-Shaair"
 ]
 }
 },
@@ -242,9 +242,9 @@
 }
 },
 "WAS@ARI": {
-"spread_home": "7.0",
+"spread_home": "6.5",
 "total": "41.5",
-"ml": "-318/+257",
+"ml": "-310/+252",
 "qb": {
 "WAS": "Jayden Daniels",
 "ARI": "Carson Beck"
@@ -272,5 +272,5 @@
 "TB": []
 }
 },
-"_stamp": "11-25 14:04"
+"_stamp": "11-25 15:04"
 }
