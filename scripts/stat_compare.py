@@ -1,7 +1,7 @@
 """📊 스탯 비교(말로) — 2026-10-10 Paul 「수치들은 숫자만 나와 있고 이해하기 힘듦 · 스탯 비교가 더 필요함」.
 발행문이 그대로 옮길 수 있게 **값 + 32팀 순위 + 상위/중간/하위 낱말 + 한 줄 뜻**을 다이제스트가 만든다(발행 세션 재계산 금지).
 전부 서술 전용 — 시장이 이미 반영한 정보(N0·N12). 「유리/불리/우위」 낱말은 쓰지 않고 순위 구간(상위 1~10 · 중간 11~22 · 하위 23~32)만 쓴다."""
-import os
+import os, re
 from collections import defaultdict
 
 import nfl_pull as N
@@ -279,6 +279,12 @@ def player_tables(a, h, RS, inj, g):
     return L
 
 
+def active_names(txt):
+    """2026-11-25(보드·발행 제보 · GB@LA 16:21판 — 🏥 줄은 「★Travis Glover(Q → Active 11-25)」 인데 📌 새 정보 후보에 「GB Travis Glover(Q)」 잔존):
+    🏥 줄에서 ESPN 이 당일 Active 로 표시한 선수 이름 집합(소문자 · 점 뺌) — 이미 출전이 확인된 선수는 「결장 확정되면 새 정보」 후보가 아니다."""
+    return {re.sub(r"[.★]", "", n).strip().lower() for n in re.findall(r"([^,·/()—]+?)\([^()]*→ Active[^()]*\)", txt or "")}
+
+
 def conclusion_line(a, h, sec, inj, m, g):
     """📌 결론 재료(자동 — 2026-10-14 Paul 「MLB 처럼」 · MLB A9 방식). sec = 이 경기 절에 이미 쌓인 줄들(🔮·📊·🧑‍🤝‍🧑·라인 이동).
     발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다 — 재계산·지어내기 방지."""
@@ -333,11 +339,13 @@ def conclusion_line(a, h, sec, inj, m, g):
                + (f" · 공식 비활성(ESPN {_annt} PT 발표): ★주전 {_ina.group(2)} {_ina.group(3)} / {_ina.group(4)} {_ina.group(5)} — 🏥 줄 그대로" if _ina else
                   f" · 공식 비활성 부분 발표(ESPN {_inp.group(1)} {_inp.group(2)} PT 발표 · ★주전 결장 {_inp.group(1)} {_inp.group(4)} — 🏥 줄 그대로 · {_inp.group(3)} 미발표 — 들어오면 리프레시)" if _inp else
                   (" · ⚠️ 최종 지정 미발표(연습 보고) — 웹 확인 필수" if ia.get("final_pending") or ih.get("final_pending") else " · 공식 비활성 미발표(🏥 줄)")))
-    cand = []
+    cand = []; _act = active_names(txt)
     for t, x in ((a, ia), (h, ih)):
         for key in ("questionable", "doubtful"):
             # 항목 = 「이름(포지션 · ★스냅 nn%)」 — 괄호 안에도 「 · 」가 있어 「) · 」 경계로 나눈다(2026-10-15 「DEN ★스냅 76%)(Q)」 오기 수정)
             for nm in [y.strip() for y in re.split(r"\)\s*·\s*", str(x.get(key) or "")) if "★" in y]:
+                if re.sub(r"[.★]", "", nm.split("(")[0]).strip().lower() in _act:   # 2026-11-25: 🏥 줄이 이미 「→ Active」 로 적은 선수는 후보에서 뺀다
+                    continue
                 cand.append(f"{t} {nm.split('(')[0].strip()}({key[0].upper()})")
     out.append("새 정보 후보(판 시각 뒤 결장 확정되면 새 정보 — ★주전 Q/Doubtful): " + (", ".join(cand[:6]) if cand else "없음"))
     _ag = next((ln for ln in sec if ln.startswith("- 🔎 관찰 각도")), "")

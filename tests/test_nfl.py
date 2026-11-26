@@ -239,3 +239,13 @@ def test_qb_return_only_when_started_before_season_main():
         assert not N._is_qb_return("MIA", "Quinn Ewers", "M.Willis")         # 올해 선발 없음 → 백업
     finally:
         N._STARTS.clear(); N._STARTS.update(old)
+
+
+def test_active_names_drop_from_new_info_candidates():
+    """2026-11-25 GB@LA 16:21판: 🏥 줄이 「★Travis Glover(Q → Active 11-25)」 로 적은 선수는 📌 새 정보 후보에서 빠진다."""
+    import stat_compare as SC
+    txt = "- 🏥 결장 명단(ESPN 공식 비활성 · 발표 15:52 PT): GB Out 3 — Josh Jacobs(RB) · 출전: Micah Parsons(Q → Active 15:49), Bo Melton(Q → Active 15:56), ★Travis Glover(Q → Active 11-25) / LA Out 12 — Ty Simpson(QB)"
+    act = SC.active_names(txt)
+    assert {"travis glover", "micah parsons", "bo melton"} <= act and "josh jacobs" not in act and "ty simpson" not in act
+    assert SC.active_names("") == set() and SC.active_names("- 🏥 결장 명단: GB Out 1 — A.J. Brown(WR)") == set()
+    assert "aj brown" in SC.active_names("★A.J. Brown(D → Active 10:02)")
