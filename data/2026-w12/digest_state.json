@@ -49,7 +49,7 @@
 "TEN@JAX": {
 "spread_home": "-14.5",
 "total": "49.5",
-"ml": "+740/-1180",
+"ml": "+780/-1260",
 "qb": {
 "TEN": "Cam Ward",
 "JAX": "Trevor Lawrence"
@@ -66,7 +66,7 @@
 "BAL@HOU": {
 "spread_home": "-6.5",
 "total": "47.5",
-"ml": "+267/-333",
+"ml": "+267/-332",
 "qb": {
 "BAL": "Jacoby Brissett",
 "HOU": "C.J. Stroud"
@@ -162,7 +162,7 @@
 "DEN@PIT": {
 "spread_home": "4.5",
 "total": "36.5",
-"ml": "-257/+211",
+"ml": "-254/+209",
 "qb": {
 "DEN": "Bo Nix",
 "PIT": "Mason Rudolph"
@@ -182,7 +182,7 @@
 "PHI@DAL": {
 "spread_home": "-8.5",
 "total": "49.5",
-"ml": "+362/-468",
+"ml": "?/?",
 "qb": {
 "PHI": "Joe Milton III",
 "DAL": "Dak Prescott"
@@ -207,7 +207,7 @@
 "NYG@IND": {
 "spread_home": "6.0",
 "total": "41.5",
-"ml": "-287/+236",
+"ml": "-286/+235",
 "qb": {
 "NYG": "J.J. McCarthy",
 "IND": "Anthony Richardson"
@@ -247,7 +247,7 @@
 "WAS@ARI": {
 "spread_home": "6.5",
 "total": "41.5",
-"ml": "-351/+281",
+"ml": "-352/+282",
 "qb": {
 "WAS": "Jayden Daniels",
 "ARI": "Carson Beck"
@@ -265,7 +265,7 @@
 "SEA@SF": {
 "spread_home": "-3.0",
 "total": "43.5",
-"ml": "+130/-154",
+"ml": "+129/-152",
 "qb": {
 "SEA": "Sam Darnold",
 "SF": "Brock Purdy"
@@ -293,5 +293,5 @@
 "TB": []
 }
 },
-"_stamp": "11-26 12:34"
+"_stamp": "11-26 14:24"
 }
