@@ -2,7 +2,7 @@
 "ATL@MIN": {
 "spread_home": "-7.0",
 "total": "41.5",
-"ml": "+252/-309",
+"ml": "+251/-309",
 "qb": {
 "ATL": "Michael Penix Jr.",
 "MIN": "Kirk Cousins"
@@ -34,7 +34,7 @@
 "NO@CIN": {
 "spread_home": "-10.0",
 "total": "49.5",
-"ml": "+408/-539",
+"ml": "+420/-558",
 "qb": {
 "NO": "Tyler Shough",
 "CIN": "Joe Burrow"
@@ -48,8 +48,8 @@
 },
 "TEN@JAX": {
 "spread_home": "-14.5",
-"total": "48.5",
-"ml": "+740/-1160",
+"total": "49.5",
+"ml": "+730/-1160",
 "qb": {
 "TEN": "Cam Ward",
 "JAX": "Trevor Lawrence"
@@ -66,7 +66,7 @@
 "BAL@HOU": {
 "spread_home": "-6.5",
 "total": "47.5",
-"ml": "+266/-331",
+"ml": "+267/-332",
 "qb": {
 "BAL": "Jacoby Brissett",
 "HOU": "C.J. Stroud"
@@ -81,7 +81,7 @@
 "GB@LA": {
 "spread_home": "-2.5",
 "total": "43.5",
-"ml": "+119/-141",
+"ml": "?/?",
 "qb": {
 "GB": "Jordan Love",
 "LA": "Matthew Stafford"
@@ -106,7 +106,7 @@
 "CHI@DET": {
 "spread_home": "1.5",
 "total": "55.5",
-"ml": "-120/+101",
+"ml": "-120/+102",
 "qb": {
 "CHI": "Caleb Williams",
 "DET": "Jared Goff"
@@ -121,9 +121,9 @@
 }
 },
 "NYJ@MIA": {
-"spread_home": "3.5",
+"spread_home": "4.5",
 "total": "40.5",
-"ml": "-205/+172",
+"ml": "-216/+180",
 "qb": {
 "NYJ": "Geno Smith",
 "MIA": "Kyle McCord"
@@ -141,7 +141,7 @@
 "DEN@PIT": {
 "spread_home": "3.5",
 "total": "36.5",
-"ml": "-202/+169",
+"ml": "-203/+170",
 "qb": {
 "DEN": "Bo Nix",
 "PIT": "Mason Rudolph"
@@ -157,8 +157,8 @@
 },
 "PHI@DAL": {
 "spread_home": "-8.5",
-"total": "47.5",
-"ml": "+370/-480",
+"total": "48.5",
+"ml": "+349/-447",
 "qb": {
 "PHI": "Joe Milton III",
 "DAL": "Dak Prescott"
@@ -176,7 +176,7 @@
 "NE@LAC": {
 "spread_home": "1.5",
 "total": "35.5",
-"ml": "-115/-102",
+"ml": "-119/+100",
 "qb": {
 "NE": "Tommy DeVito",
 "LAC": "Justin Herbert"
@@ -190,9 +190,9 @@
 }
 },
 "NYG@IND": {
-"spread_home": "6.5",
+"spread_home": "6.0",
 "total": "41.5",
-"ml": "-322/+261",
+"ml": "-286/+236",
 "qb": {
 "NYG": "J.J. McCarthy",
 "IND": "Anthony Richardson"
@@ -227,8 +227,8 @@
 },
 "KC@BUF": {
 "spread_home": "-3.0",
-"total": "46.5",
-"ml": "+125/-148",
+"total": "45.5",
+"ml": "+127/-151",
 "qb": {
 "KC": "Patrick Mahomes",
 "BUF": "Josh Allen"
@@ -246,7 +246,7 @@
 "WAS@ARI": {
 "spread_home": "7.0",
 "total": "41.5",
-"ml": "-332/+267",
+"ml": "-325/+262",
 "qb": {
 "WAS": "Jayden Daniels",
 "ARI": "Carson Beck"
@@ -264,7 +264,7 @@
 "CAR@TB": {
 "spread_home": "-3.0",
 "total": "43.5",
-"ml": "+133/-158",
+"ml": "+132/-157",
 "qb": {
 "CAR": "Bryce Young",
 "TB": "Baker Mayfield"
@@ -274,5 +274,5 @@
 "TB": []
 }
 },
-"_stamp": "11-25 16:21"
+"_stamp": "11-25 21:22"
 }
