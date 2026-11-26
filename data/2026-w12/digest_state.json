@@ -146,7 +146,7 @@
 "NE@LAC": {
 "spread_home": "2.5",
 "total": "35.5",
-"ml": "-139/+117",
+"ml": "-138/+116",
 "qb": {
 "NE": "Tommy DeVito",
 "LAC": "Justin Herbert"
@@ -162,7 +162,7 @@
 "DEN@PIT": {
 "spread_home": "4.5",
 "total": "36.5",
-"ml": "-228/+190",
+"ml": "-232/+192",
 "qb": {
 "DEN": "Bo Nix",
 "PIT": "Mason Rudolph"
@@ -182,7 +182,7 @@
 "PHI@DAL": {
 "spread_home": "-8.5",
 "total": "49.5",
-"ml": "+355/-457",
+"ml": "+356/-458",
 "qb": {
 "PHI": "Joe Milton III",
 "DAL": "Dak Prescott"
@@ -265,7 +265,7 @@
 "SEA@SF": {
 "spread_home": "-3.0",
 "total": "43.5",
-"ml": "+129/-152",
+"ml": "+130/-154",
 "qb": {
 "SEA": "Sam Darnold",
 "SF": "Brock Purdy"
@@ -293,5 +293,5 @@
 "TB": []
 }
 },
-"_stamp": "11-26 11:34"
+"_stamp": "11-26 12:08"
 }
