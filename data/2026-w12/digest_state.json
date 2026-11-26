@@ -19,7 +19,7 @@
 "LV@CLE": {
 "spread_home": "-4.5",
 "total": "39.5",
-"ml": "+196/-236",
+"ml": "+196/-237",
 "qb": {
 "LV": "Fernando Mendoza",
 "CLE": "Deshaun Watson"
@@ -81,13 +81,14 @@
 "GB@LA": {
 "spread_home": "-2.5",
 "total": "43.5",
-"ml": "+118/-140",
+"ml": "+119/-141",
 "qb": {
 "GB": "Jordan Love",
 "LA": "Matthew Stafford"
 },
 "out": {
 "GB": [
+"Josh Jacobs",
 "Josh Whyle"
 ],
 "LA": [
@@ -174,7 +175,7 @@
 "NE@LAC": {
 "spread_home": "1.5",
 "total": "35.5",
-"ml": "-112/-106",
+"ml": "-115/-102",
 "qb": {
 "NE": "Tommy DeVito",
 "LAC": "Justin Herbert"
@@ -244,7 +245,7 @@
 "WAS@ARI": {
 "spread_home": "6.5",
 "total": "41.5",
-"ml": "-318/+258",
+"ml": "-328/+265",
 "qb": {
 "WAS": "Jayden Daniels",
 "ARI": "Carson Beck"
@@ -272,5 +273,5 @@
 "TB": []
 }
 },
-"_stamp": "11-25 15:38"
+"_stamp": "11-25 16:04"
 }
