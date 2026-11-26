@@ -19,7 +19,7 @@
 "LV@CLE": {
 "spread_home": "-4.5",
 "total": "40.5",
-"ml": "+202/-244",
+"ml": "+201/-244",
 "qb": {
 "LV": "Fernando Mendoza",
 "CLE": "Deshaun Watson"
@@ -34,7 +34,7 @@
 "NO@CIN": {
 "spread_home": "-10.0",
 "total": "49.5",
-"ml": "+422/-561",
+"ml": "+423/-563",
 "qb": {
 "NO": "Tyler Shough",
 "CIN": "Joe Burrow"
@@ -104,7 +104,7 @@
 "CHI@DET": {
 "spread_home": "1.5",
 "total": "56.5",
-"ml": "-118/+100",
+"ml": "-119/+101",
 "qb": {
 "CHI": "Caleb Williams",
 "DET": "Jared Goff"
@@ -126,7 +126,7 @@
 "NYJ@MIA": {
 "spread_home": "4.5",
 "total": "40.5",
-"ml": "-218/+181",
+"ml": "-220/+183",
 "qb": {
 "NYJ": "Geno Smith",
 "MIA": "Kyle McCord"
@@ -144,7 +144,7 @@
 "DEN@PIT": {
 "spread_home": "4.5",
 "total": "36.5",
-"ml": "-228/+190",
+"ml": "-229/+190",
 "qb": {
 "DEN": "Bo Nix",
 "PIT": "Mason Rudolph"
@@ -164,7 +164,7 @@
 "PHI@DAL": {
 "spread_home": "-8.5",
 "total": "49.5",
-"ml": "+366/-473",
+"ml": "+370/-479",
 "qb": {
 "PHI": "Joe Milton III",
 "DAL": "Dak Prescott"
@@ -189,7 +189,7 @@
 "NE@LAC": {
 "spread_home": "1.5",
 "total": "35.5",
-"ml": "-118/+100",
+"ml": "-117/-101",
 "qb": {
 "NE": "Tommy DeVito",
 "LAC": "Justin Herbert"
@@ -205,7 +205,7 @@
 "NYG@IND": {
 "spread_home": "6.0",
 "total": "41.5",
-"ml": "-286/+235",
+"ml": "-287/+236",
 "qb": {
 "NYG": "J.J. McCarthy",
 "IND": "Anthony Richardson"
@@ -291,5 +291,5 @@
 "TB": []
 }
 },
-"_stamp": "11-26 07:04"
+"_stamp": "11-26 08:04"
 }

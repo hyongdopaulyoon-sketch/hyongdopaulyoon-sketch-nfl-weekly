@@ -150,6 +150,9 @@ KC@BUF,BUF,James Cook III,RB,Active,,,2026-11-22T21:26,0,0,59
 KC@BUF,BUF,Josh Allen,QB,Active,,,2026-11-22T21:19,0,1,97
 KC@BUF,BUF,Ed Oliver,DT,Active,,,2026-11-22T17:05,0,0,55
 KC@BUF,BUF,Jackson Hawes,TE,Active,,,2026-11-22T16:58,0,0,41
+GB@LA,GB,Savion Williams,WR,Active,,,2026-11-26T15:56,1,0,53
+GB@LA,GB,Chris Brooks,RB,Active,,,2026-11-26T15:44,1,0,44
+GB@LA,GB,MarShawn Lloyd,RB,Active,,,2026-11-26T15:16,1,0,16
 GB@LA,GB,Kaleb Johnson,RB,Active,,,2026-11-26T05:32,1,0,39
 GB@LA,GB,Jordan Love,QB,Active,,,2026-11-26T05:17,1,1,94
 GB@LA,GB,Matthew Golden,WR,Active,,,2026-11-26T05:11,1,1,80
@@ -172,10 +175,8 @@ GB@LA,GB,Brandon Cisse,CB,Active,,,2026-11-24T00:13,1,1,67
 GB@LA,GB,Luke Musgrave,TE,Out,Neck,Not Specified,2026-11-22T14:06,1,0,
 GB@LA,GB,Evan Williams,S,Active,,,2026-11-19T02:35,1,1,99
 GB@LA,GB,Xavier McKinney,S,Active,,,2026-11-19T02:33,1,1,94
-GB@LA,GB,Savion Williams,WR,Active,,,2026-11-17T04:31,1,0,53
-GB@LA,GB,Chris Brooks,RB,Active,,,2026-11-17T04:28,1,0,44
-GB@LA,GB,J. Michael Sturdivant,WR,Active,,,2026-11-17T04:24,1,0,19
-GB@LA,LA,Bill Murray,G,Questionable,Leg,,2026-11-26T12:31,1,1,68
+GB@LA,LA,Colby Parkinson,TE,Active,,,2026-11-26T15:30,1,1,75
+GB@LA,LA,Bill Murray,G,Questionable,Leg,,2026-11-26T15:09,1,1,68
 GB@LA,LA,Konata Mumpfield,WR,Active,,,2026-11-26T05:42,1,1,66
 GB@LA,LA,Matthew Stafford,QB,Active,,,2026-11-26T05:24,1,1,100
 GB@LA,LA,Kyren Williams,RB,Active,,,2026-11-26T04:59,1,0,55
@@ -199,7 +200,6 @@ GB@LA,LA,Joe Cardona,LS,Active,,,2026-11-23T00:19,1,0,
 GB@LA,LA,Davante Adams,WR,Out,IR · Hamstring,Surgery,2026-11-22T14:32,1,0,
 GB@LA,LA,Puka Nacua,WR,Out,IR · Knee - MCL,Surgery,2026-11-22T01:25,1,1,93
 GB@LA,LA,Quentin Lake,S,Active,,,2026-11-19T02:55,1,1,100
-GB@LA,LA,Max Klare,TE,Active,,,2026-11-18T17:23,1,0,30
 DEN@PIT,DEN,Sai'vion Jones,DE,Out,Hamstring,Not Specified,2026-11-25T22:43,0,0,31
 DEN@PIT,DEN,Taylor Rapp,S,Out,Quadriceps,Not Specified,2026-11-25T22:43,0,1,66
 DEN@PIT,DEN,J.K. Dobbins,RB,Suspension,Suspension,Not Specified,2026-11-25T22:13,0,0,12
