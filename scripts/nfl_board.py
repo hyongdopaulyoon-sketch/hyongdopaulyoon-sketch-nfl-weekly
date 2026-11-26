@@ -15,6 +15,7 @@ import predictions as PR   # noqa: E402
 import team_hex as TH   # noqa: E402  11/15 육각형(선수 위주)
 import team_track as TT   # noqa: E402  11/16 팀별 기록(추적기 「팀별」 시트와 같은 값)
 import recent_chart as RC   # noqa: E402  11/19 최근 10경기 점수 차 막대(11주차~)
+import sack_allow_watch as AW   # noqa: E402  11/26 Paul 「보드에도 색 허용률 차 보이게 해줘」(값만)
 
 KR = N.TEAM_KR
 esc = html.escape
@@ -1451,7 +1452,18 @@ def weather_chip(g):
     return f'<span class="chip">{esc(" · ".join(bits))}</span>' if bits else ""
 
 
-def team_state_html(week, g, pk, so, so_src, inj, hexg=None, poly=({}, "")):
+_AWO = []
+
+
+def _aw_off():
+    """sack_context 공격 색 상태 — 보드 한 번 만들 때 한 번만 읽음."""
+    if not _AWO:
+        import sack_context as SK
+        _AWO.append(SK.state()[0])
+    return _AWO[0]
+
+
+def team_state_html(week, g, pk, so, so_src, inj, hexg=None, poly=({}, ""), fin=None):
     """펼침 맨 위 「팀 상태」 표 — 두 팀 나란히(행 = 항목 · 열 = 원정 | 홈) · 값만. 초록 = 더 좋은 값 · 빨강 = 주전 결장 많은 쪽 · 파랑 = 예측 승자."""
     A, H = g["away"], g["home"]
     rows = []
@@ -1527,6 +1539,24 @@ def team_state_html(week, g, pk, so, so_src, inj, hexg=None, poly=({}, "")):
                      "육각형 꼭짓점 — 전원 가용이면 → 이번 주 뛰는 선수만(50 = 리그 평균) · 내려간 꼭짓점 = 깎임(많이 깎인 쪽 빨강) · "
                      "회색 = 결장으로 오른 꼭짓점(빠진 선수가 대신 뛰는 선수보다 값이 나빴던 경우 — 「더 좋아졌다」는 뜻이 아니라 값의 한계 표시) · "
                      "커버리지는 12주차~ 상한 적용(결장으로는 못 오름 — 뛰는 선수만의 값이 더 높으면 전원 가용 값으로 표시 · 11/24) · 값만"))
+    try:   # 11/26 Paul 「보드에도 색 허용률 차 보이게 해줘」 — 그 경기 전 시즌 누적 공격 색 허용률(sack_allow_watch · 값만)
+        sv = AW.game_values(A, H, week, _aw_off())
+    except Exception as e_:
+        sv = None
+        print("색 허용률 생략:", e_, file=sys.stderr)
+    if sv:
+        def _sv(t):
+            v = f'{sv["a"] if t == A else sv["h"]:.1f}%'
+            if not sv["low"] or t != sv["low"]:
+                return v
+            tail = f'낮은 쪽 · 차 {sv["gap"]:.1f}%p' + (" · 지켜보는 중(3.0%p 이상)" if sv["big"] else " · 지켜보는 중" if sv["watch"] else " · 2.0%p 미만 — 해당 없음")
+            if sv["watch"] and fin:
+                m_ = (fin[0] - fin[1]) * (1 if t == A else -1)
+                tail += " → 이김" if m_ > 0 else " → 짐" if m_ < 0 else " → 무승부"
+            return (v, tail)
+        rows.append(("공격 색 허용률(낮을수록 좋음)", _sv(A), _sv(H), sv["low"] if sv["watch"] else "", "better",
+                     "색 = 쿼터백이 공을 던지기 전에 수비에게 잡히는 것 · 허용률 = 색 ÷ 드롭백(그 경기 전 시즌 누적 · 4경기+) · "
+                     "두 팀 차 2.0%p 이상이면 색을 덜 당하는 쪽(초록)을 지켜보는 중(11/25 Paul) · 값만(예측·★·판단 근거 아님)"))
     mla, mlh = g.get("ml_away"), g.get("ml_home")
     if mla and mlh:   # ⑥ 가격 — DK ML 과 그 가격의 손익분기(비그 포함) · Polymarket 사는 가격
         be = lambda o: f"{o} · 손익분기 {N._implied(o) * 100:.1f}%" if N._implied(o) else str(o)
@@ -1859,7 +1889,10 @@ def main():
                         '<th>항목</th><th>이 경기 쪽·라인</th><th>지금 성적</th><th>용도</th><th>결과</th></tr></thead><tbody>'
                         + "".join(f"<tr><td>{a1}</td><td>{a2}</td><td class=\"num\">{esc(a3)}</td><td>{esc(a4)}</td><td>{a5}</td></tr>" for a1, a2, a3, a4, a5 in orows)
                         + "</tbody></table></div>") if orows else "") + (f'<div class="none1">해당 없음 — {esc(" · ".join(none_))}</div>' if none_ else "")
-            so_line, tt_line, lines = team_state_html(a.week, g, pick_t, so, so_src, inj, (hexv or {}).get(gk), poly_ml(g, wd)), "", obs_tbl
+            _lv = live.get(gk) or {}
+            _fin = (N.fnum(_lv.get("sa")), N.fnum(_lv.get("sh"))) if _lv.get("state") == "STATUS_FINAL" else None
+            _fin = _fin if _fin and None not in _fin else None
+            so_line, tt_line, lines = team_state_html(a.week, g, pick_t, so, so_src, inj, (hexv or {}).get(gk), poly_ml(g, wd), _fin), "", obs_tbl
         div = '<span class="chip">디비전</span>' if g.get("div_game") == "1" else ""
         neu = '<span class="chip">중립 구장</span>' if g.get("neutral") == "1" else ""
         # ── 주차 전체 비교표 한 줄(MLB 서열표처럼 — 머리 누르면 정렬, 줄 누르면 발행문 펼침 · 10/11 Paul · 10/16 ML 전용)
@@ -2044,6 +2077,16 @@ def main():
     star_rows = "".join(
         f'<tr><td class="star">{"★" * k}</td><td class="num">{w}-{l}</td><td class="num">{(f"{100 * w / (w + l):.0f}%") if w + l else "—"}</td><td class="num muted">{PR.STAR_HIT[k]}</td></tr>'
         for k, (w, l) in ms.get("stars", {}).items())
+    aw_line = ""
+    if NEWTBL["on"]:   # 11/26 Paul 「보드에도 색 허용률 차 보이게 해줘」 — 맨 위 한 줄(낮은 쪽 성적 · 값만)
+        try:
+            rv = AW.record_values()
+            _sh = lambda x: (f'{x["w"]}승 {x["l"]}패(승률 {100 * x["w"] / (x["w"] + x["l"]):.0f}% · 시장 기대 {x["exp"]:.0f}%)' if x["w"] + x["l"] else "0경기")
+            aw_line = ('<div class="muted" style="margin:8px 0 0">공격 색 허용률 차 지켜보기(두 팀 차 2.0%p 이상 → 색을 덜 당하는 쪽 · 11/25 Paul) — '
+                       f'등록 뒤({rv["reg_week"]}주차~) {_sh(rv["post"])} · {rv["post"]["w"] + rv["post"]["l"]}/{rv["target"]}경기 · '
+                       f'올해 {_sh(rv["season"])} · {esc(rv["base"])} · 값만(예측·★·판단 근거 아님)</div>')
+        except Exception as e_:
+            print("색 허용률 요약 생략:", e_, file=sys.stderr)
     leg_new = ""
     if NEWTBL["on"]:   # 11/21 밤 — 경기마다 반복되던 설명은 여기 한 번
         _gl = dict(CODE_GLOSS)
@@ -2142,6 +2185,7 @@ nav.weeks a{{color:var(--ink)}}nav.weeks b.cur{{color:var(--ink);text-decoration
     <div class="stat"><span class="k">승자 예측 시즌</span><span class="v">{ms.get("w", 0) - wm.get("w", 0) + live_wl[0]}-{ms.get("l", 0) - wm.get("l", 0) + live_wl[1]}</span></div>
     <div class="stat"><span class="k">승자 예측 이번 주</span><span class="v">{live_wl[0]}-{live_wl[1]}</span></div>
   </div>
+  {aw_line}
   <div class="headline">{headline}</div>
   {unrec_html}<h2>{a.week}주차 전체 경기 <span class="muted" style="font-size:.9rem">— 머리 누르면 정렬 · 줄 누르면 바로 아래 펼침(다시 누르면 접힘)</span></h2>
   {RC.CSS}{RC.logo_defs(logo_uri)}{cmp_tbl}
