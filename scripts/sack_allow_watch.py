@@ -106,6 +106,27 @@ def digest_tail(a, h, wk, off):
             + (" (3.0%p 이상)" if abs(oa - oh) >= CUT2 else "") + f" · 낮은 쪽 {low} · {cur}" + (f" · {BASE}" if BASE else ""))
 
 
+def game_values(a, h, wk, off=None):
+    """보드용 값(2026-11-26 Paul 「보드에도 색 허용률 차 보이게 해줘」) — 그 경기 전 두 팀 공격 색 허용률. 값이 없으면(4경기 미만) None.
+    → {a: 원정 허용률 %, h: 홈 허용률 %, gap: 차 %p, low: 낮은 쪽 팀, watch: 2.0%p 이상, big: 3.0%p 이상}"""
+    if off is None:
+        import sack_context as SK
+        off = SK.state()[0]
+    oa, oh = osr(off, a, wk), osr(off, h, wk)
+    if oa is None or oh is None:
+        return None
+    gap = abs(oa - oh)
+    return {"a": round(100 * oa, 1), "h": round(100 * oh, 1), "gap": round(100 * gap, 1), "low": (a if oa < oh else h) if oa != oh else "",
+            "watch": gap >= CUT, "big": gap >= CUT2}
+
+
+def record_values(before_week=None):
+    """보드용 성적(낮은 쪽 기준) — {season: 올해 2.0%p+, season_big: 올해 3.0%p+, post: 등록(12주차) 뒤 2.0%p+, base: 2018~2025 기준선 문구, target: 재보고 경기 수}.
+    각 요약 = {w, l, exp(시장 기대 승률 %), aw, al, ap(스프레드 승·패·무)} · 글로는 fmt(요약)."""
+    s, b, p = season_now(before_week)
+    return {"season": s, "season_big": b, "post": p, "base": BASE, "target": TARGET, "reg_week": REG_WK}
+
+
 def report():
     import sack_lab2 as L2
     import sack_context as SK

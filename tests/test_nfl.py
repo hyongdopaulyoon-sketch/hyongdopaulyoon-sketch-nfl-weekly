@@ -179,6 +179,9 @@ def test_sack_allow_watch(monkeypatch):
     t = AW.digest_tail("GB", "LA", 12, off)
     assert t.startswith(" · 지켜보는 중(2026-11-25 Paul · 값만 · 방향 근거 아님): 공격 색 허용률 차 2.0%p 이상 — GB 6.2% / LA 3.8% · 차 2.5%p · 낮은 쪽 LA · 올해 낮은 쪽 2승 0패") and "2018~2025 낮은 쪽 499승 292패" in t
     assert AW.digest_tail("DET", "GB", 12, off) == "" and AW.digest_tail("NEW", "GB", 12, off) == ""
+    assert AW.game_values("GB", "LA", 12, off) == {"a": 6.2, "h": 3.8, "gap": 2.5, "low": "LA", "watch": True, "big": False}   # 보드용 값(2026-11-26)
+    assert AW.game_values("DET", "GB", 12, off)["watch"] is False and AW.game_values("NEW", "GB", 12, off) is None
+    assert AW.record_values()["post"] == s and AW.record_values()["target"] == 30
 
 
 def test_official_list_needs_scratches_or_three_outs():
