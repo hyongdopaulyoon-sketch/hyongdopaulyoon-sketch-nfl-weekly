@@ -334,6 +334,16 @@ def cap_cov(sc, full):
     return sc, None
 
 
+def absent_sources(x, reserve):
+    """2026-11-25(보드·발행 제보 · 12주차 DET Jack Campbell · KC L'Jarius Sneed — hex.json 꼬리에 나오는데 injuries.csv·inactives.csv 엔 없음 → 둘 다 nflverse 주간 로스터 IR(RES)이고
+    최근 팀 3경기 스냅이 없어 주간 보고 Out 줄에서 빠진 장기 결장): 결장 처리한 선수와 그 출처 [(이름, 출처)] — IR 명단이 먼저(주간 보고 Out 줄에 「· IR」 로 같이 실린 선수도 출처는 IR)."""
+    src = [(n, ("IR" if st == "RES" else st) + " 명단 · nflverse 로스터") for n, (_pos, st) in (reserve or {}).items()]
+    src += [(n.split("(")[0].strip(), "주간 보고 " + ("Out" if key == "out" else "Doubtful")) for key in ("out", "doubtful")
+            for n in N.re.split(r"(?<=\))\s*·\s*", str(x.get(key) or "")) if n.strip()]
+    src += [(n.strip(), "ESPN 명단 Out") for n in str(x.get("espn_only_out") or "").split(" · ") if n.strip()]
+    return src
+
+
 def week_values(week):
     """그 주 경기별 {경기: {팀: {점수, 재료 값}}} → data/<시즌>-wNN/hex.json 에도 쓴다. 뛰는 선수 = 부상 보고 Out/Doubtful·IR·ESPN 명단 Out 이 아닌 선수."""
     if week in _LIVE:
@@ -355,18 +365,25 @@ def week_values(week):
         a, h = g["away"], g["home"]; gk = f"{a}@{h}"; out[gk] = {}
         for t in (a, h):
             x = inj.get(t, {})
-            absent = [n.split("(")[0].strip() for key in ("out", "doubtful") for n in N.re.split(r"(?<=\))\s*·\s*", str(x.get(key) or "")) if n.strip()]
-            absent += [n.strip() for n in str(x.get("espn_only_out") or "").split(" · ") if n.strip()] + list(AP.reserve_players(t))
+            _src = absent_sources(x, AP.reserve_players(t))
+            absent = [n for n, _ in _src]
+
+            def _hit(nm, f):
+                return N._same_person(nm, f) or N._same_person(f, nm) or N._norm_name(nm) == N._norm_name(f)
 
             def plays(kind, nm, absent=absent):
-                return not any(N._same_person(nm, f) or N._same_person(f, nm) or N._norm_name(nm) == N._norm_name(f) for f in absent)
+                return not any(_hit(nm, f) for f in absent)
+
+            def _why(nm, _src=_src):   # 꼬리 표시용 결장 출처(값만)
+                w = next((lab for f, lab in _src if _hit(nm, f)), "")
+                return f"[{w}]" if w else ""
             _dn, _df = {}, {}
             mat = materials(S, PREV, t, week, x.get("expected_qb") or "", plays, _dn)
             sc = scores(base, mat) if base else None
             _fm = materials(S, PREV, t, week, x.get("expected_qb") or "", lambda kind, nm: True, _df)
             full = scores(base, _fm) if base else None   # 전원 가용 가정(결장으로 깎인 폭 표시용)
             # 2026-11-20(보드 복기 · IND ★CB Gardner 결장인데 커버리지 3 → 6): 전원 가용 넷에 들던 결장 선수의 타깃당 허용 야드가 지금 넷 평균보다 나쁘면(크면) 빠져도 값이 안 내려간다 — 그 선수를 꼬리로 밝힌다(값만)
-            rev = [f"{nm}(타깃당 {yt:.1f}야드 · 지금 넷 평균 {mat['cov']:.1f})" for nm, yt in (_df.get("cov") or {}).items()
+            rev = [f"{nm}{_why(nm)}(타깃당 {yt:.1f}야드 · 지금 넷 평균 {mat['cov']:.1f})" for nm, yt in (_df.get("cov") or {}).items()
                    if "cov" in mat and nm not in (_dn.get("cov") or {}) and yt > mat["cov"]]
             sc, cov_raw = cap_cov(sc, full)
             out[gk][t] = {"scores": sc, "full": full, "mat": {k: round(v, 4) for k, v in mat.items()}, "rev": rev, "cov_raw": cov_raw}   # cov_raw = 상한 전 커버리지(결장으로 올랐을 때만 · A14 관찰용)

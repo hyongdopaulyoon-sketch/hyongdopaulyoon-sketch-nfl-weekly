@@ -1699,7 +1699,8 @@ def _inactives_line(wd, g, a, h):
         return (f'- 🏥 결장 명단(ESPN 부분 발표 — {_in} 공식 비활성 발표 {ann_pt} PT · {_no} 미발표(들어오면 리프레시) ∪ 주간 보고 Out): ' + " / ".join(parts)
                 + f' · {_in} ★주전 결장 {stars[_in]} — 값만 · {_no} 는 주간 보고 Out 기준')
     return ('- 🏥 결장 명단(ESPN): 공식 비활성 미발표(킥오프 90분 전 발표 — 그때 리프레시하면 이 줄이 채워진다) · 주간 보고 Out 기준 '
-            + " / ".join(parts))
+            + " / ".join(parts)
+            + f' · ★주전 결장(ESPN 명단 Out ∪ 주간 보고 Out) {a} {stars[a]} / {h} {stars[h]} — 값만(공식 비활성 발표 전)')   # 2026-11-25: 📌 결론 재료가 이 수를 그대로 쓴다
 
 
 def ph_model(week, force=False):

@@ -285,6 +285,28 @@ def active_names(txt):
     return {re.sub(r"[.★]", "", n).strip().lower() for n in re.findall(r"([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ.'\- ]*?)\([^()]*→ Active[^()]*\)", txt or "")}
 
 
+def starters_out_text(a, h, ia, ih, txt):
+    """📌 결론 재료의 ★주전 결장 조각. 2026-11-25(발행·보드 제보 · 12주차 21:22판 PHI@DAL 「DAL 1명」 · KC@BUF 「KC 1명」 vs 같은 판 🏥 줄 ★Out DAL 2(Locke·Booker) · KC 2(Moore·Walker)):
+    최종 지정 전(연습 보고) 판의 n_starters_missing 은 ★ 연습 불참(DNP) 수인데 라벨이 「Out/Doubtful」 이었고, ESPN 이 이미 Out 으로 내린 ★(연습 Limited 포함)은 🏥 줄에만 있었다 →
+    라벨을 「연습 불참」 으로 바로잡고, 공식 비활성 발표 전 판에도 🏥 줄의 ★주전 결장 수(ESPN 명단 Out ∪ 주간 보고 Out)를 그대로 옮긴다(값만 — 모델·각도 입력은 안 바뀜)."""
+    pa, ph = bool(ia.get("final_pending")), bool(ih.get("final_pending"))
+    na, nh = ia.get("n_starters_missing") or 0, ih.get("n_starters_missing") or 0
+    lab = lambda p: "연습 불참(주간 연습 보고 · 최종 지정 전)" if p else "Out/Doubtful"
+    head = (f"★주전 {lab(pa)} {a} {na}명 / {h} {nh}명" if pa == ph else f"★주전 {a} {lab(pa)} {na}명 / {h} {lab(ph)} {nh}명")
+    _ina = re.search(r"- 🏥 결장 명단\(ESPN 공식 비활성 · 발표 (\S+) PT[^)]*\): .*?★주전 결장 ([A-Z]{2,3}) (\d+) / ([A-Z]{2,3}) (\d+)", txt)
+    # 2026-11-19(보드 제보 · IND@HOU 15:52판): 한 팀만 발표된 「부분 발표」 판에서 「공식 비활성 미발표」 로 남던 것 → 발표된 팀·시각·★주전 결장 수를 그대로
+    _tm = re.search(r"팀별 발표 ([A-Z]{2,3} \S+ / [A-Z]{2,3} \S+) PT", txt)   # 2026-11-19(보드 제보 · 16:14판 「15:48 PT 발표」 하나만 — 실제 IND 15:48~16:04 · HOU 15:50): 🏥 줄의 팀별 발표 시각 그대로
+    _annt = _tm.group(1) if _tm else (_ina.group(1) if _ina else "")
+    _inp = re.search(r"- 🏥 결장 명단\(ESPN 부분 발표 — ([A-Z]{2,3}) 공식 비활성 발표 (\S+) PT · ([A-Z]{2,3}) 미발표.*? · \1 ★주전 결장 (\d+) — 값만", txt)
+    _pre = re.search(r"- 🏥 결장 명단\(ESPN\): 공식 비활성 미발표.*★주전 결장\(ESPN 명단 Out ∪ 주간 보고 Out\) ([A-Z]{2,3}) (\d+) / ([A-Z]{2,3}) (\d+)", txt)
+    if _ina:
+        return head + f" · 공식 비활성(ESPN {_annt} PT 발표): ★주전 {_ina.group(2)} {_ina.group(3)} / {_ina.group(4)} {_ina.group(5)} — 🏥 줄 그대로"
+    if _inp:
+        return head + f" · 공식 비활성 부분 발표(ESPN {_inp.group(1)} {_inp.group(2)} PT 발표 · ★주전 결장 {_inp.group(1)} {_inp.group(4)} — 🏥 줄 그대로 · {_inp.group(3)} 미발표 — 들어오면 리프레시)"
+    return (head + (f" · ESPN 명단 Out 까지 세면 ★주전 결장 {_pre.group(1)} {_pre.group(2)} / {_pre.group(3)} {_pre.group(4)} — 🏥 줄 그대로(공식 비활성 발표 전)" if _pre else "")
+            + (" · ⚠️ 최종 지정 미발표(연습 보고) — 웹 확인 필수" if pa or ph else " · 공식 비활성 미발표(🏥 줄)"))
+
+
 def conclusion_line(a, h, sec, inj, m, g):
     """📌 결론 재료(자동 — 2026-10-14 Paul 「MLB 처럼」 · MLB A9 방식). sec = 이 경기 절에 이미 쌓인 줄들(🔮·📊·🧑‍🤝‍🧑·라인 이동).
     발행 세션은 팀 비교·선수 비교·변수·정리를 이 재료로 푼다 — 재계산·지어내기 방지."""
@@ -330,15 +352,7 @@ def conclusion_line(a, h, sec, inj, m, g):
                    + f" · 캐리 1위 {a} {pl[a]['rush'] or '—'} vs {h} {pl[h]['rush'] or '—'}")
     # ★주전 결장·새 정보 후보
     ia, ih = inj.get(a) or {}, inj.get(h) or {}
-    _ina = re.search(r"- 🏥 결장 명단\(ESPN 공식 비활성 · 발표 (\S+) PT[^)]*\): .*?★주전 결장 ([A-Z]{2,3}) (\d+) / ([A-Z]{2,3}) (\d+)", txt)
-    # 2026-11-19(보드 제보 · IND@HOU 15:52판): 한 팀만 발표된 「부분 발표」 판에서 「공식 비활성 미발표」 로 남던 것 → 발표된 팀·시각·★주전 결장 수를 그대로
-    _tm = re.search(r"팀별 발표 ([A-Z]{2,3} \S+ / [A-Z]{2,3} \S+) PT", txt)   # 2026-11-19(보드 제보 · 16:14판 「15:48 PT 발표」 하나만 — 실제 IND 15:48~16:04 · HOU 15:50): 🏥 줄의 팀별 발표 시각 그대로
-    _annt = _tm.group(1) if _tm else (_ina.group(1) if _ina else "")
-    _inp = re.search(r"- 🏥 결장 명단\(ESPN 부분 발표 — ([A-Z]{2,3}) 공식 비활성 발표 (\S+) PT · ([A-Z]{2,3}) 미발표.*? · \1 ★주전 결장 (\d+) — 값만", txt)
-    out.append(f"★주전 Out/Doubtful {a} {ia.get('n_starters_missing') or 0}명 / {h} {ih.get('n_starters_missing') or 0}명"
-               + (f" · 공식 비활성(ESPN {_annt} PT 발표): ★주전 {_ina.group(2)} {_ina.group(3)} / {_ina.group(4)} {_ina.group(5)} — 🏥 줄 그대로" if _ina else
-                  f" · 공식 비활성 부분 발표(ESPN {_inp.group(1)} {_inp.group(2)} PT 발표 · ★주전 결장 {_inp.group(1)} {_inp.group(4)} — 🏥 줄 그대로 · {_inp.group(3)} 미발표 — 들어오면 리프레시)" if _inp else
-                  (" · ⚠️ 최종 지정 미발표(연습 보고) — 웹 확인 필수" if ia.get("final_pending") or ih.get("final_pending") else " · 공식 비활성 미발표(🏥 줄)")))
+    out.append(starters_out_text(a, h, ia, ih, txt))
     cand = []; _act = active_names(txt)
     for t, x in ((a, ia), (h, ih)):
         for key in ("questionable", "doubtful"):

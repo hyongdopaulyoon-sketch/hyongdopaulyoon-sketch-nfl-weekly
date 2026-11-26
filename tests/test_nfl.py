@@ -241,6 +241,28 @@ def test_qb_return_only_when_started_before_season_main():
         N._STARTS.clear(); N._STARTS.update(old)
 
 
+def test_starters_out_text_and_absent_sources():
+    """2026-11-25 12주차 21:22판: 연습 보고 단계 라벨 = 「연습 불참」 · 공식 비활성 발표 전 판도 🏥 줄 ★주전 결장 수를 옮긴다 · 육각형 꼬리 결장 출처(IR 명단)."""
+    import stat_compare as SC, team_hex as TH
+    pre = ("- 🏥 결장 명단(ESPN): 공식 비활성 미발표(킥오프 90분 전 발표 — 그때 리프레시하면 이 줄이 채워진다) · 주간 보고 Out 기준 PHI Out 5 — ★Zack Baun(LB · IR) / DAL Out 7 — ★P.J. Locke(S) · ★Tyler Booker(G)"
+           " · ★주전 결장(ESPN 명단 Out ∪ 주간 보고 Out) PHI 1 / DAL 2 — 값만(공식 비활성 발표 전)")
+    s = SC.starters_out_text("PHI", "DAL", {"n_starters_missing": "1", "final_pending": "1"}, {"n_starters_missing": "1", "final_pending": "1"}, pre)
+    assert s.startswith("★주전 연습 불참(주간 연습 보고 · 최종 지정 전) PHI 1명 / DAL 1명 · ESPN 명단 Out 까지 세면 ★주전 결장 PHI 1 / DAL 2 — 🏥 줄 그대로") and s.endswith("웹 확인 필수")
+    s = SC.starters_out_text("KC", "BUF", {"n_starters_missing": "2"}, {}, "")
+    assert s == "★주전 Out/Doubtful KC 2명 / BUF 0명 · 공식 비활성 미발표(🏥 줄)"
+    s = SC.starters_out_text("KC", "BUF", {"n_starters_missing": "1", "final_pending": "1"}, {"n_starters_missing": "0"}, "")
+    assert s.startswith("★주전 KC 연습 불참(주간 연습 보고 · 최종 지정 전) 1명 / BUF Out/Doubtful 0명")
+    off = "- 🏥 결장 명단(ESPN 공식 비활성 · 발표 15:52 PT ∪ 주간 보고 Out): GB Out 3 — x / LA Out 12 — y · ★주전 결장 GB 0 / LA 4 — 값만 · 팀별 발표 GB 15:49 / LA 15:52 PT · ESPN"
+    assert SC.starters_out_text("GB", "LA", {}, {"n_starters_missing": "4"}, off) == "★주전 Out/Doubtful GB 0명 / LA 4명 · 공식 비활성(ESPN GB 15:49 / LA 15:52 PT 발표): ★주전 GB 0 / LA 4 — 🏥 줄 그대로"
+    src = TH.absent_sources({"out": "Aidan Hutchinson(DL · 스냅 52% · IR)", "doubtful": "A B(CB · ★스냅 80%)", "espn_only_out": "Cade Mays · Ennis Rakestraw Jr."},
+                            {"Jack Campbell": ("LB", "RES"), "Aidan Hutchinson": ("DL", "RES"), "X Y": ("WR", "PUP")})
+    d = {}
+    for n, lab in src:
+        d.setdefault(n, lab)
+    assert d == {"Jack Campbell": "IR 명단 · nflverse 로스터", "Aidan Hutchinson": "IR 명단 · nflverse 로스터", "X Y": "PUP 명단 · nflverse 로스터", "A B": "주간 보고 Doubtful",
+                 "Cade Mays": "ESPN 명단 Out", "Ennis Rakestraw Jr.": "ESPN 명단 Out"}
+
+
 def test_active_names_drop_from_new_info_candidates():
     """2026-11-25 GB@LA 16:21판: 🏥 줄이 「★Travis Glover(Q → Active 11-25)」 로 적은 선수는 📌 새 정보 후보에서 빠진다."""
     import stat_compare as SC
