@@ -146,7 +146,7 @@
 "NE@LAC": {
 "spread_home": "2.5",
 "total": "35.5",
-"ml": "-138/+116",
+"ml": "-137/+116",
 "qb": {
 "NE": "Tommy DeVito",
 "LAC": "Justin Herbert"
@@ -162,7 +162,7 @@
 "DEN@PIT": {
 "spread_home": "4.5",
 "total": "36.5",
-"ml": "-232/+192",
+"ml": "-257/+211",
 "qb": {
 "DEN": "Bo Nix",
 "PIT": "Mason Rudolph"
@@ -182,7 +182,7 @@
 "PHI@DAL": {
 "spread_home": "-8.5",
 "total": "49.5",
-"ml": "+356/-458",
+"ml": "+362/-468",
 "qb": {
 "PHI": "Joe Milton III",
 "DAL": "Dak Prescott"
@@ -226,7 +226,7 @@
 "KC@BUF": {
 "spread_home": "-3.0",
 "total": "45.5",
-"ml": "+130/-153",
+"ml": "+130/-154",
 "qb": {
 "KC": "Patrick Mahomes",
 "BUF": "Josh Allen"
@@ -247,7 +247,7 @@
 "WAS@ARI": {
 "spread_home": "6.5",
 "total": "41.5",
-"ml": "-351/+282",
+"ml": "-351/+281",
 "qb": {
 "WAS": "Jayden Daniels",
 "ARI": "Carson Beck"
@@ -293,5 +293,5 @@
 "TB": []
 }
 },
-"_stamp": "11-26 12:08"
+"_stamp": "11-26 12:34"
 }
