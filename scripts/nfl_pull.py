@@ -1595,6 +1595,31 @@ def _gloss_line(week, g, a, h, ia, ih, m):
     return ("- 🗒️ 규칙 풀이(이 경기에 걸린 것 · 발행문에서 코드는 이 쉬운 이름·뜻·지금 성적으로 풀어 쓴다): " + " / ".join(parts)) if parts else "- 🗒️ 규칙 풀이: 이 경기에 걸린 관찰 각도·규칙 없음"
 
 
+_ACT_SET = {}
+
+
+def _mark_active(wd, game, t, s):
+    """부상·QB 줄의 Questionable/Doubtful 목록에서 ESPN 이 Active 로 표시한 선수 괄호 끝에 「 · ESPN Active」(2026-11-26 발행 제보 · CHI@DET 09:04판: 🏥 줄은
+    「Stevenson(Q → Active)」 인데 부상·QB 줄은 Questionable 그대로). 표시만 — injuries.csv·결장 수·모델·각도 입력은 안 바꾼다."""
+    if not s:
+        return s
+    if (wd, game) not in _ACT_SET:
+        d = defaultdict(set)
+        for r in rd(os.path.join(wd, "inactives.csv")):
+            if r.get("game") == game and r.get("status") == "Active":
+                d[r["team"]].add(_norm_name(r["player"]))
+        _ACT_SET[(wd, game)] = d
+    names = _ACT_SET[(wd, game)].get(t) or set()
+    if not names:
+        return s
+    out = []
+    for y in [z.strip() for z in re.split(r"(?<=\))\s*·\s*", str(s)) if z.strip()]:
+        nk = _norm_name(y.split("(")[0])
+        hit = nk in names or (len(nk.split()) >= 2 and sum(1 for k in names if len(k.split()) >= 2 and k.split()[-1] == nk.split()[-1] and k[0] == nk[0]) == 1)
+        out.append((y[:-1] + " · ESPN Active)") if hit and y.endswith(")") else (y + "(ESPN Active)" if hit else y))
+    return " · ".join(out)
+
+
 def _inactives_line(wd, g, a, h):
     """경기 절 「- 🏥 결장 명단」 — ESPN 당일 명단(건강 제외 등) ∪ 주간 보고 Out(injuries.csv out 열). ESPN 당일 명단은 주중에 이미 Out 인
     선수를 생략한다(10/15 SEA@DEN ESPN 5/5 vs 공식 7/7 — Thomas★·Surratt·Surtain 누락, 발행 세션 제보). 발표 시각 = 당일 행 중 가장 이른 것."""
@@ -1610,8 +1635,9 @@ def _inactives_line(wd, g, a, h):
         ds = [datetime.strptime(r["announced_utc"], "%Y-%m-%dT%H:%M") for r in rows if r["announced_utc"] and off_t.get(r["team"])
               and r["status"] == "Out" and not str(r.get("reason") or "").startswith("IR")]   # 2026-11-16(수집 제보 · 「발표 14:48」 = Active 행 시각): 발표 시각도 당일 Out 행에서만
         ds = [d for d in ds if 0 <= (ko - d).total_seconds() <= 4 * 3600]   # 2026-11-15: 며칠 전 날짜가 시각만 남아 「17:05 PT」 로 찍히던 것(JAX) — 발표된 팀의 당일 행만, 없으면 「?」
-        if ds:
-            ann_pt = (kp - (ko - min(ds))).strftime("%H:%M")
+        if ds:   # 2026-11-26(발행 제보 · CHI@DET 09:04판 머리 「발표 08:33」 — 실제 CHI 08:36 · DET 08:33~08:51): 가장 이른 시각 하나가 아니라 이른~늦은 범위
+            _lo, _hi = (kp - (ko - min(ds))).strftime("%H:%M"), (kp - (ko - max(ds))).strftime("%H:%M")
+            ann_pt = _lo if _lo == _hi else f"{_lo}~{_hi}"
     except Exception:
         pass
     parts, stars = [], {}
@@ -1630,7 +1656,13 @@ def _inactives_line(wd, g, a, h):
     for t in (a, h):
         _ts = sorted(x for x in (_pt(r["announced_utc"]) for r in rows if r["team"] == t and r["status"] == "Out") if x)
         t_ann[t] = (_ts[0] if _ts[0] == _ts[-1] else f"{_ts[0]}~{_ts[-1]}") if _ts else "?"
-    act = {t: {_norm_name(r["player"]): (_pt(r["announced_utc"]) or r["announced_utc"][5:10]) for r in rows if r["team"] == t and r["status"] == "Active"} for t in (a, h)}
+    def _ptd(u):   # 킥오프 4시간 밖 Active 행 = PT 날짜 + 「ESPN 표시」(2026-11-26 발행 제보 · CHI@DET: UTC 날짜가 찍혀 같은 저녁이 「11-25」·「11-26」 으로 갈리고 당일 확인 시각처럼 읽힘)
+        try:
+            d = datetime.strptime(u, "%Y-%m-%dT%H:%M")
+            return (d - timedelta(minutes=((ko.hour * 60 + ko.minute) - (kp.hour * 60 + kp.minute)) % 1440)).strftime("%m-%d") + " ESPN 표시"
+        except Exception:
+            return str(u)[5:10]
+    act = {t: {_norm_name(r["player"]): (_pt(r["announced_utc"]) or _ptd(r["announced_utc"])) for r in rows if r["team"] == t and r["status"] == "Active"} for t in (a, h)}
     # 2026-11-19(보드 제보 · HOU 주간 보고 「Jacob Hummel」 Q ↔ ESPN 「Jake Hummel」 Active): 이름 표기가 달라 출전 표시가 안 붙던 것 — 성·이름 첫 글자가 같은 Active 행이 그 팀에 하나뿐이면 같은 선수
     for t in (a, h):
         _keys = list(act[t])
@@ -1851,8 +1883,8 @@ def ph_digest(week, force=False):
                         + f' · Limited {x.get("n_limited", 0)}' + (f'({x["limited"]})' if x.get("limited") else "") + ' — 발행 세션 웹 확인 필수'
                         if x.get("final_pending") else
                         f' · Out {x.get("n_out", 0)} / Doubtful {x.get("n_doubtful", 0)} / Questionable {x.get("n_questionable", 0)}')
-                     + (f' — Out: {x["out"]}' if x.get("out") else "") + (f' — Doubtful: {x["doubtful"]}' if x.get("doubtful") else "")
-                     + (f' — Questionable: {x["questionable"]}' if x.get("questionable") else "")
+                     + (f' — Out: {x["out"]}' if x.get("out") else "") + (f' — Doubtful: {_mark_active(wd, f"{a}@{h}", t, x["doubtful"])}' if x.get("doubtful") else "")
+                     + (f' — Questionable: {_mark_active(wd, f"{a}@{h}", t, x["questionable"])}' if x.get("questionable") else "")
                      + (f' · ★주전급(스냅 60%+) {"Out/Doubtful" if not x.get("final_pending") else "연습 불참"} {x["n_starters_missing"]}명'
                         if str(x.get("n_starters_missing") or "0") not in ("0", "") else "")
                      + ((lambda _eo: f' · ESPN 명단에만 Out {len(_eo)}: {" · ".join(_eo)}(주간 부상 보고 밖 — 건강 제외·스냅 없는 장기 결장 등 · 🏥 줄 Out 수엔 포함)' if _eo else "")(_espn_only_out(wd, t, x)))

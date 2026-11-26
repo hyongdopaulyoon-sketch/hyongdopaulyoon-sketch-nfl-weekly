@@ -131,6 +131,35 @@ def test_sack_context_line_and_flag(monkeypatch):
     assert "해당:" not in SC.digest_line("T10", "T12", 11, {}, T) and SC.digest_line("X", "Y", 11, {}, T) == ""
 
 
+def test_mark_active_and_announce_range(tmp_path, monkeypatch):
+    """2026-11-26 CHI@DET 09:04판: 부상·QB 줄 Q 선수에 「ESPN Active」 · 🏥 머리 발표 시각은 범위 · 출전 표시 날짜는 PT 날짜 + 「ESPN 표시」."""
+    import csv
+    import nfl_pull as P
+    wd = str(tmp_path)
+    hdr = ["game", "team", "player", "pos", "status", "reason", "detail", "announced_utc", "official", "star", "snap_pct"]
+    rows = [["CHI@DET", "CHI", "Tyrique Stevenson Sr.", "CB", "Active", "", "", "2026-11-25T23:56", "1", "1", "80"],
+            ["CHI@DET", "CHI", "D'Marco Jackson", "LB", "Active", "", "", "2026-11-26T03:14", "1", "0", "1"],
+            ["CHI@DET", "CHI", "Kyler Gordon", "CB", "Out", "Shoulder", "", "2026-11-26T16:36", "1", "1", "69"],
+            ["CHI@DET", "DET", "Chuck Clark", "S", "Out", "Hamstring", "", "2026-11-26T16:46", "1", "1", "99"],
+            ["CHI@DET", "DET", "Tyrus Wheat", "LB", "Out", "Coach's Decision", "", "2026-11-26T16:33", "1", "0", ""],
+            ["CHI@DET", "DET", "DJ Wonnum", "LB", "Out", "Back", "", "2026-11-26T16:51", "1", "1", "73"]]
+    with open(os.path.join(wd, "inactives.csv"), "w", encoding="utf-8", newline="") as f:
+        w = csv.writer(f); w.writerow(hdr); w.writerows(rows)
+    with open(os.path.join(wd, "injuries.csv"), "w", encoding="utf-8", newline="") as f:
+        w = csv.writer(f); w.writerow(["team", "out", "doubtful", "questionable", "limited", "dnp"])
+        w.writerow(["CHI", "", "", "D'Marco Jackson(LB · 스냅 1%) · Tyrique Stevenson(CB · ★스냅 80%)", "", ""]); w.writerow(["DET", "", "", "", "", ""])
+    P._ACT_SET.clear()
+    s = P._mark_active(wd, "CHI@DET", "CHI", "D'Marco Jackson(LB · 스냅 1%) · Tyrique Stevenson(CB · ★스냅 80%) · Cole Kmet(TE · ★스냅 70%)")
+    assert s == "D'Marco Jackson(LB · 스냅 1% · ESPN Active) · Tyrique Stevenson(CB · ★스냅 80% · ESPN Active) · Cole Kmet(TE · ★스냅 70%)"
+    assert P._mark_active(wd, "CHI@DET", "DET", "A B(CB)") == "A B(CB)" and P._mark_active(wd, "CHI@DET", "CHI", "") == ""
+    monkeypatch.setattr(P, "_last_snap", lambda: {})
+    ln = P._inactives_line(wd, {"kickoff_utc": "2026-11-26T18:00Z", "kickoff_pt": "10:00"}, "CHI", "DET")
+    assert ln.startswith("- 🏥 결장 명단(ESPN 공식 비활성 · 발표 08:33~08:51 PT ∪ 주간 보고 Out): ") and "팀별 발표 CHI 08:36 / DET 08:33~08:51 PT" in ln
+    assert "D'Marco Jackson(Q → Active 11-25 ESPN 표시)" in ln and "★Tyrique Stevenson(Q → Active 11-25 ESPN 표시)" in ln
+    import stat_compare as SC
+    assert {"tyrique stevenson", "d'marco jackson"} <= SC.active_names(ln) or {"tyrique stevenson", "dmarco jackson"} <= SC.active_names(ln)
+
+
 def test_sack_allow_watch(monkeypatch):
     """2026-11-25 Paul 「허용률 차이 큰 경기도 지켜보는걸로」: 그 경기 전 시즌 누적 공격 색 허용률 차 2.0%p 이상 → 낮은 쪽 기록 · 해당 경기만 색 맥락 꼬리."""
     import sack_allow_watch as AW
