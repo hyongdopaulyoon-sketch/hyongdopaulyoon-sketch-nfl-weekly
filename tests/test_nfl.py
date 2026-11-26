@@ -131,6 +131,27 @@ def test_sack_context_line_and_flag(monkeypatch):
     assert "해당:" not in SC.digest_line("T10", "T12", 11, {}, T) and SC.digest_line("X", "Y", 11, {}, T) == ""
 
 
+def test_sack_allow_watch(monkeypatch):
+    """2026-11-25 Paul 「허용률 차이 큰 경기도 지켜보는걸로」: 그 경기 전 시즌 누적 공격 색 허용률 차 2.0%p 이상 → 낮은 쪽 기록 · 해당 경기만 색 맥락 꼬리."""
+    import sack_allow_watch as AW
+    off = {"GB": {w: [40.0, 2.5] for w in range(1, 12)}, "LA": {w: [40.0, 1.5] for w in range(1, 12)}, "DET": {w: [40.0, 2.4] for w in range(1, 12)}, "NEW": {1: [40.0, 9.0]}}
+    assert abs(AW.osr(off, "GB", 12) - 0.0625) < 1e-9 and AW.osr(off, "NEW", 12) is None and AW.osr(off, "GB", 4) is None and AW.osr(off, "ZZ", 12) is None
+    games = [{"game_type": "REG", "season": "2026", "week": "12", "home_team": "LA", "away_team": "GB", "result": "13", "spread_line": "2.5", "away_moneyline": "120", "home_moneyline": "-140"},
+             {"game_type": "REG", "season": "2026", "week": "12", "home_team": "GB", "away_team": "DET", "result": "3", "spread_line": "1", "away_moneyline": "100", "home_moneyline": "-120"},   # 차 0.25%p → 해당 없음
+             {"game_type": "REG", "season": "2026", "week": "11", "home_team": "GB", "away_team": "LA", "result": "-3", "spread_line": "-3", "away_moneyline": "-150", "home_moneyline": "130"},  # 낮은 쪽 LA(원정) 승 · 스프레드 무
+             {"game_type": "REG", "season": "2026", "week": "3", "home_team": "LA", "away_team": "GB", "result": "7", "spread_line": "3", "away_moneyline": "130", "home_moneyline": "-150"},     # 5주차 전
+             {"game_type": "REG", "season": "2026", "week": "13", "home_team": "LA", "away_team": "GB", "result": "", "spread_line": "3"}]                                                        # 안 끝남
+    R = AW.rows(2026, off, games=games)
+    assert [(r["week"], r["low_home"]) for r in R] == [(12, True), (12, False), (11, False)] and abs(R[0]["gap"] - 0.025) < 1e-9
+    s = AW.summ(R)
+    assert (s["w"], s["l"], s["aw"], s["al"], s["ap"]) == (2, 0, 1, 0, 1) and 55 < s["exp"] < 60
+    assert AW.summ(R, AW.CUT2)["w"] == 0 and AW.summ(R, AW.CUT, lambda r: r["week"] >= 12)["w"] == 1 and AW.fmt(AW.summ([])) == "0경기"
+    monkeypatch.setattr(AW, "season_now", lambda before_week=None: (s, s, s))
+    t = AW.digest_tail("GB", "LA", 12, off)
+    assert t.startswith(" · 지켜보는 중(2026-11-25 Paul · 값만 · 방향 근거 아님): 공격 색 허용률 차 2.0%p 이상 — GB 6.2% / LA 3.8% · 차 2.5%p · 낮은 쪽 LA · 올해 낮은 쪽 2승 0패") and "2018~2025 낮은 쪽 499승 292패" in t
+    assert AW.digest_tail("DET", "GB", 12, off) == "" and AW.digest_tail("NEW", "GB", 12, off) == ""
+
+
 def test_official_list_needs_scratches_or_three_outs():
     """2026-11-22: 킥오프 직전 Out 한 줄(LV Bowers Q → Out)만으로는 「공식 비활성 명단 도착」 이 아니다 · 건강 제외 행이 있거나 Out 3개+ 면 도착."""
     import nfl_pull as P

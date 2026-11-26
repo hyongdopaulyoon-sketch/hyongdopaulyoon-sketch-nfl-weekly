@@ -140,6 +140,11 @@ def digest_line(a, h, wk, inj, T=None):
         except Exception as e:
             cur = f"올해 값 계산 실패({type(e).__name__})"
         s += f" · 해당: 색 잘 당하는 QB({qt_}) 대 색률 상위 {TOP} 수비({dt_}) — {HIST} · {cur} · 역사와 올해가 반대 방향이라 관찰 값으로만"
+    try:   # 2026-11-25 Paul 「허용률 차이 큰 경기도 지켜보는걸로 하자」: 공격 색 허용률 차 2.0%p 이상인 경기만 꼬리(값만 · scripts/sack_allow_watch.py)
+        import sack_allow_watch as AW
+        s += AW.digest_tail(a, h, wk, state()[0])
+    except Exception:
+        pass
     return s
 
 
