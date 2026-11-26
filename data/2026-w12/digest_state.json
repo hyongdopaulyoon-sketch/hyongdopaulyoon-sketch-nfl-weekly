@@ -162,7 +162,7 @@
 "DEN@PIT": {
 "spread_home": "4.5",
 "total": "36.5",
-"ml": "-254/+209",
+"ml": "-257/+211",
 "qb": {
 "DEN": "Bo Nix",
 "PIT": "Mason Rudolph"
@@ -225,8 +225,8 @@
 },
 "KC@BUF": {
 "spread_home": "-3.0",
-"total": "45.5",
-"ml": "+130/-154",
+"total": "46.5",
+"ml": "+131/-155",
 "qb": {
 "KC": "Patrick Mahomes",
 "BUF": "Josh Allen"
@@ -247,7 +247,7 @@
 "WAS@ARI": {
 "spread_home": "6.5",
 "total": "41.5",
-"ml": "-352/+282",
+"ml": "-351/+282",
 "qb": {
 "WAS": "Jayden Daniels",
 "ARI": "Carson Beck"
@@ -293,5 +293,5 @@
 "TB": []
 }
 },
-"_stamp": "11-26 14:24"
+"_stamp": "11-26 15:24"
 }
