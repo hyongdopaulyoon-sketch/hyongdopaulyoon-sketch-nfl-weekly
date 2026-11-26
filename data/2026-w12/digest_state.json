@@ -19,7 +19,7 @@
 "LV@CLE": {
 "spread_home": "-4.5",
 "total": "39.5",
-"ml": "+196/-237",
+"ml": "+201/-244",
 "qb": {
 "LV": "Fernando Mendoza",
 "CLE": "Deshaun Watson"
@@ -34,7 +34,7 @@
 "NO@CIN": {
 "spread_home": "-10.0",
 "total": "49.5",
-"ml": "+409/-539",
+"ml": "+408/-539",
 "qb": {
 "NO": "Tyler Shough",
 "CIN": "Joe Burrow"
@@ -89,7 +89,8 @@
 "out": {
 "GB": [
 "Josh Jacobs",
-"Josh Whyle"
+"Josh Whyle",
+"Zaire Franklin"
 ],
 "LA": [
 "Coleman Shelton",
@@ -243,9 +244,9 @@
 }
 },
 "WAS@ARI": {
-"spread_home": "6.5",
+"spread_home": "7.0",
 "total": "41.5",
-"ml": "-328/+265",
+"ml": "-332/+267",
 "qb": {
 "WAS": "Jayden Daniels",
 "ARI": "Carson Beck"
@@ -273,5 +274,5 @@
 "TB": []
 }
 },
-"_stamp": "11-25 16:04"
+"_stamp": "11-25 16:21"
 }
