@@ -66,7 +66,7 @@
 "BAL@HOU": {
 "spread_home": "-6.5",
 "total": "47.5",
-"ml": "+267/-332",
+"ml": "+267/-333",
 "qb": {
 "BAL": "Jacoby Brissett",
 "HOU": "C.J. Stroud"
@@ -104,7 +104,7 @@
 "CHI@DET": {
 "spread_home": "1.5",
 "total": "56.5",
-"ml": "-119/+101",
+"ml": "-114/-104",
 "qb": {
 "CHI": "Caleb Williams",
 "DET": "Jared Goff"
@@ -141,30 +141,10 @@
 ]
 }
 },
-"DEN@PIT": {
-"spread_home": "4.5",
-"total": "36.5",
-"ml": "-229/+190",
-"qb": {
-"DEN": "Bo Nix",
-"PIT": "Mason Rudolph"
-},
-"out": {
-"DEN": [
-"Eyioma Uwazurike",
-"J.K. Dobbins",
-"Sai'vion Jones",
-"Taylor Rapp"
-],
-"PIT": [
-"Mason McCormick"
-]
-}
-},
 "PHI@DAL": {
-"spread_home": "-8.5",
+"spread_home": "-9.5",
 "total": "49.5",
-"ml": "+370/-479",
+"ml": "+371/-482",
 "qb": {
 "PHI": "Joe Milton III",
 "DAL": "Dak Prescott"
@@ -183,6 +163,26 @@
 "P.J. Locke",
 "Tyler Booker",
 "Tyler Goodson"
+]
+}
+},
+"DEN@PIT": {
+"spread_home": "4.5",
+"total": "36.5",
+"ml": "-228/+190",
+"qb": {
+"DEN": "Bo Nix",
+"PIT": "Mason Rudolph"
+},
+"out": {
+"DEN": [
+"Eyioma Uwazurike",
+"J.K. Dobbins",
+"Sai'vion Jones",
+"Taylor Rapp"
+],
+"PIT": [
+"Mason McCormick"
 ]
 }
 },
@@ -223,8 +223,8 @@
 },
 "SEA@SF": {
 "spread_home": "-2.5",
-"total": "44.5",
-"ml": "+124/-147",
+"total": "43.5",
+"ml": "+127/-150",
 "qb": {
 "SEA": "Sam Darnold",
 "SF": "Brock Purdy"
@@ -263,7 +263,7 @@
 "WAS@ARI": {
 "spread_home": "6.5",
 "total": "41.5",
-"ml": "-351/+282",
+"ml": "-351/+281",
 "qb": {
 "WAS": "Jayden Daniels",
 "ARI": "Carson Beck"
@@ -291,5 +291,5 @@
 "TB": []
 }
 },
-"_stamp": "11-26 08:04"
+"_stamp": "11-26 08:38"
 }

@@ -1,29 +1,30 @@
 ﻿game,team,player,pos,status,reason,detail,announced_utc,official,star,snap_pct
-CHI@DET,CHI,D'Marco Jackson,LB,Questionable,Elbow,Not Specified,2026-11-26T03:14,0,0,1
-CHI@DET,CHI,Tyrique Stevenson Sr.,CB,Questionable,Groin,Not Specified,2026-11-25T23:56,0,1,80
-CHI@DET,CHI,Kyler Gordon,CB,Out,Shoulder,Not Specified,2026-11-25T20:28,0,1,69
-CHI@DET,CHI,Salvon Ahmed,RB,Active,,,2026-11-25T20:32,0,0,22
-CHI@DET,CHI,Roschon Johnson,RB,Out,Ankle,Not Specified,2026-11-25T20:15,0,0,20
-CHI@DET,CHI,Isaac Yiadom,CB,Active,,,2026-11-25T02:11,0,0,
-CHI@DET,CHI,Elijah Hicks,S,Out,Concussion,Concussion,2026-11-25T01:36,0,0,5
-CHI@DET,CHI,Theo Benedet,OT,Active,,,2026-11-24T22:16,0,1,99
-CHI@DET,CHI,Cam Lewis,CB,Active,,,2026-11-24T04:19,0,0,
-CHI@DET,CHI,Dillon Thieneman,S,Active,,,2026-11-24T04:14,0,1,100
-CHI@DET,CHI,Jeffery Simmons,DT,Active,,,2026-11-24T04:08,0,1,91
-CHI@DET,CHI,Sam Roush,TE,Active,,,2026-11-24T01:39,0,0,50
-CHI@DET,CHI,Zavion Thomas,WR,Active,,,2026-11-24T01:35,0,0,17
-CHI@DET,CHI,Kalif Raymond,WR,Active,,,2026-11-24T01:24,0,1,69
-CHI@DET,CHI,Cairo Santos,PK,Active,,,2026-11-24T00:29,0,0,
-CHI@DET,CHI,Stephen Carlson,TE,Active,,,2026-11-23T16:56,0,0,14
-CHI@DET,CHI,Jayden Loving,DT,Active,,,2026-11-23T15:21,0,0,
-CHI@DET,CHI,Jordan McFadden,G,Active,,,2026-11-23T15:21,0,0,
-CHI@DET,CHI,Keyshaun Elliott,LB,Active,,,2026-11-23T15:21,0,0,
-CHI@DET,CHI,Colston Loveland,TE,Active,,,2026-11-22T23:14,0,1,91
-CHI@DET,CHI,Rome Odunze,WR,Active,,,2026-11-22T22:35,0,1,89
-CHI@DET,CHI,Luther Burden III,WR,Active,,,2026-11-22T22:24,0,0,57
-CHI@DET,CHI,Caleb Williams,QB,Active,,,2026-11-22T22:20,0,1,100
-CHI@DET,CHI,Kyle Monangai,RB,Active,,,2026-11-22T22:15,0,0,38
-CHI@DET,CHI,D'Andre Swift,RB,Active,,,2026-11-22T22:10,0,1,65
+CHI@DET,CHI,Isaac Yiadom,CB,Out,Coach's Decision,Not Specified,2026-11-26T16:36,1,0,
+CHI@DET,CHI,Case Keenum,QB,Out,Coach's Decision,Not Specified,2026-11-26T16:36,1,0,
+CHI@DET,CHI,Jayden Loving,DT,Out,Coach's Decision,Not Specified,2026-11-26T16:36,1,0,
+CHI@DET,CHI,Jordan McFadden,G,Out,Coach's Decision,Not Specified,2026-11-26T16:36,1,0,
+CHI@DET,CHI,Elijah Hicks,S,Out,Concussion,Concussion,2026-11-26T16:36,1,0,5
+CHI@DET,CHI,D'Marco Jackson,LB,Questionable,,,2026-11-26T03:14,1,0,1
+CHI@DET,CHI,Tyrique Stevenson Sr.,CB,Questionable,Groin,Not Specified,2026-11-25T23:56,1,1,80
+CHI@DET,CHI,Kyler Gordon,CB,Out,Shoulder,Not Specified,2026-11-25T20:28,1,1,69
+CHI@DET,CHI,Salvon Ahmed,RB,Active,,,2026-11-25T20:32,1,0,22
+CHI@DET,CHI,Roschon Johnson,RB,Out,Ankle,Not Specified,2026-11-25T20:15,1,0,20
+CHI@DET,CHI,Theo Benedet,OT,Active,,,2026-11-24T22:16,1,1,99
+CHI@DET,CHI,Cam Lewis,CB,Active,,,2026-11-24T04:19,1,0,
+CHI@DET,CHI,Dillon Thieneman,S,Active,,,2026-11-24T04:14,1,1,100
+CHI@DET,CHI,Jeffery Simmons,DT,Active,,,2026-11-24T04:08,1,1,91
+CHI@DET,CHI,Sam Roush,TE,Active,,,2026-11-24T01:39,1,0,50
+CHI@DET,CHI,Zavion Thomas,WR,Active,,,2026-11-24T01:35,1,0,17
+CHI@DET,CHI,Kalif Raymond,WR,Active,,,2026-11-24T01:24,1,1,69
+CHI@DET,CHI,Cairo Santos,PK,Active,,,2026-11-24T00:29,1,0,
+CHI@DET,CHI,Stephen Carlson,TE,Active,,,2026-11-23T16:56,1,0,14
+CHI@DET,CHI,Keyshaun Elliott,LB,Active,,,2026-11-23T15:21,1,0,
+CHI@DET,CHI,Colston Loveland,TE,Active,,,2026-11-22T23:14,1,1,91
+CHI@DET,CHI,Rome Odunze,WR,Active,,,2026-11-22T22:35,1,1,89
+CHI@DET,CHI,Luther Burden III,WR,Active,,,2026-11-22T22:24,1,0,57
+CHI@DET,CHI,Caleb Williams,QB,Active,,,2026-11-22T22:20,1,1,100
+CHI@DET,CHI,Kyle Monangai,RB,Active,,,2026-11-22T22:15,1,0,38
+CHI@DET,CHI,D'Andre Swift,RB,Active,,,2026-11-22T22:10,1,1,65
 CHI@DET,DET,Skyler Gill-Howard,DT,Out,IR · Knee,Surgery,2026-11-25T21:25,0,0,48
 CHI@DET,DET,Ennis Rakestraw Jr.,CB,Out,Shoulder,Not Specified,2026-11-26T03:20,0,0,22
 CHI@DET,DET,Chuck Clark,S,Questionable,Hamstring,Not Specified,2026-11-26T01:04,0,1,99
@@ -150,6 +151,9 @@ KC@BUF,BUF,James Cook III,RB,Active,,,2026-11-22T21:26,0,0,59
 KC@BUF,BUF,Josh Allen,QB,Active,,,2026-11-22T21:19,0,1,97
 KC@BUF,BUF,Ed Oliver,DT,Active,,,2026-11-22T17:05,0,0,55
 KC@BUF,BUF,Jackson Hawes,TE,Active,,,2026-11-22T16:58,0,0,41
+GB@LA,GB,Trey Smack,PK,Active,,,2026-11-26T16:23,1,0,
+GB@LA,GB,Skyy Moore,WR,Active,,,2026-11-26T16:17,1,0,2
+GB@LA,GB,Bo Melton,WR,Active,,,2026-11-26T16:08,1,0,30
 GB@LA,GB,Savion Williams,WR,Active,,,2026-11-26T15:56,1,0,53
 GB@LA,GB,Chris Brooks,RB,Active,,,2026-11-26T15:44,1,0,44
 GB@LA,GB,MarShawn Lloyd,RB,Active,,,2026-11-26T15:16,1,0,16
@@ -163,8 +167,6 @@ GB@LA,GB,Kevin Zeitler,G,Active,,,2026-11-26T00:28,1,0,41
 GB@LA,GB,Travis Glover,OT,Active,,,2026-11-26T00:26,1,1,100
 GB@LA,GB,Sean Rhyan,G,Active,,,2026-11-26T00:23,1,1,100
 GB@LA,GB,Zaire Franklin,LB,Out,Shin,Fracture,2026-11-25T23:56,1,0,
-GB@LA,GB,Bo Melton,WR,Active,,,2026-11-26T00:08,1,0,30
-GB@LA,GB,Skyy Moore,WR,Active,,,2026-11-26T00:06,1,0,2
 GB@LA,GB,Donovan Jennings,G,Out,Coach's Decision,Not Specified,2026-11-25T23:56,1,0,
 GB@LA,GB,Jager Burton,C,Out,Coach's Decision,Not Specified,2026-11-25T23:56,1,0,12
 GB@LA,GB,Mekhi Becton,G,Out,Coach's Decision,Not Specified,2026-11-25T23:56,1,0,8
@@ -174,7 +176,6 @@ GB@LA,GB,Isaiah McDuffie,LB,Active,,,2026-11-24T18:37,1,1,98
 GB@LA,GB,Brandon Cisse,CB,Active,,,2026-11-24T00:13,1,1,67
 GB@LA,GB,Luke Musgrave,TE,Out,Neck,Not Specified,2026-11-22T14:06,1,0,
 GB@LA,GB,Evan Williams,S,Active,,,2026-11-19T02:35,1,1,99
-GB@LA,GB,Xavier McKinney,S,Active,,,2026-11-19T02:33,1,1,94
 GB@LA,LA,Colby Parkinson,TE,Active,,,2026-11-26T15:30,1,1,75
 GB@LA,LA,Bill Murray,G,Questionable,Leg,,2026-11-26T15:09,1,1,68
 GB@LA,LA,Konata Mumpfield,WR,Active,,,2026-11-26T05:42,1,1,66
@@ -813,8 +814,8 @@ CAR@TB,CAR,Isaiah Simmons,S,Out,IR · Knee,Not Specified,2026-11-22T00:57,0,0,
 WAS@ARI,WAS,Daron Payne,DT,Out,IR · Foot,Surgery,2026-11-04T19:13,0,0,
 LV@CLE,CLE,Michael Burton,FB,Out,IR · Calf,Not Specified,2026-11-14T18:01,0,0,13
 LV@CLE,CLE,Kalia Davis,DT,Out,IR · Quadriceps,Not Specified,2026-10-28T00:26,0,0,
-CHI@DET,CHI,Zavier Scott,RB,Out,IR · Wrist,Not Specified,2026-11-05T21:19,0,0,
-CHI@DET,CHI,Kentavius Street,DT,Out,IR · Knee,Not Specified,2026-11-05T04:55,0,0,21
+CHI@DET,CHI,Zavier Scott,RB,Out,IR · Wrist,Not Specified,2026-11-05T21:19,1,0,
+CHI@DET,CHI,Kentavius Street,DT,Out,IR · Knee,Not Specified,2026-11-05T04:55,1,0,21
 NYG@IND,NYG,Tyrone Tracy Jr.,RB,Out,IR · Hamstring,Strain,2026-11-18T20:16,0,0,
 NYG@IND,NYG,Tremaine Edmunds,LB,Out,IR · Chest,Not Specified,2026-10-24T23:28,0,0,
 NYG@IND,NYG,Braxton Berrios,WR,Out,IR · Foot,Surgery,2026-10-14T21:17,0,0,
