@@ -282,7 +282,7 @@ def player_tables(a, h, RS, inj, g):
 def active_names(txt):
     """2026-11-25(보드·발행 제보 · GB@LA 16:21판 — 🏥 줄은 「★Travis Glover(Q → Active 11-25)」 인데 📌 새 정보 후보에 「GB Travis Glover(Q)」 잔존):
     🏥 줄에서 ESPN 이 당일 Active 로 표시한 선수 이름 집합(소문자 · 점 뺌) — 이미 출전이 확인된 선수는 「결장 확정되면 새 정보」 후보가 아니다."""
-    return {re.sub(r"[.★]", "", n).strip().lower() for n in re.findall(r"([^,·/()—]+?)\([^()]*→ Active[^()]*\)", txt or "")}
+    return {re.sub(r"[.★]", "", n).strip().lower() for n in re.findall(r"([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ.'\- ]*?)\([^()]*→ Active[^()]*\)", txt or "")}
 
 
 def conclusion_line(a, h, sec, inj, m, g):
