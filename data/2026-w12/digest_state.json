@@ -19,7 +19,7 @@
 "LV@CLE": {
 "spread_home": "-4.5",
 "total": "40.5",
-"ml": "+201/-244",
+"ml": "+202/-244",
 "qb": {
 "LV": "Fernando Mendoza",
 "CLE": "Deshaun Watson"
@@ -34,7 +34,7 @@
 "NO@CIN": {
 "spread_home": "-10.0",
 "total": "49.5",
-"ml": "+423/-563",
+"ml": "+424/-563",
 "qb": {
 "NO": "Tyler Shough",
 "CIN": "Joe Burrow"
@@ -104,7 +104,7 @@
 "CHI@DET": {
 "spread_home": "1.5",
 "total": "56.5",
-"ml": "-116/-102",
+"ml": "?/?",
 "qb": {
 "CHI": "Caleb Williams",
 "DET": "Jared Goff"
@@ -127,8 +127,8 @@
 },
 "NYJ@MIA": {
 "spread_home": "4.5",
-"total": "40.5",
-"ml": "-220/+183",
+"total": "39.5",
+"ml": "-241/+200",
 "qb": {
 "NYJ": "Geno Smith",
 "MIA": "Kyle McCord"
@@ -166,7 +166,7 @@
 "PHI@DAL": {
 "spread_home": "-8.5",
 "total": "49.5",
-"ml": "+359/-462",
+"ml": "+354/-455",
 "qb": {
 "PHI": "Joe Milton III",
 "DAL": "Dak Prescott"
@@ -223,24 +223,6 @@
 ]
 }
 },
-"SEA@SF": {
-"spread_home": "-2.5",
-"total": "43.5",
-"ml": "+127/-150",
-"qb": {
-"SEA": "Sam Darnold",
-"SF": "Brock Purdy"
-},
-"out": {
-"SEA": [
-"George Holani"
-],
-"SF": [
-"Colton McKivitz",
-"Gracen Halton"
-]
-}
-},
 "KC@BUF": {
 "spread_home": "-3.0",
 "total": "45.5",
@@ -280,6 +262,24 @@
 ]
 }
 },
+"SEA@SF": {
+"spread_home": "-3.0",
+"total": "43.5",
+"ml": "+129/-152",
+"qb": {
+"SEA": "Sam Darnold",
+"SF": "Brock Purdy"
+},
+"out": {
+"SEA": [
+"George Holani"
+],
+"SF": [
+"Colton McKivitz",
+"Gracen Halton"
+]
+}
+},
 "CAR@TB": {
 "spread_home": "-3.0",
 "total": "43.5",
@@ -293,5 +293,5 @@
 "TB": []
 }
 },
-"_stamp": "11-26 09:04"
+"_stamp": "11-26 10:34"
 }
