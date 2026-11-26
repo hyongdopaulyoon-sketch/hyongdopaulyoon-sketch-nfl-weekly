@@ -2,7 +2,7 @@
 "ATL@MIN": {
 "spread_home": "-7.0",
 "total": "41.5",
-"ml": "+252/-311",
+"ml": "+252/-310",
 "qb": {
 "ATL": "Michael Penix Jr.",
 "MIN": "Kirk Cousins"
@@ -19,7 +19,7 @@
 "LV@CLE": {
 "spread_home": "-4.5",
 "total": "40.5",
-"ml": "+202/-244",
+"ml": "+201/-244",
 "qb": {
 "LV": "Fernando Mendoza",
 "CLE": "Deshaun Watson"
@@ -34,7 +34,7 @@
 "NO@CIN": {
 "spread_home": "-10.0",
 "total": "49.5",
-"ml": "+424/-563",
+"ml": "+423/-562",
 "qb": {
 "NO": "Tyler Shough",
 "CIN": "Joe Burrow"
@@ -143,6 +143,22 @@
 ]
 }
 },
+"NE@LAC": {
+"spread_home": "2.5",
+"total": "35.5",
+"ml": "-139/+117",
+"qb": {
+"NE": "Tommy DeVito",
+"LAC": "Justin Herbert"
+},
+"out": {
+"NE": [],
+"LAC": [
+"Branson Taylor",
+"Rodney Shelley"
+]
+}
+},
 "DEN@PIT": {
 "spread_home": "4.5",
 "total": "36.5",
@@ -166,7 +182,7 @@
 "PHI@DAL": {
 "spread_home": "-8.5",
 "total": "49.5",
-"ml": "+354/-455",
+"ml": "+355/-457",
 "qb": {
 "PHI": "Joe Milton III",
 "DAL": "Dak Prescott"
@@ -185,22 +201,6 @@
 "P.J. Locke",
 "Tyler Booker",
 "Tyler Goodson"
-]
-}
-},
-"NE@LAC": {
-"spread_home": "1.5",
-"total": "35.5",
-"ml": "-117/-101",
-"qb": {
-"NE": "Tommy DeVito",
-"LAC": "Justin Herbert"
-},
-"out": {
-"NE": [],
-"LAC": [
-"Branson Taylor",
-"Rodney Shelley"
 ]
 }
 },
@@ -226,7 +226,7 @@
 "KC@BUF": {
 "spread_home": "-3.0",
 "total": "45.5",
-"ml": "+131/-155",
+"ml": "+130/-153",
 "qb": {
 "KC": "Patrick Mahomes",
 "BUF": "Josh Allen"
@@ -293,5 +293,5 @@
 "TB": []
 }
 },
-"_stamp": "11-26 10:34"
+"_stamp": "11-26 11:34"
 }
