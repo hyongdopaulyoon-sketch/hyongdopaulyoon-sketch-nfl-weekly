@@ -1508,13 +1508,13 @@ def team_state_html(week, g, pk, so, so_src, inj, hexg=None, poly=({}, "")):
                 if k in sc and sc[k] > fu[k]:
                     why = "빠진 선수가 대신 뛰는 선수보다 값이 나빴음"
                     if k == "커버리지" and d.get("rev"):
-                        nm = [re.sub(r"\(타깃당 ([\d.]+)야드 · 지금 넷 평균 ([\d.]+)\)$", r" \1야드", x_) for x_ in d["rev"]]
+                        nm = [re.sub(r"\[([^\]]*?)(?: · nflverse 로스터)?\]", r"(\1)", re.sub(r"\(타깃당 ([\d.]+)야드 · 지금 넷 평균 ([\d.]+)\)$", r" \1야드", x_)) for x_ in d["rev"]]
                         avg = re.search(r"지금 넷 평균 ([\d.]+)", d["rev"][0])
                         why = f"빠진 선수의 타깃당 허용 야드가 대체 선수보다 나쁨: {' · '.join(nm)}" + (f" > 지금 넷 평균 {avg.group(1)}야드" if avg else "")
                     out.append(f"{k} {sc[k] - fu[k]:+g}({fu[k]}→{sc[k]}) — 결장으로 오름({why})")
             up = bool(out)
             if d.get("cov_raw") is not None and "커버리지" in fu:   # 11/24 Paul 「추천대로」 — 커버리지 상한(결장으로는 못 오름 · 4a8fe96)
-                nm = [re.sub(r"\(타깃당 ([\d.]+)야드 · 지금 넷 평균 ([\d.]+)\)$", r" \1야드", x_) for x_ in (d.get("rev") or [])]
+                nm = [re.sub(r"\[([^\]]*?)(?: · nflverse 로스터)?\]", r"(\1)", re.sub(r"\(타깃당 ([\d.]+)야드 · 지금 넷 평균 ([\d.]+)\)$", r" \1야드", x_)) for x_ in (d.get("rev") or [])]
                 out.append(f"커버리지 결장으로는 못 오름 — 상한 적용(뛰는 선수만 {d['cov_raw']} · 표시는 전원 가용 값 {fu['커버리지']}"
                            + (f" · 빠진 선수 {' · '.join(nm)}" if nm else "") + ")")
             return " · ".join(out), up
