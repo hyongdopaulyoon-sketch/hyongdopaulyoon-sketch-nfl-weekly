@@ -128,7 +128,7 @@
 "NYJ@MIA": {
 "spread_home": "4.5",
 "total": "39.5",
-"ml": "-241/+199",
+"ml": "-243/+201",
 "qb": {
 "NYJ": "Geno Smith",
 "MIA": "Kyle McCord"
@@ -162,7 +162,7 @@
 "DEN@PIT": {
 "spread_home": "4.5",
 "total": "36.5",
-"ml": "-257/+211",
+"ml": "-255/+210",
 "qb": {
 "DEN": "Bo Nix",
 "PIT": "Mason Rudolph"
@@ -207,7 +207,7 @@
 "NYG@IND": {
 "spread_home": "6.0",
 "total": "41.5",
-"ml": "-286/+235",
+"ml": "-287/+236",
 "qb": {
 "NYG": "J.J. McCarthy",
 "IND": "Anthony Richardson"
@@ -226,7 +226,7 @@
 "KC@BUF": {
 "spread_home": "-3.0",
 "total": "45.5",
-"ml": "+132/-156",
+"ml": "+132/-157",
 "qb": {
 "KC": "Patrick Mahomes",
 "BUF": "Josh Allen"
@@ -294,5 +294,5 @@
 "TB": []
 }
 },
-"_stamp": "11-26 15:58"
+"_stamp": "11-26 16:24"
 }

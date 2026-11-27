@@ -1,4 +1,5 @@
 ﻿game,team,player,pos,status,reason,detail,announced_utc,official,star,snap_pct
+PHI@DAL,PHI,Marcus Epps,S,Out,Foot,,2026-11-27T00:13,1,0,56
 PHI@DAL,PHI,Dallas Goedert,TE,Out,Shoulder,Not Specified,2026-11-26T23:03,1,1,83
 PHI@DAL,PHI,Saquon Barkley,RB,Questionable,Neck,Stinger,2026-11-26T22:49,1,0,52
 PHI@DAL,PHI,Cooper DeJean,CB,Questionable,Concussion,Concussion,2026-11-26T22:08,1,1,100
@@ -23,7 +24,6 @@ PHI@DAL,PHI,Makai Lemon,WR,Active,,,2026-11-23T01:41,1,1,90
 PHI@DAL,PHI,Joe Milton,QB,Active,,,2026-11-23T01:37,1,1,100
 PHI@DAL,PHI,DeVonta Smith,WR,Active,,,2026-11-22T22:23,1,1,81
 PHI@DAL,PHI,Jalen Carter,DT,Active,,,2026-11-22T16:37,1,1,85
-PHI@DAL,PHI,Zack Baun,LB,Out,IR · Back,Not Specified,2026-11-22T00:14,1,1,74
 PHI@DAL,DAL,Jalen Thompson,S,Active,,,2026-11-26T20:18,1,0,
 PHI@DAL,DAL,Jake Ferguson,TE,Out,Knee,Not Specified,2026-11-26T20:13,1,0,34
 PHI@DAL,DAL,Tyler Booker,G,Out,Ankle,Sprain,2026-11-26T20:13,1,1,70
@@ -49,6 +49,8 @@ PHI@DAL,DAL,Javonte Williams,RB,Active,,,2026-11-22T22:27,1,1,69
 PHI@DAL,DAL,George Pickens,WR,Active,,,2026-11-22T22:17,1,1,82
 PHI@DAL,DAL,CeeDee Lamb,WR,Active,,,2026-11-22T22:11,1,1,89
 PHI@DAL,DAL,Dak Prescott,QB,Active,,,2026-11-22T22:05,1,1,100
+CHI@DET,CHI,Sam Roush,TE,Active,,,2026-11-26T23:56,1,0,50
+CHI@DET,CHI,Rome Odunze,WR,Active,,,2026-11-26T23:52,1,1,89
 CHI@DET,CHI,Luther Burden III,WR,Active,,,2026-11-26T23:42,1,0,57
 CHI@DET,CHI,Kyle Monangai,RB,Active,,,2026-11-26T23:33,1,0,38
 CHI@DET,CHI,D'Andre Swift,RB,Active,,,2026-11-26T23:27,1,1,65
@@ -68,12 +70,10 @@ CHI@DET,CHI,Theo Benedet,OT,Active,,,2026-11-24T22:16,1,1,99
 CHI@DET,CHI,Cam Lewis,CB,Active,,,2026-11-24T04:19,1,0,
 CHI@DET,CHI,Dillon Thieneman,S,Active,,,2026-11-24T04:14,1,1,100
 CHI@DET,CHI,Jeffery Simmons,DT,Active,,,2026-11-24T04:08,1,1,91
-CHI@DET,CHI,Sam Roush,TE,Active,,,2026-11-24T01:39,1,0,50
 CHI@DET,CHI,Zavion Thomas,WR,Active,,,2026-11-24T01:35,1,0,17
 CHI@DET,CHI,Kalif Raymond,WR,Active,,,2026-11-24T01:24,1,1,69
 CHI@DET,CHI,Cairo Santos,PK,Active,,,2026-11-24T00:29,1,0,
 CHI@DET,CHI,Stephen Carlson,TE,Active,,,2026-11-23T16:56,1,0,14
-CHI@DET,CHI,Keyshaun Elliott,LB,Active,,,2026-11-23T15:21,1,0,
 CHI@DET,DET,Sam LaPorta,TE,Active,,,2026-11-26T23:17,1,1,87
 CHI@DET,DET,Jameson Williams,WR,Active,,,2026-11-26T23:12,1,1,80
 CHI@DET,DET,Jared Goff,QB,Active,,,2026-11-26T23:08,1,1,95
@@ -99,40 +99,40 @@ CHI@DET,DET,Mekhi Wingo,DT,Active,,,2026-11-23T15:27,1,0,
 CHI@DET,DET,Amen Ogbongbemiga,LB,Active,,,2026-11-23T15:27,1,0,
 CHI@DET,DET,Khalil Dorsey,CB,Active,,,2026-11-22T19:14,1,0,26
 CHI@DET,DET,Tyler Lacy,DT,Active,,,2026-11-22T17:08,1,0,34
-KC@BUF,KC,John FitzPatrick,TE,Active,,,2026-11-26T23:32,0,0,
-KC@BUF,KC,Nate Carter,RB,Active,,,2026-11-26T23:27,0,0,
-KC@BUF,KC,Peter Woods,DT,Questionable,Neck,Not Specified,2026-11-26T02:59,0,0,
-KC@BUF,KC,Trey Smith,G,Active,,,2026-11-26T02:57,0,0,58
-KC@BUF,KC,Omarr Norman-Lott,DT,Out,Knee,Not Specified,2026-11-26T02:54,0,0,
-KC@BUF,KC,Jaylon Moore,OT,Out,Ankle,Not Specified,2026-11-26T02:51,0,1,64
-KC@BUF,KC,Noah Gray,TE,Questionable,Ribs,Not Specified,2026-11-25T17:36,0,1,71
-KC@BUF,KC,Emmett Johnson,RB,Active,,,2026-11-25T17:16,0,1,67
-KC@BUF,KC,Kenneth Walker III,RB,Out,Groin,Soreness,2026-11-25T16:48,0,1,65
-KC@BUF,KC,Ben VanSumeren,FB,Out,IR · Knee,Sprain,2026-11-24T21:28,0,0,1
-KC@BUF,KC,Drue Tranquill,LB,Active,,,2026-11-24T03:44,0,1,77
-KC@BUF,KC,Nick Bolton,LB,Active,,,2026-11-24T03:37,0,1,84
-KC@BUF,KC,George Karlaftis,DE,Active,,,2026-11-24T03:32,0,1,75
-KC@BUF,KC,Cyrus Allen,WR,Active,,,2026-11-24T02:04,0,0,29
-KC@BUF,KC,Jaydn Ott,RB,Active,,,2026-11-24T01:56,0,0,12
-KC@BUF,KC,Melvin Smith Jr.,CB,Active,,,2026-11-23T15:35,0,0,
-KC@BUF,KC,Harrison Butker,PK,Active,,,2026-11-23T05:41,0,0,
-KC@BUF,KC,Xavier Worthy,WR,Active,,,2026-11-23T03:29,0,1,76
-KC@BUF,KC,Josh Downs,WR,Active,,,2026-11-22T23:20,0,0,20
-KC@BUF,KC,Rashee Rice,WR,Active,,,2026-11-22T23:16,0,0,49
-KC@BUF,KC,Travis Kelce,TE,Active,,,2026-11-22T23:10,0,0,58
-KC@BUF,KC,Patrick Mahomes,QB,Active,,,2026-11-22T21:57,0,1,91
-KC@BUF,KC,Garrett Nussmeier,QB,Active,,,2026-11-22T16:50,0,0,
-KC@BUF,KC,Jared Wiley,TE,Out,IR · Ankle,Fracture,2026-11-19T01:06,0,0,7
-KC@BUF,KC,Nohl Williams,CB,Active,,,2026-11-18T03:09,0,1,90
-KC@BUF,BUF,T.J. Sanders,DT,Active,,,2026-11-26T23:53,1,0,38
-KC@BUF,BUF,Dorian Williams,LB,Active,,,2026-11-26T23:53,1,0,43
+KC@BUF,KC,Garrett Nussmeier,QB,Out,Coach's Decision,Not Specified,2026-11-27T00:05,1,0,
+KC@BUF,KC,Peter Woods,DT,Active,,,2026-11-27T00:05,1,0,
+KC@BUF,KC,Noah Gray,TE,Active,,,2026-11-27T00:02,1,1,71
+KC@BUF,KC,Diego Pounds,OT,Out,Coach's Decision,Not Specified,2026-11-27T00:01,1,0,8
+KC@BUF,KC,Melvin Smith Jr.,CB,Out,Coach's Decision,Not Specified,2026-11-27T00:01,1,0,
+KC@BUF,KC,Kenneth Walker III,RB,Out,Groin,Soreness,2026-11-27T00:01,1,1,65
+KC@BUF,KC,Marcus Harris,DT,Out,Coach's Decision,Not Specified,2026-11-27T00:01,1,0,23
+KC@BUF,KC,John FitzPatrick,TE,Active,,,2026-11-26T23:32,1,0,
+KC@BUF,KC,Nate Carter,RB,Active,,,2026-11-26T23:27,1,0,
+KC@BUF,KC,Trey Smith,G,Active,,,2026-11-26T02:57,1,0,58
+KC@BUF,KC,Omarr Norman-Lott,DT,Out,Knee,Not Specified,2026-11-26T02:54,1,0,
+KC@BUF,KC,Jaylon Moore,OT,Out,Ankle,Not Specified,2026-11-26T02:51,1,1,64
+KC@BUF,KC,Emmett Johnson,RB,Active,,,2026-11-25T17:16,1,1,67
+KC@BUF,KC,Ben VanSumeren,FB,Out,IR · Knee,Sprain,2026-11-24T21:28,1,0,1
+KC@BUF,KC,Drue Tranquill,LB,Active,,,2026-11-24T03:44,1,1,77
+KC@BUF,KC,Nick Bolton,LB,Active,,,2026-11-24T03:37,1,1,84
+KC@BUF,KC,George Karlaftis,DE,Active,,,2026-11-24T03:32,1,1,75
+KC@BUF,KC,Cyrus Allen,WR,Active,,,2026-11-24T02:04,1,0,29
+KC@BUF,KC,Jaydn Ott,RB,Active,,,2026-11-24T01:56,1,0,12
+KC@BUF,KC,Harrison Butker,PK,Active,,,2026-11-23T05:41,1,0,
+KC@BUF,KC,Xavier Worthy,WR,Active,,,2026-11-23T03:29,1,1,76
+KC@BUF,KC,Josh Downs,WR,Active,,,2026-11-22T23:20,1,0,20
+KC@BUF,KC,Rashee Rice,WR,Active,,,2026-11-22T23:16,1,0,49
+KC@BUF,KC,Travis Kelce,TE,Active,,,2026-11-22T23:10,1,0,58
+KC@BUF,KC,Patrick Mahomes,QB,Active,,,2026-11-22T21:57,1,1,91
+KC@BUF,BUF,T.J. Sanders,DT,Active,,,2026-11-26T23:58,1,0,38
+KC@BUF,BUF,Dorian Williams,LB,Active,,,2026-11-26T23:56,1,0,43
+KC@BUF,BUF,Dalton Kincaid,TE,Active,,,2026-11-26T23:55,1,0,48
 KC@BUF,BUF,Christian Benford,CB,Out,Groin,Not Specified,2026-11-26T23:53,1,1,66
-KC@BUF,BUF,Dalton Kincaid,TE,Active,,,2026-11-26T23:53,1,0,48
-KC@BUF,BUF,O'Cyrus Torrence,G,Active,,,2026-11-26T23:53,1,1,98
-KC@BUF,BUF,Jalon Kilgore,S,Out,Coach's Decision,,2026-11-26T23:53,1,0,19
+KC@BUF,BUF,Jalon Kilgore,S,Out,Coach's Decision,Not Specified,2026-11-26T23:53,1,0,19
 KC@BUF,BUF,Jude Bowry,OT,Out,Coach's Decision,Not Specified,2026-11-26T23:53,1,0,4
-KC@BUF,BUF,Mike Danna,DE,Out,Coach's Decision,,2026-11-26T23:53,1,0,
+KC@BUF,BUF,Mike Danna,DE,Out,Coach's Decision,Not Specified,2026-11-26T23:53,1,0,
 KC@BUF,BUF,Greg Gaines,DT,Out,Coach's Decision,Not Specified,2026-11-26T23:53,1,0,47
+KC@BUF,BUF,O'Cyrus Torrence,G,Active,,,2026-11-26T23:53,1,1,98
 KC@BUF,BUF,Skyler Bell,WR,Out,Coach's Decision,Not Specified,2026-11-26T23:53,1,0,35
 KC@BUF,BUF,Greg Rousseau,LB,Active,,,2026-11-25T00:57,1,0,
 KC@BUF,BUF,Spencer Brown,OT,Active,,,2026-11-24T22:37,1,1,97
@@ -504,6 +504,7 @@ TEN@JAX,JAX,Cam Little,PK,Active,,,2026-11-23T15:03,0,0,
 TEN@JAX,JAX,Brenton Strange,TE,Active,,,2026-11-23T03:18,0,1,80
 TEN@JAX,JAX,Chris Rodriguez Jr.,RB,Active,,,2026-11-23T03:11,0,0,32
 TEN@JAX,JAX,Brian Thomas Jr.,WR,Active,,,2026-11-23T02:40,0,0,44
+BAL@HOU,BAL,Mike Green,LB,Active,,,2026-11-26T23:52,0,1,71
 BAL@HOU,BAL,Jaylinn Hawkins,S,Questionable,Knee,Not Specified,2026-11-26T23:14,0,0,
 BAL@HOU,BAL,Rashod Bateman,WR,Active,,,2026-11-26T22:03,0,1,81
 BAL@HOU,BAL,Zay Flowers,WR,Active,,,2026-11-26T21:59,0,1,81
@@ -513,7 +514,6 @@ BAL@HOU,BAL,Aeneas Peebles,DT,Active,,,2026-11-26T21:38,0,0,23
 BAL@HOU,BAL,John Simpson,G,Active,,,2026-11-26T21:38,0,1,100
 BAL@HOU,BAL,Chidobe Awuzie,CB,Questionable,Back,,2026-11-26T21:37,0,0,48
 BAL@HOU,BAL,Marlon Humphrey,CB,Active,,,2026-11-26T02:21,0,1,76
-BAL@HOU,BAL,Mike Green,LB,Active,,,2026-11-26T02:15,0,1,71
 BAL@HOU,BAL,Nnamdi Madubuike,DT,Questionable,Hamstring,Not Specified,2026-11-26T02:09,0,1,61
 BAL@HOU,BAL,Travis Jones,DT,Active,,,2026-11-25T02:42,0,1,69
 BAL@HOU,BAL,Trenton Simpson,LB,Active,,,2026-11-25T02:36,0,1,75
@@ -805,6 +805,8 @@ CAR@TB,TB,Kenny Gainwell,RB,Active,,,2026-11-23T00:51,0,0,
 CAR@TB,TB,Emeka Egbuka,WR,Active,,,2026-11-23T00:37,0,1,74
 CAR@TB,TB,Baker Mayfield,QB,Active,,,2026-11-23T00:01,0,1,100
 CAR@TB,TB,Bucky Irving,RB,Active,,,2026-11-22T23:02,0,1,62
+PHI@DAL,PHI,Zack Baun,LB,Out,IR · Back,Not Specified,2026-11-22T00:14,1,1,74
+KC@BUF,KC,Jared Wiley,TE,Out,IR · Ankle,Fracture,2026-11-19T01:06,1,0,7
 PHI@DAL,PHI,Dontayvion Wicks,WR,Out,IR · Ankle,Not Specified,2026-11-21T21:09,1,0,
 WAS@ARI,ARI,Zachary Carter,DT,Out,IR · Knee,Not Specified,2026-11-21T01:35,0,0,
 PHI@DAL,PHI,Jalen Hurts,QB,Out,IR · Calf,Not Specified,2026-10-19T14:18,1,0,
