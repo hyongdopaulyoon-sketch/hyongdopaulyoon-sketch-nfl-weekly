@@ -2,7 +2,7 @@
 "ATL@MIN": {
 "spread_home": "-7.0",
 "total": "41.5",
-"ml": "+252/-310",
+"ml": "+253/-311",
 "qb": {
 "ATL": "Michael Penix Jr.",
 "MIN": "Kirk Cousins"
@@ -128,7 +128,7 @@
 "NYJ@MIA": {
 "spread_home": "4.5",
 "total": "39.5",
-"ml": "-241/+200",
+"ml": "-241/+199",
 "qb": {
 "NYJ": "Geno Smith",
 "MIA": "Kyle McCord"
@@ -225,8 +225,8 @@
 },
 "KC@BUF": {
 "spread_home": "-3.0",
-"total": "46.5",
-"ml": "+131/-155",
+"total": "45.5",
+"ml": "+132/-156",
 "qb": {
 "KC": "Patrick Mahomes",
 "BUF": "Josh Allen"
@@ -240,7 +240,8 @@
 "Omarr Norman-Lott"
 ],
 "BUF": [
-"Ar'maj Reed-Adams"
+"Ar'maj Reed-Adams",
+"Christian Benford"
 ]
 }
 },
@@ -293,5 +294,5 @@
 "TB": []
 }
 },
-"_stamp": "11-26 15:24"
+"_stamp": "11-26 15:58"
 }
